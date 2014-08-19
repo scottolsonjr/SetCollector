@@ -1,0 +1,253 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" 
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                   xsi:schemaLocation="http://www.blizzard.com/wow/ui/ 
+                   ..\..\FrameXML\UI.xsd">
+  <Script File="Core.lua"/>
+  
+  <GameTooltip name="SetCollectorTooltip" inherits="GameTooltipTemplate" parent="UIParent" hidden="true" />
+  
+  <Button name="SetCollectorMinimapButton" parent="Minimap" movable="true" toplevel="true">
+		<Size>
+			<AbsDimension x="33" y="33"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="Minimap" relativePoint="RIGHT">
+				<Offset>
+					<AbsDimension x="5" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>		
+		<Scripts>
+			<OnLoad>
+				self:RegisterForClicks("LeftButtonDown", "RightButtonDown");
+				self:RegisterForDrag("RightButton");
+			</OnLoad>
+			<OnClick>
+				if button == "LeftButton" then
+					SetCollector_ToggleUI()
+				end
+			</OnClick>
+			<OnUpdate>
+				--if(self.isMoving == true) then
+				--	self:UpdateMinimapIconCoords()
+				--end
+			</OnUpdate>
+			<OnDragStart>
+				--self.isMoving = true;
+				self:StartMoving()
+			</OnDragStart>
+			<OnDragStop>
+				--self.isMoving = false;
+				self:StopMovingOrSizing()
+			</OnDragStop>
+			<OnEnter> 
+				SetCollector_ShowMinimapTooltip(self)
+			</OnEnter>
+			<OnLeave>
+				SetCollectorTooltip:Hide();
+			</OnLeave>
+		</Scripts>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parentIcon" file="Interface\Icons\INV_Gauntlets_Mail_RaidShaman_J_01">
+					<Size>
+						<AbsDimension x="21" y="21"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="7" y="-6"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.075" right="0.925" top="0.075" bottom="0.925"/>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture file="Interface\Minimap\MiniMap-TrackingBorder">
+					<Size>
+						<AbsDimension x="56" y="56"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<HighlightTexture alphaMode="ADD" file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight"/>
+	</Button>
+	
+	<Button name="SetCollectorListItemTemplate" virtual="true">
+    <Size>
+      <AbsDimension x="300" y="16" />
+    </Size>
+    <Layers>
+    	<Layer level="BACKGROUND">
+    		<Texture name="$parentHighlight" alphaMode="ADD" parentKey="texture" hidden="false" />
+    	</Layer>
+    	<Layer level="OVERLAY">
+    		<FontString name="$parentTag" inherits="GameFontNormal" justifyH="RIGHT" parentKey="tag">
+					<Size x="0" y="16"/>
+					<Anchors>
+						<Anchor point="RIGHT" x="-17" y="0"/>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentGroupMates" inherits="GameFontNormalSmall" justifyH="RIGHT" parentKey="groupMates">
+					<Size x="0" y="16"/>
+					<Anchors>
+						<Anchor point="LEFT" x="8" y="-1"/>
+					</Anchors>
+				</FontString>
+    	</Layer>
+    </Layers>
+    <Scripts>
+    	<OnLoad>
+				SetCollectorListItem_OnLoad(self);
+			</OnLoad>
+			<OnClick>
+				PlaySound("igMainMenuOptionCheckBoxOn");
+				SetCollectorListItem_OnClick(self, button, down);
+			</OnClick>
+			<OnEnter>
+				SetCollectorListItem_OnEnter(self);
+			</OnEnter>
+			<OnLeave>
+				SetCollectorListItem_OnLeave(self);
+			</OnLeave>
+		</Scripts>
+		<Attributes>
+			<Attribute name="collection" type="string" />
+			<Attribute name="set" type="string" />
+			<Attribute name="isHeader" type="boolean" />
+		</Attributes>
+		<NormalTexture>
+			<Size x="16" y="16"/>
+			<Anchors>
+				<Anchor point="LEFT" x="3" y="0"/>
+			</Anchors>
+		</NormalTexture>
+		<HighlightTexture name="$parentHighlightPlusMinus" alphaMode="ADD">
+			<Size x="16" y="16"/>
+			<Anchors>
+				<Anchor point="LEFT" x="3" y="0"/>
+			</Anchors>
+		</HighlightTexture>
+		<ButtonText name="$parentNormalText" nonspacewrap="true" parentKey="normalText">
+			<Size x="0" y="10"/>
+			<Anchors>
+				<Anchor point="LEFT" x="20" y="0"/>
+			</Anchors> 
+		</ButtonText>
+		<NormalFont style="GameFontNormalLeft"/>
+		<HighlightFont style="GameFontHighlightLeft"/>
+		<DisabledFont style="GameFontHighlightLeft"/>
+  </Button>
+	
+	<Frame name="SetCollectorFrame" parent="UIParent" toplevel="true" enableMouse="true" movable="true" hidden="true" inherits="ButtonFrameTemplate">
+    <Scripts>
+      <OnLoad>
+				SetCollectorFrame_OnLoad();
+      </OnLoad>
+      <OnEvent>
+      	SetCollectorFrame_OnEvent(self, event, ...);
+      </OnEvent>
+      <OnShow>
+				SetCollectorFrame_OnShow();
+			</OnShow>
+			<OnHide>
+				SetCollectorFrame_OnHide();
+			</OnHide>
+    </Scripts>
+    <Anchors>
+      <Anchor point="TOPLEFT">
+      	<Offset x="17" y="-115" />
+      </Anchor>
+    </Anchors>
+    <Size x="650" y="496" />
+    <Layers>
+    	<Layer level="OVERLAY" textureSubLevel="-1">
+				<Texture name="$parentPlayerPortrait">
+					<Size x="60" y="60"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="-5" y="5"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="100">
+    		<FontString name="$parentTitle" inherits="GameFontNormal" parentKey="Title">
+    			<Size x="300" y="14" />
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset x="0" y="-4" />
+						</Anchor>
+					</Anchors>
+    		</FontString>
+    	</Layer>
+   	</Layers>
+   	<Frames>
+			<Button name="$parentTutorialButton" parentKey="MainHelpButton" inherits="MainHelpPlateButton">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="SetCollectorFrame" x="39" y="20" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						SetCollectorFrame_ToggleTutorial();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Frame name="$parentSetFilter" inherits="UIDropDownMenuTemplate" enableMouse="true" parentKey="setFilter">
+				<Anchors>
+					<Anchor point="TOPRIGHT" x="0" y="-28"/>
+				</Anchors>
+			</Frame>
+			<Button name="$parentFrameCancelButton" inherits="UIPanelButtonTemplate" text="CLOSE">
+				<Size x="80" y="22"/>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" x="-6" y="4"/>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						HideUIPanel(SetCollectorFrame);
+					</OnClick>
+				</Scripts>
+			</Button>
+			<DressUpModel name="$parentDressUpModel" inherits="ModelWithControlsTemplate">
+				<Size x="310" />
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="6" y="-64" />
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="6" y="28" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</DressUpModel>
+			<ScrollFrame name="$parentScrollBar" inherits="FauxScrollFrameTemplate">
+		    <Anchors>
+				  <Anchor point="TOPLEFT">
+				    <Offset>
+				      <AbsDimension x="315" y="-64"/>
+				    </Offset>
+				  </Anchor>
+				  <Anchor point="BOTTOMRIGHT">
+				    <Offset>
+				      <AbsDimension x="-32" y="28"/>
+				    </Offset>
+				  </Anchor>
+				</Anchors>
+		    <Scripts>
+		      <OnVerticalScroll>
+		        FauxScrollFrame_OnVerticalScroll(self, offset, 16, SetCollectorFrameScrollBar_Update); 
+		      </OnVerticalScroll>
+		      <OnShow>
+		        SetCollectorFrameScrollBar_Update()
+		      </OnShow>
+		    </Scripts>
+			</ScrollFrame>
+    </Frames>
+  </Frame>
+</Ui>
