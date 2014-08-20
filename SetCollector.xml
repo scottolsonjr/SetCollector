@@ -10,13 +10,13 @@
 		<Size>
 			<AbsDimension x="33" y="33"/>
 		</Size>
-		<Anchors>
-			<Anchor point="CENTER" relativeTo="Minimap" relativePoint="RIGHT">
+		<!--<Anchors>
+			<Anchor point="CENTER" relativeTo="Minimap" relativePoint="CENTER">
 				<Offset>
 					<AbsDimension x="5" y="0"/>
 				</Offset>
 			</Anchor>
-		</Anchors>		
+		</Anchors>		-->
 		<Scripts>
 			<OnLoad>
 				self:RegisterForClicks("LeftButtonDown", "RightButtonDown");
@@ -34,11 +34,11 @@
 			</OnUpdate>
 			<OnDragStart>
 				--self.isMoving = true;
-				self:StartMoving()
+				--self:StartMoving()
 			</OnDragStart>
 			<OnDragStop>
 				--self.isMoving = false;
-				self:StopMovingOrSizing()
+				--self:StopMovingOrSizing()
 			</OnDragStop>
 			<OnEnter> 
 				SetCollector_ShowMinimapTooltip(self)

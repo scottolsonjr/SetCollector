@@ -4,7 +4,7 @@
 
 local addonName = ...;
 local addon = _G[addonName];
-local DB_VERSION = "1.1.0.1"
+local DB_VERSION = "1.1.0.2"
 local _L = SetCollectorLocalization;
 
 local ALL = nil
@@ -1543,6 +1543,11 @@ function SetCollectorSetupDB()
 		
 		-- Set DB VERSION
 		SetCollectorDB["version"] = DB_VERSION
+		
+		-- Set Other Properties
+		SetCollectorDB["MinimapButtonAngle"] = 0
+		SetCollectorDB["MinimapButtonRadius"] = 78
+		SetCollectorDB["ShowMinimapButton"] = true
 		
 		-- Initialize Classes (with Metadata)
 		SetCollectorDB[DEATHKNIGHT] = {	Name = DEATHKNIGHT, Collections = { } }
