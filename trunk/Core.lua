@@ -8,7 +8,7 @@ Written by : Lomiedo, NA-Uldum
 
 local addonName = ...
 local addon = _G[addonName]
-local DB_VERSION = "1.1.0.1"
+local DB_VERSION = "1.1.0.2"
 local INITIALIZED = false
 local _L = SetCollectorLocalization
 
@@ -345,8 +345,18 @@ function SetCollectorFrame_OnLoad (self)
   SetCollectorFrame:SetAttribute("UIPanelLayout-width", width)
   SetCollectorFrame:SetAttribute("UIPanelLayout-whileDead", true)
   
+  -- Set Frame Title
 	SetCollectorFrame.Title:SetText(_L["ADDON_NAME"]);
 	
+	-- Position Minimap Button
+	-- move to function
+	local r = 78
+	local t = 0
+	local x = r * math.cos(t)
+	local y = r * math.sin(t)
+	SetCollectorMinimapButton:SetPoint("CENTER", Minimap, "CENTER", x, y)
+	
+	-- Setup Filter
 	UIDropDownMenu_SetWidth(SetCollectorFrame.setFilter, 132);
 	
 end
