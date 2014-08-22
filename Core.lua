@@ -1,7 +1,3 @@
---[[	*** SetCollector ***
-Written by : Lomiedo, NA-Uldum
---]]
-
 --
 -- Local Variables and Constants
 --
@@ -10,7 +6,6 @@ local addonName = ...
 local addon = _G[addonName]
 local DB_VERSION = "1.1.0.2"
 local INITIALIZED = false
-local MINIMAPICON_ANGLE = 0
 local _L = SetCollectorLocalization
 
 local classes = {}
@@ -330,14 +325,17 @@ function SetCollector_UpdateMinimapIconCoords()
 	local a = mX - (x/s)
 	local b = mY - (y/s)
 	local c = math.sqrt(a^2 + b^2 - (2 * a * b * math.cos(math.pi / 2)))
-	local angle = math.acos((b^2 + c^2 - a^2) / (2 * b * c)) - (math.pi / 2)
-	MINIMAPICON_ANGLE = angle
+	local t = math.acos((b^2 + c^2 - a^2) / (2 * b * c)) - (math.pi / 2)
+	if mX > (x/s) then
+		t = math.pi - t
+	end
+	SetCollectorDB["MinimapButtonAngle"] = t
 	SetCollector_MoveMinimapIcon()
 end
 
 function SetCollector_MoveMinimapIcon()
 	local r = 78
-	local t = MINIMAPICON_ANGLE
+	local t = SetCollectorDB["MinimapButtonAngle"]
 	local x = r * math.cos(t)
 	local y = r * math.sin(t)
 	SetCollectorMinimapButton:SetPoint("CENTER", Minimap, "CENTER", x, y)
@@ -369,9 +367,6 @@ function SetCollectorFrame_OnLoad (self)
   -- Set Frame Title
 	SetCollectorFrame.Title:SetText(_L["ADDON_NAME"]);
 	
-	-- Position Minimap Button
-	SetCollector_MoveMinimapIcon()
-	
 	-- Setup Filter
 	UIDropDownMenu_SetWidth(SetCollectorFrame.setFilter, 132);
 	
@@ -386,6 +381,7 @@ function SetCollectorFrame_OnEvent (self, event, ...)
 			local class = UnitClass("player")
 			local faction, localizedFaction = UnitFactionGroup("player")
 			
+			-- Initialize Dropdown Filter
 			UIDropDownMenu_Initialize(SetCollectorFrame.setFilter, SetCollectorFrame_InitFilter);
 			
 			if SetCollectorCharacterDB == nil then
@@ -444,7 +440,13 @@ function SetCollectorFrame_OnEvent (self, event, ...)
 					end
 				end
 			end
+			
+			-- Position Minimap Button
+			if SetCollectorDB["ShowMinimapButton"] == true then
+				SetCollector_MoveMinimapIcon()
+			end
 		
+			-- Setup DressUpModel
 			SetCollectorFrameDressUpModel:SetUnit("PLAYER")
 			SetCollectorFrameDressUpModel:SetPosition(0.1,0,0) 	-- Slightly moves the model to the left
 			SetCollectorFrameDressUpModel:SetFacing(0.25)				-- Slightly turns the model towards the list
