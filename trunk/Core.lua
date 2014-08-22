@@ -10,6 +10,7 @@ local addonName = ...
 local addon = _G[addonName]
 local DB_VERSION = "1.1.0.2"
 local INITIALIZED = false
+local MINIMAPICON_ANGLE = 0
 local _L = SetCollectorLocalization
 
 local classes = {}
@@ -322,6 +323,26 @@ function SetCollectorFrame_GetTutorial()
 	return tutorial, helpPlate, mainHelpButton;
 end
 
+function SetCollector_UpdateMinimapIconCoords()
+	local x, y = GetCursorPosition()
+	local s = Minimap:GetEffectiveScale()
+	local mX, mY = Minimap:GetCenter()
+	local a = mX - (x/s)
+	local b = mY - (y/s)
+	local c = math.sqrt(a^2 + b^2 - (2 * a * b * math.cos(math.pi / 2)))
+	local angle = math.acos((b^2 + c^2 - a^2) / (2 * b * c)) - (math.pi / 2)
+	MINIMAPICON_ANGLE = angle
+	SetCollector_MoveMinimapIcon()
+end
+
+function SetCollector_MoveMinimapIcon()
+	local r = 78
+	local t = MINIMAPICON_ANGLE
+	local x = r * math.cos(t)
+	local y = r * math.sin(t)
+	SetCollectorMinimapButton:SetPoint("CENTER", Minimap, "CENTER", x, y)
+end
+
 -- Events
 
 local MyModData = { };
@@ -349,12 +370,7 @@ function SetCollectorFrame_OnLoad (self)
 	SetCollectorFrame.Title:SetText(_L["ADDON_NAME"]);
 	
 	-- Position Minimap Button
-	-- move to function
-	local r = 78
-	local t = 0
-	local x = r * math.cos(t)
-	local y = r * math.sin(t)
-	SetCollectorMinimapButton:SetPoint("CENTER", Minimap, "CENTER", x, y)
+	SetCollector_MoveMinimapIcon()
 	
 	-- Setup Filter
 	UIDropDownMenu_SetWidth(SetCollectorFrame.setFilter, 132);

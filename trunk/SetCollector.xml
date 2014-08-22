@@ -10,13 +10,6 @@
 		<Size>
 			<AbsDimension x="33" y="33"/>
 		</Size>
-		<!--<Anchors>
-			<Anchor point="CENTER" relativeTo="Minimap" relativePoint="CENTER">
-				<Offset>
-					<AbsDimension x="5" y="0"/>
-				</Offset>
-			</Anchor>
-		</Anchors>		-->
 		<Scripts>
 			<OnLoad>
 				self:RegisterForClicks("LeftButtonDown", "RightButtonDown");
@@ -28,16 +21,16 @@
 				end
 			</OnClick>
 			<OnUpdate>
-				--if(self.isMoving == true) then
-				--	self:UpdateMinimapIconCoords()
-				--end
+				if (self.isMoving == true) then
+					SetCollector_UpdateMinimapIconCoords()
+				end
 			</OnUpdate>
 			<OnDragStart>
-				--self.isMoving = true;
+				self.isMoving = true;
 				--self:StartMoving()
 			</OnDragStart>
 			<OnDragStop>
-				--self.isMoving = false;
+				self.isMoving = false;
 				--self:StopMovingOrSizing()
 			</OnDragStop>
 			<OnEnter> 
