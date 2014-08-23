@@ -356,7 +356,7 @@ function SetCollectorFrame_OnLoad (self)
 end
 
 function SetCollectorFrame_OnEvent (self, event, ...)
-	if event == "ADDON_LOADED" and ... == "SetCollector" then
+	if event == "ADDON_LOADED" and ... == string.lower("SetCollector") then
 		SetCollectorSetupDB()
 		CreateMinimapButton()
 		
