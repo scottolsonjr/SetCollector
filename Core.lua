@@ -4,7 +4,7 @@
 
 local addonName = ...
 local addon = _G[addonName]
-local DB_VERSION = "1.1.1.2"
+local DB_VERSION = "1.1.1.4"
 local INITIALIZED = false
 local _L = SetCollectorLocalization
 
@@ -355,8 +355,8 @@ function SetCollectorFrame_OnLoad (self)
 	
 end
 
-function SetCollectorFrame_OnEvent (self, event, ...)
-	if event == "ADDON_LOADED" and ... == string.lower("SetCollector") then
+function SetCollectorFrame_OnEvent (self, event, arg1, ...)
+	if event == "ADDON_LOADED" and string.lower(arg1) == string.lower("SetCollector") then
 		SetCollectorSetupDB()
 		CreateMinimapButton()
 		
