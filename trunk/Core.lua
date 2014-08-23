@@ -4,7 +4,7 @@
 
 local addonName = ...
 local addon = _G[addonName]
-local DB_VERSION = "1.1.1.0"
+local DB_VERSION = "1.1.1.2"
 local INITIALIZED = false
 local _L = SetCollectorLocalization
 
@@ -558,16 +558,23 @@ function SetCollectorFrameScrollBar_Update()
 				  		
 				  		local isComplete = false
 				  		local tag = ""
+				  		local items = ""
 				  		if SetCollectorDB[class].Collections[i].Sets[j].setPiecesNumAvailable == acquired then
 				  			tag = "(Complete)"
 				  			isComplete = true
+				  		else
+					  		if SetCollectorDB[class].Collections[i].Sets[j].setPiecesNumAvailable > 1 then
+					  			items = " ("..SetCollectorDB[class].Collections[i].Sets[j].setPiecesNumAvailable.." items)"
+					  		else
+					  			items = " ("..SetCollectorDB[class].Collections[i].Sets[j].setPiecesNumAvailable.." item)"
+					  		end
 				  		end
 				  		
 				  		local setDisplay = {
 				  			Type = "Set",
 				  			Collection = i,
 				  			ID = j,
-				  			Name = "["..SetCollectorDB[class].Collections[i].Sets[j].MinLevel.."] "..SetCollectorDB[class].Collections[i].Sets[j].Name,
+				  			Name = "["..SetCollectorDB[class].Collections[i].Sets[j].MinLevel.."] "..SetCollectorDB[class].Collections[i].Sets[j].Name..items,
 				  			Quality = SetCollectorDB[class].Collections[i].Sets[j].Quality,
 				  			Tag = tag,
 				  			GroupMates = acquired,

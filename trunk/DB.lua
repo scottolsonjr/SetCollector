@@ -4,7 +4,7 @@
 
 local addonName = ...;
 local addon = _G[addonName];
-local DB_VERSION = "1.1.1.1"
+local DB_VERSION = "1.1.1.3"
 local _L = SetCollectorLocalization;
 
 local ALL = nil
@@ -90,9 +90,12 @@ local function AddDeathKnightCollections() -- Future Update: Store Localization 
 	local c = 0
 	
 	-- Legendaries
-	c = AddCollection(DEATHKNIGHT,ALL,ALL,"Legendaries",1);
+	c = AddCollection(DEATHKNIGHT,ALL,ALL,"Legendaries",60);
 	AddSet(DEATHKNIGHT,ALL,c,TANK,"Qian-Ying, Fortitude of Niuzao",90,608,LEGENDARY,102250);
 	AddSet(DEATHKNIGHT,ALL,c,MELEE,"Gong-Lu, Strength of Xuen",90,608,LEGENDARY,102249);
+	AddSet(DEATHKNIGHT,ALL,c,ALL,"Shadowmourne",80,284,LEGENDARY,49623);
+	AddSet(DEATHKNIGHT,ALL,c,MELEE,"Twin Blades of Azzinoth",70,156,LEGENDARY,32837,32838);
+	AddSet(DEATHKNIGHT,ALL,c,ALL,"Sulfuras, Hand of Ragnaros",60,80,LEGENDARY,17182);
 
 	-- Tier 16
 	c = AddCollection(DEATHKNIGHT,ALL,TANK,"Tier 16: Plate of Cyclopean Dread",90);
@@ -214,12 +217,14 @@ local function AddDruidCollections()
 	local c = 0
 	
 	-- Legendaries
-	c = AddCollection(DRUID,ALL,ALL,"Legendaries",85);
+	c = AddCollection(DRUID,ALL,ALL,"Legendaries",60);
 	AddSet(DRUID,ALL,c,CASTER,"Xing-Ho, Breath of Yulon",90,608,LEGENDARY,102246);
 	AddSet(DRUID,ALL,c,MELEE,"Fen-Yu, Fury of Xuen",90,608,LEGENDARY,102248);
 	AddSet(DRUID,ALL,c,TANK,"Qian-Le, Courage of Niuzao",90,608,LEGENDARY,102245);
 	AddSet(DRUID,ALL,c,HEALER,"Jina-Kang, Kindness of Chi-Ji",90,608,LEGENDARY,102247);
 	AddSet(DRUID,ALL,c,CASTER,"Dragonwrath, Tarecgosa's Rest",85,397,LEGENDARY,71086);
+	AddSet(DRUID,ALL,c,HEALER,"Val'anyr, Hammer of Ancient Kings",80,245,LEGENDARY,46017);
+	AddSet(DRUID,ALL,c,TANK,"Sulfuras, Hand of Ragnaros",60,80,LEGENDARY,17182);
 	
 	-- Tier 16
 	c = AddCollection(DRUID,ALL,CASTER,"Tier 16: Regalia of the Shattered Vale",90);
@@ -441,8 +446,9 @@ local function AddHunterCollections()
 	local c = 0
 	
 	-- Legendaries
-	c = AddCollection(HUNTER,ALL,RANGED,"Legendaries",90);
+	c = AddCollection(HUNTER,ALL,RANGED,"Legendaries",70);
 	AddSet(HUNTER,ALL,c,RANGED,"Fen-Yu, Fury of Xuen",90,608,LEGENDARY,102248);
+	AddSet(HUNTER,ALL,c,RANGED,"Thori'dal, the Stars' Fury",70,164,LEGENDARY,34334);
 
 	-- Tier 16
 	c = AddCollection(HUNTER,ALL,RANGED,"Tier 16: Battlegear of the Unblinking Vigil",90);
@@ -520,7 +526,7 @@ local function AddMageCollections()
 	local c = 0
 	
   -- Legendaries
-	c = AddCollection(MAGE,ALL,CASTER,"Legendaries",90);
+	c = AddCollection(MAGE,ALL,CASTER,"Legendaries",85);
 	AddSet(MAGE,ALL,c,CASTER,"Xing-Ho, Breath of Yulon",90,608,LEGENDARY,102246);
 	AddSet(MAGE,ALL,c,CASTER,"Dragonwrath, Tarecgosa's Rest",85,397,LEGENDARY,71086);
 	
@@ -601,10 +607,12 @@ local function AddMonkCollections()
 	local c = 0
 	
 	-- Legendaries
-	c = AddCollection(MONK,ALL,ALL,"Legendaries",90);
+	c = AddCollection(MONK,ALL,ALL,"Legendaries",70);
 	AddSet(MONK,ALL,c,TANK,"Qian-Le, Courage of Niuzao",90,608,LEGENDARY,102245);
 	AddSet(MONK,ALL,c,MELEE,"Fen-Yu, Fury of Xuen",90,608,LEGENDARY,102248);
 	AddSet(MONK,ALL,c,HEALER,"Jina-Kang, Kindness of Chi-Ji",90,608,LEGENDARY,102247);
+	AddSet(MONK,ALL,c,HEALER,"Val'anyr, Hammer of Ancient Kings",80,245,LEGENDARY,46017);
+	AddSet(MONK,ALL,c,MELEE,"Twin Blades of Azzinoth",70,156,LEGENDARY,32837,32838);
 
 	-- Tier 16
 	c = AddCollection(MONK,ALL,TANK,"Tier 16: Armor of Seven Sacred Seals",90);
@@ -662,10 +670,15 @@ local function AddPaladinCollections()
 	local c = 0
 	
 	-- Legendaries
-	c = AddCollection(PALADIN,ALL,ALL,"Legendaries",90);
+	c = AddCollection(PALADIN,ALL,ALL,"Legendaries",60);
 	AddSet(PALADIN,ALL,c,MELEE,"Gong-Lu, Strength of Xuen",90,608,LEGENDARY,102249);
 	AddSet(PALADIN,ALL,c,TANK,"Qian-Ying, Fortitude of Niuzao",90,608,LEGENDARY,102250);
 	AddSet(PALADIN,ALL,c,HEALER,"Jina-Kang, Kindness of Chi-Ji",90,608,LEGENDARY,102247);
+	AddSet(PALADIN,ALL,c,MELEE,"Shadowmourne",80,284,LEGENDARY,49623);
+	AddSet(PALADIN,ALL,c,TANK,"Shadowmourne",80,284,LEGENDARY,49623);
+	AddSet(PALADIN,ALL,c,HEALER,"Val'anyr, Hammer of Ancient Kings",80,245,LEGENDARY,46017);
+	AddSet(PALADIN,ALL,c,MELEE,"Sulfuras, Hand of Ragnaros",60,80,LEGENDARY,17182);
+	AddSet(PALADIN,ALL,c,TANK,"Sulfuras, Hand of Ragnaros",60,80,LEGENDARY,17182);
 
 	-- Tier 16
 	c = AddCollection(PALADIN,ALL,HEALER,"Tier 16: Vestments of Winged Triumph",90);
@@ -869,10 +882,11 @@ local function AddPriestCollections()
 	local c = 0
 	
 	-- Legendaries
-	c = AddCollection(PRIEST,ALL,ALL,"Legendaries",85);
+	c = AddCollection(PRIEST,ALL,ALL,"Legendaries",80);
 	AddSet(PRIEST,ALL,c,HEALER,"Jina-Kang, Kindness of Chi-Ji",90,608,LEGENDARY,102247);
 	AddSet(PRIEST,ALL,c,CASTER,"Xing-Ho, Breath of Yulon",90,608,LEGENDARY,102246);
 	AddSet(PRIEST,ALL,c,CASTER,"Dragonwrath, Tarecgosa's Rest",85,397,LEGENDARY,71086);
+	AddSet(PRIEST,ALL,c,HEALER,"Val'anyr, Hammer of Ancient Kings",80,245,LEGENDARY,46017);
 
 	-- Tier 16
 	c = AddCollection(PRIEST,ALL,HEALER,"Tier 16: Vestments of Ternion Glory",90);
@@ -1016,9 +1030,10 @@ local function AddRogueCollections()
 	local c = 0
 	
 	-- Legendaries
-	c = AddCollection(ROGUE,ALL,MELEE,"Legendaries",85);
+	c = AddCollection(ROGUE,ALL,MELEE,"Legendaries",70);
 	AddSet(ROGUE,ALL,c,MELEE,"Fen-Yu, Fury of Xuen",90,608,LEGENDARY,102248);
 	AddSet(ROGUE,ALL,c,MELEE,"Fangs of the Father",85,416,LEGENDARY,77949,77950);
+	AddSet(ROGUE,ALL,c,MELEE,"Twin Blades of Azzinoth",70,156,LEGENDARY,32837,32838);
 
 	-- Tier 16
 	c = AddCollection(ROGUE,ALL,MELEE,"Tier 16: Barbed Assassin Battlegear",90);
@@ -1096,10 +1111,12 @@ local function AddShamanCollections()
 	local c = 0
 	
 	-- Legendaries
-	c = AddCollection(SHAMAN,ALL,ALL,"Legendaries",85);
+	c = AddCollection(SHAMAN,ALL,ALL,"Legendaries",60);
 	AddSet(SHAMAN,ALL,c,CASTER,"Xing-Ho, Breath of Yulon",90,608,LEGENDARY,102246);
 	AddSet(SHAMAN,ALL,c,MELEE,"Fen-Yu, Fury of Xuen",90,608,LEGENDARY,102248);
 	AddSet(SHAMAN,ALL,c,HEALER,"Jina-Kang, Kindness of Chi-Ji",90,608,LEGENDARY,102247);
+	AddSet(SHAMAN,ALL,c,HEALER,"Val'anyr, Hammer of Ancient Kings",80,245,LEGENDARY,46017);
+	AddSet(SHAMAN,ALL,c,MELEE,"Sulfuras, Hand of Ragnaros",60,80,LEGENDARY,17182);
 	
 	-- Tier 16
 	c = AddCollection(SHAMAN,ALL,CASTER,"Tier 16: Regalia of Celestial Harmony",90);
@@ -1287,15 +1304,15 @@ local function AddShamanCollections()
 	
 	-- Tier 3
 	c = AddCollection(SHAMAN,ALL,ALL,"Tier 3: Earthshatter Collection",60)
-	AddSet(SHAMAN,ALL,c,CASTER,"The Earth Shatterer",60,86,EPIC,22466,22467,22464,22471,22469,22470,22465,22468,23065)
+	AddSet(SHAMAN,ALL,c,ALL,"The Earth Shatterer",60,86,EPIC,22466,22467,22464,22471,22469,22470,22465,22468,23065)
 	
 	-- Tier 2
 	c = AddCollection(SHAMAN,ALL,ALL,"Tier 2: The Ten Storms Collection",60)
-	AddSet(SHAMAN,ALL,c,CASTER,"The Ten Storms",60,76,EPIC,16947,16945,16950,16943,16948,16944,16946,16949)
+	AddSet(SHAMAN,ALL,c,ALL,"The Ten Storms",60,76,EPIC,16947,16945,16950,16943,16948,16944,16946,16949)
 	
 	-- Tier 1
 	c = AddCollection(SHAMAN,ALL,ALL,"Tier 1: Earthfury Collection",60)
-	AddSet(SHAMAN,ALL,c,CASTER,"Earthfury Raiment",60,66,EPIC,16842,16844,16841,16840,16839,16838,16843,16837)
+	AddSet(SHAMAN,ALL,c,ALL,"Earthfury Raiment",60,66,EPIC,16842,16844,16841,16840,16839,16838,16843,16837)
 	
 end
 
@@ -1383,9 +1400,12 @@ local function AddWarriorCollections()
 	local c = 0
 	
   -- Legendaries
-	c = AddCollection(WARRIOR,ALL,ALL,"Legendary",90);
+	c = AddCollection(WARRIOR,ALL,ALL,"Legendary",60);
 	AddSet(WARRIOR,ALL,c,MELEE,"Gong-Lu, Strength of Xuen",90,608,LEGENDARY,102249);
 	AddSet(WARRIOR,ALL,c,TANK,"Qian-Ying, Fortitude of Niuzao",90,608,LEGENDARY,102250);	
+	AddSet(WARRIOR,ALL,c,ALL,"Shadowmourne",80,284,LEGENDARY,49623);
+	AddSet(WARRIOR,ALL,c,MELEE,"Twin Blades of Azzinoth",70,156,LEGENDARY,32837,32838);
+	AddSet(WARRIOR,ALL,c,ALL,"Sulfuras, Hand of Ragnaros",60,80,LEGENDARY,17182);
 
 	-- Tier 16
 	c = AddCollection(WARRIOR,ALL,MELEE,"Tier 16: Battleplate of the Prehistoric Marauder",90);
