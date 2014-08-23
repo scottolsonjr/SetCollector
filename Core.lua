@@ -4,10 +4,11 @@
 
 local addonName = ...
 local addon = _G[addonName]
-local DB_VERSION = "1.1.0.2"
+local DB_VERSION = "1.1.1.0"
 local INITIALIZED = false
 local _L = SetCollectorLocalization
 
+		
 local classes = {}
 FillLocalizedClassList(classes)
 local DEATHKNIGHT = classes.DEATHKNIGHT
@@ -135,19 +136,24 @@ function SetCollector_ToggleUI()
 	end
 end
 
-function SetCollector_ShowMinimapTooltip(frame)
-	if not frame then return end
-	
-	SetCollectorTooltip:SetOwner(frame, "ANCHOR_LEFT");
-	SetCollectorTooltip:ClearLines();
-	SetCollectorTooltip:AddLine(WHITE.._L["ADDON_NAME"]);
-	SetCollectorTooltip:AddLine(_L["MINIMAP_TOOLTIP"]);
-	SetCollectorTooltip:Show();
-end
-
 --
 -- General Functions - Local
 --
+
+local function CreateMinimapButton()
+	local myLDB = LibStub("LibDataBroker-1.1"):NewDataObject("SetCollectorMinimap", {
+		type = "data source",
+		text = "Set Collector",
+		icon = "Interface\\Icons\\INV_Gauntlets_Mail_RaidShaman_J_01",
+		OnClick = function() SetCollector_ToggleUI() end,		
+		OnTooltipShow = function(tt)
+			tt:AddLine(WHITE.._L["ADDON_NAME"])
+			tt:AddLine(_L["MINIMAP_TOOLTIP"])
+		end,
+	})
+	local icon = LibStub("LibDBIcon-1.0")
+  icon:Register("SetCollectorMinimap", myLDB, SetCollectorDB.Minimap)
+end
 
 local function SetHighlight(button, ...)
 	local index 			= _G[button].index
@@ -318,29 +324,6 @@ function SetCollectorFrame_GetTutorial()
 	return tutorial, helpPlate, mainHelpButton;
 end
 
-function SetCollector_UpdateMinimapIconCoords()
-	local x, y = GetCursorPosition()
-	local s = Minimap:GetEffectiveScale()
-	local mX, mY = Minimap:GetCenter()
-	local a = mX - (x/s)
-	local b = mY - (y/s)
-	local c = math.sqrt(a^2 + b^2 - (2 * a * b * math.cos(math.pi / 2)))
-	local t = math.acos((b^2 + c^2 - a^2) / (2 * b * c)) - (math.pi / 2)
-	if mX > (x/s) then
-		t = math.pi - t
-	end
-	SetCollectorDB["MinimapButtonAngle"] = t
-	SetCollector_MoveMinimapIcon()
-end
-
-function SetCollector_MoveMinimapIcon()
-	local r = 78
-	local t = SetCollectorDB["MinimapButtonAngle"]
-	local x = r * math.cos(t)
-	local y = r * math.sin(t)
-	SetCollectorMinimapButton:SetPoint("CENTER", Minimap, "CENTER", x, y)
-end
-
 -- Events
 
 local MyModData = { };
@@ -375,6 +358,7 @@ end
 function SetCollectorFrame_OnEvent (self, event, ...)
 	if event == "ADDON_LOADED" and ... == "SetCollector" then
 		SetCollectorSetupDB()
+		CreateMinimapButton()
 		
 	elseif event == "PLAYER_ENTERING_WORLD" then
 		if INITIALIZED == false then
@@ -442,9 +426,9 @@ function SetCollectorFrame_OnEvent (self, event, ...)
 			end
 			
 			-- Position Minimap Button
-			if SetCollectorDB["ShowMinimapButton"] == true then
-				SetCollector_MoveMinimapIcon()
-			end
+			--if SetCollectorDB["ShowMinimapButton"] == true then
+			--	SetCollector_MoveMinimapIcon()
+			--end
 		
 			-- Setup DressUpModel
 			SetCollectorFrameDressUpModel:SetUnit("PLAYER")
