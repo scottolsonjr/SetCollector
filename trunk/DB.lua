@@ -4,7 +4,7 @@
 
 local addonName = ...;
 local addon = _G[addonName];
-local DB_VERSION = "1.1.1.3"
+local DB_VERSION = "1.1.1.4"
 local _L = SetCollectorLocalization;
 
 local ALL = nil
@@ -1557,7 +1557,7 @@ end
 --
 
 function SetCollectorSetupDB()
-	if SetCollectorDB.version ~= DB_VERSION then
+	if SetCollectorDB == nil or SetCollectorDB.version ~= DB_VERSION then
 		-- Clear previous DB to avoid duplicate entries
 		SetCollectorDB = { }
 		
