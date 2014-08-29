@@ -4,24 +4,22 @@
 
 local addonName = ...;
 local addon = _G[addonName];
-local DB_VERSION = "1.1.1.4"
+local DB_VERSION = "1.1.1.5"
 local _L = SetCollectorLocalization;
 
 local ALL = nil
 
-local classes = {}
-FillLocalizedClassList(classes)
-local DEATHKNIGHT = classes.DEATHKNIGHT
-local DRUID 			= classes.DRUID
-local HUNTER 			= classes.HUNTER
-local MAGE 				= classes.MAGE
-local MONK 				= classes.MONK
-local PALADIN 		= classes.PALADIN
-local PRIEST 			= classes.PRIEST
-local ROGUE 			= classes.ROGUE
-local SHAMAN 			= classes.SHAMAN
-local WARLOCK 		= classes.WARLOCK
-local WARRIOR 		= classes.WARRIOR
+local DEATHKNIGHT = "DEATHKNIGHT"
+local DRUID 			= "DRUID"
+local HUNTER 			= "HUNTER"
+local MAGE 				= "MAGE"
+local MONK 				= "MONK"
+local PALADIN 		= "PALADIN"
+local PRIEST 			= "PRIEST"
+local ROGUE 			= "ROGUE"
+local SHAMAN 			= "SHAMAN"
+local WARLOCK 		= "WARLOCK"
+local WARRIOR 		= "WARRIOR"
 
 local ALLIANCE = "Alliance"
 local HORDE = "Horde"
@@ -1598,4 +1596,37 @@ function SetCollectorSetupDB()
 		AddWarlockCollections()
 		AddWarriorCollections()
 	end
+end
+
+function SetCollectorSetupCharacterDB(class)
+	if SetCollectorCharacterDB == nil then
+		SetCollectorCharacterDB = { version = DB_VERSION, Items = { } }
+		
+		for i=1, #SetCollectorDB[class].Collections do
+			for j=1, #SetCollectorDB[class].Collections[i].Sets do
+				for k=1, #SetCollectorDB[class].Collections[i].Sets[j].setPieces do
+					local itemID = SetCollectorDB[class].Collections[i].Sets[j].setPieces[k]
+					SetCollectorCharacterDB.Items[itemID] = { count = 0 }
+				end
+			end
+		end
+		
+	elseif SetCollectorCharacterDB.version ~= DB_VERSION then
+		SetCollectorCharacterDB.version = DB_VERSION
+		
+		for i=1, #SetCollectorDB[class].Collections do
+			for j=1, #SetCollectorDB[class].Collections[i].Sets do
+				for k=1, #SetCollectorDB[class].Collections[i].Sets[j].setPieces do
+					if SetCollectorCharacterDB.Items[itemID] == nil then
+						local itemID = SetCollectorDB[class].Collections[i].Sets[j].setPieces[k]
+						SetCollectorCharacterDB.Items[itemID] = { count = 0 }
+					end
+				end
+			end
+		end
+		
+	else
+		-- Leave it alone
+	end
+	
 end

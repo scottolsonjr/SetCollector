@@ -4,27 +4,20 @@
 
 local addonName = ...
 local addon = _G[addonName]
-local DB_VERSION = "1.1.1.4"
-local INITIALIZED = false
+local DB_VERSION = "1.1.1.5"
 local _L = SetCollectorLocalization
 
-		
-local classes = {}
-FillLocalizedClassList(classes)
-local DEATHKNIGHT = classes.DEATHKNIGHT
-local DRUID 			= classes.DRUID
-local HUNTER 			= classes.HUNTER
-local MAGE 				= classes.MAGE
-local MONK 				= classes.MONK
-local PALADIN 		= classes.PALADIN
-local PRIEST 			= classes.PRIEST
-local ROGUE 			= classes.ROGUE
-local SHAMAN 			= classes.SHAMAN
-local WARLOCK 		= classes.WARLOCK
-local WARRIOR 		= classes.WARRIOR
-
-
--- Other local variables not requiring localization
+local DEATHKNIGHT = "DEATHKNIGHT"
+local DRUID 			= "DRUID"
+local HUNTER 			= "HUNTER"
+local MAGE 				= "MAGE"
+local MONK 				= "MONK"
+local PALADIN 		= "PALADIN"
+local PRIEST 			= "PRIEST"
+local ROGUE 			= "ROGUE"
+local SHAMAN 			= "SHAMAN"
+local WARLOCK 		= "WARLOCK"
+local WARRIOR 		= "WARRIOR"
 
 local TANK 		= "TANK"
 local HEALER 	= "HEALER"
@@ -83,41 +76,13 @@ local BANK = {
 	ITEM_INVENTORY_BANK_BAG_OFFSET+7
 }
 
--- Void Storage appears to use a simple 1 to 80 loop
-
--- Begin Local Variable Use Review
-local SETTLED_FRAME_HELP_VISIBLE = false;
-local SETTLED_FRAME_SELECTED_SET = 0;
-local SETTLED_FRAME_SELECTED_NAME;
-local SETTLED_FRAME_SELECTED_BUTTON;
-local SELECTED_BUTTON = "";
-local SELECTED_INDEX = 0;
+local SELECTED_BUTTON = ""
+local SELECTED_INDEX = 0
 local SELECTED_OFFSET = 0
-local SELECTED_COLLECTION = 0;
-local SELECTED_SET = 0;
+local SELECTED_COLLECTION = 0
+local SELECTED_SET = 0
 
 local WHITE		= "|cFFFFFFFF"
-local RED		= "|cFFFF0000"
-local GREEN		= "|cFF00FF00"
-local YELLOW	= "|cFFFFFF00"
-local ORANGE	= "|cFFFF7F00"
-local TEAL		= "|cFF00FF9A"
-local GOLD		= "|cFFFFD700"
-
-local PLAYER_CURRENT_LEVEL = UnitLevel("player");
-local PLAYER_CURRENT_SPECIALIZATION = GetSpecialization();
-local PLAYER_CURRENT_SPECIALIZATION_ID = nil;
-local PLAYER_CURRENT_SPECIALIZATION_NAME = nil;
-local PLAYER_CURRENT_SPECIALIZATION_ROLE = nil;
-  if PLAYER_CURRENT_SPECIALIZATION then
-  	local id, name, description, icon, background, role = GetSpecializationInfo(PLAYER_CURRENT_SPECIALIZATION);
-  	PLAYER_CURRENT_SPECIALIZATION_ID = id;
-  	PLAYER_CURRENT_SPECIALIZATION_NAME = name;
-  	PLAYER_CURRENT_SPECIALIZATION_ROLE = role;
-  end
-local avgItemLevel, avgItemLevelEquipped = GetAverageItemLevel();
-local PLAYER_CURRENT_ITEM_LEVEL = avgItemLevelEquipped;
--- End Local Variable Use Review
 
 local CURRENT_DISPLAY = { }
 local COLLAPSED_COLLECTIONS = { }
@@ -213,34 +178,14 @@ local function SetCollectorFrame_UpdatePortrait()
 	end
 end
 
-local function SetCollectorFrame_UpdateCharacterInfo()
-	-- http://wowpedia.org/API_UnitLevel
-	PLAYER_CURRENT_LEVEL = UnitLevel("player");
-	
-  -- http://wowpedia.org/API_GetSpecialization
-  local PLAYER_CURRENT_SPECIALIZATION = GetSpecialization();
-  if PLAYER_CURRENT_SPECIALIZATION then
-  	local id, name, description, icon, background, role = GetSpecializationInfo(PLAYER_CURRENT_SPECIALIZATION);
-  	PLAYER_CURRENT_SPECIALIZATION_ID = id;
-  	PLAYER_CURRENT_SPECIALIZATION_NAME = name;
-  	PLAYER_CURRENT_SPECIALIZATION_ROLE = role;
-  end
-
-  -- http://wowpedia.org/API_GetAverageItemLevel
-	local avgItemLevel, avgItemLevelEquipped = GetAverageItemLevel();
-	PLAYER_CURRENT_ITEM_LEVEL = avgItemLevelEquipped;
-	
-end
-
 local function SetFilterOptions(classIndex)
 	CURRENT_FILTER = classIndex
 end
 
 local function GetFilterOptions()
 	if CURRENT_FILTER == 0 then
-		-- Insert Specialization Lookup Here
 		local currentSpec = GetSpecialization();
-		if currentSpec == nil then currentSpec = 0 end 	-- Fix for unspecialized characters
+		if currentSpec == nil then currentSpec = 0 end
 		CURRENT_FILTER = currentSpec + 2
 	end
 	return CURRENT_FILTER;
@@ -305,20 +250,20 @@ function SetCollectorFrame_ToggleTutorial()
 	local tutorial, helpPlate, mainHelpButton = SetCollectorFrame_GetTutorial();
 		
 	if ( helpPlate and not HelpPlate_IsShowing(helpPlate) and SetCollectorFrame:IsShown()) then
-		HelpPlate_Show( helpPlate, SetCollectorFrame, mainHelpButton, true );
-		SetCollectorFrame_HELP_VISIBLE = true;
+		HelpPlate_Show( helpPlate, SetCollectorFrame, mainHelpButton, true )
+		SetCollectorFrame_HELP_VISIBLE = true
 	else
-		HelpPlate_Hide(true);
-	  SetCollectorFrame_HELP_VISIBLE = false;
+		HelpPlate_Hide(true)
+	  SetCollectorFrame_HELP_VISIBLE = false
 	end
 end
 
 function SetCollectorFrame_GetTutorial()
-	local tutorial;
-	local helpPlate;
-	local mainHelpButton;
+	local tutorial
+	local helpPlate
+	local mainHelpButton
 
-	tutorial = "Content Here."; -- Where does this display?
+	tutorial = "Content Here."; 								-- Where could this display?
 	helpPlate = SetCollectorFrame_HelpPlate;
 	mainHelpButton = SetCollectorFrame.MainHelpButton;
 	return tutorial, helpPlate, mainHelpButton;
@@ -326,32 +271,21 @@ end
 
 -- Events
 
-local MyModData = { };
-
 function SetCollectorFrame_OnLoad (self)
   -- Register events
-  SetCollectorFrame:RegisterEvent("ADDON_LOADED");
-	SetCollectorFrame:RegisterEvent("PLAYER_ENTERING_WORLD");
-	SetCollectorFrame:RegisterEvent("BAG_UPDATE");
-	SetCollectorFrame:RegisterEvent("BANKFRAME_OPENED");
+  SetCollectorFrame:RegisterEvent("ADDON_LOADED")
+	SetCollectorFrame:RegisterEvent("PLAYER_LOGIN")
 	
-  -- Hides frame when Escape is pressed or Game menu selected.
-  tinsert(UISpecialFrames, "SetCollectorFrame");
-  
-  -- Allows frame to shift other frames when opened or be shifted when others are opened.
-  -- http://www.wowwiki.com/Creating_standard_left-sliding_frames
-  SetCollectorFrame:SetAttribute("UIPanelLayout-defined", true)
-  SetCollectorFrame:SetAttribute("UIPanelLayout-enabled", true)
+	-- Setup Frame
+	SetCollectorFrame.Title:SetText(_L["ADDON_NAME"])
+	UIDropDownMenu_SetWidth(SetCollectorFrame.setFilter, 132)
+  tinsert(UISpecialFrames, "SetCollectorFrame")											-- Hides frame when Escape is pressed or Game menu selected.
+  SetCollectorFrame:SetAttribute("UIPanelLayout-defined", true)			-- Allows frame to shift other frames when opened or be shifted when others are opened.
+  SetCollectorFrame:SetAttribute("UIPanelLayout-enabled", true)			-- http://www.wowwiki.com/Creating_standard_left-sliding_frames
   SetCollectorFrame:SetAttribute("UIPanelLayout-area", "left")
   SetCollectorFrame:SetAttribute("UIPanelLayout-pushable", 3)
   SetCollectorFrame:SetAttribute("UIPanelLayout-width", width)
   SetCollectorFrame:SetAttribute("UIPanelLayout-whileDead", true)
-  
-  -- Set Frame Title
-	SetCollectorFrame.Title:SetText(_L["ADDON_NAME"]);
-	
-	-- Setup Filter
-	UIDropDownMenu_SetWidth(SetCollectorFrame.setFilter, 132);
 	
 end
 
@@ -359,84 +293,44 @@ function SetCollectorFrame_OnEvent (self, event, arg1, ...)
 	if event == "ADDON_LOADED" and string.lower(arg1) == string.lower("SetCollector") then
 		SetCollectorSetupDB()
 		CreateMinimapButton()
+  	SetCollectorFrame:UnregisterEvent("ADDON_LOADED");
 		
-	elseif event == "PLAYER_ENTERING_WORLD" then
-		if INITIALIZED == false then
-			local class = UnitClass("player")
-			local faction, localizedFaction = UnitFactionGroup("player")
-			
-			-- Initialize Dropdown Filter
-			UIDropDownMenu_Initialize(SetCollectorFrame.setFilter, SetCollectorFrame_InitFilter);
-			
-			if SetCollectorCharacterDB == nil then
-				SetCollectorCharacterDB = { version = DB_VERSION, Items = { } }
+	elseif event == "PLAYER_LOGIN" then
+		local _, class = UnitClass("player")
+		SetCollectorSetupCharacterDB(class)
 				
-				for i=1, #SetCollectorDB[class].Collections do
-					for j=1, #SetCollectorDB[class].Collections[i].Sets do
-						for k=1, #SetCollectorDB[class].Collections[i].Sets[j].setPieces do
-							local itemID = SetCollectorDB[class].Collections[i].Sets[j].setPieces[k]
-							SetCollectorCharacterDB.Items[itemID] = { count = 0 }
-						end
-					end
+		for key, value in pairs(SetCollectorCharacterDB.Items) do
+			-- Check EQUIPMENT for item (Longhand for detailed scan, future look at inventory and set count to 1 for quick)
+			for i=1, #EQUIPMENT do
+				local itemID = GetInventoryItemID("player", EQUIPMENT[i]);
+				if key == itemID then
+					value.count = 1
 				end
-				
-			elseif SetCollectorCharacterDB.version ~= DB_VERSION then
-				SetCollectorCharacterDB.version = DB_VERSION
-				
-				for i=1, #SetCollectorDB[class].Collections do
-					for j=1, #SetCollectorDB[class].Collections[i].Sets do
-						for k=1, #SetCollectorDB[class].Collections[i].Sets[j].setPieces do
-							if SetCollectorCharacterDB.Items[itemID] == nil then
-								local itemID = SetCollectorDB[class].Collections[i].Sets[j].setPieces[k]
-								SetCollectorCharacterDB.Items[itemID] = { count = 0 }
-							end
-						end
-					end
-				end
-				
-			else
-				-- Leave it alone
 			end
-					
-			for key, value in pairs(SetCollectorCharacterDB.Items) do
-				-- Check EQUIPMENT for item (Longhand for detailed scan, future look at inventory and set count to 1 for quick)
-				for i=1, #EQUIPMENT do
-					local itemID = GetInventoryItemID("player", EQUIPMENT[i]);
-					if key == itemID then
-						value.count = 1
-					end
-				end
-				-- Check BAGS for item
-				for i=1, #BAGS do	--
-					local numberOfSlots = GetContainerNumSlots(BAGS[i]); 
-					for j=1, numberOfSlots do
-						local itemID = GetContainerItemID(BAGS[i],j);
-						if key == itemID then
-							value.count = 1
-						end
-					end
-				end
-				-- Check Void Storage for item
-				for i=1, 80 do -- VOID_STORAGE_MAX
-					local itemID, textureName, locked, recentDeposit, isFiltered = GetVoidItemInfo(i);
+			-- Check BAGS for item
+			for i=1, #BAGS do	--
+				local numberOfSlots = GetContainerNumSlots(BAGS[i]); 
+				for j=1, numberOfSlots do
+					local itemID = GetContainerItemID(BAGS[i],j);
 					if key == itemID then
 						value.count = 1
 					end
 				end
 			end
-			
-			-- Position Minimap Button
-			--if SetCollectorDB["ShowMinimapButton"] == true then
-			--	SetCollector_MoveMinimapIcon()
-			--end
-		
-			-- Setup DressUpModel
-			SetCollectorFrameDressUpModel:SetUnit("PLAYER")
-			SetCollectorFrameDressUpModel:SetPosition(0.1,0,0) 	-- Slightly moves the model to the left
-			SetCollectorFrameDressUpModel:SetFacing(0.25)				-- Slightly turns the model towards the list
-			
-			INITIALIZED = true
 		end
+	
+		-- Setup Frame
+		UIDropDownMenu_Initialize(SetCollectorFrame.setFilter, SetCollectorFrame_InitFilter);
+	
+		-- Setup DressUpModel
+		SetCollectorFrameDressUpModel:SetUnit("PLAYER")
+		SetCollectorFrameDressUpModel:SetPosition(0.1,0,0) 	-- Slightly moves the model to the left
+		SetCollectorFrameDressUpModel:SetFacing(0.25)				-- Slightly turns the model towards the list
+		
+		-- Register New Events
+		SetCollectorFrame:RegisterEvent("BAG_UPDATE");
+		SetCollectorFrame:RegisterEvent("BANKFRAME_OPENED");
+		SetCollectorFrame:RegisterEvent("VOID_STORAGE_OPEN");
 		
 	elseif event == "BAG_UPDATE" then
 		for key, value in pairs(SetCollectorCharacterDB.Items) do
@@ -452,21 +346,11 @@ function SetCollectorFrame_OnEvent (self, event, arg1, ...)
 			end
 		end
 		if SetCollectorFrame:IsVisible() then
-			SetCollectorFrameScrollBar_Update()
+			SetCollectorFrameScrollBar_Update()			-- Is this what steps on the CompactUnitFrame and CompactRaidFrame in combat?
 		end
-			
+		
 	elseif event == "BANKFRAME_OPENED" then
 		for key, value in pairs(SetCollectorCharacterDB.Items) do
-			-- Check BAGS for item
-			for i=1, #BAGS do
-				local numberOfSlots = GetContainerNumSlots(BAGS[i]); 
-				for j=1, numberOfSlots do
-					local itemID = GetContainerItemID(BAGS[i],j);
-					if key == itemID then
-						value.count = 1
-					end
-				end
-			end
 			-- Check BANK for item
 			for i=1, #BANK do
 				local numberOfSlots = GetContainerNumSlots(BANK[i]); 
@@ -481,15 +365,33 @@ function SetCollectorFrame_OnEvent (self, event, arg1, ...)
 		if SetCollectorFrame:IsVisible() then
 			SetCollectorFrameScrollBar_Update()
 		end
-		
+	
+	elseif event == "VOID_STORAGE_OPEN" then				-- Currently requires the Void Storage to be opened a second time to scan.
+		local isReady = IsVoidStorageReady()
+		if isReady == 1 then
+			for key, value in pairs(SetCollectorCharacterDB.Items) do
+				-- Check Void Storage for item
+				for i=1, 80 do -- VOID_STORAGE_MAX
+					local itemID, textureName, locked, recentDeposit, isFiltered = GetVoidItemInfo(i);
+					if key == itemID then
+						value.count = 1
+					end
+				end
+			end
+			if SetCollectorFrame:IsVisible() then
+				SetCollectorFrameScrollBar_Update()
+			end
+		else
+			print("Set Collector: Void Storage not ready to scan. Please close Void Storage and reopen.")
+		end
+	
 	end
 end
 
 function SetCollectorFrame_OnShow (self)
-	PlaySound("igCharacterInfoOpen");
-	SetCollectorFrame_UpdatePortrait();					-- Review functionality
-	SetCollectorFrame_UpdateCharacterInfo();		-- Review functionality
-	SetCollectorFrameScrollBar_Update();
+	PlaySound("igCharacterInfoOpen")
+	SetCollectorFrame_UpdatePortrait()
+	SetCollectorFrameScrollBar_Update()
 end
 
 function SetCollectorFrame_OnHide (self)
@@ -510,7 +412,7 @@ function SetCollectorFrameScrollBar_Update()
   CURRENT_DISPLAY = { } -- Clear Previous Display
   
   -- Class and Faction Filters
-  local class = UnitClass("player");
+  local _, class = UnitClass("player");
 	local faction, localizedFaction = UnitFactionGroup("player")
   
   -- Specialization/Role Filter
@@ -593,13 +495,14 @@ function SetCollectorFrameScrollBar_Update()
   	
   end
   
-  local maxLines = #CURRENT_DISPLAY;
-  local maxLinesDisplayed = 25;
-  local buttonWidth = 320;
-  local buttonHeight = 16;
-  local line; -- 1 through 5 of our window to scroll
-  local lineplusoffset; -- an index into our data calculated from the scroll offset
-  FauxScrollFrame_Update(SetCollectorFrameScrollBar,maxLines,maxLinesDisplayed,buttonHeight);
+  -- Set Display Parameters
+  local maxLines = #CURRENT_DISPLAY
+  local maxLinesDisplayed = 25
+  local buttonWidth = 320
+  local buttonHeight = 16
+  local line
+  local lineplusoffset
+  FauxScrollFrame_Update(SetCollectorFrameScrollBar, maxLines, maxLinesDisplayed, buttonHeight)
   
   -- Create buttons dynamically
   for line = 1, maxLinesDisplayed do
@@ -706,7 +609,7 @@ function SetCollectorListItem_OnClick(self, button)
 	local collection 	= _G[button].collection
 	local set 				= _G[button].set
 	
-	local class = UnitClass("player")
+	local _, class = UnitClass("player")
 	
 	local previousButton 			= SELECTED_BUTTON
 	local previousIndex 			= SELECTED_INDEX
@@ -716,14 +619,12 @@ function SetCollectorListItem_OnClick(self, button)
 	
 	-- Check for header
 	if _G[button].collection == "" and _G[button].set == "" then
-		-- Future Helper ToggleCollapse(COLLAPSED_COLLECTIONS[CURRENT_DISPLAY[self.index].ID])
 		if COLLAPSED_COLLECTIONS[CURRENT_DISPLAY[offset].ID] then
 			COLLAPSED_COLLECTIONS[CURRENT_DISPLAY[offset].ID] = false
 		else
 			COLLAPSED_COLLECTIONS[CURRENT_DISPLAY[offset].ID] = true
 		end
 		SetCollectorFrameScrollBar_Update()
-		-- end ToggleCollapse()
 		
 	else	
 		if index == SELECTED_INDEX then
@@ -731,7 +632,7 @@ function SetCollectorListItem_OnClick(self, button)
 			UnsetHighlight(previousButton, CURRENT_DISPLAY[offset].Quality)
 			
 		elseif index == nil then
-			print("Error: Item Index is Nil")
+			print("Set Collector Error: Item Index is Nil")
 			
 		else
 			-- Unset Previous Highlight
@@ -803,7 +704,7 @@ function SetCollectorFrame_UpdateFilterString()
 	local currFilter = GetFilterOptions();
 
 	if currFilter == LE_LOOT_FILTER_CLASS then
-		name = UnitClass("player");
+		_, name = UnitClass("player");
 	else -- Spec
 		local _, specName, _, icon = GetSpecializationInfo(currFilter - LE_LOOT_FILTER_SPEC1 + 1);
 		name = specName;
@@ -817,7 +718,6 @@ function SetCollectorFrame_InitFilter()
 	local currFilter = GetFilterOptions();
 	local className = UnitClass("player");
 	
-	--UIDropDownMenu_SetText(SetCollectorFrame.setFilter, className);
 	SetCollectorFrame_UpdateFilterString()
 	
 	info.func = SetCollectorFrame_SetFilter;
