@@ -4,7 +4,7 @@
 
 local addonName = ...
 local addon = _G[addonName]
-local DB_VERSION = "1.1.1.5"
+local DB_VERSION = "1.1.2.0"
 local _L = SetCollectorLocalization
 
 local DEATHKNIGHT = "DEATHKNIGHT"
@@ -278,6 +278,7 @@ function SetCollectorFrame_OnLoad (self)
 	
 	-- Setup Frame
 	SetCollectorFrame.Title:SetText(_L["ADDON_NAME"])
+	SetCollectorFrame.CloseButton:SetText(CLOSE)
 	UIDropDownMenu_SetWidth(SetCollectorFrame.setFilter, 132)
   tinsert(UISpecialFrames, "SetCollectorFrame")											-- Hides frame when Escape is pressed or Game menu selected.
   SetCollectorFrame:SetAttribute("UIPanelLayout-defined", true)			-- Allows frame to shift other frames when opened or be shifted when others are opened.
@@ -331,6 +332,7 @@ function SetCollectorFrame_OnEvent (self, event, arg1, ...)
 		SetCollectorFrame:RegisterEvent("BAG_UPDATE");
 		SetCollectorFrame:RegisterEvent("BANKFRAME_OPENED");
 		SetCollectorFrame:RegisterEvent("VOID_STORAGE_OPEN");
+		SetCollectorFrame:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED");
 		
 	elseif event == "BAG_UPDATE" then
 		for key, value in pairs(SetCollectorCharacterDB.Items) do
@@ -382,8 +384,12 @@ function SetCollectorFrame_OnEvent (self, event, arg1, ...)
 				SetCollectorFrameScrollBar_Update()
 			end
 		else
-			print("Set Collector: Void Storage not ready to scan. Please close Void Storage and reopen.")
+			print(_L["VOID_STORAGE_NOT_READY"])
 		end
+	
+	elseif event == "PLAYER_SPECIALIZATION_CHANGED" then
+		local i = GetSpecialization()
+		SetCollectorFrame_SetFilter(nil, LE_LOOT_FILTER_SPEC1 + i - 1)
 	
 	end
 end
@@ -391,6 +397,7 @@ end
 function SetCollectorFrame_OnShow (self)
 	PlaySound("igCharacterInfoOpen")
 	SetCollectorFrame_UpdatePortrait()
+	SetCollectorFrame_UpdateFilterString()
 	SetCollectorFrameScrollBar_Update()
 end
 
@@ -462,14 +469,10 @@ function SetCollectorFrameScrollBar_Update()
 				  		local tag = ""
 				  		local items = ""
 				  		if SetCollectorDB[class].Collections[i].Sets[j].setPiecesNumAvailable == acquired then
-				  			tag = "(Complete)"
+				  			tag = "("..COMPLETE..")"
 				  			isComplete = true
 				  		else
-					  		if SetCollectorDB[class].Collections[i].Sets[j].setPiecesNumAvailable > 1 then
-					  			items = " ("..SetCollectorDB[class].Collections[i].Sets[j].setPiecesNumAvailable.." items)"
-					  		else
-					  			items = " ("..SetCollectorDB[class].Collections[i].Sets[j].setPiecesNumAvailable.." item)"
-					  		end
+					  		items = " ("..format(ITEMS_VARIABLE_QUANTITY, SetCollectorDB[class].Collections[i].Sets[j].setPiecesNumAvailable)..")"
 				  		end
 				  		
 				  		local setDisplay = {
@@ -498,7 +501,7 @@ function SetCollectorFrameScrollBar_Update()
   -- Set Display Parameters
   local maxLines = #CURRENT_DISPLAY
   local maxLinesDisplayed = 25
-  local buttonWidth = 320
+  local buttonWidth = 304
   local buttonHeight = 16
   local line
   local lineplusoffset
@@ -525,8 +528,8 @@ function SetCollectorFrameScrollBar_Update()
 	  
 		  if CURRENT_DISPLAY[lineplusoffset].IsHeader then
 		  	_G["SetCollectorEntry"..line]:SetText(CURRENT_DISPLAY[lineplusoffset].Name);
-		  	_G["SetCollectorEntry"..line].tag:SetText("");
-		  	_G["SetCollectorEntry"..line].groupMates:SetText("");
+		  	_G["SetCollectorEntry"..line].tag:SetText(nil);
+		  	_G["SetCollectorEntry"..line].groupMates:SetText(nil);
 		  	
 		  	_G["SetCollectorEntry"..line].collection = ""
 		  	_G["SetCollectorEntry"..line].set = ""
@@ -550,7 +553,7 @@ function SetCollectorFrameScrollBar_Update()
 		  	if not CURRENT_DISPLAY[lineplusoffset].IsComplete and CURRENT_DISPLAY[lineplusoffset].GroupMates ~= 0 then
 		  		_G["SetCollectorEntry"..line].groupMates:SetText(CURRENT_DISPLAY[lineplusoffset].GroupMates);
 		  	else
-		  		_G["SetCollectorEntry"..line].groupMates:SetText("");
+		  		_G["SetCollectorEntry"..line].groupMates:SetText(nil);
 		  	end
 		  	
 		  	_G["SetCollectorEntry"..line].collection = CURRENT_DISPLAY[lineplusoffset].Collection
@@ -585,6 +588,8 @@ function SetCollectorFrameScrollBar_Update()
 					end
 				end
 		  end
+		  	
+		  SetCollectorListItem_Resize(_G["SetCollectorEntry"..line]);
 		  	
 	    _G["SetCollectorEntry"..line].index = line;
 	    _G["SetCollectorEntry"..line]:Show();
@@ -684,6 +689,24 @@ function SetCollectorListItem_OnLeave(self)
 	end
 end
 
+function SetCollectorListItem_Resize(setTitle)				-- Based on the QuestLogTitleButton_Resize Hack
+	local setNormalText = setTitle.normalText;
+	setNormalText:SetWidth(0);
+	setTitle:SetText(setTitle:GetText());
+
+	local setTitleTag = setTitle.tag;
+	local setCheck = setTitle.check;
+	local rightEdge = setTitle:GetLeft() + setTitle:GetWidth();
+	--[[if ( setCheck:IsShown() ) then
+		rightEdge = rightEdge - setCheck:GetWidth() - 2;
+	end]]--
+	if ( setTitleTag:IsShown() ) then
+		rightEdge = rightEdge - setTitleTag:GetWidth() - 20;
+	end
+	local setNormalTextWidth = setNormalText:GetWidth() - max(setNormalText:GetRight() - rightEdge, 0);
+	setNormalText:SetWidth(setNormalTextWidth);
+	
+end
 
 --
 -- Set Filter
@@ -704,7 +727,7 @@ function SetCollectorFrame_UpdateFilterString()
 	local currFilter = GetFilterOptions();
 
 	if currFilter == LE_LOOT_FILTER_CLASS then
-		_, name = UnitClass("player");
+		name = UnitClass("player");
 	else -- Spec
 		local _, specName, _, icon = GetSpecializationInfo(currFilter - LE_LOOT_FILTER_SPEC1 + 1);
 		name = specName;
