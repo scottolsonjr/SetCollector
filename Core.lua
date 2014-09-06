@@ -645,7 +645,11 @@ function SetCollectorListItem_OnClick(self, button)
 				if CURRENT_DISPLAY[previousOffset].IsHeader then
 					UnsetHighlight(previousButton)
 				else
-					UnsetHighlight(previousButton, CURRENT_DISPLAY[previousOffset].Quality)
+					local previousScroll = previousOffset - previousIndex
+					local newScroll = offset - index
+					if previousScroll == newScroll then
+						UnsetHighlight(previousButton, CURRENT_DISPLAY[previousOffset].Quality)
+					end
 				end
 			end
 
