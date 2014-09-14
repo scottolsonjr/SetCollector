@@ -389,6 +389,7 @@ function SetCollectorFrame_OnEvent (self, event, arg1, ...)
 	
 	elseif event == "PLAYER_SPECIALIZATION_CHANGED" then
 		local i = GetSpecialization()
+		if i == nil then i = 0 end
 		SetCollectorFrame_SetFilter(nil, LE_LOOT_FILTER_SPEC1 + i - 1)
 	
 	end
