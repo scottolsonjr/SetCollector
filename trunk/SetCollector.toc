@@ -1,7 +1,7 @@
 ## Interface: 50400
 ## Title: Set Collector
 ## Notes: Allows the user to track their progress in the collection of various items and itemsets, such as Legendaries and TierSets. Additional features include preview of the character wearing the specific set.
-## Version: 1.1.2
+## Version: 1.1.3
 ## Author: Lomiedo-Uldum
 ## SavedVariables: SetCollectorDB
 ## SavedVariablesPerCharacter: SetCollectorCharacterDB
