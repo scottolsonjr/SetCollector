@@ -4,8 +4,9 @@
 
 local addonName = ...
 local addon = _G[addonName]
-local DB_VERSION = "1.1.2.0"
+local DB_VERSION = "1.1.3.00"
 local _L = SetCollectorLocalization
+local WOW_VERSION = select(4,GetBuildInfo())
 
 local DEATHKNIGHT = "DEATHKNIGHT"
 local DRUID 			= "DRUID"
@@ -75,6 +76,9 @@ local BANK = {
 	ITEM_INVENTORY_BANK_BAG_OFFSET+6,
 	ITEM_INVENTORY_BANK_BAG_OFFSET+7
 }
+
+local VOID_STORAGE_MAX = 80;
+local VOID_STORAGE_PAGES = 2;	-- Available in 6.0
 
 local SELECTED_BUTTON = ""
 local SELECTED_INDEX = 0
@@ -230,6 +234,41 @@ local function GetSetSpecializationRole(spec)
 	end
 end
 
+local function ScanVoidStorage()
+  local isReady = IsVoidStorageReady()
+	if isReady == true then				-- 6.0 method
+		for key, value in pairs(SetCollectorCharacterDB.Items) do
+			-- Check Void Storage for item
+			for i = VOID_STORAGE_PAGES, 1, -1 do
+				for j = VOID_STORAGE_MAX, 1, -1 do
+					local itemID, textureName, locked, recentDeposit, isFiltered = GetVoidItemInfo(i,j);
+					if key == itemID then
+						value.count = 1
+					end
+				end
+			end
+		end
+		if SetCollectorFrame:IsVisible() then
+			SetCollectorFrameScrollBar_Update()
+		end
+	elseif isReady == 1 then			-- 5.4 method
+		for key, value in pairs(SetCollectorCharacterDB.Items) do
+			-- Check Void Storage for item
+			for i = VOID_STORAGE_MAX, 1, -1 do
+				local itemID, textureName, locked, recentDeposit, isFiltered = GetVoidItemInfo(i);
+				if key == itemID then
+					value.count = 1
+				end
+			end
+		end
+		if SetCollectorFrame:IsVisible() then
+			SetCollectorFrameScrollBar_Update()
+		end
+	else
+		print(_L["VOID_STORAGE_NOT_READY"])
+	end
+end
+
 
 
 --
@@ -368,23 +407,13 @@ function SetCollectorFrame_OnEvent (self, event, arg1, ...)
 			SetCollectorFrameScrollBar_Update()
 		end
 	
-	elseif event == "VOID_STORAGE_OPEN" then				-- Currently requires the Void Storage to be opened a second time to scan.
-		local isReady = IsVoidStorageReady()
-		if isReady == 1 then
-			for key, value in pairs(SetCollectorCharacterDB.Items) do
-				-- Check Void Storage for item
-				for i=1, 80 do -- VOID_STORAGE_MAX
-					local itemID, textureName, locked, recentDeposit, isFiltered = GetVoidItemInfo(i);
-					if key == itemID then
-						value.count = 1
-					end
-				end
-			end
-			if SetCollectorFrame:IsVisible() then
-				SetCollectorFrameScrollBar_Update()
-			end
+	elseif event == "VOID_STORAGE_OPEN" then
+	  local isReady = IsVoidStorageReady()
+		if isReady == false then
+			--print("Set Collector: Preparing to scan Void Storage in 2 seconds.")
+			C_Timer.After(2, ScanVoidStorage)
 		else
-			print(_L["VOID_STORAGE_NOT_READY"])
+			ScanVoidStorage()
 		end
 	
 	elseif event == "PLAYER_SPECIALIZATION_CHANGED" then
@@ -659,6 +688,7 @@ function SetCollectorListItem_OnClick(self, button)
 			-- Show Items on Model
 		  for i=1, #SetCollectorDB[class].Collections[_G[button].collection].Sets[_G[button].set].setPieces do
 		  	SetCollectorFrameDressUpModel:TryOn(SetCollectorDB[class].Collections[_G[button].collection].Sets[_G[button].set].setPieces[i])
+		  	--print(SetCollectorDB[class].Collections[_G[button].collection].Sets[_G[button].set].setPieces[i])
 		  end
 		end 
 	end
