@@ -11,3 +11,7 @@ SetCollectorLocalization["TUTORIAL_4"] = "Frame controls, such as close and char
 
 
 SetCollectorLocalization["VOID_STORAGE_NOT_READY"] = "Set Collector: Void Storage not ready to scan. Please close Void Storage and reopen."
+
+
+SetCollectorLocalization["SLASH_HELP"] = "Set Collector: Possible commands include show, hide, resetdb and help.\nFor example, /setcollector show"
+SetCollectorLocalization["SLASH_HELP_SORT"] = "Set Collector: Sets the direction of the default collection sort. Use asc for ascending and desc for descending.\nFor example, /setcollector sort asc"

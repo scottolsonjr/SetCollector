@@ -4,9 +4,9 @@
 
 local addonName = ...
 local addon = _G[addonName]
-local DB_VERSION = "1.1.3.00"
 local _L = SetCollectorLocalization
 local WOW_VERSION = select(4,GetBuildInfo())
+local DB_VERSION = WOW_VERSION
 
 local DEATHKNIGHT = "DEATHKNIGHT"
 local DRUID 			= "DRUID"
@@ -93,21 +93,97 @@ local COLLAPSED_COLLECTIONS = { }
 
 local CURRENT_FILTER = 0
 
+local SORT_BY = "key"					-- Default Sort Value
+local SORT_DIR = "DESC"				-- Default Sort Direction
+
+local Session = {
+	InitialScanComplete = false
+}
+
 --
 -- General Functions
 --
 
+local function SetCollector_Scan(selection)
+	local show, success
+	if selection == "Equipment" then 
+		show = { containers = 1, slots = function() return #EQUIPMENT end, itemID = function(i,j) return GetInventoryItemID("player", EQUIPMENT[j]) end }
+	elseif selection == "Bags" then 
+		show = { containers = #BAGS, slots = function(i) return GetContainerNumSlots(BAGS[i]) end, itemID = function(i,j) return GetContainerItemID(BAGS[i],j) end }
+	elseif selection == "Bank" then 
+		show = { containers = #BANK, slots = function(i) return GetContainerNumSlots(BANK[i]) end, itemID = function(i,j) return GetContainerItemID(BANK[i],j) end }
+	elseif selection == "Void" then 
+		-- Special tasks for Void Storage
+		local isReady = IsVoidStorageReady()
+		if isReady == true then 	-- 6.0 method
+			show = { containers = VOID_STORAGE_PAGES, slots = function() return VOID_STORAGE_MAX end, itemID = function(i,j) return GetVoidItemInfo(i,j) end }
+		elseif isReady == 1 then 	-- 5.4 method
+			show = { containers = 1, slots = function() return VOID_STORAGE_MAX end, itemID = function(i,j) return GetVoidItemInfo(j) end }
+		else 
+			print(_L["VOID_STORAGE_NOT_READY"]); return;
+		end	
+	else return
+	end
+	
+	for key, value in pairs(SetCollectorCharacterDB.Items) do
+		for i=1, show.containers do
+			local numberOfSlots = show.slots(i)
+			for j=1, numberOfSlots do
+				local itemID = show.itemID(i,j)
+				if key == itemID then
+					value.count = 1
+				end
+				--if success == nil then print(selection.." scan successful"); success = true; end
+			end
+		end
+	end
+	
+	if SetCollectorFrame:IsVisible() then
+		SetCollectorFrameScrollBar_Update()
+	end
+end
+
 function SetCollector_ToggleUI()
 	if (SetCollectorFrame:IsVisible()) then
-		HideUIPanel(SetCollectorFrame);
+		HideUIPanel(SetCollectorFrame)
 	else
-		ShowUIPanel(SetCollectorFrame);
+		ShowUIPanel(SetCollectorFrame)
+		if Session.InitialScanComplete == false then
+			SetCollector_Scan("Equipment")
+			SetCollector_Scan("Bags")
+			Session.InitialScanComplete = true
+		end
 	end
 end
 
 --
 -- General Functions - Local
 --
+
+local function pairsByKeys(t, d)
+	local a = {}
+	for n in pairs(t) do table.insert(a, n) end
+	if d == "ASC" then
+	  table.sort(a, function(a,b) return a<b end)
+	else
+	  table.sort(a, function(a,b) return a>b end)
+	end
+	local i = 0      -- iterator variable
+	local iter = function ()   -- iterator function
+		i = i + 1
+		if a[i] == nil then return nil
+		else return a[i], t[a[i]]
+		end
+	end
+	return iter
+end
+
+local function SortedList(t, f, d)
+	if f == "key" then return pairsByKeys(t, d)		-- Allow for exlicit request to sort by key
+	-- Future sort alternatives here
+	else return pairsByKeys(t, d)									-- Default to sort by key
+	end
+end
 
 local function CreateMinimapButton()
 	local myLDB = LibStub("LibDataBroker-1.1"):NewDataObject("SetCollectorMinimap", {
@@ -234,41 +310,6 @@ local function GetSetSpecializationRole(spec)
 	end
 end
 
-local function ScanVoidStorage()
-  local isReady = IsVoidStorageReady()
-	if isReady == true then				-- 6.0 method
-		for key, value in pairs(SetCollectorCharacterDB.Items) do
-			-- Check Void Storage for item
-			for i = VOID_STORAGE_PAGES, 1, -1 do
-				for j = VOID_STORAGE_MAX, 1, -1 do
-					local itemID, textureName, locked, recentDeposit, isFiltered = GetVoidItemInfo(i,j);
-					if key == itemID then
-						value.count = 1
-					end
-				end
-			end
-		end
-		if SetCollectorFrame:IsVisible() then
-			SetCollectorFrameScrollBar_Update()
-		end
-	elseif isReady == 1 then			-- 5.4 method
-		for key, value in pairs(SetCollectorCharacterDB.Items) do
-			-- Check Void Storage for item
-			for i = VOID_STORAGE_MAX, 1, -1 do
-				local itemID, textureName, locked, recentDeposit, isFiltered = GetVoidItemInfo(i);
-				if key == itemID then
-					value.count = 1
-				end
-			end
-		end
-		if SetCollectorFrame:IsVisible() then
-			SetCollectorFrameScrollBar_Update()
-		end
-	else
-		print(_L["VOID_STORAGE_NOT_READY"])
-	end
-end
-
 
 
 --
@@ -329,38 +370,20 @@ function SetCollectorFrame_OnLoad (self)
 	
 end
 
-function SetCollectorFrame_OnEvent (self, event, arg1, ...)
+function SetCollectorFrame_OnEvent (self, event, ...)
+	local arg1, arg2, arg3, arg4 = ...
 	if event == "ADDON_LOADED" and string.lower(arg1) == string.lower("SetCollector") then
 		SetCollectorSetupDB()
 		CreateMinimapButton()
-  	SetCollectorFrame:UnregisterEvent("ADDON_LOADED");
+			
+  	SetCollectorFrame:UnregisterEvent("ADDON_LOADED")
 		
 	elseif event == "PLAYER_LOGIN" then
 		local _, class = UnitClass("player")
 		SetCollectorSetupCharacterDB(class)
-				
-		for key, value in pairs(SetCollectorCharacterDB.Items) do
-			-- Check EQUIPMENT for item (Longhand for detailed scan, future look at inventory and set count to 1 for quick)
-			for i=1, #EQUIPMENT do
-				local itemID = GetInventoryItemID("player", EQUIPMENT[i]);
-				if key == itemID then
-					value.count = 1
-				end
-			end
-			-- Check BAGS for item
-			for i=1, #BAGS do	--
-				local numberOfSlots = GetContainerNumSlots(BAGS[i]); 
-				for j=1, numberOfSlots do
-					local itemID = GetContainerItemID(BAGS[i],j);
-					if key == itemID then
-						value.count = 1
-					end
-				end
-			end
-		end
-	
+
 		-- Setup Frame
-		UIDropDownMenu_Initialize(SetCollectorFrame.setFilter, SetCollectorFrame_InitFilter);
+		UIDropDownMenu_Initialize(SetCollectorFrame.setFilter, SetCollectorFrame_InitFilter)
 	
 		-- Setup DressUpModel
 		SetCollectorFrameDressUpModel:SetUnit("PLAYER")
@@ -368,52 +391,25 @@ function SetCollectorFrame_OnEvent (self, event, arg1, ...)
 		SetCollectorFrameDressUpModel:SetFacing(0.25)				-- Slightly turns the model towards the list
 		
 		-- Register New Events
-		SetCollectorFrame:RegisterEvent("BAG_UPDATE");
-		SetCollectorFrame:RegisterEvent("BANKFRAME_OPENED");
-		SetCollectorFrame:RegisterEvent("VOID_STORAGE_OPEN");
-		SetCollectorFrame:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED");
+		SetCollectorFrame:RegisterEvent("BAG_UPDATE")
+		SetCollectorFrame:RegisterEvent("BANKFRAME_OPENED")
+		SetCollectorFrame:RegisterEvent("VOID_STORAGE_OPEN")
+		SetCollectorFrame:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
 		
 	elseif event == "BAG_UPDATE" then
-		for key, value in pairs(SetCollectorCharacterDB.Items) do
-			-- Check BAGS for item
-			for i=1, #BAGS do	--
-				local numberOfSlots = GetContainerNumSlots(BAGS[i]); 
-				for j=1, numberOfSlots do
-					local itemID = GetContainerItemID(BAGS[i],j);
-					if key == itemID then
-						value.count = 1
-					end
-				end
-			end
-		end
-		if SetCollectorFrame:IsVisible() then
-			SetCollectorFrameScrollBar_Update()			-- Is this what steps on the CompactUnitFrame and CompactRaidFrame in combat?
-		end
+		SetCollector_Scan("Bags")
+		--SetCollector_ScanBags()
 		
 	elseif event == "BANKFRAME_OPENED" then
-		for key, value in pairs(SetCollectorCharacterDB.Items) do
-			-- Check BANK for item
-			for i=1, #BANK do
-				local numberOfSlots = GetContainerNumSlots(BANK[i]); 
-				for j=1, numberOfSlots do
-					local itemID = GetContainerItemID(BANK[i],j);
-					if key == itemID then
-						value.count = 1
-					end
-				end
-			end
-		end
-		if SetCollectorFrame:IsVisible() then
-			SetCollectorFrameScrollBar_Update()
-		end
+		SetCollector_Scan("Bank")
+		--SetCollector_ScanBank()
 	
 	elseif event == "VOID_STORAGE_OPEN" then
 	  local isReady = IsVoidStorageReady()
 		if isReady == false then
-			--print("Set Collector: Preparing to scan Void Storage in 2 seconds.")
-			C_Timer.After(2, ScanVoidStorage)
+			C_Timer.After(2, SetCollector_Scan("Void"))
 		else
-			ScanVoidStorage()
+			SetCollector_Scan("Void")
 		end
 	
 	elseif event == "PLAYER_SPECIALIZATION_CHANGED" then
@@ -453,22 +449,22 @@ function SetCollectorFrameScrollBar_Update()
 	local faction, localizedFaction = UnitFactionGroup("player")
   
   -- Specialization/Role Filter
-  local specID = 0;
-	local currFilter = GetFilterOptions();
+  local specID = 0
+	local currFilter = GetFilterOptions()
 
 	if currFilter == LE_LOOT_FILTER_CLASS then
-		local currentSpec = GetSpecialization();
-		local specID = currentSpec and select(1, GetSpecializationInfo(currentSpec)) or "None";
+		local currentSpec = GetSpecialization()
+		local specID = currentSpec and select(1, GetSpecializationInfo(currentSpec)) or "None"
 		local role = GetSetSpecializationRole(specID);
 	else -- Spec
-		local id = GetSpecializationInfo(currFilter - LE_LOOT_FILTER_SPEC1 + 1);
+		local id = GetSpecializationInfo(currFilter - LE_LOOT_FILTER_SPEC1 + 1)
 		specID = id;
 	end
-  local role = GetSetSpecializationRole(specID);
+  local role = GetSetSpecializationRole(specID)
   
-  for i=1, #SetCollectorDB[class].Collections do
-  	if (SetCollectorDB[class].Collections[i].Role == nil or SetCollectorDB[class].Collections[i].Role == role or role == "ALL") then
-  		if (SetCollectorDB[class].Collections[i].Faction == nil or SetCollectorDB[class].Collections[i].Faction == faction or faction == nil) then
+  for i,value in SortedList(SetCollectorDB[class].Collections, SORT_BY, SORT_DIR) do
+  	if (SetCollectorDB[class].Collections[i].Role == "Any" or SetCollectorDB[class].Collections[i].Role == role or role == "ALL") then
+  		if (SetCollectorDB[class].Collections[i].Faction == "Any" or SetCollectorDB[class].Collections[i].Faction == faction or faction == nil) then
 		  	local collapse = false
 		  	if COLLAPSED_COLLECTIONS[i] == true then
 		  		collapse = true
@@ -488,10 +484,11 @@ function SetCollectorFrameScrollBar_Update()
 		  	
 		  	if not collectionDisplay.IsCollapsed then
 					for j=1, #SetCollectorDB[class].Collections[i].Sets do
-						if (SetCollectorDB[class].Collections[i].Sets[j].Role == nil or SetCollectorDB[class].Collections[i].Sets[j].Role == role or role == "ALL") then
+						if (SetCollectorDB[class].Collections[i].Sets[j].Role == "Any" or SetCollectorDB[class].Collections[i].Sets[j].Role == role or role == "ALL") then
 				  		local acquired = 0
 				  		for k=1, #SetCollectorDB[class].Collections[i].Sets[j].setPieces do
-				  			acquired = acquired + SetCollectorCharacterDB.Items[SetCollectorDB[class].Collections[i].Sets[j].setPieces[k]].count
+				  			local item = SetCollectorDB[class].Collections[i].Sets[j].setPieces[k]
+				  			acquired = acquired + SetCollectorCharacterDB.Items[item].count
 				  			
 				  		end
 				  		
@@ -527,7 +524,7 @@ function SetCollectorFrameScrollBar_Update()
   	end
   	
   end
-  
+    
   -- Set Display Parameters
   local maxLines = #CURRENT_DISPLAY
   local maxLinesDisplayed = 25
@@ -630,6 +627,7 @@ function SetCollectorFrameScrollBar_Update()
 	  	_G["SetCollectorEntry"..line].index = line;
 	    _G["SetCollectorEntry"..line]:Hide();
 	  end
+	  --line = line + 1
   end
 end
 
@@ -814,8 +812,47 @@ function SetCollectorFrame_InitFilter()
 	--UIDropDownMenu_AddButton(info);
 end
 
--- Create console command here
+-- Create Slash Command
+local CommandTable = {
+	["show"] = function()
+		ShowUIPanel(SetCollectorFrame)
+	end,
+	["hide"] = function()
+		HideUIPanel(SetCollectorFrame)
+	end,
+	["resetdb"] = function()
+		SetCollectorSetupDB(true)
+	end,
+	["sort"] = {
+		["asc"] = function()
+			SORT_DIR = "ASC"
+			SetCollectorFrameScrollBar_Update()
+		end,
+		["desc"] = function()
+			SORT_DIR = "DESC"
+			SetCollectorFrameScrollBar_Update()
+		end,
+		["help"] = _L["SLASH_HELP_SORT"]
+	},
+	["help"] = _L["SLASH_HELP"]
+}
+
+local function DispatchCommand(message, commandTable)
+	local command, parameters = string.split(" ", message, 2)
+	local entry = commandTable[command:lower()]
+	local which = type(entry)
+	if which == "function" then
+		entry(parameters)
+	elseif which == "table" then
+		DispatchCommand(parameters or " ", entry)
+	elseif which == "string" then
+		print(entry)
+	elseif message ~= "help" then
+		DispatchCommand("help", commandTable)
+	end
+end
+
 SLASH_SETCOLLECTOR1 = "/setcollector"
-SlashCmdList["SETCOLLECTOR"] = function(msg)
-	ShowUIPanel(SetCollectorFrame)
+SlashCmdList["SETCOLLECTOR"] = function(message)
+	DispatchCommand(message, CommandTable)
 end
