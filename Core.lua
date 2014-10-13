@@ -398,11 +398,9 @@ function SetCollectorFrame_OnEvent (self, event, ...)
 		
 	elseif event == "BAG_UPDATE" then
 		SetCollector_Scan("Bags")
-		--SetCollector_ScanBags()
 		
 	elseif event == "BANKFRAME_OPENED" then
 		SetCollector_Scan("Bank")
-		--SetCollector_ScanBank()
 	
 	elseif event == "VOID_STORAGE_OPEN" then
 	  local isReady = IsVoidStorageReady()
@@ -627,7 +625,7 @@ function SetCollectorFrameScrollBar_Update()
 	  	_G["SetCollectorEntry"..line].index = line;
 	    _G["SetCollectorEntry"..line]:Hide();
 	  end
-	  --line = line + 1
+	  
   end
 end
 
@@ -686,7 +684,6 @@ function SetCollectorListItem_OnClick(self, button)
 			-- Show Items on Model
 		  for i=1, #SetCollectorDB[class].Collections[_G[button].collection].Sets[_G[button].set].setPieces do
 		  	SetCollectorFrameDressUpModel:TryOn(SetCollectorDB[class].Collections[_G[button].collection].Sets[_G[button].set].setPieces[i])
-		  	--print(SetCollectorDB[class].Collections[_G[button].collection].Sets[_G[button].set].setPieces[i])
 		  end
 		end 
 	end
@@ -799,6 +796,7 @@ function SetCollectorFrame_InitFilter()
 	info.func = SetCollectorFrame_SetFilter;
 	UIDropDownMenu_AddButton(info);
 	
+	-- Sample items for future sort and filter interface
 	--info.leftPadding = nil;
 	--info.text = ITEM_BIND_ON_EQUIP;
 	--info.checked = currFilter == LE_LOOT_FILTER_BOE;
@@ -832,9 +830,16 @@ local CommandTable = {
 			SORT_DIR = "DESC"
 			SetCollectorFrameScrollBar_Update()
 		end,
-		["help"] = _L["SLASH_HELP_SORT"]
+		["help"] = _L["SLASH_HELP_SORT"],
+		["empty"] = function()
+			if SORT_DIR == "DESC" then SORT_DIR = "ASC" else SORT_DIR = "DESC" end
+			SetCollectorFrameScrollBar_Update()
+		end
 	},
-	["help"] = _L["SLASH_HELP"]
+	["help"] = _L["SLASH_HELP"],
+	["empty"] = function()
+		SetCollector_ToggleUI()
+	end
 }
 
 local function DispatchCommand(message, commandTable)
@@ -847,6 +852,8 @@ local function DispatchCommand(message, commandTable)
 		DispatchCommand(parameters or " ", entry)
 	elseif which == "string" then
 		print(entry)
+	elseif message == "" or message == " " then
+		DispatchCommand("empty", commandTable)
 	elseif message ~= "help" then
 		DispatchCommand("help", commandTable)
 	end

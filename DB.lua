@@ -1886,7 +1886,6 @@ end
 function SetCollectorSetupCharacterDB(class)
 	if SetCollectorCharacterDB == nil then
 		SetCollectorCharacterDB = { version = DB_VERSION, Items = { } }
-		
 		for i in pairs(SetCollectorDB[class].Collections) do
 			for j=1, #SetCollectorDB[class].Collections[i].Sets do
 				for k=1, #SetCollectorDB[class].Collections[i].Sets[j].setPieces do
@@ -1898,7 +1897,6 @@ function SetCollectorSetupCharacterDB(class)
 		
 	elseif SetCollectorCharacterDB.version ~= DB_VERSION then
 		SetCollectorCharacterDB.version = DB_VERSION
-		
 		for i in pairs(SetCollectorDB[class].Collections) do
 			for j=1, #SetCollectorDB[class].Collections[i].Sets do
 				for k=1, #SetCollectorDB[class].Collections[i].Sets[j].setPieces do
