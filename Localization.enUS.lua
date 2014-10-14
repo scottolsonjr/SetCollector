@@ -11,6 +11,7 @@ SetCollectorLocalization["TUTORIAL_4"] = "Frame controls, such as close and char
 
 
 SetCollectorLocalization["VOID_STORAGE_NOT_READY"] = "Set Collector: Void Storage not ready to scan. Please close Void Storage and reopen."
+SetCollectorLocalization["ITEMLINK_ERROR"] = "Set Collector: Item information is not in your cache yet or an invalid item ID was used. Please try again."
 
 
 SetCollectorLocalization["SLASH_HELP"] = "Set Collector: Possible commands include show, hide, resetdb and help.\nFor example, /setcollector show"
