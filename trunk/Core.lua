@@ -818,9 +818,6 @@ local CommandTable = {
 	["hide"] = function()
 		HideUIPanel(SetCollectorFrame)
 	end,
-	["resetdb"] = function()
-		SetCollectorSetupDB(true)
-	end,
 	["sort"] = {
 		["asc"] = function()
 			SORT_DIR = "ASC"
@@ -836,6 +833,13 @@ local CommandTable = {
 			SetCollectorFrameScrollBar_Update()
 		end
 	},
+	["resetdb"] = function()
+		SetCollectorSetupDB(true)
+	end,
+	["link"] = function(itemID)
+		local _, itemLink = GetItemInfo(itemID)
+		print(itemLink or _L["ITEMLINK_ERROR"])
+	end,
 	["help"] = _L["SLASH_HELP"],
 	["empty"] = function()
 		SetCollector_ToggleUI()
