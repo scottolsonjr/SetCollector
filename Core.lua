@@ -143,6 +143,10 @@ local function SetCollector_Scan(selection)
 	end
 end
 
+local function SetCollector_ScanVoid()
+	SetCollector_Scan("Void")							-- C_Timer does not allow for passing parameters in callback
+end
+
 function SetCollector_ToggleUI()
 	if (SetCollectorFrame:IsVisible()) then
 		HideUIPanel(SetCollectorFrame)
@@ -405,7 +409,7 @@ function SetCollectorFrame_OnEvent (self, event, ...)
 	elseif event == "VOID_STORAGE_OPEN" then
 	  local isReady = IsVoidStorageReady()
 		if isReady == false then
-			C_Timer.After(2, SetCollector_Scan("Void"))
+			C_Timer.After(2, SetCollector_ScanVoid)
 		else
 			SetCollector_Scan("Void")
 		end
