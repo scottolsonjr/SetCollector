@@ -399,6 +399,8 @@ function SetCollectorFrame_OnEvent (self, event, ...)
 		SetCollectorFrame:RegisterEvent("BANKFRAME_OPENED")
 		SetCollectorFrame:RegisterEvent("VOID_STORAGE_OPEN")
 		SetCollectorFrame:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
+		SetCollectorFrame:RegisterEvent("PLAYER_REGEN_DISABLED")
+		SetCollectorFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
 		
 	elseif event == "BAG_UPDATE" then
 		SetCollector_Scan("Bags")
@@ -418,6 +420,13 @@ function SetCollectorFrame_OnEvent (self, event, ...)
 		local i = GetSpecialization()
 		if i == nil then i = 0 end
 		SetCollectorFrame_SetFilter(nil, LE_LOOT_FILTER_SPEC1 + i - 1)
+	
+	elseif event == "PLAYER_REGEN_DISABLED" then
+		SetCollectorFrame:UnregisterEvent("BAG_UPDATE")
+	
+	elseif event == "PLAYER_REGEN_ENABLED" then
+		SetCollectorFrame:RegisterEvent("BAG_UPDATE")
+		SetCollector_Scan("Bags")
 	
 	end
 end
@@ -839,6 +848,7 @@ local CommandTable = {
 	},
 	["resetdb"] = function()
 		SetCollectorSetupDB(true)
+		SetCollectorFrameScrollBar_Update()
 	end,
 	["link"] = function(itemID)
 		local _, itemLink = GetItemInfo(itemID)
