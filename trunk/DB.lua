@@ -1548,8 +1548,6 @@ local function AddShamanCollections()
 	-- Dungeon Sets
 	c = AddCollection(50400,nil,DUNGEON,1,SHAMAN,ANY,ANY,"Dungeon Sets",52)
 	AddSet(50400,nil,SHAMAN,ANY,c,ANY,"Tidefury Raiment",70,115,EPIC,28349,27802,28231,27510,27909)
-	AddSet(50400,nil,SHAMAN,ANY,c,ANY,"Mana-Etched Regalia",68,115,EPIC,28193,27796,28191,27465,27907)
-	AddSet(50400,nil,SHAMAN,ANY,c,ANY,"Wastestalker Armor",68,115,EPIC,28224,27797,28264,27531,27837)
 	AddSet(50400,nil,SHAMAN,ANY,c,ANY,"Desolation Battlegear",68,115,EPIC,28192,27713,28401,27528,27936)
 	AddSet(50400,nil,SHAMAN,ANY,c,ANY,"Stormcaller's Garb",60,78,EPIC,21374,21372,21375,21376,21373)
 	AddSet(50400,nil,SHAMAN,ANY,c,ANY,"Gift of the Gathering Storm",60,65,EPIC,21398,21400,21399)
