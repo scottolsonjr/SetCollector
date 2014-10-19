@@ -392,7 +392,7 @@ function SetCollectorFrame_OnEvent (self, event, ...)
 		
 	elseif event == "PLAYER_LOGIN" then
 		local _, class = UnitClass("player")
-		if (SetCollectorDB and (SetCollectorCharacterDB["release"] == nil or SetCollectorCharacterDB["release"] < MIN_DB_RELEASE_VERSION)) then
+		if (SetCollectorCharacterDB and (SetCollectorCharacterDB["release"] == nil or SetCollectorCharacterDB["release"] < MIN_DB_RELEASE_VERSION)) then
 			SetCollectorSetupCharacterDB(class, true)
 		else
 			SetCollectorSetupCharacterDB(class)
