@@ -7,7 +7,7 @@ local addon = _G[addonName]
 local _L = SetCollectorLocalization
 local WOW_VERSION = select(4,GetBuildInfo())
 local DB_VERSION = WOW_VERSION
-local MIN_DB_RELEASE_VERSION = 25							-- Sets the minimum release compatibility
+local MIN_DB_RELEASE_VERSION = 28							-- Sets the minimum release compatibility
 
 local DEATHKNIGHT = "DEATHKNIGHT"
 local DRUID 			= "DRUID"
