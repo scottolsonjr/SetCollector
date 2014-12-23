@@ -1,13 +1,19 @@
 --
--- Local Variables and Constants
+-- LOCAL VARIABLES
 --
 
-local addonName = ...
-local addon = _G[addonName]
 local _L = SetCollectorLocalization
+	BINDING_HEADER_SETCOLLECTOR = _L["ADDON_NAME"]
+	BINDING_NAME_SETCOLLECTOR 	= _L["BINDING_TOGGLE_UI"]
+	
 local WOW_VERSION = select(4,GetBuildInfo())
 local DB_VERSION = WOW_VERSION
-local MIN_DB_RELEASE_VERSION = 28							-- Sets the minimum release compatibility
+local MIN_DB_RELEASE_VERSION = 30							-- Sets the minimum release compatibility (last released 25)
+
+local icon = LibStub("LibDBIcon-1.0")
+local HelpPlateSeen = false										-- Replace with CVar
+
+local ANY					=	{ Code = "Z", Description = "Any" }
 
 local DEATHKNIGHT = "DEATHKNIGHT"
 local DRUID 			= "DRUID"
@@ -21,20 +27,26 @@ local SHAMAN 			= "SHAMAN"
 local WARLOCK 		= "WARLOCK"
 local WARRIOR 		= "WARRIOR"
 
-local TANK 		= "TANK"
-local HEALER 	= "HEALER"
-local CASTER 	= "CASTER"
-local RANGED 	= "RANGED"
-local MELEE 	= "MELEE"
+local ALLIANCE 		= { Code = "A", Description = "Alliance" }
+local HORDE 			= { Code = "H", Description = "Horde" }
 
-local POOR 			= 0
-local COMMON 		= 1
-local UNCOMMON 	= 2
-local RARE 			= 3
-local EPIC 			= 4
-local LEGENDARY = 5
-local ARTIFACT 	= 6
-local HEIRLOOM 	= 7
+local TANK 				= { Code = "T", Description = "TANK" }
+local HEALER 			= { Code = "H", Description = "HEALER" }
+local CASTER 			= { Code = "C", Description = "CASTER" }
+local RANGED 			= { Code = "R", Description = "RANGED" }
+local MELEE 			= { Code = "M", Description = "MELEE" }
+
+local COLLECTION_LIST_WIDTH = 260
+
+local WHITE		= "|cFFFFFFFF"
+
+local CURRENT_FILTER = 0
+local SHOW_ONLY_FAVORITES = false
+
+local SELECTED_BUTTON = nil
+
+local SORT_BY = "key"					-- Default Sort Value
+local SORT_DIR = "DESC"				-- Default Sort Direction
 
 local EQUIPMENT = {
 	INVSLOT_AMMO,
@@ -81,91 +93,8 @@ local BANK = {
 local VOID_STORAGE_MAX = 80;
 local VOID_STORAGE_PAGES = 2;	-- Available in 6.0
 
-local SELECTED_BUTTON = ""
-local SELECTED_INDEX = 0
-local SELECTED_OFFSET = 0
-local SELECTED_COLLECTION = 0
-local SELECTED_SET = 0
-
-local WHITE		= "|cFFFFFFFF"
-
-local CURRENT_DISPLAY = { }
-local COLLAPSED_COLLECTIONS = { }
-
-local CURRENT_FILTER = 0
-
-local SORT_BY = "key"					-- Default Sort Value
-local SORT_DIR = "DESC"				-- Default Sort Direction
-
-local Session = {
-	InitialScanComplete = false
-}
-
 --
--- General Functions
---
-
-local function SetCollector_Scan(selection)
-	local inLockdown = InCombatLockdown()
-	if (inLockdown == nil or inLockdown == false) then
-		local show, success
-		if selection == "Equipment" then 
-			show = { containers = 1, slots = function() return #EQUIPMENT end, itemID = function(i,j) return GetInventoryItemID("player", EQUIPMENT[j]) end }
-		elseif selection == "Bags" then 
-			show = { containers = #BAGS, slots = function(i) return GetContainerNumSlots(BAGS[i]) end, itemID = function(i,j) return GetContainerItemID(BAGS[i],j) end }
-		elseif selection == "Bank" then 
-			show = { containers = #BANK, slots = function(i) return GetContainerNumSlots(BANK[i]) end, itemID = function(i,j) return GetContainerItemID(BANK[i],j) end }
-		elseif selection == "Void" then 
-			-- Special tasks for Void Storage
-			local isReady = IsVoidStorageReady()
-			if isReady == true then 	-- 6.0 method
-				show = { containers = VOID_STORAGE_PAGES, slots = function() return VOID_STORAGE_MAX end, itemID = function(i,j) return GetVoidItemInfo(i,j) end }
-			elseif isReady == 1 then 	-- 5.4 method
-				show = { containers = 1, slots = function() return VOID_STORAGE_MAX end, itemID = function(i,j) return GetVoidItemInfo(j) end }
-			else 
-				print(_L["VOID_STORAGE_NOT_READY"]); return;
-			end	
-		else return
-		end
-		
-		for key, value in pairs(SetCollectorCharacterDB.Items) do
-			for i=1, show.containers do
-				local numberOfSlots = show.slots(i)
-				for j=1, numberOfSlots do
-					local itemID = show.itemID(i,j)
-					if key == itemID then
-						value.count = 1
-					end
-					--if success == nil then print(selection.." scan successful"); success = true; end
-				end
-			end
-		end
-		
-		if SetCollectorFrame:IsVisible() then
-			SetCollectorFrameScrollBar_Update()
-		end
-	end
-end
-
-local function SetCollector_ScanVoid()
-	SetCollector_Scan("Void")							-- C_Timer does not allow for passing parameters in callback
-end
-
-function SetCollector_ToggleUI()
-	if (SetCollectorFrame:IsVisible()) then
-		HideUIPanel(SetCollectorFrame)
-	else
-		ShowUIPanel(SetCollectorFrame)
-		if Session.InitialScanComplete == false then
-			SetCollector_Scan("Equipment")
-			SetCollector_Scan("Bags")
-			Session.InitialScanComplete = true
-		end
-	end
-end
-
---
--- General Functions - Local
+-- LOCAL FUNCTIONS
 --
 
 local function pairsByKeys(t, d)
@@ -204,66 +133,24 @@ local function CreateMinimapButton()
 			tt:AddLine(_L["MINIMAP_TOOLTIP"])
 		end,
 	})
-	local icon = LibStub("LibDBIcon-1.0")
-  icon:Register("SetCollectorMinimap", myLDB, SetCollectorDB.Minimap)
+  icon:Register("SetCollectorMinimap", myLDB, SetCollectorCharacterDB.minimap)
 end
 
 local function SetHighlight(button, ...)
-	local index 			= _G[button].index
-	local offset 			= _G[button].index + FauxScrollFrame_GetOffset(SetCollectorFrameScrollBar);
-	local collection 	= _G[button].collection
-	local set 				= _G[button].set
-	
-	_G[button].normalText:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-	_G[button].tag:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-	_G[button].groupMates:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-	_G[button].texture:SetTexture("Interface\\QuestFrame\\UI-QuestLogTitleHighlight");
-		  
-	SELECTED_BUTTON = button;
-	SELECTED_INDEX = index;
-	SELECTED_OFFSET = offset
-	SELECTED_COLLECTION = _G[button].collection
-	SELECTED_SET = _G[button].set
+	local collection 	= button.Collection
+	local set 				= button.Set
+	if ( button ) then SetCollector_UnsetHighlight(SELECTED_BUTTON) end
+	button.Text:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
+	button.Texture:Show()
+	SELECTED_BUTTON = button
 end
 
-local function UnsetHighlight(button, quality, ...)
-	local color;
-	if button ~= nil then
-		if _G[button].collection == "" and _G[button].set == "" then
-			color = { r = 0.75, g = 0.75, b = 0.75 };
-		else
-			if quality == nil then
-				color = { r = 0.75, g = 0.75, b = 0.75 };
-			else
-				color = ITEM_QUALITY_COLORS[quality];
-			end
-		end
-			
-		_G[button].normalText:SetTextColor(color.r, color.g, color.b);
-		_G[button].tag:SetTextColor(color.r, color.g, color.b);
-		_G[button].groupMates:SetTextColor(color.r, color.g, color.b);
-		_G[button].texture:SetTexture(0,0,0,0);
+function SetCollector_UnsetHighlight(button, ...)
+	if ( button ) then			
+		button.Text:SetTextColor(1.0, 0.82, 0);
+		button.Texture:Hide()
 	end
-	
-	-- Reset Variables
 	SELECTED_BUTTON = nil
-	SELECTED_INDEX = 0
-	SELECTED_OFFSET = 0
-	SELECTED_COLLECTION = 0
-	SELECTED_SET = 0
-end
-
-local function SetCollectorFrame_UpdatePortrait()
-	local masteryIndex = GetSpecialization();
-	if (masteryIndex == nil) then
-		local _, class = UnitClass("player");
-		SetCollectorFramePlayerPortrait:SetTexture("Interface\\TargetingFrame\\UI-Classes-Circles");
-		SetCollectorFramePlayerPortrait:SetTexCoord(unpack(CLASS_ICON_TCOORDS[class]));
-	else
-		local _, _, _, icon = GetSpecializationInfo(masteryIndex);
-		SetCollectorFramePlayerPortrait:SetTexCoord(0, 1, 0, 1);
-		SetPortraitToTexture(SetCollectorFramePlayerPortrait, icon);	
-	end
 end
 
 local function SetFilterOptions(classIndex)
@@ -280,142 +167,529 @@ local function GetFilterOptions()
 end
 
 local function GetSetSpecializationRole(spec)
-	if 		 spec == 62 	then return CASTER 	-- Arcane Mage
-	elseif spec == 63 	then return CASTER	-- Fire Mage
-	elseif spec == 64 	then return CASTER	-- Frost Mage
-	elseif spec == 65 	then return HEALER	-- Holy Paladin
-	elseif spec == 66 	then return TANK		-- Protection Paladin
-	elseif spec == 70 	then return MELEE		-- Retribution Paladin
-	elseif spec == 71 	then return MELEE		-- Arms Warrior
-	elseif spec == 72 	then return MELEE		-- Fury Warrior
-	elseif spec == 73 	then return TANK		-- Protection Warrior
-	elseif spec == 102 	then return CASTER	-- Balance Druid
-	elseif spec == 103 	then return MELEE		-- Feral Combat Druid
-	elseif spec == 104 	then return TANK		-- Guardian Druid
-	elseif spec == 105 	then return HEALER	-- Restoration Druid
-	elseif spec == 250 	then return TANK		-- Blood Death Knight
-	elseif spec == 251 	then return MELEE		-- Frost Death Knight
-	elseif spec == 252 	then return MELEE		-- Unholy Death Knight
-	elseif spec == 253 	then return RANGED	-- Beast Mastery Hunter
-	elseif spec == 254 	then return RANGED	-- Marksmanship Hunter
-	elseif spec == 255 	then return RANGED	-- Survival Hunter
-	elseif spec == 256 	then return HEALER	-- Discipline Priest
-	elseif spec == 257 	then return HEALER	-- Holy Priest
-	elseif spec == 258 	then return CASTER	-- Shadow Priest
-	elseif spec == 259 	then return MELEE		-- Assassination Rogue
-	elseif spec == 260 	then return MELEE		-- Combat Rogue
-	elseif spec == 261 	then return MELEE		-- Subtlety Rogue
-	elseif spec == 262 	then return CASTER	-- Elemental Shaman
-	elseif spec == 263 	then return MELEE		-- Enhancement Shaman
-	elseif spec == 264 	then return HEALER	-- Restoration Shaman
-	elseif spec == 265 	then return CASTER	-- Affliction Warlock
-	elseif spec == 266 	then return CASTER	-- Demonology Warlock
-	elseif spec == 267 	then return CASTER	-- Destruction Warlock
-	elseif spec == 268 	then return TANK		-- Brewmaster Monk
-	elseif spec == 269 	then return MELEE		-- Windwalker Monk
-	elseif spec == 270 	then return HEALER	-- Mistweaver Monk
-	else return "ALL"												-- No specialization selected yet
+	if 		 spec == 62 	then return CASTER.Description 	-- Arcane Mage
+	elseif spec == 63 	then return CASTER.Description	-- Fire Mage
+	elseif spec == 64 	then return CASTER.Description	-- Frost Mage
+	elseif spec == 65 	then return HEALER.Description	-- Holy Paladin
+	elseif spec == 66 	then return TANK.Description		-- Protection Paladin
+	elseif spec == 70 	then return MELEE.Description		-- Retribution Paladin
+	elseif spec == 71 	then return MELEE.Description		-- Arms Warrior
+	elseif spec == 72 	then return MELEE.Description		-- Fury Warrior
+	elseif spec == 73 	then return TANK.Description		-- Protection Warrior
+	elseif spec == 102 	then return CASTER.Description	-- Balance Druid
+	elseif spec == 103 	then return MELEE.Description		-- Feral Combat Druid
+	elseif spec == 104 	then return TANK.Description		-- Guardian Druid
+	elseif spec == 105 	then return HEALER.Description	-- Restoration Druid
+	elseif spec == 250 	then return TANK.Description		-- Blood Death Knight
+	elseif spec == 251 	then return MELEE.Description		-- Frost Death Knight
+	elseif spec == 252 	then return MELEE	.Description	-- Unholy Death Knight
+	elseif spec == 253 	then return RANGED.Description	-- Beast Mastery Hunter
+	elseif spec == 254 	then return RANGED.Description	-- Marksmanship Hunter
+	elseif spec == 255 	then return RANGED.Description	-- Survival Hunter
+	elseif spec == 256 	then return HEALER.Description	-- Discipline Priest
+	elseif spec == 257 	then return HEALER.Description	-- Holy Priest
+	elseif spec == 258 	then return CASTER.Description	-- Shadow Priest
+	elseif spec == 259 	then return MELEE.Description		-- Assassination Rogue
+	elseif spec == 260 	then return MELEE.Description		-- Combat Rogue
+	elseif spec == 261 	then return MELEE.Description		-- Subtlety Rogue
+	elseif spec == 262 	then return CASTER.Description	-- Elemental Shaman
+	elseif spec == 263 	then return MELEE.Description		-- Enhancement Shaman
+	elseif spec == 264 	then return HEALER.Description	-- Restoration Shaman
+	elseif spec == 265 	then return CASTER.Description	-- Affliction Warlock
+	elseif spec == 266 	then return CASTER.Description	-- Demonology Warlock
+	elseif spec == 267 	then return CASTER.Description	-- Destruction Warlock
+	elseif spec == 268 	then return TANK.Description		-- Brewmaster Monk
+	elseif spec == 269 	then return MELEE.Description		-- Windwalker Monk
+	elseif spec == 270 	then return HEALER.Description	-- Mistweaver Monk
+	else return ANY.Description													-- No specialization selected yet
 	end
 end
 
-
-
---
--- UI Functions
---
-
--- SetCollectorFrame Tutorial / HelpPlate
-
-local SetCollectorFrame_HelpPlate = {
+local AddTutorial = {
 	FramePos = { x = 0,	y = -30 },
-	FrameSize = { width = 338, height = 496	},
-	[1] = { ButtonPos = { x = 440,	y = 10 }, 	HighLightBox = { x = 441, y = 2, width = 200, height = 30 },		ToolTipDir = "LEFT",		ToolTipText = _L["TUTORIAL_1"] },
-	[2] = { ButtonPos = { x = 140,	y = -366 }, HighLightBox = { x = 8, y = -30, width = 308, height = 406 },		ToolTipDir = "UP",			ToolTipText = _L["TUTORIAL_2"] },
-	[3] = { ButtonPos = { x = 460,	y = -366 }, HighLightBox = { x = 321, y = -30, width = 320, height = 406 },	ToolTipDir = "UP",			ToolTipText = _L["TUTORIAL_3"] },
+	FrameSize = { width = 638, height = 496	},
+	[1] = { ButtonPos = { x = 500,	y = 10 }, 	HighLightBox = { x = 497, y = 2, width = 200, height = 30 },		ToolTipDir = "LEFT",	ToolTipText = _L["TUTORIAL_1"] },
+	[2] = { ButtonPos = { x = 120,	y = -405 }, HighLightBox = { x = 8, y = -30, width = 275, height = 518 },		ToolTipDir = "DOWN",	ToolTipText = _L["TUTORIAL_2"] },
+	[3] = { ButtonPos = { x = 310,	y = -31 }, 	HighLightBox = { x = 305, y = -30, width = 392, height = 50 },	ToolTipDir = "LEFT",	ToolTipText = _L["TUTORIAL_3"] },
+	[4] = { ButtonPos = { x = 476,	y = -405 }, HighLightBox = { x = 305, y = -83, width = 392, height = 465 },	ToolTipDir = "DOWN",	ToolTipText = _L["TUTORIAL_4"] },
 }
 
-function SetCollectorFrame_ToggleTutorial()
-	local tutorial, helpPlate, mainHelpButton = SetCollectorFrame_GetTutorial();
-		
-	if ( helpPlate and not HelpPlate_IsShowing(helpPlate) and SetCollectorFrame:IsShown()) then
-		HelpPlate_Show( helpPlate, SetCollectorFrame, mainHelpButton, true )
-		SetCollectorFrame_HELP_VISIBLE = true
+local function SetVariantTab(self, tab)
+	PanelTemplates_SetTab(self, tab);
+	--SetCVar("setCollectorTab", tab);
+	SetCollector_UpdateSelectedVariantTab(self);
+end
+
+local function AddSetCollectorUI(frame)
+
+	frame.Title:SetText(_L["ADDON_NAME"])
+	frame:SetWidth(703)
+	frame:SetHeight(606)
+	frame:SetPoint("TOPLEFT",17,-115)
+
+	tinsert(UISpecialFrames, frame:GetName())											-- Hides frame when Escape is pressed or Game menu selected.
+  frame:SetAttribute("UIPanelLayout-defined", true)			-- Allows frame to shift other frames when opened or be shifted when others are opened.
+  frame:SetAttribute("UIPanelLayout-enabled", true)			-- http://www.wowwiki.com/Creating_standard_left-sliding_frames
+  frame:SetAttribute("UIPanelLayout-area", "left")
+  frame:SetAttribute("UIPanelLayout-pushable", 3)
+  frame:SetAttribute("UIPanelLayout-width", width)
+  frame:SetAttribute("UIPanelLayout-whileDead", true)
+	  	
+	local helpButton = CreateFrame("Button","$parentTutorialButton",frame,"MainHelpPlateButton")
+	helpButton:SetPoint("TOPLEFT",frame, 39, 20)
+	helpButton:SetScript("OnClick", SetCollector_ToggleTutorial)
+	
+	-- Add Left Inset (ScrollFrame)
+	local leftInset = CreateFrame("Frame","$parentLeftInset",frame,"InsetFrameTemplate")
+	leftInset:SetWidth(COLLECTION_LIST_WIDTH)
+	leftInset:SetHeight(496)
+	leftInset:SetPoint("TOPLEFT", 4, -60)
+	leftInset:SetPoint("BOTTOMLEFT", 4, 26)
+	leftInset:SetAttribute("parentKey","LeftInset")
+	leftInset:SetAttribute("useParentLevel","true")
+	
+	local scrollFrame = CreateFrame("ScrollFrame","SetCollectorScrollFrame",frame,"CollectionsScrollFrameTemplate")
+	scrollFrame:SetPoint("TOPLEFT","$parentLeftInset","TOPLEFT",2,-5)
+	scrollFrame:SetPoint("BOTTOMRIGHT","$parentLeftInset","BOTTOMRIGHT", -4, 3)
+	
+	-- Add Right Inset (Model)
+	local rightInset = CreateFrame("Frame","$parentRightInset",frame,"InsetFrameTemplate")
+	rightInset:SetPoint("TOPRIGHT", -6, -60)
+	rightInset:SetPoint("BOTTOMLEFT", leftInset, "BOTTOMRIGHT", 20, 0)
+	rightInset:SetAttribute("parentKey","RightInset")
+	rightInset:SetAttribute("useParentLevel","true")
+	
+	local setDisplay = CreateFrame("Frame","SetDisplay",rightInset)
+	setDisplay:SetPoint("TOPLEFT",rightInset,"TOPLEFT", 3, -3)
+	setDisplay:SetPoint("BOTTOMRIGHT",rightInset,"BOTTOMRIGHT", -3, 3)
+	setDisplay:SetAttribute("parentKey","SetDisplay")
+	setDisplay.Texture = setDisplay:CreateTexture("setTexture","BACKGROUND")
+	setDisplay.Texture:SetAllPoints(setDisplay)
+	setDisplay.Texture:SetTexture("Interface\\PetBattles\\MountJournal-BG",false)
+	setDisplay.Texture:SetTexCoord(0,0.78515625,0,1)
+	
+	local shadowOverlay = CreateFrame("Frame",nil,setDisplay,"ShadowOverlayTemplate")
+	shadowOverlay:SetAllPoints(true)
+	shadowOverlay:SetAttribute("useParentLevel","true")
+	shadowOverlay:SetAttribute("parentKey","ShadowOverlay")
+	
+	local progressDisplay = CreateFrame("Button","SummaryButton",setDisplay)
+	progressDisplay:SetWidth(56)
+	progressDisplay:SetHeight(56)
+	progressDisplay:SetPoint("TOPRIGHT","$parent","TOPRIGHT",-10,-3)
+	progressDisplay.Summary = progressDisplay:CreateFontString("$parentSummary","OVERLAY","GameFontNormalLarge")
+	progressDisplay.Summary:SetPoint("CENTER", 0, 2)
+	progressDisplay.Summary:SetText(" ")
+	progressDisplay.Background = progressDisplay:CreateTexture("$parentBackground","BACKGROUND")
+	progressDisplay.Background:SetTexture(0,0,0,0)
+	progressDisplay.Background:SetPoint("TOPLEFT",3,-3)
+	progressDisplay.Background:SetPoint("BOTTOMRIGHT",-3,3)
+	progressDisplay.Texture = progressDisplay:CreateTexture("$parentTexture","OVERLAY")
+	progressDisplay.Texture:SetAtlas("collections-itemborder-uncollected")
+	progressDisplay.Texture:SetPoint("TOPLEFT",0,0)
+	progressDisplay.Texture:SetPoint("BOTTOMRIGHT",0,0)
+	progressDisplay:SetFrameLevel(10)
+	progressDisplay:SetScript("OnClick", function(self) SetCollectorSummaryButton_OnClick(self) end)
+	progressDisplay:Hide()
+	
+	local modelFrame = CreateFrame("DressUpModel","$parentModelFrame",setDisplay,"ModelWithZoomTemplate") --"ModelWithControlsTemplate")
+	modelFrame:SetPoint("TOPLEFT", setDisplay, "TOPLEFT", 0, 0)
+	modelFrame:SetPoint("BOTTOMRIGHT", setDisplay, "BOTTOMRIGHT", 0, 0)
+	modelFrame:SetAttribute("parentKey","ModelFrame")
+	modelFrame:SetAttribute("useParentLevel","true")
+	
+	local detailFrame = CreateFrame("Frame","$parentDetailFrame",setDisplay,"InsetFrameTemplate")
+	detailFrame:SetPoint("BOTTOMLEFT", leftInset, "BOTTOMRIGHT", 20, 0)
+	detailFrame:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -6, 26)
+	detailFrame:SetAttribute("parentKey","DetailFrame")
+	detailFrame:SetAttribute("useParentLevel","false")
+	
+	local detailInfo = detailFrame:CreateFontString("$parentContent","OVERLAY")
+	detailInfo:SetFontObject("GameFontNormalLeft")
+	content = " "
+	detailInfo:SetText(content)
+	detailInfo:SetTextColor(1,1,1,0.9)
+	detailInfo:SetPoint("BOTTOMLEFT", detailFrame, "BOTTOMLEFT", 25, 17)
+	detailInfo:SetPoint("BOTTOMRIGHT", detailFrame, "BOTTOMRIGHT", 5, 17)
+	detailFrame:SetFrameLevel(11)
+	detailFrame:SetWidth(280)
+	detailFrame:SetHeight(detailInfo:GetHeight() + 22)
+	detailFrame:Hide()
+	
+	local showDetail = CreateFrame("Button","$parentShowDetail",frame,"UIPanelButtonTemplate")
+	showDetail:SetText(_L["SHOW_DETAIL"])
+	showDetail:SetWidth(120)
+	showDetail:SetPoint("TOPLEFT",leftInset,"BOTTOMRIGHT",20,0)
+	showDetail:SetAttribute("parentKey","ShowDetail")
+	showDetail:SetScript("OnClick", function(self) SetCollectorShowDetail_OnClick(self) end)
+	
+	for i=1, 5 do
+		local variantTab = CreateFrame("Button","$parentTab"..i,setDisplay,"CharacterFrameTabButtonTemplate")
+		variantTab:SetID(i)
+		variantTab:SetText(i)
+		if i == 1 then
+			variantTab:SetPoint("TOPLEFT", SetDisplay, "TOPLEFT", 5, 0)
+		else
+			local prev = i - 1
+			variantTab:SetPoint("LEFT", "$parentTab"..prev, "RIGHT", -16, 0)
+		end
+		variantTab:SetScript("OnClick",function() 
+			SetVariantTab(SetDisplay, i);
+			PlaySound("UI_Toybox_Tabs");
+		end)
+		variantTab:Hide()
+	end
+	PanelTemplates_SetNumTabs(SetDisplay, 5)
+	SetVariantTab(SetDisplay, 1)
+	
+	-- Add Filter Button
+	local filterButton = CreateFrame("Frame","$parentSetFilter",frame,"UIDropDownMenuTemplate")
+	filterButton:SetPoint("TOPRIGHT",frame,"TOPRIGHT",-125,-28)
+	filterButton:SetAttribute("enableMouse","true")
+	filterButton:SetAttribute("parentKey","setFilter")
+	
+end
+
+local function GetCollectionButton(index)
+	local collections = SetCollector.CollectionsFrame.Contents.Collections;
+	if ( not collections[index] ) then
+		local collection = CreateFrame("BUTTON", nil, SetCollector.CollectionsFrame.Contents, "SetCollectorCollectionTemplate");
+		collections[index] = collection;
+	end
+	return collections[index];
+end
+
+local function GetSetButton(index)
+	local sets = SetCollector.CollectionsFrame.Contents.Sets;
+	if ( not sets[index] ) then
+		local set = CreateFrame("BUTTON", nil, SetCollector.CollectionsFrame.Contents, "SetCollectorSetTemplate");
+		sets[index] = set;
+	end
+	return sets[index];
+end
+
+local function ClearVariantTabs()
+		for i=1, 5 do
+			local variantTab = _G["SetDisplayTab"..i]
+			variantTab:SetText(i)
+			variantTab.Collection = collection
+			variantTab.Set = set
+			variantTab.Preview = false
+			variantTab:Hide()
+		end
+		PanelTemplates_SetNumTabs(SetDisplay, 5)
+end
+
+local function SetVariantTabs(collection, set)
+	local Collections = SetCollectorDB
+	if ( collection and set and #Collections[collection].Sets[set].Variants > 1 ) then
+		for i=1, 5 do
+			local variantTab = _G["SetDisplayTab"..i]
+			if ( Collections[collection].Sets[set].Variants[i] ) then
+				variantTab:SetText(_L[Collections[collection].Sets[set].Variants[i].Title])
+				variantTab.Collection = collection
+				variantTab.Set = set
+				variantTab.Preview = false
+				variantTab:Show()
+			else
+				variantTab:Hide()
+			end
+			PanelTemplates_TabResize(variantTab, 0, nil, 36, variantTab:GetParent().maxTabWidth or 88)
+		end
+		PanelTemplates_SetNumTabs(SetDisplay, #Collections[collection].Sets[set].Variants)
+		SetVariantTab(SetDisplay, 1)
 	else
-		HelpPlate_Hide(true)
-	  SetCollectorFrame_HELP_VISIBLE = false
+		for i=1, 5 do
+			local variantTab = _G["SetDisplayTab"..i]
+			variantTab:SetText(i)
+			variantTab.Collection = collection
+			variantTab.Set = set
+			variantTab.Preview = false
+			variantTab:Hide()
+		end
+		PanelTemplates_SetNumTabs(SetDisplay, 5)
+		SetVariantTab(SetDisplay, 1)
 	end
 end
 
-function SetCollectorFrame_GetTutorial()
-	local tutorial
-	local helpPlate
-	local mainHelpButton
+local function CollectionsUpdate()
+	prevButton = nil
+	rowIndex = 0
+	
+  -- Class and Faction Filters
+  local _, class = UnitClass("player")
+	local faction, localizedFaction = UnitFactionGroup("player")
+	
+  -- Specialization/Role Filter
+  local specID = 0
+	local currFilter = GetFilterOptions()
 
-	tutorial = "Content Here."; 								-- Where could this display?
-	helpPlate = SetCollectorFrame_HelpPlate;
-	mainHelpButton = SetCollectorFrame.MainHelpButton;
-	return tutorial, helpPlate, mainHelpButton;
+	if currFilter == LE_LOOT_FILTER_CLASS then
+		local currentSpec = GetSpecialization()
+		local specID = currentSpec and select(1, GetSpecializationInfo(currentSpec)) or "None"
+		local role = GetSetSpecializationRole(specID)
+	else -- Spec
+		local id = GetSpecializationInfo(currFilter - LE_LOOT_FILTER_SPEC1 + 1)
+		specID = id
+	end
+  local role = GetSetSpecializationRole(specID)
+  
+  local Collections = SetCollectorDB
+  local Log = SetCollectorCharacterDB
+	
+	for i=1, #Collections do
+		rowIndex = rowIndex + 1
+		button = GetCollectionButton(rowIndex)
+		button:SetText(_L[Collections[i].Title])
+		button:ClearAllPoints()
+		if ( prevButton ) then
+			button:SetPoint("TOPLEFT", prevButton, "BOTTOMLEFT", 0, 0)
+		else
+			button:SetPoint("TOPLEFT", 1, -6)
+		end
+		button:Show()
+		prevButton = button
+		for j,value in SortedList(Collections[i].Sets, SORT_BY, SORT_DIR) do
+			local acquired = 0
+			if (Collections[i].Sets[j].Class == ANY.Description or Collections[i].Sets[j].Class == class or class == "Any") then
+				rowIndex = rowIndex + 1
+				titleButton = GetSetButton(rowIndex)
+				titleButton.Text:SetText(_L[Collections[i].Sets[j].Title] or _L["MISSING_LOCALIZATION"])			-- Putting Text into FontString allows for Wrapping using SetWidth
+				titleButton.Text:SetWidth(COLLECTION_LIST_WIDTH - 32)
+				if (i == 7) then
+					titleButton.SubText:SetText("|cff999999".."SubText Here".."|r")
+				end
+				local height = titleButton.Text:GetHeight() + titleButton.SubText:GetHeight() + 10
+				titleButton:SetHeight(height)
+				titleButton.Collection = i
+				titleButton.Set = j
+				titleButton:ClearAllPoints()
+				titleButton:SetPoint("TOPLEFT", prevButton, "BOTTOMLEFT", 0, 0)
+				if Log.Sets[j].Favorite == true then
+					titleButton.Favorite:Show()
+				end
+				if Log.Sets[j].Tracking == true then
+					titleButton.Check:Show()
+				end
+				titleButton:Hide()
+				if (Collections[i].Sets[j].Role == ANY.Description or Collections[i].Sets[j].Role == role or role == "Any") then
+					if (Collections[i].Sets[j].Faction == ANY.Description or Collections[i].Sets[j].Faction == faction or faction == "Any") then
+						-- Preload Item Info into Cache
+						for k=1, #Collections[i].Sets[j].Variants do
+							for l=1, #Collections[i].Sets[j].Variants[k].Items do
+								local itemID = Collections[i].Sets[j].Variants[k].Items[l]
+								local name, link = GetItemInfo(itemID)
+								if (Log.Items[itemID].Count > 0) then 
+									acquired = acquired + Log.Items[itemID].Count
+								end
+							end
+						end
+						if ( SHOW_ONLY_FAVORITES == true and Log.Sets[j].Favorite == false ) then
+							-- Keep it hidden
+						else
+							titleButton:Show()
+							prevButton = titleButton
+						end
+					end
+				end
+			end
+		end
+	end
 end
 
--- Events
-
-function SetCollectorFrame_OnLoad (self)
-  -- Register events
-  SetCollectorFrame:RegisterEvent("ADDON_LOADED")
-	SetCollectorFrame:RegisterEvent("PLAYER_LOGIN")
-	
-	-- Setup Frame
-	SetCollectorFrame.Title:SetText(_L["ADDON_NAME"])
-	SetCollectorFrame.CloseButton:SetText(CLOSE)
-	UIDropDownMenu_SetWidth(SetCollectorFrame.setFilter, 132)
-  tinsert(UISpecialFrames, "SetCollectorFrame")											-- Hides frame when Escape is pressed or Game menu selected.
-  SetCollectorFrame:SetAttribute("UIPanelLayout-defined", true)			-- Allows frame to shift other frames when opened or be shifted when others are opened.
-  SetCollectorFrame:SetAttribute("UIPanelLayout-enabled", true)			-- http://www.wowwiki.com/Creating_standard_left-sliding_frames
-  SetCollectorFrame:SetAttribute("UIPanelLayout-area", "left")
-  SetCollectorFrame:SetAttribute("UIPanelLayout-pushable", 3)
-  SetCollectorFrame:SetAttribute("UIPanelLayout-width", width)
-  SetCollectorFrame:SetAttribute("UIPanelLayout-whileDead", true)
-	
+local function UpdatePortrait()
+	local portrait = SetCollectorPortrait
+	local masteryIndex = GetSpecialization();
+	if (masteryIndex == nil) then
+		local _, class = UnitClass("player");
+		portrait:SetTexture("Interface\\TargetingFrame\\UI-Classes-Circles");
+		portrait:SetTexCoord(unpack(CLASS_ICON_TCOORDS[class]));
+	else
+		local _, _, _, icon = GetSpecializationInfo(masteryIndex);
+		portrait:SetTexCoord(0, 1, 0, 1);
+		SetPortraitToTexture(portrait, icon);	
+	end
 end
 
-function SetCollectorFrame_OnEvent (self, event, ...)
+local function SetCollector_Scan(selection)
+	local inLockdown = InCombatLockdown()
+	if (inLockdown == nil or inLockdown == false) then
+		local show, success
+		if selection == "Equipment" then 
+			show = { containers = 1, slots = function() return #EQUIPMENT end, itemID = function(i,j) return GetInventoryItemID("player", EQUIPMENT[j]) end }
+		elseif selection == "Bags" then 
+			show = { containers = #BAGS, slots = function(i) return GetContainerNumSlots(BAGS[i]) end, itemID = function(i,j) return GetContainerItemID(BAGS[i],j) end }
+		elseif selection == "Bank" then 
+			show = { containers = #BANK, slots = function(i) return GetContainerNumSlots(BANK[i]) end, itemID = function(i,j) return GetContainerItemID(BANK[i],j) end }
+		elseif selection == "Void" then 
+			-- Special tasks for Void Storage
+			local isReady = IsVoidStorageReady()
+			if isReady == true then 	-- 6.0 method
+				show = { containers = VOID_STORAGE_PAGES, slots = function() return VOID_STORAGE_MAX end, itemID = function(i,j) return GetVoidItemInfo(i,j) end }
+			elseif isReady == 1 then 	-- 5.4 method
+				show = { containers = 1, slots = function() return VOID_STORAGE_MAX end, itemID = function(i,j) return GetVoidItemInfo(j) end }
+			else 
+				print(_L["VOID_STORAGE_NOT_READY"]); return;
+			end	
+		else return
+		end
+		
+		for key, value in pairs(SetCollectorCharacterDB.Items) do
+			for i=1, show.containers do
+				local numberOfSlots = show.slots(i)
+				for j=1, numberOfSlots do
+					local itemID = show.itemID(i,j)
+					if key == itemID then
+						value.Count = 1
+					end
+					--if success == nil then print(selection.." scan successful"); success = true; end
+				end
+			end
+		end
+		
+		if SetCollector:IsVisible() then
+			CollectionsUpdate()
+			-- Update displayed details too
+		end
+	end
+end
+
+local function SetCollector_ScanVoid()
+	SetCollector_Scan("Void")							-- C_Timer does not allow for passing parameters in callback
+end
+
+
+--
+-- GLOBAL FUNCTIONS
+--
+
+function SetCollector_ToggleUI()
+	if (SetCollector:IsVisible()) then
+		HideUIPanel(SetCollector)
+	else
+		ShowUIPanel(SetCollector)
+		--[[if Session.InitialScanComplete == false then
+			SetCollector_Scan("Equipment")
+			SetCollector_Scan("Bags")
+			Session.InitialScanComplete = true
+		end]]--
+	end
+end
+
+function SetCollector_ToggleMinimapButton()
+	SetCollectorCharacterDB.minimap.hide = not SetCollectorCharacterDB.minimap.hide
+	if SetCollectorCharacterDB.minimap.hide then
+		icon:Hide("SetCollectorMinimap")
+	else
+		icon:Show("SetCollectorMinimap")
+	end
+end
+
+function SetCollector_GetTutorial()
+	local helpPlate, mainHelpButton
+	helpPlate = AddTutorial
+	mainHelpButton = SetCollector.MainHelpButton
+	return helpPlate, mainHelpButton
+end
+
+function SetCollector_ToggleTutorial()
+	local helpPlate, mainHelpButton = SetCollector_GetTutorial()
+		
+	if ( helpPlate and not HelpPlate_IsShowing(helpPlate) and SetCollector:IsShown()) then
+		HelpPlate_Show( helpPlate, SetCollector, mainHelpButton, HelpPlateSeen)
+		SetCollector_HELP_VISIBLE = true
+		HelpPlateSeen = true
+	else
+		HelpPlate_Hide(true) 								-- True indicates to animate the hide. Blank or flase suppresses the animation.
+	  SetCollector_HELP_VISIBLE = false
+	end
+end
+
+function SetCollector_UpdateSelectedVariantTab(self)
+	local selected = PanelTemplates_GetSelectedTab(self);
+	if ( SetCollector:IsShown() ) then
+		SetDisplayModelFrame:Dress()
+		local collection = _G["SetDisplayTab"..selected].Collection
+		local set = _G["SetDisplayTab"..selected].Set
+		if ( collection and set ) then
+	  	local Collections = SetCollectorDB
+	  	local Log = SetCollectorCharacterDB
+			local num = #Collections[collection].Sets[set].Variants[selected].Items
+			local acq = 0
+			for i=1, num do
+				local itemID = Collections[collection].Sets[set].Variants[selected].Items[i]
+			 	SetDisplayModelFrame:TryOn(itemID)
+			 	if (Log.Items[itemID].Count > 0) then acq = acq + Log.Items[itemID].Count; end
+			end
+			SummaryButtonSummary:SetText(string.format(_L["ITEMS_COLLECTED"],acq,num))
+			SummaryButton:Show()
+			SetCollector_SetVariantDetails(collection, set, selected)
+		else
+			SummaryButton:Hide()
+		end
+	end
+end
+
+function SetCollector_ClearVariantDetails()
+	local content = ""
+	SetDisplayDetailFrameContent:SetText(content)
+	SetDisplayDetailFrame:SetHeight(SetDisplayDetailFrameContent:GetHeight() + 22)
+end
+
+function SetCollector_SetVariantDetails(collection, set, variant)
+	local Collections = SetCollectorDB
+	local content = ""
+	for i=1, #Collections[collection].Sets[set].Variants[variant].Items do
+		local itemID = Collections[collection].Sets[set].Variants[variant].Items[i]
+		local acquired = SetCollectorCharacterDB.Items[itemID].Count
+		local name, link, quality, _, _, _, _, _, slot = GetItemInfo(Collections[collection].Sets[set].Variants[variant].Items[i])
+		local displayName = name or " "
+		local itemString = string.match(link, "item[%-?%d:]+")		-- To make the item linkable (future)
+		local _, _, _, color = GetItemQualityColor(quality)
+		content = content.."|n- "..acquired.."/1 |c"..color..displayName.."|r"
+	end
+	SetDisplayDetailFrameContent:SetText(content)
+	SetDisplayDetailFrame:SetHeight(SetDisplayDetailFrameContent:GetHeight() + 22)
+end
+
+function SetCollector_OnLoad(self)
+	AddSetCollectorUI(self)
+	self:RegisterEvent("ADDON_LOADED")
+	self:RegisterEvent("PLAYER_LOGIN")
+end
+
+function SetCollector_OnEvent(self, event, ...)
 	local arg1, arg2, arg3, arg4 = ...
 	if event == "ADDON_LOADED" and string.lower(arg1) == string.lower("SetCollector") then
 		if (SetCollectorDB and (SetCollectorDB["release"] == nil or SetCollectorDB["release"] < MIN_DB_RELEASE_VERSION)) then
-			SetCollectorSetupDB(true)
+			SetCollectorSetupDB(MIN_DB_RELEASE_VERSION, true)
 		else
-			SetCollectorSetupDB()
+			SetCollectorSetupDB(MIN_DB_RELEASE_VERSION, false)
 		end
-		CreateMinimapButton()
-			
-  	SetCollectorFrame:UnregisterEvent("ADDON_LOADED")
 		
 	elseif event == "PLAYER_LOGIN" then
 		local _, class = UnitClass("player")
-		if (SetCollectorCharacterDB and (SetCollectorCharacterDB["release"] == nil or SetCollectorCharacterDB["release"] < MIN_DB_RELEASE_VERSION)) then
-			SetCollectorSetupCharacterDB(class, true)
-		else
-			SetCollectorSetupCharacterDB(class)
-		end
-
-		-- Setup Frame
-		UIDropDownMenu_Initialize(SetCollectorFrame.setFilter, SetCollectorFrame_InitFilter)
-	
-		-- Setup DressUpModel
-		SetCollectorFrameDressUpModel:SetUnit("PLAYER")
-		SetCollectorFrameDressUpModel:SetPosition(0.1,0,0) 	-- Slightly moves the model to the left
-		SetCollectorFrameDressUpModel:SetFacing(0.25)				-- Slightly turns the model towards the list
+		SetCollectorSetupCharacterDB(class,MIN_DB_RELEASE_VERSION)
+		CollectionsUpdate()
+		UIDropDownMenu_Initialize(SetCollectorSetFilter, SetCollector_InitFilter)
+		SetDisplayModelFrame:SetUnit("PLAYER")
+		CreateMinimapButton()
+		
+		-- Initial Scan
+		SetCollector_Scan("Equipment")
+		SetCollector_Scan("Bags")
 		
 		-- Register New Events
-		SetCollectorFrame:RegisterEvent("BAG_UPDATE")
-		SetCollectorFrame:RegisterEvent("BANKFRAME_OPENED")
-		SetCollectorFrame:RegisterEvent("VOID_STORAGE_OPEN")
-		SetCollectorFrame:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
-		SetCollectorFrame:RegisterEvent("PLAYER_REGEN_DISABLED")
-		SetCollectorFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
-  	SetCollectorFrame:UnregisterEvent("PLAYER_LOGIN")
+		self:RegisterEvent("BAG_UPDATE")
+		self:RegisterEvent("BANKFRAME_OPENED")
+		self:RegisterEvent("VOID_STORAGE_OPEN")
+		self:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
+		self:RegisterEvent("PLAYER_REGEN_DISABLED")
+		self:RegisterEvent("PLAYER_REGEN_ENABLED")
+  	self:UnregisterEvent("PLAYER_LOGIN")
 		
 	elseif event == "BAG_UPDATE" then
+		SetCollector_Scan("Equipment")
 		SetCollector_Scan("Bags")
 		
 	elseif event == "BANKFRAME_OPENED" then
@@ -425,366 +699,136 @@ function SetCollectorFrame_OnEvent (self, event, ...)
 	  local isReady = IsVoidStorageReady()
 		if isReady == false then
 			C_Timer.After(2, SetCollector_ScanVoid)
-		else
-			SetCollector_Scan("Void")
+		--else
+			--SetCollector_Scan("Void")
 		end
 	
 	elseif event == "PLAYER_SPECIALIZATION_CHANGED" then
 		local i = GetSpecialization()
 		if i == nil then i = 0 end
-		SetCollectorFrame_SetFilter(nil, LE_LOOT_FILTER_SPEC1 + i - 1)
+		SetCollector_SetFilter(nil, LE_LOOT_FILTER_SPEC1 + i - 1)
 	
 	elseif event == "PLAYER_REGEN_DISABLED" then
-		SetCollectorFrame:UnregisterEvent("BAG_UPDATE")
+		SetCollector:UnregisterEvent("BAG_UPDATE")
 	
 	elseif event == "PLAYER_REGEN_ENABLED" then
-		SetCollectorFrame:RegisterEvent("BAG_UPDATE")
+		SetCollector:RegisterEvent("BAG_UPDATE")
 		SetCollector_Scan("Bags")
-	
 	end
 end
 
-function SetCollectorFrame_OnShow (self)
-	PlaySound("igCharacterInfoOpen")
-	SetCollectorFrame_UpdatePortrait()
-	SetCollectorFrame_UpdateFilterString()
-	SetCollectorFrameScrollBar_Update()
+function SetCollector_OnShow(self)
+	UpdatePortrait()
+	SetCollector_UpdateFilterString()
 end
 
-function SetCollectorFrame_OnHide (self)
-  if SetCollectorFrame_HELP_VISIBLE == true then
-    SetCollectorFrame_ToggleTutorial();
-  end
-  UnsetHighlight()
-	PlaySound("igCharacterInfoClose");
+function SetCollector_OnHide(self)
+	HelpPlate_Hide()
+	SummaryButton:Hide()
+	SetCollector_UnsetHighlight(SELECTED_BUTTON)
 end
 
---
--- ScrollFrame Functions
---
-
-function SetCollectorFrameScrollBar_Update()
-	local inLockdown = InCombatLockdown()
-	if (inLockdown == nil or inLockdown == false) then
-		-- Get List to Display (Add Class, Role and Text Filters plus collapse)
-	  CURRENT_DISPLAY = { } -- Clear Previous Display
-	  
-	  -- Class and Faction Filters
-	  local _, class = UnitClass("player")
-		local faction, localizedFaction = UnitFactionGroup("player")
-	  
-	  -- Specialization/Role Filter
-	  local specID = 0
-		local currFilter = GetFilterOptions()
-	
-		if currFilter == LE_LOOT_FILTER_CLASS then
-			local currentSpec = GetSpecialization()
-			local specID = currentSpec and select(1, GetSpecializationInfo(currentSpec)) or "None"
-			local role = GetSetSpecializationRole(specID);
-		else -- Spec
-			local id = GetSpecializationInfo(currFilter - LE_LOOT_FILTER_SPEC1 + 1)
-			specID = id;
-		end
-	  local role = GetSetSpecializationRole(specID)
-	  
-	  for i,value in SortedList(SetCollectorDB[class].Collections, SORT_BY, SORT_DIR) do
-	  	if (SetCollectorDB[class].Collections[i].Role == "Any" or SetCollectorDB[class].Collections[i].Role == role or role == "ALL") then
-	  		if (SetCollectorDB[class].Collections[i].Faction == "Any" or SetCollectorDB[class].Collections[i].Faction == faction or faction == nil) then
-			  	local collapse = false
-			  	if COLLAPSED_COLLECTIONS[i] == true then
-			  		collapse = true
-			  	end
-			  
-			  	local collectionName = _L[SetCollectorDB[class].Collections[i].Name] or _L["MISSING_COLLECTION_NAME"]
-			  
-			  	local collectionDisplay = {
-			  		Type = "Collection",
-			  		ID = i,
-			  		Name = collectionName,
-			  		Tag = "",
-			  		GroupMates = 0,
-			  		IsHeader = true,
-			  		IsCollapsed = collapse,
-			  		IsComplete = false
-			  	}
-			  	tinsert(CURRENT_DISPLAY, collectionDisplay)
-			  	
-			  	if not collectionDisplay.IsCollapsed then
-						for j=1, #SetCollectorDB[class].Collections[i].Sets do
-							if (SetCollectorDB[class].Collections[i].Sets[j].Role == "Any" or SetCollectorDB[class].Collections[i].Sets[j].Role == role or role == "ALL") then
-					  		local acquired = 0
-					  		for k=1, #SetCollectorDB[class].Collections[i].Sets[j].setPieces do
-					  			local item = SetCollectorDB[class].Collections[i].Sets[j].setPieces[k]
-					  			acquired = acquired + SetCollectorCharacterDB.Items[item].count
-					  			
-					  		end
-					  		
-					  		local isComplete = false
-					  		local tag = ""
-					  		local items = ""
-					  		if SetCollectorDB[class].Collections[i].Sets[j].setPiecesNumAvailable == acquired then
-					  			tag = "("..COMPLETE..")"
-					  			isComplete = true
-					  		else
-						  		items = " ("..format(ITEMS_VARIABLE_QUANTITY, SetCollectorDB[class].Collections[i].Sets[j].setPiecesNumAvailable)..")"
-					  		end
-					  		
-					  		local setName = _L[SetCollectorDB[class].Collections[i].Sets[j].Name] or _L["MISSING_SET_NAME"]
-					  		
-					  		local setDisplay = {
-					  			Type = "Set",
-					  			Collection = i,
-					  			ID = j,
-					  			Name = "["..SetCollectorDB[class].Collections[i].Sets[j].MinLevel.."] "..setName..items,
-					  			Quality = SetCollectorDB[class].Collections[i].Sets[j].Quality,
-					  			Tag = tag,
-					  			GroupMates = acquired,
-					  			IsHeader = false,
-					  			IsCollapsed = false,
-					  			IsComplete = isComplete
-					  		}
-					  		
-				  			tinsert(CURRENT_DISPLAY, setDisplay)
-				  		
-				  		end
-				  	end
-				  end
-			  end
-	  	end
-	  	
-	  end
-	    
-	  -- Set Display Parameters
-	  local maxLines = #CURRENT_DISPLAY
-	  local maxLinesDisplayed = 25
-	  local buttonWidth = 304
-	  local buttonHeight = 16
-	  local line
-	  local lineplusoffset
-	  FauxScrollFrame_Update(SetCollectorFrameScrollBar, maxLines, maxLinesDisplayed, buttonHeight)
-	  
-	  -- Create buttons dynamically
-	  for line = 1, maxLinesDisplayed do
-	    lineplusoffset = line + FauxScrollFrame_GetOffset(SetCollectorFrameScrollBar);
-	  	local prevLine = line - 1;
-	    local color;
-		  if line == 1 then
-		  	local button = CreateFrame("Button","SetCollectorEntry"..line, SetCollectorFrame, "SetCollectorListItemTemplate");
-		  	button:SetPoint("TOPLEFT","SetCollectorFrameScrollBar","TOPLEFT",2,0);
-		  	button:SetWidth(buttonWidth);
-		  	button:SetHeight(buttonHeight);
-	    else
-	    	local button = CreateFrame("Button","SetCollectorEntry"..line, SetCollectorFrame, "SetCollectorListItemTemplate");
-		  	button:SetPoint("TOPLEFT","SetCollectorEntry"..prevLine,"BOTTOMLEFT");
-		  	button:SetWidth(buttonWidth);
-		  	button:SetHeight(buttonHeight);
-		  end	  
-		  
-		  if lineplusoffset <= maxLines then
-		  
-			  if CURRENT_DISPLAY[lineplusoffset].IsHeader then
-			  	_G["SetCollectorEntry"..line]:SetText(CURRENT_DISPLAY[lineplusoffset].Name);
-			  	_G["SetCollectorEntry"..line].tag:SetText(nil);
-			  	_G["SetCollectorEntry"..line].groupMates:SetText(nil);
-			  	
-			  	_G["SetCollectorEntry"..line].collection = ""
-			  	_G["SetCollectorEntry"..line].set = ""
-			  	
-			  	_G["SetCollectorEntry"..line].normalText:SetTextColor(0.75, 0.75, 0.75);
-			  	_G["SetCollectorEntry"..line].tag:SetTextColor(0.75, 0.75, 0.75);
-			  	_G["SetCollectorEntry"..line].groupMates:SetTextColor(0.75, 0.75, 0.75);
-					_G["SetCollectorEntry"..line].texture:SetTexture(0,0,0,0);
-			  	
-			  	if CURRENT_DISPLAY[lineplusoffset].IsCollapsed then
-			  		_G["SetCollectorEntry"..line]:SetNormalTexture("Interface\\Buttons\\UI-PlusButton-Up");
-			    	_G["SetCollectorEntry"..line]:SetHighlightTexture("Interface\\Buttons\\UI-PlusButton-Hilight");
-			  	else
-			  		_G["SetCollectorEntry"..line]:SetNormalTexture("Interface\\Buttons\\UI-MinusButton-Up");
-			    	_G["SetCollectorEntry"..line]:SetHighlightTexture("Interface\\Buttons\\UI-PlusButton-Hilight");
-			  	end	
-			  	
-			  else
-			  	_G["SetCollectorEntry"..line]:SetText(CURRENT_DISPLAY[lineplusoffset].Name);
-			  	_G["SetCollectorEntry"..line].tag:SetText(CURRENT_DISPLAY[lineplusoffset].Tag);
-			  	if not CURRENT_DISPLAY[lineplusoffset].IsComplete and CURRENT_DISPLAY[lineplusoffset].GroupMates ~= 0 then
-			  		_G["SetCollectorEntry"..line].groupMates:SetText(CURRENT_DISPLAY[lineplusoffset].GroupMates);
-			  	else
-			  		_G["SetCollectorEntry"..line].groupMates:SetText(nil);
-			  	end
-			  	
-			  	_G["SetCollectorEntry"..line].collection = CURRENT_DISPLAY[lineplusoffset].Collection
-			  	_G["SetCollectorEntry"..line].set = CURRENT_DISPLAY[lineplusoffset].ID
-			  	
-		  		-- SetHighlight
-			    _G["SetCollectorEntry"..line]:SetNormalTexture("");
-			    _G["SetCollectorEntry"..line]:SetHighlightTexture("");
-			    
-			    if CURRENT_DISPLAY[lineplusoffset].Collection == SELECTED_COLLECTION and CURRENT_DISPLAY[lineplusoffset].ID == SELECTED_SET then
-				  	_G["SetCollectorEntry"..line].normalText:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-						_G["SetCollectorEntry"..line].tag:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-						_G["SetCollectorEntry"..line].groupMates:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-						_G["SetCollectorEntry"..line].texture:SetTexture("Interface\\QuestFrame\\UI-QuestLogTitleHighlight");
-						
-						SELECTED_BUTTON = "SetCollectorEntry"..line
-			  		SELECTED_INDEX = line
-			  		SELECTED_OFFSET = lineplusoffset
-				  		
-				  else
-						-- Set Color
-				    color = ITEM_QUALITY_COLORS[CURRENT_DISPLAY[lineplusoffset].Quality]
-				    if CURRENT_DISPLAY[lineplusoffset].Collection == SELECTED_COLLECTION and CURRENT_DISPLAY[lineplusoffset].Set == SELECTED_SET then
-				      _G["SetCollectorEntry"..line].tag:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-					    _G["SetCollectorEntry"..line].groupMates:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-							_G["SetCollectorEntry"..line].texture:SetTexture("Interface\\QuestFrame\\UI-QuestLogTitleHighlight");
-				    else
-					    _G["SetCollectorEntry"..line].normalText:SetTextColor(color.r, color.g, color.b);
-					    _G["SetCollectorEntry"..line].tag:SetTextColor(color.r, color.g, color.b);
-					    _G["SetCollectorEntry"..line].groupMates:SetTextColor(color.r, color.g, color.b);
-							_G["SetCollectorEntry"..line].texture:SetTexture(0,0,0,0);
-						end
-					end
-			  end
-			  	
-			  SetCollectorListItem_Resize(_G["SetCollectorEntry"..line]);
-			  	
-		    _G["SetCollectorEntry"..line].index = line;
-		    _G["SetCollectorEntry"..line]:Show();
-			  
-		  else	    
-		  	_G["SetCollectorEntry"..line]:SetNormalTexture("");
-		    _G["SetCollectorEntry"..line]:SetHighlightTexture("");
-		  	_G["SetCollectorEntry"..line].index = line;
-		    _G["SetCollectorEntry"..line]:Hide();
-		  end
-		  
-	  end
-  end
+function SetCollectorCollectionButton_OnClick(self)
+	print("Set Collector: ".._L["NOT_AVAILABLE"])
 end
 
-function SetCollectorListItem_OnLoad(self)
-	self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
-end
-
-function SetCollectorListItem_OnClick(self, button)
-	local button 			= self:GetName()
-	local index 			= _G[button].index
-	local offset 			= _G[button].index + FauxScrollFrame_GetOffset(SetCollectorFrameScrollBar);
-	local collection 	= _G[button].collection
-	local set 				= _G[button].set
-	
-	local _, class = UnitClass("player")
-	
-	local previousButton 			= SELECTED_BUTTON
-	local previousIndex 			= SELECTED_INDEX
-	local previousOffset 			= SELECTED_OFFSET
-	local previousCollection 	= SELECTED_COLLECTION
-	local previousSet 				= SELECTED_SET
-	
-	-- Check for header
-	if _G[button].collection == "" and _G[button].set == "" then
-		if COLLAPSED_COLLECTIONS[CURRENT_DISPLAY[offset].ID] then
-			COLLAPSED_COLLECTIONS[CURRENT_DISPLAY[offset].ID] = false
+function SetCollectorSetButton_OnClick(self, button, ...)
+	if ( button == "LeftButton" ) then
+		if ( self ~= SELECTED_BUTTON ) then
+			SetVariantTabs(self.Collection, self.Set)
+			SetHighlight(self)
 		else
-			COLLAPSED_COLLECTIONS[CURRENT_DISPLAY[offset].ID] = true
+			SetVariantTabs()
+			SetCollector_ClearVariantDetails()
+			SetCollector_UnsetHighlight(self)
 		end
-		SetCollectorFrameScrollBar_Update()
+	elseif ( button == "RightButton" ) then
+  	local Log = SetCollectorCharacterDB
+  	if ( Log.Sets[self.Set].Favorite == false ) then
+  		Log.Sets[self.Set].Favorite = true
+  		self.Favorite:Show()
+  	else
+  		Log.Sets[self.Set].Favorite = false
+  		self.Favorite:Hide()
+  	end
+  else
+  	print(button)
+	end
+end
+function SetCollectorSetButton_OnEnter(self)
+	if ( self.Collection and self.Set ) then 
+		local Collection = SetCollectorDB
+		self.Text:SetFontObject("GameFontHighlightLeft")
+		local collection = Collection[self.Collection].Title
+		local set = _L[Collection[self.Collection].Sets[self.Set].Title] or _L["MISSING_LOCALIZATION"]
+	
+		SetCollectorTooltip:ClearLines()
+		SetCollectorTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT", -16, 16)
+		SetCollectorTooltip:AddLine("|cffffffff"..set.."|r")
+		for i=1, #Collection[self.Collection].Sets[self.Set].Variants do
+			local collected = 0
+			for j=1, #Collection[self.Collection].Sets[self.Set].Variants[i].Items do
+				local itemID = Collection[self.Collection].Sets[self.Set].Variants[i].Items[j]
+				collected = collected + SetCollectorCharacterDB.Items[itemID].Count
+			end
+			local line = "- "..collected.."/"..Collection[self.Collection].Sets[self.Set].Variants[i].Count.." ".._L[Collection[self.Collection].Sets[self.Set].Variants[i].Title]
+			SetCollectorTooltip:AddLine(line)
+		end
+		SetCollectorTooltip:Show()
+	end
+end
+function SetCollectorSetButton_OnLeave(self)
+	self.Text:SetFontObject("GameFontNormalLeft")
+	
+	SetCollectorTooltip:Hide()
 		
-	else	
-		if index == SELECTED_INDEX then
-			SetCollectorFrameDressUpModel:Dress()
-			UnsetHighlight(previousButton, CURRENT_DISPLAY[offset].Quality)
-			
-		elseif index == nil then
-			print("Set Collector Error: Item Index is Nil")
-			
-		else
-			-- Unset Previous Highlight
-			if previousOffset ~= 0 then
-				if CURRENT_DISPLAY[previousOffset].IsHeader then
-					UnsetHighlight(previousButton)
-				else
-					local previousScroll = previousOffset - previousIndex
-					local newScroll = offset - index
-					if previousScroll == newScroll then
-						UnsetHighlight(previousButton, CURRENT_DISPLAY[previousOffset].Quality)
-					end
-				end
-			end
-
-		  SetHighlight(button)
-		  
-			-- Show Items on Model
-		  for i=1, #SetCollectorDB[class].Collections[_G[button].collection].Sets[_G[button].set].setPieces do
-		  	SetCollectorFrameDressUpModel:TryOn(SetCollectorDB[class].Collections[_G[button].collection].Sets[_G[button].set].setPieces[i])
-		  end
-		end 
-	end
-	
+end
+function SetCollectorSetButton_OnMouseDown(self)
+	-- Do nothing at this time.
+end
+function SetCollectorSetButton_OnMouseUp(self)
+	-- Do nothing at this time.
 end
 
-function SetCollectorListItem_OnEnter(self)
-	local button = self:GetName()
-	if _G[button]:IsShown() ~= nil then
-		self.normalText:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-		self.tag:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-		self.groupMates:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+function SetCollectorSummaryButton_OnClick(self)
+	SetCollectorShowDetail_OnClick(self)
+end
+
+function SetCollectorShowDetail_OnClick(self)
+	if ( not SetDisplayDetailFrame:IsShown() ) then
+		SetCollectorRightInset:SetPoint("BOTTOMLEFT",SetDisplayDetailFrame,"TOPLEFT", 0, 0)
+		SetDisplayDetailFrame:Show()
+		SetCollectorShowDetail:SetText(_L["HIDE_DETAIL"])
+	else
+		SetCollectorRightInset:SetPoint("BOTTOMLEFT",SetCollectorLeftInset,"BOTTOMRIGHT", 20, 0)
+		SetDisplayDetailFrame:Hide()
+		SetCollectorShowDetail:SetText(_L["SHOW_DETAIL"])
 	end
 end
 
-function SetCollectorListItem_OnLeave(self)
-	local button = self:GetName()
-	if _G[button]:IsShown() ~= nil and self.index ~= nil then
-		if ( self.index == SELECTED_INDEX and self.collection == SELECTED_COLLECTION and self.set == SELECTED_SET) then
-			-- Do nothing
+function SetCollector_SetFilter(self, classIndex)
+	if ( classIndex == "favorites" ) then
+		if SHOW_ONLY_FAVORITES == false then
+			SHOW_ONLY_FAVORITES = true
 		else
-			local color
-			local lineplusoffset = self.index + FauxScrollFrame_GetOffset(SetCollectorFrameScrollBar);
-			if CURRENT_DISPLAY[lineplusoffset].IsHeader then
-				color = { r = 0.75, g = 0.75, b = 0.75 };
-			else
-				color = ITEM_QUALITY_COLORS[CURRENT_DISPLAY[lineplusoffset].Quality];
-			end
-			self.normalText:SetTextColor(color.r, color.g, color.b);
-			self.tag:SetTextColor(color.r, color.g, color.b);
-			self.groupMates:SetTextColor(color.r, color.g, color.b);		 
+			SHOW_ONLY_FAVORITES = false
 		end
+	else
+		SetFilterOptions(classIndex);
 	end
-end
-
-function SetCollectorListItem_Resize(setTitle)				-- Based on the QuestLogTitleButton_Resize Hack
-	local setNormalText = setTitle.normalText;
-	setNormalText:SetWidth(0);
-	setTitle:SetText(setTitle:GetText());
-
-	local setTitleTag = setTitle.tag;
-	local setCheck = setTitle.check;
-	local rightEdge = setTitle:GetLeft() + setTitle:GetWidth();
-	--[[if ( setCheck:IsShown() ) then
-		rightEdge = rightEdge - setCheck:GetWidth() - 2;
-	end]]--
-	if ( setTitleTag:IsShown() ) then
-		rightEdge = rightEdge - setTitleTag:GetWidth() - 20;
-	end
-	local setNormalTextWidth = setNormalText:GetWidth() - max(setNormalText:GetRight() - rightEdge, 0);
-	setNormalText:SetWidth(setNormalTextWidth);
+	if SetCollector:IsShown() then
+		CollectionsUpdate();
+		SetCollector_UpdateFilterString()
 	
-end
-
---
--- Set Filter
---
-
-function SetCollectorFrame_SetFilter(self, classIndex)
-	SetFilterOptions(classIndex);
-	if SetCollectorFrame:IsVisible() then
-		SELECTED_COLLECTION = 0
-		SELECTED_SET = 0
-		SetCollectorFrameScrollBar_Update();
-		SetCollectorFrame_UpdateFilterString()
+		-- Clear Selection
+		SetCollector_UnsetHighlight(SELECTED_BUTTON)
+		SELECTED_BUTTON = nil
+		SetVariantTabs()
+		SetCollector_ClearVariantDetails()
 	end
 end
 
-function SetCollectorFrame_UpdateFilterString()
+function SetCollector_UpdateFilterString()
 	local name = ALL;
 	local currFilter = GetFilterOptions();
 
@@ -795,17 +839,17 @@ function SetCollectorFrame_UpdateFilterString()
 		name = specName;
 	end
 	
-	UIDropDownMenu_SetText(SetCollectorFrame.setFilter, name);
+	UIDropDownMenu_SetText(SetCollectorSetFilter, name);
 end
 
-function SetCollectorFrame_InitFilter()
+function SetCollector_InitFilter()
 	local info = UIDropDownMenu_CreateInfo();
 	local currFilter = GetFilterOptions();
 	local className = UnitClass("player");
 	
-	SetCollectorFrame_UpdateFilterString()
+	SetCollector_UpdateFilterString()
 	
-	info.func = SetCollectorFrame_SetFilter;
+	info.func = SetCollector_SetFilter;
 	
 	info.text = className;
 	info.checked = (currFilter ~= LE_LOOT_FILTER_ALL);
@@ -825,54 +869,63 @@ function SetCollectorFrame_InitFilter()
 	info.text = ALL_SPECS;
 	info.checked = currFilter == LE_LOOT_FILTER_CLASS;
 	info.arg1 = LE_LOOT_FILTER_CLASS;
-	info.func = SetCollectorFrame_SetFilter;
+	info.func = SetCollector_SetFilter;
 	UIDropDownMenu_AddButton(info);
 	
-	-- Sample items for future sort and filter interface
-	--info.leftPadding = nil;
-	--info.text = ITEM_BIND_ON_EQUIP;
-	--info.checked = currFilter == LE_LOOT_FILTER_BOE;
-	--info.arg1 = LE_LOOT_FILTER_BOE;
-	--UIDropDownMenu_AddButton(info);
-	
-	--info.leftPadding = nil;
-	--info.text = ALL;
-	--info.checked = currFilter == LE_LOOT_FILTER_ALL;
-	--info.arg1 = LE_LOOT_FILTER_ALL;
-	--UIDropDownMenu_AddButton(info);
+	info.leftPadding = nil;
+	info.text = FAVORITES_FILTER;
+	info.checked = SHOW_ONLY_FAVORITES;
+	info.arg1 = "favorites";
+	UIDropDownMenu_AddButton(info);
 end
 
+
+--
 -- Create Slash Command
+--
+
 local CommandTable = {
 	["show"] = function()
-		ShowUIPanel(SetCollectorFrame)
+		ShowUIPanel(SetCollector)
 	end,
 	["hide"] = function()
-		HideUIPanel(SetCollectorFrame)
+		HideUIPanel(SetCollector)
 	end,
 	["sort"] = {
 		["asc"] = function()
 			SORT_DIR = "ASC"
-			SetCollectorFrameScrollBar_Update()
+			CollectionsUpdate()
 		end,
 		["desc"] = function()
 			SORT_DIR = "DESC"
-			SetCollectorFrameScrollBar_Update()
+			CollectionsUpdate()
 		end,
 		["help"] = _L["SLASH_HELP_SORT"],
 		["empty"] = function()
 			if SORT_DIR == "DESC" then SORT_DIR = "ASC" else SORT_DIR = "DESC" end
-			SetCollectorFrameScrollBar_Update()
+			CollectionsUpdate()
+		end
+	},
+	["button"] = {
+		["show"] = function()
+			icon:Show("SetCollectorMinimap")
+		end,
+		["hide"] = function()
+			icon:Hide("SetCollectorMinimap")
+		end,
+		["help"] = _L["SLASH_HELP_BUTTON"],
+		["empty"] = function()
+			SetCollector_ToggleMinimapButton()
 		end
 	},
 	["resetdb"] = function()
-		SetCollectorSetupDB(true)
-		SetCollectorFrameScrollBar_Update()
+		SetCollectorSetupDB(MIN_DB_RELEASE_VERSION, true)
+		CollectionsUpdate()
 	end,
 	["resetchardb"] = function()
 		local _, class = UnitClass("player")
-		SetCollectorSetupCharacterDB(class,true)
-		SetCollectorFrameScrollBar_Update()
+		SetCollectorSetupCharacterDB(class, MIN_DB_RELEASE_VERSION, true)
+		CollectionsUpdate()
 	end,
 	["link"] = function(itemID)
 		local _, itemLink = GetItemInfo(itemID)
@@ -901,7 +954,7 @@ local function DispatchCommand(message, commandTable)
 	end
 end
 
-SLASH_SETCOLLECTOR1 = "/setcollector"
-SlashCmdList["SETCOLLECTOR"] = function(message)
+SLASH_SetCollector1 = "/SetCollector"
+SlashCmdList["SetCollector"] = function(message)
 	DispatchCommand(message, CommandTable)
 end

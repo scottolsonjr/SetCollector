@@ -3,63 +3,90 @@
                    xsi:schemaLocation="http://www.blizzard.com/wow/ui/ 
                    ..\..\FrameXML\UI.xsd">
   <Script File="Core.lua"/>
-	
-	<Button name="SetCollectorListItemTemplate" virtual="true">
-    <Size>
-      <AbsDimension x="300" y="16" />
-    </Size>
-    <Layers>
-    	<Layer level="BACKGROUND">
-    		<Texture name="$parentHighlight" alphaMode="ADD" parentKey="texture" hidden="false" />
-    	</Layer>
-    	<Layer level="OVERLAY">
-    		<FontString name="$parentTag" inherits="GameFontNormal" justifyH="RIGHT" parentKey="tag">
-					<Size x="0" y="16"/>
-					<Anchors>
-						<Anchor point="RIGHT" x="-17" y="0"/>
-					</Anchors>
-				</FontString>
-				<FontString name="$parentGroupMates" inherits="GameFontNormalSmall" justifyH="RIGHT" parentKey="groupMates">
-					<Size x="0" y="16"/>
-					<Anchors>
-						<Anchor point="LEFT" x="8" y="-1"/>
-					</Anchors>
-				</FontString>
-    	</Layer>
-    </Layers>
-    <Scripts>
-    	<OnLoad>
-				SetCollectorListItem_OnLoad(self);
+  
+  <Button name="SetCollectorCollectionTemplate" virtual="true">
+		<Size x="255" y="16"/>		
+		<Scripts>
+			<OnLoad>
+				--QuestLogTitleButton_OnLoad(self);
+				self.ButtonText:SetTextColor(0.7, 0.7, 0.7);
+				self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
 			</OnLoad>
-			<OnClick>
-				PlaySound("igMainMenuOptionCheckBoxOn");
-				SetCollectorListItem_OnClick(self, button, down);
-			</OnClick>
+			<OnEvent>
+				--QuestLogTitleButton_OnEvent(self, event, ...);
+			</OnEvent>
+			<OnClick function="SetCollectorCollectionButton_OnClick"/>
 			<OnEnter>
-				SetCollectorListItem_OnEnter(self);
+				self.ButtonText:SetTextColor(1, 1, 1);
 			</OnEnter>
 			<OnLeave>
-				SetCollectorListItem_OnLeave(self);
+				self.ButtonText:SetTextColor(0.7, 0.7, 0.7);
 			</OnLeave>
 		</Scripts>
+		<ButtonText nonspacewrap="true" parentKey="ButtonText">
+			<Size x="0" y="10"/>
+			<Anchors>
+				<Anchor point="LEFT" x="5" y="0"/>
+			</Anchors> 
+		</ButtonText>
+		<NormalFont style="GameFontNormalMed3"/>
+		<HighlightFont style="GameFontHighlightMedium"/>
+	</Button>
+	<Button name="SetCollectorSetTemplate" virtual="true">
+		<Size x="269" y="16"/>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="Texture" file="Interface\QuestFrame\UI-QuestLogTitleHighlight" hidden="true">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent" relativePoint="TOPLEFT" x="0" y="0" />
+						<Anchor point="BOTTOMRIGHT" relativeKey="$parent" relativePoint="BOTTOMRIGHT" x="0" y="0" />
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString parentKey="Text" inherits="GameFontNormalLeft">
+					<Size x="248" y="0"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent" relativePoint="TOPLEFT" x="25" y="-4"/>
+					</Anchors>
+				</FontString>
+				<FontString parentKey="SubText" inherits="GameFontNormalLeft">
+					<Size x="248" y="0"/>
+					<Anchors>
+						<Anchor point="BOTTMLEFT" relativeKey="$parent" relativePoint="BOTTOMLEFT" x="27" y="14"/>
+					</Anchors>
+				</FontString>
+				<Texture parentKey="Favorite" atlas="PetJournal-FavoritesIcon" useAtlasSize="true" hidden="true">
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeKey="$parent.Text" relativePoint="TOPLEFT" x="0" y="5"/>
+					</Anchors>
+				</Texture>
+				<Texture parentKey="Check" file="Interface\Buttons\UI-CheckBox-Check" hidden="true">
+					<Size x="16" y="16"/>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeKey="$parent.Text" relativePoint="TOPRIGHT" x="-5" y="4"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
 		<Attributes>
-			<Attribute name="collection" type="string" />
-			<Attribute name="set" type="string" />
-			<Attribute name="isHeader" type="boolean" />
+			<Attribute name="Collection" type="string" />
+			<Attribute name="Set" type="string" />
 		</Attributes>
-		<NormalTexture>
-			<Size x="16" y="16"/>
-			<Anchors>
-				<Anchor point="LEFT" x="3" y="0"/>
-			</Anchors>
-		</NormalTexture>
-		<HighlightTexture name="$parentHighlightPlusMinus" alphaMode="ADD">
-			<Size x="16" y="16"/>
-			<Anchors>
-				<Anchor point="LEFT" x="3" y="0"/>
-			</Anchors>
-		</HighlightTexture>
-		<ButtonText name="$parentNormalText" nonspacewrap="true" parentKey="normalText">
+		<Scripts>
+			<OnLoad>
+				self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+			</OnLoad>
+			<OnEvent>
+				--QuestLogTitleButton_OnEvent(self, event, ...);
+			</OnEvent>
+			<OnClick function="SetCollectorSetButton_OnClick"/>
+			<OnEnter function="SetCollectorSetButton_OnEnter"/>
+			<OnLeave function="SetCollectorSetButton_OnLeave"/>
+			<OnMouseDown function="SetCollectorSetButton_OnMouseDown"/>
+			<OnMouseUp function="SetCollectorSetButton_OnMouseUp"/>
+		</Scripts>
+		<ButtonText nonspacewrap="true" parentKey="ButtonText">
 			<Size x="0" y="10"/>
 			<Anchors>
 				<Anchor point="LEFT" x="20" y="0"/>
@@ -68,38 +95,89 @@
 		<NormalFont style="GameFontNormalLeft"/>
 		<HighlightFont style="GameFontHighlightLeft"/>
 		<DisabledFont style="GameFontHighlightLeft"/>
-  </Button>
-	
-	<Frame name="SetCollectorFrame" parent="UIParent" toplevel="true" enableMouse="true" movable="true" hidden="true" inherits="ButtonFrameTemplate">
-    <Scripts>
-      <OnLoad>
-				SetCollectorFrame_OnLoad();
-      </OnLoad>
-      <OnEvent>
-      	SetCollectorFrame_OnEvent(self, event, ...);
-      </OnEvent>
+	</Button>
+  <ScrollFrame parentKey="CollectionsFrame" name="CollectionsScrollFrameTemplate" inherits="UIPanelScrollFrameCodeTemplate" virtual="true">
+		<Size x="259" y="462"/>
+		<!--<Anchors>
+			<Anchor point="TOPRIGHT" x="-26" y="-1"/>
+		</Anchors>-->
+		<ScrollChild>
+			<Frame parentKey="Contents">
+				<Size x="258" y="454"/>
+				<Anchors>
+					<Anchor point="TOPLEFT"/>
+				</Anchors>					
+				<Frames>
+					<Button parentArray="Collections" inherits="SetCollectorCollectionTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" x="1" y="-6"/>
+						</Anchors>
+					</Button>
+					<Button parentArray="Sets" inherits="SetCollectorSetTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT"/>
+						</Anchors>
+					</Button>
+				</Frames>
+			</Frame>
+		</ScrollChild>
+		<Frames>
+			<Slider name="$parentScrollBar" inherits="UIPanelScrollBarTemplate" parentKey="ScrollBar">
+				<Layers>
+					<Layer level="ARTWORK">
+						<Texture name="$parentMiddle">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parentTop" relativePoint="BOTTOMLEFT"/>
+								<Anchor point="BOTTOMRIGHT" relativeTo="$parentBottom" relativePoint="TOPRIGHT"/>
+							</Anchors>
+							<Color r="0" g="0" b="0" a="0.7"/>
+						</Texture>
+					</Layer>
+				</Layers>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="6" y="-16"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="6" y="16"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Slider>						
+		</Frames>
+		<Scripts>
+			<OnLoad>					
+				ScrollFrame_OnLoad(self);					
+			</OnLoad>
+		</Scripts>
+	</ScrollFrame>
+	<GameTooltip name="SetCollectorTooltip" inherits="GameTooltipTemplate">
+	  <Scripts>
+	    <Onload>
+	      self:SetOwner(WorldFrame, "ANCHOR_NONE");
+	    </Onload>
+	  </Scripts>
+	</GameTooltip>
+  
+  <Frame name="SetCollector" parent="UIParent" toplevel="true" enableMouse="true" movable="true" hidden="true" inherits="ButtonFrameTemplate">
+  	<Scripts>
+  		<OnLoad>
+  			SetCollector_OnLoad(self)
+  		</OnLoad>
+  		<OnEvent>
+  			SetCollector_OnEvent(self, event, ...)
+  		</OnEvent>
       <OnShow>
-				SetCollectorFrame_OnShow();
+				SetCollector_OnShow();
 			</OnShow>
 			<OnHide>
-				SetCollectorFrame_OnHide();
+				SetCollector_OnHide();
 			</OnHide>
-    </Scripts>
-    <Anchors>
-      <Anchor point="TOPLEFT">
-      	<Offset x="17" y="-115" />
-      </Anchor>
-    </Anchors>
-    <Size x="650" y="496" />
+  	</Scripts>	
     <Layers>
-    	<Layer level="OVERLAY" textureSubLevel="-1">
-				<Texture name="$parentPlayerPortrait">
-					<Size x="60" y="60"/>
-					<Anchors>
-						<Anchor point="TOPLEFT" x="-5" y="5"/>
-					</Anchors>
-				</Texture>
-			</Layer>
 			<Layer level="OVERLAY" textureSubLevel="100">
     		<FontString name="$parentTitle" inherits="GameFontNormal" parentKey="Title">
     			<Size x="300" y="14" />
@@ -111,70 +189,6 @@
     		</FontString>
     	</Layer>
    	</Layers>
-   	<Frames>
-			<Button name="$parentTutorialButton" parentKey="MainHelpButton" inherits="MainHelpPlateButton">
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="SetCollectorFrame" x="39" y="20" />
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						SetCollectorFrame_ToggleTutorial();
-					</OnClick>
-				</Scripts>
-			</Button>
-			<Frame name="$parentSetFilter" inherits="UIDropDownMenuTemplate" enableMouse="true" parentKey="setFilter">
-				<Anchors>
-					<Anchor point="TOPRIGHT" x="0" y="-28"/>
-				</Anchors>
-			</Frame>
-			<Button name="$parentCloseButton" inherits="UIPanelButtonTemplate" parentKey="CloseButton">
-				<Size x="80" y="22"/>
-				<Anchors>
-					<Anchor point="BOTTOMRIGHT" x="-6" y="4"/>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						HideUIPanel(SetCollectorFrame);
-					</OnClick>
-				</Scripts>
-			</Button>
-			<DressUpModel name="$parentDressUpModel" inherits="ModelWithControlsTemplate">
-				<Size x="310" />
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="6" y="-64" />
-						</Offset>
-					</Anchor>
-					<Anchor point="BOTTOMLEFT">
-						<Offset>
-							<AbsDimension x="6" y="28" />
-						</Offset>
-					</Anchor>
-				</Anchors>
-			</DressUpModel>
-			<ScrollFrame name="$parentScrollBar" inherits="FauxScrollFrameTemplate">
-		    <Anchors>
-				  <Anchor point="TOPLEFT">
-				    <Offset>
-				      <AbsDimension x="315" y="-64"/>
-				    </Offset>
-				  </Anchor>
-				  <Anchor point="BOTTOMRIGHT">
-				    <Offset>
-				      <AbsDimension x="-32" y="28"/>
-				    </Offset>
-				  </Anchor>
-				</Anchors>
-		    <Scripts>
-		      <OnVerticalScroll>
-		        FauxScrollFrame_OnVerticalScroll(self, offset, 16, SetCollectorFrameScrollBar_Update); 
-		      </OnVerticalScroll>
-		      <OnShow>
-		        SetCollectorFrameScrollBar_Update()
-		      </OnShow>
-		    </Scripts>
-			</ScrollFrame>
-    </Frames>
   </Frame>
+  
 </Ui>
