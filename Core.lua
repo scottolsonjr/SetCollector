@@ -42,6 +42,7 @@ local WHITE		= "|cFFFFFFFF"
 
 local CURRENT_FILTER = 0
 local SHOW_ONLY_FAVORITES = false
+local COLLECTION_COLLAPSED = { false, false, false, false, false, false }			-- Currently there are six possible collections
 
 local SELECTED_BUTTON = nil
 
@@ -440,7 +441,12 @@ local function CollectionsUpdate()
 	for i=1, #Collections do
 		rowIndex = rowIndex + 1
 		button = GetCollectionButton(rowIndex)
-		button:SetText(_L[Collections[i].Title])
+		if ( COLLECTION_COLLAPSED[i] == true ) then
+			button:SetText(_L[Collections[i].Title].."...")
+		else
+			button:SetText(_L[Collections[i].Title])
+		end
+		button.Collection = i
 		button:ClearAllPoints()
 		if ( prevButton ) then
 			button:SetPoint("TOPLEFT", prevButton, "BOTTOMLEFT", 0, 0)
@@ -448,6 +454,8 @@ local function CollectionsUpdate()
 			button:SetPoint("TOPLEFT", 1, -6)
 		end
 		button:Show()
+		local archivePrevButton = prevButton
+		local setsDisplayed = 0
 		prevButton = button
 		for j,value in SortedList(Collections[i].Sets, SORT_BY, SORT_DIR) do
 			local acquired = 0
@@ -486,13 +494,21 @@ local function CollectionsUpdate()
 						end
 						if ( SHOW_ONLY_FAVORITES == true and Log.Sets[j].Favorite == false ) then
 							-- Keep it hidden
+						elseif ( COLLECTION_COLLAPSED[i] == true ) then
+							-- Keep it hidden but...
+							setsDisplayed = setsDisplayed + 1
 						else
 							titleButton:Show()
 							prevButton = titleButton
+							setsDisplayed = setsDisplayed + 1
 						end
 					end
 				end
 			end
+		end
+		if ( setsDisplayed == 0 ) then					-- Hides the Collections button when no sets are displayed
+			button:Hide()
+			prevButton = archivePrevButton
 		end
 	end
 end
@@ -729,7 +745,8 @@ function SetCollector_OnHide(self)
 end
 
 function SetCollectorCollectionButton_OnClick(self)
-	print("Set Collector: ".._L["NOT_AVAILABLE"])
+	COLLECTION_COLLAPSED[self.Collection] = not COLLECTION_COLLAPSED[self.Collection]
+	CollectionsUpdate()
 end
 
 function SetCollectorSetButton_OnClick(self, button, ...)
