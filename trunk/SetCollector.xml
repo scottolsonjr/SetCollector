@@ -99,6 +99,52 @@
 		<HighlightFont style="GameFontHighlightLeft"/>
 		<DisabledFont style="GameFontHighlightLeft"/>
 	</Button>
+	<Button name="SetCollectorItemTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="37" y="37" />
+		</Size>
+		<Layers>
+			<Layer level="BORDER">
+				<Texture name="$parentIconTexture" parentKey="icon" />
+				<FontString name="$parentCount" parentKey="count" inherits="NumberFontNormal" justifyH="right" hidden="true">
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT">
+							<Offset>
+								<AbsDimension x="-5" y="2" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture name="$parentGlow" parentKey="glow" alphaMode="ADD" file="Interface\Buttons\UI-ActionButton-Border">
+					<Size x="70" y="70" />
+					<Anchors>
+						<Anchor point="CENTER" />
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="0.6" />
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnEnter function="SetCollector_Item_OnEnter" />
+			<OnLeave function="SetCollector_Item_OnLeave" />
+		</Scripts>
+		<NormalTexture name="$parentNormalTexture" file="Interface\Buttons\UI-Quickslot2">
+			<Size>
+				<AbsDimension x="64" y="64" />
+			</Size>
+			<Anchors>
+				<Anchor point="CENTER">
+					<Offset>
+						<AbsDimension x="0" y="-1" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+		</NormalTexture>
+		<PushedTexture file="Interface\Buttons\UI-Quickslot-Depress" />
+		<HighlightTexture file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD" />
+	</Button>
   <ScrollFrame parentKey="CollectionsFrame" name="CollectionsScrollFrameTemplate" inherits="UIPanelScrollFrameCodeTemplate" virtual="true">
 		<Size x="259" y="462"/>
 		<!--<Anchors>
@@ -157,13 +203,6 @@
 			</OnLoad>
 		</Scripts>
 	</ScrollFrame>
-	<GameTooltip name="SetCollectorTooltip" inherits="GameTooltipTemplate">
-	  <Scripts>
-	    <Onload>
-	      self:SetOwner(WorldFrame, "ANCHOR_NONE");
-	    </Onload>
-	  </Scripts>
-	</GameTooltip>
   
   <Frame name="SetCollector" parent="UIParent" toplevel="true" enableMouse="true" movable="true" hidden="true" inherits="ButtonFrameTemplate">
   	<Scripts>

@@ -259,8 +259,15 @@ local function AddDeathKnightSets()
 	set = AddSet(50400,nil,DUNGEON,1,"DG_PLATE_03",DEATHKNIGHT,ANY,ANY)
 				AddVariant(50400,nil,DUNGEON,set,"DG_PLATE_03",28225,27771,28403,27497,27870)
 				
-	-- PvP (Future)
-	
+	-- PvP
+	set = AddSet(50400,nil,PVP,15,"DK_PVP_MELEE_15",DEATHKNIGHT,ANY,ALLIANCE)
+				AddVariant(50400,nil,PVP,set,"ALLIANCE",102650,102652,102676,102713,102651)
+				AddVariant(50400,nil,PVP,set,"ELITE",103007,103004,103005,103006,103008,103073,103076)
+				
+	set = AddSet(50400,nil,PVP,15,"DK_PVP_MELEE_15",DEATHKNIGHT,ANY,HORDE)
+				AddVariant(50400,nil,PVP,set,"HORDE",103376,103377,103378,103379,103380)
+				AddVariant(50400,nil,PVP,set,"ELITE",103007,103004,103005,103006,103008,103073,103076)
+				
 end
 
 local function AddDruidSets()
@@ -525,6 +532,31 @@ local function AddDruidSets()
 	set = AddSet(50400,nil,DUNGEON,10,"DR_DG_01",DRUID,ANY,ANY)
 				AddVariant(50400,nil,DUNGEON,set,"DR_DG_01",16720,16718,16706,16714,16717,16716,16719,16715)
 
+	-- PvP
+	set = AddSet(50400,nil,PVP,15,"DR_PVP_MELEE_15",DRUID,MELEE,ALLIANCE)
+				AddVariant(50400,nil,PVP,set,"ALLIANCE",102653,102739,102740,102741,102645)
+				AddVariant(50400,nil,PVP,set,"ELITE",103012,103009,103010,103011,103013,103137,103138)
+				
+	set = AddSet(50400,nil,PVP,15,"DR_PVP_HEALER_15",DRUID,HEALER,ALLIANCE)
+				AddVariant(50400,nil,PVP,set,"ALLIANCE",102657,102721,102761,102776,102658)
+				AddVariant(50400,nil,PVP,set,"ELITE",103017,103014,103015,103016,103018,103019,103020)
+				
+	set = AddSet(50400,nil,PVP,15,"DR_PVP_CASTER_15",DRUID,CASTER,ALLIANCE)
+				AddVariant(50400,nil,PVP,set,"ALLIANCE",102614,102696,102700,102767,102634)
+				AddVariant(50400,nil,PVP,set,"ELITE",103025,102022,103023,103024,103026,103027,103028)
+				
+	set = AddSet(50400,nil,PVP,15,"DR_PVP_MELEE_15",DRUID,MELEE,HORDE)
+				AddVariant(50400,nil,PVP,set,"HORDE",103381,103382,103383,103384,103385)
+				AddVariant(50400,nil,PVP,set,"ELITE",103012,103009,103010,103011,103013,103137,103138)
+				
+	set = AddSet(50400,nil,PVP,15,"DR_PVP_HEALER_15",DRUID,HEALER,HORDE)
+				AddVariant(50400,nil,PVP,set,"HORDE",103389,103390,103391,103392,103393)
+				AddVariant(50400,nil,PVP,set,"ELITE",103017,103014,103015,103016,103018,103019,103020)
+				
+	set = AddSet(50400,nil,PVP,15,"DR_PVP_CASTER_15",DRUID,CASTER,HORDE)
+				AddVariant(50400,nil,PVP,set,"HORDE",103398,103399,103400,103401,103402)
+				AddVariant(50400,nil,PVP,set,"ELITE",103025,102022,103023,103024,103026,103027,103028)
+				
 end
 
 
@@ -637,6 +669,15 @@ local function AddHunterSets()
 				
 	set = AddSet(50400,nil,DUNGEON,10,"HU_DG_01",HUNTER,ANY,ANY)
 				AddVariant(50400,nil,DUNGEON,set,"HU_DG_01",16677,16679,16674,16681,16676,16680,16678,16675)
+				
+	-- PvP
+	set = AddSet(50400,nil,PVP,15,"HU_PVP_RANGED_15",HUNTER,ANY,ALLIANCE)
+				AddVariant(50400,nil,PVP,set,"ALLIANCE",102670,102690,102734,102737,102689)
+				AddVariant(50400,nil,PVP,set,"ELITE",103038,103033,103035,103037,103039,103040,103041)
+				
+	set = AddSet(50400,nil,PVP,15,"HU_PVP_RANGED_15",HUNTER,ANY,HORDE)
+				AddVariant(50400,nil,PVP,set,"HORDE",103416,103417,103418103419,1034220)
+				AddVariant(50400,nil,PVP,set,"ELITE",103038,103033,103035,103037,103039,103040,103041)
 	
 end
 
@@ -1944,7 +1985,46 @@ local function AddWarriorSets()
 	
 end
 
-
+local function AddHolidaySets()
+	local set = ""
+	
+	set = AddSet(50400,nil,HOLIDAY,3271,"HO_FESTIVE_DRESS",ANY,ANY,ANY)
+				AddVariant(50400,nil,HOLIDAY,set,"GREEN",21157)
+				AddVariant(50400,nil,HOLIDAY,set,"PINK",21538)
+				AddVariant(50400,nil,HOLIDAY,set,"PURPLE",21539)
+				AddVariant(50400,nil,HOLIDAY,set,"RED",21154)
+				
+	set = AddSet(50400,nil,HOLIDAY,3272,"HO_FESTIVE_SUIT",ANY,ANY,ANY)
+				AddVariant(50400,nil,HOLIDAY,set,"BLACK",21541)
+				AddVariant(50400,nil,HOLIDAY,set,"BLUE",21544)
+				AddVariant(50400,nil,HOLIDAY,set,"TEAL",21543)
+				AddVariant(50400,nil,HOLIDAY,set,"RED",21542)
+				
+	set = AddSet(50400,nil,HOLIDAY,3351,"HO_LOVELY_DRESS",ANY,ANY,ANY)
+				AddVariant(50400,nil,HOLIDAY,set,"BLACK",22279)
+				AddVariant(50400,nil,HOLIDAY,set,"BLUE",22278)
+				AddVariant(50400,nil,HOLIDAY,set,"PURPLE",22280)
+				AddVariant(50400,nil,HOLIDAY,set,"RED",22276)
+				
+	set = AddSet(50400,nil,HOLIDAY,3352,"HO_DINNER_SUIT",ANY,ANY,ANY)
+				AddVariant(50400,nil,HOLIDAY,set,"BLUE",22281)
+				AddVariant(50400,nil,HOLIDAY,set,"PURPLE",22282)
+				AddVariant(50400,nil,HOLIDAY,set,"RED",22277)
+				
+	set = AddSet(50400,nil,HOLIDAY,1811,"HO_ELEGANT_DRESS",ANY,ANY,ANY)
+				AddVariant(50400,nil,HOLIDAY,set,"HO_ELEGANT_DRESS",19028)
+				
+	set = AddSet(50400,nil,HOLIDAY,1812,"HO_TUXEDO",ANY,ANY,ANY)
+				AddVariant(50400,nil,HOLIDAY,set,"BLACK",6833,6835)
+				
+	set = AddSet(50400,nil,HOLIDAY,3411,"HO_MIDSUMMER_REVELER",ANY,ANY,ANY)
+				AddVariant(50400,nil,HOLIDAY,set,"RED",23324,34685,34683)
+	
+	set = AddSet(50400,nil,HOLIDAY,1411,"HO_WINTER_GARB",ANY,ANY,ANY)
+				AddVariant(50400,nil,HOLIDAY,set,"GREEN",21525,34087,34086)
+				AddVariant(50400,nil,HOLIDAY,set,"RED",21524,34085,34086)
+			
+end
 
 --
 -- Setup Database
@@ -1970,6 +2050,7 @@ function SetCollectorSetupDB(release, override)
 		AddShamanSets()
 		AddWarlockSets()
 		AddWarriorSets()
+		AddHolidaySets()
 		
 		if (override == true) then print(_L["DB_UPGRADED"]) end
 	end
@@ -1980,7 +2061,7 @@ function SetCollectorSetupCharacterDB(class, release, override)
 		SetCollectorCharacterDB = { version = DB_VERSION, release = release, minimap = { hide = false }, Sets = { }, Items = { } }
 		for i=1, #SetCollectorDB do
 			for j in pairs(SetCollectorDB[i].Sets) do
-				if ( SetCollectorDB[i].Sets[j].Class == class ) then
+				if ( SetCollectorDB[i].Sets[j].Class == class or SetCollectorDB[i].Sets[j].Class == ANY.Description ) then
 					-- Set Info
 					SetCollectorCharacterDB.Sets[j] = { Favorite = false, Tracking = false }
 					-- Item Info
@@ -1997,11 +2078,11 @@ function SetCollectorSetupCharacterDB(class, release, override)
 		end
 		if (override == true) then print("|cffff6666".._L["CHAR_DB_UPGRADED"].."|r") end
 		
-	elseif SetCollectorCharacterDB.version ~= DB_VERSION or SetCollectorCharacterDB.release < 30 then
+	elseif SetCollectorCharacterDB.release < 30 then
 		SetCollectorCharacterDB = { version = DB_VERSION, release = release, minimap = { hide = false }, Sets = { }, Items = { } }
 		for i=1, #SetCollectorDB do
 			for j in pairs(SetCollectorDB[i].Sets) do
-				if ( SetCollectorDB[i].Sets[j].Class == class ) then
+				if ( SetCollectorDB[i].Sets[j].Class == class or SetCollectorDB[i].Sets[j].Class == ANY.Description ) then
 					-- Set Info
 					SetCollectorCharacterDB.Sets[j] = { Favorite = false, Tracking = false }
 					-- Item Info
@@ -2022,7 +2103,7 @@ function SetCollectorSetupCharacterDB(class, release, override)
 		local added = 0
 		for i=1, #SetCollectorDB do
 			for j in pairs(SetCollectorDB[i].Sets) do
-				if ( SetCollectorDB[i].Sets[j].Class == class ) then
+				if ( SetCollectorDB[i].Sets[j].Class == class or SetCollectorDB[i].Sets[j].Class == ANY.Description ) then
 					-- Set Info
 					if ( not SetCollectorCharacterDB.Sets[j] ) then
 						SetCollectorCharacterDB.Sets[j] = { Favorite = false, Tracking = false }
