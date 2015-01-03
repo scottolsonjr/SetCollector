@@ -8,7 +8,7 @@ local _L = SetCollectorLocalization
 	
 local WOW_VERSION = select(4,GetBuildInfo())
 local DB_VERSION = WOW_VERSION
-local MIN_DB_RELEASE_VERSION = 30							-- Sets the minimum release compatibility (last released 25)
+local MIN_DB_RELEASE_VERSION = 32							-- Sets the minimum release compatibility
 
 local icon = LibStub("LibDBIcon-1.0")
 local HelpPlateSeen = false										-- Replace with CVar
@@ -210,9 +210,9 @@ local AddTutorial = {
 	FramePos = { x = 0,	y = -30 },
 	FrameSize = { width = 638, height = 496	},
 	[1] = { ButtonPos = { x = 500,	y = 10 }, 	HighLightBox = { x = 497, y = 2, width = 200, height = 30 },		ToolTipDir = "LEFT",	ToolTipText = _L["TUTORIAL_1"] },
-	[2] = { ButtonPos = { x = 120,	y = -405 }, HighLightBox = { x = 8, y = -30, width = 275, height = 518 },		ToolTipDir = "DOWN",	ToolTipText = _L["TUTORIAL_2"] },
-	[3] = { ButtonPos = { x = 310,	y = -31 }, 	HighLightBox = { x = 305, y = -30, width = 392, height = 50 },	ToolTipDir = "LEFT",	ToolTipText = _L["TUTORIAL_3"] },
-	[4] = { ButtonPos = { x = 476,	y = -405 }, HighLightBox = { x = 305, y = -83, width = 392, height = 465 },	ToolTipDir = "DOWN",	ToolTipText = _L["TUTORIAL_4"] },
+	[2] = { ButtonPos = { x = 120,	y = -405 }, HighLightBox = { x = 8, y = -30, width = 252, height = 518 },		ToolTipDir = "DOWN",	ToolTipText = _L["TUTORIAL_2"] },
+	[3] = { ButtonPos = { x = 310,	y = -31 }, 	HighLightBox = { x = 285, y = -30, width = 412, height = 50 },	ToolTipDir = "LEFT",	ToolTipText = _L["TUTORIAL_3"] },
+	[4] = { ButtonPos = { x = 476,	y = -405 }, HighLightBox = { x = 285, y = -83, width = 412, height = 465 },	ToolTipDir = "DOWN",	ToolTipText = _L["TUTORIAL_4"] },
 }
 
 local function SetVariantTab(self, tab)
@@ -299,30 +299,19 @@ local function AddSetCollectorUI(frame)
 	modelFrame:SetAttribute("parentKey","ModelFrame")
 	modelFrame:SetAttribute("useParentLevel","true")
 	
-	local detailFrame = CreateFrame("Frame","$parentDetailFrame",setDisplay,"InsetFrameTemplate")
-	detailFrame:SetPoint("BOTTOMLEFT", leftInset, "BOTTOMRIGHT", 20, 0)
-	detailFrame:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -6, 26)
-	detailFrame:SetAttribute("parentKey","DetailFrame")
-	detailFrame:SetAttribute("useParentLevel","false")
-	
-	local detailInfo = detailFrame:CreateFontString("$parentContent","OVERLAY")
-	detailInfo:SetFontObject("GameFontNormalLeft")
-	content = " "
-	detailInfo:SetText(content)
-	detailInfo:SetTextColor(1,1,1,0.9)
-	detailInfo:SetPoint("BOTTOMLEFT", detailFrame, "BOTTOMLEFT", 25, 17)
-	detailInfo:SetPoint("BOTTOMRIGHT", detailFrame, "BOTTOMRIGHT", 5, 17)
-	detailFrame:SetFrameLevel(11)
-	detailFrame:SetWidth(280)
-	detailFrame:SetHeight(detailInfo:GetHeight() + 22)
-	detailFrame:Hide()
-	
-	local showDetail = CreateFrame("Button","$parentShowDetail",frame,"UIPanelButtonTemplate")
-	showDetail:SetText(_L["SHOW_DETAIL"])
-	showDetail:SetWidth(120)
-	showDetail:SetPoint("TOPLEFT",leftInset,"BOTTOMRIGHT",20,0)
-	showDetail:SetAttribute("parentKey","ShowDetail")
-	showDetail:SetScript("OnClick", function(self) SetCollectorShowDetail_OnClick(self) end)
+	local prevItem
+	for i=1, #EQUIPMENT do
+	local itemButton = CreateFrame("Button","$parentItem"..i,modelFrame,"SetCollectorItemTemplate")
+		if i == 1 then
+			itemButton:SetPoint("TOPLEFT",modelFrame,"TOPLEFT", 7, -73)
+		elseif i == 11 then
+			itemButton:SetPoint("TOPRIGHT",modelFrame,"TOPRIGHT", -7, -73)
+		else
+			itemButton:SetPoint("TOPLEFT",prevItem,"BOTTOMLEFT", 0, -7)
+		end
+		itemButton:Hide()
+		prevItem = itemButton
+	end
 	
 	for i=1, 5 do
 		local variantTab = CreateFrame("Button","$parentTab"..i,setDisplay,"CharacterFrameTabButtonTemplate")
@@ -413,6 +402,43 @@ local function SetVariantTabs(collection, set)
 	end
 end
 
+local function SetItemButton(button, itemID, count)
+	if button and itemID then
+		local sName, sLink, iRarity, iLevel, iMinLevel, sType, sSubType, iStackCount, sLocation, sTexture = GetItemInfo(itemID)
+		if sTexture then
+			button.link = sLink
+			button.icon:SetTexture(sTexture)
+			if count == 0 or count == nil then
+				button.icon:SetDesaturated(true)
+				button.count:SetText("")
+				button.count:Hide()
+				button.glow:Hide()
+			else
+				button.icon:SetDesaturated(false)
+				button.count:SetText(count)
+				button.count:Show()
+				button.glow:SetVertexColor(GetItemQualityColor(iRarity))
+				button.glow:Show()
+			end
+			button:Show()
+		end
+	else
+		button:Hide()
+	end
+end
+
+local function ClearItemButtons(button)
+	if button then
+		for i=button, #EQUIPMENT do
+			_G["SetDisplayModelFrameItem"..i]:Hide()
+		end
+	else
+		for i=1, #EQUIPMENT do
+			_G["SetDisplayModelFrameItem"..i]:Hide()
+		end
+	end
+end
+
 local function CollectionsUpdate()
 	prevButton = nil
 	rowIndex = 0
@@ -473,10 +499,13 @@ local function CollectionsUpdate()
 				titleButton.Set = j
 				titleButton:ClearAllPoints()
 				titleButton:SetPoint("TOPLEFT", prevButton, "BOTTOMLEFT", 0, 0)
-				if Log.Sets[j].Favorite == true then
+				if not Log.Sets[j] then
+					Log.Sets[j] = { Favorite = false, Tracking = false }
+				end
+				if Log.Sets[j] and Log.Sets[j].Favorite == true then
 					titleButton.Favorite:Show()
 				end
-				if Log.Sets[j].Tracking == true then
+				if Log.Sets[j] and Log.Sets[j].Tracking == true then
 					titleButton.Check:Show()
 				end
 				titleButton:Hide()
@@ -487,7 +516,10 @@ local function CollectionsUpdate()
 							for l=1, #Collections[i].Sets[j].Variants[k].Items do
 								local itemID = Collections[i].Sets[j].Variants[k].Items[l]
 								local name, link = GetItemInfo(itemID)
-								if (Log.Items[itemID].Count > 0) then 
+								if ( not Log.Items[itemID] ) then
+									Log.Items[itemID] = { Count = 0; }
+								end
+								if (Log.Items[itemID] and Log.Items[itemID].Count > 0) then 
 									acquired = acquired + Log.Items[itemID].Count
 								end
 							end
@@ -566,6 +598,7 @@ local function SetCollector_Scan(selection)
 		if SetCollector:IsVisible() then
 			CollectionsUpdate()
 			-- Update displayed details too
+			--print("Set Collector: Scan complete. Updating display.")
 		end
 	end
 end
@@ -635,37 +668,16 @@ function SetCollector_UpdateSelectedVariantTab(self)
 			for i=1, num do
 				local itemID = Collections[collection].Sets[set].Variants[selected].Items[i]
 			 	SetDisplayModelFrame:TryOn(itemID)
-			 	if (Log.Items[itemID].Count > 0) then acq = acq + Log.Items[itemID].Count; end
+			 	if (Log.Items[itemID] and Log.Items[itemID].Count > 0) then acq = acq + Log.Items[itemID].Count; end
+			 	SetItemButton(_G["SetDisplayModelFrameItem"..i], itemID, Log.Items[itemID].Count)
 			end
+			ClearItemButtons(num + 1)
 			SummaryButtonSummary:SetText(string.format(_L["ITEMS_COLLECTED"],acq,num))
 			SummaryButton:Show()
-			SetCollector_SetVariantDetails(collection, set, selected)
 		else
 			SummaryButton:Hide()
 		end
 	end
-end
-
-function SetCollector_ClearVariantDetails()
-	local content = ""
-	SetDisplayDetailFrameContent:SetText(content)
-	SetDisplayDetailFrame:SetHeight(SetDisplayDetailFrameContent:GetHeight() + 22)
-end
-
-function SetCollector_SetVariantDetails(collection, set, variant)
-	local Collections = SetCollectorDB
-	local content = ""
-	for i=1, #Collections[collection].Sets[set].Variants[variant].Items do
-		local itemID = Collections[collection].Sets[set].Variants[variant].Items[i]
-		local acquired = SetCollectorCharacterDB.Items[itemID].Count
-		local name, link, quality, _, _, _, _, _, slot = GetItemInfo(Collections[collection].Sets[set].Variants[variant].Items[i])
-		local displayName = name or " "
-		local itemString = string.match(link, "item[%-?%d:]+")		-- To make the item linkable (future)
-		local _, _, _, color = GetItemQualityColor(quality)
-		content = content.."|n- "..acquired.."/1 |c"..color..displayName.."|r"
-	end
-	SetDisplayDetailFrameContent:SetText(content)
-	SetDisplayDetailFrame:SetHeight(SetDisplayDetailFrameContent:GetHeight() + 22)
 end
 
 function SetCollector_OnLoad(self)
@@ -715,8 +727,8 @@ function SetCollector_OnEvent(self, event, ...)
 	  local isReady = IsVoidStorageReady()
 		if isReady == false then
 			C_Timer.After(2, SetCollector_ScanVoid)
-		--else
-			--SetCollector_Scan("Void")
+		else
+			SetCollector_Scan("Void")
 		end
 	
 	elseif event == "PLAYER_SPECIALIZATION_CHANGED" then
@@ -729,7 +741,7 @@ function SetCollector_OnEvent(self, event, ...)
 	
 	elseif event == "PLAYER_REGEN_ENABLED" then
 		SetCollector:RegisterEvent("BAG_UPDATE")
-		SetCollector_Scan("Bags")
+		--SetCollector_Scan("Bags")
 	end
 end
 
@@ -741,6 +753,8 @@ end
 function SetCollector_OnHide(self)
 	HelpPlate_Hide()
 	SummaryButton:Hide()
+	SetVariantTabs()
+	ClearItemButtons()
 	SetCollector_UnsetHighlight(SELECTED_BUTTON)
 end
 
@@ -756,7 +770,7 @@ function SetCollectorSetButton_OnClick(self, button, ...)
 			SetHighlight(self)
 		else
 			SetVariantTabs()
-			SetCollector_ClearVariantDetails()
+			ClearItemButtons()
 			SetCollector_UnsetHighlight(self)
 		end
 	elseif ( button == "RightButton" ) then
@@ -779,26 +793,34 @@ function SetCollectorSetButton_OnEnter(self)
 		local collection = Collection[self.Collection].Title
 		local set = _L[Collection[self.Collection].Sets[self.Set].Title] or _L["MISSING_LOCALIZATION"]
 	
-		SetCollectorTooltip:ClearLines()
-		SetCollectorTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT", -16, 16)
-		SetCollectorTooltip:AddLine("|cffffffff"..set.."|r")
+		GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT", -16, 16)
+		GameTooltip:SetText(set, 1, 1, 1)
 		for i=1, #Collection[self.Collection].Sets[self.Set].Variants do
 			local collected = 0
 			for j=1, #Collection[self.Collection].Sets[self.Set].Variants[i].Items do
 				local itemID = Collection[self.Collection].Sets[self.Set].Variants[i].Items[j]
-				collected = collected + SetCollectorCharacterDB.Items[itemID].Count
+				if SetCollectorCharacterDB.Items[itemID] then collected = collected + SetCollectorCharacterDB.Items[itemID].Count; end
 			end
-			local line = "- "..collected.."/"..Collection[self.Collection].Sets[self.Set].Variants[i].Count.." ".._L[Collection[self.Collection].Sets[self.Set].Variants[i].Title]
-			SetCollectorTooltip:AddLine(line)
+			local line = ""
+			if Collection[self.Collection].Sets[self.Set].Variants[i].Count and _L[Collection[self.Collection].Sets[self.Set].Variants[i].Title] then
+				line = "- "..collected.."/"..Collection[self.Collection].Sets[self.Set].Variants[i].Count.." ".._L[Collection[self.Collection].Sets[self.Set].Variants[i].Title]
+			elseif Collection[self.Collection].Sets[self.Set].Variants[i].Count and not _L[Collection[self.Collection].Sets[self.Set].Variants[i].Title] then
+				line = "- "..collected.."/"..Collection[self.Collection].Sets[self.Set].Variants[i].Count.." ".._L["MISSING_LOCALIZATION"]
+			elseif not Collection[self.Collection].Sets[self.Set].Variants[i].Count and _L[Collection[self.Collection].Sets[self.Set].Variants[i].Title] then
+				line = "- "..collected.."/? ".._L[Collection[self.Collection].Sets[self.Set].Variants[i].Title]
+			else
+				line = "- "..collected.."/? ".._L["MISSING_LOCALIZATION"]
+			end
+			GameTooltip:AddLine(line)
 		end
-		SetCollectorTooltip:Show()
+		local rightclick = _L["RIGHT_CLICK_FAVORITE"] or _L["MISSING_LOCALIZATION"]
+		GameTooltip:AddLine(rightclick, 1, 1, 1)
+		GameTooltip:Show()
 	end
 end
 function SetCollectorSetButton_OnLeave(self)
 	self.Text:SetFontObject("GameFontNormalLeft")
-	
-	SetCollectorTooltip:Hide()
-		
+	GameTooltip:Hide()
 end
 function SetCollectorSetButton_OnMouseDown(self)
 	-- Do nothing at this time.
@@ -808,19 +830,18 @@ function SetCollectorSetButton_OnMouseUp(self)
 end
 
 function SetCollectorSummaryButton_OnClick(self)
-	SetCollectorShowDetail_OnClick(self)
+	-- Do nothing at this time.
 end
 
-function SetCollectorShowDetail_OnClick(self)
-	if ( not SetDisplayDetailFrame:IsShown() ) then
-		SetCollectorRightInset:SetPoint("BOTTOMLEFT",SetDisplayDetailFrame,"TOPLEFT", 0, 0)
-		SetDisplayDetailFrame:Show()
-		SetCollectorShowDetail:SetText(_L["HIDE_DETAIL"])
-	else
-		SetCollectorRightInset:SetPoint("BOTTOMLEFT",SetCollectorLeftInset,"BOTTOMRIGHT", 20, 0)
-		SetDisplayDetailFrame:Hide()
-		SetCollectorShowDetail:SetText(_L["SHOW_DETAIL"])
+function SetCollector_Item_OnEnter(self, motion)
+	if self.link then
+		GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT")
+		GameTooltip:SetHyperlink(self.link)
+		GameTooltip:Show()
 	end
+end
+function SetCollector_Item_OnLeave(self, motion)
+	GameTooltip:Hide()
 end
 
 function SetCollector_SetFilter(self, classIndex)
@@ -841,7 +862,6 @@ function SetCollector_SetFilter(self, classIndex)
 		SetCollector_UnsetHighlight(SELECTED_BUTTON)
 		SELECTED_BUTTON = nil
 		SetVariantTabs()
-		SetCollector_ClearVariantDetails()
 	end
 end
 

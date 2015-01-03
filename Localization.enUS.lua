@@ -9,6 +9,8 @@ SetCollectorLocalization["MINIMAP_TOOLTIP"] 	= "Click to view your gear set prog
 SetCollectorLocalization["HIDE_DETAIL"] 			= "Hide Detail"
 SetCollectorLocalization["SHOW_DETAIL"] 			= "Show Detail"
 
+SetCollectorLocalization["RIGHT_CLICK_FAVORITE"] = "Right-click to set as favorite"
+
 SetCollectorLocalization["TUTORIAL_1"] 				= "Filter sets by specialization.";
 SetCollectorLocalization["TUTORIAL_2"] 				= "A list of available gear collections and sets is displayed here. Click on a set\nto preview. It will also show your progress toward completing the set.";
 SetCollectorLocalization["TUTORIAL_3"] 				= "When there are multiple variants of a set you will see tabs for each variant.";
@@ -27,6 +29,18 @@ SetCollectorLocalization["ITEMLINK_ERROR"] 					= "Set Collector: Item informati
 
 SetCollectorLocalization["MISSING_LOCALIZATION"] 		= "Missing Localization. Please report bug."
 SetCollectorLocalization["NOT_AVAILABLE"] 					= "This feature or function is not available yet. Thank you for your patience."
+
+SetCollectorLocalization["BLACK"]			= "Black"
+SetCollectorLocalization["BLUE"]			= "Blue"
+SetCollectorLocalization["GREEN"]			= "Green"
+SetCollectorLocalization["PINK"]			= "Pink"
+SetCollectorLocalization["PURPLE"]		= "Purple"
+SetCollectorLocalization["RED"]				= "Red"
+SetCollectorLocalization["TEAL"]			= "Teal"
+
+SetCollectorLocalization["ALLIANCE"]	= "Alliance"
+SetCollectorLocalization["HORDE"]			= "Horde"
+SetCollectorLocalization["ELITE"]			= "Elite"
 
 --
 -- Collection Localizations
@@ -66,6 +80,7 @@ SetCollectorLocalization["DG_PLATE_03"] 					= "Doomplate Battlegear"
 
 -- Class Sets
 SetCollectorLocalization["DK_CD_90"] 							= "Lich Lord Set"
+SetCollectorLocalization["DK_PVP_MELEE_15"] 			= "[15] Prideful Gladiator's Desecration"
 SetCollectorLocalization["DK_TR_MELEE_07"] 				= "[7] Scourgeborne Battlegear"
 SetCollectorLocalization["DK_TR_TANK_07"] 				= "[7] Scourgeborne Plate"
 SetCollectorLocalization["DK_TR_MELEE_08"] 				= "[8] Darkruned Battlegear"
@@ -92,6 +107,9 @@ SetCollectorLocalization["DK_TR_17"] 							= "[17] Ogreskull Boneplate Battlege
 
 
 SetCollectorLocalization["DR_CD_90"] 							= "The Cycle Set"
+SetCollectorLocalization["DR_PVP_CASTER_15"] 			= "[15] Prideful Gladiator's Wildhide"
+SetCollectorLocalization["DR_PVP_HEALER_15"] 			= "[15] Prideful Gladiator's Refuge"
+SetCollectorLocalization["DR_PVP_MELEE_15"] 			= "[15] Prideful Gladiator's Sanctuary"
 SetCollectorLocalization["DR_DG_01"] 							= "D1: Wildheart Raiment"
 SetCollectorLocalization["DR_DG_02"] 							= "D2: Feralheart Raiment"
 SetCollectorLocalization["DR_DG_AQ_1"] 						= "Symbols of Unending Life"
@@ -149,6 +167,7 @@ SetCollectorLocalization["DR_TR_17"] 							= "[17] Living Wood Battlegear"
 
 
 SetCollectorLocalization["HU_CD_90"] 							= "The Howling Beast Set"
+SetCollectorLocalization["HU_PVP_RANGED_15"] 			= "[15] Prideful Gladiator's Pursuit"
 SetCollectorLocalization["HU_DG_01"] 							= "D1: Beaststalker Armor"
 SetCollectorLocalization["HU_DG_02"] 							= "D2: Beastmaster Armor"
 SetCollectorLocalization["HU_DG_AQ_1"] 						= "Trappings of the Unseen Path"
@@ -452,6 +471,14 @@ SetCollectorLocalization["WR_TR_MELEE_16"]	 			= "[16] Battleplate of the Prehis
 SetCollectorLocalization["WR_TR_TANK_16"] 				= "[16] Plate of the Prehistoric Marauder"
 SetCollectorLocalization["WR_TR_17"] 							= "[17] Blackhand's Battlegear"
 
+SetCollectorLocalization["HO_FESTIVE_DRESS"]			= "Festive Dress / Festival Dress"
+SetCollectorLocalization["HO_FESTIVE_SUIT"]				= "Festive Pant Suit / Festival Suit"
+SetCollectorLocalization["HO_LOVELY_DRESS"]				= "Lovely Dress"
+SetCollectorLocalization["HO_DINNER_SUIT"]				= "Dinner Suit"
+SetCollectorLocalization["HO_ELEGANT_DRESS"]			= "Elegant Dress"
+SetCollectorLocalization["HO_TUXEDO"]							= "Tuxedo"
+SetCollectorLocalization["HO_MIDSUMMER_REVELER"]	= "Midsummer Reveler"
+SetCollectorLocalization["HO_WINTER_GARB"]				= "Winter Garb"
 
 --
 -- Variant Localizations
