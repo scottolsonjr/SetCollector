@@ -32,6 +32,7 @@ SetCollectorLocalization["NOT_AVAILABLE"] 					= "This feature or function is no
 
 SetCollectorLocalization["BLACK"]			= "Black"
 SetCollectorLocalization["BLUE"]			= "Blue"
+SetCollectorLocalization["BROWN"]			= "Brown"
 SetCollectorLocalization["GREEN"]			= "Green"
 SetCollectorLocalization["PINK"]			= "Pink"
 SetCollectorLocalization["PURPLE"]		= "Purple"
@@ -41,6 +42,11 @@ SetCollectorLocalization["TEAL"]			= "Teal"
 SetCollectorLocalization["ALLIANCE"]	= "Alliance"
 SetCollectorLocalization["HORDE"]			= "Horde"
 SetCollectorLocalization["ELITE"]			= "Elite"
+SetCollectorLocalization["FINE"]			= "Fine"
+
+SetCollectorLocalization["90"]			= "90"
+SetCollectorLocalization["100"]			= "100"
+
 
 --
 -- Collection Localizations
@@ -194,6 +200,7 @@ SetCollectorLocalization["HU_TR_17"] 							= "[17] Rylakstalker's Battlegear"
 
 
 SetCollectorLocalization["MA_CD_90"] 							= "The Elemental Triad Set"
+SetCollectorLocalization["MA_PVP_CASTER_15"] 			= "[15] Prideful Gladiator's Regalia"
 SetCollectorLocalization["MA_DG_01"] 							= "D1: Magister's Regalia"
 SetCollectorLocalization["MA_DG_02"]							= "D2: Sorcerer's Regalia"
 SetCollectorLocalization["MA_DG_AQ_1"] 						= "Trappings of Vaulted Secrets"
@@ -220,6 +227,8 @@ SetCollectorLocalization["MA_TR_17"] 							= "[17] Arcanoshatter Regalia"
 
 
 SetCollectorLocalization["MO_CD_90"] 							= "The Regal Lord Set"
+SetCollectorLocalization["MO_PVP_CASTER_15"] 			= "[15] Prideful Gladiator's Copperskin"
+SetCollectorLocalization["MO_PVP_MELEE_15"] 			= "[15] Prideful Gladiator's Ironskin"
 SetCollectorLocalization["MO_TR_HEALER_14"] 			= "[14] Battlegear of the Red Crane"
 SetCollectorLocalization["MO_TR_MELEE_14"] 				= "[14] Vestments of the Red Crane"
 SetCollectorLocalization["MO_TR_TANK_14"] 				= "[14] Armor of the Red Crane"
@@ -233,6 +242,8 @@ SetCollectorLocalization["MO_TR_17"] 							= "[17] Battlegear of the Somber Gaz
 
 
 SetCollectorLocalization["PA_CD_90"] 							= "The Holy Warrior Set"
+SetCollectorLocalization["PA_PVP_HEALER_15"] 			= "[15] Prideful Gladiator's Redemption"
+SetCollectorLocalization["PA_PVP_MELEE_15"] 			= "[15] Prideful Gladiator's Vindication"
 SetCollectorLocalization["PA_DG_01"] 							= "D1: Lightforge Armor"
 SetCollectorLocalization["PA_DG_02"] 							= "D2: Soulforge Armor"
 SetCollectorLocalization["PA_DG_AQ_1"] 						= "Battlegear of Eternal Justice"
@@ -287,6 +298,8 @@ SetCollectorLocalization["PA_TR_17"] 							= "[17] Vestments of Winged Triumph"
 
 
 SetCollectorLocalization["PR_CD_90"] 							= "The Light Set"
+SetCollectorLocalization["PR_PVP_CASTER_15"] 			= "[15] Prideful Gladiator's Raiment"
+SetCollectorLocalization["PR_PVP_HEALER_15"] 			= "[15] Prideful Gladiator's Investiture"
 SetCollectorLocalization["PR_DG_01"] 							= "D1: Vestments of the Devout"
 SetCollectorLocalization["PR_DG_02"] 							= "D2: Vestments of the Virtuous"
 SetCollectorLocalization["PR_DG_AQ_1"] 						= "Finery of Infinite Wisdom"
@@ -327,6 +340,7 @@ SetCollectorLocalization["PR_TR_17"] 							= "[17] Soul Priest's Raiment"
 
 
 SetCollectorLocalization["RO_CD_90"]	 						= "The Silent Assassin Set"
+SetCollectorLocalization["RO_PVP_MELEE_15"]	 			= "[15] Prideful Gladiator's Vestments"
 SetCollectorLocalization["RO_DG_01"] 							= "D1: Shadowcraft Armor"
 SetCollectorLocalization["RO_DG_02"] 							= "D2: Darkmantle Armor"
 SetCollectorLocalization["RO_DG_AQ_1"] 						= "Emblems of Veiled Shadows"
@@ -353,6 +367,9 @@ SetCollectorLocalization["RO_TR_17"] 							= "[17] Poisoner's Battlegear"
 
 
 SetCollectorLocalization["SH_CD_90"] 							= "Windfury Set"
+SetCollectorLocalization["SH_PVP_CASTER_15"] 			= "[15] Prideful Gladiator's Thuderfist"
+SetCollectorLocalization["SH_PVP_HEALER_15"] 			= "[15] Prideful Gladiator's Wartide"
+SetCollectorLocalization["SH_PVP_MELEE_15"] 			= "[15] Prideful Gladiator's Earthshaker"
 SetCollectorLocalization["SH_DG_01"] 							= "The Elements"
 SetCollectorLocalization["SH_DG_02"] 							= "The Five Thunders"
 SetCollectorLocalization["SH_DG_AQ_1"] 						= "Gift of the Gathering Storm"
@@ -407,6 +424,7 @@ SetCollectorLocalization["SH_TR_17"] 							= "[17] Windspeaker's Regalia"
 
 
 SetCollectorLocalization["WK_CD_90"] 							= "The Betrayer Set"
+SetCollectorLocalization["WK_PVP_CASTER_15"] 			= "[15] Prideful Gladiator's Felshroud"
 SetCollectorLocalization["WK_DG_01"] 							= "D1: Dreadmist Raiment"
 SetCollectorLocalization["WK_DG_02"] 							= "D2: Deathmist Raiment"
 SetCollectorLocalization["WK_DG_AQ_1"] 						= "Implements of Unspoken Names"
@@ -433,6 +451,7 @@ SetCollectorLocalization["WK_TR_17"] 							= "[17] Shadow Council's Garb"
 
 
 SetCollectorLocalization["WR_CD_90"] 							= "The Golden King Set"
+SetCollectorLocalization["WR_PVP_MELEE_15"] 			= "[15] Prideful Gladiator's Battlegear"
 SetCollectorLocalization["WR_DG_01"] 							= "D1: Battlegear of Valor"
 SetCollectorLocalization["WR_DG_02"] 							= "D2: Battlegear of Heroism"
 SetCollectorLocalization["WR_DG_AQ_1"] 						= "Battlegear of Unyielding Strength"
@@ -478,6 +497,13 @@ SetCollectorLocalization["HO_DINNER_SUIT"]				= "Dinner Suit"
 SetCollectorLocalization["HO_ELEGANT_DRESS"]			= "Elegant Dress"
 SetCollectorLocalization["HO_TUXEDO"]							= "Tuxedo"
 SetCollectorLocalization["HO_MIDSUMMER_REVELER"]	= "Midsummer Reveler"
+SetCollectorLocalization["HO_BREWFEST_DRESS"]			= "Brewfest Garb (Dress)"
+SetCollectorLocalization["HO_BREWFEST_REGALIA"]		= "Brewfest Garb (Regalia)"
+SetCollectorLocalization["HO_HALLOWED_HELM"]			= "Hallowed Helm"
+SetCollectorLocalization["HO_HORSEMANS_HOOD"]			= "The Horseman's Horrific Hood"
+SetCollectorLocalization["HO_HORSEMANS_SLICER"]		= "The Horseman's Sinister Slicer"
+SetCollectorLocalization["HO_PILGRIMS_ATTIRE"]		= "Pilgrim's Attire"
+SetCollectorLocalization["HO_PILGRIMS_DRESS"]			= "Pilgrim's Dress"
 SetCollectorLocalization["HO_WINTER_GARB"]				= "Winter Garb"
 
 --
