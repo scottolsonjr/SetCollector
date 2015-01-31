@@ -8,7 +8,7 @@ local _L = SetCollectorLocalization
 	
 local WOW_VERSION = select(4,GetBuildInfo())
 local DB_VERSION = WOW_VERSION
-local MIN_DB_RELEASE_VERSION = 34							-- Sets the minimum release compatibility
+local MIN_DB_RELEASE_VERSION = 35							-- Sets the minimum release compatibility
 
 local icon = LibStub("LibDBIcon-1.0")
 local HelpPlateSeen = false										-- Replace with CVar
@@ -92,7 +92,7 @@ local BANK = {
 }
 
 local VOID_STORAGE_MAX = 80;
-local VOID_STORAGE_PAGES = 2;	-- Available in 6.0
+local VOID_STORAGE_PAGES = 2;
 
 --
 -- LOCAL FUNCTIONS
@@ -408,18 +408,21 @@ local function SetItemButton(button, itemID, count)
 		if sTexture then
 			button.link = sLink
 			button.icon:SetTexture(sTexture)
-			if count == 0 or count == nil then
-				button.icon:SetDesaturated(true)
-				button.count:SetText("")
-				button.count:Hide()
-				button.glow:Hide()
-			else
+			button.icon:SetDesaturated(true)
+			button.count:SetText("")
+			button.count:Hide()
+			button.glow:Hide()
+			
+			local i = GetItemCount(sLink, true)
+			i = i + SetCollectorCharacterDB.Items[itemID].Count				-- Get Void Storage Count
+			if i > 0 then
 				button.icon:SetDesaturated(false)
-				button.count:SetText(count)
-				button.count:Show()
+				button.count:SetText(i)
+				--button.count:Show()			-- Count may not reliable yet. Revisit Void Count management.
 				button.glow:SetVertexColor(GetItemQualityColor(iRarity))
 				button.glow:Show()
 			end
+			
 			button:Show()
 		end
 	else
@@ -559,52 +562,23 @@ local function UpdatePortrait()
 	end
 end
 
-local function SetCollector_Scan(selection)
-	local inLockdown = InCombatLockdown()
-	if (inLockdown == nil or inLockdown == false) then
-		local show, success
-		if selection == "Equipment" then 
-			show = { containers = 1, slots = function() return #EQUIPMENT end, itemID = function(i,j) return GetInventoryItemID("player", EQUIPMENT[j]) end }
-		elseif selection == "Bags" then 
-			show = { containers = #BAGS, slots = function(i) return GetContainerNumSlots(BAGS[i]) end, itemID = function(i,j) return GetContainerItemID(BAGS[i],j) end }
-		elseif selection == "Bank" then 
-			show = { containers = #BANK, slots = function(i) return GetContainerNumSlots(BANK[i]) end, itemID = function(i,j) return GetContainerItemID(BANK[i],j) end }
-		elseif selection == "Void" then 
-			-- Special tasks for Void Storage
-			local isReady = IsVoidStorageReady()
-			if isReady == true then 	-- 6.0 method
-				show = { containers = VOID_STORAGE_PAGES, slots = function() return VOID_STORAGE_MAX end, itemID = function(i,j) return GetVoidItemInfo(i,j) end }
-			elseif isReady == 1 then 	-- 5.4 method
-				show = { containers = 1, slots = function() return VOID_STORAGE_MAX end, itemID = function(i,j) return GetVoidItemInfo(j) end }
-			else 
-				print(_L["VOID_STORAGE_NOT_READY"]); return;
-			end	
-		else return
-		end
+local function SetCollector_ScanVoid()
+	local isReady = IsVoidStorageReady()
+	if isReady == true then
 		
-		for key, value in pairs(SetCollectorCharacterDB.Items) do
-			for i=1, show.containers do
-				local numberOfSlots = show.slots(i)
-				for j=1, numberOfSlots do
-					local itemID = show.itemID(i,j)
-					if key == itemID then
-						value.Count = 1
-					end
-					--if success == nil then print(selection.." scan successful"); success = true; end
+		for i=1, VOID_STORAGE_PAGES do
+			for j=1, VOID_STORAGE_MAX do
+				local itemID = GetVoidItemInfo(i,j)
+				if itemID then
+					SetCollectorCharacterDB.Items[itemID] = { Count = 1 }
 				end
 			end
 		end
 		
-		if SetCollector:IsVisible() then
-			CollectionsUpdate()
-			-- Update displayed details too
-			--print("Set Collector: Scan complete. Updating display.")
-		end
-	end
-end
-
-local function SetCollector_ScanVoid()
-	SetCollector_Scan("Void")							-- C_Timer does not allow for passing parameters in callback
+	else 
+		print(_L["VOID_STORAGE_NOT_READY"]); return;
+	end	
+	
 end
 
 
@@ -617,11 +591,6 @@ function SetCollector_ToggleUI()
 		HideUIPanel(SetCollector)
 	else
 		ShowUIPanel(SetCollector)
-		--[[if Session.InitialScanComplete == false then
-			SetCollector_Scan("Equipment")
-			SetCollector_Scan("Bags")
-			Session.InitialScanComplete = true
-		end]]--
 	end
 end
 
@@ -703,45 +672,25 @@ function SetCollector_OnEvent(self, event, ...)
 		SetDisplayModelFrame:SetUnit("PLAYER")
 		CreateMinimapButton()
 		
-		-- Initial Scan
-		SetCollector_Scan("Equipment")
-		SetCollector_Scan("Bags")
-		
 		-- Register New Events
-		self:RegisterEvent("BAG_UPDATE")
-		self:RegisterEvent("BANKFRAME_OPENED")
 		self:RegisterEvent("VOID_STORAGE_OPEN")
 		self:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
-		self:RegisterEvent("PLAYER_REGEN_DISABLED")
-		self:RegisterEvent("PLAYER_REGEN_ENABLED")
   	self:UnregisterEvent("PLAYER_LOGIN")
-		
-	elseif event == "BAG_UPDATE" then
-		SetCollector_Scan("Equipment")
-		SetCollector_Scan("Bags")
-		
-	elseif event == "BANKFRAME_OPENED" then
-		SetCollector_Scan("Bank")
 	
 	elseif event == "VOID_STORAGE_OPEN" then
 	  local isReady = IsVoidStorageReady()
 		if isReady == false then
 			C_Timer.After(2, SetCollector_ScanVoid)
 		else
-			SetCollector_Scan("Void")
+			--SetCollector_Scan("Void")
+			SetCollector_ScanVoid()
 		end
 	
 	elseif event == "PLAYER_SPECIALIZATION_CHANGED" then
 		local i = GetSpecialization()
 		if i == nil then i = 0 end
 		SetCollector_SetFilter(nil, LE_LOOT_FILTER_SPEC1 + i - 1)
-	
-	elseif event == "PLAYER_REGEN_DISABLED" then
-		SetCollector:UnregisterEvent("BAG_UPDATE")
-	
-	elseif event == "PLAYER_REGEN_ENABLED" then
-		SetCollector:RegisterEvent("BAG_UPDATE")
-		--SetCollector_Scan("Bags")
+		
 	end
 end
 
@@ -799,7 +748,10 @@ function SetCollectorSetButton_OnEnter(self)
 			local collected = 0
 			for j=1, #Collection[self.Collection].Sets[self.Set].Variants[i].Items do
 				local itemID = Collection[self.Collection].Sets[self.Set].Variants[i].Items[j]
-				if SetCollectorCharacterDB.Items[itemID] then collected = collected + SetCollectorCharacterDB.Items[itemID].Count; end
+				collected = collected + GetItemCount(itemID, true)
+				if SetCollectorCharacterDB.Items[itemID] then			-- Get Void Storage Count
+					collected = collected + SetCollectorCharacterDB.Items[itemID].Count
+				end
 			end
 			local line = ""
 			if Collection[self.Collection].Sets[self.Set].Variants[i].Count and _L[Collection[self.Collection].Sets[self.Set].Variants[i].Title] then
