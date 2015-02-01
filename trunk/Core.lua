@@ -418,7 +418,6 @@ local function SetItemButton(button, itemID, count)
 			if i > 0 then
 				button.icon:SetDesaturated(false)
 				button.count:SetText(i)
-				--button.count:Show()			-- Count may not reliable yet. Revisit Void Count management.
 				button.glow:SetVertexColor(GetItemQualityColor(iRarity))
 				button.glow:Show()
 			end
@@ -630,6 +629,7 @@ function SetCollector_UpdateSelectedVariantTab(self)
 		local collection = _G["SetDisplayTab"..selected].Collection
 		local set = _G["SetDisplayTab"..selected].Set
 		if ( collection and set ) then
+			SetDisplayModelFrame:Undress()
 	  	local Collections = SetCollectorDB
 	  	local Log = SetCollectorCharacterDB
 			local num = #Collections[collection].Sets[set].Variants[selected].Items
@@ -748,10 +748,12 @@ function SetCollectorSetButton_OnEnter(self)
 			local collected = 0
 			for j=1, #Collection[self.Collection].Sets[self.Set].Variants[i].Items do
 				local itemID = Collection[self.Collection].Sets[self.Set].Variants[i].Items[j]
-				collected = collected + GetItemCount(itemID, true)
+				local count = 0
+				count = count + GetItemCount(itemID, true)
 				if SetCollectorCharacterDB.Items[itemID] then			-- Get Void Storage Count
-					collected = collected + SetCollectorCharacterDB.Items[itemID].Count
+					count = count + SetCollectorCharacterDB.Items[itemID].Count
 				end
+				if count > 0 then collected = collected + 1; end
 			end
 			local line = ""
 			if Collection[self.Collection].Sets[self.Set].Variants[i].Count and _L[Collection[self.Collection].Sets[self.Set].Variants[i].Title] then
