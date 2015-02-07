@@ -8,7 +8,7 @@ local _L = SetCollectorLocalization
 	
 local WOW_VERSION = select(4,GetBuildInfo())
 local DB_VERSION = WOW_VERSION
-local MIN_DB_RELEASE_VERSION = 39							-- Sets the minimum release compatibility
+local MIN_DB_RELEASE_VERSION = 41							-- Sets the minimum release compatibility
 
 local icon = LibStub("LibDBIcon-1.0")
 local HelpPlateSeen = false										-- Replace with CVar
@@ -818,6 +818,7 @@ function SetCollector_SetFilter(self, classIndex)
 		SetCollector_UnsetHighlight(SELECTED_BUTTON)
 		SELECTED_BUTTON = nil
 		SetVariantTabs()
+		ClearItemButtons()
 	end
 end
 

@@ -11,8 +11,8 @@ SetCollectorLocalization["SHOW_DETAIL"] 			= "Show Detail"
 
 SetCollectorLocalization["RIGHT_CLICK_FAVORITE"] = "Right-click to set as favorite"
 
-SetCollectorLocalization["TUTORIAL_1"] 				= "Filter sets by specialization.";
-SetCollectorLocalization["TUTORIAL_2"] 				= "A list of available gear collections and sets is displayed here. Click on a set\nto preview. It will also show your progress toward completing the set.";
+SetCollectorLocalization["TUTORIAL_1"] 				= "Filter sets by specialization and set whether you only want to see your favorites.";
+SetCollectorLocalization["TUTORIAL_2"] 				= "A list of available gear collections and sets is displayed here. Click on a set\nto preview. It will also show a star for your favorite sets.";
 SetCollectorLocalization["TUTORIAL_3"] 				= "When there are multiple variants of a set you will see tabs for each variant.";
 SetCollectorLocalization["TUTORIAL_4"] 				= "A preview of the set will\nappear here. Click on a set to the left to preview it here.";
 
@@ -47,6 +47,9 @@ SetCollectorLocalization["FINE"]			= "Fine"
 SetCollectorLocalization["90"]			= "90"
 SetCollectorLocalization["100"]			= "100"
 
+SetCollectorLocalization["ASPIRANT"] = "Aspirant"
+SetCollectorLocalization["COMBATANT"] = "Combatant"
+SetCollectorLocalization["GLADIATOR"] = "Gladiator"
 
 --
 -- Collection Localizations
@@ -86,7 +89,9 @@ SetCollectorLocalization["DG_PLATE_03"] 					= "Doomplate Battlegear"
 
 -- Class Sets
 SetCollectorLocalization["DK_CD_90"] 							= "Lich Lord Set"
+SetCollectorLocalization["DK_PVP_MELEE_14"] 			= "[14] Greivous Gladiator's Desecration"
 SetCollectorLocalization["DK_PVP_MELEE_15"] 			= "[15] Prideful Gladiator's Desecration"
+SetCollectorLocalization["DK_PVP_MELEE_16"] 			= "[16] Primal Desecration"
 SetCollectorLocalization["DK_TR_MELEE_07"] 				= "[7] Scourgeborne Battlegear"
 SetCollectorLocalization["DK_TR_TANK_07"] 				= "[7] Scourgeborne Plate"
 SetCollectorLocalization["DK_TR_MELEE_08"] 				= "[8] Darkruned Battlegear"
