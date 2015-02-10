@@ -182,7 +182,9 @@ SetCollectorLocalization["DR_TR_17"] 							= "[17] Living Wood Battlegear"
 
 
 SetCollectorLocalization["HU_CD_90"] 							= "The Howling Beast Set"
+SetCollectorLocalization["HU_PVP_RANGED_14"] 			= "[14] Grievous Gladiator's Pursuit"
 SetCollectorLocalization["HU_PVP_RANGED_15"] 			= "[15] Prideful Gladiator's Pursuit"
+SetCollectorLocalization["HU_PVP_16"] 						= "[16] Primal Pursuit"
 SetCollectorLocalization["HU_DG_01"] 							= "D1: Beaststalker Armor"
 SetCollectorLocalization["HU_DG_02"] 							= "D2: Beastmaster Armor"
 SetCollectorLocalization["HU_DG_AQ_1"] 						= "Trappings of the Unseen Path"
