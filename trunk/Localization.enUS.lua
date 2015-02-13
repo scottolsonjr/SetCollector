@@ -211,7 +211,9 @@ SetCollectorLocalization["HU_TR_17"] 							= "[17] Rylakstalker's Battlegear"
 
 
 SetCollectorLocalization["MA_CD_90"] 							= "The Elemental Triad Set"
+SetCollectorLocalization["MA_PVP_CASTER_14"] 			= "[14] Grievous Gladiator's Regalia"
 SetCollectorLocalization["MA_PVP_CASTER_15"] 			= "[15] Prideful Gladiator's Regalia"
+SetCollectorLocalization["MA_PVP_16"] 						= "[16] Primal Gladiator's Regalia"
 SetCollectorLocalization["MA_DG_01"] 							= "D1: Magister's Regalia"
 SetCollectorLocalization["MA_DG_02"]							= "D2: Sorcerer's Regalia"
 SetCollectorLocalization["MA_DG_AQ_1"] 						= "Trappings of Vaulted Secrets"
