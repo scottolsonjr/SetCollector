@@ -240,8 +240,11 @@ SetCollectorLocalization["MA_TR_17"] 							= "[17] Arcanoshatter Regalia"
 
 
 SetCollectorLocalization["MO_CD_90"] 							= "The Regal Lord Set"
-SetCollectorLocalization["MO_PVP_CASTER_15"] 			= "[15] Prideful Gladiator's Copperskin"
+SetCollectorLocalization["MO_PVP_HEALER_14"] 			= "[14] Grievous Gladiator's Copperskin"
+SetCollectorLocalization["MO_PVP_MELEE_14"] 			= "[14] Grievous Gladiator's Ironskin"
+SetCollectorLocalization["MO_PVP_HEALER_15"] 			= "[15] Prideful Gladiator's Copperskin"
 SetCollectorLocalization["MO_PVP_MELEE_15"] 			= "[15] Prideful Gladiator's Ironskin"
+SetCollectorLocalization["MO_PVP_16"] 						= "[16] Primal Ironskin"
 SetCollectorLocalization["MO_TR_HEALER_14"] 			= "[14] Battlegear of the Red Crane"
 SetCollectorLocalization["MO_TR_MELEE_14"] 				= "[14] Vestments of the Red Crane"
 SetCollectorLocalization["MO_TR_TANK_14"] 				= "[14] Armor of the Red Crane"
