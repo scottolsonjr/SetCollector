@@ -317,8 +317,11 @@ SetCollectorLocalization["PA_TR_17"] 							= "[17] Battlegear of Guiding Light"
 
 
 SetCollectorLocalization["PR_CD_90"] 							= "The Light Set"
+SetCollectorLocalization["PR_PVP_CASTER_14"] 			= "[14] Grievous Gladiator's Raiment"
+SetCollectorLocalization["PR_PVP_HEALER_14"] 			= "[14] Grievous Gladiator's Investiture"
 SetCollectorLocalization["PR_PVP_CASTER_15"] 			= "[15] Prideful Gladiator's Raiment"
 SetCollectorLocalization["PR_PVP_HEALER_15"] 			= "[15] Prideful Gladiator's Investiture"
+SetCollectorLocalization["PR_PVP_16"] 						= "[16] Primal Investiture"
 SetCollectorLocalization["PR_DG_01"] 							= "D1: Vestments of the Devout"
 SetCollectorLocalization["PR_DG_02"] 							= "D2: Vestments of the Virtuous"
 SetCollectorLocalization["PR_DG_AQ_1"] 						= "Finery of Infinite Wisdom"
