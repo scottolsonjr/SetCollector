@@ -258,8 +258,11 @@ SetCollectorLocalization["MO_TR_17"] 							= "[17] Battlegear of the Somber Gaz
 
 
 SetCollectorLocalization["PA_CD_90"] 							= "The Holy Warrior Set"
+SetCollectorLocalization["PA_PVP_HEALER_14"] 			= "[14] Grievous Gladiator's Redemption"
+SetCollectorLocalization["PA_PVP_MELEE_14"] 			= "[14] Grievous Gladiator's Vindication"
 SetCollectorLocalization["PA_PVP_HEALER_15"] 			= "[15] Prideful Gladiator's Redemption"
 SetCollectorLocalization["PA_PVP_MELEE_15"] 			= "[15] Prideful Gladiator's Vindication"
+SetCollectorLocalization["PA_PVP_16"] 						= "[16] Primal Redemption"
 SetCollectorLocalization["PA_DG_01"] 							= "D1: Lightforge Armor"
 SetCollectorLocalization["PA_DG_02"] 							= "D2: Soulforge Armor"
 SetCollectorLocalization["PA_DG_AQ_1"] 						= "Battlegear of Eternal Justice"
