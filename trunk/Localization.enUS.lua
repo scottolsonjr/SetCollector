@@ -362,7 +362,9 @@ SetCollectorLocalization["PR_TR_17"] 							= "[17] Soul Priest's Raiment"
 
 
 SetCollectorLocalization["RO_CD_90"]	 						= "The Silent Assassin Set"
+SetCollectorLocalization["RO_PVP_MELEE_14"]	 			= "[14] Grievous Gladiator's Vestments"
 SetCollectorLocalization["RO_PVP_MELEE_15"]	 			= "[15] Prideful Gladiator's Vestments"
+SetCollectorLocalization["RO_PVP_16"]	 						= "[16] Primal Vestments"
 SetCollectorLocalization["RO_DG_01"] 							= "D1: Shadowcraft Armor"
 SetCollectorLocalization["RO_DG_02"] 							= "D2: Darkmantle Armor"
 SetCollectorLocalization["RO_DG_AQ_1"] 						= "Emblems of Veiled Shadows"
