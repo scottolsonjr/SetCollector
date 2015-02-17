@@ -391,9 +391,13 @@ SetCollectorLocalization["RO_TR_17"] 							= "[17] Poisoner's Battlegear"
 
 
 SetCollectorLocalization["SH_CD_90"] 							= "Windfury Set"
+SetCollectorLocalization["SH_PVP_CASTER_14"] 			= "[14] Grievous Gladiator's Thunderfist"
+SetCollectorLocalization["SH_PVP_HEALER_14"] 			= "[14] Grievous Gladiator's Wartide"
+SetCollectorLocalization["SH_PVP_MELEE_14"] 			= "[14] Grievous Gladiator's Earthshaker"
 SetCollectorLocalization["SH_PVP_CASTER_15"] 			= "[15] Prideful Gladiator's Thunderfist"
 SetCollectorLocalization["SH_PVP_HEALER_15"] 			= "[15] Prideful Gladiator's Wartide"
 SetCollectorLocalization["SH_PVP_MELEE_15"] 			= "[15] Prideful Gladiator's Earthshaker"
+SetCollectorLocalization["SH_PVP_16"] 						= "[16] Primal Wartide"
 SetCollectorLocalization["SH_DG_01"] 							= "D1: The Elements"
 SetCollectorLocalization["SH_DG_02"] 							= "D2: The Five Thunders"
 SetCollectorLocalization["SH_DG_AQ_1"] 						= "Gift of the Gathering Storm"
