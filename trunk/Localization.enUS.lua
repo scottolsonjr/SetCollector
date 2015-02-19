@@ -481,7 +481,9 @@ SetCollectorLocalization["WK_TR_17"] 							= "[17] Shadow Council's Garb"
 
 
 SetCollectorLocalization["WR_CD_90"] 							= "The Golden King Set"
+SetCollectorLocalization["WR_PVP_MELEE_14"] 			= "[14] Grievous Gladiator's Battlegear"
 SetCollectorLocalization["WR_PVP_MELEE_15"] 			= "[15] Prideful Gladiator's Battlegear"
+SetCollectorLocalization["WR_PVP_16"] 						= "[16] Primal Battlegear"
 SetCollectorLocalization["WR_DG_01"] 							= "D1: Battlegear of Valor"
 SetCollectorLocalization["WR_DG_02"] 							= "D2: Battlegear of Heroism"
 SetCollectorLocalization["WR_DG_AQ_1"] 						= "Battlegear of Unyielding Strength"
