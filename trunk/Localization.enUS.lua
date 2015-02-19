@@ -452,7 +452,9 @@ SetCollectorLocalization["SH_TR_17"] 							= "[17] Windspeaker's Regalia"
 
 
 SetCollectorLocalization["WK_CD_90"] 							= "The Betrayer Set"
+SetCollectorLocalization["WK_PVP_CASTER_14"] 			= "[14] Grievous Gladiator's Felshroud"
 SetCollectorLocalization["WK_PVP_CASTER_15"] 			= "[15] Prideful Gladiator's Felshroud"
+SetCollectorLocalization["WK_PVP_16"] 						= "[16] Primal Felshroud"
 SetCollectorLocalization["WK_DG_01"] 							= "D1: Dreadmist Raiment"
 SetCollectorLocalization["WK_DG_02"] 							= "D2: Deathmist Raiment"
 SetCollectorLocalization["WK_DG_AQ_1"] 						= "Implements of Unspoken Names"
