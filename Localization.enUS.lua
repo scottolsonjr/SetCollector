@@ -44,6 +44,9 @@ SetCollectorLocalization["HORDE"]			= "Horde"
 SetCollectorLocalization["ELITE"]			= "Elite"
 SetCollectorLocalization["FINE"]			= "Fine"
 
+SetCollectorLocalization["ORIGINAL"] 	= "Original"
+SetCollectorLocalization["REPLICA"] 	= "Replica"
+
 SetCollectorLocalization["90"]			= "90"
 SetCollectorLocalization["100"]			= "100"
 
