@@ -8,7 +8,7 @@ local _L = SetCollectorLocalization
 	
 local WOW_VERSION = select(4,GetBuildInfo())
 local DB_VERSION = WOW_VERSION
-local MIN_DB_RELEASE_VERSION = 51							-- Sets the minimum release compatibility
+local MIN_DB_RELEASE_VERSION = 54							-- Sets the minimum release compatibility
 
 local icon = LibStub("LibDBIcon-1.0")
 local HelpPlateSeen = false										-- Replace with CVar
@@ -125,7 +125,7 @@ end
 
 local function CreateMinimapButton()
 	local myLDB = LibStub("LibDataBroker-1.1"):NewDataObject("SetCollectorMinimap", {
-		type = "data source",
+		type = "launcher",
 		text = "Set Collector",
 		icon = "Interface\\Icons\\INV_Gauntlets_Mail_RaidShaman_J_01",
 		OnClick = function() SetCollector_ToggleUI() end,		
