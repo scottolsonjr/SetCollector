@@ -36,6 +36,15 @@ local CASTER 			= { Code = "C", Description = "CASTER" }
 local RANGED 			= { Code = "R", Description = "RANGED" }
 local MELEE 			= { Code = "M", Description = "MELEE" }
 
+-- Collection Types
+local LEGENDARY 	= { ID = 1, Code = "ZZ", Description = "LEGENDARY" }
+local RAID 				= { ID = 2, Code = "TR", Description = "RAID" }
+local DUNGEON 		= { ID = 3, Code = "DG", Description = "DUNGEON" }
+local CHALLENGE 	= { ID = 4, Code = "CD", Description = "CHALLENGE" }
+local PVP 				= { ID = 5, Code = "PV", Description = "PVP" }
+local GARRISON 		= { ID = 6, Code = "GA", Description = "GARRISON" }
+local HOLIDAY			= { ID = 7, Code = "HO", Description = "HOLIDAY" }
+
 local COLLECTION_LIST_WIDTH = 260
 
 local WHITE		= "|cFFFFFFFF"
@@ -414,7 +423,7 @@ local function SetItemButton(button, itemID, count)
 			button.glow:Hide()
 			
 			local i = GetItemCount(sLink, true)
-			i = i + SetCollectorCharacterDB.Items[itemID].Count				-- Get Void Storage Count
+			if SetCollectorCharacterDB.Items[itemID].Count then i = i + SetCollectorCharacterDB.Items[itemID].Count; end				-- Get Void Storage Count
 			if i > 0 then
 				button.icon:SetDesaturated(false)
 				button.count:SetText(i)
@@ -492,7 +501,7 @@ local function CollectionsUpdate()
 				titleButton = GetSetButton(rowIndex)
 				titleButton.Text:SetText(_L[Collections[i].Sets[j].Title] or _L["MISSING_LOCALIZATION"])			-- Putting Text into FontString allows for Wrapping using SetWidth
 				titleButton.Text:SetWidth(COLLECTION_LIST_WIDTH - 32)
-				if (i == 7) then
+				if (i == 10) then
 					titleButton.SubText:SetText("|cff999999".."SubText Here".."|r")
 				end
 				local height = titleButton.Text:GetHeight() + titleButton.SubText:GetHeight() + 10
@@ -564,7 +573,7 @@ end
 local function SetCollector_ScanVoid()
 	local isReady = IsVoidStorageReady()
 	if isReady == true then
-		
+		SetCollectorCharacterDB.Items = { }
 		for i=1, VOID_STORAGE_PAGES do
 			for j=1, VOID_STORAGE_MAX do
 				local itemID = GetVoidItemInfo(i,j)
@@ -640,7 +649,8 @@ function SetCollector_UpdateSelectedVariantTab(self)
 			 	local count = GetItemCount(itemID, true)
 			 	if (Log.Items[itemID] and Log.Items[itemID].Count > 0) then count = count + Log.Items[itemID].Count; end
 			 	if count > 0 then acq = acq + 1; end
-			 	SetItemButton(_G["SetDisplayModelFrameItem"..i], itemID, Log.Items[itemID].Count)
+			 	SetItemButton(_G["SetDisplayModelFrameItem"..i], itemID, 1)
+			 	--SetItemButton(_G["SetDisplayModelFrameItem"..i], itemID, Log.Items[itemID].Count)			-- No longer displaying count
 			end
 			ClearItemButtons(num + 1)
 			SummaryButtonSummary:SetText(string.format(_L["ITEMS_COLLECTED"],acq,num))
@@ -684,7 +694,6 @@ function SetCollector_OnEvent(self, event, ...)
 		if isReady == false then
 			C_Timer.After(2, SetCollector_ScanVoid)
 		else
-			--SetCollector_Scan("Void")
 			SetCollector_ScanVoid()
 		end
 	
@@ -871,6 +880,90 @@ function SetCollector_InitFilter()
 	info.checked = SHOW_ONLY_FAVORITES;
 	info.arg1 = "favorites";
 	UIDropDownMenu_AddButton(info);
+end
+
+--
+-- Item Tooltips
+--
+
+local origTooltips = {};
+
+local function T17(itemID, bonusID)
+	local itemString = ""
+	if itemID ~= nil and bonusID ~= nil then
+		itemString = "item:"..itemID..":0:0:0:0:0:0:0:0:0:491:1:"..bonusID
+	else
+		itemString = itemID
+	end
+	return itemString
+end
+
+local function GetIDFromLink(link)
+	if link == nil then return 0; end
+	local id = string.match(link, "item:(%d+)");
+	return tonumber(id);
+end
+
+local function GetBonusFromLink(link)
+	if link == nil then return 0; end
+	local bonus = string.match(link, ":1:(%d+)");
+	return bonus;
+end
+
+local function OnTooltipSetItemHook(tooltip, ...)
+	local itemName, itemLink = tooltip:GetItem()
+	local itemID, itemString
+	if itemLink then
+		itemID = T17(GetIDFromLink(itemLink),GetBonusFromLink(itemLink))
+		if not SetCollectorDB.Items[itemID] then
+			itemID = GetIDFromLink(itemLink)
+		end
+	end
+	
+	if (itemID and SetCollectorDB.Items[itemID]) then
+		local collection = SetCollectorDB.Items[itemID].collection
+		local set = SetCollectorDB.Items[itemID].set
+		local variant = SetCollectorDB.Items[itemID].variant
+		local text, setID, roleText, variantText
+		
+		if (SetCollectorDB[collection].Sets[set].TooltipID) then
+			text = _L[SetCollectorDB[collection].Sets[set].TooltipID] or SetCollectorDB[collection].Sets[set].TooltipID
+		else
+			if text then text = text.._L[SetCollectorDB[collection].Sets[set].Title] or _L["MISSING_LOCALIZATION"]; else text = _L[SetCollectorDB[collection].Sets[set].Title] or _L["MISSING_LOCALIZATION"]; end
+		end
+		
+		if (SetCollectorDB[collection].Sets[set].Role and SetCollectorDB[collection].Sets[set].Role ~= "Any") then
+			roleText = _L[SetCollectorDB[collection].Sets[set].Role] or SetCollectorDB[collection].Sets[set].Role or _L["MISSING_LOCALIZATION"]
+			if text then text = text.." "..roleText; else text = " "..roleText; end
+		end
+		
+		if (#SetCollectorDB[collection].Sets[set].Variants > 1) then
+			variantText = _L[SetCollectorDB[collection].Sets[set].Variants[variant].Title] or _L["MISSING_LOCALIZATION"]
+			if text then text = text.." ["..variantText.."]"; else text = " ["..variantText.."]"; end
+		end
+		
+		-- Display count
+		--if (SetCollectorDB[collection].Sets[set].Variants[variant].Count and SetCollectorDB[collection].Sets[set].Variants[variant].Count > 0) then
+		--	if text then text = text.." (?/"..SetCollectorDB[collection].Sets[set].Variants[variant].Count..")"; else text = " (?/"..SetCollectorDB[collection].Sets[set].Variants[variant].Count..")"; end
+		--end
+		
+		if ( text and text ~= "" ) then
+			tooltip:AddLine(ITEM_SET_BONUS:format(text), 1, 1, 0);
+		end
+	end
+end
+
+local hookTooltips = {};
+hookTooltips[GameTooltip] = 1; -- mouseover
+hookTooltips[ItemRefTooltip] = 1; -- clicked
+if (AtlasLootTooltip) then hookTooltips[AtlasLootTooltip] = 1; end
+
+for tt in pairs(hookTooltips) do
+	local origHook = tt:GetScript("OnTooltipSetItem");
+	if (origHook ~= OnTooltipSetItemHook) then
+		origTooltips[tt] = origHook;
+		tt:SetScript("OnTooltipSetItem", OnTooltipSetItemHook);
+	end
 end
 
 

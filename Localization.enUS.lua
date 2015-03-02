@@ -30,29 +30,11 @@ SetCollectorLocalization["ITEMLINK_ERROR"] 					= "Set Collector: Item informati
 SetCollectorLocalization["MISSING_LOCALIZATION"] 		= "Missing Localization. Please report bug."
 SetCollectorLocalization["NOT_AVAILABLE"] 					= "This feature or function is not available yet. Thank you for your patience."
 
-SetCollectorLocalization["BLACK"]			= "Black"
-SetCollectorLocalization["BLUE"]			= "Blue"
-SetCollectorLocalization["BROWN"]			= "Brown"
-SetCollectorLocalization["GREEN"]			= "Green"
-SetCollectorLocalization["PINK"]			= "Pink"
-SetCollectorLocalization["PURPLE"]		= "Purple"
-SetCollectorLocalization["RED"]				= "Red"
-SetCollectorLocalization["TEAL"]			= "Teal"
-
-SetCollectorLocalization["ALLIANCE"]	= "Alliance"
-SetCollectorLocalization["HORDE"]			= "Horde"
-SetCollectorLocalization["ELITE"]			= "Elite"
-SetCollectorLocalization["FINE"]			= "Fine"
-
-SetCollectorLocalization["ORIGINAL"] 	= "Original"
-SetCollectorLocalization["REPLICA"] 	= "Replica"
-
-SetCollectorLocalization["90"]			= "90"
-SetCollectorLocalization["100"]			= "100"
-
-SetCollectorLocalization["ASPIRANT"] = "Aspirant"
-SetCollectorLocalization["COMBATANT"] = "Combatant"
-SetCollectorLocalization["GLADIATOR"] = "Gladiator"
+SetCollectorLocalization["HEALER"] 	= HEALER
+SetCollectorLocalization["TANK"] 		= TANK
+SetCollectorLocalization["CASTER"] 	= RANGED
+SetCollectorLocalization["RANGED"]	= RANGED
+SetCollectorLocalization["MELEE"] 	= MELEE
 
 --
 -- Collection Localizations
@@ -63,6 +45,7 @@ SetCollectorLocalization["DUNGEON"] 		= GUILD_CHALLENGE_TYPE1
 SetCollectorLocalization["LEGENDARY"] 	= ITEM_QUALITY5_DESC
 SetCollectorLocalization["PVP"] 				= PVP
 SetCollectorLocalization["HOLIDAY"] 		= "Holiday"
+SetCollectorLocalization["GARRISON"] 		= "Garrison"
 SetCollectorLocalization["RAID"] 				= "Raid"
 
 --
@@ -83,6 +66,12 @@ SetCollectorLocalization["LG_MELEE_AGI_90"] 			= "Fen-Yu, Fury of Xuen"
 SetCollectorLocalization["LG_MELEE_STR_90"] 			= "Gong-Lu, Strength of Xuen"
 SetCollectorLocalization["LG_TANK_AGI_90"] 				= "Qian-Le, Courage of Niuzao"
 SetCollectorLocalization["LG_TANK_STR_90"] 				= "Qian-Ying, Fortitude of Niuzao"
+
+-- Garrison Sets
+SetCollectorLocalization["GA_ALLIANCE_SET"] 			= "Stormwind Set"
+SetCollectorLocalization["GA_HORDE_SET"] 					= "Orgrimmar Set"
+SetCollectorLocalization["GA_BWM_SET_100"] 				= "Bunker/War Mill Sets"
+
 
 -- Generic Sets
 SetCollectorLocalization["DG_CLOTH_03"] 					= "Mana-Etched Regalia"
@@ -553,6 +542,35 @@ SetCollectorLocalization["RAIDFINDER"] 	= PLAYER_DIFFICULTY3
 SetCollectorLocalization["25PLAYER"] 		= RAID_DIFFICULTY2
 SetCollectorLocalization["10PLAYER"] 		= RAID_DIFFICULTY1
 SetCollectorLocalization["VENDOR"] 			= "Vendor Set"
+
+SetCollectorLocalization["BLACK"]			= "Black"
+SetCollectorLocalization["BLUE"]			= "Blue"
+SetCollectorLocalization["BROWN"]			= "Brown"
+SetCollectorLocalization["GREEN"]			= "Green"
+SetCollectorLocalization["PINK"]			= "Pink"
+SetCollectorLocalization["PURPLE"]		= "Purple"
+SetCollectorLocalization["RED"]				= "Red"
+SetCollectorLocalization["TEAL"]			= "Teal"
+
+SetCollectorLocalization["ALLIANCE"]	= "Alliance"
+SetCollectorLocalization["HORDE"]			= "Horde"
+SetCollectorLocalization["ELITE"]			= "Elite"
+SetCollectorLocalization["FINE"]			= "Fine"
+
+SetCollectorLocalization["CLOTH"]			= "Cloth"
+SetCollectorLocalization["LEATHER"]		= "Leather"
+SetCollectorLocalization["MAIL"]			= "Mail"
+SetCollectorLocalization["PLATE"]			= "Plate"
+
+SetCollectorLocalization["ORIGINAL"] 	= "Original"
+SetCollectorLocalization["REPLICA"] 	= "Replica"
+
+SetCollectorLocalization["90"]			= "90"
+SetCollectorLocalization["100"]			= "100"
+
+SetCollectorLocalization["ASPIRANT"] = "Aspirant"
+SetCollectorLocalization["COMBATANT"] = "Combatant"
+SetCollectorLocalization["GLADIATOR"] = "Gladiator"
 
 
 --
