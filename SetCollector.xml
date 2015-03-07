@@ -126,7 +126,11 @@
 				</Texture>
 			</Layer>
 		</Layers>
+		<Attributes>
+			<Attribute name="ItemID" type="string" />
+		</Attributes>
 		<Scripts>
+			<OnClick function="SetCollector_Item_OnClick" />
 			<OnEnter function="SetCollector_Item_OnEnter" />
 			<OnLeave function="SetCollector_Item_OnLeave" />
 		</Scripts>

@@ -9,7 +9,7 @@ SetCollectorLocalization["MINIMAP_TOOLTIP"] 	= "Click to view your gear set prog
 SetCollectorLocalization["HIDE_DETAIL"] 			= "Hide Detail"
 SetCollectorLocalization["SHOW_DETAIL"] 			= "Show Detail"
 
-SetCollectorLocalization["RIGHT_CLICK_FAVORITE"] = "Right-click to set as favorite"
+SetCollectorLocalization["RIGHT_CLICK_FAVORITE"] = "Right-click to favorite a set. This \nlist can be filtered to just favorites."
 
 SetCollectorLocalization["TUTORIAL_1"] 				= "Filter sets by specialization and set whether you only want to see your favorites.";
 SetCollectorLocalization["TUTORIAL_2"] 				= "A list of available gear collections and sets is displayed here. Click on a set\nto preview. It will also show a star for your favorite sets.";
