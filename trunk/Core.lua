@@ -318,6 +318,7 @@ local function AddSetCollectorUI(frame)
 		else
 			itemButton:SetPoint("TOPLEFT",prevItem,"BOTTOMLEFT", 0, -7)
 		end
+		itemButton:RegisterForClicks("AnyDown")
 		itemButton:Hide()
 		prevItem = itemButton
 	end
@@ -416,6 +417,7 @@ local function SetItemButton(button, itemID, count)
 		local sName, sLink, iRarity, iLevel, iMinLevel, sType, sSubType, iStackCount, sLocation, sTexture = GetItemInfo(itemID)
 		if sTexture then
 			button.link = sLink
+			button.ItemID = itemID
 			button.icon:SetTexture(sTexture)
 			button.icon:SetDesaturated(true)
 			button.count:SetText("")
@@ -423,7 +425,7 @@ local function SetItemButton(button, itemID, count)
 			button.glow:Hide()
 			
 			local i = GetItemCount(sLink, true)
-			if SetCollectorCharacterDB.Items[itemID].Count then i = i + SetCollectorCharacterDB.Items[itemID].Count; end				-- Get Void Storage Count
+			if SetCollectorCharacterDB.Items[itemID] then i = i + SetCollectorCharacterDB.Items[itemID].Count; end				-- Get Void Storage Count
 			if i > 0 then
 				button.icon:SetDesaturated(false)
 				button.count:SetText(i)
@@ -661,6 +663,99 @@ function SetCollector_UpdateSelectedVariantTab(self)
 	end
 end
 
+--
+-- Item Tooltips
+--
+
+local origTooltips = {};
+
+local function T17(itemID, bonusID)
+	local itemString = ""
+	if itemID ~= nil and bonusID ~= nil then
+		itemString = "item:"..itemID..":0:0:0:0:0:0:0:0:0:491:1:"..bonusID
+	else
+		itemString = itemID
+	end
+	return itemString
+end
+
+local function GetIDFromLink(link)
+	if link == nil then return 0; end
+	local id = string.match(link, "item:(%d+)");
+	return tonumber(id);
+end
+
+local function GetBonusFromLink(link)
+	if link == nil then return 0; end
+	local bonus = string.match(link, ":1:(%d+)");
+	return bonus;
+end
+
+local function OnTooltipSetItemHook(tooltip, ...)
+	local itemName, itemLink = tooltip:GetItem()
+	local itemID, itemString
+	if itemLink then
+		itemID = T17(GetIDFromLink(itemLink),GetBonusFromLink(itemLink))
+		if not SetCollectorDB.Items[itemID] then
+			itemID = GetIDFromLink(itemLink)
+		end
+	end
+	
+	if (itemID and SetCollectorDB.Items[itemID]) then
+		local collection = SetCollectorDB.Items[itemID].collection
+		local set = SetCollectorDB.Items[itemID].set
+		local variant = SetCollectorDB.Items[itemID].variant
+		local text, setID, roleText, variantText
+		
+		if (SetCollectorDB[collection].Sets[set].TooltipID) then
+			text = _L[SetCollectorDB[collection].Sets[set].TooltipID] or SetCollectorDB[collection].Sets[set].TooltipID
+		else
+			if text then text = text.._L[SetCollectorDB[collection].Sets[set].Title] or _L["MISSING_LOCALIZATION"]; else text = _L[SetCollectorDB[collection].Sets[set].Title] or _L["MISSING_LOCALIZATION"]; end
+		end
+		
+		if (SetCollectorDB[collection].Sets[set].Role and SetCollectorDB[collection].Sets[set].Role ~= "Any") then
+			roleText = _L[SetCollectorDB[collection].Sets[set].Role] or SetCollectorDB[collection].Sets[set].Role or _L["MISSING_LOCALIZATION"]
+			if text then text = text.." "..roleText; else text = " "..roleText; end
+		end
+		
+		if (#SetCollectorDB[collection].Sets[set].Variants > 1) then
+			variantText = _L[SetCollectorDB[collection].Sets[set].Variants[variant].Title] or _L["MISSING_LOCALIZATION"]
+			if text then text = text.." ["..variantText.."]"; else text = " ["..variantText.."]"; end
+		end
+		
+		-- Display count
+		--if (SetCollectorDB[collection].Sets[set].Variants[variant].Count and SetCollectorDB[collection].Sets[set].Variants[variant].Count > 0) then
+		--	if text then text = text.." (?/"..SetCollectorDB[collection].Sets[set].Variants[variant].Count..")"; else text = " (?/"..SetCollectorDB[collection].Sets[set].Variants[variant].Count..")"; end
+		--end
+		
+		if ( text and text ~= "" ) then
+			tooltip:AddLine(ITEM_SET_BONUS:format(text), 1, 1, 0);
+		end
+	end
+	if origTooltips[tooltip] then
+		return origTooltips[tooltip](tooltip, ...);
+	end
+end
+
+local hookTooltips = {};
+local function SetupTooltips()
+	hookTooltips[GameTooltip] = 1; -- mouseover
+	hookTooltips[ItemRefTooltip] = 1; -- clicked
+	if (AtlasLootTooltip) then hookTooltips[AtlasLootTooltip] = 1; end
+	
+	for tt in pairs(hookTooltips) do
+		local origHook = tt:GetScript("OnTooltipSetItem");
+		if (origHook ~= OnTooltipSetItemHook) then
+			origTooltips[tt] = origHook;
+			tt:SetScript("OnTooltipSetItem", OnTooltipSetItemHook);
+		end
+	end
+end
+
+--
+-- Events
+--
+
 function SetCollector_OnLoad(self)
 	AddSetCollectorUI(self)
 	self:RegisterEvent("ADDON_LOADED")
@@ -683,13 +778,23 @@ function SetCollector_OnEvent(self, event, ...)
 		UIDropDownMenu_Initialize(SetCollectorSetFilter, SetCollector_InitFilter)
 		SetDisplayModelFrame:SetUnit("PLAYER")
 		CreateMinimapButton()
+		SetupTooltips()
 		
 		-- Register New Events
 		self:RegisterEvent("VOID_STORAGE_OPEN")
+		self:RegisterEvent("VOID_TRANSFER_DONE")
 		self:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
   	self:UnregisterEvent("PLAYER_LOGIN")
 	
 	elseif event == "VOID_STORAGE_OPEN" then
+	  local isReady = IsVoidStorageReady()
+		if isReady == false then
+			C_Timer.After(2, SetCollector_ScanVoid)
+		else
+			SetCollector_ScanVoid()
+		end
+	
+	elseif event == "VOID_TRANSFER_DONE" then
 	  local isReady = IsVoidStorageReady()
 		if isReady == false then
 			C_Timer.After(2, SetCollector_ScanVoid)
@@ -798,6 +903,20 @@ function SetCollectorSummaryButton_OnClick(self)
 	-- Do nothing at this time.
 end
 
+function SetCollector_Item_OnClick(self, button, ...)
+	if ( IsShiftKeyDown() and button == "LeftButton" ) then
+		ChatEdit_InsertLink(self.link)
+	elseif ( IsShiftKeyDown() and button == "RightButton" ) then
+		if (string.find(self.ItemID, "item")) then
+			local itemID = string.match(self.ItemID,"item:(%d+)") or "0"
+			local bonusID = string.match(self.ItemID,":1:(%d+)") or "0"
+			--print(self.ItemID)
+			ChatEdit_InsertLink("http://www.wowhead.com/item="..itemID.."&bonus="..bonusID)
+		else
+			ChatEdit_InsertLink("http://www.wowhead.com/item="..self.ItemID)
+		end
+	end
+end
 function SetCollector_Item_OnEnter(self, motion)
 	if self.link then
 		GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT")
@@ -882,89 +1001,7 @@ function SetCollector_InitFilter()
 	UIDropDownMenu_AddButton(info);
 end
 
---
--- Item Tooltips
---
 
-local origTooltips = {};
-
-local function T17(itemID, bonusID)
-	local itemString = ""
-	if itemID ~= nil and bonusID ~= nil then
-		itemString = "item:"..itemID..":0:0:0:0:0:0:0:0:0:491:1:"..bonusID
-	else
-		itemString = itemID
-	end
-	return itemString
-end
-
-local function GetIDFromLink(link)
-	if link == nil then return 0; end
-	local id = string.match(link, "item:(%d+)");
-	return tonumber(id);
-end
-
-local function GetBonusFromLink(link)
-	if link == nil then return 0; end
-	local bonus = string.match(link, ":1:(%d+)");
-	return bonus;
-end
-
-local function OnTooltipSetItemHook(tooltip, ...)
-	local itemName, itemLink = tooltip:GetItem()
-	local itemID, itemString
-	if itemLink then
-		itemID = T17(GetIDFromLink(itemLink),GetBonusFromLink(itemLink))
-		if not SetCollectorDB.Items[itemID] then
-			itemID = GetIDFromLink(itemLink)
-		end
-	end
-	
-	if (itemID and SetCollectorDB.Items[itemID]) then
-		local collection = SetCollectorDB.Items[itemID].collection
-		local set = SetCollectorDB.Items[itemID].set
-		local variant = SetCollectorDB.Items[itemID].variant
-		local text, setID, roleText, variantText
-		
-		if (SetCollectorDB[collection].Sets[set].TooltipID) then
-			text = _L[SetCollectorDB[collection].Sets[set].TooltipID] or SetCollectorDB[collection].Sets[set].TooltipID
-		else
-			if text then text = text.._L[SetCollectorDB[collection].Sets[set].Title] or _L["MISSING_LOCALIZATION"]; else text = _L[SetCollectorDB[collection].Sets[set].Title] or _L["MISSING_LOCALIZATION"]; end
-		end
-		
-		if (SetCollectorDB[collection].Sets[set].Role and SetCollectorDB[collection].Sets[set].Role ~= "Any") then
-			roleText = _L[SetCollectorDB[collection].Sets[set].Role] or SetCollectorDB[collection].Sets[set].Role or _L["MISSING_LOCALIZATION"]
-			if text then text = text.." "..roleText; else text = " "..roleText; end
-		end
-		
-		if (#SetCollectorDB[collection].Sets[set].Variants > 1) then
-			variantText = _L[SetCollectorDB[collection].Sets[set].Variants[variant].Title] or _L["MISSING_LOCALIZATION"]
-			if text then text = text.." ["..variantText.."]"; else text = " ["..variantText.."]"; end
-		end
-		
-		-- Display count
-		--if (SetCollectorDB[collection].Sets[set].Variants[variant].Count and SetCollectorDB[collection].Sets[set].Variants[variant].Count > 0) then
-		--	if text then text = text.." (?/"..SetCollectorDB[collection].Sets[set].Variants[variant].Count..")"; else text = " (?/"..SetCollectorDB[collection].Sets[set].Variants[variant].Count..")"; end
-		--end
-		
-		if ( text and text ~= "" ) then
-			tooltip:AddLine(ITEM_SET_BONUS:format(text), 1, 1, 0);
-		end
-	end
-end
-
-local hookTooltips = {};
-hookTooltips[GameTooltip] = 1; -- mouseover
-hookTooltips[ItemRefTooltip] = 1; -- clicked
-if (AtlasLootTooltip) then hookTooltips[AtlasLootTooltip] = 1; end
-
-for tt in pairs(hookTooltips) do
-	local origHook = tt:GetScript("OnTooltipSetItem");
-	if (origHook ~= OnTooltipSetItemHook) then
-		origTooltips[tt] = origHook;
-		tt:SetScript("OnTooltipSetItem", OnTooltipSetItemHook);
-	end
-end
 
 
 --
