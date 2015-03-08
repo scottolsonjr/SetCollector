@@ -28,13 +28,18 @@ SetCollectorLocalization["VOID_STORAGE_NOT_READY"]	= "Set Collector: Void Storag
 SetCollectorLocalization["ITEMLINK_ERROR"] 					= "Set Collector: Item information is not in your cache yet or an invalid item ID was used. Please try again."
 
 SetCollectorLocalization["MISSING_LOCALIZATION"] 		= "Missing Localization. Please report bug."
-SetCollectorLocalization["NOT_AVAILABLE"] 					= "This feature or function is not available yet. Thank you for your patience."
+SetCollectorLocalization["NOT_AVAILABLE"] 					= "Set Collector: This feature or function is not available yet. Thank you for your patience."
 
 SetCollectorLocalization["HEALER"] 	= HEALER
 SetCollectorLocalization["TANK"] 		= TANK
 SetCollectorLocalization["CASTER"] 	= RANGED
 SetCollectorLocalization["RANGED"]	= RANGED
 SetCollectorLocalization["MELEE"] 	= MELEE
+
+SetCollectorLocalization["OBTAIN_FILTER"] 	= "Only Obtainable"
+SetCollectorLocalization["NOOBTAIN"] 				= "No longer obtainable"
+SetCollectorLocalization["TRANSMOG_FILTER"] = "Only for Transmogrification"
+SetCollectorLocalization["NOTRANSMOG"] 			= "Not for transmogrification"
 
 --
 -- Collection Localizations
