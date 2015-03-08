@@ -8,7 +8,7 @@ local _L = SetCollectorLocalization
 	
 local WOW_VERSION = select(4,GetBuildInfo())
 local DB_VERSION = WOW_VERSION
-local MIN_DB_RELEASE_VERSION = 56							-- Sets the minimum release compatibility
+local MIN_DB_RELEASE_VERSION = 59							-- Sets the minimum release compatibility
 
 local icon = LibStub("LibDBIcon-1.0")
 local HelpPlateSeen = false										-- Replace with CVar
@@ -49,9 +49,12 @@ local COLLECTION_LIST_WIDTH = 260
 
 local WHITE		= "|cFFFFFFFF"
 
-local CURRENT_FILTER = 0
-local SHOW_ONLY_FAVORITES = false
-local COLLECTION_COLLAPSED = { false, false, false, false, false, false }			-- Currently there are six possible collections
+local CURRENT_FILTER 				= 0
+local SHOW_ONLY_FAVORITES 	= false
+local SHOW_ONLY_OBTAINABLE 	= false
+local SHOW_ONLY_TRANSMOG 		= false
+
+local COLLECTION_COLLAPSED 	= { false, false, false, false, false, false }			-- Currently there are six possible collections
 
 local SELECTED_BUTTON = nil
 
@@ -881,6 +884,14 @@ function SetCollectorSetButton_OnEnter(self)
 			else
 				line = "- "..collected.."/? ".._L["MISSING_LOCALIZATION"]
 			end
+			if Collection[self.Collection].Sets[self.Set].Variants[i] and not Collection[self.Collection].Sets[self.Set].Variants[i].Transmogrifiable then
+				local text = _L["NOTRANSMOG"] or _L["MISSING_LOCALIZATION"]
+				line = line.." ("..text..")"
+			end
+			if Collection[self.Collection].Sets[self.Set].Variants[i] and not Collection[self.Collection].Sets[self.Set].Variants[i].Obtainable then
+				local text = _L["NOOBTAIN"] or _L["MISSING_LOCALIZATION"]
+				line = line.." ("..text..")"
+			end
 			GameTooltip:AddLine(line)
 		end
 		local rightclick = _L["RIGHT_CLICK_FAVORITE"] or _L["MISSING_LOCALIZATION"]
@@ -934,6 +945,20 @@ function SetCollector_SetFilter(self, classIndex)
 			SHOW_ONLY_FAVORITES = true
 		else
 			SHOW_ONLY_FAVORITES = false
+		end
+	elseif ( classIndex == "obtainable" ) then
+		print(_L["NOT_AVAILABLE"])
+		if SHOW_ONLY_OBTAINABLE == false then
+			SHOW_ONLY_OBTAINABLE = true
+		else
+			SHOW_ONLY_OBTAINABLE = false
+		end
+	elseif ( classIndex == "transmog" ) then
+		print(_L["NOT_AVAILABLE"])
+		if SHOW_ONLY_TRANSMOG == false then
+			SHOW_ONLY_TRANSMOG = true
+		else
+			SHOW_ONLY_TRANSMOG = false
 		end
 	else
 		SetFilterOptions(classIndex);
@@ -998,6 +1023,18 @@ function SetCollector_InitFilter()
 	info.text = FAVORITES_FILTER;
 	info.checked = SHOW_ONLY_FAVORITES;
 	info.arg1 = "favorites";
+	UIDropDownMenu_AddButton(info);
+	
+	info.leftPadding = nil;
+	info.text = _L["OBTAIN_FILTER"] or _L["MISSING_LOCALIZATION"];
+	info.checked = SHOW_ONLY_OBTAINABLE;
+	info.arg1 = "obtainable";
+	UIDropDownMenu_AddButton(info);
+	
+	info.leftPadding = nil;
+	info.text = _L["TRANSMOG_FILTER"] or _L["MISSING_LOCALIZATION"];
+	info.checked = SHOW_ONLY_TRANSMOG;
+	info.arg1 = "transmog";
 	UIDropDownMenu_AddButton(info);
 end
 
