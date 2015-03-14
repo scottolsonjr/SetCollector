@@ -8,7 +8,7 @@ local _L = SetCollectorLocalization
 	
 local WOW_VERSION = select(4,GetBuildInfo())
 local DB_VERSION = WOW_VERSION
-local MIN_DB_RELEASE_VERSION = 59							-- Sets the minimum release compatibility
+local MIN_DB_RELEASE_VERSION = 60							-- Sets the minimum release compatibility
 
 local icon = LibStub("LibDBIcon-1.0")
 local HelpPlateSeen = false										-- Replace with CVar
@@ -393,7 +393,13 @@ local function SetVariantTabs(collection, set)
 				variantTab.Collection = collection
 				variantTab.Set = set
 				variantTab.Preview = false
-				variantTab:Show()
+				if ( SHOW_ONLY_OBTAINABLE == true and Collections[collection].Sets[set].Variants[i].Obtainable == false ) then
+					variantTab:Hide()
+				elseif ( SHOW_ONLY_TRANSMOG == true and Collections[collection].Sets[set].Variants[i].Transmogrifiable == false ) then
+					variantTab:Hide()
+				else
+					variantTab:Show()
+				end
 			else
 				variantTab:Hide()
 			end
@@ -528,6 +534,8 @@ local function CollectionsUpdate()
 				if (Collections[i].Sets[j].Role == ANY.Description or Collections[i].Sets[j].Role == role or role == "Any") then
 					if (Collections[i].Sets[j].Faction == ANY.Description or Collections[i].Sets[j].Faction == faction or faction == "Any") then
 						-- Preload Item Info into Cache
+						local obtainable = 0
+						local transmogable = 0
 						for k=1, #Collections[i].Sets[j].Variants do
 							for l=1, #Collections[i].Sets[j].Variants[k].Items do
 								local itemID = Collections[i].Sets[j].Variants[k].Items[l]
@@ -539,8 +547,14 @@ local function CollectionsUpdate()
 									acquired = acquired + Log.Items[itemID].Count
 								end
 							end
+							if ( Collections[i].Sets[j].Variants[k].Obtainable == true ) then obtainable = obtainable + 1; end
+							if ( Collections[i].Sets[j].Variants[k].Transmogrifiable == true ) then transmogable = transmogable + 1; end
 						end
 						if ( SHOW_ONLY_FAVORITES == true and Log.Sets[j].Favorite == false ) then
+							-- Keep it hidden
+						elseif ( SHOW_ONLY_OBTAINABLE == true and obtainable == 0 ) then
+							-- Keep it hidden
+						elseif ( SHOW_ONLY_TRANSMOG == true and transmogable == 0 ) then
 							-- Keep it hidden
 						elseif ( COLLECTION_COLLAPSED[i] == true ) then
 							-- Keep it hidden but...
@@ -865,34 +879,40 @@ function SetCollectorSetButton_OnEnter(self)
 		GameTooltip:SetText(set, 1, 1, 1)
 		for i=1, #Collection[self.Collection].Sets[self.Set].Variants do
 			local collected = 0
-			for j=1, #Collection[self.Collection].Sets[self.Set].Variants[i].Items do
-				local itemID = Collection[self.Collection].Sets[self.Set].Variants[i].Items[j]
-				local count = 0
-				count = count + GetItemCount(itemID, true)
-				if SetCollectorCharacterDB.Items[itemID] then			-- Get Void Storage Count
-					count = count + SetCollectorCharacterDB.Items[itemID].Count
-				end
-				if count > 0 then collected = collected + 1; end
-			end
-			local line = ""
-			if Collection[self.Collection].Sets[self.Set].Variants[i].Count and _L[Collection[self.Collection].Sets[self.Set].Variants[i].Title] then
-				line = "- "..collected.."/"..Collection[self.Collection].Sets[self.Set].Variants[i].Count.." ".._L[Collection[self.Collection].Sets[self.Set].Variants[i].Title]
-			elseif Collection[self.Collection].Sets[self.Set].Variants[i].Count and not _L[Collection[self.Collection].Sets[self.Set].Variants[i].Title] then
-				line = "- "..collected.."/"..Collection[self.Collection].Sets[self.Set].Variants[i].Count.." ".._L["MISSING_LOCALIZATION"]
-			elseif not Collection[self.Collection].Sets[self.Set].Variants[i].Count and _L[Collection[self.Collection].Sets[self.Set].Variants[i].Title] then
-				line = "- "..collected.."/? ".._L[Collection[self.Collection].Sets[self.Set].Variants[i].Title]
+			if ( SHOW_ONLY_OBTAINABLE == true and Collection[self.Collection].Sets[self.Set].Variants[i].Obtainable == false ) then
+				-- Don't list
+			elseif ( SHOW_ONLY_TRANSMOG == true and Collection[self.Collection].Sets[self.Set].Variants[i].Transmogrifiable == false ) then
+				-- Don't list
 			else
-				line = "- "..collected.."/? ".._L["MISSING_LOCALIZATION"]
+				for j=1, #Collection[self.Collection].Sets[self.Set].Variants[i].Items do
+					local itemID = Collection[self.Collection].Sets[self.Set].Variants[i].Items[j]
+					local count = 0
+					count = count + GetItemCount(itemID, true)
+					if SetCollectorCharacterDB.Items[itemID] then			-- Get Void Storage Count
+						count = count + SetCollectorCharacterDB.Items[itemID].Count
+					end
+					if count > 0 then collected = collected + 1; end
+				end
+				local line = ""
+				if Collection[self.Collection].Sets[self.Set].Variants[i].Count and _L[Collection[self.Collection].Sets[self.Set].Variants[i].Title] then
+					line = "- "..collected.."/"..Collection[self.Collection].Sets[self.Set].Variants[i].Count.." ".._L[Collection[self.Collection].Sets[self.Set].Variants[i].Title]
+				elseif Collection[self.Collection].Sets[self.Set].Variants[i].Count and not _L[Collection[self.Collection].Sets[self.Set].Variants[i].Title] then
+					line = "- "..collected.."/"..Collection[self.Collection].Sets[self.Set].Variants[i].Count.." ".._L["MISSING_LOCALIZATION"]
+				elseif not Collection[self.Collection].Sets[self.Set].Variants[i].Count and _L[Collection[self.Collection].Sets[self.Set].Variants[i].Title] then
+					line = "- "..collected.."/? ".._L[Collection[self.Collection].Sets[self.Set].Variants[i].Title]
+				else
+					line = "- "..collected.."/? ".._L["MISSING_LOCALIZATION"]
+				end
+				if Collection[self.Collection].Sets[self.Set].Variants[i] and not Collection[self.Collection].Sets[self.Set].Variants[i].Transmogrifiable then
+					local text = _L["NOTRANSMOG"] or _L["MISSING_LOCALIZATION"]
+					line = line.." ("..text..")"
+				end
+				if Collection[self.Collection].Sets[self.Set].Variants[i] and not Collection[self.Collection].Sets[self.Set].Variants[i].Obtainable then
+					local text = _L["NOOBTAIN"] or _L["MISSING_LOCALIZATION"]
+					line = line.." ("..text..")"
+				end
+				GameTooltip:AddLine(line)
 			end
-			if Collection[self.Collection].Sets[self.Set].Variants[i] and not Collection[self.Collection].Sets[self.Set].Variants[i].Transmogrifiable then
-				local text = _L["NOTRANSMOG"] or _L["MISSING_LOCALIZATION"]
-				line = line.." ("..text..")"
-			end
-			if Collection[self.Collection].Sets[self.Set].Variants[i] and not Collection[self.Collection].Sets[self.Set].Variants[i].Obtainable then
-				local text = _L["NOOBTAIN"] or _L["MISSING_LOCALIZATION"]
-				line = line.." ("..text..")"
-			end
-			GameTooltip:AddLine(line)
 		end
 		local rightclick = _L["RIGHT_CLICK_FAVORITE"] or _L["MISSING_LOCALIZATION"]
 		GameTooltip:AddLine(rightclick, 1, 1, 1)
@@ -947,14 +967,12 @@ function SetCollector_SetFilter(self, classIndex)
 			SHOW_ONLY_FAVORITES = false
 		end
 	elseif ( classIndex == "obtainable" ) then
-		print(_L["NOT_AVAILABLE"])
 		if SHOW_ONLY_OBTAINABLE == false then
 			SHOW_ONLY_OBTAINABLE = true
 		else
 			SHOW_ONLY_OBTAINABLE = false
 		end
 	elseif ( classIndex == "transmog" ) then
-		print(_L["NOT_AVAILABLE"])
 		if SHOW_ONLY_TRANSMOG == false then
 			SHOW_ONLY_TRANSMOG = true
 		else
