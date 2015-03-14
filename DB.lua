@@ -2527,9 +2527,14 @@ function SetCollectorSetupCharacterDB(class, release, override)
 			for j in pairs(SetCollectorDB[i].Sets) do
 				if ( SetCollectorDB[i].Sets[j].Class == class or SetCollectorDB[i].Sets[j].Class == ANY.Description ) then
 					-- Set Info
-					SetCollectorCharacterDB.Sets[j] = { Favorite = false, Tracking = false }
+					SetCollectorCharacterDB.Sets[j] = { Favorite = false, Tracking = false, Variants = {} }
 					-- Item Info
 					for k=1, #SetCollectorDB[i].Sets[j].Variants do
+						if ( SetCollectorCharacterDB.Sets[j].Variants[k] ) then
+							SetCollectorCharacterDB.Sets[j].Variants[k].Favorite = false
+						else
+							SetCollectorCharacterDB.Sets[j].Variants[k] = { Favorite = false }
+						end
 						for l=1, #SetCollectorDB[i].Sets[j].Variants[k].Items do
 							local itemID = SetCollectorDB[i].Sets[j].Variants[k].Items[l]
 							local itemCheck = itemID
@@ -2548,9 +2553,14 @@ function SetCollectorSetupCharacterDB(class, release, override)
 			for j in pairs(SetCollectorDB[i].Sets) do
 				if ( SetCollectorDB[i].Sets[j].Class == class or SetCollectorDB[i].Sets[j].Class == ANY.Description ) then
 					-- Set Info
-					SetCollectorCharacterDB.Sets[j] = { Favorite = false, Tracking = false }
+					SetCollectorCharacterDB.Sets[j] = { Favorite = false, Tracking = false, Variants = {} }
 					-- Item Info
 					for k=1, #SetCollectorDB[i].Sets[j].Variants do
+						if ( SetCollectorCharacterDB.Sets[j].Variants[k] ) then
+							SetCollectorCharacterDB.Sets[j].Variants[k].Favorite = false
+						else
+							SetCollectorCharacterDB.Sets[j].Variants[k] = { Favorite = false }
+						end
 						for l=1, #SetCollectorDB[i].Sets[j].Variants[k].Items do
 							local itemID = SetCollectorDB[i].Sets[j].Variants[k].Items[l]
 							SetCollectorCharacterDB.Items[itemID] = { Count = 0 }
@@ -2570,11 +2580,18 @@ function SetCollectorSetupCharacterDB(class, release, override)
 				if ( SetCollectorDB[i].Sets[j].Class == class or SetCollectorDB[i].Sets[j].Class == ANY.Description ) then
 					-- Set Info
 					if ( not SetCollectorCharacterDB.Sets[j] ) then
-						SetCollectorCharacterDB.Sets[j] = { Favorite = false, Tracking = false }
+						SetCollectorCharacterDB.Sets[j] = { Favorite = false, Tracking = false, Variants = {} }
 						added = added + 1
+					elseif ( not SetCollectorCharacterDB.Sets[j].Variants ) then
+						SetCollectorCharacterDB.Sets[j].Variants = {}
 					end
 					-- Item Info
 					for k=1, #SetCollectorDB[i].Sets[j].Variants do
+						if ( SetCollectorCharacterDB.Sets[j].Variants[k] ) then
+							SetCollectorCharacterDB.Sets[j].Variants[k].Favorite = false
+						else
+							SetCollectorCharacterDB.Sets[j].Variants[k] = { Favorite = false }
+						end
 						for l=1, #SetCollectorDB[i].Sets[j].Variants[k].Items do
 							local itemID = SetCollectorDB[i].Sets[j].Variants[k].Items[l]
 							if ( not SetCollectorCharacterDB.Items[itemID] ) then
