@@ -302,7 +302,8 @@ local function AddSetCollectorUI(frame)
 	progressDisplay.Texture:SetPoint("TOPLEFT",0,0)
 	progressDisplay.Texture:SetPoint("BOTTOMRIGHT",0,0)
 	progressDisplay:SetFrameLevel(10)
-	progressDisplay:SetScript("OnClick", function(self) SetCollectorSummaryButton_OnClick(self) end)
+	progressDisplay:RegisterForClicks("AnyDown")
+	progressDisplay:SetScript("OnClick", SetCollectorSummaryButton_OnClick)
 	progressDisplay:Hide()
 	
 	local modelFrame = CreateFrame("DressUpModel","$parentModelFrame",setDisplay,"ModelWithZoomTemplate") --"ModelWithControlsTemplate")
@@ -336,10 +337,8 @@ local function AddSetCollectorUI(frame)
 			local prev = i - 1
 			variantTab:SetPoint("LEFT", "$parentTab"..prev, "RIGHT", -16, 0)
 		end
-		variantTab:SetScript("OnClick",function() 
-			SetVariantTab(SetDisplay, i);
-			PlaySound("UI_Toybox_Tabs");
-		end)
+		variantTab:RegisterForClicks("AnyDown")
+		variantTab:SetScript("OnClick",SetCollectorVariantTab_OnClick)
 		variantTab:Hide()
 	end
 	PanelTemplates_SetNumTabs(SetDisplay, 5)
@@ -385,19 +384,31 @@ end
 
 local function SetVariantTabs(collection, set)
 	local Collections = SetCollectorDB
+	local Log = SetCollectorCharacterDB
 	if ( collection and set and #Collections[collection].Sets[set].Variants > 1 ) then
 		for i=1, 5 do
 			local variantTab = _G["SetDisplayTab"..i]
 			if ( Collections[collection].Sets[set].Variants[i] ) then
-				variantTab:SetText(_L[Collections[collection].Sets[set].Variants[i].Title])
 				variantTab.Collection = collection
 				variantTab.Set = set
 				variantTab.Preview = false
+				if ( not variantTab.FavoriteTexture ) then
+					variantTab.FavoriteTexture = variantTab:CreateTexture("$parentFavorite","OVERLAY")
+					variantTab.FavoriteTexture:SetAtlas("PetJournal-FavoritesIcon")
+					variantTab.FavoriteTexture:SetPoint("LEFT","$parentText","LEFT",-10,0)
+				end
 				if ( SHOW_ONLY_OBTAINABLE == true and Collections[collection].Sets[set].Variants[i].Obtainable == false ) then
 					variantTab:Hide()
 				elseif ( SHOW_ONLY_TRANSMOG == true and Collections[collection].Sets[set].Variants[i].Transmogrifiable == false ) then
 					variantTab:Hide()
 				else
+					if Log.Sets[set].Variants[i].Favorite then
+						variantTab:SetText("      ".._L[Collections[collection].Sets[set].Variants[i].Title])
+						variantTab.FavoriteTexture:Show()
+					else
+						variantTab:SetText(_L[Collections[collection].Sets[set].Variants[i].Title])
+						variantTab.FavoriteTexture:Hide()
+					end
 					variantTab:Show()
 				end
 			else
@@ -421,13 +432,14 @@ local function SetVariantTabs(collection, set)
 	end
 end
 
-local function SetItemButton(button, itemID, count)
+local function SetItemButton(button, itemID, count, obtainable)
 	if button and itemID then
 		local sName, sLink, iRarity, iLevel, iMinLevel, sType, sSubType, iStackCount, sLocation, sTexture = GetItemInfo(itemID)
 		if sTexture then
 			button.link = sLink
 			button.ItemID = itemID
 			button.icon:SetTexture(sTexture)
+			button.icon:SetVertexColor(1, 1, 1, 1)
 			button.icon:SetDesaturated(true)
 			button.count:SetText("")
 			button.count:Hide()
@@ -440,6 +452,8 @@ local function SetItemButton(button, itemID, count)
 				button.count:SetText(i)
 				button.glow:SetVertexColor(GetItemQualityColor(iRarity))
 				button.glow:Show()
+			elseif not obtainable then
+				button.icon:SetVertexColor(1, 0.25, 0.25, 0.5)
 			end
 			
 			button:Show()
@@ -660,6 +674,7 @@ function SetCollector_UpdateSelectedVariantTab(self)
 			SetDisplayModelFrame:Undress()
 	  	local Collections = SetCollectorDB
 	  	local Log = SetCollectorCharacterDB
+	  	local obtainable = Collections[collection].Sets[set].Variants[selected].Obtainable
 			local num = #Collections[collection].Sets[set].Variants[selected].Items
 			local acq = 0
 			for i=1, num do
@@ -668,7 +683,7 @@ function SetCollector_UpdateSelectedVariantTab(self)
 			 	local count = GetItemCount(itemID, true)
 			 	if (Log.Items[itemID] and Log.Items[itemID].Count > 0) then count = count + Log.Items[itemID].Count; end
 			 	if count > 0 then acq = acq + 1; end
-			 	SetItemButton(_G["SetDisplayModelFrameItem"..i], itemID, 1)
+			 	SetItemButton(_G["SetDisplayModelFrameItem"..i], itemID, 1, obtainable)
 			 	--SetItemButton(_G["SetDisplayModelFrameItem"..i], itemID, Log.Items[itemID].Count)			-- No longer displaying count
 			end
 			ClearItemButtons(num + 1)
@@ -856,14 +871,38 @@ function SetCollectorSetButton_OnClick(self, button, ...)
 			SetCollector_UnsetHighlight(self)
 		end
 	elseif ( button == "RightButton" ) then
-  	local Log = SetCollectorCharacterDB
-  	if ( Log.Sets[self.Set].Favorite == false ) then
-  		Log.Sets[self.Set].Favorite = true
-  		self.Favorite:Show()
-  	else
-  		Log.Sets[self.Set].Favorite = false
-  		self.Favorite:Hide()
-  	end
+  	if ( self == SELECTED_BUTTON ) then
+	  	local Log = SetCollectorCharacterDB
+	  	if ( Log.Sets[self.Set].Favorite == false ) then
+	  		Log.Sets[self.Set].Favorite = true
+	  		for i=1, #SetCollectorCharacterDB.Sets[self.Set].Variants do
+	  			SetCollectorCharacterDB.Sets[self.Set].Variants[i].Favorite = true
+	  		end
+	  		self.Favorite:Show()
+	  	else
+	  		Log.Sets[self.Set].Favorite = false
+	  		for i=1, #SetCollectorCharacterDB.Sets[self.Set].Variants do
+	  			SetCollectorCharacterDB.Sets[self.Set].Variants[i].Favorite = false
+	  		end
+	  		self.Favorite:Hide()
+	  	end
+			SetVariantTabs(self.Collection, self.Set)
+		else
+	  	local Log = SetCollectorCharacterDB
+	  	if ( Log.Sets[self.Set].Favorite == false ) then
+	  		Log.Sets[self.Set].Favorite = true
+	  		for i=1, #SetCollectorCharacterDB.Sets[self.Set].Variants do
+	  			SetCollectorCharacterDB.Sets[self.Set].Variants[i].Favorite = true
+	  		end
+	  		self.Favorite:Show()
+	  	else
+	  		Log.Sets[self.Set].Favorite = false
+	  		for i=1, #SetCollectorCharacterDB.Sets[self.Set].Variants do
+	  			SetCollectorCharacterDB.Sets[self.Set].Variants[i].Favorite = false
+	  		end
+	  		self.Favorite:Hide()
+	  	end
+		end
   else
   	print(button)
 	end
@@ -930,8 +969,26 @@ function SetCollectorSetButton_OnMouseUp(self)
 	-- Do nothing at this time.
 end
 
-function SetCollectorSummaryButton_OnClick(self)
-	-- Do nothing at this time.
+function SetCollectorVariantTab_OnClick(self, button, ...)
+	if ( button == "LeftButton" ) then 
+		SetVariantTab(_G["SetDisplay"], self:GetID());
+		PlaySound("UI_Toybox_Tabs");
+	elseif ( button == "RightButton" ) then
+		if ( SetCollectorCharacterDB.Sets[self.Set].Variants[self:GetID()].Favorite ) then
+			SetCollectorCharacterDB.Sets[self.Set].Variants[self:GetID()].Favorite = false
+		else
+			SetCollectorCharacterDB.Sets[self.Set].Variants[self:GetID()] = { Favorite = true }
+		end
+		SetVariantTabs(self.Collection, self.Set)
+	end
+end
+
+function SetCollectorSummaryButton_OnClick(self, button, ...)
+	if ( button == "LeftButton" ) then
+		print("left click")
+	elseif ( button == "RightButton" ) then
+		print("right click")
+	end
 end
 
 function SetCollector_Item_OnClick(self, button, ...)
