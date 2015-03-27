@@ -401,6 +401,8 @@ local function SetVariantTabs(collection, set)
 					variantTab:Hide()
 				elseif ( SHOW_ONLY_TRANSMOG == true and Collections[collection].Sets[set].Variants[i].Transmogrifiable == false ) then
 					variantTab:Hide()
+				elseif ( SHOW_ONLY_FAVORITE == true and Collections[collection].Sets[set].Variants[i].Favorite == false ) then
+					variantTab:Hide()
 				else
 					if Log.Sets[set].Variants[i].Favorite then
 						variantTab:SetText("      ".._L[Collections[collection].Sets[set].Variants[i].Title])
@@ -540,9 +542,13 @@ local function CollectionsUpdate()
 				end
 				if Log.Sets[j] and Log.Sets[j].Favorite == true then
 					titleButton.Favorite:Show()
+				else
+					titleButton.Favorite:Hide()
 				end
 				if Log.Sets[j] and Log.Sets[j].Tracking == true then
 					titleButton.Check:Show()
+				else
+					titleButton.Check:Hide()
 				end
 				titleButton:Hide()
 				if (Collections[i].Sets[j].Role == ANY.Description or Collections[i].Sets[j].Role == role or role == "Any") then
@@ -888,8 +894,32 @@ function SetCollectorVariantTab_OnClick(self, button, ...)
 	elseif ( button == "RightButton" ) then
 		if ( SetCollectorCharacterDB.Sets[self.Set].Variants[self:GetID()].Favorite ) then
 			SetCollectorCharacterDB.Sets[self.Set].Variants[self:GetID()].Favorite = false
+			if ( SetCollectorCharacterDB.Sets[self.Set].Favorite ) then
+				local fave = 0
+				for i=1, #SetCollectorCharacterDB.Sets[self.Set].Variants do
+					if SetCollectorCharacterDB.Sets[self.Set].Variants[i].Favorite then
+						fave = fave + 1
+					end
+				end
+				if fave == 0 then
+					SetCollectorCharacterDB.Sets[self.Set].Favorite = false
+					CollectionsUpdate()
+				end
+			end
 		else
 			SetCollectorCharacterDB.Sets[self.Set].Variants[self:GetID()] = { Favorite = true }
+			if ( not SetCollectorCharacterDB.Sets[self.Set].Favorite ) then
+				local fave = 0
+				for i=1, #SetCollectorCharacterDB.Sets[self.Set].Variants do
+					if SetCollectorCharacterDB.Sets[self.Set].Variants[i].Favorite then
+						fave = fave + 1
+					end
+				end
+				if fave > 0 then
+					SetCollectorCharacterDB.Sets[self.Set].Favorite = true
+					CollectionsUpdate()
+				end
+			end
 		end
 		SetVariantTabs(self.Collection, self.Set)
 	end
@@ -897,9 +927,9 @@ end
 
 function SetCollectorSummaryButton_OnClick(self, button, ...)
 	if ( button == "LeftButton" ) then
-		print("left click")
+		--print("left click")
 	elseif ( button == "RightButton" ) then
-		print("right click")
+		--print("right click")
 	end
 end
 
