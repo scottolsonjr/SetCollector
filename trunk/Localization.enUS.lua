@@ -71,6 +71,11 @@ SetCollectorLocalization["LG_MELEE_AGI_90"] 			= "Fen-Yu, Fury of Xuen"
 SetCollectorLocalization["LG_MELEE_STR_90"] 			= "Gong-Lu, Strength of Xuen"
 SetCollectorLocalization["LG_TANK_AGI_90"] 				= "Qian-Le, Courage of Niuzao"
 SetCollectorLocalization["LG_TANK_STR_90"] 				= "Qian-Ying, Fortitude of Niuzao"
+SetCollectorLocalization["LG_CASTER_INT_100"]	 		= "Etheralus, the Eternal Reward"
+SetCollectorLocalization["LG_HEALER_INT_100"] 		= "Nithramus, the All-Seer"
+SetCollectorLocalization["LG_MELEE_AGI_100"] 			= "Maalus, the Blood Drinker"
+SetCollectorLocalization["LG_MELEE_STR_100"] 			= "Thorasus, the Stone Heart of Dreanor"
+SetCollectorLocalization["LG_TANK_100"] 					= "Sanctus, Sigil of the Unbroken"
 
 -- Garrison Sets
 SetCollectorLocalization["GA_ALLIANCE_SET"] 			= "Stormwind Set"
