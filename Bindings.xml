@@ -1,0 +1,5 @@
+<Bindings>
+	<Binding name="SETCOLLECTOR" header="SETCOLLECTOR">
+		SetCollector_ToggleUI();
+	</Binding>
+</Bindings>
