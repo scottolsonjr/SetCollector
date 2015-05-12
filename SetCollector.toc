@@ -1,7 +1,7 @@
 ## Interface: 60100
 ## Title: Set Collector
 ## Notes: Allows the user to preview and track their progress in the collection of various items and itemsets, such as Legendaries and Raid sets.
-## Version: 2.1.1
+## Version: 2.1.0
 ## Author: Lomiedo-Uldum
 ## SavedVariables: SetCollectorDB
 ## SavedVariablesPerCharacter: SetCollectorCharacterDB
