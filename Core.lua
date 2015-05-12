@@ -1132,7 +1132,7 @@ local function DispatchCommand(message, commandTable)
 	end
 end
 
-SLASH_SetCollector1 = "/SetCollector"
-SlashCmdList["SetCollector"] = function(message)
+SLASH_SETCOLLECTOR1 = "/setcollector"
+SlashCmdList["SETCOLLECTOR"] = function(message)
 	DispatchCommand(message, CommandTable)
 end
