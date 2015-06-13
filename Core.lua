@@ -8,7 +8,7 @@ local _L = SetCollectorLocalization
 	
 local WOW_VERSION = select(4,GetBuildInfo())
 local DB_VERSION = WOW_VERSION
-local MIN_DB_RELEASE_VERSION = 67						-- Sets the minimum release compatibility
+local MIN_DB_RELEASE_VERSION = 74						-- Sets the minimum release compatibility
 
 local icon = LibStub("LibDBIcon-1.0")
 local HelpPlateSeen = false										-- Replace with CVar
@@ -54,7 +54,7 @@ local SHOW_ONLY_FAVORITES 	= false
 local SHOW_ONLY_OBTAINABLE 	= false
 local SHOW_ONLY_TRANSMOG 		= false
 
-local COLLECTION_COLLAPSED 	= { false, false, false, false, false, false }			-- Currently there are six possible collections
+local COLLECTION_COLLAPSED 	= { false, false, false, false, false, false, false, false }			-- Currently there are eight possible collections
 
 local SELECTED_BUTTON = nil
 
