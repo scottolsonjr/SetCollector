@@ -117,6 +117,7 @@ DK_TR_TANK_15 				= "[15] Plate of the All-Consuming Maw",
 DK_TR_MELEE_16 				= "[16] Battleplate of Cyclopean Dread",
 DK_TR_TANK_16 				= "[16] Plate of Cyclopean Dread",
 DK_TR_17 							= "[17] Ogreskull Boneplate Battlegear",
+DK_TR_18 							= "[18] Demongaze Armor",
 
 
 DR_CD_90 							= "The Cycle Set",
@@ -181,6 +182,7 @@ DR_TR_HEALER_16 			= "[16] Vestments of the Shattered Vale",
 DR_TR_MELEE_16 				= "[16] Battlegear of the Shattered Vale",
 DR_TR_TANK_16 				= "[16] Armor of the Shattered Vale",
 DR_TR_17 							= "[17] Living Wood Battlegear",
+DR_TR_18 							= "[18] Oathclaw Wargarb",
 
 
 HU_CD_90 							= "The Howling Beast Set",
@@ -210,6 +212,7 @@ HU_TR_RANGED_14 			= "[14] Yaungol Slayer Battlegear",
 HU_TR_RANGED_15 			= "[15] Battlegear of the Saurok Stalker",
 HU_TR_RANGED_16 			= "[16] Battlegear of the Unblinking Vigil",
 HU_TR_17 							= "[17] Rylakstalker's Battlegear",
+HU_TR_18 							= "[18] Battlegear of the Savage Hunt",
 
 
 MA_CD_90 							= "The Elemental Triad Set",
@@ -239,6 +242,7 @@ MA_TR_CASTER_14 			= "[14] Regalia of the Burning Scroll",
 MA_TR_CASTER_15 			= "[15] Regalia of the Chromatic Hydra",
 MA_TR_CASTER_16 			= "[16] Chronomancer Regalia",
 MA_TR_17 							= "[17] Arcanoshatter Regalia",
+MA_TR_18 							= "[18] Raiment of the Arcane Conclave",
 
 
 MO_CD_90 							= "The Regal Lord Set",
@@ -257,6 +261,7 @@ MO_TR_HEALER_16 			= "[16] Vestments of Seven Sacred Seals",
 MO_TR_MELEE_16 				= "[16] Battlegear of Seven Sacred Seals",
 MO_TR_TANK_16 				= "[16] Armor of Seven Sacred Seals",
 MO_TR_17 							= "[17] Battlegear of the Somber Gaze",
+MO_TR_18 							= "[18] Battlewrap of the Hurricane's Eye",
 
 
 PA_CD_90 							= "The Holy Warrior Set",
@@ -316,6 +321,7 @@ PA_TR_HEALER_16 			= "[16] Vestments of Winged Triumph",
 PA_TR_MELEE_16 				= "[16] Battlegear of Winged Triupmh",
 PA_TR_TANK_16 				= "[16] Plate of Winged Triumph",
 PA_TR_17 							= "[17] Battlegear of Guiding Light",
+PA_TR_18 							= "[18] Watch of the Ceaseless Vigil",
 
 
 PR_CD_90 							= "The Light Set",
@@ -361,6 +367,7 @@ PR_TR_HEALER_15 			= "[15] Vestments of the Exorcist",
 PR_TR_CASTER_16 			= "[16] Regalia of Ternion Glory",
 PR_TR_HEALER_16 			= "[16] Vestments of Ternion Glory",
 PR_TR_17 							= "[17] Soul Priest's Raiment",
+PR_TR_18 							= "[18] Attire of Piety",
 
 
 RO_CD_90	 						= "The Silent Assassin Set",
@@ -390,6 +397,7 @@ RO_TR_MELEE_14 				= "[14] Battlegear of the Thousandfold Blades",
 RO_TR_MELEE_15 				= "[15] Nine-Tail Battlegear",
 RO_TR_MELEE_16 				= "[16] Barbed Assassin Battlegear",
 RO_TR_17 							= "[17] Poisoner's Battlegear",
+RO_TR_18 							= "[18] Felblade Armor",
 
 
 SH_CD_90 							= "Windfury Set",
@@ -451,6 +459,7 @@ SH_TR_CASTER_16 			= "[16] Celestial Harmony Regalia",
 SH_TR_HEALER_16 			= "[16] Celestial Harmony Vestment",
 SH_TR_MELEE_16 				= "[16] Celestial Harmony Battlegear",
 SH_TR_17 							= "[17] Windspeaker's Regalia",
+SH_TR_18 							= "[18] Embrace of the Living Mountain",
 
 
 WK_CD_90 							= "The Betrayer Set",
@@ -480,6 +489,7 @@ WK_TR_CASTER_14 			= "[14] Sha-Skin Regalia",
 WK_TR_CASTER_15 			= "[15] Regalia of the Thousandfold Hells",
 WK_TR_CASTER_16 			= "[16] Regalia of the Horned Nightmare",
 WK_TR_17 							= "[17] Shadow Council's Garb",
+WK_TR_18 							= "[18] Deathrattle Regalia",
 
 
 WR_CD_90 							= "The Golden King Set",
@@ -523,6 +533,7 @@ WR_TR_TANK_15 				= "[15] Plate of the Last Mogu",
 WR_TR_MELEE_16	 			= "[16] Battleplate of the Prehistoric Marauder",
 WR_TR_TANK_16 				= "[16] Plate of the Prehistoric Marauder",
 WR_TR_17 							= "[17] Blackhand's Battlegear",
+WR_TR_18 							= "[18] Battlegear of Iron Wrath",
 
 HO_FESTIVE_DRESS			= "Festive Dress / Festival Dress",
 HO_FESTIVE_SUIT				= "Festive Pant Suit / Festival Suit",
@@ -539,6 +550,9 @@ HO_HORSEMANS_SLICER		= "The Horseman's Sinister Slicer",
 HO_PILGRIMS_ATTIRE		= "Pilgrim's Attire",
 HO_PILGRIMS_DRESS			= "Pilgrim's Dress",
 HO_WINTER_GARB				= "Winter Garb",
+
+
+OT_ELR_100						= "Eredar Lord Regalia"
 
 --
 -- Variant Localizations
