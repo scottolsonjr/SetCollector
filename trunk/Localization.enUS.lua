@@ -552,7 +552,7 @@ HO_PILGRIMS_DRESS			= "Pilgrim's Dress",
 HO_WINTER_GARB				= "Winter Garb",
 
 
-OT_ELR_100						= "Eredar Lord Regalia"
+OT_ELR_100						= "Eredar Lord Regalia",
 
 --
 -- Variant Localizations
