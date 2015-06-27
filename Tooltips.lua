@@ -30,6 +30,9 @@ end
 local function OnTooltipSetItemHook(tooltip, ...)
 	local itemName, itemLink = tooltip:GetItem()
 	local itemID, itemString
+	
+	--tooltip:AddLine(itemLink:gsub("|","!"), 1, 1, 0);		-- For troubleshooting itemLink and itemString issues
+	
 	if itemLink then
 		itemID = T17(GetIDFromLink(itemLink),GetBonusFromLink(itemLink))
 		if not SetCollectorDB.Items[itemID] then
