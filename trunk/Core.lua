@@ -8,7 +8,7 @@ local _L = SetCollectorLocalization
 	
 local WOW_VERSION = select(4,GetBuildInfo())
 local DB_VERSION = WOW_VERSION
-local MIN_DB_RELEASE_VERSION = 74						-- Sets the minimum release compatibility
+local MIN_DB_RELEASE_VERSION = 76						-- Sets the minimum release compatibility
 
 local icon = LibStub("LibDBIcon-1.0")
 local HelpPlateSeen = false										-- Replace with CVar
@@ -685,7 +685,7 @@ function SetCollector_UpdateSelectedVariantTab(self)
 			local acq = 0
 			for i=1, num do
 				local itemID = Collections[collection].Sets[set].Variants[selected].Items[i]
-			 	SetDisplayModelFrame:TryOn(itemID)
+				SetDisplayModelFrame:TryOn(itemID)
 			 	local count = GetItemCount(itemID, true)
 			 	if (Log.Items[itemID] and Log.Items[itemID].Count > 0) then count = count + Log.Items[itemID].Count; end
 			 	if count > 0 then acq = acq + 1; end
