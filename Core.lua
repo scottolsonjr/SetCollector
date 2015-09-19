@@ -8,7 +8,7 @@ local _L = SetCollectorLocalization
 	
 local WOW_VERSION = select(4,GetBuildInfo())
 local DB_VERSION = WOW_VERSION
-local MIN_DB_RELEASE_VERSION = 78						-- Sets the minimum release compatibility
+local MIN_DB_RELEASE_VERSION = 79						-- Sets the minimum release compatibility
 
 local icon = LibStub("LibDBIcon-1.0")
 local HelpPlateSeen = false										-- Replace with CVar
@@ -628,6 +628,17 @@ local function SetCollector_ScanVoid()
 	
 end
 
+local function GetFilters()
+	SHOW_ONLY_FAVORITES 	= SetCollectorCharacterDB.Filters.favorites
+	SHOW_ONLY_OBTAINABLE 	= SetCollectorCharacterDB.Filters.obtainable
+	SHOW_ONLY_TRANSMOG 		= SetCollectorCharacterDB.Filters.transmog
+end
+
+local function SetFilters()
+	SetCollectorCharacterDB.Filters.favorites		= SHOW_ONLY_FAVORITES
+	SetCollectorCharacterDB.Filters.obtainable 	= SHOW_ONLY_OBTAINABLE
+	SetCollectorCharacterDB.Filters.transmog 		= SHOW_ONLY_TRANSMOG
+end
 
 --
 -- GLOBAL FUNCTIONS
@@ -724,6 +735,7 @@ function SetCollector_OnEvent(self, event, ...)
 	elseif event == "PLAYER_LOGIN" then
 		local _, class = UnitClass("player")
 		SetCollectorSetupCharacterDB(class,MIN_DB_RELEASE_VERSION)
+		GetFilters()
 		CollectionsUpdate()
 		UIDropDownMenu_Initialize(SetCollectorSetFilter, SetCollector_InitFilter)
 		SetDisplayModelFrame:SetUnit("PLAYER")
@@ -980,6 +992,7 @@ function SetCollector_SetFilter(self, classIndex)
 	else
 		SetFilterOptions(classIndex);
 	end
+	SetFilters()
 	if SetCollector:IsShown() then
 		CollectionsUpdate();
 		SetCollector_UpdateFilterString()
