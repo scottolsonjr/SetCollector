@@ -44,6 +44,7 @@ local CHALLENGE 	= { ID = 4, Code = "CD", Description = "CHALLENGE" }
 local PVP 				= { ID = 5, Code = "PV", Description = "PVP" }
 local GARRISON 		= { ID = 6, Code = "GA", Description = "GARRISON" }
 local HOLIDAY			= { ID = 7, Code = "HO", Description = "HOLIDAY" }
+local OTHER				= { ID = 8, Code = "OT", Description = "OTHER" }
 
 local COLLECTION_LIST_WIDTH = 260
 

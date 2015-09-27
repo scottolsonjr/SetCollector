@@ -55,7 +55,7 @@ local CHALLENGE 	= { ID = 4, Code = "CD", Description = "CHALLENGE" }
 local PVP 				= { ID = 5, Code = "PV", Description = "PVP" }
 local GARRISON 		= { ID = 6, Code = "GA", Description = "GARRISON" }
 local HOLIDAY			= { ID = 7, Code = "HO", Description = "HOLIDAY" }
-local OTHER				= { ID = 7, Code = "OT", Description = "OTHER" }
+local OTHER				= { ID = 8, Code = "OT", Description = "OTHER" }
 
 --
 -- Helper Functions
@@ -76,6 +76,7 @@ local function CreateCollections(version, release)
 		[PVP.ID] 				= { Title = PVP.Description, Sets = { } },
 		[GARRISON.ID] 	= { Title = GARRISON.Description, Sets = { } },
 		[HOLIDAY.ID] 		= { Title = HOLIDAY.Description, Sets = { } },
+		[OTHER.ID] 			= { Title = OTHER.Description, Sets = { } },
 		Items = { },
 		version = version,
 		release = release
@@ -2261,7 +2262,7 @@ local function AddShamanSets()
 				AddVariant(50400,nil,PVP,set,"GLADIATOR",OBTAIN,TRANSMOG,115722,115724,115720,115721,115723)
 				
 	set = AddSet(50400,nil,PVP,16,"SH_PVP_16",SHAMAN,ANY,HORDE)
-				AddVariant(50400,nil,PVP,set,"ASPIRANT",OBTAIN,TRANSMOG,120030,120032,120028,1200229,120031)
+				AddVariant(50400,nil,PVP,set,"ASPIRANT",OBTAIN,TRANSMOG,120030,120032,120028,120029,120031)
 				AddVariant(50400,nil,PVP,set,"COMBATANT",OBTAIN,TRANSMOG,119912,119915,119910,119911,119913)
 				AddVariant(50400,nil,PVP,set,"GLADIATOR",OBTAIN,TRANSMOG,111195,111197,111193,111194,111196)
 				
