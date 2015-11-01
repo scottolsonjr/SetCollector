@@ -2900,7 +2900,7 @@ end
 
 function SetCollectorSetupCharacterDB(class, release, override)
 	if SetCollectorCharacterDB == nil or override == true then
-		SetCollectorCharacterDB = { version = DB_VERSION, release = release, minimap = { hide = false }, Sets = { }, Items = { }, Filters = { favorites = false, obtainable = false, transmog = false } }
+		SetCollectorCharacterDB = { version = DB_VERSION, release = release, minimap = { hide = false }, Sets = { }, Items = { }, Filters = { favorites = false, obtainable = false, transmog = false, spec = 0 } }
 		for i=1, #SetCollectorDB do
 			for j in pairs(SetCollectorDB[i].Sets) do
 				if ( SetCollectorDB[i].Sets[j].Class == class or SetCollectorDB[i].Sets[j].Class == ANY.Description ) then
@@ -2926,7 +2926,7 @@ function SetCollectorSetupCharacterDB(class, release, override)
 		if (override == true) then print("|cffff6666".._L["CHAR_DB_UPGRADED"].."|r") end
 		
 	elseif SetCollectorCharacterDB.release < 30 then
-		SetCollectorCharacterDB = { version = DB_VERSION, release = release, minimap = { hide = false }, Sets = { }, Items = { }, Filters = { favorites = false, obtainable = false, transmog = false } }
+		SetCollectorCharacterDB = { version = DB_VERSION, release = release, minimap = { hide = false }, Sets = { }, Items = { }, Filters = { favorites = false, obtainable = false, transmog = false, spec = 0 } }
 		for i=1, #SetCollectorDB do
 			for j in pairs(SetCollectorDB[i].Sets) do
 				if ( SetCollectorDB[i].Sets[j].Class == class or SetCollectorDB[i].Sets[j].Class == ANY.Description ) then
@@ -2953,7 +2953,7 @@ function SetCollectorSetupCharacterDB(class, release, override)
 		SetCollectorCharacterDB.version = DB_VERSION
 		SetCollectorCharacterDB.release = release
 		if not SetCollectorCharacterDB.Filters then
-			 SetCollectorCharacterDB.Filters = { favorites = false, obtainable = false, transmog = false }
+			 SetCollectorCharacterDB.Filters = { favorites = false, obtainable = false, transmog = false, spec = 0 }
 		end
 		local added = 0
 		for i=1, #SetCollectorDB do

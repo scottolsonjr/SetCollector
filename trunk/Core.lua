@@ -8,7 +8,7 @@ local _L = SetCollectorLocalization
 	
 local WOW_VERSION = select(4,GetBuildInfo())
 local DB_VERSION = WOW_VERSION
-local MIN_DB_RELEASE_VERSION = 83						-- Sets the minimum release compatibility
+local MIN_DB_RELEASE_VERSION = 86						-- Sets the minimum release compatibility
 
 local icon = LibStub("LibDBIcon-1.0")
 local HelpPlateSeen = false										-- Replace with CVar
@@ -172,7 +172,7 @@ local function SetFilterOptions(classIndex)
 end
 
 local function GetFilterOptions()
-	if CURRENT_FILTER == 0 then
+	if CURRENT_FILTER == 0 or CURRENT_FILTER == nil then
 		local currentSpec = GetSpecialization();
 		if currentSpec == nil then currentSpec = 0 end
 		CURRENT_FILTER = currentSpec + 2
@@ -273,10 +273,10 @@ local function AddSetCollectorUI(frame)
 	rightInset:SetAttribute("parentKey","RightInset")
 	rightInset:SetAttribute("useParentLevel","true")
 	
-	local setDisplay = CreateFrame("Frame","SetDisplay",rightInset)
+	local setDisplay = CreateFrame("Frame","SetCollectorSetDisplay",rightInset)
 	setDisplay:SetPoint("TOPLEFT",rightInset,"TOPLEFT", 3, -3)
 	setDisplay:SetPoint("BOTTOMRIGHT",rightInset,"BOTTOMRIGHT", -3, 3)
-	setDisplay:SetAttribute("parentKey","SetDisplay")
+	setDisplay:SetAttribute("parentKey","SetCollectorSetDisplay")
 	setDisplay.Texture = setDisplay:CreateTexture("setTexture","BACKGROUND")
 	setDisplay.Texture:SetAllPoints(setDisplay)
 	setDisplay.Texture:SetTexture("Interface\\PetBattles\\MountJournal-BG",false)
@@ -287,15 +287,15 @@ local function AddSetCollectorUI(frame)
 	shadowOverlay:SetAttribute("useParentLevel","true")
 	shadowOverlay:SetAttribute("parentKey","ShadowOverlay")
 	
-	local progressDisplay = CreateFrame("Button","SummaryButton",setDisplay)
+	local progressDisplay = CreateFrame("Button","SetCollectorSummaryButton",setDisplay)
 	progressDisplay:SetWidth(56)
 	progressDisplay:SetHeight(56)
-	progressDisplay:SetPoint("TOPRIGHT","$parent","TOPRIGHT",-10,-3)
+	progressDisplay:SetPoint("BOTTOM","$parent","BOTTOM",0,15)
 	progressDisplay.Summary = progressDisplay:CreateFontString("$parentSummary","OVERLAY","GameFontNormalLarge")
 	progressDisplay.Summary:SetPoint("CENTER", 0, 2)
 	progressDisplay.Summary:SetText(" ")
 	progressDisplay.Background = progressDisplay:CreateTexture("$parentBackground","BACKGROUND")
-	progressDisplay.Background:SetTexture(0,0,0,0)
+	progressDisplay.Background:SetTexture(0,0,0,0.7)
 	progressDisplay.Background:SetPoint("TOPLEFT",3,-3)
 	progressDisplay.Background:SetPoint("BOTTOMRIGHT",-3,3)
 	progressDisplay.Texture = progressDisplay:CreateTexture("$parentTexture","OVERLAY")
@@ -333,7 +333,7 @@ local function AddSetCollectorUI(frame)
 		variantTab:SetID(i)
 		variantTab:SetText(i)
 		if i == 1 then
-			variantTab:SetPoint("TOPLEFT", SetDisplay, "TOPLEFT", 5, 0)
+			variantTab:SetPoint("TOPLEFT", SetCollectorSetDisplay, "TOPLEFT", 5, 0)
 		else
 			local prev = i - 1
 			variantTab:SetPoint("LEFT", "$parentTab"..prev, "RIGHT", -16, 0)
@@ -342,8 +342,8 @@ local function AddSetCollectorUI(frame)
 		variantTab:SetScript("OnClick",SetCollectorVariantTab_OnClick)
 		variantTab:Hide()
 	end
-	PanelTemplates_SetNumTabs(SetDisplay, 5)
-	SetVariantTab(SetDisplay, 1)
+	PanelTemplates_SetNumTabs(SetCollectorSetDisplay, 5)
+	SetVariantTab(SetCollectorSetDisplay, 1)
 	
 	-- Add Filter Button
 	local filterButton = CreateFrame("Frame","$parentSetFilter",frame,"UIDropDownMenuTemplate")
@@ -383,12 +383,12 @@ local function ClearVariantTabs()
 		PanelTemplates_SetNumTabs(SetDisplay, 5)
 end
 
-local function SetVariantTabs(collection, set)
+local function SetVariantTabs(collection, set, variant)
 	local Collections = SetCollectorDB
 	local Log = SetCollectorCharacterDB
 	if ( collection and set and #Collections[collection].Sets[set].Variants > 1 ) then
 		for i=1, 5 do
-			local variantTab = _G["SetDisplayTab"..i]
+			local variantTab = _G["SetCollectorSetDisplayTab"..i]
 			if ( Collections[collection].Sets[set].Variants[i] ) then
 				variantTab.Collection = collection
 				variantTab.Set = set
@@ -419,19 +419,19 @@ local function SetVariantTabs(collection, set)
 			end
 			PanelTemplates_TabResize(variantTab, 0, nil, 36, variantTab:GetParent().maxTabWidth or 88)
 		end
-		PanelTemplates_SetNumTabs(SetDisplay, #Collections[collection].Sets[set].Variants)
-		SetVariantTab(SetDisplay, 1)
+		PanelTemplates_SetNumTabs(SetCollectorSetDisplay, #Collections[collection].Sets[set].Variants)
+		SetVariantTab(SetCollectorSetDisplay, variant or 1)
 	else
 		for i=1, 5 do
-			local variantTab = _G["SetDisplayTab"..i]
+			local variantTab = _G["SetCollectorSetDisplayTab"..i]
 			variantTab:SetText(i)
 			variantTab.Collection = collection
 			variantTab.Set = set
 			variantTab.Preview = false
 			variantTab:Hide()
 		end
-		PanelTemplates_SetNumTabs(SetDisplay, 5)
-		SetVariantTab(SetDisplay, 1)
+		PanelTemplates_SetNumTabs(SetCollectorSetDisplay, 5)
+		SetVariantTab(SetCollectorSetDisplay, 1)
 	end
 end
 
@@ -469,11 +469,11 @@ end
 local function ClearItemButtons(button)
 	if button then
 		for i=button, #EQUIPMENT do
-			_G["SetDisplayModelFrameItem"..i]:Hide()
+			_G["SetCollectorSetDisplayModelFrameItem"..i]:Hide()
 		end
 	else
 		for i=1, #EQUIPMENT do
-			_G["SetDisplayModelFrameItem"..i]:Hide()
+			_G["SetCollectorSetDisplayModelFrameItem"..i]:Hide()
 		end
 	end
 end
@@ -487,10 +487,10 @@ local function CollectionsUpdate()
 	local faction, localizedFaction = UnitFactionGroup("player")
 	
   -- Specialization/Role Filter
-  local specID = 0
-	local currFilter = GetFilterOptions()
-
-	if currFilter == LE_LOOT_FILTER_CLASS then
+  local currFilter = GetFilterOptions()
+	local specID = 0
+	
+	if currFilter == LE_LOOT_FILTER_CLASS then	-- 2
 		local currentSpec = GetSpecialization()
 		local specID = currentSpec and select(1, GetSpecializationInfo(currentSpec)) or "None"
 		local role = GetSetSpecializationRole(specID)
@@ -633,12 +633,14 @@ local function GetFilters()
 	SHOW_ONLY_FAVORITES 	= SetCollectorCharacterDB.Filters.favorites
 	SHOW_ONLY_OBTAINABLE 	= SetCollectorCharacterDB.Filters.obtainable
 	SHOW_ONLY_TRANSMOG 		= SetCollectorCharacterDB.Filters.transmog
+	CURRENT_FILTER 				= SetCollectorCharacterDB.Filters.spec
 end
 
 local function SetFilters()
 	SetCollectorCharacterDB.Filters.favorites		= SHOW_ONLY_FAVORITES
 	SetCollectorCharacterDB.Filters.obtainable 	= SHOW_ONLY_OBTAINABLE
 	SetCollectorCharacterDB.Filters.transmog 		= SHOW_ONLY_TRANSMOG
+	SetCollectorCharacterDB.Filters.spec 				= CURRENT_FILTER
 end
 
 --
@@ -685,11 +687,11 @@ end
 function SetCollector_UpdateSelectedVariantTab(self)
 	local selected = PanelTemplates_GetSelectedTab(self);
 	if ( SetCollector:IsShown() ) then
-		SetDisplayModelFrame:Dress()
-		local collection = _G["SetDisplayTab"..selected].Collection
-		local set = _G["SetDisplayTab"..selected].Set
+		SetCollectorSetDisplayModelFrame:Dress()
+		local collection = _G["SetCollectorSetDisplayTab"..selected].Collection
+		local set = _G["SetCollectorSetDisplayTab"..selected].Set
 		if ( collection and set ) then
-			SetDisplayModelFrame:Undress()
+			SetCollectorSetDisplayModelFrame:Undress()
 	  	local Collections = SetCollectorDB
 	  	local Log = SetCollectorCharacterDB
 	  	local obtainable = Collections[collection].Sets[set].Variants[selected].Obtainable
@@ -697,18 +699,23 @@ function SetCollector_UpdateSelectedVariantTab(self)
 			local acq = 0
 			for i=1, num do
 				local itemID = Collections[collection].Sets[set].Variants[selected].Items[i]
-				SetDisplayModelFrame:TryOn(itemID)
+				SetCollectorSetDisplayModelFrame:TryOn(itemID)
 			 	local count = GetItemCount(itemID, true)
 			 	if (Log.Items[itemID] and Log.Items[itemID].Count > 0) then count = count + Log.Items[itemID].Count; end
 			 	if count > 0 then acq = acq + 1; end
-			 	SetItemButton(_G["SetDisplayModelFrameItem"..i], itemID, 1, obtainable)
-			 	--SetItemButton(_G["SetDisplayModelFrameItem"..i], itemID, Log.Items[itemID].Count)			-- No longer displaying count
+			 	SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..i], itemID, 1, obtainable)
+			 	--SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..i], itemID, Log.Items[itemID].Count)			-- No longer displaying count
 			end
 			ClearItemButtons(num + 1)
-			SummaryButtonSummary:SetText(string.format(_L["ITEMS_COLLECTED"],acq,num))
-			SummaryButton:Show()
+			SetCollectorSummaryButtonSummary:SetText(string.format(_L["ITEMS_COLLECTED"],acq,num))
+			if acq > 0 then 
+				SetCollectorSummaryButton.Texture:SetAtlas("collections-itemborder-collected")
+			else
+				SetCollectorSummaryButton.Texture:SetAtlas("collections-itemborder-uncollected")
+			end
+			SetCollectorSummaryButton:Show()
 		else
-			SummaryButton:Hide()
+			SetCollectorSummaryButton:Hide()
 		end
 	end
 end
@@ -739,7 +746,7 @@ function SetCollector_OnEvent(self, event, ...)
 		GetFilters()
 		CollectionsUpdate()
 		UIDropDownMenu_Initialize(SetCollectorSetFilter, SetCollector_InitFilter)
-		SetDisplayModelFrame:SetUnit("PLAYER")
+		SetCollectorSetDisplayModelFrame:SetUnit("PLAYER")
 		CreateMinimapButton()
 		SetCollector_SetupTooltips()
 		
@@ -780,7 +787,7 @@ end
 
 function SetCollector_OnHide(self)
 	HelpPlate_Hide()
-	SummaryButton:Hide()
+	SetCollectorSummaryButton:Hide()
 	SetVariantTabs()
 	ClearItemButtons()
 	SetCollector_UnsetHighlight(SELECTED_BUTTON)
@@ -902,7 +909,7 @@ end
 
 function SetCollectorVariantTab_OnClick(self, button, ...)
 	if ( button == "LeftButton" ) then 
-		SetVariantTab(_G["SetDisplay"], self:GetID());
+		SetVariantTab(_G["SetCollectorSetDisplay"], self:GetID());
 		PlaySound("UI_Toybox_Tabs");
 	elseif ( button == "RightButton" ) then
 		if ( SetCollectorCharacterDB.Sets[self.Set].Variants[self:GetID()].Favorite ) then
@@ -934,7 +941,7 @@ function SetCollectorVariantTab_OnClick(self, button, ...)
 				end
 			end
 		end
-		SetVariantTabs(self.Collection, self.Set)
+		SetVariantTabs(self.Collection, self.Set, PanelTemplates_GetSelectedTab(self:GetParent()))
 	end
 end
 
