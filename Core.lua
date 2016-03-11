@@ -8,7 +8,7 @@ local _L = SetCollectorLocalization
 	
 local WOW_VERSION = select(4,GetBuildInfo())
 local DB_VERSION = WOW_VERSION
-local MIN_DB_RELEASE_VERSION = 86						-- Sets the minimum release compatibility
+local MIN_DB_RELEASE_VERSION = 89						-- Sets the minimum release compatibility
 
 local icon = LibStub("LibDBIcon-1.0")
 local HelpPlateSeen = false										-- Replace with CVar
@@ -262,7 +262,7 @@ local function AddSetCollectorUI(frame)
 	leftInset:SetAttribute("parentKey","LeftInset")
 	leftInset:SetAttribute("useParentLevel","true")
 	
-	local scrollFrame = CreateFrame("ScrollFrame","SetCollectorScrollFrame",frame,"CollectionsScrollFrameTemplate")
+	local scrollFrame = CreateFrame("ScrollFrame","SetCollectorScrollFrame",frame,"SetCollectorCollectionsScrollFrameTemplate")
 	scrollFrame:SetPoint("TOPLEFT","$parentLeftInset","TOPLEFT",2,-5)
 	scrollFrame:SetPoint("BOTTOMRIGHT","$parentLeftInset","BOTTOMRIGHT", -4, 3)
 	
