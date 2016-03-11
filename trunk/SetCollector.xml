@@ -8,13 +8,9 @@
 		<Size x="255" y="16"/>		
 		<Scripts>
 			<OnLoad>
-				--QuestLogTitleButton_OnLoad(self);
 				self.ButtonText:SetTextColor(0.7, 0.7, 0.7);
 				self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
 			</OnLoad>
-			<OnEvent>
-				--QuestLogTitleButton_OnEvent(self, event, ...);
-			</OnEvent>
 			<OnClick function="SetCollectorCollectionButton_OnClick"/>
 			<OnEnter>
 				self.ButtonText:SetTextColor(1, 1, 1);
@@ -56,7 +52,7 @@
 				<FontString parentKey="SubText" inherits="GameFontNormalLeft">
 					<Size x="248" y="0"/>
 					<Anchors>
-						<Anchor point="BOTTMLEFT" relativeKey="$parent" relativePoint="BOTTOMLEFT" x="27" y="14"/>
+						<Anchor point="BOTTOMLEFT" relativeKey="$parent" relativePoint="BOTTOMLEFT" x="27" y="14"/>
 					</Anchors>
 				</FontString>
 				<Texture parentKey="Favorite" atlas="PetJournal-FavoritesIcon" useAtlasSize="true" hidden="true">
@@ -80,9 +76,6 @@
 			<OnLoad>
 				self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
 			</OnLoad>
-			<OnEvent>
-				--QuestLogTitleButton_OnEvent(self, event, ...);
-			</OnEvent>
 			<OnClick function="SetCollectorSetButton_OnClick"/>
 			<OnEnter function="SetCollectorSetButton_OnEnter"/>
 			<OnLeave function="SetCollectorSetButton_OnLeave"/>
@@ -149,11 +142,8 @@
 		<PushedTexture file="Interface\Buttons\UI-Quickslot-Depress" />
 		<HighlightTexture file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD" />
 	</Button>
-  <ScrollFrame parentKey="CollectionsFrame" name="CollectionsScrollFrameTemplate" inherits="UIPanelScrollFrameCodeTemplate" virtual="true">
+  <ScrollFrame parentKey="CollectionsFrame" name="SetCollectorCollectionsScrollFrameTemplate" inherits="UIPanelScrollFrameCodeTemplate" virtual="true">
 		<Size x="259" y="462"/>
-		<!--<Anchors>
-			<Anchor point="TOPRIGHT" x="-26" y="-1"/>
-		</Anchors>-->
 		<ScrollChild>
 			<Frame parentKey="Contents">
 				<Size x="258" y="454"/>
@@ -201,11 +191,6 @@
 				</Anchors>
 			</Slider>						
 		</Frames>
-		<Scripts>
-			<OnLoad>					
-				ScrollFrame_OnLoad(self);					
-			</OnLoad>
-		</Scripts>
 	</ScrollFrame>
   
   <Frame name="SetCollector" parent="UIParent" toplevel="true" enableMouse="true" movable="true" hidden="true" inherits="ButtonFrameTemplate">
