@@ -1,18 +1,14 @@
-## Interface: 60200
+## Interface: 70000
 ## Title: Set Collector
 ## Notes: Allows the user to preview and track their progress in the collection of various items and itemsets, such as Legendaries and Raid sets.
-## Version: 2.1.5
+## Version: 3.0.0
 ## Author: Lomiedo-Uldum
 ## SavedVariables: SetCollectorDB
 ## SavedVariablesPerCharacter: SetCollectorCharacterDB
 
-Libs\LibDBIcon-1.0\LibStub\LibStub.lua
-Libs\LibDBIcon-1.0\CallbackHandler-1.0\CallbackHandler-1.0.lua
-Libs\LibDBIcon-1.0\LibDataBroker-1.1\LibDataBroker-1.1.lua
-Libs\LibDBIcon-1.0\LibDBIcon-1.0\LibDBIcon-1.0.lua
+embeds.xml
 
 Localization.enUS.lua
+Core.lua
 DB.lua
 Tooltips.lua
-Core.lua
-SetCollector.xml
