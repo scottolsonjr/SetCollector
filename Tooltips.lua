@@ -1,92 +1,93 @@
---
--- Item Tooltips
---
-
-local _L = SetCollectorLocalization
 local origTooltips = {};
+local L = LibStub("AceLocale-3.0"):GetLocale("SetCollector", true)
 
-local function T17(itemID, bonusID)
-	local itemString = ""
-	if itemID ~= nil and bonusID ~= nil then
-		itemString = "item:"..itemID..":0:0:0:0:0:0:0:0:0:491:1:"..bonusID
-	else
-		itemString = itemID
-	end
-	return itemString
-end
+--
+-- Local Functions
+--
 
-local function GetIDFromLink(link)
-	if link == nil then return 0; end
-	local id = string.match(link, "item:(%d+)");
-	return tonumber(id);
-end
+local InventorySlots = {
+    ['INVTYPE_HEAD'] = 1,
+    ['INVTYPE_SHOULDER'] = 3,
+    ['INVTYPE_BODY'] = 4,
+    ['INVTYPE_CHEST'] = 5,
+    ['INVTYPE_ROBE'] = 5,
+    ['INVTYPE_WAIST'] = 6,
+    ['INVTYPE_LEGS'] = 7,
+    ['INVTYPE_FEET'] = 8,
+    ['INVTYPE_WRIST'] = 9,
+    ['INVTYPE_HAND'] = 10,
+    ['INVTYPE_CLOAK'] = 15,
+    ['INVTYPE_WEAPON'] = 16,
+    ['INVTYPE_SHIELD'] = 17,
+    ['INVTYPE_2HWEAPON'] = 16,
+    ['INVTYPE_WEAPONMAINHAND'] = 16,
+    ['INVTYPE_RANGED'] = 16,
+    ['INVTYPE_RANGEDRIGHT'] = 16,
+    ['INVTYPE_WEAPONOFFHAND'] = 17,
+    ['INVTYPE_HOLDABLE'] = 17,
+    ['INVTYPE_TABARD'] = 19,
+}
 
-local function GetBonusFromLink(link)
-	if link == nil then return 0; end
-	local bonus = string.match(link, ":1:(%d+)");
-	return bonus;
+local model = CreateFrame('DressUpModel')
+
+local function GetAppearanceID(itemLink)
+    local itemID, _, _, slotName = GetItemInfoInstant(itemLink)
+    local slot = InventorySlots[slotName]
+
+    if not slot or not IsDressableItem(itemLink) then return end
+
+    model:SetUnit('player')
+    model:Undress()
+    model:TryOn(itemLink, slot)
+    local sourceID = model:GetSlotTransmogSources(slot)
+    if sourceID then
+        local appearanceID = select(2, C_TransmogCollection.GetAppearanceSourceInfo(sourceID))
+        return appearanceID
+    end
 end
 
 local function OnTooltipSetItemHook(tooltip, ...)
-	local itemName, itemLink = tooltip:GetItem()
-	local itemID, itemString
+	local appearanceID, collection, variant, set
+	local debug = SetCollector:GetDebug();
+	local itemName, itemLink = tooltip:GetItem();
 	
-	--tooltip:AddLine(itemLink:gsub("|","!"), 1, 1, 0);		-- For troubleshooting itemLink and itemString issues
-	
-	if itemLink then
-		itemID = T17(GetIDFromLink(itemLink),GetBonusFromLink(itemLink))
-		if not SetCollectorDB.Items[itemID] then
-			itemID = GetIDFromLink(itemLink)
+	appearanceID = GetAppearanceID(itemLink);
+	if (appearanceID) then
+		if SetCollector.db.global.collections.Appearances[appearanceID] then
+			collection = SetCollector.db.global.collections.Appearances[appearanceID].collection
+			variant = SetCollector.db.global.collections.Appearances[appearanceID].variant
+			set = SetCollector.db.global.collections.Appearances[appearanceID].set
+			
+			tooltip:AddLine(" ");
+			local tip = L[SetCollector.db.global.collections[collection].Sets[set].Title];
+			tooltip:AddLine(tip);
+		end
+		if debug then
+			tooltip:AddLine(" ");
+			tooltip:AddLine("SetCollector Debug");
+			tooltip:AddLine("Appearance ID: "..appearanceID);
+		end
+		if debug and SetCollector.db.global.collections.Appearances[appearanceID] then
+			tooltip:AddLine("Collection ID: "..collection)
+			tooltip:AddLine("Variant ID: "..variant)
+			tooltip:AddLine("Set ID: "..set)
 		end
 	end
 	
-	if (itemID and SetCollectorDB.Items[itemID]) then
-		local collection = SetCollectorDB.Items[itemID].collection
-		local set = SetCollectorDB.Items[itemID].set
-		local variant = SetCollectorDB.Items[itemID].variant
-		local text, setID, roleText, variantText
-		
-		if (SetCollectorDB[collection].Sets[set].TooltipID) then
-			text = _L[SetCollectorDB[collection].Sets[set].TooltipID] or SetCollectorDB[collection].Sets[set].TooltipID
-		else
-			if text then text = text.._L[SetCollectorDB[collection].Sets[set].Title] or _L["MISSING_LOCALIZATION"]; else text = _L[SetCollectorDB[collection].Sets[set].Title] or _L["MISSING_LOCALIZATION"]; end
-		end
-		
-		if (SetCollectorDB[collection].Sets[set].Role and SetCollectorDB[collection].Sets[set].Role ~= "Any") then
-			roleText = _L[SetCollectorDB[collection].Sets[set].Role] or SetCollectorDB[collection].Sets[set].Role or _L["MISSING_LOCALIZATION"]
-			if text then text = text.." "..roleText; else text = " "..roleText; end
-		end
-		
-		if (#SetCollectorDB[collection].Sets[set].Variants > 1) then
-			variantText = _L[SetCollectorDB[collection].Sets[set].Variants[variant].Title] or _L["MISSING_LOCALIZATION"]
-			if text then text = text.." ["..variantText.."]"; else text = " ["..variantText.."]"; end
-		end
-		
-		-- Display count
-		--if (SetCollectorDB[collection].Sets[set].Variants[variant].Count and SetCollectorDB[collection].Sets[set].Variants[variant].Count > 0) then
-		--	if text then text = text.." (?/"..SetCollectorDB[collection].Sets[set].Variants[variant].Count..")"; else text = " (?/"..SetCollectorDB[collection].Sets[set].Variants[variant].Count..")"; end
-		--end
-		
-		if ( text and text ~= "" ) then
-			tooltip:AddLine(ITEM_SET_BONUS:format(text), 1, 1, 0);
-		end
-	end
 	if origTooltips[tooltip] then
 		return origTooltips[tooltip](tooltip, ...);
 	end
 end
 
 local hookTooltips = {};
-function SetCollector_SetupTooltips()
-	hookTooltips[GameTooltip] = 1; -- mouseover
-	hookTooltips[ItemRefTooltip] = 1; -- clicked
-	if (AtlasLootTooltip) then hookTooltips[AtlasLootTooltip] = 1; end
-	
-	for tt in pairs(hookTooltips) do
-		local origHook = tt:GetScript("OnTooltipSetItem");
-		if (origHook ~= OnTooltipSetItemHook) then
-			origTooltips[tt] = origHook;
-			tt:SetScript("OnTooltipSetItem", OnTooltipSetItemHook);
-		end
+hookTooltips[GameTooltip] = 1; -- mouseover
+hookTooltips[ItemRefTooltip] = 1; -- clicked
+if (AtlasLootTooltip) then hookTooltips[AtlasLootTooltip] = 1; end
+
+for tt in pairs(hookTooltips) do
+	local origHook = tt:GetScript("OnTooltipSetItem");
+	if (origHook ~= OnTooltipSetItemHook) then
+		origTooltips[tt] = origHook;
+		tt:SetScript("OnTooltipSetItem", OnTooltipSetItemHook);
 	end
 end
