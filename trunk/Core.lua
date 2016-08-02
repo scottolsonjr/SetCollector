@@ -48,7 +48,11 @@ end
 SetCollector:RegisterChatCommand("setcollector", "MySlashProcessorFunc")
 
 function SetCollector:MySlashProcessorFunc(input)
-	if input == "debug" then
+	if input == "show" then
+		SetCollector:ShowFrame()
+	elseif input == "hide" then
+		SetCollector:HideFrame()
+	elseif input == "debug" then
 		SetCollector:SetDebug(not DEBUG)
 		local message
 		if SetCollector:GetDebug() then message = "DEBUG_ON" else message = "DEBUG_OFF" end
