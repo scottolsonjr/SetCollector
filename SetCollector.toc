@@ -10,6 +10,7 @@ embeds.xml
 
 Localization.enUS.lua
 Core.lua
+SetCollector.xml
 UI.lua
 DB.lua
 Tooltips.lua

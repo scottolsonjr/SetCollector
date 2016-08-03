@@ -25,32 +25,35 @@ local EQUIPMENT = {
 	INVSLOT_TABARD
 }
 
+--
+--  Setup Frame
+--
+
 local frame = CreateFrame("Frame", "SetCollectorFrame", UIParent, "ButtonFrameTemplate")
 
-local title = CreateFrame("Frame", "$parentTitle", frame)			--, "GameFontNormal"
+local title = CreateFrame("Frame", "$parentTitle", frame)
 title:SetWidth(300)
 title:SetHeight(14)
 title:SetPoint("TOP", 0, -4)
 title:SetFrameLevel(100)
 title:SetAttribute("parentKey", "Title")
 
---frame.Title:SetText(L["ADDON_NAME"])
-
 frame:SetWidth(703)
 frame:SetHeight(606)
 frame:SetPoint("TOPLEFT",17,-115)
+	
+frame.TitleText:SetText(L["ADDON_NAME"])
 
 tinsert(UISpecialFrames, frame:GetName())							-- Hides frame when Escape is pressed or Game menu selected.
 frame:SetAttribute("UIPanelLayout-defined", true)			-- Allows frame to shift other frames when opened or be shifted when others are opened.
 frame:SetAttribute("UIPanelLayout-enabled", true)			-- http://www.wowwiki.com/Creating_standard_left-sliding_frames
 frame:SetAttribute("UIPanelLayout-area", "left")
-frame:SetAttribute("UIPanelLayout-pushable", 3)
+frame:SetAttribute("UIPanelLayout-pushable", 5)
 frame:SetAttribute("UIPanelLayout-width", width)
 frame:SetAttribute("UIPanelLayout-whileDead", true)
   	
 local helpButton = CreateFrame("Button","$parentTutorialButton",frame,"MainHelpPlateButton")
 helpButton:SetPoint("TOPLEFT",frame, 39, 20)
-helpButton:SetScript("OnClick", SetCollector_ToggleTutorial)
 
 -- Add Left Inset (ScrollFrame)
 local leftInset = CreateFrame("Frame","$parentLeftInset",frame,"InsetFrameTemplate")
@@ -61,9 +64,9 @@ leftInset:SetPoint("BOTTOMLEFT", 4, 26)
 leftInset:SetAttribute("parentKey","LeftInset")
 leftInset:SetAttribute("useParentLevel","true")
 
---[[local scrollFrame = CreateFrame("ScrollFrame","SetCollectorScrollFrame",frame,"SetCollectorCollectionsScrollFrameTemplate")
+local scrollFrame = CreateFrame("ScrollFrame","SetCollectorScrollFrame",frame,"SetCollectorCollectionsScrollFrameTemplate")
 scrollFrame:SetPoint("TOPLEFT","$parentLeftInset","TOPLEFT",2,-5)
-scrollFrame:SetPoint("BOTTOMRIGHT","$parentLeftInset","BOTTOMRIGHT", -4, 3)]]--
+scrollFrame:SetPoint("BOTTOMRIGHT","$parentLeftInset","BOTTOMRIGHT", -4, 3)
 
 -- Add Right Inset (Model)
 local rightInset = CreateFrame("Frame","$parentRightInset",frame,"InsetFrameTemplate")
@@ -112,7 +115,7 @@ modelFrame:SetPoint("BOTTOMRIGHT", setDisplay, "BOTTOMRIGHT", 0, 0)
 modelFrame:SetAttribute("parentKey","ModelFrame")
 modelFrame:SetAttribute("useParentLevel","true")
 
---[[local prevItem
+local prevItem
 for i=1, #EQUIPMENT do
 local itemButton = CreateFrame("Button","$parentItem"..i,modelFrame,"SetCollectorItemTemplate")
 	if i == 1 then
@@ -125,7 +128,7 @@ local itemButton = CreateFrame("Button","$parentItem"..i,modelFrame,"SetCollecto
 	itemButton:RegisterForClicks("AnyDown")
 	itemButton:Hide()
 	prevItem = itemButton
-end]]--
+end
 
 for i=1, 5 do
 	local variantTab = CreateFrame("Button","$parentTab"..i,setDisplay,"CharacterFrameTabButtonTemplate")
@@ -142,7 +145,6 @@ for i=1, 5 do
 	variantTab:Hide()
 end
 PanelTemplates_SetNumTabs(SetCollectorSetDisplay, 5)
---SetVariantTab(SetCollectorSetDisplay, 1)
 
 -- Add Filter Button
 local filterButton = CreateFrame("Frame","$parentSetFilter",frame,"UIDropDownMenuTemplate")
@@ -150,12 +152,136 @@ filterButton:SetPoint("TOPRIGHT",frame,"TOPRIGHT",-125,-28)
 filterButton:SetAttribute("enableMouse","true")
 filterButton:SetAttribute("parentKey","setFilter")
 
-function SetCollector:HideFrame()
-	SetCollector:Print("Hiding SetCollector UI")
-	frame:Hide()
+--
+--  Local Functions
+--
+
+local AddTutorial = {
+	FramePos = { x = 0,	y = -30 },
+	FrameSize = { width = 638, height = 496	},
+	[1] = { ButtonPos = { x = 500,	y = 10 }, 	HighLightBox = { x = 497, y = 2, width = 200, height = 30 },		ToolTipDir = "LEFT",	ToolTipText = L["TUTORIAL_1"] },
+	[2] = { ButtonPos = { x = 120,	y = -405 }, HighLightBox = { x = 8, y = -30, width = 252, height = 518 },		ToolTipDir = "DOWN",	ToolTipText = L["TUTORIAL_2"] },
+	[3] = { ButtonPos = { x = 310,	y = -31 }, 	HighLightBox = { x = 285, y = -30, width = 412, height = 50 },	ToolTipDir = "LEFT",	ToolTipText = L["TUTORIAL_3"] },
+	[4] = { ButtonPos = { x = 476,	y = -405 }, HighLightBox = { x = 285, y = -83, width = 412, height = 465 },	ToolTipDir = "DOWN",	ToolTipText = L["TUTORIAL_4"] },
+}
+
+local function GetTutorial()
+	local helpPlate, mainHelpButton
+	helpPlate = AddTutorial
+	mainHelpButton = helpButton
+	return helpPlate, mainHelpButton
 end
 
-function SetCollector:ShowFrame()
-	SetCollector:Print("Showing SetCollector UI")
-	frame:Show()
+
+
+--
+--  Global Functions
+--
+
+function SetCollector:GetFrameObject()
+	return frame
+end
+
+function SetCollector:ToggleUI(DEBUG)
+	if (frame:IsVisible()) then
+		if DEBUG then SetCollector:Print("Hiding SetCollector UI") end
+		HideUIPanel(frame)
+	else
+		if DEBUG then SetCollector:Print("Showing SetCollector UI") end
+		ShowUIPanel(frame)
+	end
+end
+
+function SetCollector:ToggleTutorial()
+	local helpPlate, mainHelpButton = GetTutorial()
+		
+	if ( helpPlate and not HelpPlate_IsShowing(helpPlate) and frame:IsShown()) then
+		HelpPlate_Show(helpPlate, frame:GetName(), mainHelpButton, HelpPlateSeen)
+		SetCollector_HELP_VISIBLE = true
+		HelpPlateSeen = true
+	else
+		HelpPlate_Hide(true) 								-- True indicates to animate the hide. Blank or flase suppresses the animation.
+	  SetCollector_HELP_VISIBLE = false
+	end
+end
+
+function SetCollector:UpdatePortrait()
+	local portrait = SetCollectorFramePortrait				-- Switch to frame
+	local masteryIndex = GetSpecialization();
+	if (masteryIndex == nil) then
+		local _, class = UnitClass("player");
+		portrait:SetTexture("Interface\\TargetingFrame\\UI-Classes-Circles");
+		portrait:SetTexCoord(unpack(CLASS_ICON_TCOORDS[class]));
+	else
+		local _, _, _, icon = GetSpecializationInfo(masteryIndex);
+		portrait:SetTexCoord(0, 1, 0, 1);
+		SetPortraitToTexture(portrait, icon);	
+	end
+end
+
+
+
+function SetCollector:UpdateSelectedVariantTab(self)
+	local selected = PanelTemplates_GetSelectedTab(self);
+	if ( frame:IsShown() ) then
+		SetCollectorFrameSetDisplayModelFrame:Dress()
+		local collection = _G["SetCollectorLegacySetDisplayTab"..selected].Collection
+		local set = _G["SetCollectorLegacySetDisplayTab"..selected].Set
+		if ( collection and set ) then
+			SetCollectorLegacySetDisplayModelFrame:Undress()
+	  	local Collections = SetCollectorLegacyDB
+	  	local Log = SetCollectorLegacyCharacterDB
+	  	local obtainable = Collections[collection].Sets[set].Variants[selected].Obtainable
+			local num = #Collections[collection].Sets[set].Variants[selected].Items
+			local acq = 0
+			for i=1, num do
+				local itemID = Collections[collection].Sets[set].Variants[selected].Items[i]
+				SetCollectorLegacySetDisplayModelFrame:TryOn(itemID)
+			 	local count = GetItemCount(itemID, true)
+			 	if (Log.Items[itemID] and Log.Items[itemID].Count > 0) then count = count + Log.Items[itemID].Count; end
+			 	if count > 0 then acq = acq + 1; end
+			 	SetItemButton(_G["SetCollectorLegacySetDisplayModelFrameItem"..i], itemID, 1, obtainable)
+			 	--SetItemButton(_G["SetCollectorLegacySetDisplayModelFrameItem"..i], itemID, Log.Items[itemID].Count)			-- No longer displaying count
+			end
+			ClearItemButtons(num + 1)
+			SetCollectorLegacySummaryButtonSummary:SetText(string.format(_L["ITEMS_COLLECTED"],acq,num))
+			if acq > 0 then 
+				SetCollectorLegacySummaryButton.Texture:SetAtlas("collections-itemborder-collected")
+			else
+				SetCollectorLegacySummaryButton.Texture:SetAtlas("collections-itemborder-uncollected")
+			end
+			SetCollectorLegacySummaryButton:Show()
+		else
+			SetCollectorLegacySummaryButton:Hide()
+		end
+	end
+end
+
+function SetCollector:SetVariantTab(self, tab)
+	PanelTemplates_SetTab(self, tab);
+	--SetCVar("SetCollectorLegacyTab", tab);
+	--SetCollector:UpdateSelectedVariantTab(self);
+end
+
+
+
+--
+--  Finalize UI Setup
+--
+
+
+function SetCollector:OnShow(self)
+	SetCollector:UpdatePortrait(self)
+end
+
+
+function SetCollector:SetupUI(DEBUG)
+	local tutorialScript = function() SetCollector:ToggleTutorial() end
+	helpButton:SetScript("OnClick", tutorialScript)
+	
+	local onShowScript = function() SetCollector:OnShow() end
+	frame:SetScript("OnShow", onShowScript)
+	
+	SetCollector:SetVariantTab(SetCollectorSetDisplay, 1)
+	-- Other delayed build actions
 end
