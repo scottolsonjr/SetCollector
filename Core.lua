@@ -1,6 +1,6 @@
 local DEBUG = false
 
-SetCollector = LibStub("AceAddon-3.0"):NewAddon("SetCollector", "AceConsole-3.0")
+SetCollector = LibStub("AceAddon-3.0"):NewAddon("SetCollector", "AceConsole-3.0", "AceEvent-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale("SetCollector", true)
 
 --
@@ -11,6 +11,7 @@ function SetCollector:OnInitialize()
 	SetCollector:SetupDB(DEBUG)
 	SetCollector:SetupUI(DEBUG)
 	if SetCollector:GetDebug() then SetCollector:Print("Initialized"); end
+	SetCollector:RegisterEvent("PLAYER_LOGIN")
 end
 
 function SetCollector:OnEnable()
@@ -21,6 +22,11 @@ function SetCollector:OnDisable()
     if SetCollector:GetDebug() then SetCollector:Print("Disabled"); end
 end
 
+function SetCollector:PLAYER_LOGIN()
+		local _, class = UnitClass("player")
+		SetCollector:InitializeFilter()
+		SetCollector:InitializeModel()
+end
 
 --
 --  Local Functions
@@ -55,8 +61,12 @@ end
 SetCollector:RegisterChatCommand("setcollector", "MySlashProcessorFunc")
 
 function SetCollector:MySlashProcessorFunc(input)
-	if input == "show" or input == "hide" or input == nil then
-		SetCollector:ToggleUI(IsDebugging())
+	if input == "show" then
+		SetCollector:ShowUI(IsDebugging())
+	elseif input == "hide" then
+		SetCollector:HideUI(IsDebugging())
+	elseif input == "button" then
+		SetCollector:ToggleMinimapButton()
 	elseif input == "debug" then
 		SetCollector:SetDebug(not IsDebbuging())
 		local message
@@ -66,7 +76,9 @@ function SetCollector:MySlashProcessorFunc(input)
 		SetCollector:ResetDB(IsDebugging())
 	elseif input == "listframe" then
 		SetCollector:ListFrameObjects(SetCollector:GetFrameObject())
-	else
+	elseif input == "help" then
     SetCollector:Print(L["SLASH_HELP"])
+	else
+		SetCollector:ToggleUI(IsDebugging())
   end
 end
