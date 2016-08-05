@@ -1,6 +1,9 @@
 local L = LibStub("AceLocale-3.0"):GetLocale("SetCollector", true)
+local icon = LibStub("LibDBIcon-1.0")
 
 local COLLECTION_LIST_WIDTH = 260
+
+local WHITE		= "|cFFFFFFFF"
 
 local EQUIPMENT = {
 	INVSLOT_AMMO,
@@ -24,6 +27,11 @@ local EQUIPMENT = {
 	INVSLOT_RANGED,
 	INVSLOT_TABARD
 }
+
+local CURRENT_FILTER 				= 0
+local SHOW_ONLY_FAVORITES 	= false
+local SHOW_ONLY_OBTAINABLE 	= false
+local SHOW_ONLY_TRANSMOG 		= false
 
 --
 --  Setup Frame
@@ -109,11 +117,27 @@ progressDisplay:RegisterForClicks("AnyDown")
 progressDisplay:SetScript("OnClick", SetCollectorSummaryButton_OnClick)
 progressDisplay:Hide()
 
+
+
+--
+--  Model
+--
+
 local modelFrame = CreateFrame("DressUpModel","$parentModelFrame",setDisplay,"ModelWithZoomTemplate") --"ModelWithControlsTemplate")
 modelFrame:SetPoint("TOPLEFT", setDisplay, "TOPLEFT", 0, 0)
 modelFrame:SetPoint("BOTTOMRIGHT", setDisplay, "BOTTOMRIGHT", 0, 0)
 modelFrame:SetAttribute("parentKey","ModelFrame")
 modelFrame:SetAttribute("useParentLevel","true")
+
+function SetCollector:InitializeModel()
+	modelFrame:SetUnit("PLAYER")
+end
+
+
+
+--
+--  Appearance Buttons
+--
 
 local prevItem
 for i=1, #EQUIPMENT do
@@ -129,6 +153,12 @@ local itemButton = CreateFrame("Button","$parentItem"..i,modelFrame,"SetCollecto
 	itemButton:Hide()
 	prevItem = itemButton
 end
+
+
+
+--
+--  Variant Tabs
+--
 
 for i=1, 5 do
 	local variantTab = CreateFrame("Button","$parentTab"..i,setDisplay,"CharacterFrameTabButtonTemplate")
@@ -146,14 +176,199 @@ for i=1, 5 do
 end
 PanelTemplates_SetNumTabs(SetCollectorSetDisplay, 5)
 
--- Add Filter Button
+function SetCollector:UpdateSelectedVariantTab(self)
+	local selected = PanelTemplates_GetSelectedTab(self);
+	if ( frame:IsShown() ) then
+		--[[
+		SetCollectorFrameSetDisplayModelFrame:Dress()
+		
+		local collection = _G["SetCollectorLegacySetDisplayTab"..selected].Collection
+		local set = _G["SetCollectorLegacySetDisplayTab"..selected].Set
+		if ( collection and set ) then
+			SetCollectorLegacySetDisplayModelFrame:Undress()
+	  	local Collections = SetCollectorLegacyDB
+	  	local Log = SetCollectorLegacyCharacterDB
+	  	local obtainable = Collections[collection].Sets[set].Variants[selected].Obtainable
+			local num = #Collections[collection].Sets[set].Variants[selected].Items
+			local acq = 0
+			for i=1, num do
+				local itemID = Collections[collection].Sets[set].Variants[selected].Items[i]
+				SetCollectorLegacySetDisplayModelFrame:TryOn(itemID)
+			 	local count = GetItemCount(itemID, true)
+			 	if (Log.Items[itemID] and Log.Items[itemID].Count > 0) then count = count + Log.Items[itemID].Count; end
+			 	if count > 0 then acq = acq + 1; end
+			 	SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..i], itemID, 1, obtainable)
+			 	--SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..i], itemID, Log.Items[itemID].Count)			-- No longer displaying count
+			end
+			ClearItemButtons(num + 1)
+			SetCollectorSummaryButtonSummary:SetText(string.format(_L["ITEMS_COLLECTED"],acq,num))
+			if acq > 0 then 
+				SetCollectorSummaryButton.Texture:SetAtlas("collections-itemborder-collected")
+			else
+				SetCollectorSummaryButton.Texture:SetAtlas("collections-itemborder-uncollected")
+			end
+			SetCollectorFrameSummaryButton:Show()
+		else
+			SetCollectorFrameSummaryButton:Hide()
+		end
+			
+		]]--
+	end
+end
+
+function SetCollector:SetVariantTab(self, tab)
+	PanelTemplates_SetTab(self, tab);
+	--SetCVar("SetCollectorLegacyTab", tab);
+	SetCollector:UpdateSelectedVariantTab(self);
+end
+
+
+
+--
+--  Filter
+--
+
 local filterButton = CreateFrame("Frame","$parentSetFilter",frame,"UIDropDownMenuTemplate")
 filterButton:SetPoint("TOPRIGHT",frame,"TOPRIGHT",-125,-28)
 filterButton:SetAttribute("enableMouse","true")
 filterButton:SetAttribute("parentKey","setFilter")
 
+local function GetFilters()
+	-- Do I still want to remember filters between sessions
+	--SHOW_ONLY_FAVORITES 	= SetCollectorCharacterDB.Filters.favorites
+	--SHOW_ONLY_OBTAINABLE 	= SetCollectorCharacterDB.Filters.obtainable
+	--SHOW_ONLY_TRANSMOG 		= SetCollectorCharacterDB.Filters.transmog
+	--CURRENT_FILTER 				= SetCollectorCharacterDB.Filters.spec
+end
+
+local function SetFilters()
+	--SetCollectorLegacyCharacterDB.Filters.favorites		= SHOW_ONLY_FAVORITES
+	--SetCollectorLegacyCharacterDB.Filters.obtainable 	= SHOW_ONLY_OBTAINABLE
+	--SetCollectorLegacyCharacterDB.Filters.transmog 		= SHOW_ONLY_TRANSMOG
+	--SetCollectorLegacyCharacterDB.Filters.spec 				= CURRENT_FILTER
+end
+
+local function SetFilterOptions(classIndex)
+	CURRENT_FILTER = classIndex
+end
+
+local function GetFilterOptions()
+	if CURRENT_FILTER == 0 or CURRENT_FILTER == nil then
+		local currentSpec = GetSpecialization();
+		if currentSpec == nil then currentSpec = 0 end
+		CURRENT_FILTER = currentSpec + 2
+	end
+	return CURRENT_FILTER;
+end
+
+local function UpdateFilterString()
+	local name = ALL;
+	local currFilter = GetFilterOptions();
+
+	if currFilter == LE_LOOT_FILTER_CLASS then
+		name = UnitClass("player");
+	else -- Spec
+		local _, specName, _, icon = GetSpecializationInfo(currFilter - LE_LOOT_FILTER_SPEC1 + 1);
+		name = specName;
+	end
+	
+	UIDropDownMenu_SetText(filterButton, name);
+end
+
+local function SetFilter(self, classIndex)
+	if ( classIndex == "favorites" ) then
+		if SHOW_ONLY_FAVORITES == false then
+			SHOW_ONLY_FAVORITES = true
+		else
+			SHOW_ONLY_FAVORITES = false
+		end
+	elseif ( classIndex == "obtainable" ) then
+		if SHOW_ONLY_OBTAINABLE == false then
+			SHOW_ONLY_OBTAINABLE = true
+		else
+			SHOW_ONLY_OBTAINABLE = false
+		end
+	elseif ( classIndex == "transmog" ) then
+		if SHOW_ONLY_TRANSMOG == false then
+			SHOW_ONLY_TRANSMOG = true
+		else
+			SHOW_ONLY_TRANSMOG = false
+		end
+	else
+		SetFilterOptions(classIndex);
+	end
+	SetFilters()
+	if frame:IsShown() then
+		--CollectionsUpdate();
+		UpdateFilterString()
+	
+		-- Clear Selection
+		--SetCollectorLegacy_UnsetHighlight(SELECTED_BUTTON)
+		--SELECTED_BUTTON = nil
+		--SetVariantTabs()
+		--ClearItemButtons()
+	end
+end
+
+local function InitFilter()
+	local info = UIDropDownMenu_CreateInfo();
+	local currFilter = GetFilterOptions();
+	local className = UnitClass("player");
+	
+	UpdateFilterString()
+	info.func = SetFilter;
+	
+	info.text = className;
+	info.checked = (currFilter ~= LE_LOOT_FILTER_ALL);
+	info.arg1 = LE_LOOT_FILTER_CLASS;
+	UIDropDownMenu_AddButton(info);
+	
+	local numSpecs = GetNumSpecializations();
+	for i = 1, numSpecs do
+		local _, name, _, icon = GetSpecializationInfo(i);
+		info.text = name;
+		info.arg1 = LE_LOOT_FILTER_SPEC1 + i - 1;
+		info.checked = currFilter == (LE_LOOT_FILTER_SPEC1 + i - 1);
+		info.leftPadding = 10;
+		UIDropDownMenu_AddButton(info);
+	end
+
+	info.text = ALL_SPECS;
+	info.checked = currFilter == LE_LOOT_FILTER_CLASS;
+	info.arg1 = LE_LOOT_FILTER_CLASS;
+	info.func = SetFilter;
+	UIDropDownMenu_AddButton(info);
+	
+	info.leftPadding = nil;
+	info.text = FAVORITES_FILTER;
+	info.checked = SHOW_ONLY_FAVORITES;
+	info.arg1 = "favorites";
+	UIDropDownMenu_AddButton(info);
+	
+	info.leftPadding = nil;
+	info.text = L["OBTAIN_FILTER"] or L["MISSING_LOCALIZATION"];
+	info.checked = SHOW_ONLY_OBTAINABLE;
+	info.arg1 = "obtainable";
+	UIDropDownMenu_AddButton(info);
+	
+	info.leftPadding = nil;
+	info.text = L["TRANSMOG_FILTER"] or L["MISSING_LOCALIZATION"];
+	info.checked = SHOW_ONLY_TRANSMOG;
+	info.arg1 = "transmog";
+	UIDropDownMenu_AddButton(info);
+end
+
+function SetCollector:InitializeFilter()
+		GetFilters()
+		--CollectionsUpdate()
+		local init = function() InitFilter() end
+		UIDropDownMenu_Initialize(filterButton, init)
+end
+
+
+
 --
---  Local Functions
+--  Tutorial
 --
 
 local AddTutorial = {
@@ -172,26 +387,6 @@ local function GetTutorial()
 	return helpPlate, mainHelpButton
 end
 
-
-
---
---  Global Functions
---
-
-function SetCollector:GetFrameObject()
-	return frame
-end
-
-function SetCollector:ToggleUI(DEBUG)
-	if (frame:IsVisible()) then
-		if DEBUG then SetCollector:Print("Hiding SetCollector UI") end
-		HideUIPanel(frame)
-	else
-		if DEBUG then SetCollector:Print("Showing SetCollector UI") end
-		ShowUIPanel(frame)
-	end
-end
-
 function SetCollector:ToggleTutorial()
 	local helpPlate, mainHelpButton = GetTutorial()
 		
@@ -204,6 +399,12 @@ function SetCollector:ToggleTutorial()
 	  SetCollector_HELP_VISIBLE = false
 	end
 end
+
+
+
+--
+--  Portrait
+--
 
 function SetCollector:UpdatePortrait()
 	local portrait = SetCollectorFramePortrait				-- Switch to frame
@@ -221,57 +422,70 @@ end
 
 
 
-function SetCollector:UpdateSelectedVariantTab(self)
-	local selected = PanelTemplates_GetSelectedTab(self);
-	if ( frame:IsShown() ) then
-		SetCollectorFrameSetDisplayModelFrame:Dress()
-		local collection = _G["SetCollectorLegacySetDisplayTab"..selected].Collection
-		local set = _G["SetCollectorLegacySetDisplayTab"..selected].Set
-		if ( collection and set ) then
-			SetCollectorLegacySetDisplayModelFrame:Undress()
-	  	local Collections = SetCollectorLegacyDB
-	  	local Log = SetCollectorLegacyCharacterDB
-	  	local obtainable = Collections[collection].Sets[set].Variants[selected].Obtainable
-			local num = #Collections[collection].Sets[set].Variants[selected].Items
-			local acq = 0
-			for i=1, num do
-				local itemID = Collections[collection].Sets[set].Variants[selected].Items[i]
-				SetCollectorLegacySetDisplayModelFrame:TryOn(itemID)
-			 	local count = GetItemCount(itemID, true)
-			 	if (Log.Items[itemID] and Log.Items[itemID].Count > 0) then count = count + Log.Items[itemID].Count; end
-			 	if count > 0 then acq = acq + 1; end
-			 	SetItemButton(_G["SetCollectorLegacySetDisplayModelFrameItem"..i], itemID, 1, obtainable)
-			 	--SetItemButton(_G["SetCollectorLegacySetDisplayModelFrameItem"..i], itemID, Log.Items[itemID].Count)			-- No longer displaying count
-			end
-			ClearItemButtons(num + 1)
-			SetCollectorLegacySummaryButtonSummary:SetText(string.format(_L["ITEMS_COLLECTED"],acq,num))
-			if acq > 0 then 
-				SetCollectorLegacySummaryButton.Texture:SetAtlas("collections-itemborder-collected")
-			else
-				SetCollectorLegacySummaryButton.Texture:SetAtlas("collections-itemborder-uncollected")
-			end
-			SetCollectorLegacySummaryButton:Show()
-		else
-			SetCollectorLegacySummaryButton:Hide()
-		end
+--
+--  Minimap Button
+--
+
+local function CreateMinimapButton()
+	local myLDB = LibStub("LibDataBroker-1.1"):NewDataObject("SetCollectorMinimap", {
+		type = "launcher",
+		text = L["ADDON_NAME"],
+		icon = "Interface\\Icons\\INV_Gauntlets_Mail_RaidShaman_J_01",
+		OnClick = function() SetCollector:ToggleUI() end,										--  Add logic for debug handling
+		OnTooltipShow = function(tt)
+			tt:AddLine(WHITE..L["ADDON_NAME"])
+			tt:AddLine(L["MINIMAP_TOOLTIP"])
+		end,
+	})
+  icon:Register("SetCollectorMinimap", myLDB, SetCollector.db.char.minimap)
+end
+
+function SetCollector:ToggleMinimapButton()
+	SetCollector.db.char.minimap.hide = not SetCollector.db.char.minimap.hide
+	if SetCollector.db.char.minimap.hide then
+		icon:Hide("SetCollectorMinimap")
+	else
+		icon:Show("SetCollectorMinimap")
 	end
 end
-
-function SetCollector:SetVariantTab(self, tab)
-	PanelTemplates_SetTab(self, tab);
-	--SetCVar("SetCollectorLegacyTab", tab);
-	--SetCollector:UpdateSelectedVariantTab(self);
-end
-
 
 
 --
 --  Finalize UI Setup
 --
 
+function SetCollector:GetFrameObject()
+	return frame
+end
+
+function SetCollector:HideUI(DEBUG)
+		if DEBUG then SetCollector:Print("Hiding SetCollector UI") end
+		HideUIPanel(frame)
+end
+
+function SetCollector:ShowUI(DEBUG)
+		if DEBUG then SetCollector:Print("Showing SetCollector UI") end
+		ShowUIPanel(frame)
+end
+
+function SetCollector:ToggleUI(DEBUG)
+	if (frame:IsVisible()) then
+		SetCollector:HideUI(DEBUG)
+	else
+		SetCollector:ShowUI(DEBUG)
+	end
+end
 
 function SetCollector:OnShow(self)
 	SetCollector:UpdatePortrait(self)
+end
+
+function SetCollector:OnHide(self)
+	HelpPlate_Hide()
+	--SetCollectorLegacySummaryButton:Hide()
+	--SetVariantTabs()
+	--ClearItemButtons()
+	--SetCollectorLegacy_UnsetHighlight(SELECTED_BUTTON)
 end
 
 
@@ -281,7 +495,11 @@ function SetCollector:SetupUI(DEBUG)
 	
 	local onShowScript = function() SetCollector:OnShow() end
 	frame:SetScript("OnShow", onShowScript)
+	local onHideScript = function() SetCollector:OnHide() end
+	frame:SetScript("OnHide", onHideScript)
 	
 	SetCollector:SetVariantTab(SetCollectorSetDisplay, 1)
+	
+	CreateMinimapButton()
 	-- Other delayed build actions
 end

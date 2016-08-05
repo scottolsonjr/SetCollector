@@ -3,6 +3,11 @@
 --
 
 local defaults = {
+	char = {
+		minimap = {
+			hide = false
+		}
+	},
   global = {
     debug = false,
     collections = {}

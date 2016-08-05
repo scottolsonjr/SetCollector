@@ -65,6 +65,7 @@ local function OnTooltipSetItemHook(tooltip, ...)
 		if debug then
 			tooltip:AddLine(" ");
 			tooltip:AddLine("SetCollector Debug");
+			--tooltip:AddLine(gsub(itemLink, "\124", "\124\124"))
 			tooltip:AddLine("Appearance ID: "..appearanceID);
 		end
 		if debug and SetCollector.db.global.collections.Appearances[appearanceID] then
@@ -83,6 +84,12 @@ local hookTooltips = {};
 hookTooltips[GameTooltip] = 1; -- mouseover
 hookTooltips[ItemRefTooltip] = 1; -- clicked
 if (AtlasLootTooltip) then hookTooltips[AtlasLootTooltip] = 1; end
+
+
+
+--
+-- Global Functions
+--
 
 for tt in pairs(hookTooltips) do
 	local origHook = tt:GetScript("OnTooltipSetItem");
