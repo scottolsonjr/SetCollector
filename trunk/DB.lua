@@ -6,7 +6,12 @@ local defaults = {
 	char = {
 		minimap = {
 			hide = false
-		}
+		},
+		filters = {
+			specialization = nil,
+			favorites = false
+		},
+		sets = {}
 	},
   global = {
     debug = false,
@@ -112,17 +117,17 @@ end
 local function AddVariant(minVersion, maxVersion, collection, set, title, ...)
 	if WOW_VERSION >= minVersion then
 		if maxVersion == nil or WOW_VERSION <= maxVersion then
-			local tempItems = { }
+			local tempAppearances = { }
 			local n = select("#",...)
 			for i = 1,n do
 				local v = select(i,...)
-				tinsert(tempItems,v)
+				tinsert(tempAppearances,v)
 				SetCollector.db.global.collections.Appearances[v] = { collection = collection.ID, set = set, variant = #SetCollector.db.global.collections[collection.ID].Sets[set].Variants + 1 }
 			end
 			local tempVariant = {
 				Title = title,
-				Items = tempItems,
-				Count = #tempItems
+				Appearances = tempAppearances,
+				Count = #tempAppearances
 			}
 			tinsert(SetCollector.db.global.collections[collection.ID].Sets[set].Variants, tempVariant)	
 		end
@@ -153,6 +158,21 @@ local function GetShamanAppearances()
 	
 	-- LEGENDARY
 	
+	set = AddSet(50400,nil,LEGENDARY,90,"LG_CASTER_INT_90",SHAMAN,CASTER,ANY)
+				AddVariant(50400,nil,LEGENDARY,set,"LG_CASTER_INT_90",20801)
+	
+	set = AddSet(50400,nil,LEGENDARY,90,"LG_MELEE_AGI_90",SHAMAN,MELEE,ANY)
+				AddVariant(50400,nil,LEGENDARY,set,"LG_MELEE_AGI_90",20805)
+	
+	set = AddSet(50400,nil,LEGENDARY,90,"LG_HEALER_INT_90",SHAMAN,HEALER,ANY)
+				AddVariant(50400,nil,LEGENDARY,set,"LG_HEALER_INT_90",20825)
+	
+	set = AddSet(50400,nil,LEGENDARY,80,"LG_HEALER_80",SHAMAN,ANY,ANY)
+				AddVariant(50400,nil,LEGENDARY,set,"LG_HEALER_80",11613)
+	
+	set = AddSet(70000,nil,LEGENDARY,60,"LG_60",SHAMAN,ANY,ANY)
+				AddVariant(70000,nil,LEGENDARY,set,"LG_60",5131)
+	
 	-- RAID
 	
 	set = AddSet(70000,nil,RAID,191,"SH_TR_19",SHAMAN,ANY,ANY)
@@ -170,8 +190,124 @@ local function GetShamanAppearances()
 				AddVariant(70000,nil,RAID,set,"MYTHIC",23678,23679,23688,23677,23689)
 				
 	-- DUNGEON
+	set = AddSet(70000,nil,DUNGEON,30,"SH_DG_03",SHAMAN,ANY,ANY)
+				AddVariant(70000,nil,DUNGEON,set,"SH_DG_03",7163,6962,7104,6876,7020)
 	
 	
+end
+
+
+
+--
+--  Global Functions
+--
+
+function SetCollector:GetCollectionsList()
+	local db = SetCollector.db.global.collections
+	local collections = {}
+	
+	for i=1, #db do
+		collections[i] = {
+			Title = db[i].Title,
+			sets = {}
+		}
+		if db[i].Sets then
+			local sortedList = SetCollector:SortList(db[i].Sets, "key", "DESC")
+			for j,value in sortedList do
+				collections[i].sets[j] = {
+					Title = db[i].Sets[j].Title
+				}
+			end
+		end
+	end
+	
+	return collections
+end
+
+function SetCollector:GetCollectedCount(collection, set, variant)
+	local sourcesCount, collectedCount = 0, 0
+	
+	local appearances = SetCollector.db.global.collections[collection].Sets[set].Variants[variant].Appearances
+	for i=1, #appearances do
+		local anyCollected, sources = false, C_TransmogCollection.GetAppearanceSources(appearances[i])
+		if sources then
+			sourcesCount = sourcesCount + #sources
+			for j=1, #sources do
+				local _, _, _, _, isCollected, link = C_TransmogCollection.GetAppearanceSourceInfo(sources[j].sourceID)
+				if not anyCollected and isCollected then
+					anyCollected = true
+				end
+			end
+		end
+		if anyCollected then collectedCount = collectedCount + 1 end
+	end
+	if sourcesCount == 0 and collectedCount == 0 then collectedCount = "*" end
+	
+	return collectedCount
+end
+
+function SetCollector:GetSetTooltip(self)
+	local db = SetCollector.db.global.collections
+	local collection = db[self.Collection].Title
+	local set = L[db[self.Collection].Sets[self.Set].Title] or L["MISSING_LOCALIZATION"]
+	
+	GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT", -16, 16)
+	GameTooltip:SetText(set, 1, 1, 1)
+	
+	for i=1, #db[self.Collection].Sets[self.Set].Variants do
+		local collected = SetCollector:GetCollectedCount(self.Collection, self.Set, i)
+		local line = ""
+		if db[self.Collection].Sets[self.Set].Variants[i].Count and L[db[self.Collection].Sets[self.Set].Variants[i].Title] then
+			line = "- "..collected.."/"..db[self.Collection].Sets[self.Set].Variants[i].Count.." "..L[db[self.Collection].Sets[self.Set].Variants[i].Title]
+		elseif db[self.Collection].Sets[self.Set].Variants[i].Count and not L[db[self.Collection].Sets[self.Set].Variants[i].Title] then
+			line = "- "..collected.."/"..db[self.Collection].Sets[self.Set].Variants[i].Count.." "..L["MISSING_LOCALIZATION"]
+		elseif not db[self.Collection].Sets[self.Set].Variants[i].Count and L[db[self.Collection].Sets[self.Set].Variants[i].Title] then
+			line = "- "..collected.."/? "..L[db[self.Collection].Sets[self.Set].Variants[i].Title]
+		else
+			line = "- "..collected.."/? "..L["MISSING_LOCALIZATION"]
+		end
+		GameTooltip:AddLine(line)
+	end
+	local rightclick = L["RIGHT_CLICK_FAVORITE"] or L["MISSING_LOCALIZATION"]
+	GameTooltip:AddLine(rightclick, 1, 1, 1)
+	
+	GameTooltip:Show()
+end
+
+function SetCollector:IsFavoriteSet(set)
+	local isFavorite = false
+	if SetCollector.db.char.sets[set] then
+		isFavorite = SetCollector.db.char.sets[set].favorite
+	end
+	return isFavorite
+end
+
+function SetCollector:SetFavoriteSet(self)
+	local db = SetCollector.db.char
+	if not db.sets[self.Set] then
+		db.sets[self.Set] = {
+			favorite = false
+		}
+	end
+	db.sets[self.Set].favorite = not db.sets[self.Set].favorite
+	if not db.sets[self.Set].variants then
+		db.sets[self.Set].variants = {}
+		local variants = SetCollector.db.global.collections[self.Collection].Sets[self.Set].Variants
+		for i=1, #variants do
+			db.sets[self.Set].variants[i] = {
+				favorite = db.sets[self.Set].favorite
+			}
+		end
+	else
+		for i=1, #db.sets[self.Set].variants do
+			db.sets[self.Set].variants[i].favorite = not db.sets[self.Set].favorite
+		end
+	end
+	if db.sets[self.Set].favorite then
+		self.Favorite:Show()
+	else
+		self.Favorite:Hide()
+	end
 end
 
 --

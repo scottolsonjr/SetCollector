@@ -52,7 +52,7 @@ L["DB_RESET"]		=	"Database Reset."
 		-- Collection Localizations
 		--
 		
-		L["CHALLENGE"] 	= GUILD_CHALLENGE_TYPE5
+		L["CHALLENGE"] 	= "Challenge"
 		L["DUNGEON"] 		= GUILD_CHALLENGE_TYPE1
 		L["LEGENDARY"] 	= ITEM_QUALITY5_DESC
 		L["PVP"] 				= PVP
@@ -97,8 +97,8 @@ L["DB_RESET"]		=	"Database Reset."
 		L["DG_MAIL_03"] 						= "Desolation Battlegear"
 		L["DG_PLATE_03"] 					= "Doomplate Battlegear"
 		
-L["TR_MAIL_17"] 							= "Ashlink Armor"
-L["TR_MAIL_18"] 							= "Rancorbite Armor"
+L["TR_MAIL_17"] 							= "[17] Ashlink Armor"
+L["TR_MAIL_18"] 							= "[18] Rancorbite Armor"
 		
 		-- Class Sets
 		L["DK_CD_90"] 							= "Lich Lord Set"

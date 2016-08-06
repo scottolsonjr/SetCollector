@@ -15,11 +15,11 @@ function SetCollector:OnInitialize()
 end
 
 function SetCollector:OnEnable()
-    if SetCollector:GetDebug() then SetCollector:Print("Enabled"); end
+  if SetCollector:GetDebug() then SetCollector:Print("Enabled"); end
 end
 
 function SetCollector:OnDisable()
-    if SetCollector:GetDebug() then SetCollector:Print("Disabled"); end
+  if SetCollector:GetDebug() then SetCollector:Print("Disabled"); end
 end
 
 --
@@ -70,29 +70,12 @@ function SetCollector:SortList(t, f, d)
 end
 
 function SetCollector:UpdateCollections()
-	--local collections = SetCollector.db.collections
-	local collections = {
-		[1] = {
-			Title = "LEGENDARY",
-			sets = { }
-		},
-		[2] = {
-			Title = "RAID",
-			sets = {
-				["TR181SHZZ"] = {
-					Title = "SH_TR_18"
-				},
-				["TR171SHZZ"] = {
-					Title = "SH_TR_17"
-				}
-			}
-		}
-	}
+	local collections = SetCollector:GetCollectionsList()
 	SetCollector:UpdateScrollFrame(collections, DEBUG)
 end
 
 function SetCollector:PLAYER_LOGIN()
-		local _, class = UnitClass("player")
+		local _, class = UnitClass("player")			-- Unnecessary now?
 		SetCollector:InitializeFilter()
 		SetCollector:InitializeModel()
 		SetCollector:UpdateCollections()
