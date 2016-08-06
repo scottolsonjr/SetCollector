@@ -40,6 +40,79 @@ local SELECTED_BUTTON = nil
 local SORT_BY = "key"					-- Default Sort Value
 local SORT_DIR = "DESC"				-- Default Sort Direction
 
+local ANY					=	{ Code = "Z", Description = "Any" }
+
+local CLOTH				= { Code = "C", Description = "CLOTH" }
+local LEATHER			= { Code = "L", Description = "LEATHER" }
+local MAIL				= { Code = "M", Description = "MAIL" }
+local PLATE				= { Code = "P", Description = "PLATE" }
+
+local TANK 				= { Code = "T", Description = "TANK" }
+local HEALER 			= { Code = "H", Description = "HEALER" }
+local CASTER 			= { Code = "C", Description = "CASTER" }
+local RANGED 			= { Code = "R", Description = "RANGED" }
+local MELEE 			= { Code = "M", Description = "MELEE" }
+
+--
+--  Local Functions
+--
+
+local function GetClassArmorType(class)
+	if			class == "DEATHKNIGHT"	then return PLATE.Description
+	elseif	class == "DEMONHUNTER"	then return LEATHER.Description
+	elseif	class	== "DRUID"				then return LEATHER.Description
+	elseif	class	== "HUNTER"				then return MAIL.Description
+	elseif	class	== "MAGE"					then return CLOTH.Description
+	elseif	class	== "MONK"					then return LEATHER.Description
+	elseif	class	== "PALADIN"			then return PLATE.Description
+	elseif	class	== "PRIEST"				then return CLOTH.Description
+	elseif	class	== "ROGUE"				then return LEATHER.Description
+	elseif	class	== "SHAMAN"				then return MAIL.Description
+	elseif	class	== "WARLOCK"			then return CLOTH.Description
+	elseif	class	== "WARRIOR"			then return PLATE.Description
+	else return ANY.Description
+	end
+end
+
+local function GetSetSpecializationRole(spec)			--  Need to get Demon Hunter
+	if 		 spec == 62 	then return CASTER.Description 	-- Arcane Mage
+	elseif spec == 63 	then return CASTER.Description	-- Fire Mage
+	elseif spec == 64 	then return CASTER.Description	-- Frost Mage
+	elseif spec == 65 	then return HEALER.Description	-- Holy Paladin
+	elseif spec == 66 	then return TANK.Description		-- Protection Paladin
+	elseif spec == 70 	then return MELEE.Description		-- Retribution Paladin
+	elseif spec == 71 	then return MELEE.Description		-- Arms Warrior
+	elseif spec == 72 	then return MELEE.Description		-- Fury Warrior
+	elseif spec == 73 	then return TANK.Description		-- Protection Warrior
+	elseif spec == 102 	then return CASTER.Description	-- Balance Druid
+	elseif spec == 103 	then return MELEE.Description		-- Feral Combat Druid
+	elseif spec == 104 	then return TANK.Description		-- Guardian Druid
+	elseif spec == 105 	then return HEALER.Description	-- Restoration Druid
+	elseif spec == 250 	then return TANK.Description		-- Blood Death Knight
+	elseif spec == 251 	then return MELEE.Description		-- Frost Death Knight
+	elseif spec == 252 	then return MELEE	.Description	-- Unholy Death Knight
+	elseif spec == 253 	then return RANGED.Description	-- Beast Mastery Hunter
+	elseif spec == 254 	then return RANGED.Description	-- Marksmanship Hunter
+	elseif spec == 255 	then return RANGED.Description	-- Survival Hunter
+	elseif spec == 256 	then return HEALER.Description	-- Discipline Priest
+	elseif spec == 257 	then return HEALER.Description	-- Holy Priest
+	elseif spec == 258 	then return CASTER.Description	-- Shadow Priest
+	elseif spec == 259 	then return MELEE.Description		-- Assassination Rogue
+	elseif spec == 260 	then return MELEE.Description		-- Combat Rogue
+	elseif spec == 261 	then return MELEE.Description		-- Subtlety Rogue
+	elseif spec == 262 	then return CASTER.Description	-- Elemental Shaman
+	elseif spec == 263 	then return MELEE.Description		-- Enhancement Shaman
+	elseif spec == 264 	then return HEALER.Description	-- Restoration Shaman
+	elseif spec == 265 	then return CASTER.Description	-- Affliction Warlock
+	elseif spec == 266 	then return CASTER.Description	-- Demonology Warlock
+	elseif spec == 267 	then return CASTER.Description	-- Destruction Warlock
+	elseif spec == 268 	then return TANK.Description		-- Brewmaster Monk
+	elseif spec == 269 	then return MELEE.Description		-- Windwalker Monk
+	elseif spec == 270 	then return HEALER.Description	-- Mistweaver Monk
+	else return ANY.Description													-- No specialization selected yet
+	end
+end
+
 --
 --  Setup Frame
 --
@@ -158,78 +231,6 @@ end
 function SetCollectorSetButton_OnLeave(self)
 	self.Text:SetFontObject("GameFontNormalLeft")
 	GameTooltip:Hide()
-end
-
-function SetCollector:UpdateScrollFrame(collections, DEBUG)
-	if DEBUG then SetCollector:Print("Updating ScrollFrame") end
-	if collections then
-		if DEBUG then SetCollector:Print("Received list of collections.") end
-		prevButton = nil
-		rowIndex = 1
-		
-		for i=1, #collections do
-			rowIndex = rowIndex + 1
-			button = GetCollectionButton(rowIndex)
-			if ( COLLECTION_COLLAPSED[i] == true ) then
-				button:SetText(L[collections[i].Title].."...")
-			else
-				button:SetText(L[collections[i].Title])
-			end
-			button.Collection = i
-			button:ClearAllPoints()
-			if ( prevButton ) then
-				button:SetPoint("TOPLEFT", prevButton, "BOTTOMLEFT", 0, 0)
-			else
-				button:SetPoint("TOPLEFT", 1, -6)
-			end
-			button:Show()
-			local archivePrevButton = prevButton
-			local setsDisplayed = 0
-			prevButton = button
-			
-			if collections[i].sets then
-				local sortedList = SetCollector:SortList(collections[i].sets, SORT_BY, SORT_DIR)
-				for j,value in sortedList do
-					
-					rowIndex = rowIndex + 1
-					titleButton = GetSetButton(rowIndex)
-					titleButton.Text:SetText(L[collections[i].sets[j].Title] or L["MISSING_LOCALIZATION"])			-- Putting Text into FontString allows for Wrapping using SetWidth
-					titleButton.Text:SetWidth(COLLECTION_LIST_WIDTH - 32)
-					
-					if (i == 10) then
-						titleButton.SubText:SetText("|cff999999".."SubText Here".."|r")
-					end
-					
-					local height = titleButton.Text:GetHeight() + titleButton.SubText:GetHeight() + 10
-					titleButton:SetHeight(height)
-					titleButton.Collection = i
-					titleButton.Set = j
-					titleButton:ClearAllPoints()
-					titleButton:SetPoint("TOPLEFT", prevButton, "BOTTOMLEFT", 0, 0)
-					titleButton:Hide()
-					
-					local isFavorite = SetCollector:IsFavoriteSet(j)
-					if isFavorite then
-						titleButton.Favorite:Show()
-					else
-						titleButton.Favorite:Hide()
-					end
-					
-					if ( SHOW_ONLY_FAVORITES == true and not isFavorite ) then
-							-- Keep it hidden
-					elseif not COLLECTION_COLLAPSED[i] then
-						titleButton:Show()
-						prevButton = titleButton
-						setsDisplayed = setsDisplayed + 1
-					end
-				end	
-			end
-			if setsDisplayed == 0 and not COLLECTION_COLLAPSED[i] then					-- Hides the Collections button when no sets are displayed
-				button:Hide()
-				prevButton = archivePrevButton
-			end
-		end
-	end
 end
 
 
@@ -460,6 +461,20 @@ local function SetFilter(self, classIndex)
 	end
 end
 
+local function GetFilteredRole()
+  local currFilter = GetFilterOptions()
+	local specID = 0
+	
+	if currFilter == LE_LOOT_FILTER_CLASS then	-- 2
+		local currentSpec = GetSpecialization()
+		specID = currentSpec and select(1, GetSpecializationInfo(currentSpec)) or "None"
+	else -- Spec
+		local id = GetSpecializationInfo(currFilter - LE_LOOT_FILTER_SPEC1 + 1)
+		specID = id
+	end
+  return GetSetSpecializationRole(specID)
+end
+
 local function InitFilter()
 	local info = UIDropDownMenu_CreateInfo();
 	local currFilter = GetFilterOptions();
@@ -604,8 +619,90 @@ end
 --  Finalize UI Setup
 --
 
-function SetCollector:GetFrameObject()
-	return frame
+function SetCollector:UpdateScrollFrame(collections, DEBUG)
+	if DEBUG then SetCollector:Print("Updating ScrollFrame") end
+	if collections then
+		if DEBUG then SetCollector:Print("Received list of collections.") end
+		prevButton = nil
+		rowIndex = 1
+		
+		for i=1, #collections do
+			rowIndex = rowIndex + 1
+			button = GetCollectionButton(rowIndex)
+			if ( COLLECTION_COLLAPSED[i] == true ) then
+				button:SetText(L[collections[i].Title].."...")
+			else
+				button:SetText(L[collections[i].Title])
+			end
+			button.Collection = i
+			button:ClearAllPoints()
+			if ( prevButton ) then
+				button:SetPoint("TOPLEFT", prevButton, "BOTTOMLEFT", 0, 0)
+			else
+				button:SetPoint("TOPLEFT", 1, -6)
+			end
+			button:Show()
+			local archivePrevButton = prevButton
+			local setsDisplayed = 0
+			prevButton = button
+			
+			if collections[i].sets then
+				local sortedList = SetCollector:SortList(collections[i].sets, SORT_BY, SORT_DIR)
+				for j,value in sortedList do
+					
+					rowIndex = rowIndex + 1
+					titleButton = GetSetButton(rowIndex)
+					titleButton.Text:SetText(L[collections[i].sets[j].Title] or L["MISSING_LOCALIZATION"])			-- Putting Text into FontString allows for Wrapping using SetWidth
+					titleButton.Text:SetWidth(COLLECTION_LIST_WIDTH - 32)
+					
+					if (i == 10) then
+						titleButton.SubText:SetText("|cff999999".."SubText Here".."|r")
+					end
+					
+					local height = titleButton.Text:GetHeight() + titleButton.SubText:GetHeight() + 10
+					titleButton:SetHeight(height)
+					titleButton.Collection = i
+					titleButton.Set = j
+					titleButton:ClearAllPoints()
+					titleButton:SetPoint("TOPLEFT", prevButton, "BOTTOMLEFT", 0, 0)
+					titleButton:Hide()
+					
+					local isFavorite = SetCollector:IsFavoriteSet(j)
+					if isFavorite then
+						titleButton.Favorite:Show()
+					else
+						titleButton.Favorite:Hide()
+					end
+					
+					
+				  local _, class = UnitClass("player")
+				  local armorType = GetClassArmorType(class)
+					local faction = UnitFactionGroup("player")
+					local role = GetFilteredRole()
+					
+					if SetCollector:SetIsFilteredOutByArmorType(i, j, armorType) then
+						-- Keep it hidden
+					elseif SetCollector:SetIsFilteredOutByClass(i, j, class) then
+						-- Keep it hidden
+					elseif SetCollector:SetIsFilteredOutByFaction(i, j, faction) then
+						-- Keep it hidden
+					elseif SetCollector:SetIsFilteredOutByRole(i, j, role) then
+						-- Keep it hidden
+					elseif SHOW_ONLY_FAVORITES == true and not isFavorite then
+						-- Keep it hidden
+					elseif not COLLECTION_COLLAPSED[i] then
+						titleButton:Show()
+						prevButton = titleButton
+						setsDisplayed = setsDisplayed + 1
+					end
+				end	
+			end
+			if setsDisplayed == 0 and not COLLECTION_COLLAPSED[i] then					-- Hides the Collections button when no sets are displayed
+				button:Hide()
+				prevButton = archivePrevButton
+			end
+		end
+	end
 end
 
 function SetCollector:HideUI(DEBUG)
