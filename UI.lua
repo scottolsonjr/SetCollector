@@ -33,6 +33,13 @@ local SHOW_ONLY_FAVORITES 	= false
 local SHOW_ONLY_OBTAINABLE 	= false
 local SHOW_ONLY_TRANSMOG 		= false
 
+local COLLECTION_COLLAPSED 	= { false, false, false, false, false, false, false, false }			-- Currently there are eight possible collections
+
+local SELECTED_BUTTON = nil
+
+local SORT_BY = "key"					-- Default Sort Value
+local SORT_DIR = "DESC"				-- Default Sort Direction
+
 --
 --  Setup Frame
 --
@@ -63,7 +70,12 @@ frame:SetAttribute("UIPanelLayout-whileDead", true)
 local helpButton = CreateFrame("Button","$parentTutorialButton",frame,"MainHelpPlateButton")
 helpButton:SetPoint("TOPLEFT",frame, 39, 20)
 
--- Add Left Inset (ScrollFrame)
+
+
+--
+--  ScrollFrame
+--
+
 local leftInset = CreateFrame("Frame","$parentLeftInset",frame,"InsetFrameTemplate")
 leftInset:SetWidth(COLLECTION_LIST_WIDTH)
 leftInset:SetHeight(496)
@@ -76,7 +88,221 @@ local scrollFrame = CreateFrame("ScrollFrame","SetCollectorScrollFrame",frame,"S
 scrollFrame:SetPoint("TOPLEFT","$parentLeftInset","TOPLEFT",2,-5)
 scrollFrame:SetPoint("BOTTOMRIGHT","$parentLeftInset","BOTTOMRIGHT", -4, 3)
 
--- Add Right Inset (Model)
+local function GetCollectionButton(index)
+	local buttons = SetCollectorFrame.CollectionsFrame.Contents.Collections;
+	if ( not buttons[index] ) then
+		local button = CreateFrame("BUTTON", nil, SetCollectorFrame.CollectionsFrame.Contents, "SetCollectorCollectionTemplate");
+		buttons[index] = button;
+	end
+	return buttons[index];
+end
+
+function SetCollectorCollectionButton_OnClick(self)
+	COLLECTION_COLLAPSED[self.Collection] = not COLLECTION_COLLAPSED[self.Collection]
+	SetCollector:UpdateCollections()
+end
+
+local function GetSetButton(index)
+	local buttons = SetCollectorFrame.CollectionsFrame.Contents.Sets;
+	if ( not buttons[index] ) then
+		local button = CreateFrame("BUTTON", nil, SetCollectorFrame.CollectionsFrame.Contents, "SetCollectorSetTemplate");
+		buttons[index] = button;
+	end
+	return buttons[index];
+end
+
+local function SetHighlight(button, ...)
+	local collection 	= button.Collection
+	local set 				= button.Set
+	if ( button ) then SetCollectorLegacy_UnsetHighlight(SELECTED_BUTTON) end
+	button.Text:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
+	button.Texture:Show()
+	SELECTED_BUTTON = button
+end
+
+local function UnsetHighlight(button, ...)
+	if ( button ) then			
+		button.Text:SetTextColor(1.0, 0.82, 0);
+		button.Texture:Hide()
+	end
+	SELECTED_BUTTON = nil
+end
+
+function SetCollectorSetButton_OnClick(self, button, ...)
+	if ( button == "LeftButton" ) then
+		if ( self ~= SELECTED_BUTTON ) then
+			--SetVariantTabs(self.Collection, self.Set)
+			SetHighlight(self)
+		else
+			--SetVariantTabs()
+			--ClearItemButtons()
+			UnsetHighlight(self)
+		end
+	elseif ( button == "RightButton" ) then
+  	--[[if ( self == SELECTED_BUTTON ) then
+	  	local Log = SetCollectorLegacyCharacterDB
+	  	if ( Log.Sets[self.Set].Favorite == false ) then
+	  		Log.Sets[self.Set].Favorite = true
+	  		for i=1, #SetCollectorLegacyCharacterDB.Sets[self.Set].Variants do
+	  			SetCollectorLegacyCharacterDB.Sets[self.Set].Variants[i].Favorite = true
+	  		end
+	  		self.Favorite:Show()
+	  	else
+	  		Log.Sets[self.Set].Favorite = false
+	  		for i=1, #SetCollectorLegacyCharacterDB.Sets[self.Set].Variants do
+	  			SetCollectorLegacyCharacterDB.Sets[self.Set].Variants[i].Favorite = false
+	  		end
+	  		self.Favorite:Hide()
+	  	end
+			SetVariantTabs(self.Collection, self.Set)
+		else
+	  	local Log = SetCollectorLegacyCharacterDB
+	  	if ( Log.Sets[self.Set].Favorite == false ) then
+	  		Log.Sets[self.Set].Favorite = true
+	  		for i=1, #SetCollectorLegacyCharacterDB.Sets[self.Set].Variants do
+	  			SetCollectorLegacyCharacterDB.Sets[self.Set].Variants[i].Favorite = true
+	  		end
+	  		self.Favorite:Show()
+	  	else
+	  		Log.Sets[self.Set].Favorite = false
+	  		for i=1, #SetCollectorLegacyCharacterDB.Sets[self.Set].Variants do
+	  			SetCollectorLegacyCharacterDB.Sets[self.Set].Variants[i].Favorite = false
+	  		end
+	  		self.Favorite:Hide()
+	  	end
+		end]]--
+  else
+  	print(button)
+	end
+end
+
+function SetCollectorSetButton_OnEnter(self)
+	if ( self.Collection and self.Set ) then 
+		self.Text:SetFontObject("GameFontHighlightLeft")
+		
+		--[[local Collection = SetCollectorLegacyDB
+		local collection = Collection[self.Collection].Title
+		local set = _L[Collection[self.Collection].Sets[self.Set].Title] or _L["MISSING_LOCALIZATION"]
+	
+		GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT", -16, 16)
+		GameTooltip:SetText(set, 1, 1, 1)
+		for i=1, #Collection[self.Collection].Sets[self.Set].Variants do
+			local collected = 0
+			if ( SHOW_ONLY_OBTAINABLE == true and Collection[self.Collection].Sets[self.Set].Variants[i].Obtainable == false ) then
+				-- Don't list
+			elseif ( SHOW_ONLY_TRANSMOG == true and Collection[self.Collection].Sets[self.Set].Variants[i].Transmogrifiable == false ) then
+				-- Don't list
+			else
+				for j=1, #Collection[self.Collection].Sets[self.Set].Variants[i].Items do
+					local itemID = Collection[self.Collection].Sets[self.Set].Variants[i].Items[j]
+					local count = 0
+					count = count + GetItemCount(itemID, true)
+					if SetCollectorLegacyCharacterDB.Items[itemID] then			-- Get Void Storage Count
+						count = count + SetCollectorLegacyCharacterDB.Items[itemID].Count
+					end
+					if count > 0 then collected = collected + 1; end
+				end
+				local line = ""
+				if Collection[self.Collection].Sets[self.Set].Variants[i].Count and _L[Collection[self.Collection].Sets[self.Set].Variants[i].Title] then
+					line = "- "..collected.."/"..Collection[self.Collection].Sets[self.Set].Variants[i].Count.." ".._L[Collection[self.Collection].Sets[self.Set].Variants[i].Title]
+				elseif Collection[self.Collection].Sets[self.Set].Variants[i].Count and not _L[Collection[self.Collection].Sets[self.Set].Variants[i].Title] then
+					line = "- "..collected.."/"..Collection[self.Collection].Sets[self.Set].Variants[i].Count.." ".._L["MISSING_LOCALIZATION"]
+				elseif not Collection[self.Collection].Sets[self.Set].Variants[i].Count and _L[Collection[self.Collection].Sets[self.Set].Variants[i].Title] then
+					line = "- "..collected.."/? ".._L[Collection[self.Collection].Sets[self.Set].Variants[i].Title]
+				else
+					line = "- "..collected.."/? ".._L["MISSING_LOCALIZATION"]
+				end
+				if Collection[self.Collection].Sets[self.Set].Variants[i] and not Collection[self.Collection].Sets[self.Set].Variants[i].Transmogrifiable then
+					local text = _L["NOTRANSMOG"] or _L["MISSING_LOCALIZATION"]
+					line = line.." ("..text..")"
+				end
+				if Collection[self.Collection].Sets[self.Set].Variants[i] and not Collection[self.Collection].Sets[self.Set].Variants[i].Obtainable then
+					local text = _L["NOOBTAIN"] or _L["MISSING_LOCALIZATION"]
+					line = line.." ("..text..")"
+				end
+				GameTooltip:AddLine(line)
+			end
+		end
+		local rightclick = _L["RIGHT_CLICK_FAVORITE"] or _L["MISSING_LOCALIZATION"]
+		GameTooltip:AddLine(rightclick, 1, 1, 1)
+		GameTooltip:Show()]]--
+	end
+end
+
+function SetCollectorSetButton_OnLeave(self)
+	self.Text:SetFontObject("GameFontNormalLeft")
+	GameTooltip:Hide()
+end
+
+function SetCollector:UpdateScrollFrame(collections, DEBUG)
+	if DEBUG then SetCollector:Print("Updating ScrollFrame") end
+	if collections then
+		if DEBUG then SetCollector:Print("Received list of collections.") end
+		prevButton = nil
+		rowIndex = 1
+		
+		for i=1, #collections do
+			rowIndex = rowIndex + 1
+			button = GetCollectionButton(rowIndex)
+			if ( COLLECTION_COLLAPSED[i] == true ) then
+				button:SetText(L[collections[i].Title].."...")
+			else
+				button:SetText(L[collections[i].Title])
+			end
+			button.Collection = i
+			button:ClearAllPoints()
+			if ( prevButton ) then
+				button:SetPoint("TOPLEFT", prevButton, "BOTTOMLEFT", 0, 0)
+			else
+				button:SetPoint("TOPLEFT", 1, -6)
+			end
+			button:Show()
+			local archivePrevButton = prevButton
+			local setsDisplayed = 0
+			prevButton = button
+			
+			if collections[i].sets then
+				local sortedList = SetCollector:SortList(collections[i].sets, SORT_BY, SORT_DIR)
+				for j,value in sortedList do
+					
+					rowIndex = rowIndex + 1
+					titleButton = GetSetButton(rowIndex)
+					titleButton.Text:SetText(L[collections[i].sets[j].Title] or L["MISSING_LOCALIZATION"])			-- Putting Text into FontString allows for Wrapping using SetWidth
+					titleButton.Text:SetWidth(COLLECTION_LIST_WIDTH - 32)
+					
+					if (i == 10) then
+						titleButton.SubText:SetText("|cff999999".."SubText Here".."|r")
+					end
+					
+					local height = titleButton.Text:GetHeight() + titleButton.SubText:GetHeight() + 10
+					titleButton:SetHeight(height)
+					titleButton.Collection = i
+					titleButton.Set = j
+					titleButton:ClearAllPoints()
+					titleButton:SetPoint("TOPLEFT", prevButton, "BOTTOMLEFT", 0, 0)
+					titleButton:Hide()
+					
+					if not COLLECTION_COLLAPSED[i] then
+						titleButton:Show()
+						prevButton = titleButton
+						setsDisplayed = setsDisplayed + 1
+					end
+				end	
+			end
+			if setsDisplayed == 0 and not COLLECTION_COLLAPSED[i] then					-- Hides the Collections button when no sets are displayed
+				button:Hide()
+				prevButton = archivePrevButton
+			end
+		end
+	end
+end
+
+
+
+--
+--  Model
+--
+
 local rightInset = CreateFrame("Frame","$parentRightInset",frame,"InsetFrameTemplate")
 rightInset:SetPoint("TOPRIGHT", -6, -60)
 rightInset:SetPoint("BOTTOMLEFT", leftInset, "BOTTOMRIGHT", 20, 0)
@@ -116,12 +342,6 @@ progressDisplay:SetFrameLevel(10)
 progressDisplay:RegisterForClicks("AnyDown")
 progressDisplay:SetScript("OnClick", SetCollectorSummaryButton_OnClick)
 progressDisplay:Hide()
-
-
-
---
---  Model
---
 
 local modelFrame = CreateFrame("DressUpModel","$parentModelFrame",setDisplay,"ModelWithZoomTemplate") --"ModelWithControlsTemplate")
 modelFrame:SetPoint("TOPLEFT", setDisplay, "TOPLEFT", 0, 0)
@@ -487,7 +707,6 @@ function SetCollector:OnHide(self)
 	--ClearItemButtons()
 	--SetCollectorLegacy_UnsetHighlight(SELECTED_BUTTON)
 end
-
 
 function SetCollector:SetupUI(DEBUG)
 	local tutorialScript = function() SetCollector:ToggleTutorial() end

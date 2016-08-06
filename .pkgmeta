@@ -13,6 +13,12 @@ externals:
   Libs/AceDB-3.0:
     url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceDB-3.0
     tag: latest
+  Libs/AceEvent-3.0:
+    url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceEvent-3.0
+    tag: latest
+  Libs/AceGUI-3.0:
+    url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceGUI-3.0
+    tag: latest
   Libs/AceLocale-3.0:
     url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceLocale-3.0
     tag: latest
