@@ -139,38 +139,10 @@ function SetCollectorSetButton_OnClick(self, button, ...)
 			UnsetHighlight(self)
 		end
 	elseif ( button == "RightButton" ) then
-  	--[[if ( self == SELECTED_BUTTON ) then
-	  	local Log = SetCollectorLegacyCharacterDB
-	  	if ( Log.Sets[self.Set].Favorite == false ) then
-	  		Log.Sets[self.Set].Favorite = true
-	  		for i=1, #SetCollectorLegacyCharacterDB.Sets[self.Set].Variants do
-	  			SetCollectorLegacyCharacterDB.Sets[self.Set].Variants[i].Favorite = true
-	  		end
-	  		self.Favorite:Show()
-	  	else
-	  		Log.Sets[self.Set].Favorite = false
-	  		for i=1, #SetCollectorLegacyCharacterDB.Sets[self.Set].Variants do
-	  			SetCollectorLegacyCharacterDB.Sets[self.Set].Variants[i].Favorite = false
-	  		end
-	  		self.Favorite:Hide()
-	  	end
-			SetVariantTabs(self.Collection, self.Set)
-		else
-	  	local Log = SetCollectorLegacyCharacterDB
-	  	if ( Log.Sets[self.Set].Favorite == false ) then
-	  		Log.Sets[self.Set].Favorite = true
-	  		for i=1, #SetCollectorLegacyCharacterDB.Sets[self.Set].Variants do
-	  			SetCollectorLegacyCharacterDB.Sets[self.Set].Variants[i].Favorite = true
-	  		end
-	  		self.Favorite:Show()
-	  	else
-	  		Log.Sets[self.Set].Favorite = false
-	  		for i=1, #SetCollectorLegacyCharacterDB.Sets[self.Set].Variants do
-	  			SetCollectorLegacyCharacterDB.Sets[self.Set].Variants[i].Favorite = false
-	  		end
-	  		self.Favorite:Hide()
-	  	end
-		end]]--
+	  SetCollector:SetFavoriteSet(self)
+  	if ( self == SELECTED_BUTTON ) then
+			--SetVariantTabs(self.Collection, self.Set)
+		end
   else
   	print(button)
 	end
@@ -179,53 +151,7 @@ end
 function SetCollectorSetButton_OnEnter(self)
 	if ( self.Collection and self.Set ) then 
 		self.Text:SetFontObject("GameFontHighlightLeft")
-		
-		--[[local Collection = SetCollectorLegacyDB
-		local collection = Collection[self.Collection].Title
-		local set = _L[Collection[self.Collection].Sets[self.Set].Title] or _L["MISSING_LOCALIZATION"]
-	
-		GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT", -16, 16)
-		GameTooltip:SetText(set, 1, 1, 1)
-		for i=1, #Collection[self.Collection].Sets[self.Set].Variants do
-			local collected = 0
-			if ( SHOW_ONLY_OBTAINABLE == true and Collection[self.Collection].Sets[self.Set].Variants[i].Obtainable == false ) then
-				-- Don't list
-			elseif ( SHOW_ONLY_TRANSMOG == true and Collection[self.Collection].Sets[self.Set].Variants[i].Transmogrifiable == false ) then
-				-- Don't list
-			else
-				for j=1, #Collection[self.Collection].Sets[self.Set].Variants[i].Items do
-					local itemID = Collection[self.Collection].Sets[self.Set].Variants[i].Items[j]
-					local count = 0
-					count = count + GetItemCount(itemID, true)
-					if SetCollectorLegacyCharacterDB.Items[itemID] then			-- Get Void Storage Count
-						count = count + SetCollectorLegacyCharacterDB.Items[itemID].Count
-					end
-					if count > 0 then collected = collected + 1; end
-				end
-				local line = ""
-				if Collection[self.Collection].Sets[self.Set].Variants[i].Count and _L[Collection[self.Collection].Sets[self.Set].Variants[i].Title] then
-					line = "- "..collected.."/"..Collection[self.Collection].Sets[self.Set].Variants[i].Count.." ".._L[Collection[self.Collection].Sets[self.Set].Variants[i].Title]
-				elseif Collection[self.Collection].Sets[self.Set].Variants[i].Count and not _L[Collection[self.Collection].Sets[self.Set].Variants[i].Title] then
-					line = "- "..collected.."/"..Collection[self.Collection].Sets[self.Set].Variants[i].Count.." ".._L["MISSING_LOCALIZATION"]
-				elseif not Collection[self.Collection].Sets[self.Set].Variants[i].Count and _L[Collection[self.Collection].Sets[self.Set].Variants[i].Title] then
-					line = "- "..collected.."/? ".._L[Collection[self.Collection].Sets[self.Set].Variants[i].Title]
-				else
-					line = "- "..collected.."/? ".._L["MISSING_LOCALIZATION"]
-				end
-				if Collection[self.Collection].Sets[self.Set].Variants[i] and not Collection[self.Collection].Sets[self.Set].Variants[i].Transmogrifiable then
-					local text = _L["NOTRANSMOG"] or _L["MISSING_LOCALIZATION"]
-					line = line.." ("..text..")"
-				end
-				if Collection[self.Collection].Sets[self.Set].Variants[i] and not Collection[self.Collection].Sets[self.Set].Variants[i].Obtainable then
-					local text = _L["NOOBTAIN"] or _L["MISSING_LOCALIZATION"]
-					line = line.." ("..text..")"
-				end
-				GameTooltip:AddLine(line)
-			end
-		end
-		local rightclick = _L["RIGHT_CLICK_FAVORITE"] or _L["MISSING_LOCALIZATION"]
-		GameTooltip:AddLine(rightclick, 1, 1, 1)
-		GameTooltip:Show()]]--
+		SetCollector:GetSetTooltip(self)
 	end
 end
 
@@ -282,7 +208,16 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 					titleButton:SetPoint("TOPLEFT", prevButton, "BOTTOMLEFT", 0, 0)
 					titleButton:Hide()
 					
-					if not COLLECTION_COLLAPSED[i] then
+					local isFavorite = SetCollector:IsFavoriteSet(j)
+					if isFavorite then
+						titleButton.Favorite:Show()
+					else
+						titleButton.Favorite:Hide()
+					end
+					
+					if ( SHOW_ONLY_FAVORITES == true and not isFavorite ) then
+							-- Keep it hidden
+					elseif not COLLECTION_COLLAPSED[i] then
 						titleButton:Show()
 						prevButton = titleButton
 						setsDisplayed = setsDisplayed + 1
@@ -438,7 +373,7 @@ end
 
 function SetCollector:SetVariantTab(self, tab)
 	PanelTemplates_SetTab(self, tab);
-	--SetCVar("SetCollectorLegacyTab", tab);
+	--SetCVar("SetCollectorTab", tab);
 	SetCollector:UpdateSelectedVariantTab(self);
 end
 
@@ -454,18 +389,13 @@ filterButton:SetAttribute("enableMouse","true")
 filterButton:SetAttribute("parentKey","setFilter")
 
 local function GetFilters()
-	-- Do I still want to remember filters between sessions
-	--SHOW_ONLY_FAVORITES 	= SetCollectorCharacterDB.Filters.favorites
-	--SHOW_ONLY_OBTAINABLE 	= SetCollectorCharacterDB.Filters.obtainable
-	--SHOW_ONLY_TRANSMOG 		= SetCollectorCharacterDB.Filters.transmog
-	--CURRENT_FILTER 				= SetCollectorCharacterDB.Filters.spec
+	CURRENT_FILTER 				= SetCollector.db.char.filters.specialization
+	SHOW_ONLY_FAVORITES 	= SetCollector.db.char.filters.favorites
 end
 
 local function SetFilters()
-	--SetCollectorLegacyCharacterDB.Filters.favorites		= SHOW_ONLY_FAVORITES
-	--SetCollectorLegacyCharacterDB.Filters.obtainable 	= SHOW_ONLY_OBTAINABLE
-	--SetCollectorLegacyCharacterDB.Filters.transmog 		= SHOW_ONLY_TRANSMOG
-	--SetCollectorLegacyCharacterDB.Filters.spec 				= CURRENT_FILTER
+	SetCollector.db.char.filters.specialization		= CURRENT_FILTER
+	SetCollector.db.char.filters.favorites				= SHOW_ONLY_FAVORITES
 end
 
 local function SetFilterOptions(classIndex)
@@ -519,12 +449,12 @@ local function SetFilter(self, classIndex)
 	end
 	SetFilters()
 	if frame:IsShown() then
-		--CollectionsUpdate();
+		SetCollector:UpdateCollections();
 		UpdateFilterString()
 	
 		-- Clear Selection
-		--SetCollectorLegacy_UnsetHighlight(SELECTED_BUTTON)
-		--SELECTED_BUTTON = nil
+		UnsetHighlight(SELECTED_BUTTON)
+		SELECTED_BUTTON = nil
 		--SetVariantTabs()
 		--ClearItemButtons()
 	end
@@ -565,7 +495,7 @@ local function InitFilter()
 	info.arg1 = "favorites";
 	UIDropDownMenu_AddButton(info);
 	
-	info.leftPadding = nil;
+	--[[info.leftPadding = nil;
 	info.text = L["OBTAIN_FILTER"] or L["MISSING_LOCALIZATION"];
 	info.checked = SHOW_ONLY_OBTAINABLE;
 	info.arg1 = "obtainable";
@@ -575,7 +505,7 @@ local function InitFilter()
 	info.text = L["TRANSMOG_FILTER"] or L["MISSING_LOCALIZATION"];
 	info.checked = SHOW_ONLY_TRANSMOG;
 	info.arg1 = "transmog";
-	UIDropDownMenu_AddButton(info);
+	UIDropDownMenu_AddButton(info);]]--
 end
 
 function SetCollector:InitializeFilter()
@@ -702,10 +632,10 @@ end
 
 function SetCollector:OnHide(self)
 	HelpPlate_Hide()
-	--SetCollectorLegacySummaryButton:Hide()
+	--SetCollectorSummaryButton:Hide()
 	--SetVariantTabs()
 	--ClearItemButtons()
-	--SetCollectorLegacy_UnsetHighlight(SELECTED_BUTTON)
+	UnsetHighlight(SELECTED_BUTTON)
 end
 
 function SetCollector:SetupUI(DEBUG)
