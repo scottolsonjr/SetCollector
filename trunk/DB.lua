@@ -28,6 +28,11 @@ local WOW_VERSION = select(4,GetBuildInfo())
 
 local ANY					=	{ Code = "Z", Description = "Any" }
 
+local CLOTH				= { Code = "C", Description = "CLOTH" }
+local LEATHER			= { Code = "L", Description = "LEATHER" }
+local MAIL				= { Code = "M", Description = "MAIL" }
+local PLATE				= { Code = "P", Description = "PLATE" }
+
 local DEATHKNIGHT = { Code = "DK", Description = "DEATHKNIGHT" }
 local DRUID 			= { Code = "DR", Description = "DRUID" }
 local HUNTER 			= { Code = "HU", Description = "HUNTER" }
@@ -94,13 +99,14 @@ local function GetTooltipIdentifier(collection, id, title)
 	return identifier
 end
 
-local function AddSet(minVersion, maxVersion, collection, id, title, class, role, faction, ...)
+local function AddSet(minVersion, maxVersion, collection, id, title, armorType, class, role, faction, ...)
 	if WOW_VERSION >= minVersion then
 		if maxVersion == nil or WOW_VERSION <= maxVersion then
 			local tempSet = { }
 			tempSet = {
 				Title = title,
 				TooltipID = GetTooltipIdentifier(collection, id, title),
+				ArmorType = armorType,
 				Class = class.Description,
 				Role = role.Description,
 				Faction = faction.Description,
@@ -143,9 +149,9 @@ local function GetGeneralAppearances()
 	local set = ""
 	
 	-- RAID
-	set = AddSet(70000,nil,RAID,180,"TR_MAIL_18",ANY,ANY,ANY)
+	set = AddSet(70000,nil,RAID,180,"TR_MAIL_18",MAIL,ANY,ANY,ANY)
 				AddVariant(70000,nil,RAID,set,"RAIDFINDER",25949,25950,25947,25948,25951,25946)		-- Need belt
-	set = AddSet(70000,nil,RAID,170,"TR_MAIL_17",ANY,ANY,ANY)
+	set = AddSet(70000,nil,RAID,170,"TR_MAIL_17",MAIL,ANY,ANY,ANY)
 				AddVariant(70000,nil,RAID,set,"RAIDFINDER",22684,22686,22682,22683,22685,22681)		-- Need belt
 
 	-- DUNGEON
@@ -158,39 +164,39 @@ local function GetShamanAppearances()
 	
 	-- LEGENDARY
 	
-	set = AddSet(50400,nil,LEGENDARY,90,"LG_CASTER_INT_90",SHAMAN,CASTER,ANY)
+	set = AddSet(50400,nil,LEGENDARY,90,"LG_CASTER_INT_90",ANY,SHAMAN,CASTER,ANY)
 				AddVariant(50400,nil,LEGENDARY,set,"LG_CASTER_INT_90",20801)
 	
-	set = AddSet(50400,nil,LEGENDARY,90,"LG_MELEE_AGI_90",SHAMAN,MELEE,ANY)
+	set = AddSet(50400,nil,LEGENDARY,90,"LG_MELEE_AGI_90",ANY,SHAMAN,MELEE,ANY)
 				AddVariant(50400,nil,LEGENDARY,set,"LG_MELEE_AGI_90",20805)
 	
-	set = AddSet(50400,nil,LEGENDARY,90,"LG_HEALER_INT_90",SHAMAN,HEALER,ANY)
+	set = AddSet(50400,nil,LEGENDARY,90,"LG_HEALER_INT_90",ANY,SHAMAN,HEALER,ANY)
 				AddVariant(50400,nil,LEGENDARY,set,"LG_HEALER_INT_90",20825)
 	
-	set = AddSet(50400,nil,LEGENDARY,80,"LG_HEALER_80",SHAMAN,ANY,ANY)
+	set = AddSet(50400,nil,LEGENDARY,80,"LG_HEALER_80",ANY,SHAMAN,ANY,ANY)
 				AddVariant(50400,nil,LEGENDARY,set,"LG_HEALER_80",11613)
 	
-	set = AddSet(70000,nil,LEGENDARY,60,"LG_60",SHAMAN,ANY,ANY)
+	set = AddSet(70000,nil,LEGENDARY,60,"LG_60",ANY,SHAMAN,ANY,ANY)
 				AddVariant(70000,nil,LEGENDARY,set,"LG_60",5131)
 	
 	-- RAID
 	
-	set = AddSet(70000,nil,RAID,191,"SH_TR_19",SHAMAN,ANY,ANY)
+	set = AddSet(70000,nil,RAID,191,"SH_TR_19",MAIL,SHAMAN,ANY,ANY)
 				AddVariant(70000,nil,RAID,set,"RAIDFINDER",32095,32096,32086,32099,32094,32097)		-- Need belt and feet for each variant
 				AddVariant(70000,nil,RAID,set,"NORMAL",30937,30938,31364,30942,30936,30939)
 				AddVariant(70000,nil,RAID,set,"HEROIC",30928,30929,31363,30932,30927,30930)
 				AddVariant(70000,nil,RAID,set,"MYTHIC",31039,31041,31348,31043,31038,31040)
-	set = AddSet(70000,nil,RAID,181,"SH_TR_18",SHAMAN,ANY,ANY)
+	set = AddSet(70000,nil,RAID,181,"SH_TR_18",MAIL,SHAMAN,ANY,ANY)
 				AddVariant(70000,nil,RAID,set,"NORMAL",26019,26021,26023,26018,26016,26020,26472)
 				AddVariant(70000,nil,RAID,set,"HEROIC",26036,26038,26040,26035,26033,26037,26474)
 				AddVariant(70000,nil,RAID,set,"MYTHIC",26000,26002,26004,25999,25996,26001,25997)
-	set = AddSet(70000,nil,RAID,171,"SH_TR_17",SHAMAN,ANY,ANY)
+	set = AddSet(70000,nil,RAID,171,"SH_TR_17",MAIL,SHAMAN,ANY,ANY)
 				AddVariant(70000,nil,RAID,set,"NORMAL",23360,23361,23363,23368,23365)		-- Need Belt and Feet
 				AddVariant(70000,nil,RAID,set,"HEROIC",23370,23371,23373,23378,23375)
 				AddVariant(70000,nil,RAID,set,"MYTHIC",23678,23679,23688,23677,23689)
 				
 	-- DUNGEON
-	set = AddSet(70000,nil,DUNGEON,30,"SH_DG_03",SHAMAN,ANY,ANY)
+	set = AddSet(70000,nil,DUNGEON,30,"SH_DG_03",MAIL,SHAMAN,ANY,ANY)
 				AddVariant(70000,nil,DUNGEON,set,"SH_DG_03",7163,6962,7104,6876,7020)
 	
 	
@@ -272,6 +278,46 @@ function SetCollector:GetSetTooltip(self)
 	GameTooltip:AddLine(rightclick, 1, 1, 1)
 	
 	GameTooltip:Show()
+end
+
+function SetCollector:SetIsFilteredOutByArmorType(collection, set, type)
+	local db = SetCollector.db.global.collections
+	local setType = db[collection].Sets[set].ArmorType.Description
+	if (setType == ANY.Description or setType == type or type == "Any") then
+		return false
+	else
+		return true
+	end
+end
+
+function SetCollector:SetIsFilteredOutByClass(collection, set, class)
+	local db = SetCollector.db.global.collections
+	local setClass = db[collection].Sets[set].Class
+	if (setClass == ANY.Description or setClass == class or class == "Any") then
+		return false
+	else
+		return true
+	end
+end
+
+function SetCollector:SetIsFilteredOutByFaction(collection, set, faction)
+	local db = SetCollector.db.global.collections
+	local setFaction = db[collection].Sets[set].Faction
+	if (setFaction == ANY.Description or setFaction == faction or faction == "Any") then
+		return false
+	else
+		return true
+	end
+end
+
+function SetCollector:SetIsFilteredOutByRole(collection, set, role)
+	local db = SetCollector.db.global.collections
+	local setRole = db[collection].Sets[set].Role
+	if (setRole == ANY.Description or setRole == role or role == "Any") then
+		return false
+	else
+		return true
+	end
 end
 
 function SetCollector:IsFavoriteSet(set)
