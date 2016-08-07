@@ -113,7 +113,7 @@ local function AddSet(minVersion, maxVersion, collection, id, title, armorType, 
 				Name = name,
 				Variants = { }
 			}
-			local ID = collection.Code..string.format("%03d", id)..class.Code..role.Code..faction.Code
+			local ID = collection.Code..string.format("%03d", id)..armorType.Code..class.Code..role.Code..faction.Code
 			SetCollector.db.global.collections[collection.ID].Sets[ID] = tempSet
 			return ID
 		end
@@ -149,10 +149,23 @@ local function GetGeneralAppearances()
 	local set = ""
 	
 	-- RAID
+	set = AddSet(70000,nil,RAID,180,"TR_CLOTH_18",CLOTH,ANY,ANY,ANY)
+				AddVariant(70000,nil,RAID,set,"RAIDFINDER",25845,25847,25849,25844,25846,25842)		-- Need belt
+	set = AddSet(70000,nil,RAID,180,"TR_LEATHER_18",LEATHER,ANY,ANY,ANY)
+				AddVariant(70000,nil,RAID,set,"RAIDFINDER",25983,25985,25981,25982,25984,25979)		-- Need belt
 	set = AddSet(70000,nil,RAID,180,"TR_MAIL_18",MAIL,ANY,ANY,ANY)
 				AddVariant(70000,nil,RAID,set,"RAIDFINDER",25949,25950,25947,25948,25951,25946)		-- Need belt
+	set = AddSet(70000,nil,RAID,180,"TR_PLATE_18",PLATE,ANY,ANY,ANY)
+				AddVariant(70000,nil,RAID,set,"RAIDFINDER",25933,25935,25931,25932,25934,25930)		-- Need belt
+				
+	set = AddSet(70000,nil,RAID,170,"TR_CLOTH_17",CLOTH,ANY,ANY,ANY)
+				AddVariant(70000,nil,RAID,set,"RAIDFINDER",22599,22595,22597,22598,22600,22594)		-- Need belt
+	set = AddSet(70000,nil,RAID,170,"TR_LEATHER_17",LEATHER,ANY,ANY,ANY)
+				AddVariant(70000,nil,RAID,set,"RAIDFINDER",23053,23055,23051,23052,23054,23050)		-- Need belt
 	set = AddSet(70000,nil,RAID,170,"TR_MAIL_17",MAIL,ANY,ANY,ANY)
 				AddVariant(70000,nil,RAID,set,"RAIDFINDER",22684,22686,22682,22683,22685,22681)		-- Need belt
+	set = AddSet(70000,nil,RAID,170,"TR_PLATE_17",PLATE,ANY,ANY,ANY)
+				AddVariant(70000,nil,RAID,set,"RAIDFINDER",22640,22642,22638,22639,22641,22637)		-- Need belt
 
 	-- DUNGEON
 	

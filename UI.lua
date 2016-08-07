@@ -184,15 +184,6 @@ local function GetSetButton(index)
 	return buttons[index];
 end
 
-local function SetHighlight(button, ...)
-	local collection 	= button.Collection
-	local set 				= button.Set
-	if ( button ) then SetCollectorLegacy_UnsetHighlight(SELECTED_BUTTON) end
-	button.Text:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
-	button.Texture:Show()
-	SELECTED_BUTTON = button
-end
-
 local function UnsetHighlight(button, ...)
 	if ( button ) then			
 		button.Text:SetTextColor(1.0, 0.82, 0);
@@ -201,20 +192,29 @@ local function UnsetHighlight(button, ...)
 	SELECTED_BUTTON = nil
 end
 
+local function SetHighlight(button, ...)
+	local collection 	= button.Collection
+	local set 				= button.Set
+	if ( button ) then UnsetHighlight(SELECTED_BUTTON) end
+	button.Text:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
+	button.Texture:Show()
+	SELECTED_BUTTON = button
+end
+
 function SetCollectorSetButton_OnClick(self, button, ...)
 	if ( button == "LeftButton" ) then
 		if ( self ~= SELECTED_BUTTON ) then
-			--SetVariantTabs(self.Collection, self.Set)
+			SetCollector:SetVariantTabs(self.Collection, self.Set)
 			SetHighlight(self)
 		else
-			--SetVariantTabs()
+			SetCollector:SetVariantTabs()
 			--ClearItemButtons()
 			UnsetHighlight(self)
 		end
 	elseif ( button == "RightButton" ) then
 	  SetCollector:SetFavoriteSet(self)
   	if ( self == SELECTED_BUTTON ) then
-			--SetVariantTabs(self.Collection, self.Set)
+			SetCollector:SetVariantTabs(self.Collection, self.Set)
 		end
   else
   	print(button)
@@ -332,20 +332,69 @@ for i=1, 5 do
 end
 PanelTemplates_SetNumTabs(SetCollectorSetDisplay, 5)
 
+function SetCollector:SetVariantTabs(collection, set, variant)
+	local db = SetCollector.db.global.collections
+	local char = SetCollector.db.char
+	if ( collection and set and #db[collection].Sets[set].Variants > 1 ) then
+		for i=1, 5 do
+			local variantTab = _G["SetCollectorSetDisplayTab"..i]
+			if ( db[collection].Sets[set].Variants[i] ) then
+				variantTab.Collection = collection
+				variantTab.Set = set
+				variantTab.Preview = false
+				if ( not variantTab.FavoriteTexture ) then
+					variantTab.FavoriteTexture = variantTab:CreateTexture("$parentFavorite","OVERLAY")
+					variantTab.FavoriteTexture:SetAtlas("PetJournal-FavoritesIcon")
+					variantTab.FavoriteTexture:SetPoint("LEFT","$parentText","LEFT",-10,0)
+				end
+				if ( SHOW_ONLY_FAVORITE == true and not char.sets[set].Variants[i].Favorite ) then
+					variantTab:Hide()
+				else
+						variantTab:SetText(L[db[collection].Sets[set].Variants[i].Title])
+						variantTab.FavoriteTexture:Hide()
+					if char.sets[set] and char.sets[set].Variants then
+						if char.sets[set].Variants[i].Favorite then
+							variantTab:SetText("      "..L[db[collection].Sets[set].Variants[i].Title])
+							variantTab.FavoriteTexture:Show()
+						end
+					end
+					variantTab:Show()
+				end
+			else
+				variantTab:Hide()
+			end
+			PanelTemplates_TabResize(variantTab, 0, nil, 36, variantTab:GetParent().maxTabWidth or 88)
+		end
+		PanelTemplates_SetNumTabs(SetCollectorSetDisplay, #db[collection].Sets[set].Variants)
+		SetCollector:SetVariantTab(SetCollectorSetDisplay, variant or 1)
+	else
+		for i=1, 5 do
+			local variantTab = _G["SetCollectorSetDisplayTab"..i]
+			variantTab:SetText(i)
+			variantTab.Collection = collection
+			variantTab.Set = set
+			variantTab.Preview = false
+			variantTab:Hide()
+		end
+		PanelTemplates_SetNumTabs(SetCollectorSetDisplay, 5)
+		SetCollector:SetVariantTab(SetCollectorSetDisplay, 1)
+	end
+end
+
 function SetCollector:UpdateSelectedVariantTab(self)
 	local selected = PanelTemplates_GetSelectedTab(self);
-	if ( frame:IsShown() ) then
-		--[[
-		SetCollectorFrameSetDisplayModelFrame:Dress()
+	--[[if ( frame:IsShown() ) then
 		
-		local collection = _G["SetCollectorLegacySetDisplayTab"..selected].Collection
-		local set = _G["SetCollectorLegacySetDisplayTab"..selected].Set
+		modelFrame:Dress()
+		
+		local collection = _G["SetCollectorFrameSetDisplayTab"..selected].Collection
+		local set = _G["SetCollectorFrameSetDisplayTab"..selected].Set
 		if ( collection and set ) then
-			SetCollectorLegacySetDisplayModelFrame:Undress()
-	  	local Collections = SetCollectorLegacyDB
-	  	local Log = SetCollectorLegacyCharacterDB
-	  	local obtainable = Collections[collection].Sets[set].Variants[selected].Obtainable
-			local num = #Collections[collection].Sets[set].Variants[selected].Items
+			SetCollectorFrameSetDisplayModelFrame:Undress()
+	  	local db = SetCollector.db.global.collections
+	  	local char = SetCollector.db.char
+	  	--local obtainable = Collections[collection].Sets[set].Variants[selected].Obtainable
+			local num = #db[collection].Sets[set].Variants[selected].Appearances
 			local acq = 0
 			for i=1, num do
 				local itemID = Collections[collection].Sets[set].Variants[selected].Items[i]
@@ -354,7 +403,6 @@ function SetCollector:UpdateSelectedVariantTab(self)
 			 	if (Log.Items[itemID] and Log.Items[itemID].Count > 0) then count = count + Log.Items[itemID].Count; end
 			 	if count > 0 then acq = acq + 1; end
 			 	SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..i], itemID, 1, obtainable)
-			 	--SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..i], itemID, Log.Items[itemID].Count)			-- No longer displaying count
 			end
 			ClearItemButtons(num + 1)
 			SetCollectorSummaryButtonSummary:SetText(string.format(_L["ITEMS_COLLECTED"],acq,num))
@@ -368,8 +416,7 @@ function SetCollector:UpdateSelectedVariantTab(self)
 			SetCollectorFrameSummaryButton:Hide()
 		end
 			
-		]]--
-	end
+	end]]--
 end
 
 function SetCollector:SetVariantTab(self, tab)
@@ -456,7 +503,7 @@ local function SetFilter(self, classIndex)
 		-- Clear Selection
 		UnsetHighlight(SELECTED_BUTTON)
 		SELECTED_BUTTON = nil
-		--SetVariantTabs()
+		SetCollector:SetVariantTabs()
 		--ClearItemButtons()
 	end
 end
@@ -667,18 +714,17 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 					titleButton:SetPoint("TOPLEFT", prevButton, "BOTTOMLEFT", 0, 0)
 					titleButton:Hide()
 					
+				  local _, class = UnitClass("player")
+				  local armorType = GetClassArmorType(class)
+					local faction = UnitFactionGroup("player")
+					local role = GetFilteredRole()
+					
 					local isFavorite = SetCollector:IsFavoriteSet(j)
 					if isFavorite then
 						titleButton.Favorite:Show()
 					else
 						titleButton.Favorite:Hide()
 					end
-					
-					
-				  local _, class = UnitClass("player")
-				  local armorType = GetClassArmorType(class)
-					local faction = UnitFactionGroup("player")
-					local role = GetFilteredRole()
 					
 					if SetCollector:SetIsFilteredOutByArmorType(i, j, armorType) then
 						-- Keep it hidden
@@ -730,7 +776,7 @@ end
 function SetCollector:OnHide(self)
 	HelpPlate_Hide()
 	--SetCollectorSummaryButton:Hide()
-	--SetVariantTabs()
+	SetCollector:SetVariantTabs()
 	--ClearItemButtons()
 	UnsetHighlight(SELECTED_BUTTON)
 end

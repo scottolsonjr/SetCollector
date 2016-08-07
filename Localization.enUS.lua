@@ -97,8 +97,14 @@ L["DB_RESET"]		=	"Database Reset."
 		L["DG_MAIL_03"] 						= "Desolation Battlegear"
 		L["DG_PLATE_03"] 					= "Doomplate Battlegear"
 		
+L["TR_CLOTH_17"] 							= "[17] Ebonflame Raiment"
+L["TR_LEATHER_17"] 						= "[17] Sootfur Garb"
 L["TR_MAIL_17"] 							= "[17] Ashlink Armor"
+L["TR_PLATE_17"] 							= "[17] Blacksteel Battleplate"
+L["TR_CLOTH_18"] 							= "[18] Felfume Raiment"
+L["TR_LEATHER_18"] 						= "[18] Ironpelt Armor"
 L["TR_MAIL_18"] 							= "[18] Rancorbite Armor"
+L["TR_PLATE_18"] 							= "[18] Demonbreaker Wargear"
 		
 		-- Class Sets
 		L["DK_CD_90"] 							= "Lich Lord Set"
