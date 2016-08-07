@@ -215,6 +215,21 @@ local function GetShamanAppearances()
 	
 end
 
+local function GetWarlockAppearances()
+	local set = ""
+	
+	-- LEGENDARY
+
+	-- RAID
+	set = AddSet(70000,nil,RAID,191,"WK_TR_19",CLOTH,WARLOCK,ANY,ANY)
+				AddVariant(70000,nil,RAID,set,"RAIDFINDER",31884,31886,31871,31888,31883,31885)		-- Need belt and feet for each variant
+				AddVariant(70000,nil,RAID,set,"NORMAL",29171,29173,29040,29175,29170,29172)
+				AddVariant(70000,nil,RAID,set,"HEROIC",29161,29163,29028,29165,29160,29162)
+				AddVariant(70000,nil,RAID,set,"MYTHIC",29083,29085,29049,29087,29082,29084)
+	
+	-- DUNGEON
+	
+end
 
 
 --
@@ -380,6 +395,7 @@ function SetCollector:AddAppearances(debug)
 	GetGeneralAppearances()
 	--
 	GetShamanAppearances()
+	GetWarlockAppearances()
 	--
 	if debug then SetCollector:Print("Finished adding appearances to database.") end
 end
