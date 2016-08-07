@@ -316,6 +316,15 @@ end
 --  Variant Tabs
 --
 
+local function VariantTab_OnClick(self, button, ...)
+	if ( button == "LeftButton" ) then 
+		SetCollector:SetVariantTab(_G["SetCollectorSetDisplay"], self:GetID());
+		PlaySound("UI_Toybox_Tabs");
+	elseif ( button == "RightButton" ) then
+		-- Pending
+	end
+end
+
 for i=1, 5 do
 	local variantTab = CreateFrame("Button","$parentTab"..i,setDisplay,"CharacterFrameTabButtonTemplate")
 	variantTab:SetID(i)
@@ -327,10 +336,49 @@ for i=1, 5 do
 		variantTab:SetPoint("LEFT", "$parentTab"..prev, "RIGHT", -16, 0)
 	end
 	variantTab:RegisterForClicks("AnyDown")
-	variantTab:SetScript("OnClick",SetCollectorVariantTab_OnClick)
+	variantTab:SetScript("OnClick",VariantTab_OnClick)
 	variantTab:Hide()
 end
 PanelTemplates_SetNumTabs(SetCollectorSetDisplay, 5)
+
+function SetCollectorVariantTab_OnClick(self, button, ...)
+	SetCollector:Print("Click")
+	if ( button == "LeftButton" ) then 
+		SetVariantTab(_G["SetCollectorSetDisplay"], self:GetID());
+		PlaySound("UI_Toybox_Tabs");
+	elseif ( button == "RightButton" ) then
+		--[[if ( SetCollectorLegacyCharacterDB.Sets[self.Set].Variants[self:GetID()].Favorite ) then
+			SetCollectorLegacyCharacterDB.Sets[self.Set].Variants[self:GetID()].Favorite = false
+			if ( SetCollectorLegacyCharacterDB.Sets[self.Set].Favorite ) then
+				local fave = 0
+				for i=1, #SetCollectorLegacyCharacterDB.Sets[self.Set].Variants do
+					if SetCollectorLegacyCharacterDB.Sets[self.Set].Variants[i].Favorite then
+						fave = fave + 1
+					end
+				end
+				if fave == 0 then
+					SetCollectorLegacyCharacterDB.Sets[self.Set].Favorite = false
+					CollectionsUpdate()
+				end
+			end
+		else
+			SetCollectorLegacyCharacterDB.Sets[self.Set].Variants[self:GetID()] = { Favorite = true }
+			if ( not SetCollectorLegacyCharacterDB.Sets[self.Set].Favorite ) then
+				local fave = 0
+				for i=1, #SetCollectorLegacyCharacterDB.Sets[self.Set].Variants do
+					if SetCollectorLegacyCharacterDB.Sets[self.Set].Variants[i].Favorite then
+						fave = fave + 1
+					end
+				end
+				if fave > 0 then
+					SetCollectorLegacyCharacterDB.Sets[self.Set].Favorite = true
+					CollectionsUpdate()
+				end
+			end
+		end]]--
+		SetVariantTabs(self.Collection, self.Set, PanelTemplates_GetSelectedTab(self:GetParent()))
+	end
+end
 
 function SetCollector:SetVariantTabs(collection, set, variant)
 	local db = SetCollector.db.global.collections
@@ -383,40 +431,36 @@ end
 
 function SetCollector:UpdateSelectedVariantTab(self)
 	local selected = PanelTemplates_GetSelectedTab(self);
-	--[[if ( frame:IsShown() ) then
+	if ( frame:IsShown() ) then
 		
 		modelFrame:Dress()
 		
-		local collection = _G["SetCollectorFrameSetDisplayTab"..selected].Collection
-		local set = _G["SetCollectorFrameSetDisplayTab"..selected].Set
+		local collection = _G["SetCollectorSetDisplayTab"..selected].Collection
+		local set = _G["SetCollectorSetDisplayTab"..selected].Set
 		if ( collection and set ) then
-			SetCollectorFrameSetDisplayModelFrame:Undress()
+			modelFrame:Undress()
 	  	local db = SetCollector.db.global.collections
 	  	local char = SetCollector.db.char
-	  	--local obtainable = Collections[collection].Sets[set].Variants[selected].Obtainable
 			local num = #db[collection].Sets[set].Variants[selected].Appearances
-			local acq = 0
+			local acq = SetCollector:GetCollectedCount(collection, set, selected)
 			for i=1, num do
-				local itemID = Collections[collection].Sets[set].Variants[selected].Items[i]
-				SetCollectorLegacySetDisplayModelFrame:TryOn(itemID)
-			 	local count = GetItemCount(itemID, true)
-			 	if (Log.Items[itemID] and Log.Items[itemID].Count > 0) then count = count + Log.Items[itemID].Count; end
-			 	if count > 0 then acq = acq + 1; end
-			 	SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..i], itemID, 1, obtainable)
+				local appearanceID = db[collection].Sets[set].Variants[selected].Appearances[i]
+				--[[modelFrame:TryOn(itemID)
+			 	SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..i], itemID, 1, obtainable)]]--
 			end
-			ClearItemButtons(num + 1)
-			SetCollectorSummaryButtonSummary:SetText(string.format(_L["ITEMS_COLLECTED"],acq,num))
+			--ClearItemButtons(num + 1)
+			SetCollectorSummaryButtonSummary:SetText(string.format(L["ITEMS_COLLECTED"],acq,num))
 			if acq > 0 then 
 				SetCollectorSummaryButton.Texture:SetAtlas("collections-itemborder-collected")
 			else
 				SetCollectorSummaryButton.Texture:SetAtlas("collections-itemborder-uncollected")
 			end
-			SetCollectorFrameSummaryButton:Show()
+			SetCollectorSummaryButton:Show()
 		else
-			SetCollectorFrameSummaryButton:Hide()
+			SetCollectorSummaryButton:Hide()
 		end
 			
-	end]]--
+	end
 end
 
 function SetCollector:SetVariantTab(self, tab)
