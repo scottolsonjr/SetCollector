@@ -528,6 +528,7 @@ L["SH_TR_19"] 							= "[19] Regalia of Bound Elements"
 		L["WK_TR_CASTER_16"] 			= "[16] Regalia of the Horned Nightmare"
 		L["WK_TR_17"] 							= "[17] Shadow Council's Garb"
 		L["WK_TR_18"] 							= "[18] Deathrattle Regalia"
+		L["WK_TR_19"] 							= "[19] Legacy of Azj'Aquir"
 		
 		
 		L["WR_CD_90"] 							= "The Golden King Set"

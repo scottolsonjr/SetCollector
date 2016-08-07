@@ -341,7 +341,7 @@ for i=1, 5 do
 end
 PanelTemplates_SetNumTabs(SetCollectorSetDisplay, 5)
 
-function SetCollectorVariantTab_OnClick(self, button, ...)
+function SetCollectorVariantTab_OnClick(self, button, ...)			--- Deprecated
 	SetCollector:Print("Click")
 	if ( button == "LeftButton" ) then 
 		SetVariantTab(_G["SetCollectorSetDisplay"], self:GetID());
@@ -429,6 +429,16 @@ function SetCollector:SetVariantTabs(collection, set, variant)
 	end
 end
 
+local function GetItemID(appearanceID)
+	local sources = C_TransmogCollection.GetAppearanceSources(appearanceID)
+	local itemID
+	if sources then
+		return sources[1].sourceID
+	else
+		return 0
+	end
+end
+
 function SetCollector:UpdateSelectedVariantTab(self)
 	local selected = PanelTemplates_GetSelectedTab(self);
 	if ( frame:IsShown() ) then
@@ -445,12 +455,12 @@ function SetCollector:UpdateSelectedVariantTab(self)
 			local acq = SetCollector:GetCollectedCount(collection, set, selected)
 			for i=1, num do
 				local appearanceID = db[collection].Sets[set].Variants[selected].Appearances[i]
-				--[[modelFrame:TryOn(itemID)
-			 	SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..i], itemID, 1, obtainable)]]--
+				modelFrame:TryOn(GetItemID(appearanceID))
+			 	--SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..i], itemID, 1, obtainable)
 			end
 			--ClearItemButtons(num + 1)
 			SetCollectorSummaryButtonSummary:SetText(string.format(L["ITEMS_COLLECTED"],acq,num))
-			if acq > 0 then 
+			if acq ~= "*" and acq > 0 then 
 				SetCollectorSummaryButton.Texture:SetAtlas("collections-itemborder-collected")
 			else
 				SetCollectorSummaryButton.Texture:SetAtlas("collections-itemborder-uncollected")
@@ -557,8 +567,7 @@ local function GetFilteredRole()
 	local specID = 0
 	
 	if currFilter == LE_LOOT_FILTER_CLASS then	-- 2
-		local currentSpec = GetSpecialization()
-		specID = currentSpec and select(1, GetSpecializationInfo(currentSpec)) or "None"
+		specID = ANY.Description
 	else -- Spec
 		local id = GetSpecializationInfo(currFilter - LE_LOOT_FILTER_SPEC1 + 1)
 		specID = id
@@ -616,7 +625,7 @@ end
 
 function SetCollector:InitializeFilter()
 		GetFilters()
-		--CollectionsUpdate()
+		SetCollector:UpdateCollections()
 		local init = function() InitFilter() end
 		UIDropDownMenu_Initialize(filterButton, init)
 end
