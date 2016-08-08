@@ -121,11 +121,6 @@
 		<Attributes>
 			<Attribute name="ItemID" type="string" />
 		</Attributes>
-		<Scripts>
-			<OnClick function="SetCollector_Item_OnClick" />
-			<OnEnter function="SetCollector_Item_OnEnter" />
-			<OnLeave function="SetCollector_Item_OnLeave" />
-		</Scripts>
 		<NormalTexture name="$parentNormalTexture" file="Interface\Buttons\UI-Quickslot2">
 			<Size>
 				<AbsDimension x="64" y="64" />
