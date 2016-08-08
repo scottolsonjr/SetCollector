@@ -107,6 +107,9 @@ L["TR_MAIL_18"] 							= "[18] Rancorbite Armor"
 L["TR_PLATE_18"] 							= "[18] Demonbreaker Wargear"
 		
 		-- Class Sets
+L["DH_TR_19"]							= "[19] Vestment of Second Sight"
+
+		
 		L["DK_CD_90"] 							= "Lich Lord Set"
 		L["DK_PVP_MELEE_14"] 			= "[14] Greivous Desecration"
 		L["DK_PVP_MELEE_15"] 			= "[15] Prideful Desecration"
@@ -137,6 +140,7 @@ L["TR_PLATE_18"] 							= "[18] Demonbreaker Wargear"
 		L["DK_TR_TANK_16"] 				= "[16] Plate of Cyclopean Dread"
 		L["DK_TR_17"] 							= "[17] Ogreskull Boneplate Battlegear"
 		L["DK_TR_18"] 							= "[18] Demongaze Armor"
+L["DK_TR_19"] 							= "[19] Dreadwyrm Battleplate"
 		
 		
 		L["DR_CD_90"] 							= "The Cycle Set"
@@ -204,6 +208,7 @@ L["TR_PLATE_18"] 							= "[18] Demonbreaker Wargear"
 		L["DR_TR_TANK_16"] 				= "[16] Armor of the Shattered Vale"
 		L["DR_TR_17"] 							= "[17] Living Wood Battlegear"
 		L["DR_TR_18"] 							= "[18] Oathclaw Wargarb"
+L["DR_TR_19"] 							= "[19] Garb of the Astral Warden"
 		
 		
 		L["HU_CD_90"] 							= "The Howling Beast Set"
@@ -236,6 +241,7 @@ L["TR_PLATE_18"] 							= "[18] Demonbreaker Wargear"
 		L["HU_TR_RANGED_16"] 			= "[16] Battlegear of the Unblinking Vigil"
 		L["HU_TR_17"] 							= "[17] Rylakstalker's Battlegear"
 		L["HU_TR_18"] 							= "[18] Battlegear of the Savage Hunt"
+L["HU_TR_19"] 							= "[19] Eagletalon Battlegear"
 		
 		
 		L["MA_CD_90"] 							= "The Elemental Triad Set"
@@ -268,6 +274,7 @@ L["TR_PLATE_18"] 							= "[18] Demonbreaker Wargear"
 		L["MA_TR_CASTER_16"] 			= "[16] Chronomancer Regalia"
 		L["MA_TR_17"] 							= "[17] Arcanoshatter Regalia"
 		L["MA_TR_18"] 							= "[18] Raiment of the Arcane Conclave"
+L["MA_TR_19"] 							= "[19] Regalia of Everburning Knowledge"
 		
 		
 		L["MO_CD_90"] 							= "The Regal Lord Set"
@@ -289,6 +296,7 @@ L["TR_PLATE_18"] 							= "[18] Demonbreaker Wargear"
 		L["MO_TR_TANK_16"] 				= "[16] Armor of Seven Sacred Seals"
 		L["MO_TR_17"] 							= "[17] Battlegear of the Somber Gaze"
 		L["MO_TR_18"] 							= "[18] Battlewrap of the Hurricane's Eye"
+L["MO_TR_19"] 							= "[19] Vestments of Enveloped Dissonance"
 		
 		
 		L["PA_CD_90"] 							= "The Holy Warrior Set"
@@ -351,6 +359,7 @@ L["TR_PLATE_18"] 							= "[18] Demonbreaker Wargear"
 		L["PA_TR_TANK_16"] 				= "[16] Plate of Winged Triumph"
 		L["PA_TR_17"] 							= "[17] Battlegear of Guiding Light"
 		L["PA_TR_18"] 							= "[18] Watch of the Ceaseless Vigil"
+L["PA_TR_19"] 							= "[19] Battleplate of the Highlord"
 		
 		
 		L["PR_CD_90"] 							= "The Light Set"
@@ -399,6 +408,7 @@ L["TR_PLATE_18"] 							= "[18] Demonbreaker Wargear"
 		L["PR_TR_HEALER_16"] 			= "[16] Vestments of Ternion Glory"
 		L["PR_TR_17"] 							= "[17] Soul Priest's Raiment"
 		L["PR_TR_18"] 							= "[18] Attire of Piety"
+L["PR_TR_19"] 							= "[19] Vestments of the Purifier"
 		
 		
 		L["RO_CD_90"]	 						= "The Silent Assassin Set"
@@ -431,6 +441,7 @@ L["TR_PLATE_18"] 							= "[18] Demonbreaker Wargear"
 		L["RO_TR_MELEE_16"] 				= "[16] Barbed Assassin Battlegear"
 		L["RO_TR_17"] 							= "[17] Poisoner's Battlegear"
 		L["RO_TR_18"] 							= "[18] Felblade Armor"
+L["RO_TR_19"] 							= "[19] Doomblade Battlegear"
 		
 		
 		L["SH_CD_90"] 							= "Windfury Set"
@@ -528,7 +539,7 @@ L["SH_TR_19"] 							= "[19] Regalia of Bound Elements"
 		L["WK_TR_CASTER_16"] 			= "[16] Regalia of the Horned Nightmare"
 		L["WK_TR_17"] 							= "[17] Shadow Council's Garb"
 		L["WK_TR_18"] 							= "[18] Deathrattle Regalia"
-		L["WK_TR_19"] 							= "[19] Legacy of Azj'Aquir"
+L["WK_TR_19"] 							= "[19] Legacy of Azj'Aquir"
 		
 		
 		L["WR_CD_90"] 							= "The Golden King Set"
@@ -575,6 +586,7 @@ L["SH_TR_19"] 							= "[19] Regalia of Bound Elements"
 		L["WR_TR_TANK_16"] 				= "[16] Plate of the Prehistoric Marauder"
 		L["WR_TR_17"] 							= "[17] Blackhand's Battlegear"
 		L["WR_TR_18"] 							= "[18] Battlegear of Iron Wrath"
+L["WR_TR_19"] 							= "[19] Warplate of the Obsidian Aspect"
 
 		L["HO_FESTIVE_DRESS"]			= "Festive Dress / Festival Dress"
 		L["HO_FESTIVE_SUIT"]				= "Festive Pant Suit / Festival Suit"

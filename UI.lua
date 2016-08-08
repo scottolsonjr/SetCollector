@@ -295,6 +295,31 @@ end
 --  Appearance Buttons
 --
 
+local function SetItem_OnClick(self, button, ...)
+	if ( IsShiftKeyDown() and button == "LeftButton" ) then
+		ChatEdit_InsertLink(self.link)
+	elseif ( IsShiftKeyDown() and button == "RightButton" ) then
+		if (string.find(self.ItemID, "item")) then
+			local itemID = string.match(self.ItemID,"item:(%d+)") or "0"
+			local bonusID = string.match(self.ItemID,":1:(%d+)") or "0"
+			--print(self.ItemID)
+			ChatEdit_InsertLink("http://www.wowhead.com/item="..itemID.."&bonus="..bonusID)
+		else
+			ChatEdit_InsertLink("http://www.wowhead.com/item="..self.ItemID)
+		end
+	end
+end
+local function SetItem_OnEnter(self, motion)
+	if self.link then
+		GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT")
+		GameTooltip:SetHyperlink(self.link)
+		GameTooltip:Show()
+	end
+end
+local function SetItem_OnLeave(self, motion)
+	GameTooltip:Hide()
+end
+
 local prevItem
 for i=1, #EQUIPMENT do
 local itemButton = CreateFrame("Button","$parentItem"..i,modelFrame,"SetCollectorItemTemplate")
@@ -306,8 +331,58 @@ local itemButton = CreateFrame("Button","$parentItem"..i,modelFrame,"SetCollecto
 		itemButton:SetPoint("TOPLEFT",prevItem,"BOTTOMLEFT", 0, -7)
 	end
 	itemButton:RegisterForClicks("AnyDown")
+	itemButton:SetScript("OnClick",SetItem_OnClick)
+	itemButton:SetScript("OnEnter",SetItem_OnEnter)
+	itemButton:SetScript("OnLeave",SetItem_OnLeave)
 	itemButton:Hide()
 	prevItem = itemButton
+end
+
+local function SetItemButton(button, appearanceID, count, obtainable)
+	if button and appearanceID then
+		local sources = SetCollector:GetAppearanceSources(appearanceID);
+		if sources then
+			local _, _, _, sTexture, _, sLink = C_TransmogCollection.GetAppearanceSourceInfo(sources[1].sourceID)
+			if sTexture then
+				button.link = sLink
+				button.ItemID = sources[1].sourceID
+				button.icon:SetTexture(sTexture)
+				button.icon:SetVertexColor(1, 1, 1, 1)
+				button.icon:SetDesaturated(true)
+				button.count:SetText("")
+				button.count:Hide()
+				button.glow:Hide()
+				
+				local isCollected = SetCollector:IsAppearanceCollected(appearanceID)
+				if isCollected then
+					--local sName, sLink, iRarity, iLevel, iMinLevel, sType, sSubType, iStackCount, sLocation, sTexture = GetItemInfo(itemID)
+					local iRarity = select(3, GetItemInfo(sLink))
+					button.icon:SetDesaturated(false)
+					button.count:SetText(i)
+					button.glow:SetVertexColor(GetItemQualityColor(iRarity))
+					button.glow:Show()
+				--elseif not obtainable then
+				--	button.icon:SetVertexColor(1, 0.25, 0.25, 0.5)
+				end
+				
+				button:Show()
+			end
+		end
+	else
+		button:Hide()
+	end
+end
+
+local function ClearItemButtons(button)
+	if button then
+		for i=button, #EQUIPMENT do
+			_G["SetCollectorSetDisplayModelFrameItem"..i]:Hide()
+		end
+	else
+		for i=1, #EQUIPMENT do
+			_G["SetCollectorSetDisplayModelFrameItem"..i]:Hide()
+		end
+	end
 end
 
 
@@ -456,9 +531,9 @@ function SetCollector:UpdateSelectedVariantTab(self)
 			for i=1, num do
 				local appearanceID = db[collection].Sets[set].Variants[selected].Appearances[i]
 				modelFrame:TryOn(GetItemID(appearanceID))
-			 	--SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..i], itemID, 1, obtainable)
+			  SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..i], appearanceID, 1, obtainable)
 			end
-			--ClearItemButtons(num + 1)
+			ClearItemButtons(num + 1)
 			SetCollectorSummaryButtonSummary:SetText(string.format(L["ITEMS_COLLECTED"],acq,num))
 			if acq ~= "*" and acq > 0 then 
 				SetCollectorSummaryButton.Texture:SetAtlas("collections-itemborder-collected")
@@ -558,7 +633,7 @@ local function SetFilter(self, classIndex)
 		UnsetHighlight(SELECTED_BUTTON)
 		SELECTED_BUTTON = nil
 		SetCollector:SetVariantTabs()
-		--ClearItemButtons()
+		ClearItemButtons()
 	end
 end
 
@@ -828,9 +903,9 @@ end
 
 function SetCollector:OnHide(self)
 	HelpPlate_Hide()
-	--SetCollectorSummaryButton:Hide()
+	SetCollectorSummaryButton:Hide()
 	SetCollector:SetVariantTabs()
-	--ClearItemButtons()
+	ClearItemButtons()
 	UnsetHighlight(SELECTED_BUTTON)
 end
 

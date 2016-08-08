@@ -65,12 +65,11 @@ local function OnTooltipSetItemHook(tooltip, ...)
 		if debug then
 			tooltip:AddLine(" ");
 			tooltip:AddLine("SetCollector Debug");
-			--tooltip:AddLine(gsub(itemLink, "\124", "\124\124"))
 			tooltip:AddLine("Appearance ID: "..appearanceID);
-			local sources = C_TransmogCollection.GetAppearanceSources(appearanceID)
+			local sources = SetCollector:GetAppearanceSources(appearanceID)
 			if sources then
 				for i=1, #sources do
-					local _, _, _, _, _, link = C_TransmogCollection.GetAppearanceSourceInfo(sources[i].sourceID)
+					local link = select(6, C_TransmogCollection.GetAppearanceSourceInfo(sources[i].sourceID))
 					tooltip:AddLine(link)
 				end
 			end

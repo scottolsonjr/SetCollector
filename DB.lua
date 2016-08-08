@@ -34,6 +34,7 @@ local MAIL				= { Code = "M", Description = "MAIL" }
 local PLATE				= { Code = "P", Description = "PLATE" }
 
 local DEATHKNIGHT = { Code = "DK", Description = "DEATHKNIGHT" }
+local DEMONHUNTER = { Code = "DH", Description = "DEMONHUNTER" }
 local DRUID 			= { Code = "DR", Description = "DRUID" }
 local HUNTER 			= { Code = "HU", Description = "HUNTER" }
 local MAGE 				= { Code = "MA", Description = "MAGE" }
@@ -172,6 +173,150 @@ local function GetGeneralAppearances()
 	
 end
 
+local function GetDeathKnightAppearances()
+	local set = ""
+	
+	-- LEGENDARY
+
+	-- RAID
+	set = AddSet(70000,nil,RAID,191,"DK_TR_19",PLATE,DEATHKNIGHT,ANY,ANY)
+				AddVariant(70000,nil,RAID,set,"RAIDFINDER",32139,32141,31975,32137,32138,32140)		-- Need belt and feet for each variant
+				AddVariant(70000,nil,RAID,set,"NORMAL",29805,29807,29974,29800,29804,29806)
+				AddVariant(70000,nil,RAID,set,"HEROIC",29813,29815,29961,29811,29812,29814)
+				AddVariant(70000,nil,RAID,set,"MYTHIC",29829,29831,29939,29827,29828,29830)
+	
+	-- DUNGEON
+	
+end
+
+local function GetDemonHunterAppearances()
+	local set = ""
+	
+	-- LEGENDARY
+
+	-- RAID
+	set = AddSet(70000,nil,RAID,191,"DH_TR_19",LEATHER,DEMONHUNTER,ANY,ANY)
+				AddVariant(70000,nil,RAID,set,"RAIDFINDER",32020,32022,32100,32018,32019,32021)		-- Need belt and feet for each variant
+				AddVariant(70000,nil,RAID,set,"NORMAL",32004,32006,32208,32002,32003,32005)
+				AddVariant(70000,nil,RAID,set,"HEROIC",32012,32014,32220,32010,32011,32013)
+				AddVariant(70000,nil,RAID,set,"MYTHIC",31913,31915,32166,31911,31912,31914)
+	
+	-- DUNGEON
+	
+end
+
+local function GetDruidAppearances()
+	local set = ""
+	
+	-- LEGENDARY
+
+	-- RAID
+	set = AddSet(70000,nil,RAID,191,"DR_TR_19",LEATHER,DRUID,ANY,ANY)
+				AddVariant(70000,nil,RAID,set,"RAIDFINDER",32072,32074,32221,32076,32071,32073)		-- Need belt and feet for each variant
+				AddVariant(70000,nil,RAID,set,"NORMAL",30740,30742,31035,30744,30739,30741)
+				AddVariant(70000,nil,RAID,set,"HEROIC",30731,30733,31024,30735,30730,30732)
+				AddVariant(70000,nil,RAID,set,"MYTHIC",30696,30698,30819,30700,30695,30697)
+	
+	-- DUNGEON
+	
+end
+
+local function GetHunterAppearances()
+	local set = ""
+	
+	-- LEGENDARY
+
+	-- RAID
+	set = AddSet(70000,nil,RAID,191,"HU_TR_19",MAIL,HUNTER,ANY,ANY)
+				AddVariant(70000,nil,RAID,set,"RAIDFINDER",31867,31869,32112,31865,31866,31868)		-- Need belt and feet for each variant
+				AddVariant(70000,nil,RAID,set,"NORMAL",29758,29760,30050,29755,29757,29759)
+				AddVariant(70000,nil,RAID,set,"HEROIC",29766,29768,30075,29764,29765,29767)
+				AddVariant(70000,nil,RAID,set,"MYTHIC",29904,29905,30129,29902,29903,29906)
+	
+	-- DUNGEON
+	
+end
+
+local function GetMageAppearances()
+	local set = ""
+	
+	-- LEGENDARY
+
+	-- RAID
+	set = AddSet(70000,nil,RAID,191,"MA_TR_19",CLOTH,MAGE,ANY,ANY)
+				AddVariant(70000,nil,RAID,set,"RAIDFINDER",31938,31940,32048,31942,31937,31939)		-- Need belt and feet for each variant
+				AddVariant(70000,nil,RAID,set,"NORMAL",30785,30787,31175,30789,30784,30786)
+				AddVariant(70000,nil,RAID,set,"HEROIC",30776,30778,31171,30780,30775,30777)
+				AddVariant(70000,nil,RAID,set,"MYTHIC",31083,31085,31115,31087,31082,31084)
+	
+	-- DUNGEON
+	
+end
+
+local function GetMonkAppearances()
+	local set = ""
+	
+	-- LEGENDARY
+
+	-- RAID
+	set = AddSet(70000,nil,RAID,191,"MO_TR_19",LEATHER,MONK,ANY,ANY)
+				AddVariant(70000,nil,RAID,set,"RAIDFINDER",30634,30645,30535,30633,30643,30644)		-- Need belt and feet for each variant
+				AddVariant(70000,nil,RAID,set,"NORMAL",32043,32046,31917,32042,32044,32045)
+				AddVariant(70000,nil,RAID,set,"HEROIC",30617,30619,30510,30615,30616,30618)
+				AddVariant(70000,nil,RAID,set,"MYTHIC",30670,30671,30491,30669,30672,30673)
+	
+	-- DUNGEON
+	
+end
+
+local function GetPaladinAppearances()
+	local set = ""
+	
+	-- LEGENDARY
+
+	-- RAID
+	set = AddSet(70000,nil,RAID,191,"PA_TR_19",PLATE,PALADIN,ANY,ANY)
+				AddVariant(70000,nil,RAID,set,"RAIDFINDER",32147,32149,32105,32151,32146,32148)		-- Need belt and feet for each variant
+				AddVariant(70000,nil,RAID,set,"NORMAL",29644,29647,29707,29646,29643,29645)
+				AddVariant(70000,nil,RAID,set,"HEROIC",29653,29655,29717,29657,29652,29654)
+				AddVariant(70000,nil,RAID,set,"MYTHIC",29452,29454,29676,29456,29451,29453)
+	
+	-- DUNGEON
+	
+end
+
+local function GetPriestAppearances()
+	local set = ""
+	
+	-- LEGENDARY
+
+	-- RAID
+	set = AddSet(70000,nil,RAID,191,"PR_TR_19",CLOTH,PRIEST,ANY,ANY)
+				AddVariant(70000,nil,RAID,set,"RAIDFINDER",31947,31949,32060,31950,31946,31948)		-- Need belt and feet for each variant
+				AddVariant(70000,nil,RAID,set,"NORMAL",30262,30264,30177,30266,30261,30263)
+				AddVariant(70000,nil,RAID,set,"HEROIC",30271,30273,30189,30275,30270,30272)
+				AddVariant(70000,nil,RAID,set,"MYTHIC",30280,30282,30231,30283,30279,30281)
+	
+	-- DUNGEON
+	
+end
+
+local function GetRogueAppearances()
+	local set = ""
+	
+	-- LEGENDARY
+
+	-- RAID
+	set = AddSet(70000,nil,RAID,191,"RO_TR_19",LEATHER,ROGUE,ANY,ANY)
+				AddVariant(70000,nil,RAID,set,"RAIDFINDER",32083,32084,32298,32079,32080,32081)		-- Need belt and feet for each variant
+				AddVariant(70000,nil,RAID,set,"NORMAL",29870,29872,32292,29868,29869,29871)
+				AddVariant(70000,nil,RAID,set,"HEROIC",29197,29218,32282,29195,29196,29217)
+				AddVariant(70000,nil,RAID,set,"MYTHIC",28986,28988,32317,28984,28985,28987)
+	
+	-- DUNGEON
+	
+end
+
 local function GetShamanAppearances()
 	local set = ""
 	
@@ -231,6 +376,22 @@ local function GetWarlockAppearances()
 	
 end
 
+local function GetWarriorAppearances()
+	local set = ""
+	
+	-- LEGENDARY
+
+	-- RAID
+	set = AddSet(70000,nil,RAID,191,"WR_TR_19",PLATE,WARRIOR,ANY,ANY)
+				AddVariant(70000,nil,RAID,set,"RAIDFINDER",32157,32160,32127,32156,32158,32159)		-- Need belt and feet for each variant
+				AddVariant(70000,nil,RAID,set,"NORMAL",31444,31447,32242,31443,31445,31446)
+				AddVariant(70000,nil,RAID,set,"HEROIC",31410,31413,31545,31409,31411,31412)
+				AddVariant(70000,nil,RAID,set,"MYTHIC",31449,31455,32229,31452,31453,31454)
+	
+	-- DUNGEON
+	
+end
+
 
 --
 --  Global Functions
@@ -258,6 +419,31 @@ function SetCollector:GetCollectionsList()
 	return collections
 end
 
+function SetCollector:GetAppearanceSources(appearanceID)
+	-- Taken from WardrobeCollectionFrame_GetSortedAppearanceSources(appearanceID)
+	local comparison = function(source1, source2)
+		if ( source1.isCollected ~= source2.isCollected ) then
+			return source1.isCollected;
+		end
+
+		if ( source1.quality and source2.quality ) then
+			if ( source1.quality ~= source2.quality ) then
+				return source1.quality > source2.quality;
+			end
+		else
+			return source1.quality;
+		end
+
+		return source1.sourceID > source2.sourceID;
+	end
+
+	if appearanceID then
+		local sources = C_TransmogCollection.GetAppearanceSources(appearanceID);
+		if sources then table.sort(sources, comparison) end
+		return sources;
+	end
+end
+
 function SetCollector:GetCollectedCount(collection, set, variant)
 	local sourcesCount, collectedCount = 0, 0
 	
@@ -278,6 +464,22 @@ function SetCollector:GetCollectedCount(collection, set, variant)
 	if sourcesCount == 0 and collectedCount == 0 then collectedCount = "*" end
 	
 	return collectedCount
+end
+
+function SetCollector:IsAppearanceCollected(appearanceID)
+	local anyCollected = false
+	if appearanceID then
+		local sources = C_TransmogCollection.GetAppearanceSources(appearanceID)
+		if sources then
+			for j=1, #sources do
+				local isCollected = select(5, C_TransmogCollection.GetAppearanceSourceInfo(sources[j].sourceID))
+				if not anyCollected and isCollected then
+					anyCollected = true
+				end
+			end
+		end
+	end
+	return anyCollected
 end
 
 function SetCollector:GetSetTooltip(self)
@@ -392,11 +594,22 @@ function SetCollector:AddAppearances(debug)
 	if debug then	SetCollector:Print("Adding Appearances to database") end
 	SetCollector.db.global.collections = CreateCollections()
 	if debug then SetCollector:Print("Added "..#SetCollector.db.global.collections.." collections.") end
+	
 	GetGeneralAppearances()
-	--
+	
+	GetDeathKnightAppearances()
+	GetDemonHunterAppearances()
+	GetDruidAppearances()
+	GetHunterAppearances()
+	GetMageAppearances()
+	GetMonkAppearances()
+	GetPaladinAppearances()
+	GetPriestAppearances()
+	GetRogueAppearances()
 	GetShamanAppearances()
 	GetWarlockAppearances()
-	--
+	GetWarriorAppearances()
+	
 	if debug then SetCollector:Print("Finished adding appearances to database.") end
 end
 
