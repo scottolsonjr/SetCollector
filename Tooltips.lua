@@ -28,9 +28,11 @@ local InventorySlots = {
     ['INVTYPE_TABARD'] = 19,
 }
 
-local model = CreateFrame('DressUpModel')
+local model = CreateFrame("DressUpModel","SetCollectorTooltipDressUpModel",UIParent)			-- Ticket #48 Fix?
+--local model = CreateFrame("DressUpModel")			-- Original
 
 local function GetAppearanceID(itemLink)
+	if itemLink then
     local itemID, _, _, slotName = GetItemInfoInstant(itemLink)
     local slot = InventorySlots[slotName]
 
@@ -44,6 +46,7 @@ local function GetAppearanceID(itemLink)
         local appearanceID = select(2, C_TransmogCollection.GetAppearanceSourceInfo(sourceID))
         return appearanceID
     end
+  end
 end
 
 local function OnTooltipSetItemHook(tooltip, ...)
@@ -52,7 +55,7 @@ local function OnTooltipSetItemHook(tooltip, ...)
 	local itemName, itemLink = tooltip:GetItem();
 	
 	appearanceID = GetAppearanceID(itemLink);
-	if (appearanceID) then
+	if appearanceID then
 		if SetCollector.db.global.collections.Appearances[appearanceID] then
 			collection = SetCollector.db.global.collections.Appearances[appearanceID].collection
 			variant = SetCollector.db.global.collections.Appearances[appearanceID].variant
