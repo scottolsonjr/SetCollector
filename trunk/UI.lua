@@ -1,6 +1,8 @@
 local L = LibStub("AceLocale-3.0"):GetLocale("SetCollector", true)
 local icon = LibStub("LibDBIcon-1.0")
 
+local NO_CLASS_FILTER = -1
+
 local COLLECTION_LIST_WIDTH = 260
 
 local WHITE		= "|cFFFFFFFF"
@@ -40,6 +42,7 @@ local SELECTED_BUTTON = nil
 local SORT_BY = "key"					-- Default Sort Value
 local SORT_DIR = "DESC"				-- Default Sort Direction
 
+local ALL					=	{ Code = "A", Description = "All" }
 local ANY					=	{ Code = "Z", Description = "Any" }
 
 local CLOTH				= { Code = "C", Description = "CLOTH" }
@@ -74,7 +77,7 @@ local function GetClassArmorType(class)
 	end
 end
 
-local function GetSetSpecializationRole(spec)			--  Need to get Demon Hunter
+local function GetSetSpecializationRole(spec)
 	if 		 spec == 62 	then return CASTER.Description 	-- Arcane Mage
 	elseif spec == 63 	then return CASTER.Description	-- Fire Mage
 	elseif spec == 64 	then return CASTER.Description	-- Frost Mage
@@ -109,7 +112,9 @@ local function GetSetSpecializationRole(spec)			--  Need to get Demon Hunter
 	elseif spec == 268 	then return TANK.Description		-- Brewmaster Monk
 	elseif spec == 269 	then return MELEE.Description		-- Windwalker Monk
 	elseif spec == 270 	then return HEALER.Description	-- Mistweaver Monk
-	else return ANY.Description													-- No specialization selected yet
+	elseif spec == 577 	then return MELEE.Description		-- Havoc Demon Hunter
+	elseif spec == 581 	then return TANK.Description		-- Vengeance Demon Hunter
+	else return ANY.Description													-- All Specializations Selected
 	end
 end
 
@@ -594,6 +599,8 @@ local function UpdateFilterString()
 
 	if currFilter == LE_LOOT_FILTER_CLASS then
 		name = UnitClass("player");
+	elseif currFilter == NO_CLASS_FILTER then
+		name = ALL_CLASSES
 	else -- Spec
 		local _, specName, _, icon = GetSpecializationInfo(currFilter - LE_LOOT_FILTER_SPEC1 + 1);
 		name = specName;
@@ -642,12 +649,14 @@ local function GetFilteredRole()
 	local specID = 0
 	
 	if currFilter == LE_LOOT_FILTER_CLASS then	-- 2
-		specID = ANY.Description
+		return ANY.Description
+	elseif currFilter == NO_CLASS_FILTER then		-- 1
+		return ALL.Description
 	else -- Spec
 		local id = GetSpecializationInfo(currFilter - LE_LOOT_FILTER_SPEC1 + 1)
 		specID = id
+  	return GetSetSpecializationRole(specID)
 	end
-  return GetSetSpecializationRole(specID)
 end
 
 local function InitFilter()
@@ -676,6 +685,12 @@ local function InitFilter()
 	info.text = ALL_SPECS;
 	info.checked = currFilter == LE_LOOT_FILTER_CLASS;
 	info.arg1 = LE_LOOT_FILTER_CLASS;
+	info.func = SetFilter;
+	UIDropDownMenu_AddButton(info);
+
+	info.text = ALL_CLASSES;
+	info.checked = currFilter == NO_CLASS_FILTER;
+	info.arg1 = NO_CLASS_FILTER;
 	info.func = SetFilter;
 	UIDropDownMenu_AddButton(info);
 	
@@ -844,7 +859,8 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 					
 				  local _, class = UnitClass("player")
 				  local armorType = GetClassArmorType(class)
-					local faction = UnitFactionGroup("player")
+				  
+				  local faction = UnitFactionGroup("player")
 					local role = GetFilteredRole()
 					
 					local isFavorite = SetCollector:IsFavoriteSet(j)
@@ -856,7 +872,7 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 					
 					if SetCollector:SetIsFilteredOutByArmorType(i, j, armorType) then
 						-- Keep it hidden
-					elseif SetCollector:SetIsFilteredOutByClass(i, j, class) then
+					elseif role ~= ALL.Description and SetCollector:SetIsFilteredOutByClass(i, j, class) then
 						-- Keep it hidden
 					elseif SetCollector:SetIsFilteredOutByFaction(i, j, faction) then
 						-- Keep it hidden
