@@ -105,6 +105,11 @@ L["TR_CLOTH_18"] 							= "[18] Felfume Raiment"
 L["TR_LEATHER_18"] 						= "[18] Ironpelt Armor"
 L["TR_MAIL_18"] 							= "[18] Rancorbite Armor"
 L["TR_PLATE_18"] 							= "[18] Demonbreaker Wargear"
+
+L["OTH_CLOTH_100"]						= "Fel-Infused Cloth Armor"
+L["OTH_LEATHER_100"]					= "Felshroud Leather Armor"
+L["OTH_MAIL_100"]							= "Fel-Chain Mail Armor"
+L["OTH_PLATE_100"]						= "Felforged Plate Armor"
 		
 		-- Class Sets
 L["DH_TR_19"]							= "[19] Vestment of Second Sight"
@@ -507,6 +512,7 @@ L["RO_TR_19"] 							= "[19] Doomblade Battlegear"
 L["SH_TR_17"] 							= "[17] Windspeaker's Regalia"
 L["SH_TR_18"] 							= "[18] Embrace of the Living Mountain"
 L["SH_TR_19"] 							= "[19] Regalia of Bound Elements"
+L["SH_OTH_19"]							= "Raiment of the Farseer (Unknown Source)"
 		
 		
 		L["WK_CD_90"] 							= "The Betrayer Set"
