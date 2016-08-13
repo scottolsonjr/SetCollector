@@ -533,13 +533,18 @@ function SetCollector:UpdateSelectedVariantTab(self)
 	  	local char = SetCollector.db.char
 			local num = #db[collection].Sets[set].Variants[selected].Appearances
 			local acq = SetCollector:GetCollectedCount(collection, set, selected)
+			local inc = 0
 			for i=1, num do
 				local appearanceID = db[collection].Sets[set].Variants[selected].Appearances[i]
-				modelFrame:TryOn(GetItemID(appearanceID))
-			  SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..i], appearanceID, 1, obtainable)
+				local itemID = GetItemID(appearanceID)
+				if itemID > 0 then
+					inc = inc + 1
+					modelFrame:TryOn(itemID)
+				  SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..inc], appearanceID, 1, obtainable)
+			  end
 			end
-			ClearItemButtons(num + 1)
-			SetCollectorSummaryButtonSummary:SetText(string.format(L["ITEMS_COLLECTED"],acq,num))
+			ClearItemButtons(inc + 1)
+			SetCollectorSummaryButtonSummary:SetText(string.format(L["ITEMS_COLLECTED"],acq,inc))
 			if acq ~= "*" and acq > 0 then 
 				SetCollectorSummaryButton.Texture:SetAtlas("collections-itemborder-collected")
 			else
@@ -573,11 +578,15 @@ filterButton:SetAttribute("parentKey","setFilter")
 local function GetFilters()
 	CURRENT_FILTER 				= SetCollector.db.char.filters.specialization
 	SHOW_ONLY_FAVORITES 	= SetCollector.db.char.filters.favorites
+	SHOW_ONLY_OBTAINABLE 	= SetCollector.db.char.filters.obtainable
+	SHOW_ONLY_TRANSMOG 		= SetCollector.db.char.filters.transmog
 end
 
 local function SetFilters()
 	SetCollector.db.char.filters.specialization		= CURRENT_FILTER
 	SetCollector.db.char.filters.favorites				= SHOW_ONLY_FAVORITES
+	SetCollector.db.char.filters.obtainable				= SHOW_ONLY_OBTAINABLE
+	SetCollector.db.char.filters.transmog					= SHOW_ONLY_TRANSMOG
 end
 
 local function SetFilterOptions(classIndex)
@@ -700,7 +709,7 @@ local function InitFilter()
 	info.arg1 = "favorites";
 	UIDropDownMenu_AddButton(info);
 	
-	--[[info.leftPadding = nil;
+	info.leftPadding = nil;
 	info.text = L["OBTAIN_FILTER"] or L["MISSING_LOCALIZATION"];
 	info.checked = SHOW_ONLY_OBTAINABLE;
 	info.arg1 = "obtainable";
@@ -710,7 +719,7 @@ local function InitFilter()
 	info.text = L["TRANSMOG_FILTER"] or L["MISSING_LOCALIZATION"];
 	info.checked = SHOW_ONLY_TRANSMOG;
 	info.arg1 = "transmog";
-	UIDropDownMenu_AddButton(info);]]--
+	UIDropDownMenu_AddButton(info);
 end
 
 function SetCollector:InitializeFilter()
@@ -825,7 +834,7 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 				button:SetText(L[collections[i].Title])
 			end
 			button.Collection = i
-			button:ClearAllPoints()
+			--button:ClearAllPoints()					--  This appears to be that old compactraidframes issue
 			if ( prevButton ) then
 				button:SetPoint("TOPLEFT", prevButton, "BOTTOMLEFT", 0, 0)
 			else
@@ -853,7 +862,7 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 					titleButton:SetHeight(height)
 					titleButton.Collection = i
 					titleButton.Set = j
-					titleButton:ClearAllPoints()
+					--titleButton:ClearAllPoints()					--  This appears to be that old compactraidframes issue
 					titleButton:SetPoint("TOPLEFT", prevButton, "BOTTOMLEFT", 0, 0)
 					titleButton:Hide()
 					
