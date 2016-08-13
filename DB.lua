@@ -66,6 +66,12 @@ local GARRISON 		= { ID = 6, Code = "GA", Description = "GARRISON" }
 local HOLIDAY			= { ID = 7, Code = "HO", Description = "HOLIDAY" }
 local OTHER				= { ID = 8, Code = "OT", Description = "OTHER" }
 
+local OBTAIN			= true
+local NOOBTAIN 		= false
+
+local TRANSMOG 		= true
+local NOTRANSMOG 	= false
+
 --
 --  Helpers
 --
@@ -122,26 +128,42 @@ local function AddSet(minVersion, maxVersion, collection, id, title, armorType, 
 	end
 end
 
-local function AddVariant(minVersion, maxVersion, collection, set, title, obtainable, transmogrifiable, ...)
+local function AddVariant(minVersion, maxVersion, collection, set, title, obtainable, transmog, ...)
 	if WOW_VERSION >= minVersion then
 		if maxVersion == nil or WOW_VERSION <= maxVersion then
+			local a, i = 0, 0
 			local tempAppearances = { }
 			local n = select("#",...)
 			for i = 1,n do
 				local v = select(i,...)
-				tinsert(tempAppearances,v)
-				SetCollector.db.global.collections.Appearances[v] = { collection = collection.ID, set = set, variant = #SetCollector.db.global.collections[collection.ID].Sets[set].Variants + 1 }
+				if v then
+					a = v.a
+					i = v.i
+				end
+				local t = { ID = a, sourceID = i }
+				tinsert(tempAppearances,t)
+				SetCollector.db.global.collections.Appearances[a] = { collection = collection.ID, set = set, variant = #SetCollector.db.global.collections[collection.ID].Sets[set].Variants + 1 }
+				--tinsert(tempAppearances,v)
+				--SetCollector.db.global.collections.Appearances[v] = { collection = collection.ID, set = set, variant = #SetCollector.db.global.collections[collection.ID].Sets[set].Variants + 1 }
 			end
 			local tempVariant = {
 				Title = title,
 				Obtainable = obtainable,
-				Transmogrifiable = transmogrifiable,
+				Transmog = transmog,
 				Appearances = tempAppearances,
 				Count = #tempAppearances
 			}
 			tinsert(SetCollector.db.global.collections[collection.ID].Sets[set].Variants, tempVariant)	
 		end
 	end	
+end
+
+local function A(a, i, ...)
+	local t = { 
+		a = a or 0,
+		i = i or 0
+	}
+	return t
 end
 
 
@@ -156,52 +178,66 @@ local function GetGeneralAppearances()
 	-- RAID
 	col = RAID
 	set = AddSet(70000,nil,col,180,"TR_CLOTH_18",CLOTH,ANY,ANY,ANY)
-				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,25845,25847,25849,25844,25846,25842)		-- Need belt
+				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,A(25845,73196),A(25847,73166),A(25849,73182),A(25844,73228),A(25846,73200),A(25842,72970))	-- Need belt
 	set = AddSet(70000,nil,col,180,"TR_LEATHER_18",LEATHER,ANY,ANY,ANY)
-				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,25983,25985,25981,25982,25984,25979)		-- Need belt
+				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,A(25983,73204),A(25985,73170),A(25981,73184),A(25982,73232),A(25984,73208),A(25979,72978))		-- Need belt
 	set = AddSet(70000,nil,col,180,"TR_MAIL_18",MAIL,ANY,ANY,ANY)
-				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,25949,25950,25947,25948,25951,25946)		-- Need belt
+				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,A(25949,73209),A(25950,73171),A(25947,73185),A(25948,73233),A(25951,73213),A(25946,73079))		-- Need belt
 	set = AddSet(70000,nil,col,180,"TR_PLATE_18",PLATE,ANY,ANY,ANY)
-				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,25933,25935,25931,25932,25934,25930)		-- Need belt
+				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,A(25933),A(25935),A(25931),A(25932),A(25934),A(25930))		-- Need belt
 				
 	set = AddSet(70000,nil,col,170,"TR_CLOTH_17",CLOTH,ANY,ANY,ANY)
-				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,22599,22595,22597,22598,22600,22594)		-- Need belt
+				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,A(22599),A(22595),A(22597),A(22598),A(22600),A(22594))		-- Need belt
 	set = AddSet(70000,nil,col,170,"TR_LEATHER_17",LEATHER,ANY,ANY,ANY)
-				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,23053,23055,23051,23052,23054,23050)		-- Need belt
+				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,A(23053),A(23055),A(23051),A(23052),A(23054),A(23050))		-- Need belt
 	set = AddSet(70000,nil,col,170,"TR_MAIL_17",MAIL,ANY,ANY,ANY)
-				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,22684,22686,22682,22683,22685,22681)		-- Need belt
+				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,A(22684),A(22686),A(22682),A(22683),A(22685),A(22681))		-- Need belt
 	set = AddSet(70000,nil,col,170,"TR_PLATE_17",PLATE,ANY,ANY,ANY)
-				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,22640,22642,22638,22639,22641,22637)		-- Need belt
+				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,A(22640),A(22642),A(22638),A(22639),A(22641),A(22637))		-- Need belt
 
 	-- DUNGEON
 	
 	-- GARRISON
 	col = GARRISON
 	set = AddSet(60000,nil,col,602,"GA_BWM_SET_100",CLOTH,ANY,ANY,ANY)
-				AddVariant(60000,nil,col,set,"CLOTH",OBTAIN,TRANSMOG,23099,23096,23097,23098,23807,23100,23806)
+				AddVariant(60000,nil,col,set,"CLOTH",OBTAIN,TRANSMOG,A(23099),A(23096),A(23097),A(23098),A(23807),A(23100),A(23806))
 	set = AddSet(60000,nil,col,602,"GA_BWM_SET_100",LEATHER,ANY,ANY,ANY)
-				AddVariant(60000,nil,col,set,"LEATHER",OBTAIN,TRANSMOG,22857,22859,22855,22856,22853,22858,22854)
+				AddVariant(60000,nil,col,set,"LEATHER",OBTAIN,TRANSMOG,A(22857),A(22859),A(22855),A(22856),A(22853),A(22858),A(22854))
 	set = AddSet(60000,nil,col,602,"GA_BWM_SET_100",MAIL,ANY,ANY,ANY)
-				AddVariant(60000,nil,col,set,"MAIL",OBTAIN,TRANSMOG,22945,22944,22947,22946,22949,23810,22948)
+				AddVariant(60000,nil,col,set,"MAIL",OBTAIN,TRANSMOG,A(22945),A(22944),A(22947),A(22946),A(22949),A(23810),A(22948))
 	set = AddSet(60000,nil,col,602,"GA_BWM_SET_100",PLATE,ANY,ANY,ANY)
-				AddVariant(60000,nil,col,set,"PLATE",OBTAIN,TRANSMOG,23274,23278,23265,23271,23259,23277,23262)
+				AddVariant(60000,nil,col,set,"PLATE",OBTAIN,TRANSMOG,A(23274),A(23278),A(23265),A(23271),A(23259),A(23277),A(23262))
 	
 	set = AddSet(60000,nil,col,601,"GA_ALLIANCE_SET",ANY,ANY,ANY,ALLIANCE)
-				AddVariant(60000,nil,col,set,"GA_ALLIANCE_SET",OBTAIN,TRANSMOG,24474,24476,24472,24473,24470,24475,24471)
+				AddVariant(60000,nil,col,set,"GA_ALLIANCE_SET",OBTAIN,TRANSMOG,A(24474),A(24476),A(24472),A(24473),A(24470),A(24475),A(24471))
 	
 	set = AddSet(60000,nil,col,601,"GA_HORDE_SET",ANY,ANY,ANY,HORDE)
-				AddVariant(60000,nil,col,set,"GA_HORDE_SET",OBTAIN,TRANSMOG,24054,24051,24052,24817,24053,24050,24854)
+				AddVariant(60000,nil,col,set,"GA_HORDE_SET",OBTAIN,TRANSMOG,A(24054),A(24051),A(24052),A(24817),A(24053),A(24050),A(24854))
+				
+	--  HOLIDAY
+	col = HOLIDAY
+	set = AddSet(50400,nil,col,1103271,"HO_FESTIVE_DRESS",ANY,ANY,ANY,ANY)
+				AddVariant(50400,nil,col,set,"GREEN",OBTAIN,NOTRANSMOG,A(5657))
+				AddVariant(50400,nil,col,set,"PINK",OBTAIN,NOTRANSMOG,A(5772))
+				AddVariant(50400,nil,col,set,"PURPLE",OBTAIN,NOTRANSMOG,A(5773))
+				AddVariant(50400,nil,col,set,"RED",OBTAIN,NOTRANSMOG,A(5656))
+				
+	set = AddSet(50400,nil,col,1103272,"HO_FESTIVE_SUIT",ANY,ANY,ANY,ANY)
+				AddVariant(50400,nil,col,set,"BLACK",OBTAIN,NOTRANSMOG,A(5774))
+				AddVariant(50400,nil,col,set,"BLUE",OBTAIN,NOTRANSMOG,A(5777))
+				AddVariant(50400,nil,col,set,"TEAL",OBTAIN,NOTRANSMOG,A(5776))
+				AddVariant(50400,nil,col,set,"RED",OBTAIN,NOTRANSMOG,A(5775))
 	
 	--  OTHER
 	col = OTHER
 	set = AddSet(70000,nil,col,100,"OTH_CLOTH_100",CLOTH,ANY,ANY,ANY)
-				AddVariant(70000,nil,col,set,"OTH_CLOTH_100",OBTAIN,TRANSMOG,31376,31374,31372,31375,31380,31377,31373)
+				AddVariant(70000,nil,col,set,"OTH_CLOTH_100",OBTAIN,TRANSMOG,A(31376),A(31374),A(31372),A(31375),A(31380,79532),A(31377,79536),A(31373))
 	set = AddSet(70000,nil,col,100,"OTH_LEATHER_100",LEATHER,ANY,ANY,ANY)
-				AddVariant(70000,nil,col,set,"OTH_LEATHER_100",OBTAIN,TRANSMOG,31395,31391)
+				AddVariant(70000,nil,col,set,"OTH_LEATHER_100",OBTAIN,TRANSMOG,A(31395,79518),A(31391,79517))
 	set = AddSet(70000,nil,col,100,"OTH_MAIL_100",MAIL,ANY,ANY,ANY)
-				AddVariant(70000,nil,col,set,"OTH_MAIL_100",OBTAIN,TRANSMOG,31385,31387,31383,31388,31381,31386,31382)
+				AddVariant(70000,nil,col,set,"OTH_MAIL_100",OBTAIN,TRANSMOG,A(31385,79527),A(31387,79529),A(31383,79530),A(31388,79524),A(31381,79523),A(31386),A(31382,79526))
 	set = AddSet(70000,nil,col,100,"OTH_PLATE_100",PLATE,ANY,ANY,ANY)
-				AddVariant(70000,nil,col,set,"OTH_PLATE_100",OBTAIN,TRANSMOG,31310,31313)
+				AddVariant(70000,nil,col,set,"OTH_PLATE_100",OBTAIN,TRANSMOG,A(31310,79511),A(31313,79515))
 	
 end
 
@@ -213,17 +249,17 @@ local function GetDeathKnightAppearances()
 	-- RAID
 	col = RAID
 	set = AddSet(70000,nil,col,191,"DK_TR_19",PLATE,DEATHKNIGHT,ANY,ANY)
-				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,32139,32141,31975,32137,32138,32140)		-- Need belt and feet for each variant
-				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,29805,29807,29974,29800,29804,29806)
-				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,29813,29815,29961,29811,29812,29814)
-				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,29829,29831,29939,29827,29828,29830)
+				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,A(32139),A(32141),A(31975),A(32137),A(32138),A(32140))		-- Need belt and feet for each variant
+				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,A(29805),A(29807),A(29974),A(29800),A(29804),A(29806))
+				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,A(29813),A(29815),A(29961),A(29811),A(29812),A(29814))
+				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,A(29829),A(29831),A(29939),A(29827),A(29828),A(29830))
 	
 	-- DUNGEON
 	
 	-- OTHER
 	col = OTHER
 	set = AddSet(70000,nil,col,190,"DK_OTH_19",PLATE,DEATHKNIGHT,ANY,ANY)
-				AddVariant(70000,nil,col,set,"DK_OTH_19",OBTAIN,TRANSMOG,32543,32545,32541,32546,32542,32539,32544,32540)
+				AddVariant(70000,nil,col,set,"DK_OTH_19",OBTAIN,TRANSMOG,A(32543),A(32545),A(32541),A(32546),A(32542),A(32539),A(32544),A(32540))
 	
 end
 
@@ -235,10 +271,10 @@ local function GetDemonHunterAppearances()
 	-- RAID
 	col = RAID
 	set = AddSet(70000,nil,col,191,"DH_TR_19",LEATHER,DEMONHUNTER,ANY,ANY)
-				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,32020,32022,32100,32018,32019,32021)		-- Need belt and feet for each variant
-				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,32004,32006,32208,32002,32003,32005)
-				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,32012,32014,32220,32010,32011,32013)
-				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,31913,31915,32166,31911,31912,31914)
+				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,A(32020),A(32022),A(32100),A(32018),A(32019),A(32021))		-- Need belt and feet for each variant
+				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,A(32004),A(32006),A(32208),A(32002),A(32003),A(32005))
+				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,A(32012),A(32014),A(32220),A(32010),A(32011),A(32013))
+				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,A(31913),A(31915),A(32166),A(31911),A(31912),A(31914))
 	
 	-- DUNGEON
 	
@@ -252,10 +288,10 @@ local function GetDruidAppearances()
 	-- RAID
 	col = RAID
 	set = AddSet(70000,nil,col,191,"DR_TR_19",LEATHER,DRUID,ANY,ANY)
-				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,32072,32074,32221,32076,32071,32073)		-- Need belt and feet for each variant
-				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,30740,30742,31035,30744,30739,30741)
-				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,30731,30733,31024,30735,30730,30732)
-				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,30696,30698,30819,30700,30695,30697)
+				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,A(32072),A(32074),A(32221),A(32076),A(32071),A(32073))		-- Need belt and feet for each variant
+				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,A(30740),A(30742),A(31035),A(30744),A(30739),A(30741))
+				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,A(30731),A(30733),A(31024),A(30735),A(30730),A(30732))
+				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,A(30696),A(30698),A(30819),A(30700),A(30695),A(30697))
 	
 	-- DUNGEON
 	
@@ -269,10 +305,10 @@ local function GetHunterAppearances()
 	-- RAID
 	col = RAID
 	set = AddSet(70000,nil,col,191,"HU_TR_19",MAIL,HUNTER,ANY,ANY)
-				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,31867,31869,32112,31865,31866,31868)		-- Need belt and feet for each variant
-				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,29758,29760,30050,29755,29757,29759)
-				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,29766,29768,30075,29764,29765,29767)
-				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,29904,29905,30129,29902,29903,29906)
+				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,A(31867),A(31869),A(32112),A(31865),A(31866),A(31868))		-- Need belt and feet for each variant
+				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,A(29758),A(29760),A(30050),A(29755),A(29757),A(29759))
+				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,A(29766),A(29768),A(30075),A(29764),A(29765),A(29767))
+				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,A(29904),A(29905),A(30129),A(29902),A(29903),A(29906))
 	
 	-- DUNGEON
 	
@@ -286,10 +322,10 @@ local function GetMageAppearances()
 	-- RAID
 	col = RAID
 	set = AddSet(70000,nil,col,191,"MA_TR_19",CLOTH,MAGE,ANY,ANY)
-				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,31938,31940,32048,31942,31937,31939)		-- Need belt and feet for each variant
-				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,30785,30787,31175,30789,30784,30786)
-				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,30776,30778,31171,30780,30775,30777)
-				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,31083,31085,31115,31087,31082,31084)
+				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,A(31938),A(31940),A(32048),A(31942),A(31937),A(31939))		-- Need belt and feet for each variant
+				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,A(30785),A(30787),A(31175),A(30789),A(30784),A(30786))
+				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,A(30776),A(30778),A(31171),A(30780),A(30775),A(30777))
+				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,A(31083),A(31085),A(31115),A(31087),A(31082),A(31084))
 	
 	-- DUNGEON
 	
@@ -303,10 +339,10 @@ local function GetMonkAppearances()
 	-- RAID
 	col = RAID
 	set = AddSet(70000,nil,col,191,"MO_TR_19",LEATHER,MONK,ANY,ANY)
-				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,30634,30645,30535,30633,30643,30644)		-- Need belt and feet for each variant
-				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,32043,32046,31917,32042,32044,32045)
-				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,30617,30619,30510,30615,30616,30618)
-				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,30670,30671,30491,30669,30672,30673)
+				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,A(30634),A(30645),A(30535),A(30633),A(30643),A(30644))		-- Need belt and feet for each variant
+				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,A(32043),A(32046),A(31917),A(32042),A(32044),A(32045))
+				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,A(30617),A(30619),A(30510),A(30615),A(30616),A(30618))
+				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,A(30670),A(30671),A(30491),A(30669),A(30672),A(30673))
 	
 	-- DUNGEON
 	
@@ -320,10 +356,10 @@ local function GetPaladinAppearances()
 	-- RAID
 	col = RAID
 	set = AddSet(70000,nil,col,191,"PA_TR_19",PLATE,PALADIN,ANY,ANY)
-				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,32147,32149,32105,32151,32146,32148)		-- Need belt and feet for each variant
-				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,29644,29647,29707,29646,29643,29645)
-				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,29653,29655,29717,29657,29652,29654)
-				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,29452,29454,29676,29456,29451,29453)
+				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,A(32147),A(32149),A(32105),A(32151),A(32146),A(32148))		-- Need belt and feet for each variant
+				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,A(29644),A(29647),A(29707),A(29646),A(29643),A(29645))
+				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,A(29653),A(29655),A(29717),A(29657),A(29652),A(29654))
+				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,A(29452),A(29454),A(29676),A(29456),A(29451),A(29453))
 	
 	-- DUNGEON
 	
@@ -337,10 +373,10 @@ local function GetPriestAppearances()
 	-- RAID
 	col = RAID
 	set = AddSet(70000,nil,col,191,"PR_TR_19",CLOTH,PRIEST,ANY,ANY)
-				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,31947,31949,32060,31950,31946,31948)		-- Need belt and feet for each variant
-				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,30262,30264,30177,30266,30261,30263)
-				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,30271,30273,30189,30275,30270,30272)
-				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,30280,30282,30231,30283,30279,30281)
+				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,A(31947),A(31949),A(32060),A(31950),A(31946),A(31948))		-- Need belt and feet for each variant
+				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,A(30262),A(30264),A(30177),A(30266),A(30261),A(30263))
+				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,A(30271),A(30273),A(30189),A(30275),A(30270),A(30272))
+				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,A(30280),A(30282),A(30231),A(30283),A(30279),A(30281))
 	
 	-- DUNGEON
 	
@@ -354,10 +390,10 @@ local function GetRogueAppearances()
 	-- RAID
 	col = RAID
 	set = AddSet(70000,nil,col,191,"RO_TR_19",LEATHER,ROGUE,ANY,ANY)
-				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,32083,32084,32298,32079,32080,32081)		-- Need belt and feet for each variant
-				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,29870,29872,32292,29868,29869,29871)
-				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,29197,29218,32282,29195,29196,29217)
-				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,28986,28988,32317,28984,28985,28987)
+				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,A(32083),A(32084),A(32298),A(32079),A(32080),A(32081))		-- Need belt and feet for each variant
+				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,A(29870),A(29872),A(32292),A(29868),A(29869),A(29871))
+				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,A(29197),A(29218),A(32282),A(29195),A(29196),A(29217))
+				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,A(28986),A(28988),A(32317),A(28984),A(28985),A(28987))
 	
 	-- DUNGEON
 	
@@ -369,46 +405,51 @@ local function GetShamanAppearances()
 	-- LEGENDARY
 	col = LEGENDARY
 	set = AddSet(50400,nil,col,90,"LG_CASTER_INT_90",ANY,SHAMAN,CASTER,ANY)
-				AddVariant(50400,nil,col,set,"LG_CASTER_INT_90",OBTAIN,TRANSMOG,20801)
+				AddVariant(50400,nil,col,set,"LG_CASTER_INT_90",OBTAIN,TRANSMOG,A(20801))
 	
 	set = AddSet(50400,nil,col,90,"LG_MELEE_AGI_90",ANY,SHAMAN,MELEE,ANY)
-				AddVariant(50400,nil,col,set,"LG_MELEE_AGI_90",OBTAIN,TRANSMOG,20805)
+				AddVariant(50400,nil,col,set,"LG_MELEE_AGI_90",OBTAIN,TRANSMOG,A(20805))
 	
 	set = AddSet(50400,nil,col,90,"LG_HEALER_INT_90",ANY,SHAMAN,HEALER,ANY)
-				AddVariant(50400,nil,col,set,"LG_HEALER_INT_90",OBTAIN,TRANSMOG,20825)
+				AddVariant(50400,nil,col,set,"LG_HEALER_INT_90",OBTAIN,TRANSMOG,A(20825))
 	
 	set = AddSet(50400,nil,col,80,"LG_HEALER_80",ANY,SHAMAN,ANY,ANY)
-				AddVariant(50400,nil,col,set,"LG_HEALER_80",OBTAIN,TRANSMOG,11613)
+				AddVariant(50400,nil,col,set,"LG_HEALER_80",OBTAIN,TRANSMOG,A(11613))
 	
 	set = AddSet(70000,nil,col,60,"LG_60",ANY,SHAMAN,ANY,ANY)
-				AddVariant(70000,nil,col,set,"LG_60",OBTAIN,TRANSMOG,5131)
+				AddVariant(70000,nil,col,set,"LG_60",OBTAIN,TRANSMOG,A(5131))
 	
 	-- RAID
 	col = RAID
-	set = AddSet(70000,nil,col,191,"SH_TR_19",MAIL,SHAMAN,ANY,ANY)
-				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,32095,32096,32086,32099,32094,32097)		-- Need belt and feet for each variant
-				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,30937,30938,31364,30942,30936,30939)
-				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,30928,30929,31363,30932,30927,30930)
-				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,31039,31041,31348,31043,31038,31040)
+	set = AddSet(70000,nil,col,190,"SH_TR_19",MAIL,SHAMAN,ANY,ANY)
+				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,A(32095,81070),A(32096,81073),A(32086,81539),A(32099,81072),A(32094,81069),A(32097,81071))		-- Need belt and feet for each variant
+				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,A(30937,79871),A(30938,79886),A(31364,81536),A(30942,79880),A(30936,79865),A(30939,79877))
+				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,A(30928,79872),A(30929,79887),A(31363,81537),A(30932,79881),A(30927,79866),A(30930,79878))
+				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,A(31039,79873),A(31041,79888),A(31348,81538),A(31043,79882),A(31038,79867),A(31040,79879))
 	set = AddSet(70000,nil,col,181,"SH_TR_18",MAIL,SHAMAN,ANY,ANY)
-				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,26019,26021,26023,26018,26016,26020,26472)
-				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,26036,26038,26040,26035,26033,26037,26474)
-				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,26000,26002,26004,25999,25996,26001,25997)
+				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,A(26019),A(26021),A(26023),A(26018),A(26016),A(26020),A(26472))
+				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,A(26036),A(26038),A(26040),A(26035),A(26033),A(26037),A(26474))
+				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,A(26000),A(26002),A(26004),A(25999),A(25996),A(26001),A(25997))
 	set = AddSet(70000,nil,col,171,"SH_TR_17",MAIL,SHAMAN,ANY,ANY)
-				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,23360,23361,23363,23368,23365)		-- Need Belt and Feet
-				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,23370,23371,23373,23378,23375)
-				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,23678,23679,23688,23677,23689)
+				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,A(23360),A(23361),A(23363),A(23368),A(23365))		-- Need Belt and Feet
+				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,A(23370),A(23371),A(23373),A(23378),A(23375))
+				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,A(23678),A(23679),A(23688),A(23677),A(23689))
+	set = AddSet(70000,nil,col,160,"SH_TR_16",MAIL,SHAMAN,ANY,ANY)
+				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,A(20893),A(20887),A(20897),A(20896),A(20894))		-- Need Belt and Feet
+				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,A(20943),A(20945),A(20949),A(20942),A(20944))
+				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,A(20943),A(20945),A(20949),A(20942),A(20944))
+				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,A(21010),A(21012),A(21014),A(21013),A(21011))
 				
 	-- DUNGEON
 	col = DUNGEON
 	set = AddSet(70000,nil,col,30,"SH_DG_03",MAIL,SHAMAN,ANY,ANY)
-				AddVariant(70000,nil,col,set,"SH_DG_03",OBTAIN,TRANSMOG,7163,6962,7104,6876,7020)
+				AddVariant(70000,nil,col,set,"SH_DG_03",OBTAIN,TRANSMOG,A(7163),A(6962),A(7104),A(6876),A(7020))
 	
 	
 	-- OTHER
 	col = OTHER
 	set = AddSet(70000,nil,col,190,"SH_OTH_19",MAIL,SHAMAN,ANY,ANY)
-				AddVariant(70000,nil,col,set,"SH_OTH_19",OBTAIN,TRANSMOG,32499,32501,32497,32502,32498,32495,32500,32496)
+				AddVariant(70000,nil,col,set,"SH_OTH_19",OBTAIN,TRANSMOG,A(32499),A(32501),A(32497),A(32502),A(32498),A(32495),A(32500),A(32496))
 	
 end
 
@@ -420,20 +461,20 @@ local function GetWarlockAppearances()
 	-- RAID
 	col = RAID
 	set = AddSet(70000,nil,col,191,"WK_TR_19",CLOTH,WARLOCK,ANY,ANY)
-				AddVariant(70000,nil,col,set,"RAIDFINDER",31884,31886,31871,31888,31883,31885)		-- Need belt and feet for each variant
-				AddVariant(70000,nil,col,set,"NORMAL",29171,29173,29040,29175,29170,29172)
-				AddVariant(70000,nil,col,set,"HEROIC",29161,29163,29028,29165,29160,29162)
-				AddVariant(70000,nil,col,set,"MYTHIC",29083,29085,29049,29087,29082,29084)
+				AddVariant(70000,nil,col,set,"RAIDFINDER",A(31884),A(31886),A(31871),A(31888),A(31883),A(31885))		-- Need belt and feet for each variant
+				AddVariant(70000,nil,col,set,"NORMAL",A(29171),A(29173),A(29040),A(29175),A(29170),A(29172))
+				AddVariant(70000,nil,col,set,"HEROIC",A(29161),A(29163),A(29028),A(29165),A(29160),A(29162))
+				AddVariant(70000,nil,col,set,"MYTHIC",A(29083),A(29085),A(29049),A(29087),A(29082),A(29084))
 	set = AddSet(70000,nil,col,181,"WK_TR_18",CLOTH,WARLOCK,ANY,ANY)
-				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,25845,25847,25849,25844,25846,25842)
-				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,26169,26171,26173,26168,26165,26170)
-				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,26160,26162,26164,26159,26156,26161)
-				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,26214,26216,26218,26213,26210,26215)
+				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,A(25845),A(25847),A(25849),A(25844),A(25846),A(25842))
+				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,A(26169),A(26171),A(26173),A(26168),A(26165),A(26170))
+				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,A(26160),A(26162),A(26164),A(26159),A(26156),A(26161))
+				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,A(26214),A(26216),A(26218),A(26213),A(26210),A(26215))
 	set = AddSet(70000,nil,col,171,"WK_TR_17",CLOTH,WARLOCK,CASTER,ANY)
-				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,22599,22595,22597,22598,22600,22594)
-				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,23850,23853,23852,23849,23851)
-				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,23841,23844,23843,23840,23842)
-				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,23866,23869,23868,23865,23867)
+				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,A(22599),A(22595),A(22597),A(22598),A(22600),A(22594))
+				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,A(23850),A(23853),A(23852),A(23849),A(23851))
+				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,A(23841),A(23844),A(23843),A(23840),A(23842))
+				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,A(23866),A(23869),A(23868),A(23865),A(23867))
 	
 	-- DUNGEON
 	
@@ -447,10 +488,10 @@ local function GetWarriorAppearances()
 	-- RAID
 	col = RAID
 	set = AddSet(70000,nil,col,191,"WR_TR_19",PLATE,WARRIOR,ANY,ANY)
-				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,32157,32160,32127,32156,32158,32159)		-- Need belt and feet for each variant
-				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,31444,31447,32242,31443,31445,31446)
-				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,31410,31413,31545,31409,31411,31412)
-				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,31449,31455,32229,31452,31453,31454)
+				AddVariant(70000,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,A(32157),A(32160),A(32127),A(32156),A(32158),A(32159))		-- Need belt and feet for each variant
+				AddVariant(70000,nil,col,set,"NORMAL",OBTAIN,TRANSMOG,A(31444),A(31447),A(32242),A(31443),A(31445),A(31446))
+				AddVariant(70000,nil,col,set,"HEROIC",OBTAIN,TRANSMOG,A(31410),A(31413),A(31545),A(31409),A(31411),A(31412))
+				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,A(31449),A(31455),A(32229),A(31452),A(31453),A(31454))
 				
 	--[[set = AddSet(60200,nil,col,18,"WR_TR_18",WARRIOR,ANY,ANY)
 				AddVariant(60200,nil,col,set,"RAIDFINDER",OBTAIN,TRANSMOG,128134,128123,128127,128139,128135,128032)
@@ -525,7 +566,7 @@ function SetCollector:GetCollectedCount(collection, set, variant)
 	
 	local appearances = SetCollector.db.global.collections[collection].Sets[set].Variants[variant].Appearances
 	for i=1, #appearances do
-		local anyCollected, sources = false, C_TransmogCollection.GetAppearanceSources(appearances[i])
+		local anyCollected, sources = false, C_TransmogCollection.GetAppearanceSources(appearances[i].ID)
 		if sources then
 			sourcesCount = sourcesCount + #sources
 			for j=1, #sources do
@@ -624,6 +665,22 @@ function SetCollector:SetIsFilteredOutByRole(collection, set, role)
 	else
 		return true
 	end
+end
+
+function SetCollector:IsObtainableSet(collection, set)
+	local isObtainable = false
+	if SetCollector.db.global.collections[collection].Sets[set] then
+		isObtainable = SetCollector.db.global.collections[collection].Sets[set].Variants[1].Obtainable
+	end
+	return isObtainable
+end
+
+function SetCollector:IsTransmogSet(collection, set)
+	local isTransmog = false
+	if SetCollector.db.global.collections[collection].Sets[set] then
+		isTransmog = SetCollector.db.global.collections[collection].Sets[set].Variants[1].Transmog
+	end
+	return isTransmog
 end
 
 function SetCollector:IsFavoriteSet(set)
