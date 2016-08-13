@@ -73,7 +73,7 @@ local function OnTooltipSetItemHook(tooltip, ...)
 			if sources then
 				for i=1, #sources do
 					local link = select(6, C_TransmogCollection.GetAppearanceSourceInfo(sources[i].sourceID))
-					tooltip:AddLine(link)
+					tooltip:AddLine(sources[i].sourceID.." - "..link)
 				end
 			end
 		end

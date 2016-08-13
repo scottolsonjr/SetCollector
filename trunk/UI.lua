@@ -343,35 +343,47 @@ local itemButton = CreateFrame("Button","$parentItem"..i,modelFrame,"SetCollecto
 	prevItem = itemButton
 end
 
-local function SetItemButton(button, appearanceID, count, obtainable)
+local function SetItemButton(button, appearanceID, sourceID, count, obtainable)
 	if button and appearanceID then
-		local sources = SetCollector:GetAppearanceSources(appearanceID);
-		if sources then
-			local _, _, _, sTexture, _, sLink = C_TransmogCollection.GetAppearanceSourceInfo(sources[1].sourceID)
-			if sTexture then
-				button.link = sLink
-				button.ItemID = sources[1].sourceID
-				button.icon:SetTexture(sTexture)
-				button.icon:SetVertexColor(1, 1, 1, 1)
-				button.icon:SetDesaturated(true)
-				button.count:SetText("")
-				button.count:Hide()
-				button.glow:Hide()
-				
-				local isCollected = SetCollector:IsAppearanceCollected(appearanceID)
-				if isCollected then
-					--local sName, sLink, iRarity, iLevel, iMinLevel, sType, sSubType, iStackCount, sLocation, sTexture = GetItemInfo(itemID)
-					local iRarity = select(3, GetItemInfo(sLink))
-					button.icon:SetDesaturated(false)
-					button.count:SetText(i)
-					button.glow:SetVertexColor(GetItemQualityColor(iRarity))
-					button.glow:Show()
-				--elseif not obtainable then
-				--	button.icon:SetVertexColor(1, 0.25, 0.25, 0.5)
+		local src = 0
+		if sourceID == 0 then
+			local sources = SetCollector:GetAppearanceSources(appearanceID);
+			local s = 1
+			if sources then
+				for i=1, #sources do
+					if sources[i].sourceID == sourceID then
+						s = i
+					end
 				end
-				
-				button:Show()
+				src = sources[s].sourceID
 			end
+		else
+			src = sourceID
+		end
+		local _, _, _, sTexture, _, sLink = C_TransmogCollection.GetAppearanceSourceInfo(src)
+		if sTexture then
+			button.link = sLink
+			button.ItemID = src
+			button.icon:SetTexture(sTexture)
+			button.icon:SetVertexColor(1, 1, 1, 1)
+			button.icon:SetDesaturated(true)
+			button.count:SetText("")
+			button.count:Hide()
+			button.glow:Hide()
+			
+			local isCollected = SetCollector:IsAppearanceCollected(appearanceID)
+			if isCollected then
+				--local sName, sLink, iRarity, iLevel, iMinLevel, sType, sSubType, iStackCount, sLocation, sTexture = GetItemInfo(itemID)
+				local iRarity = select(3, GetItemInfo(sLink))
+				button.icon:SetDesaturated(false)
+				button.count:SetText(i)
+				button.glow:SetVertexColor(GetItemQualityColor(iRarity))
+				button.glow:Show()
+			--elseif not obtainable then
+			--	button.icon:SetVertexColor(1, 0.25, 0.25, 0.5)
+			end
+			
+			button:Show()
 		end
 	else
 		button:Hide()
@@ -509,7 +521,7 @@ function SetCollector:SetVariantTabs(collection, set, variant)
 	end
 end
 
-local function GetItemID(appearanceID)
+local function GetSourceID(appearanceID)
 	local sources = C_TransmogCollection.GetAppearanceSources(appearanceID)
 	local itemID
 	if sources then
@@ -535,12 +547,15 @@ function SetCollector:UpdateSelectedVariantTab(self)
 			local acq = SetCollector:GetCollectedCount(collection, set, selected)
 			local inc = 0
 			for i=1, num do
-				local appearanceID = db[collection].Sets[set].Variants[selected].Appearances[i]
-				local itemID = GetItemID(appearanceID)
-				if itemID > 0 then
+				local sourceID = db[collection].Sets[set].Variants[selected].Appearances[i].sourceID
+				local appearanceID = db[collection].Sets[set].Variants[selected].Appearances[i].ID
+				if sourceID == 0 then
+					sourceID = GetSourceID(appearanceID)
+				end
+				if sourceID and sourceID > 0 then
 					inc = inc + 1
-					modelFrame:TryOn(itemID)
-				  SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..inc], appearanceID, 1, obtainable)
+					modelFrame:TryOn(sourceID)
+				  SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..inc], appearanceID, sourceID, 1, obtainable)
 			  end
 			end
 			ClearItemButtons(inc + 1)
@@ -872,6 +887,8 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 				  local faction = UnitFactionGroup("player")
 					local role = GetFilteredRole()
 					
+					local isObtainable = SetCollector:IsObtainableSet(i, j)
+					local isTransmog = SetCollector:IsTransmogSet(i, j)
 					local isFavorite = SetCollector:IsFavoriteSet(j)
 					if isFavorite then
 						titleButton.Favorite:Show()
@@ -886,6 +903,10 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 					elseif SetCollector:SetIsFilteredOutByFaction(i, j, faction) then
 						-- Keep it hidden
 					elseif SetCollector:SetIsFilteredOutByRole(i, j, role) then
+						-- Keep it hidden
+					elseif SHOW_ONLY_OBTAINABLE == true and not isObtainable then
+						-- Keep it hidden
+					elseif SHOW_ONLY_TRANSMOG == true and not isTransmog then
 						-- Keep it hidden
 					elseif SHOW_ONLY_FAVORITES == true and not isFavorite then
 						-- Keep it hidden
