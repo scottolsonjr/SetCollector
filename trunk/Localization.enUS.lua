@@ -146,6 +146,7 @@ L["DH_TR_19"]							= "[19] Vestment of Second Sight"
 		L["DK_TR_17"] 							= "[17] Ogreskull Boneplate Battlegear"
 		L["DK_TR_18"] 							= "[18] Demongaze Armor"
 L["DK_TR_19"] 							= "[19] Dreadwyrm Battleplate"
+L["DK_OTH_19"] 							= "Deathlord's Battleplate"
 		
 		
 		L["DR_CD_90"] 							= "The Cycle Set"
