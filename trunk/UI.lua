@@ -489,13 +489,13 @@ function SetCollector:SetVariantTabs(collection, set, variant)
 					variantTab.FavoriteTexture:SetAtlas("PetJournal-FavoritesIcon")
 					variantTab.FavoriteTexture:SetPoint("LEFT","$parentText","LEFT",-10,0)
 				end
-				if ( SHOW_ONLY_FAVORITE == true and not char.sets[set].Variants[i].Favorite ) then
+				if ( SHOW_ONLY_FAVORITE == true and not char.sets[set].variants[i].favorite ) then
 					variantTab:Hide()
 				else
 						variantTab:SetText(L[db[collection].Sets[set].Variants[i].Title])
 						variantTab.FavoriteTexture:Hide()
-					if char.sets[set] and char.sets[set].Variants then
-						if char.sets[set].Variants[i].Favorite then
+					if char.sets[set] and char.sets[set].variants then
+						if char.sets[set].variants[i] and char.sets[set].variants[i].favorite then
 							variantTab:SetText("      "..L[db[collection].Sets[set].Variants[i].Title])
 							variantTab.FavoriteTexture:Show()
 						end
