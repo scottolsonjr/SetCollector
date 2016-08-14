@@ -346,8 +346,8 @@ end
 local function SetItemButton(button, appearanceID, sourceID, count, obtainable)
 	if button and appearanceID then
 		local src = 0
+		local sources = SetCollector:GetAppearanceSources(appearanceID);
 		if sourceID == 0 then
-			local sources = SetCollector:GetAppearanceSources(appearanceID);
 			local s = 1
 			if sources then
 				for i=1, #sources do
@@ -379,8 +379,10 @@ local function SetItemButton(button, appearanceID, sourceID, count, obtainable)
 				button.count:SetText(i)
 				button.glow:SetVertexColor(GetItemQualityColor(iRarity))
 				button.glow:Show()
-			--elseif not obtainable then
-			--	button.icon:SetVertexColor(1, 0.25, 0.25, 0.5)
+			end
+			
+			if not sources or #sources == 0 then
+				button.icon:SetVertexColor(1, 0.25, 0.25, 0.5)
 			end
 			
 			button:Show()
@@ -724,11 +726,11 @@ local function InitFilter()
 	info.arg1 = "favorites";
 	UIDropDownMenu_AddButton(info);
 	
-	info.leftPadding = nil;
+	--[[info.leftPadding = nil;
 	info.text = L["OBTAIN_FILTER"] or L["MISSING_LOCALIZATION"];
 	info.checked = SHOW_ONLY_OBTAINABLE;
 	info.arg1 = "obtainable";
-	UIDropDownMenu_AddButton(info);
+	UIDropDownMenu_AddButton(info);]]--
 	
 	info.leftPadding = nil;
 	info.text = L["TRANSMOG_FILTER"] or L["MISSING_LOCALIZATION"];
