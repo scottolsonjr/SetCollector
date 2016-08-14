@@ -215,6 +215,7 @@ L["DK_OTH_19"] 							= "Deathlord's Battleplate"
 		L["DR_TR_17"] 							= "[17] Living Wood Battlegear"
 		L["DR_TR_18"] 							= "[18] Oathclaw Wargarb"
 L["DR_TR_19"] 							= "[19] Garb of the Astral Warden"
+L["DR_OTH_19"] 							= "Dreamgrove Raiment"
 		
 		
 		L["HU_CD_90"] 							= "The Howling Beast Set"
@@ -415,6 +416,7 @@ L["PA_TR_19"] 							= "[19] Battleplate of the Highlord"
 		L["PR_TR_17"] 							= "[17] Soul Priest's Raiment"
 		L["PR_TR_18"] 							= "[18] Attire of Piety"
 L["PR_TR_19"] 							= "[19] Vestments of the Purifier"
+L["PR_OTH_19"] 							= "Regalia of the High Priest"
 		
 		
 		L["RO_CD_90"]	 						= "The Silent Assassin Set"
@@ -448,6 +450,7 @@ L["PR_TR_19"] 							= "[19] Vestments of the Purifier"
 		L["RO_TR_17"] 							= "[17] Poisoner's Battlegear"
 		L["RO_TR_18"] 							= "[18] Felblade Armor"
 L["RO_TR_19"] 							= "[19] Doomblade Battlegear"
+L["RO_OTH_19"] 							= "Battlegear of the Uncrowned"
 		
 		
 		L["SH_CD_90"] 							= "Windfury Set"
