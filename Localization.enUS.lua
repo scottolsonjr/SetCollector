@@ -551,6 +551,7 @@ L["SH_OTH_19"]							= "Raiment of the Farseer (Unknown Source)"
 		L["WK_TR_17"] 							= "[17] Shadow Council's Garb"
 		L["WK_TR_18"] 							= "[18] Deathrattle Regalia"
 L["WK_TR_19"] 							= "[19] Legacy of Azj'Aquir"
+L["WK_OTH_19"] 							= "Vestments of the Black Harvest"
 		
 		
 		L["WR_CD_90"] 							= "The Golden King Set"

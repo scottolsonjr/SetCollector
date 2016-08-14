@@ -9,7 +9,9 @@ local defaults = {
 		},
 		filters = {
 			specialization = nil,
-			favorites = false
+			favorites = false,
+			obtainable = false,
+			transmog = false
 		},
 		sets = {}
 	},
@@ -477,7 +479,7 @@ local function GetWarlockAppearances()
 	col = RAID
 	set = AddSet(70000,nil,col,191,"WK_TR_19",CLOTH,WARLOCK,ANY,ANY)
 				AddVariant(70000,nil,col,set,"RAIDFINDER",A(31884),A(31886),A(31871),A(31888),A(31883),A(31885))		-- Need belt and feet for each variant
-				AddVariant(70000,nil,col,set,"NORMAL",A(29171),A(29173),A(29040),A(29175),A(29170),A(29172))
+				AddVariant(70000,nil,col,set,"NORMAL",A(29171,79784),A(29173,79811),A(29040,81559),A(29175,79802),A(29170,79775),A(29172,79793))
 				AddVariant(70000,nil,col,set,"HEROIC",A(29161),A(29163),A(29028),A(29165),A(29160),A(29162))
 				AddVariant(70000,nil,col,set,"MYTHIC",A(29083),A(29085),A(29049),A(29087),A(29082),A(29084))
 	set = AddSet(70000,nil,col,181,"WK_TR_18",CLOTH,WARLOCK,ANY,ANY)
@@ -492,6 +494,12 @@ local function GetWarlockAppearances()
 				AddVariant(70000,nil,col,set,"MYTHIC",OBTAIN,TRANSMOG,A(23866),A(23869),A(23868),A(23865),A(23867))
 	
 	-- DUNGEON
+	
+	
+	-- OTHER
+	col = OTHER
+	set = AddSet(70000,nil,col,190,"WK_OTH_19",CLOTH,WARLOCK,ANY,ANY)
+				AddVariant(70000,nil,col,set,"WK_OTH_19",OBTAIN,TRANSMOG,A(32517,81037),A(32519,81040),A(32521,81039),A(32520,81042),A(32516,81036),A(32513,81041),A(32518,81038),A(32514,81035))
 	
 end
 
@@ -714,7 +722,7 @@ function SetCollector:SetFavoriteSet(self)
 		}
 	end
 	db.sets[self.Set].favorite = not db.sets[self.Set].favorite
-	if not db.sets[self.Set].variants then
+	if not db.sets[self.Set].variants or #db.sets[self.Set].variants == 0 then
 		db.sets[self.Set].variants = {}
 		local variants = SetCollector.db.global.collections[self.Collection].Sets[self.Set].Variants
 		for i=1, #variants do
@@ -724,7 +732,7 @@ function SetCollector:SetFavoriteSet(self)
 		end
 	else
 		for i=1, #db.sets[self.Set].variants do
-			db.sets[self.Set].variants[i].favorite = not db.sets[self.Set].favorite
+			db.sets[self.Set].variants[i].favorite = not db.sets[self.Set].variants[i].favorite
 		end
 	end
 	if db.sets[self.Set].favorite then
@@ -733,6 +741,8 @@ function SetCollector:SetFavoriteSet(self)
 		self.Favorite:Hide()
 	end
 end
+
+
 
 --
 -- Setup Database
