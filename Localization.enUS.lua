@@ -106,10 +106,13 @@ L["TR_LEATHER_18"] 						= "[18] Ironpelt Armor"
 L["TR_MAIL_18"] 							= "[18] Rancorbite Armor"
 L["TR_PLATE_18"] 							= "[18] Demonbreaker Wargear"
 
+
+-- Legion Pre-Expansion Event Items
 L["OTH_CLOTH_100"]						= "Fel-Infused Cloth Armor"
 L["OTH_LEATHER_100"]					= "Felshroud Leather Armor"
 L["OTH_MAIL_100"]							= "Fel-Chain Mail Armor"
 L["OTH_PLATE_100"]						= "Felforged Plate Armor"
+L["OTH_LOCKET_100"]						= "Alaina's Bonnet (from Charred Locket)"
 		
 		-- Class Sets
 L["DH_TR_19"]							= "[19] Vestment of Second Sight"
@@ -249,6 +252,7 @@ L["DR_OTH_19"] 							= "Dreamgrove Raiment"
 		L["HU_TR_17"] 							= "[17] Rylakstalker's Battlegear"
 		L["HU_TR_18"] 							= "[18] Battlegear of the Savage Hunt"
 L["HU_TR_19"] 							= "[19] Eagletalon Battlegear"
+L["HU_OTH_19"] 							= "Guise of the Unseen Path"
 		
 		
 		L["MA_CD_90"] 							= "The Elemental Triad Set"
@@ -282,6 +286,7 @@ L["HU_TR_19"] 							= "[19] Eagletalon Battlegear"
 		L["MA_TR_17"] 							= "[17] Arcanoshatter Regalia"
 		L["MA_TR_18"] 							= "[18] Raiment of the Arcane Conclave"
 L["MA_TR_19"] 							= "[19] Regalia of Everburning Knowledge"
+L["MA_OTH_19"] 							= "Vesture of Tirisgarde"
 		
 		
 		L["MO_CD_90"] 							= "The Regal Lord Set"
@@ -599,6 +604,7 @@ L["WK_OTH_19"] 							= "Vestments of the Black Harvest"
 		L["WR_TR_17"] 							= "[17] Blackhand's Battlegear"
 		L["WR_TR_18"] 							= "[18] Battlegear of Iron Wrath"
 L["WR_TR_19"] 							= "[19] Warplate of the Obsidian Aspect"
+L["WR_OTH_19"] 							= "Battlelord's Plate"
 
 		L["HO_FESTIVE_DRESS"]			= "Festive Dress / Festival Dress"
 		L["HO_FESTIVE_SUIT"]				= "Festive Pant Suit / Festival Suit"
