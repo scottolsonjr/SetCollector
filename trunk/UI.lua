@@ -96,7 +96,7 @@ local function GetSetSpecializationRole(spec)
 	elseif spec == 252 	then return MELEE	.Description	-- Unholy Death Knight
 	elseif spec == 253 	then return RANGED.Description	-- Beast Mastery Hunter
 	elseif spec == 254 	then return RANGED.Description	-- Marksmanship Hunter
-	elseif spec == 255 	then return RANGED.Description	-- Survival Hunter
+	elseif spec == 255 	then return MELEE.Description		-- Survival Hunter
 	elseif spec == 256 	then return HEALER.Description	-- Discipline Priest
 	elseif spec == 257 	then return HEALER.Description	-- Holy Priest
 	elseif spec == 258 	then return CASTER.Description	-- Shadow Priest
@@ -415,7 +415,9 @@ local function VariantTab_OnClick(self, button, ...)
 		SetCollector:SetVariantTab(_G["SetCollectorSetDisplay"], self:GetID());
 		PlaySound("UI_Toybox_Tabs");
 	elseif ( button == "RightButton" ) then
-		-- Pending
+		SetCollector:SetFavoriteVariant(self.Set, self:GetID())
+		SetCollector:UpdateCollections()
+		SetCollector:SetVariantTabs(self.Collection, self.Set, PanelTemplates_GetSelectedTab(self:GetParent()))
 	end
 end
 
@@ -434,45 +436,6 @@ for i=1, 5 do
 	variantTab:Hide()
 end
 PanelTemplates_SetNumTabs(SetCollectorSetDisplay, 5)
-
-function SetCollectorVariantTab_OnClick(self, button, ...)			--- Deprecated
-	SetCollector:Print("Click")
-	if ( button == "LeftButton" ) then 
-		SetVariantTab(_G["SetCollectorSetDisplay"], self:GetID());
-		PlaySound("UI_Toybox_Tabs");
-	elseif ( button == "RightButton" ) then
-		--[[if ( SetCollectorLegacyCharacterDB.Sets[self.Set].Variants[self:GetID()].Favorite ) then
-			SetCollectorLegacyCharacterDB.Sets[self.Set].Variants[self:GetID()].Favorite = false
-			if ( SetCollectorLegacyCharacterDB.Sets[self.Set].Favorite ) then
-				local fave = 0
-				for i=1, #SetCollectorLegacyCharacterDB.Sets[self.Set].Variants do
-					if SetCollectorLegacyCharacterDB.Sets[self.Set].Variants[i].Favorite then
-						fave = fave + 1
-					end
-				end
-				if fave == 0 then
-					SetCollectorLegacyCharacterDB.Sets[self.Set].Favorite = false
-					CollectionsUpdate()
-				end
-			end
-		else
-			SetCollectorLegacyCharacterDB.Sets[self.Set].Variants[self:GetID()] = { Favorite = true }
-			if ( not SetCollectorLegacyCharacterDB.Sets[self.Set].Favorite ) then
-				local fave = 0
-				for i=1, #SetCollectorLegacyCharacterDB.Sets[self.Set].Variants do
-					if SetCollectorLegacyCharacterDB.Sets[self.Set].Variants[i].Favorite then
-						fave = fave + 1
-					end
-				end
-				if fave > 0 then
-					SetCollectorLegacyCharacterDB.Sets[self.Set].Favorite = true
-					CollectionsUpdate()
-				end
-			end
-		end]]--
-		SetVariantTabs(self.Collection, self.Set, PanelTemplates_GetSelectedTab(self:GetParent()))
-	end
-end
 
 function SetCollector:SetVariantTabs(collection, set, variant)
 	local db = SetCollector.db.global.collections
