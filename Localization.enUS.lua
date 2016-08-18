@@ -522,7 +522,10 @@ L["SH_TR_16"] 							= "[16] Celestial Harmony Regalia"
 L["SH_TR_17"] 							= "[17] Windspeaker's Regalia"
 L["SH_TR_18"] 							= "[18] Embrace of the Living Mountain"
 L["SH_TR_19"] 							= "[19] Regalia of Bound Elements"
-L["SH_OTH_19"]							= "Raiment of the Farseer (Unknown Source)"
+L["SH_LG_CASTER_110"]				= "Level 110 Legendary Items"
+L["SH_LG_HEALER_110"]				= "Level 110 Legendary Items"
+L["SH_LG_MELEE_110"]					= "Level 110 Legendary Items"
+L["SH_OTH_19"]							= "Raiment of the Farseer"
 		
 		
 		L["WK_CD_90"] 							= "The Betrayer Set"
