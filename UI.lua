@@ -831,15 +831,8 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 					
 					rowIndex = rowIndex + 1
 					titleButton = GetSetButton(rowIndex)
-					titleButton.Text:SetText(L[collections[i].sets[j].Title] or L["MISSING_LOCALIZATION"])			-- Putting Text into FontString allows for Wrapping using SetWidth
 					titleButton.Text:SetWidth(COLLECTION_LIST_WIDTH - 32)
 					
-					if (i == 10) then
-						titleButton.SubText:SetText("|cff999999".."SubText Here".."|r")
-					end
-					
-					local height = titleButton.Text:GetHeight() + titleButton.SubText:GetHeight() + 10
-					titleButton:SetHeight(height)
 					titleButton.Collection = i
 					titleButton.Set = j
 					--titleButton:ClearAllPoints()					--  This appears to be that old compactraidframes issue
@@ -860,6 +853,32 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 					else
 						titleButton.Favorite:Hide()
 					end
+					
+					local isCollected = SetCollector:IsSetFullyCollected(i, j)
+					if isCollected then
+						titleButton.Text:SetWidth(COLLECTION_LIST_WIDTH - 48)
+						titleButton.Check:Show()
+					else
+						local isPartiallyCollected = SetCollector:IsSetPartiallyCollected(i, j)
+						if isPartiallyCollected then
+							titleButton.Text:SetWidth(COLLECTION_LIST_WIDTH - 48)
+							titleButton.Check:SetDesaturated(true)
+							titleButton.Check:Show()
+						end
+					end
+					
+					if SetCollector:IsSetObtainable(i, j) then
+						titleButton.Text:SetText(L[collections[i].sets[j].Title] or L["MISSING_LOCALIZATION"])			-- Putting Text into FontString allows for Wrapping using SetWidth
+					else
+						titleButton.Text:SetText("|cff999999"..L[collections[i].sets[j].Title])
+					end
+					
+					if (i == 10) then
+						titleButton.SubText:SetText("|cff999999".."SubText Here".."|r")
+					end
+					
+					local height = titleButton.Text:GetHeight() + titleButton.SubText:GetHeight() + 10
+					titleButton:SetHeight(height)
 					
 					if SetCollector:SetIsFilteredOutByArmorType(i, j, armorType) then
 						-- Keep it hidden
