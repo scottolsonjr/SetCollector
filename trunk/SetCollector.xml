@@ -62,7 +62,7 @@
 				<Texture parentKey="Check" file="Interface\Buttons\UI-CheckBox-Check" hidden="true">
 					<Size x="16" y="16"/>
 					<Anchors>
-						<Anchor point="TOPRIGHT" relativeKey="$parent.Text" relativePoint="TOPRIGHT" x="-5" y="4"/>
+						<Anchor point="TOPLEFT" relativeKey="$parent.Text" relativePoint="TOPRIGHT" x="-5" y="4"/>
 					</Anchors>
 				</Texture>
 			</Layer>
