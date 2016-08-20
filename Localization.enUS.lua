@@ -150,6 +150,8 @@ L["DH_TR_19"]							= "[19] Vestment of Second Sight"
 		L["DK_TR_18"] 							= "[18] Demongaze Armor"
 L["DK_TR_19"] 							= "[19] Dreadwyrm Battleplate"
 L["DK_OTH_19"] 							= "Deathlord's Battleplate"
+L["DK_LG_TANK_110"]				= "Level 110 Legendary Items"
+L["DK_LG_MELEE_110"]					= "Level 110 Legendary Items"
 		
 		
 		L["DR_CD_90"] 							= "The Cycle Set"
