@@ -374,10 +374,10 @@ local function SetItemButton(button, appearanceID, sourceID, count, obtainable)
 			local isCollected = SetCollector:IsAppearanceCollected(appearanceID)
 			if isCollected then
 				--local sName, sLink, iRarity, iLevel, iMinLevel, sType, sSubType, iStackCount, sLocation, sTexture = GetItemInfo(itemID)
-				local iRarity = select(3, GetItemInfo(sLink))
 				button.icon:SetDesaturated(false)
 				button.count:SetText(i)
-				button.glow:SetVertexColor(GetItemQualityColor(iRarity))
+				local iRarity = select(3, GetItemInfo(sLink))
+				if iRarity then button.glow:SetVertexColor(GetItemQualityColor(iRarity)) end
 				button.glow:Show()
 			end
 			
