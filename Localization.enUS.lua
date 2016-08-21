@@ -115,7 +115,10 @@ L["OTH_PLATE_100"]						= "Felforged Plate Armor"
 L["OTH_LOCKET_100"]						= "Alaina's Bonnet (from Charred Locket)"
 		
 		-- Class Sets
-L["DH_TR_19"]							= "[19] Vestment of Second Sight"
+L["DH_TR_19"]									= "[19] Vestment of Second Sight"
+L["DH_OTH_19"] 								= "Battlegear of the Shattered Abyss"
+L["DH_LG_TANK_110"]						= "Level 110 Legendary Items"
+L["DH_LG_MELEE_110"]					= "Level 110 Legendary Items"
 
 		
 		L["DK_CD_90"] 							= "Lich Lord Set"
