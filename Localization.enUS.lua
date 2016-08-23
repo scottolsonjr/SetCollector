@@ -427,6 +427,8 @@ L["PA_TR_19"] 							= "[19] Battleplate of the Highlord"
 		L["PR_TR_18"] 							= "[18] Attire of Piety"
 L["PR_TR_19"] 							= "[19] Vestments of the Purifier"
 L["PR_OTH_19"] 							= "Regalia of the High Priest"
+L["PR_LG_CASTER_110"]						= "Level 110 Legendary Items"
+L["PR_LG_HEALER_110"]						= "Level 110 Legendary Items"
 		
 		
 		L["RO_CD_90"]	 						= "The Silent Assassin Set"
@@ -461,6 +463,7 @@ L["PR_OTH_19"] 							= "Regalia of the High Priest"
 		L["RO_TR_18"] 							= "[18] Felblade Armor"
 L["RO_TR_19"] 							= "[19] Doomblade Battlegear"
 L["RO_OTH_19"] 							= "Battlegear of the Uncrowned"
+L["RO_LG_MELEE_110"]						= "Level 110 Legendary Items"
 		
 		
 		L["SH_CD_90"] 							= "Windfury Set"
@@ -565,6 +568,7 @@ L["SH_OTH_19"]							= "Raiment of the Farseer"
 		L["WK_TR_18"] 							= "[18] Deathrattle Regalia"
 L["WK_TR_19"] 							= "[19] Legacy of Azj'Aquir"
 L["WK_OTH_19"] 							= "Vestments of the Black Harvest"
+L["WK_LG_CASTER_110"]						= "Level 110 Legendary Items"
 		
 		
 		L["WR_CD_90"] 							= "The Golden King Set"
