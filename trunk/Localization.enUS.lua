@@ -15,10 +15,10 @@ L["DEBUG_OFF"]	= "Debug Off."
 		L["HIDE_DETAIL"] 			= "Hide Detail"
 		L["SHOW_DETAIL"] 			= "Show Detail"
 		
-		L["RIGHT_CLICK_FAVORITE"] = "Right-click to favorite a set. This \nlist can be filtered to just favorites."
+		L["RIGHT_CLICK_FAVORITE"] = "Right-click to favorite a set."
 		
 		L["TUTORIAL_1"] 				= "Filter sets by specialization and set whether you only want to see your favorites."
-		L["TUTORIAL_2"] 				= "A list of available gear collections and sets is displayed here. Click on a set\nto preview. It will also show a star for your favorite sets."
+		L["TUTORIAL_2"] 				= "A list of available gear collections and sets is displayed here. Click on a set\nto preview. It will also show a star for your favorite sets and a check mark for sets completed."
 		L["TUTORIAL_3"] 				= "When there are multiple variants of a set you will see tabs for each variant."
 		L["TUTORIAL_4"] 				= "A preview of the set will\nappear here. Click on a set to the left to preview it here."
 		
@@ -44,7 +44,7 @@ L["DB_RESET"]		=	"Database Reset."
 		L["MELEE"] 	= MELEE
 		
 		L["OBTAIN_FILTER"] 	= "Only Obtainable"
-		L["NOOBTAIN"] 				= "No longer obtainable"
+		L["NOOBTAIN"] 				= "This set may not be obtainable"
 		L["TRANSMOG_FILTER"] = "Only for Transmogrification"
 		L["NOTRANSMOG"] 			= "Not for transmogrification"
 		
@@ -106,6 +106,8 @@ L["TR_LEATHER_18"] 						= "[18] Ironpelt Armor"
 L["TR_MAIL_18"] 							= "[18] Rancorbite Armor"
 L["TR_PLATE_18"] 							= "[18] Demonbreaker Wargear"
 
+L["OTH_SHIPYARD_100"]				= "Fleet Commander's Hat"
+
 
 -- Legion Pre-Expansion Event Items
 L["OTH_CLOTH_100"]						= "Fel-Infused Cloth Armor"
@@ -120,7 +122,7 @@ L["DH_OTH_19"] 								= "Battlegear of the Shattered Abyss"
 L["DH_LG_TANK_110"]						= "Level 110 Legendary Items"
 L["DH_LG_MELEE_110"]					= "Level 110 Legendary Items"
 
-		
+L["DK_STARTER"]						= "Starter Set"
 		L["DK_CD_90"] 							= "Lich Lord Set"
 		L["DK_PVP_MELEE_14"] 			= "[14] Greivous Desecration"
 		L["DK_PVP_MELEE_15"] 			= "[15] Prideful Desecration"
@@ -617,6 +619,8 @@ L["WK_LG_CASTER_110"]						= "Level 110 Legendary Items"
 		L["WR_TR_18"] 							= "[18] Battlegear of Iron Wrath"
 L["WR_TR_19"] 							= "[19] Warplate of the Obsidian Aspect"
 L["WR_OTH_19"] 							= "Battlelord's Plate"
+L["WR_LG_MELEE_110"]						= "Level 110 Legendary Items"
+L["WR_LG_TANK_110"]						= "Level 110 Legendary Items"
 
 		L["HO_FESTIVE_DRESS"]			= "Festive Dress / Festival Dress"
 		L["HO_FESTIVE_SUIT"]				= "Festive Pant Suit / Festival Suit"

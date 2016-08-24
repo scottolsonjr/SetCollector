@@ -442,6 +442,7 @@ function SetCollector:SetVariantTabs(collection, set, variant)
 	local char = SetCollector.db.char
 	if ( collection and set and #db[collection].Sets[set].Variants > 1 ) then
 		for i=1, 5 do
+			local collected = SetCollector:GetCollectedCount(collection, set, i)
 			local variantTab = _G["SetCollectorSetDisplayTab"..i]
 			if ( db[collection].Sets[set].Variants[i] ) then
 				variantTab.Collection = collection
@@ -469,6 +470,9 @@ function SetCollector:SetVariantTabs(collection, set, variant)
 				variantTab:Hide()
 			end
 			PanelTemplates_TabResize(variantTab, 0, nil, 36, variantTab:GetParent().maxTabWidth or 88)
+			if collected == "*" and SHOW_ONLY_OBTAINABLE then
+				variantTab:Hide()
+			end
 		end
 		PanelTemplates_SetNumTabs(SetCollectorSetDisplay, #db[collection].Sets[set].Variants)
 		SetCollector:SetVariantTab(SetCollectorSetDisplay, variant or 1)
@@ -689,17 +693,17 @@ local function InitFilter()
 	info.arg1 = "favorites";
 	UIDropDownMenu_AddButton(info);
 	
-	--[[info.leftPadding = nil;
+	info.leftPadding = nil;
 	info.text = L["OBTAIN_FILTER"] or L["MISSING_LOCALIZATION"];
 	info.checked = SHOW_ONLY_OBTAINABLE;
 	info.arg1 = "obtainable";
-	UIDropDownMenu_AddButton(info);]]--
+	UIDropDownMenu_AddButton(info);
 	
-	info.leftPadding = nil;
+	--[[info.leftPadding = nil;
 	info.text = L["TRANSMOG_FILTER"] or L["MISSING_LOCALIZATION"];
 	info.checked = SHOW_ONLY_TRANSMOG;
 	info.arg1 = "transmog";
-	UIDropDownMenu_AddButton(info);
+	UIDropDownMenu_AddButton(info);]]--
 end
 
 function SetCollector:InitializeFilter()
@@ -845,7 +849,7 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 				  local faction = UnitFactionGroup("player")
 					local role = GetFilteredRole()
 					
-					local isObtainable = SetCollector:IsObtainableSet(i, j)
+					local isObtainable = SetCollector:IsSetObtainable(i, j)
 					local isTransmog = SetCollector:IsTransmogSet(i, j)
 					local isFavorite = SetCollector:IsFavoriteSet(j)
 					if isFavorite then
@@ -867,7 +871,7 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 						end
 					end
 					
-					if SetCollector:IsSetObtainable(i, j) then
+					if isObtainable then
 						titleButton.Text:SetText(L[collections[i].sets[j].Title] or L["MISSING_LOCALIZATION"])			-- Putting Text into FontString allows for Wrapping using SetWidth
 					else
 						titleButton.Text:SetText("|cff999999"..L[collections[i].sets[j].Title])
