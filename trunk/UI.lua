@@ -343,7 +343,7 @@ local itemButton = CreateFrame("Button","$parentItem"..i,modelFrame,"SetCollecto
 	prevItem = itemButton
 end
 
-local function SetItemButton(button, appearanceID, sourceID, count, obtainable)
+local function SetItemButton(button, appearanceID, sourceID, itemID)
 	if button and appearanceID then
 		local src = 0
 		local sources = SetCollector:GetAppearanceSources(appearanceID);
@@ -360,7 +360,12 @@ local function SetItemButton(button, appearanceID, sourceID, count, obtainable)
 		else
 			src = sourceID
 		end
-		local _, _, _, sTexture, _, sLink = C_TransmogCollection.GetAppearanceSourceInfo(src)
+		local sTexture, sLink
+		if src > 0 then
+			_, _, _, sTexture, _, sLink = C_TransmogCollection.GetAppearanceSourceInfo(src)
+		else
+			_, sLink, _, _, _, _, _, _, _, sTexture = GetItemInfo(itemID)
+		end
 		if sTexture then
 			button.link = sLink
 			button.ItemID = src
@@ -373,7 +378,6 @@ local function SetItemButton(button, appearanceID, sourceID, count, obtainable)
 			
 			local isCollected = SetCollector:IsAppearanceCollected(appearanceID)
 			if isCollected then
-				--local sName, sLink, iRarity, iLevel, iMinLevel, sType, sSubType, iStackCount, sLocation, sTexture = GetItemInfo(itemID)
 				button.icon:SetDesaturated(false)
 				button.count:SetText(i)
 				local iRarity = select(3, GetItemInfo(sLink))
@@ -524,7 +528,15 @@ function SetCollector:UpdateSelectedVariantTab(self)
 				if sourceID and sourceID > 0 then
 					inc = inc + 1
 					modelFrame:TryOn(sourceID)
-				  SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..inc], appearanceID, sourceID, 1, obtainable)
+				  SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..inc], appearanceID, sourceID, 0)
+				else
+					local itemID = db[collection].Sets[set].Variants[selected].Appearances[i].itemID
+					if itemID and itemID > 0 then
+						inc = inc + 1
+						local sLink = select(2, GetItemInfo(itemID))
+						modelFrame:TryOn(sLink)
+				  	SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..inc], appearanceID, sourceID, itemID)
+					end
 			  end
 			end
 			ClearItemButtons(inc + 1)

@@ -44,7 +44,7 @@ L["DB_RESET"]		=	"Database Reset."
 		L["MELEE"] 	= MELEE
 		
 		L["OBTAIN_FILTER"] 	= "Only Obtainable"
-		L["NOOBTAIN"] 				= "This set may not be obtainable"
+		L["NOOBTAIN"] 				= "This set may not be available for transmog"
 		L["TRANSMOG_FILTER"] = "Only for Transmogrification"
 		L["NOTRANSMOG"] 			= "Not for transmogrification"
 		
@@ -52,7 +52,7 @@ L["DB_RESET"]		=	"Database Reset."
 		-- Collection Localizations
 		--
 		
-		L["CHALLENGE"] 	= "Challenge"
+		L["CHALLENGE"] 	= GUILD_CHALLENGE_TYPE5
 		L["DUNGEON"] 		= GUILD_CHALLENGE_TYPE1
 		L["LEGENDARY"] 	= ITEM_QUALITY5_DESC
 		L["PVP"] 				= PVP
@@ -106,7 +106,9 @@ L["TR_LEATHER_18"] 						= "[18] Ironpelt Armor"
 L["TR_MAIL_18"] 							= "[18] Rancorbite Armor"
 L["TR_PLATE_18"] 							= "[18] Demonbreaker Wargear"
 
-L["OTH_SHIPYARD_100"]				= "Fleet Commander's Hat"
+L["OTH_SHIPYARD_100"]				= "Captain/Fleet Commander's Hat"
+L["CAPTAIN"]								= "Captain's Hat"
+L["FLEETCOMMANDER"]					= "Fleet Commander's Hat"
 
 
 -- Legion Pre-Expansion Event Items
