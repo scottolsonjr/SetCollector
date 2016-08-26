@@ -56,6 +56,7 @@ L["DB_RESET"]		=	"Database Reset."
 		L["DUNGEON"] 		= GUILD_CHALLENGE_TYPE1
 		L["LEGENDARY"] 	= ITEM_QUALITY5_DESC
 		L["PVP"] 				= PVP
+		L["CRAFTED"]		= "Crafted"
 		L["HOLIDAY"] 		= "Holiday"
 		L["GARRISON"] 		= "Garrison"
 		L["RAID"] 				= "Raid"
@@ -89,6 +90,9 @@ L["DB_RESET"]		=	"Database Reset."
 		L["GA_ALLIANCE_SET"] 			= "Stormwind Set"
 		L["GA_HORDE_SET"] 					= "Orgrimmar Set"
 		L["GA_BWM_SET_100"] 				= "Bunker/War Mill Sets"
+L["OTH_SHIPYARD_100"]				= "Captain/Fleet Commander's Hat"
+L["CAPTAIN"]								= "Captain's Hat"
+L["FLEETCOMMANDER"]					= "Fleet Commander's Hat"
 		
 		
 		-- Generic Sets
@@ -106,9 +110,9 @@ L["TR_LEATHER_18"] 						= "[18] Ironpelt Armor"
 L["TR_MAIL_18"] 							= "[18] Rancorbite Armor"
 L["TR_PLATE_18"] 							= "[18] Demonbreaker Wargear"
 
-L["OTH_SHIPYARD_100"]				= "Captain/Fleet Commander's Hat"
-L["CAPTAIN"]								= "Captain's Hat"
-L["FLEETCOMMANDER"]					= "Fleet Commander's Hat"
+-- Crafted Sets
+L["CR_CLOTH_60"]							= "Hexweave Set"
+
 
 
 -- Legion Pre-Expansion Event Items
@@ -381,6 +385,7 @@ L["MO_TR_19"] 							= "[19] Vestments of Enveloped Dissonance"
 		L["PA_TR_17"] 							= "[17] Battlegear of Guiding Light"
 		L["PA_TR_18"] 							= "[18] Watch of the Ceaseless Vigil"
 L["PA_TR_19"] 							= "[19] Battleplate of the Highlord"
+L["PA_OTH_19"] 								= "Battleplate of the Silver Hand"
 		
 		
 		L["PR_CD_90"] 							= "The Light Set"
