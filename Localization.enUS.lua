@@ -52,14 +52,17 @@ L["DB_RESET"]		=	"Database Reset."
 		-- Collection Localizations
 		--
 		
+		L["OUTFITS"]		= "Outfits"
+		L["ARTIFACT"]		= LE_ITEM_QUALITY_ARTIFACT
 		L["CHALLENGE"] 	= GUILD_CHALLENGE_TYPE5
 		L["DUNGEON"] 		= GUILD_CHALLENGE_TYPE1
 		L["LEGENDARY"] 	= ITEM_QUALITY5_DESC
 		L["PVP"] 				= PVP
 		L["CRAFTED"]		= "Crafted"
+		L["CUSTOM"]			= "Custom"
 		L["HOLIDAY"] 		= "Holiday"
-		L["GARRISON"] 		= "Garrison"
-		L["RAID"] 				= "Raid"
+		L["GARRISON"] 	= "Garrison"
+		L["RAID"] 			= "Raid"
 		L["OTHER"] 			= "Other"
 		
 		--
@@ -121,6 +124,7 @@ L["OTH_LEATHER_100"]					= "Felshroud Leather Armor"
 L["OTH_MAIL_100"]							= "Fel-Chain Mail Armor"
 L["OTH_PLATE_100"]						= "Felforged Plate Armor"
 L["OTH_LOCKET_100"]						= "Alaina's Bonnet (from Charred Locket)"
+L["OTH_SHOES_100"]						= "Griftah's Authentic Troll Shoes"
 		
 		-- Class Sets
 L["DH_TR_19"]									= "[19] Vestment of Second Sight"
@@ -300,6 +304,7 @@ L["HU_OTH_19"] 							= "Guise of the Unseen Path"
 		L["MA_TR_18"] 							= "[18] Raiment of the Arcane Conclave"
 L["MA_TR_19"] 							= "[19] Regalia of Everburning Knowledge"
 L["MA_OTH_19"] 							= "Vesture of Tirisgarde"
+L["MA_LG_CASTER_110"]						= "Legion Legendary"
 		
 		
 		L["MO_CD_90"] 							= "The Regal Lord Set"

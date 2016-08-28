@@ -70,16 +70,17 @@ local function OnTooltipSetItemHook(tooltip, ...)
 		if debug then
 			tooltip:AddLine(" ")
 			tooltip:AddLine("SetCollector Debug")
-			tooltip:AddLine("Appearance ID:  "..appearanceID)
-			tooltip:AddLine("Source ID:  "..sourceID)
-			tooltip:AddLine("Item ID:  "..itemID)
+			tooltip:AddDoubleLine("Appearance ID:",appearanceID)		-- Make double line
+			tooltip:AddDoubleLine("Source ID:",sourceID)
+			tooltip:AddDoubleLine("Item ID:",itemID)
 			tooltip:AddLine(" ")
 			tooltip:AddLine("All Available Sources:")
 			local sources = SetCollector:GetAppearanceSources(appearanceID)
 			if sources then
 				for i=1, #sources do
 					local link = select(6, C_TransmogCollection.GetAppearanceSourceInfo(sources[i].sourceID))
-					tooltip:AddLine(sources[i].sourceID.." - "..link)
+					--tooltip:AddLine(sources[i].sourceID.." - "..link)
+					tooltip:AddDoubleLine(link,sources[i].sourceID)
 				end
 			else
 				tooltip:AddLine("None")
