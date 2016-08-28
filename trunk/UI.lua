@@ -391,6 +391,33 @@ local function SetItemButton(button, appearanceID, sourceID, itemID)
 			
 			button:Show()
 		end
+	elseif button and itemID then
+		_, sLink, _, _, _, _, _, _, _, sTexture = GetItemInfo(itemID)
+		if sTexture then						-- Refactor
+			button.link = sLink
+			button.ItemID = src
+			button.icon:SetTexture(sTexture)
+			button.icon:SetVertexColor(1, 1, 1, 1)
+			button.icon:SetDesaturated(true)
+			button.count:SetText("")
+			button.count:Hide()
+			button.glow:Hide()
+			
+			local isCollected = SetCollector:IsAppearanceCollected(appearanceID)
+			if isCollected then
+				button.icon:SetDesaturated(false)
+				button.count:SetText(i)
+				local iRarity = select(3, GetItemInfo(sLink))
+				if iRarity then button.glow:SetVertexColor(GetItemQualityColor(iRarity)) end
+				button.glow:Show()
+			end
+			
+			if not sources or #sources == 0 then
+				button.icon:SetVertexColor(1, 0.25, 0.25, 0.5)
+			end
+			
+			button:Show()
+		end
 	else
 		button:Hide()
 	end
@@ -830,7 +857,6 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 				button:SetText(L[collections[i].Title])
 			end
 			button.Collection = i
-			--button:ClearAllPoints()					--  This appears to be that old compactraidframes issue
 			if ( prevButton ) then
 				button:SetPoint("TOPLEFT", prevButton, "BOTTOMLEFT", 0, 0)
 			else
@@ -851,7 +877,6 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 					
 					titleButton.Collection = i
 					titleButton.Set = j
-					--titleButton:ClearAllPoints()					--  This appears to be that old compactraidframes issue
 					titleButton:SetPoint("TOPLEFT", prevButton, "BOTTOMLEFT", 0, 0)
 					titleButton:Hide()
 					
@@ -889,7 +914,7 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 						titleButton.Text:SetText("|cff999999"..L[collections[i].sets[j].Title])
 					end
 					
-					if (i == 10) then
+					if (i == 20) then
 						titleButton.SubText:SetText("|cff999999".."SubText Here".."|r")
 					end
 					
