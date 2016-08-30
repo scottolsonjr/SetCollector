@@ -3,6 +3,31 @@ local DEBUG = false
 SetCollector = LibStub("AceAddon-3.0"):NewAddon("SetCollector", "AceConsole-3.0", "AceEvent-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale("SetCollector", true)
 
+local InventorySlots = {
+    ['INVTYPE_HEAD'] = 1,
+    ['INVTYPE_SHOULDER'] = 3,
+    ['INVTYPE_BODY'] = 4,
+    ['INVTYPE_CHEST'] = 5,
+    ['INVTYPE_ROBE'] = 5,
+    ['INVTYPE_WAIST'] = 6,
+    ['INVTYPE_LEGS'] = 7,
+    ['INVTYPE_FEET'] = 8,
+    ['INVTYPE_WRIST'] = 9,
+    ['INVTYPE_HAND'] = 10,
+    ['INVTYPE_CLOAK'] = 15,
+    ['INVTYPE_WEAPON'] = 16,
+    ['INVTYPE_SHIELD'] = 17,
+    ['INVTYPE_2HWEAPON'] = 16,
+    ['INVTYPE_WEAPONMAINHAND'] = 16,
+    ['INVTYPE_RANGED'] = 16,
+    ['INVTYPE_RANGEDRIGHT'] = 16,
+    ['INVTYPE_WEAPONOFFHAND'] = 17,
+    ['INVTYPE_HOLDABLE'] = 17,
+    ['INVTYPE_TABARD'] = 19,
+}
+
+local model = CreateFrame("DressUpModel","SetCollectorTooltipDressUpModel",UIParent)
+
 --
 --  Startup Functions
 --
@@ -20,6 +45,24 @@ end
 
 function SetCollector:OnDisable()
   if SetCollector:GetDebug() then SetCollector:Print("Disabled"); end
+end
+
+function SetCollector:GetAppearanceInfo(itemLink)
+	if itemLink then
+    local itemID, _, _, slotName = GetItemInfoInstant(itemLink)
+    local slot = InventorySlots[slotName]
+
+    if not slot or not IsDressableItem(itemLink) then return end
+
+    model:SetUnit('player')
+    model:Undress()
+    model:TryOn(itemLink, slot)
+    local sourceID = model:GetSlotTransmogSources(slot)
+    if sourceID then
+      local appearanceID = select(2, C_TransmogCollection.GetAppearanceSourceInfo(sourceID))
+      return appearanceID, sourceID, itemID
+    end
+  end
 end
 
 --

@@ -54,7 +54,7 @@ local function OnTooltipSetItemHook(tooltip, ...)
 	local debug = SetCollector:GetDebug();
 	local itemName, itemLink = tooltip:GetItem();
 	
-	appearanceID, sourceID, itemID = GetAppearanceInfo(itemLink);
+	appearanceID, sourceID, itemID = SetCollector:GetAppearanceInfo(itemLink);
 	if appearanceID then
 		if SetCollector.db.global.collections.Appearances[appearanceID] then
 		
