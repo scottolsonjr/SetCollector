@@ -236,6 +236,10 @@ L["DK_LG_MELEE_110"]					= "Legion Legendary"
 		L["DR_TR_18"] 							= "[18] Oathclaw Wargarb"
 L["DR_TR_19"] 							= "[19] Garb of the Astral Warden"
 L["DR_OTH_19"] 							= "Dreamgrove Raiment"
+L["DR_LG_CASTER_110"]				= "Legion Legendary"
+L["DR_LG_HEALER_110"]					= "Legion Legendary"
+L["DR_LG_MELEE_110"]					= "Legion Legendary"
+L["DR_LG_TANK_110"]				= "Legion Legendary"
 		
 		
 		L["HU_CD_90"] 							= "The Howling Beast Set"

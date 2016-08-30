@@ -344,7 +344,7 @@ local itemButton = CreateFrame("Button","$parentItem"..i,modelFrame,"SetCollecto
 end
 
 local function SetItemButton(button, appearanceID, sourceID, itemID)
-	if button and appearanceID then
+	if button and appearanceID and appearanceID > 0 then
 		local src = 0
 		local sources = SetCollector:GetAppearanceSources(appearanceID);
 		if sourceID == 0 then
@@ -393,6 +393,7 @@ local function SetItemButton(button, appearanceID, sourceID, itemID)
 		end
 	elseif button and itemID then
 		_, sLink, _, _, _, _, _, _, _, sTexture = GetItemInfo(itemID)
+		local app = SetCollector:GetAppearanceInfo(sLink)
 		if sTexture then						-- Refactor
 			button.link = sLink
 			button.ItemID = src
@@ -403,7 +404,7 @@ local function SetItemButton(button, appearanceID, sourceID, itemID)
 			button.count:Hide()
 			button.glow:Hide()
 			
-			local isCollected = SetCollector:IsAppearanceCollected(appearanceID)
+			local isCollected = SetCollector:IsAppearanceCollected(app)
 			if isCollected then
 				button.icon:SetDesaturated(false)
 				button.count:SetText(i)
@@ -412,6 +413,7 @@ local function SetItemButton(button, appearanceID, sourceID, itemID)
 				button.glow:Show()
 			end
 			
+			local sources = SetCollector:GetAppearanceSources(app);
 			if not sources or #sources == 0 then
 				button.icon:SetVertexColor(1, 0.25, 0.25, 0.5)
 			end
