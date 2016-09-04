@@ -33,8 +33,8 @@ local model = CreateFrame("DressUpModel","SetCollectorTooltipDressUpModel",UIPar
 --
 
 function SetCollector:OnInitialize()
-	SetCollector:SetupDB(DEBUG)
-	SetCollector:SetupUI(DEBUG)
+	SetCollector:SetupDB(true)
+	SetCollector:SetupUI(true)
 	if SetCollector:GetDebug() then SetCollector:Print("Initialized"); end
 	SetCollector:RegisterEvent("PLAYER_LOGIN")
 end
@@ -69,7 +69,7 @@ end
 --  Local Functions
 --
 
-local function IsDebugging()
+local function IsDebugging()									-- Redundant?
 	DEBUG = SetCollector.db.global.debug
 	return DEBUG
 end
@@ -118,10 +118,10 @@ function SetCollector:UpdateCollections()
 end
 
 function SetCollector:PLAYER_LOGIN()
-		local _, class = UnitClass("player")			-- Unnecessary now?
-		SetCollector:InitializeFilter()
-		SetCollector:InitializeModel()
-		SetCollector:UpdateCollections()
+	local DEBUG = SetCollector:GetDebug()
+  if DEBUG then SetCollector:Print("Running PLAYER_LOGIN processes"); end
+	SetCollector:InitializeFilter(DEBUG)
+	SetCollector:InitializeModel(DEBUG)
 end
 
 --

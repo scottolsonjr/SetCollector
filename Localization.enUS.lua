@@ -53,7 +53,7 @@ L["DB_RESET"]		=	"Database Reset."
 		--
 		
 		L["OUTFITS"]		= "Outfits"
-		L["ARTIFACT"]		= LE_ITEM_QUALITY_ARTIFACT
+		L["ARTIFACT"]		= ITEM_QUALITY6_DESC --LE_ITEM_QUALITY_ARTIFACT
 		L["CHALLENGE"] 	= GUILD_CHALLENGE_TYPE5
 		L["DUNGEON"] 		= GUILD_CHALLENGE_TYPE1
 		L["LEGENDARY"] 	= ITEM_QUALITY5_DESC
@@ -559,6 +559,10 @@ L["SH_LG_CASTER_110"]				= "Legion Legendary"
 L["SH_LG_HEALER_110"]				= "Legion Legendary"
 L["SH_LG_MELEE_110"]					= "Legion Legendary"
 L["SH_OTH_19"]							= "Raiment of the Farseer"
+L["SH_AR_CASTER_10"]				= "The Fist of Ra-den"
+L["SH_AR_CASTER_11"]				= "Stormkeeper"
+L["SH_AR_CASTER_12"]				= "Earthspeaker"
+L["SH_AR_CASTER_13"]				= "Fist of the Fallen Shaman"
 		
 		
 		L["WK_CD_90"] 							= "The Betrayer Set"

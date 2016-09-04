@@ -30,7 +30,7 @@ local EQUIPMENT = {
 	INVSLOT_TABARD
 }
 
-local CURRENT_FILTER 				= 0
+local SHOW_CLASS_SPEC 				= 0
 local SHOW_ONLY_FAVORITES 	= false
 local SHOW_ONLY_OBTAINABLE 	= false
 local SHOW_ONLY_TRANSMOG 		= false
@@ -124,26 +124,27 @@ end
 
 local frame = CreateFrame("Frame", "SetCollectorFrame", UIParent, "ButtonFrameTemplate")
 
-local title = CreateFrame("Frame", "$parentTitle", frame)
-title:SetWidth(300)
-title:SetHeight(14)
-title:SetPoint("TOP", 0, -4)
-title:SetFrameLevel(100)
-title:SetAttribute("parentKey", "Title")
-
 frame:SetWidth(703)
 frame:SetHeight(606)
-frame:SetPoint("TOPLEFT",17,-115)
-	
-frame.TitleText:SetText(L["ADDON_NAME"])
-
-tinsert(UISpecialFrames, frame:GetName())							-- Hides frame when Escape is pressed or Game menu selected.
+--frame:SetPoint("TOPLEFT",17,-115)
 frame:SetAttribute("UIPanelLayout-defined", true)			-- Allows frame to shift other frames when opened or be shifted when others are opened.
 frame:SetAttribute("UIPanelLayout-enabled", true)			-- http://www.wowwiki.com/Creating_standard_left-sliding_frames
 frame:SetAttribute("UIPanelLayout-area", "left")
 frame:SetAttribute("UIPanelLayout-pushable", 5)
 frame:SetAttribute("UIPanelLayout-width", width)
 frame:SetAttribute("UIPanelLayout-whileDead", true)
+
+local title = CreateFrame("Frame", "$parentTitle", frame)
+title:SetWidth(300)
+title:SetHeight(14)
+title:SetPoint("TOP", 0, -4)
+title:SetFrameLevel(100)
+title:SetAttribute("parentKey", "Title")
+	
+frame.TitleText:SetText(L["ADDON_NAME"])
+
+tinsert(UISpecialFrames, frame:GetName())							-- Hides frame when Escape is pressed or Game menu selected.
+
   	
 local helpButton = CreateFrame("Button","$parentTutorialButton",frame,"MainHelpPlateButton")
 helpButton:SetPoint("TOPLEFT",frame, 39, 20)
@@ -222,7 +223,7 @@ function SetCollectorSetButton_OnClick(self, button, ...)
 			SetCollector:SetVariantTabs(self.Collection, self.Set)
 		end
   else
-  	print(button)
+  	SetCollector:Print(button)
 	end
 end
 
@@ -307,7 +308,6 @@ local function SetItem_OnClick(self, button, ...)
 		if (string.find(self.ItemID, "item")) then
 			local itemID = string.match(self.ItemID,"item:(%d+)") or "0"
 			local bonusID = string.match(self.ItemID,":1:(%d+)") or "0"
-			--print(self.ItemID)
 			ChatEdit_InsertLink("http://www.wowhead.com/item="..itemID.."&bonus="..bonusID)
 		else
 			ChatEdit_InsertLink("http://www.wowhead.com/item="..self.ItemID)
@@ -448,6 +448,7 @@ local function VariantTab_OnClick(self, button, ...)
 		SetCollector:SetVariantTab(_G["SetCollectorSetDisplay"], self:GetID());
 		PlaySound("UI_Toybox_Tabs");
 	elseif ( button == "RightButton" ) then
+		SetCollector:Print("VariantTab_OnClick Right Click")
 		SetCollector:SetFavoriteVariant(self.Set, self:GetID())
 		SetCollector:UpdateCollections()
 		SetCollector:SetVariantTabs(self.Collection, self.Set, PanelTemplates_GetSelectedTab(self:GetParent()))
@@ -468,7 +469,7 @@ for i=1, 5 do
 	variantTab:SetScript("OnClick",VariantTab_OnClick)
 	variantTab:Hide()
 end
-PanelTemplates_SetNumTabs(SetCollectorSetDisplay, 5)
+PanelTemplates_SetNumTabs(SetCollectorSetDisplay, 5)								--  Possible Taint Source
 
 function SetCollector:SetVariantTabs(collection, set, variant)
 	local db = SetCollector.db.global.collections
@@ -502,12 +503,12 @@ function SetCollector:SetVariantTabs(collection, set, variant)
 			else
 				variantTab:Hide()
 			end
-			PanelTemplates_TabResize(variantTab, 0, nil, 36, variantTab:GetParent().maxTabWidth or 88)
+			PanelTemplates_TabResize(variantTab, 0, nil, 36, variantTab:GetParent().maxTabWidth or 88)				--  Possible Taint Source
 			if collected == "*" and SHOW_ONLY_OBTAINABLE then
 				variantTab:Hide()
 			end
 		end
-		PanelTemplates_SetNumTabs(SetCollectorSetDisplay, #db[collection].Sets[set].Variants)
+		PanelTemplates_SetNumTabs(SetCollectorSetDisplay, #db[collection].Sets[set].Variants)								--  Possible Taint Source
 		SetCollector:SetVariantTab(SetCollectorSetDisplay, variant or 1)
 	else
 		for i=1, 5 do
@@ -518,7 +519,7 @@ function SetCollector:SetVariantTabs(collection, set, variant)
 			variantTab.Preview = false
 			variantTab:Hide()
 		end
-		PanelTemplates_SetNumTabs(SetCollectorSetDisplay, 5)
+		PanelTemplates_SetNumTabs(SetCollectorSetDisplay, 5)								--  Possible taint Source
 		SetCollector:SetVariantTab(SetCollectorSetDisplay, 1)
 	end
 end
@@ -584,8 +585,7 @@ function SetCollector:UpdateSelectedVariantTab(self)
 end
 
 function SetCollector:SetVariantTab(self, tab)
-	PanelTemplates_SetTab(self, tab);
-	--SetCVar("SetCollectorTab", tab);
+	PanelTemplates_SetTab(self, tab);										--  Possible Taint Source
 	SetCollector:UpdateSelectedVariantTab(self);
 end
 
@@ -601,30 +601,30 @@ filterButton:SetAttribute("enableMouse","true")
 filterButton:SetAttribute("parentKey","setFilter")
 
 local function GetFilters()
-	CURRENT_FILTER 				= SetCollector.db.char.filters.specialization
+	SHOW_CLASS_SPEC 			= SetCollector.db.char.filters.specialization
 	SHOW_ONLY_FAVORITES 	= SetCollector.db.char.filters.favorites
 	SHOW_ONLY_OBTAINABLE 	= SetCollector.db.char.filters.obtainable
 	SHOW_ONLY_TRANSMOG 		= SetCollector.db.char.filters.transmog
 end
 
 local function SetFilters()
-	SetCollector.db.char.filters.specialization		= CURRENT_FILTER
+	SetCollector.db.char.filters.specialization		= SHOW_CLASS_SPEC
 	SetCollector.db.char.filters.favorites				= SHOW_ONLY_FAVORITES
 	SetCollector.db.char.filters.obtainable				= SHOW_ONLY_OBTAINABLE
 	SetCollector.db.char.filters.transmog					= SHOW_ONLY_TRANSMOG
 end
 
 local function SetFilterOptions(classIndex)
-	CURRENT_FILTER = classIndex
+	SHOW_CLASS_SPEC = classIndex
 end
 
 local function GetFilterOptions()
-	if CURRENT_FILTER == 0 or CURRENT_FILTER == nil then
+	if SHOW_CLASS_SPEC == 0 or SHOW_CLASS_SPEC == nil then
 		local currentSpec = GetSpecialization();
 		if currentSpec == nil then currentSpec = 0 end
-		CURRENT_FILTER = currentSpec + 2
+		SHOW_CLASS_SPEC = currentSpec + 2
 	end
-	return CURRENT_FILTER;
+	return SHOW_CLASS_SPEC;
 end
 
 local function UpdateFilterString()
@@ -667,6 +667,7 @@ local function SetFilter(self, classIndex)
 	end
 	SetFilters()
 	if frame:IsShown() then
+		SetCollector:Print("Setting Filter, Updating UI")
 		SetCollector:UpdateCollections();
 		UpdateFilterString()
 	
@@ -745,13 +746,24 @@ local function InitFilter()
 	info.checked = SHOW_ONLY_TRANSMOG;
 	info.arg1 = "transmog";
 	UIDropDownMenu_AddButton(info);]]--
+	
+	UpdateFilterString()
 end
 
-function SetCollector:InitializeFilter()
+function SetCollector:DropDownMenu_Initialize(frame, func)
+	-- This should be used instead of UIDropDownMenu_Initialize, which causes tainting. Code reference: Altoholic
+	frame.displayMode = "MENU" 
+	frame.initialize = func
+end
+
+function SetCollector:InitializeFilter(DEBUG)
 		GetFilters()
+		if DEBUG then SetCollector:Print("Initializing Filters") end
 		SetCollector:UpdateCollections()
 		local init = function() InitFilter() end
-		UIDropDownMenu_Initialize(filterButton, init)
+		SetCollector:DropDownMenu_Initialize(filterButton, init)
+		UpdateFilterString()
+		if DEBUG then SetCollector:Print("Filters Initialized") end
 end
 
 
