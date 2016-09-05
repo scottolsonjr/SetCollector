@@ -48,6 +48,11 @@ L["DB_RESET"]		=	"Database Reset."
 		L["TRANSMOG_FILTER"] = "Only for Transmogrification"
 		L["NOTRANSMOG"] 			= "Not for transmogrification"
 		
+L["ONE"]		= "One"
+L["TWO"]		= "Two"
+L["THREE"]	= "Three"
+L["FOUR"]		= "Four"
+		
 		--
 		-- Collection Localizations
 		--
@@ -598,6 +603,10 @@ L["SH_AR_CASTER_13"]				= "Fist of the Fallen Shaman"
 L["WK_TR_19"] 							= "[19] Legacy of Azj'Aquir"
 L["WK_OTH_19"] 							= "Vestments of the Black Harvest"
 L["WK_LG_CASTER_110"]						= "Legion Legendary"
+L["WK_AR_CASTER_10"]				= "Sceptre of Sargeras"		-- Destruction
+L["WK_AR_CASTER_11"]				= "Hubris of the Dark Titan"
+L["WK_AR_CASTER_12"]				= "Echo of Gul'dan"
+L["WK_AR_CASTER_13"]				= "Shadow of the Destroyer"
 		
 		
 		L["WR_CD_90"] 							= "The Golden King Set"
