@@ -30,10 +30,11 @@ local EQUIPMENT = {
 	INVSLOT_TABARD
 }
 
-local SHOW_CLASS_SPEC 				= 0
+local SHOW_CLASS_SPEC 			= 0
 local SHOW_ONLY_FAVORITES 	= false
 local SHOW_ONLY_OBTAINABLE 	= false
 local SHOW_ONLY_TRANSMOG 		= false
+local SHOW_HIDDEN 					= false
 
 local COLLECTION_COLLAPSED 	= { false, false, false, false, false, false, false, false }			-- Currently there are eight possible collections
 
@@ -217,11 +218,18 @@ function SetCollectorSetButton_OnClick(self, button, ...)
 			--ClearItemButtons()
 			UnsetHighlight(self)
 		end
-	elseif ( button == "RightButton" ) then
+	elseif ( not IsShiftKeyDown() and button == "RightButton" ) then
 	  SetCollector:SetFavoriteSet(self)
   	if ( self == SELECTED_BUTTON ) then
 			SetCollector:SetVariantTabs(self.Collection, self.Set)
 		end
+	elseif ( IsShiftKeyDown() and button == "RightButton" ) then
+	  SetCollector:SetHiddenSet(self)
+  	if ( self == SELECTED_BUTTON ) then
+			SetCollector:SetVariantTabs(self.Collection, self.Set)
+			UnsetHighlight(self)
+		end
+		SetCollector:UpdateCollections()
   else
   	SetCollector:Print(button)
 	end
@@ -605,6 +613,7 @@ local function GetFilters()
 	SHOW_ONLY_FAVORITES 	= SetCollector.db.char.filters.favorites
 	SHOW_ONLY_OBTAINABLE 	= SetCollector.db.char.filters.obtainable
 	SHOW_ONLY_TRANSMOG 		= SetCollector.db.char.filters.transmog
+	SHOW_HIDDEN 					= SetCollector.db.char.filters.hidden
 end
 
 local function SetFilters()
@@ -612,6 +621,7 @@ local function SetFilters()
 	SetCollector.db.char.filters.favorites				= SHOW_ONLY_FAVORITES
 	SetCollector.db.char.filters.obtainable				= SHOW_ONLY_OBTAINABLE
 	SetCollector.db.char.filters.transmog					= SHOW_ONLY_TRANSMOG
+	SetCollector.db.char.filters.hidden						= SHOW_HIDDEN
 end
 
 local function SetFilterOptions(classIndex)
@@ -645,29 +655,19 @@ end
 
 local function SetFilter(self, classIndex)
 	if ( classIndex == "favorites" ) then
-		if SHOW_ONLY_FAVORITES == false then
-			SHOW_ONLY_FAVORITES = true
-		else
-			SHOW_ONLY_FAVORITES = false
-		end
+		SHOW_ONLY_FAVORITES = not SHOW_ONLY_FAVORITES
 	elseif ( classIndex == "obtainable" ) then
-		if SHOW_ONLY_OBTAINABLE == false then
-			SHOW_ONLY_OBTAINABLE = true
-		else
-			SHOW_ONLY_OBTAINABLE = false
-		end
+		SHOW_ONLY_OBTAINABLE = not SHOW_ONLY_OBTAINABLE
 	elseif ( classIndex == "transmog" ) then
-		if SHOW_ONLY_TRANSMOG == false then
-			SHOW_ONLY_TRANSMOG = true
-		else
-			SHOW_ONLY_TRANSMOG = false
-		end
+		SHOW_ONLY_TRANSMOG = not SHOW_ONLY_TRANSMOG
+	elseif ( classIndex == "hidden" ) then
+		SHOW_HIDDEN = not SHOW_HIDDEN
 	else
 		SetFilterOptions(classIndex);
 	end
 	SetFilters()
 	if frame:IsShown() then
-		SetCollector:Print("Setting Filter, Updating UI")
+		--SetCollector:Print("Setting Filter, Updating UI")
 		SetCollector:UpdateCollections();
 		UpdateFilterString()
 	
@@ -746,6 +746,12 @@ local function InitFilter()
 	info.checked = SHOW_ONLY_TRANSMOG;
 	info.arg1 = "transmog";
 	UIDropDownMenu_AddButton(info);]]--
+	
+	info.leftPadding = nil;
+	info.text = L["HIDDEN_FILTER"] or L["MISSING_LOCALIZATION"];
+	info.checked = SHOW_HIDDEN;
+	info.arg1 = "hidden";
+	UIDropDownMenu_AddButton(info);
 	
 	UpdateFilterString()
 end
@@ -908,6 +914,7 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 					else
 						titleButton.Favorite:Hide()
 					end
+					local isHidden = SetCollector:IsHiddenSet(j)
 					
 					local isCollected = SetCollector:IsSetFullyCollected(i, j)
 					if isCollected then
@@ -948,6 +955,8 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 					elseif SHOW_ONLY_TRANSMOG == true and not isTransmog then
 						-- Keep it hidden
 					elseif SHOW_ONLY_FAVORITES == true and not isFavorite then
+						-- Keep it hidden
+					elseif SHOW_HIDDEN == false and isHidden then
 						-- Keep it hidden
 					elseif not COLLECTION_COLLAPSED[i] then
 						titleButton:Show()
