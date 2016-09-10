@@ -15,7 +15,8 @@ L["DEBUG_OFF"]	= "Debug Off."
 		L["HIDE_DETAIL"] 			= "Hide Detail"
 		L["SHOW_DETAIL"] 			= "Show Detail"
 		
-		L["RIGHT_CLICK_FAVORITE"] = "Right-click to favorite a set."
+L["RIGHT_CLICK_FAVORITE"] 		= "Right-click to favorite a set."
+L["SHIFT_RIGHT_CLICK_HIDDEN"] = "Shift-Right-click to hide/unhide a set."
 		
 		L["TUTORIAL_1"] 				= "Filter sets by specialization and set whether you only want to see your favorites."
 		L["TUTORIAL_2"] 				= "A list of available gear collections and sets is displayed here. Click on a set\nto preview. It will also show a star for your favorite sets and a check mark for sets completed."
@@ -37,16 +38,17 @@ L["DB_RESET"]		=	"Database Reset."
 		L["MISSING_LOCALIZATION"] 		= "Missing Localization. Please report bug."
 		L["NOT_AVAILABLE"] 					= "This feature or function is not available yet. Thank you for your patience."
 		
-		L["HEALER"] 	= HEALER
-		L["TANK"] 		= TANK
-		L["CASTER"] 	= RANGED
-		L["RANGED"]	= RANGED
-		L["MELEE"] 	= MELEE
+L["HEALER"] = HEALER
+L["TANK"] 	= TANK
+L["CASTER"] = RANGED
+L["RANGED"]	= RANGED
+L["MELEE"] 	= MELEE
 		
-		L["OBTAIN_FILTER"] 	= "Only Obtainable"
-		L["NOOBTAIN"] 				= "This set may not be available for transmog"
-		L["TRANSMOG_FILTER"] = "Only for Transmogrification"
-		L["NOTRANSMOG"] 			= "Not for transmogrification"
+L["OBTAIN_FILTER"] 		= "Only Obtainable"
+L["NOOBTAIN"] 				= "This set may not be available for transmog"
+L["TRANSMOG_FILTER"] 	= "Only for Transmogrification"
+L["NOTRANSMOG"] 			= "Not for transmogrification"
+L["HIDDEN_FILTER"] 		= "Show hidden sets"
 		
 L["ONE"]		= "One"
 L["TWO"]		= "Two"
