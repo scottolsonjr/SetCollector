@@ -1,3 +1,6 @@
+BINDING_HEADER_SETCOLLECTOR = "Set Collector"
+BINDING_NAME_SETCOLLECTOR_TOGGLE = "Toggle Set Collector"
+
 local L = LibStub("AceLocale-3.0"):NewLocale("SetCollector", "enUS", true)
 
 if L then
@@ -281,6 +284,8 @@ L["DR_LG_TANK_110"]				= "Legion Legendary"
 		L["HU_TR_18"] 							= "[18] Battlegear of the Savage Hunt"
 L["HU_TR_19"] 							= "[19] Eagletalon Battlegear"
 L["HU_OTH_19"] 							= "Guise of the Unseen Path"
+L["HU_LG_MELEE_110"]						= "Legion Legendary"
+L["HU_LG_RANGED_110"]						= "Legion Legendary"
 		
 		
 		L["MA_CD_90"] 							= "The Elemental Triad Set"

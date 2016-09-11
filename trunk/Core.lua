@@ -3,6 +3,7 @@ local DEBUG = false
 SetCollector = LibStub("AceAddon-3.0"):NewAddon("SetCollector", "AceConsole-3.0", "AceEvent-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale("SetCollector", true)
 
+
 local InventorySlots = {
     ['INVTYPE_HEAD'] = 1,
     ['INVTYPE_SHOULDER'] = 3,
@@ -36,6 +37,10 @@ function SetCollector:OnInitialize()
 	SetCollector:SetupDB(true)
 	SetCollector:SetupUI(true)
 	if SetCollector:GetDebug() then SetCollector:Print("Initialized"); end
+	
+	LibStub("AceConfig-3.0"):RegisterOptionsTable("SetCollector", SetCollector:GetOptions())
+	self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SetCollector", "Set Collector")
+	
 	SetCollector:RegisterEvent("PLAYER_LOGIN")
 end
 
@@ -65,14 +70,14 @@ function SetCollector:GetAppearanceInfo(itemLink)
   end
 end
 
+function SetCollector:IsDebugging()									-- Redundant?
+	DEBUG = SetCollector:GetDebug()
+	return DEBUG
+end
+
 --
 --  Local Functions
 --
-
-local function IsDebugging()									-- Redundant?
-	DEBUG = SetCollector.db.global.debug
-	return DEBUG
-end
 
 local function pairsByKeys(t, d)
 	local a = {}
@@ -102,7 +107,11 @@ function SetCollector:GetDebug()
 end
 
 function SetCollector:SetDebug(debug)
-	SetCollector.db.global.debug = debug
+	if debug == nil then
+		SetCollector.db.global.debug = not SetCollector.db.global.debug
+	else
+		SetCollector.db.global.debug = debug
+	end
 end
 
 function SetCollector:SortList(t, f, d)
@@ -130,23 +139,29 @@ end
 
 SetCollector:RegisterChatCommand("setcollector", "MySlashProcessorFunc")
 
+function SetCollector:OptionsSetDebug()
+	if SetCollector.db.global.debug then SetCollector.db.global.debug = false
+	else SetCollector.db.global.debug = true
+	end
+	local message
+	if SetCollector:GetDebug() then message = "DEBUG_ON" else message = "DEBUG_OFF" end
+	SetCollector:Print(L[message])
+end
+
 function SetCollector:MySlashProcessorFunc(input)
 	if input == "show" then
-		SetCollector:ShowUI(IsDebugging())
+		SetCollector:ShowUI(SetCollector:IsDebugging())
 	elseif input == "hide" then
-		SetCollector:HideUI(IsDebugging())
+		SetCollector:HideUI(SetCollector:IsDebugging())
 	elseif input == "button" then
 		SetCollector:ToggleMinimapButton()
 	elseif input == "debug" then
-		SetCollector:SetDebug(not IsDebugging())
-		local message
-		if IsDebugging() then message = "DEBUG_ON" else message = "DEBUG_OFF" end
-		SetCollector:Print(L[message])
+		SetCollector:OptionsSetDebug()
 	elseif input == "resetdb" then
-		SetCollector:ResetDB(IsDebugging())
+		SetCollector:ResetDB(SetCollector:IsDebugging())
 	elseif input == "help" then
     SetCollector:Print(L["SLASH_HELP"])
 	else
-		SetCollector:ToggleUI(IsDebugging())
+		SetCollector:ToggleUI(SetCollector:IsDebugging())
   end
 end
