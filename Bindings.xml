@@ -1,5 +1,5 @@
 <Bindings>
-	<Binding name="SETCOLLECTOR" header="SETCOLLECTOR">
+	<Binding name="SETCOLLECTOR_TOGGLE" description="Set Collector Description" header="SETCOLLECTOR">
 		SetCollector:ToggleUI();
 	</Binding>
 </Bindings>

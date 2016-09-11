@@ -896,6 +896,13 @@ local function GetHunterAppearances()
 	local set = ""
 	
 	-- LEGENDARY
+	local col = LEGENDARY
+	set = AddSet(70000,nil,col,52,"HU_LG_RANGED_110",MAIL,HUNTER,RANGED,ANY)		-- Beastmastery
+				AddVariant(70000,nil,col,set,"HU_LG_RANGED_110",TRANSMOG,A(8610,78749,137064),A(16241,78786,137101),A(16240,78765,137080),A(8006,76319,132466),A(21190,78889,137227))
+	set = AddSet(70000,nil,col,50,"HU_LG_RANGED_110",MAIL,HUNTER,RANGED,ANY)		-- Marksmanship
+				AddVariant(70000,nil,col,set,"HU_LG_RANGED_110",TRANSMOG,A(8610,78749,137064),A(15732,82382,141353),A(12489,78766,137081),A(8006,76319,132466),A(12609,78737,137033))
+	set = AddSet(70000,nil,col,51,"HU_LG_MELEE_110",MAIL,HUNTER,MELEE,ANY)			-- Survival
+				AddVariant(70000,nil,col,set,"HU_LG_MELEE_110",TRANSMOG,A(8610,78749,137064),A(16241,78786,137101),A(5429,78767,137082),A(8006,76319,132466),A(8348,78738,137034))
 
 	-- RAID
 	col = RAID
@@ -2668,4 +2675,45 @@ function SetCollector:ResetDB(debug)
 		SetCollector:Print(L["DB_RESET"])
 		SetCollector:SetDebug(debug)
 	end
+end
+
+function SetCollector:GetOptions()
+	local options = {
+    name = "Set Collector",
+    handler = SetCollector,
+    type = "group",
+    args = {
+    	char = {
+    		name = "Character",
+    		type = "group",
+    		args = {
+	        minimap = {
+            type = "toggle",
+            name = "Enable Minimap",
+            desc = "Turn on minimap",
+            --usage = L["<Your message>"],
+            get = "IsMinimapButtonShown",
+            set = "ToggleMinimapButton",
+            width = "full"
+	        },
+        },
+      },
+      global = {
+    		name = "Global",
+    		type = "group",
+    		args = {
+	        debug = {
+            type = "toggle",
+            name = "Enable Debug",
+            desc = "Turn on debugging details",
+            --usage = L["<Your message>"],
+            get = "GetDebug",
+            set = "OptionsSetDebug",
+            width = "full"
+	        },
+	      },
+	    },
+    },
+	}
+	return options
 end

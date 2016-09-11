@@ -856,6 +856,10 @@ function SetCollector:ToggleMinimapButton()
 	end
 end
 
+function SetCollector:IsMinimapButtonShown()
+	return not SetCollector.db.char.minimap.hide
+end
+
 
 --
 --  Finalize UI Setup
