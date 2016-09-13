@@ -150,18 +150,25 @@ end
 
 function SetCollector:MySlashProcessorFunc(input)
 	if input == "show" then
-		SetCollector:ShowUI(SetCollector:IsDebugging())
+		SetCollector:ShowUI()
+		
 	elseif input == "hide" then
-		SetCollector:HideUI(SetCollector:IsDebugging())
+		SetCollector:HideUI()
+		
 	elseif input == "button" then
 		SetCollector:ToggleMinimapButton()
+		
 	elseif input == "debug" then
 		SetCollector:OptionsSetDebug()
+		
 	elseif input == "resetdb" then
-		SetCollector:ResetDB(SetCollector:IsDebugging())
+		SetCollector:ResetDB()
+		
 	elseif input == "help" then
     SetCollector:Print(L["SLASH_HELP"])
+    
 	else
-		SetCollector:ToggleUI(SetCollector:IsDebugging())
+		SetCollector:ToggleUI()
+		
   end
 end

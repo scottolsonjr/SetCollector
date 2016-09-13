@@ -21,7 +21,7 @@ L["DEBUG_OFF"]	= "Debug Off."
 L["RIGHT_CLICK_FAVORITE"] 		= "Right-click to favorite a set."
 L["SHIFT_RIGHT_CLICK_HIDDEN"] = "Shift-Right-click to hide/unhide a set."
 		
-		L["TUTORIAL_1"] 				= "Filter sets by specialization and set whether you only want to see your favorites."
+		L["TUTORIAL_1"] 				= "Filter sets by specialization and set whether you only want to see your favorites and more."
 		L["TUTORIAL_2"] 				= "A list of available gear collections and sets is displayed here. Click on a set\nto preview. It will also show a star for your favorite sets and a check mark for sets completed."
 		L["TUTORIAL_3"] 				= "When there are multiple variants of a set you will see tabs for each variant."
 		L["TUTORIAL_4"] 				= "A preview of the set will\nappear here. Click on a set to the left to preview it here."

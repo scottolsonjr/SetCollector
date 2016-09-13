@@ -977,17 +977,20 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 	end
 end
 
-function SetCollector:HideUI(DEBUG)
-		if DEBUG then SetCollector:Print("Hiding SetCollector UI") end
-		HideUIPanel(frame)
+function SetCollector:HideUI()
+	local DEBUG = SetCollector:GetDebug()
+	if DEBUG then SetCollector:Print("Hiding SetCollector UI") end
+	HideUIPanel(frame)
 end
 
-function SetCollector:ShowUI(DEBUG)
-		if DEBUG then SetCollector:Print("Showing SetCollector UI") end
-		ShowUIPanel(frame)
+function SetCollector:ShowUI()
+	local DEBUG = SetCollector:GetDebug()
+	if DEBUG then SetCollector:Print("Showing SetCollector UI") end
+	ShowUIPanel(frame)
 end
 
-function SetCollector:ToggleUI(DEBUG)
+function SetCollector:ToggleUI()
+	local DEBUG = SetCollector:GetDebug()
 	if (frame:IsVisible()) then
 		SetCollector:HideUI(DEBUG)
 	else
