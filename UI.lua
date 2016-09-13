@@ -374,9 +374,12 @@ local function SetItemButton(button, appearanceID, sourceID, itemID)
 		else
 			_, sLink, _, _, _, _, _, _, _, sTexture = GetItemInfo(itemID)
 		end
+		if itemID == 0 then
+			_, _, itemID = SetCollector:GetAppearanceInfo(sLink);
+		end
 		if sTexture then
 			button.link = sLink
-			button.ItemID = src
+			button.ItemID = itemID
 			button.icon:SetTexture(sTexture)
 			button.icon:SetVertexColor(1, 1, 1, 1)
 			button.icon:SetDesaturated(true)
