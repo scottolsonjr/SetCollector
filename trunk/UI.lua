@@ -354,9 +354,9 @@ end
 local function SetItemButton(button, appearanceID, sourceID, itemID)
 	if button and appearanceID and appearanceID > 0 then
 		local src = 0
-		local sources = SetCollector:GetAppearanceSources(appearanceID);
 		if sourceID == 0 then
 			local s = 1
+			local sources = SetCollector:GetAppearanceSources(appearanceID);
 			if sources then
 				for i=1, #sources do
 					if sources[i].sourceID == sourceID then
@@ -402,7 +402,8 @@ local function SetItemButton(button, appearanceID, sourceID, itemID)
 			
 			button:Show()
 		end
-	elseif button and itemID then
+	elseif button and itemID and itemID > 0 then
+		if SetCollector:GetDebug() then SetCollector:Print(itemID); end
 		_, sLink, _, _, _, _, _, _, _, sTexture = GetItemInfo(itemID)
 		local app = SetCollector:GetAppearanceInfo(sLink)
 		if sTexture then						-- Refactor
@@ -546,13 +547,17 @@ local function GetSourceID(appearanceID)
 end
 
 function SetCollector:UpdateSelectedVariantTab(self)
+	if SetCollector:GetDebug() then SetCollector:Print("Updating Selected Variant Tab") end
 	local selected = PanelTemplates_GetSelectedTab(self);
+	if selected and SetCollector:GetDebug() then SetCollector:Print("Tab: "..selected) end
 	if ( frame:IsShown() ) then
 		
 		modelFrame:Dress()
 		
 		local collection = _G["SetCollectorSetDisplayTab"..selected].Collection
+		if collection and SetCollector:GetDebug() then SetCollector:Print("Collection: "..collection) end
 		local set = _G["SetCollectorSetDisplayTab"..selected].Set
+		if set and SetCollector:GetDebug() then SetCollector:Print("Set: "..set) end
 		if ( collection and set ) then
 			modelFrame:Undress()
 	  	local db = SetCollector.db.global.collections
@@ -561,8 +566,11 @@ function SetCollector:UpdateSelectedVariantTab(self)
 			local acq = SetCollector:GetCollectedCount(collection, set, selected)
 			local inc = 0
 			for i=1, num do
+				if SetCollector:GetDebug() then SetCollector:Print("Row: "..i) end
 				local sourceID = db[collection].Sets[set].Variants[selected].Appearances[i].sourceID
+				if sourceID and SetCollector:GetDebug() then SetCollector:Print("Source ID: "..sourceID) end
 				local appearanceID = db[collection].Sets[set].Variants[selected].Appearances[i].ID
+				if appearanceID and SetCollector:GetDebug() then SetCollector:Print("Appearance ID: "..appearanceID) end
 				if sourceID == 0 then
 					sourceID = GetSourceID(appearanceID)
 				end
