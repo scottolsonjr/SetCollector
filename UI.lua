@@ -354,9 +354,9 @@ end
 local function SetItemButton(button, appearanceID, sourceID, itemID)
 	if button and appearanceID and appearanceID > 0 then
 		local src = 0
+		local s = 1
+		local sources = SetCollector:GetAppearanceSources(appearanceID)
 		if sourceID == 0 then
-			local s = 1
-			local sources = SetCollector:GetAppearanceSources(appearanceID);
 			if sources then
 				for i=1, #sources do
 					if sources[i].sourceID == sourceID then
