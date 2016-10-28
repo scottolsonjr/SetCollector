@@ -1893,12 +1893,28 @@ local function GetShamanAppearances()
 	local col = ""
 	
 	-- ARTIFACT
-	--[[col = ARTIFACT
-	set = AddSet(70000,nil,col,10,"SH_AR_CASTER_10",MAIL,SHAMAN,CASTER,ANY)
+	col = ARTIFACT
+	--[[set = AddSet(70000,nil,col,10,"SH_AR_CASTER_10",MAIL,SHAMAN,CASTER,ANY)
 				AddVariant(70000,nil,col,set,"ONE",TRANSMOG,A(27742,76534,128935),A(29134,77278,128936))
 				AddVariant(70000,nil,col,set,"TWO",TRANSMOG,A(27870,77653,128935),A(29135,77279,128936))
 				AddVariant(70000,nil,col,set,"THREE",TRANSMOG,A(27871,77654,128935),A(29136,77280,128936))
-				AddVariant(70000,nil,col,set,"FOUR",TRANSMOG,A(27872,77655,128935),A(29137,77281,128936))]]--
+				AddVariant(70000,nil,col,set,"FOUR",TRANSMOG,A(27872,77655,128935),A(29137,77281,128936))
+	set = AddSet(70000,nil,col,11,"SH_AR_CASTER_11",MAIL,SHAMAN,CASTER,ANY)
+				AddVariant(70000,nil,col,set,"ONE",TRANSMOG,A(27873,77656,128935),A(30544,78644,128936))
+	set = AddSet(70000,nil,col,10,"SH_AR_MELEE_10",MAIL,SHAMAN,MELEE,ANY)
+				AddVariant(70000,nil,col,set,"ONE",TRANSMOG,A(27384,76535,128819),A(27609,73717,128873))
+				AddVariant(70000,nil,col,set,"TWO",TRANSMOG,A(27385,76543,128819),A(27609,80554,128873))
+				AddVariant(70000,nil,col,set,"THREE",TRANSMOG,A(27386,76544,128819),A(27609,80555,128873))
+				AddVariant(70000,nil,col,set,"FOUR",TRANSMOG,A(27387,76545,128819),A(27609,80556,128873))
+	set = AddSet(70000,nil,col,11,"SH_AR_MELEE_11",MAIL,SHAMAN,MELEE,ANY)
+				AddVariant(70000,nil,col,set,"ONE",TRANSMOG,A(27374,76546,128819),A(31838,80557,128873))
+	set = AddSet(70000,nil,col,10,"SH_AR_HEALER_10",MAIL,SHAMAN,HEALER,ANY)
+				AddVariant(70000,nil,col,set,"ONE",TRANSMOG,A(27676,76536,128911),A(28097,76537,128934))
+				AddVariant(70000,nil,col,set,"TWO",TRANSMOG,A(27677,77672,128911),A(28098,77691,128934))
+				AddVariant(70000,nil,col,set,"THREE",TRANSMOG,A(27678,77673,128911),A(28099,77692,128934))
+				AddVariant(70000,nil,col,set,"FOUR",TRANSMOG,A(27679,77674,128911),A(28100,77693,128934))
+	set = AddSet(70000,nil,col,11,"SH_AR_HEALER_11",MAIL,SHAMAN,HEALER,ANY)
+				AddVariant(70000,nil,col,set,"ONE",TRANSMOG,A(27743,77675,128911),A(28097,77694,128934))]]--
 	
 	-- LEGENDARY
 	col = LEGENDARY	
@@ -2569,44 +2585,48 @@ function SetCollector:IsSetObtainable(collection, set)
 end
 
 function SetCollector:GetSetTooltip(self)
-	local db = SetCollector.db.global.collections
-	local collection = db[self.Collection].Title
-	local set = L[db[self.Collection].Sets[self.Set].Title] or L["MISSING_LOCALIZATION"]
-	
-	local isObtainable = SetCollector:IsSetObtainable(self.Collection, self.Set)
-	
-	GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT", -16, 16)
-	GameTooltip:SetText(set, 1, 1, 1)
-	
-	for i=1, #db[self.Collection].Sets[self.Set].Variants do
-		local collected = SetCollector:GetCollectedCount(self.Collection, self.Set, i)
-		if collected ~= "*" or not SetCollector.db.char.filters.obtainable then
-			local line = ""
-			if db[self.Collection].Sets[self.Set].Variants[i].Count and L[db[self.Collection].Sets[self.Set].Variants[i].Title] then
-				line = "- "..collected.."/"..db[self.Collection].Sets[self.Set].Variants[i].Count.." "..L[db[self.Collection].Sets[self.Set].Variants[i].Title]
-			elseif db[self.Collection].Sets[self.Set].Variants[i].Count and not L[db[self.Collection].Sets[self.Set].Variants[i].Title] then
-				line = "- "..collected.."/"..db[self.Collection].Sets[self.Set].Variants[i].Count.." "..L["MISSING_LOCALIZATION"]
-			elseif not db[self.Collection].Sets[self.Set].Variants[i].Count and L[db[self.Collection].Sets[self.Set].Variants[i].Title] then
-				line = "- "..collected.."/? "..L[db[self.Collection].Sets[self.Set].Variants[i].Title]
-			else
-				line = "- "..collected.."/? "..L["MISSING_LOCALIZATION"]
+	if self.Collection == 0 then
+		
+	else
+		local db = SetCollector.db.global.collections
+		local collection = db[self.Collection].Title
+		local set = L[db[self.Collection].Sets[self.Set].Title] or L["MISSING_LOCALIZATION"]
+		
+		local isObtainable = SetCollector:IsSetObtainable(self.Collection, self.Set)
+		
+		GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT", -16, 16)
+		GameTooltip:SetText(set, 1, 1, 1)
+		
+		for i=1, #db[self.Collection].Sets[self.Set].Variants do
+			local collected = SetCollector:GetCollectedCount(self.Collection, self.Set, i)
+			if collected ~= "*" or not SetCollector.db.char.filters.obtainable then
+				local line = ""
+				if db[self.Collection].Sets[self.Set].Variants[i].Count and L[db[self.Collection].Sets[self.Set].Variants[i].Title] then
+					line = "- "..collected.."/"..db[self.Collection].Sets[self.Set].Variants[i].Count.." "..L[db[self.Collection].Sets[self.Set].Variants[i].Title]
+				elseif db[self.Collection].Sets[self.Set].Variants[i].Count and not L[db[self.Collection].Sets[self.Set].Variants[i].Title] then
+					line = "- "..collected.."/"..db[self.Collection].Sets[self.Set].Variants[i].Count.." "..L["MISSING_LOCALIZATION"]
+				elseif not db[self.Collection].Sets[self.Set].Variants[i].Count and L[db[self.Collection].Sets[self.Set].Variants[i].Title] then
+					line = "- "..collected.."/? "..L[db[self.Collection].Sets[self.Set].Variants[i].Title]
+				else
+					line = "- "..collected.."/? "..L["MISSING_LOCALIZATION"]
+				end
+				GameTooltip:AddLine(line)
 			end
-			GameTooltip:AddLine(line)
 		end
+		
+		if not isObtainable then
+			GameTooltip:AddLine(L["NOOBTAIN"], 1, 0, 0)
+		end
+		
+		local rightclick = L["RIGHT_CLICK_FAVORITE"] or L["MISSING_LOCALIZATION"]
+		GameTooltip:AddLine(" ")
+		GameTooltip:AddLine(rightclick, 1, 1, 1)
+		
+		local shiftrightclick = L["SHIFT_RIGHT_CLICK_HIDDEN"] or L["MISSING_LOCALIZATION"]
+		GameTooltip:AddLine(shiftrightclick, 1, 1, 1)
+		
+		GameTooltip:Show()
 	end
-	
-	if not isObtainable then
-		GameTooltip:AddLine(L["NOOBTAIN"], 1, 0, 0)
-	end
-	
-	local rightclick = L["RIGHT_CLICK_FAVORITE"] or L["MISSING_LOCALIZATION"]
-	GameTooltip:AddLine(" ")
-	GameTooltip:AddLine(rightclick, 1, 1, 1)
-	
-	local shiftrightclick = L["SHIFT_RIGHT_CLICK_HIDDEN"] or L["MISSING_LOCALIZATION"]
-	GameTooltip:AddLine(shiftrightclick, 1, 1, 1)
-	
-	GameTooltip:Show()
 end
 
 function SetCollector:SetIsFilteredOutByArmorType(collection, set, type)

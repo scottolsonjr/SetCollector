@@ -70,6 +70,7 @@
 		<Attributes>
 			<Attribute name="Collection" type="string" />
 			<Attribute name="Set" type="string" />
+			<Attribute name="Outfit" type="string" />
 		</Attributes>
 		<Scripts>
 			<OnLoad>
