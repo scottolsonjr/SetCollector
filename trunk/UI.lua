@@ -62,60 +62,60 @@ local MELEE 			= { Code = "M", Description = "MELEE" }
 --
 
 local function GetClassArmorType(class)
-	if			class == "DEATHKNIGHT"	then return PLATE.Description
+	if		class == "DEATHKNIGHT"	then return PLATE.Description
 	elseif	class == "DEMONHUNTER"	then return LEATHER.Description
-	elseif	class	== "DRUID"				then return LEATHER.Description
-	elseif	class	== "HUNTER"				then return MAIL.Description
-	elseif	class	== "MAGE"					then return CLOTH.Description
-	elseif	class	== "MONK"					then return LEATHER.Description
-	elseif	class	== "PALADIN"			then return PLATE.Description
-	elseif	class	== "PRIEST"				then return CLOTH.Description
-	elseif	class	== "ROGUE"				then return LEATHER.Description
-	elseif	class	== "SHAMAN"				then return MAIL.Description
-	elseif	class	== "WARLOCK"			then return CLOTH.Description
-	elseif	class	== "WARRIOR"			then return PLATE.Description
+	elseif	class == "DRUID"		then return LEATHER.Description
+	elseif	class == "HUNTER"		then return MAIL.Description
+	elseif	class == "MAGE"			then return CLOTH.Description
+	elseif	class == "MONK"			then return LEATHER.Description
+	elseif	class == "PALADIN"		then return PLATE.Description
+	elseif	class == "PRIEST"		then return CLOTH.Description
+	elseif	class == "ROGUE"		then return LEATHER.Description
+	elseif	class == "SHAMAN"		then return MAIL.Description
+	elseif	class == "WARLOCK"		then return CLOTH.Description
+	elseif	class == "WARRIOR"		then return PLATE.Description
 	else return ANY.Description
 	end
 end
 
 local function GetSetSpecializationRole(spec)
-	if 		 spec == 62 	then return CASTER.Description 	-- Arcane Mage
-	elseif spec == 63 	then return CASTER.Description	-- Fire Mage
-	elseif spec == 64 	then return CASTER.Description	-- Frost Mage
-	elseif spec == 65 	then return HEALER.Description	-- Holy Paladin
-	elseif spec == 66 	then return TANK.Description		-- Protection Paladin
-	elseif spec == 70 	then return MELEE.Description		-- Retribution Paladin
-	elseif spec == 71 	then return MELEE.Description		-- Arms Warrior
-	elseif spec == 72 	then return MELEE.Description		-- Fury Warrior
-	elseif spec == 73 	then return TANK.Description		-- Protection Warrior
-	elseif spec == 102 	then return CASTER.Description	-- Balance Druid
-	elseif spec == 103 	then return MELEE.Description		-- Feral Combat Druid
-	elseif spec == 104 	then return TANK.Description		-- Guardian Druid
-	elseif spec == 105 	then return HEALER.Description	-- Restoration Druid
-	elseif spec == 250 	then return TANK.Description		-- Blood Death Knight
-	elseif spec == 251 	then return MELEE.Description		-- Frost Death Knight
-	elseif spec == 252 	then return MELEE	.Description	-- Unholy Death Knight
-	elseif spec == 253 	then return RANGED.Description	-- Beast Mastery Hunter
-	elseif spec == 254 	then return RANGED.Description	-- Marksmanship Hunter
-	elseif spec == 255 	then return MELEE.Description		-- Survival Hunter
-	elseif spec == 256 	then return HEALER.Description	-- Discipline Priest
-	elseif spec == 257 	then return HEALER.Description	-- Holy Priest
-	elseif spec == 258 	then return CASTER.Description	-- Shadow Priest
-	elseif spec == 259 	then return MELEE.Description		-- Assassination Rogue
-	elseif spec == 260 	then return MELEE.Description		-- Combat Rogue
-	elseif spec == 261 	then return MELEE.Description		-- Subtlety Rogue
-	elseif spec == 262 	then return CASTER.Description	-- Elemental Shaman
-	elseif spec == 263 	then return MELEE.Description		-- Enhancement Shaman
-	elseif spec == 264 	then return HEALER.Description	-- Restoration Shaman
-	elseif spec == 265 	then return CASTER.Description	-- Affliction Warlock
-	elseif spec == 266 	then return CASTER.Description	-- Demonology Warlock
-	elseif spec == 267 	then return CASTER.Description	-- Destruction Warlock
-	elseif spec == 268 	then return TANK.Description		-- Brewmaster Monk
-	elseif spec == 269 	then return MELEE.Description		-- Windwalker Monk
-	elseif spec == 270 	then return HEALER.Description	-- Mistweaver Monk
-	elseif spec == 577 	then return MELEE.Description		-- Havoc Demon Hunter
-	elseif spec == 581 	then return TANK.Description		-- Vengeance Demon Hunter
-	else return ANY.Description													-- All Specializations Selected
+	if 		spec == 62 		then return CASTER.Description 	-- Arcane Mage
+	elseif 	spec == 63 		then return CASTER.Description	-- Fire Mage
+	elseif 	spec == 64 		then return CASTER.Description	-- Frost Mage
+	elseif 	spec == 65 		then return HEALER.Description	-- Holy Paladin
+	elseif 	spec == 66 		then return TANK.Description	-- Protection Paladin
+	elseif 	spec == 70 		then return MELEE.Description	-- Retribution Paladin
+	elseif 	spec == 71 		then return MELEE.Description	-- Arms Warrior
+	elseif 	spec == 72 		then return MELEE.Description	-- Fury Warrior
+	elseif 	spec == 73 		then return TANK.Description	-- Protection Warrior
+	elseif 	spec == 102 	then return CASTER.Description	-- Balance Druid
+	elseif 	spec == 103 	then return MELEE.Description	-- Feral Combat Druid
+	elseif 	spec == 104 	then return TANK.Description	-- Guardian Druid
+	elseif 	spec == 105 	then return HEALER.Description	-- Restoration Druid
+	elseif 	spec == 250 	then return TANK.Description	-- Blood Death Knight
+	elseif 	spec == 251 	then return MELEE.Description	-- Frost Death Knight
+	elseif 	spec == 252 	then return MELEE.Description	-- Unholy Death Knight
+	elseif 	spec == 253 	then return RANGED.Description	-- Beast Mastery Hunter
+	elseif 	spec == 254 	then return RANGED.Description	-- Marksmanship Hunter
+	elseif 	spec == 255 	then return MELEE.Description	-- Survival Hunter
+	elseif 	spec == 256 	then return HEALER.Description	-- Discipline Priest
+	elseif 	spec == 257 	then return HEALER.Description	-- Holy Priest
+	elseif 	spec == 258 	then return CASTER.Description	-- Shadow Priest
+	elseif 	spec == 259 	then return MELEE.Description	-- Assassination Rogue
+	elseif 	spec == 260 	then return MELEE.Description	-- Combat Rogue
+	elseif 	spec == 261 	then return MELEE.Description	-- Subtlety Rogue
+	elseif 	spec == 262 	then return CASTER.Description	-- Elemental Shaman
+	elseif 	spec == 263 	then return MELEE.Description	-- Enhancement Shaman
+	elseif 	spec == 264 	then return HEALER.Description	-- Restoration Shaman
+	elseif 	spec == 265 	then return CASTER.Description	-- Affliction Warlock
+	elseif 	spec == 266 	then return CASTER.Description	-- Demonology Warlock
+	elseif 	spec == 267 	then return CASTER.Description	-- Destruction Warlock
+	elseif 	spec == 268 	then return TANK.Description	-- Brewmaster Monk
+	elseif 	spec == 269 	then return MELEE.Description	-- Windwalker Monk
+	elseif 	spec == 270 	then return HEALER.Description	-- Mistweaver Monk
+	elseif 	spec == 577 	then return MELEE.Description	-- Havoc Demon Hunter
+	elseif 	spec == 581 	then return TANK.Description	-- Vengeance Demon Hunter
+	else return ANY.Description								-- All Specializations Selected
 	end
 end
 
@@ -818,13 +818,13 @@ function SetCollector:DropDownMenu_Initialize(frame, func)
 end
 
 function SetCollector:InitializeFilter(DEBUG)
-		GetFilters()
-		if DEBUG then SetCollector:Print("Initializing Filters") end
-		SetCollector:UpdateCollections()
-		local init = function() InitFilter() end
-		SetCollector:DropDownMenu_Initialize(filterButton, init)
-		UpdateFilterString()
-		if DEBUG then SetCollector:Print("Filters Initialized") end
+	GetFilters()
+	if DEBUG then SetCollector:Print("Initializing Filters") end
+	SetCollector:UpdateCollections()
+	local init = function() InitFilter() end
+	SetCollector:DropDownMenu_Initialize(filterButton, init)
+	UpdateFilterString()
+	if DEBUG then SetCollector:Print("Filters Initialized") end
 end
 
 
@@ -961,7 +961,7 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 					titleButton:SetPoint("TOPLEFT", prevButton, "BOTTOMLEFT", 0, 0)
 					titleButton:Hide()
 					
-					titleButton.Check:Show()
+					--titleButton.Check:Show()	-- It is possible to create sets without having collected all of the appearances
 					titleButton.Favorite:Show()
 						
 					titleButton.Text:SetText(C_TransmogCollection.GetOutfitName(outfitID))
