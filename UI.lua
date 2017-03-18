@@ -219,14 +219,14 @@ function SetCollectorSetButton_OnClick(self, button, ...)
 			UnsetHighlight(self)
 		end
 	elseif ( not IsShiftKeyDown() and button == "RightButton" ) then
-		if ( self.Set and self.Set > 0 ) then
+		if ( self.Set and self.Set ~= "" ) then
 		  SetCollector:SetFavoriteSet(self)
 	  	if ( self == SELECTED_BUTTON ) then
 				SetCollector:SetVariantTabs(self.Collection, self.Set)
 			end
 		end
 	elseif ( IsShiftKeyDown() and button == "RightButton" ) then
-		if ( self.Set and self.Set > 0 ) then
+		if ( self.Set and self.Set ~= "" ) then
 		  SetCollector:SetHiddenSet(self)
 	  	if ( self == SELECTED_BUTTON ) then
 				SetCollector:SetVariantTabs(self.Collection, self.Set)
