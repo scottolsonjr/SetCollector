@@ -138,6 +138,7 @@ end
 --
 
 SetCollector:RegisterChatCommand("setcollector", "MySlashProcessorFunc")
+SetCollector:RegisterChatCommand("sc", "MySlashProcessorFunc")
 
 function SetCollector:OptionsSetDebug()
 	if SetCollector.db.global.debug then SetCollector.db.global.debug = false
