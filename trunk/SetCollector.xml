@@ -144,7 +144,7 @@
 				<Size x="258" y="454"/>
 				<Anchors>
 					<Anchor point="TOPLEFT"/>
-				</Anchors>					
+				</Anchors>
 				<Frames>
 					<Button parentArray="Collections" inherits="SetCollectorCollectionTemplate" hidden="true">
 						<Anchors>

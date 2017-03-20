@@ -168,6 +168,17 @@ local scrollFrame = CreateFrame("ScrollFrame","SetCollectorScrollFrame",frame,"S
 scrollFrame:SetPoint("TOPLEFT","$parentLeftInset","TOPLEFT",2,-5)
 scrollFrame:SetPoint("BOTTOMRIGHT","$parentLeftInset","BOTTOMRIGHT", -4, 3)
 
+local function IsShownInList(button)
+	top = SetCollectorFrame.CollectionsFrame:GetTop()
+	bottom = SetCollectorFrame.CollectionsFrame:GetBottom()
+	buttonTop = button:GetTop()
+	buttonBottom = button:GetBottom()
+	if buttonTop < top and buttonBottom > bottom then
+		return true
+	end
+	return false
+end
+
 local function GetCollectionButton(index)
 	local buttons = SetCollectorFrame.CollectionsFrame.Contents.Collections;
 	if ( not buttons[index] ) then
@@ -209,6 +220,7 @@ local function SetHighlight(button, ...)
 end
 
 function SetCollectorSetButton_OnClick(self, button, ...)
+	if ( IsShownInList(self) ) then
 	if ( button == "LeftButton" ) then
 		if ( self ~= SELECTED_BUTTON ) then
 			SetCollector:SetVariantTabs(self.Collection, self.Set, nil, self.Outfit)
@@ -234,13 +246,14 @@ function SetCollectorSetButton_OnClick(self, button, ...)
 			end
 			SetCollector:UpdateCollections()
 		end
-  else
-  	SetCollector:Print(button)
+	else
+		SetCollector:Print(button)
+	end
 	end
 end
 
 function SetCollectorSetButton_OnEnter(self)
-	if ( self.Collection and self.Set ) then 
+	if ( IsShownInList(self) and self.Collection and self.Set ) then 
 		self.Text:SetFontObject("GameFontHighlightLeft")
 		SetCollector:GetSetTooltip(self)
 	end
