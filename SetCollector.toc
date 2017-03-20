@@ -9,6 +9,10 @@
 embeds.xml
 
 Localization.enUS.lua
+Localization.deDE.lua
+Localization.esES.lua
+Localization.esMX.lua
+Localization.koKR.lua
 Core.lua
 SetCollector.xml
 DB.lua
