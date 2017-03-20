@@ -79,7 +79,14 @@ local function OnTooltipSetItemHook(tooltip, ...)
 			if sources then
 				for i=1, #sources do
 					local link = select(6, C_TransmogCollection.GetAppearanceSourceInfo(sources[i].sourceID))
-					tooltip:AddDoubleLine(link,sources[i].sourceID)
+					local sourceCollected = SetCollector:IsSourceCollected(sources[i].sourceID)
+					if sourceCollected then
+						tooltip:AddDoubleLine(link,sources[i].sourceID)
+					else
+						local name = GetItemInfo(link)
+						tooltip:AddDoubleLine("|cFF777777"..name.."|r",sources[i].sourceID)
+					end
+					
 				end
 			else
 				tooltip:AddLine("None")
