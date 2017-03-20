@@ -408,11 +408,15 @@ local function SetItemButton(button, appearanceID, sourceID, itemID)
 			if isCollected then
 				button.icon:SetDesaturated(false)
 				button.count:SetText(i)
+			end
+			
+			local sourceCollected = SetCollector:IsSourceCollected(sourceID)
+			if sourceCollected then
 				local iRarity = select(3, GetItemInfo(sLink))
 				if iRarity then button.glow:SetVertexColor(GetItemQualityColor(iRarity)) end
 				button.glow:Show()
 			end
-			
+
 			if not sources or #sources == 0 then
 				button.icon:SetVertexColor(1, 0.25, 0.25, 0.5)
 			end
@@ -437,6 +441,10 @@ local function SetItemButton(button, appearanceID, sourceID, itemID)
 			if isCollected then
 				button.icon:SetDesaturated(false)
 				button.count:SetText(i)
+			end
+			
+			local sourceCollected = SetCollector:IsSourceCollected(sourceID)
+			if sourceCollected then
 				local iRarity = select(3, GetItemInfo(sLink))
 				if iRarity then button.glow:SetVertexColor(GetItemQualityColor(iRarity)) end
 				button.glow:Show()
