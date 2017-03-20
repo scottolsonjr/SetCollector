@@ -173,7 +173,7 @@ local function IsShownInList(button)
 	bottom = SetCollectorFrame.CollectionsFrame:GetBottom()
 	buttonTop = button:GetTop()
 	buttonBottom = button:GetBottom()
-	if buttonTop < top and buttonBottom > bottom then
+	if buttonBottom < top and buttonTop > bottom then
 		return true
 	end
 	return false
