@@ -84,7 +84,9 @@ local function OnTooltipSetItemHook(tooltip, ...)
 						tooltip:AddDoubleLine(link,sources[i].sourceID)
 					else
 						local name = GetItemInfo(link)
+						if ( name ) then
 						tooltip:AddDoubleLine("|cFF777777"..name.."|r",sources[i].sourceID)
+						end
 					end
 					
 				end
