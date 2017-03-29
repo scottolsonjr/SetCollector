@@ -9,20 +9,45 @@ L["BINDING_TOGGLE_UI"] = "Set Collector를 전환합니다."
 L["BLACK"] = "검정"
 L["BLUE"] = "파랑"
 L["BROWN"] = "갈색"
+L["CAPTAIN"] = "선장의 모자"
 L["CHAR_DB_UPGRADED"] = "캐릭터 자료가 갱신되었습니다."
 L["CLOTH"] = "천"
 L["COMBATANT"] = "전투원"
+--Translation missing 
+L["CR_CLOTH_90"] = "Hexweave Set"
+--Translation missing 
+L["CR_PLATE_100"] = "Leystone Set"
+L["CRAFTED"] = "제작"
+--Translation missing 
+L["CUSTOM"] = "Custom"
 L["DB_UPGRADED"] = "자료가 갱신되었습니다."
+L["DEBUG_OFF"] = "디버그 끔."
+L["DEBUG_ON"] = "디버그 켬."
 L["DG_CLOTH_03"] = "마나 깃든 예복"
 L["DG_LEATHER_03"] = "거친 황야 의복"
 L["DG_MAIL_03"] = "황량함의 방어구"
 L["DG_PLATE_03"] = "파멸의 판금 갑옷"
+L["DH_LG_MELEE_110"] = "군단 전설아이템(근접)"
+L["DH_LG_TANK_110"] = "군단 전설아이템(방어)"
+L["DH_OTH_19"] = "산산조각난 심연의 전투장비"
+--Translation missing 
+L["DH_PVP_19"] = "[L1] Vindictive Gladiator's Felskin"
+L["DH_TR_19"] = "[19] 꿰뚫어 보는 눈의 예복"
 L["DK_CD_90"] = "리치 군주 세트"
+L["DK_LG_MELEE_110"] = "군단 전설아이템(냉기,부정)"
+L["DK_LG_TANK_110"] = "군단 전설아이템(혈기)"
+L["DK_OTH_19"] = "죽음군주의 전투판금 장비"
 L["DK_PVP_16"] = "[W1] 야성적인 (모독의 검투사 방어구)"
+L["DK_PVP_17"] = "[W2] 거침없는 (모독의 검투사 방어구)"
+L["DK_PVP_18"] = "[W3] 전쟁을 부르는 (모독의 검투사 방어구)"
+--Translation missing 
+L["DK_PVP_19"] = "[L1] Vindictive Gladiator's Desecration"
 L["DK_PVP_MELEE_14"] = "[14] 고통을 부르는 (모독의 검투사 방어구)"
 L["DK_PVP_MELEE_15"] = "[15] 자부심 가득한 (모독의 검투사 방어구)"
+L["DK_STARTER"] = "시작 장비세트(아케루스)"
 L["DK_TR_17"] = "[17] 오우거해골 뼈판금 전투장비"
 L["DK_TR_18"] = "[18] 악마눈길 방어구"
+L["DK_TR_19"] = "[19] 공포고룡 전투판금 장비"
 L["DK_TR_MELEE_07"] = "[7] 스컬지 전투장비"
 L["DK_TR_MELEE_08"] = "[8] 암흑룬새김 전투장비"
 L["DK_TR_MELEE_10"] = "[10] 스컬지군주 전투장비"
@@ -51,7 +76,16 @@ L["DR_DG_02"] = "D2: 야생의정수 의복"
 L["DR_DG_03"] = "D3: 달숲 의복"
 L["DR_DG_AQ_1"] = "영원한 삶의 의복"
 L["DR_DG_AQ_2"] = "태초의 의복"
+L["DR_LG_CASTER_110"] = "군단 전설아이템(조화)"
+L["DR_LG_HEALER_110"] = "군단 전설아이템(회복)"
+L["DR_LG_MELEE_110"] = "군단 전설아이템(야성)"
+L["DR_LG_TANK_110"] = "군단 전설아이템(수호)"
+L["DR_OTH_19"] = "꿈숲 예복"
 L["DR_PVP_16"] = "[W1] 야성적인 (성역의 검투사 의복)"
+L["DR_PVP_17"] = "[W2] 거침없는 (성역의 검투사 의복)"
+L["DR_PVP_18"] = "[W3] 전쟁을 부르는 (성역의 검투사 의복)"
+--Translation missing 
+L["DR_PVP_19"] = "[L1] Vindictive Gladiator's Dragonhide"
 L["DR_PVP_CASTER_14"] = "[14] 고통을 부르는 (야생의 검투사 방어구)"
 L["DR_PVP_CASTER_15"] = "[15] 자부심 가득한 (야생의 검투사 방어구)"
 L["DR_PVP_HEALER_14"] = "[14] 고통을 부르는 (위안의 검투사 의복)"
@@ -63,6 +97,7 @@ L["DR_TR_02"] = "[2] 성난폭풍 의복"
 L["DR_TR_03"] = "[3] 꿈나그네 의복"
 L["DR_TR_17"] = "[17] 생명의 숲 전투장비"
 L["DR_TR_18"] = "[18] 다짐발톱 전쟁의복"
+L["DR_TR_19"] = "[19] 별빛 감시자의 제복"
 L["DR_TR_CASTER_04"] = "[4] 말로른의 의복"
 L["DR_TR_CASTER_05"] = "[5] 놀드랏실 의복"
 L["DR_TR_CASTER_06"] = "[6] 천둥심장 의복"
@@ -110,12 +145,14 @@ L["DR_TR_TANK_15"] = "[15] 유령숲의 방어구"
 L["DR_TR_TANK_16"] = "[16] 으스러진 골짜기의 방어구"
 L["ELITE"] = "정예"
 L["FINE"] = "Fine"
+L["FLEETCOMMANDER"] = "함대 사령관의 모자"
 L["GA_ALLIANCE_SET"] = "스톰윈드 근위병 장비세트"
 L["GA_BWM_SET_100"] = "전쟁준비실/드워프 참호 장비세트"
 L["GA_HORDE_SET"] = "오그리마 경비병 장비세트"
 L["GARRISON"] = "주둔지"
 L["GLADIATOR"] = "검투사"
 L["GREEN"] = "녹색"
+L["HIDDEN_FILTER"] = "숨김한 장비세트 표시"
 L["HIDE_DETAIL"] = "Hide Detail"
 L["HO_BREWFEST_DRESS"] = "가을 축제 예복 (드레스)"
 L["HO_BREWFEST_REGALIA"] = "가을 축제 예복 (의복)"
@@ -140,7 +177,19 @@ L["HU_DG_02"] = "D2: 야수왕의 갑옷"
 L["HU_DG_03"] = "D3: 야수제왕의 갑옷"
 L["HU_DG_AQ_1"] = "드러나지 않은 길의 전투장비"
 L["HU_DG_AQ_2"] = "관통의 갑옷"
+--Translation missing 
+L["HU_LG_MELEE_110"] = "Legion Legendary"
+--Translation missing 
+L["HU_LG_RANGED_110"] = "Legion Legendary"
+--Translation missing 
+L["HU_OTH_19"] = "Guise of the Unseen Path"
 L["HU_PVP_16"] = "[W1] 야성적인 (추적의 검투사 장비)"
+--Translation missing 
+L["HU_PVP_17"] = "[W2] Wild Pursuit"
+--Translation missing 
+L["HU_PVP_18"] = "[W3] Warmongering Pursuit"
+--Translation missing 
+L["HU_PVP_19"] = "[L1] Vindictive Gladiator's Pursuit"
 L["HU_PVP_RANGED_14"] = "[14] 고통을 부르는 (추적의 검투사 장비)"
 L["HU_PVP_RANGED_15"] = "[15] 자부심 가득한 (추적의 검투사 장비)"
 L["HU_TR_01"] = "[1] 거인추적자 갑옷"
@@ -148,6 +197,8 @@ L["HU_TR_02"] = "[2] 용추적자 갑옷"
 L["HU_TR_03"] = "[3] 지하추적자 갑옷"
 L["HU_TR_17"] = "[17] 라일라크 추적자의 전투장비"
 L["HU_TR_18"] = "[18] 야만스러운 사냥의 전투장비"
+--Translation missing 
+L["HU_TR_19"] = "[19] Eagletalon Battlegear"
 L["HU_TR_RANGED_04"] = "[4] 악마추적자의 갑옷"
 L["HU_TR_RANGED_05"] = "[5] 균열추적자 갑옷"
 L["HU_TR_RANGED_06"] = "[6] 그론추적자 갑옷"
@@ -191,7 +242,17 @@ L["MA_DG_02"] = "D2: 마술사의 의복"
 L["MA_DG_03"] = "D3: 주문술사 의복"
 L["MA_DG_AQ_1"] = "밝혀진 비밀의 의복"
 L["MA_DG_AQ_2"] = "불가사의의 의복"
+--Translation missing 
+L["MA_LG_CASTER_110"] = "Legion Legendary"
+--Translation missing 
+L["MA_OTH_19"] = "Vesture of Tirisgarde"
 L["MA_PVP_16"] = "[W1] 야성적인 (비전의 검투사 의복)"
+--Translation missing 
+L["MA_PVP_17"] = "[W2] Wild Regalia"
+--Translation missing 
+L["MA_PVP_18"] = "[W3] Warmongering Regalia"
+--Translation missing 
+L["MA_PVP_19"] = "[L1] Vindictive Gladiator's Regalia"
 L["MA_PVP_CASTER_14"] = "[14] 고통을 부르는 (비전의 검투사 의복)"
 L["MA_PVP_CASTER_15"] = "[15] 자부심 가득한 (비전의 검투사 의복)"
 L["MA_TR_01"] = "[1] 신비술사 의복"
@@ -199,6 +260,8 @@ L["MA_TR_02"] = "[2] 소용돌이 의복"
 L["MA_TR_03"] = "[3] 얼음불꽃 의복"
 L["MA_TR_17"] = "[17] 비전파쇄자 의복"
 L["MA_TR_18"] = "[18] 비전 비밀결사의 예복"
+--Translation missing 
+L["MA_TR_19"] = "[19] Regalia of Everburning Knowledge"
 L["MA_TR_CASTER_04"] = "[4] 알도르 의복"
 L["MA_TR_CASTER_05"] = "[5] 티리스팔 의복"
 L["MA_TR_CASTER_06"] = "[6] 폭풍우 의복"
@@ -217,13 +280,29 @@ L["MAIL"] = "사슬"
 L["MINIMAP_TOOLTIP"] = "클릭하여 장비세트를 확인합니다."
 L["MISSING_LOCALIZATION"] = "한글화 오류. 버그를 제보해주세요."
 L["MO_CD_90"] = "위풍당당한 군주 세트"
+--Translation missing 
+L["MO_LG_HEALER_110"] = "Legion Legendary"
+--Translation missing 
+L["MO_LG_MELEE_110"] = "Legion Legendary"
+--Translation missing 
+L["MO_LG_TANK_110"] = "Legion Legendary"
+--Translation missing 
+L["MO_OTH_19"] = "Grandmaster's Finery"
 L["MO_PVP_16"] = "[W1] 야성적인 (검투사의 무쇠가죽)"
+--Translation missing 
+L["MO_PVP_17"] = "[W2] Wild Ironskin"
+--Translation missing 
+L["MO_PVP_18"] = "[W3] Warmongering Ironskin"
+--Translation missing 
+L["MO_PVP_19"] = "[L1] Vindictive Gladiator's Ironskin"
 L["MO_PVP_HEALER_14"] = "[14] 고통을 부르는 (검투사의 구리가죽)"
 L["MO_PVP_HEALER_15"] = "[15] 자부심 가득한 (검투사의 구리가죽)"
 L["MO_PVP_MELEE_14"] = "[14] 고통을 부르는 (검투사의 무쇠가죽)"
 L["MO_PVP_MELEE_15"] = "[15] 자부심 가득한 (검투사의 무쇠가죽)"
 L["MO_TR_17"] = "[17] 검은 시전의 전투장비"
 L["MO_TR_18"] = "[18] 태풍의 눈 전투복"
+--Translation missing 
+L["MO_TR_19"] = "[19] Vestments of Enveloped Dissonance"
 L["MO_TR_HEALER_14"] = "[14] 주학의 예복"
 L["MO_TR_HEALER_15"] = "[15] 불부적 예복"
 L["MO_TR_HEALER_16"] = "[16] 신성한 일곱 인장의 예복"
@@ -239,13 +318,45 @@ L["NOTRANSMOG"] = "형상변환이 안되는 것만"
 L["OBTAIN_FILTER"] = "획득 가능한 것만 표시"
 L["ORIGINAL"] = "원본"
 L["OT_ELR_100"] = "에레다르 군주의 의복"
+--Translation missing 
+L["OTH_CLOTH_100"] = "Fel-Infused Cloth Armor"
+--Translation missing 
+L["OTH_LEATHER_100"] = "Felshroud Leather Armor"
+--Translation missing 
+L["OTH_LOCKET_100"] = "Alaina's Bonnet (from Charred Locket)"
+--Translation missing 
+L["OTH_MAIL_100"] = "Fel-Chain Armor"
+--Translation missing 
+L["OTH_PLATE_100"] = "Felforged Plate Armor"
+--Translation missing 
+L["OTH_SHIPYARD_100"] = "Captain/Fleet Commander's Hat"
+--Translation missing 
+L["OTH_SHOES_100"] = "Griftah's Authentic Troll Shoes"
+--Translation missing 
+L["OTHER"] = "Other"
+--Translation missing 
+L["OUTFITS"] = "Outfits"
 L["PA_CD_90"] = "성전사 세트"
 L["PA_DG_01"] = "D1: 성전사 방어구"
 L["PA_DG_02"] = "D2: 성령의 갑옷"
 L["PA_DG_03"] = "D3: 정의의 방어구"
 L["PA_DG_AQ_1"] = "영원한 정의의 전투장비"
 L["PA_DG_AQ_2"] = "응징의 전투장비"
+--Translation missing 
+L["PA_LG_HEALER_110"] = "Legion Legendary"
+--Translation missing 
+L["PA_LG_MELEE_110"] = "Legion Legendary"
+--Translation missing 
+L["PA_LG_TANK_110"] = "Legion Legendary"
+--Translation missing 
+L["PA_OTH_19"] = "Battleplate of the Silver Hand"
 L["PA_PVP_16"] = "[W1] 야성적인 (비호의 검투사 방어구)"
+--Translation missing 
+L["PA_PVP_17"] = "[W2] Wild Redemption"
+--Translation missing 
+L["PA_PVP_18"] = "[W3] Warmongering Redemption"
+--Translation missing 
+L["PA_PVP_19"] = "[L1] Vindictive Gladiator's Redemption"
 L["PA_PVP_HEALER_14"] = "[14] 고통을 부르는 (구원의 검투사 방어구)"
 L["PA_PVP_HEALER_15"] = "[15] 자부심 가득한 (구원의 검투사 방어구)"
 L["PA_PVP_MELEE_14"] = "[14] 고통을 부르는 (비호의 검투사 방어구)"
@@ -255,6 +366,8 @@ L["PA_TR_02"] = "[2] 심판의 갑옷"
 L["PA_TR_03"] = "[3] 구원의 갑옷"
 L["PA_TR_17"] = "[17] 인도하는 빛의 전투장비"
 L["PA_TR_18"] = "[18] 부단한 경계의 시선"
+--Translation missing 
+L["PA_TR_19"] = "[19] Battleplate of the Highlord"
 L["PA_TR_HEALER_04"] = "[4] 심판관의 예복"
 L["PA_TR_HEALER_05"] = "[5] 수정철로 예복"
 L["PA_TR_HEALER_06"] = "[6] 빛의 수호자 예복"
@@ -305,7 +418,19 @@ L["PR_DG_02"] = "D2: 고결의 의복"
 L["PR_DG_03"] = "D3: 신성의 예복"
 L["PR_DG_AQ_1"] = "무한한 지혜의 의복"
 L["PR_DG_AQ_2"] = "신탁의 예복"
+--Translation missing 
+L["PR_LG_CASTER_110"] = "Legion Legendary"
+--Translation missing 
+L["PR_LG_HEALER_110"] = "Legion Legendary"
+--Translation missing 
+L["PR_OTH_19"] = "Regalia of the High Priest"
 L["PR_PVP_16"] = "[W1] 야성적인 (신탁의 검투사 예복)"
+--Translation missing 
+L["PR_PVP_17"] = "[W2] Wild Investiture"
+--Translation missing 
+L["PR_PVP_18"] = "[W3] Warmongering Investiture"
+--Translation missing 
+L["PR_PVP_19"] = "[L1] Vindictive Gladiator's Investiture"
 L["PR_PVP_CASTER_14"] = "[14] 고통을 부르는 (믿음의 검투사 예복)"
 L["PR_PVP_CASTER_15"] = "[15] 자부심 가득한 (믿음의 검투사 예복)"
 L["PR_PVP_HEALER_14"] = "[14] 고통을 부르는 (신탁의 검투사 예복)"
@@ -315,6 +440,8 @@ L["PR_TR_02"] = "[2] 초월의 의복"
 L["PR_TR_03"] = "[3] 신념의 의복"
 L["PR_TR_17"] = "[17] 영혼사제의 예복"
 L["PR_TR_18"] = "[18] 신앙의 의복"
+--Translation missing 
+L["PR_TR_19"] = "[19] Vestments of the Purifier"
 L["PR_TR_CASTER_04"] = "[4] 현신의 의복"
 L["PR_TR_CASTER_05"] = "[5] 화신의 의복"
 L["PR_TR_CASTER_06"] = "[6] 면죄의 의복"
@@ -354,7 +481,17 @@ L["RO_DG_02"] = "D2: 검은장막의 방어구"
 L["RO_DG_03"] = "D3: 암살의 제복"
 L["RO_DG_AQ_1"] = "어두운 그림자의 상징"
 L["RO_DG_AQ_2"] = "죽음의 선고자 전투장비"
+--Translation missing 
+L["RO_LG_MELEE_110"] = "Legion Legendary"
+--Translation missing 
+L["RO_OTH_19"] = "Battlegear of the Uncrowned"
 L["RO_PVP_16"] = "[W1] 야성적인 (암살의 검투사 제복)"
+--Translation missing 
+L["RO_PVP_17"] = "[W2] Wild Vestments"
+--Translation missing 
+L["RO_PVP_18"] = "[W3] Warmongering Vestments"
+--Translation missing 
+L["RO_PVP_19"] = "[L1] Vindictive Gladiator's Vestments"
 L["RO_PVP_MELEE_14"] = "[14] 고통을 부르는 (암살의 검투사 제복)"
 L["RO_PVP_MELEE_15"] = "[15] 자부심 가득한 (암살의 검투사 제복)"
 L["RO_TR_01"] = "[1] 밤그림자 갑옷"
@@ -362,6 +499,8 @@ L["RO_TR_02"] = "[2] 붉은송곳니 방어구"
 L["RO_TR_03"] = "[3] 해골사신의 갑옷"
 L["RO_TR_17"] = "[17] 독살자의 전투장비"
 L["RO_TR_18"] = "[18] 지옥칼날 방어구"
+--Translation missing 
+L["RO_TR_19"] = "[19] Doomblade Battlegear"
 L["RO_TR_MELEE_04"] = "[4] 황천의 칼날"
 L["RO_TR_MELEE_05"] = "[5] 죽음의 장막"
 L["RO_TR_MELEE_06"] = "[6] 학살자의 제복"
@@ -376,13 +515,51 @@ L["RO_TR_MELEE_15"] = "[15] 아홉 개의 꼬리 전투장비"
 L["RO_TR_MELEE_16"] = "[16] 가시 돋친 암살자의 전투장비"
 L["RO_TR_MELEE_A_09"] = "[9] 벤클리프의 전투장비"
 L["RO_TR_MELEE_H_09"] = "[9] 가로나의 전투장비"
+--Translation missing 
+L["SH_AR_CASTER_10"] = "The Fist of Ra-den"
+--Translation missing 
+L["SH_AR_CASTER_11"] = "Stormkeeper"
+--Translation missing 
+L["SH_AR_CASTER_12"] = "Earthspeaker"
+--Translation missing 
+L["SH_AR_CASTER_13"] = "Fist of the Fallen Shaman"
+--Translation missing 
+L["SH_AR_HEALER_10"] = "Sharas'dal Scepter of Tides"
+--Translation missing 
+L["SH_AR_HEALER_11"] = "Scepter of the Deep"
+--Translation missing 
+L["SH_AR_HEALER_12"] = "Titanborn"
+--Translation missing 
+L["SH_AR_HEALER_13"] = "Totembearer"
+--Translation missing 
+L["SH_AR_MELEE_10"] = "Doomhammer"
+--Translation missing 
+L["SH_AR_MELEE_11"] = "Stormbringer"
+--Translation missing 
+L["SH_AR_MELEE_12"] = "Legion's Doom"
+--Translation missing 
+L["SH_AR_MELEE_13"] = "Blackhand's Fate"
 L["SH_CD_90"] = "질풍 세트"
 L["SH_DG_01"] = "D1: 정령의 방어구"
 L["SH_DG_02"] = "D2: 우레의 방어구"
 L["SH_DG_03"] = "D3: 성난 파도의 방어구"
 L["SH_DG_AQ_1"] = "휘몰아치는 폭풍의 선물"
 L["SH_DG_AQ_2"] = "폭풍소환사의 의복"
+--Translation missing 
+L["SH_LG_CASTER_110"] = "Legion Legendary"
+--Translation missing 
+L["SH_LG_HEALER_110"] = "Legion Legendary"
+--Translation missing 
+L["SH_LG_MELEE_110"] = "Legion Legendary"
+--Translation missing 
+L["SH_OTH_19"] = "Raiment of the Farseer"
 L["SH_PVP_16"] = "[W1] 야성적인 (전세의 검투사 방어구)"
+--Translation missing 
+L["SH_PVP_17"] = "[W2] Wild Gladiator's Ringmail Armor"
+--Translation missing 
+L["SH_PVP_18"] = "[W3] Warmongering Gladiator's Ringmail Armor"
+--Translation missing 
+L["SH_PVP_19"] = "[L1&2] Vindictive Gladiator's Ringmail Armor"
 L["SH_PVP_CASTER_14"] = "[14] 고통을 부르는 (천둥주먹의 검투사 방어구)"
 L["SH_PVP_CASTER_15"] = "[15] 자부심 가득한 (천둥주먹의 검투사 방어구)"
 L["SH_PVP_HEALER_14"] = "[14] 고통을 부르는 (전세의 검투사 방어구)"
@@ -392,8 +569,12 @@ L["SH_PVP_MELEE_15"] = "[15] 자부심 가득한 (지각변동의 검투사 방�
 L["SH_TR_01"] = "[1] 지각변동의 방어구"
 L["SH_TR_02"] = "[2] 폭풍우 방어구"
 L["SH_TR_03"] = "[3] 지축이동의 갑옷"
+--Translation missing 
+L["SH_TR_16"] = "[16] Regalia of Celestial Harmony"
 L["SH_TR_17"] = "[17] 바람예언자의 의복"
 L["SH_TR_18"] = "[18] 살아있는 산의 품"
+--Translation missing 
+L["SH_TR_19"] = "[19] Regalia of Shackled Elements"
 L["SH_TR_CASTER_04"] = "[4] 회오리 의복"
 L["SH_TR_CASTER_05"] = "[5] 대격변 의복"
 L["SH_TR_CASTER_06"] = "[6] 무너지는 하늘의 의복"
@@ -436,6 +617,8 @@ L["SH_TR_MELEE_15"] = "[15] 의술사의 전투장비"
 L["SH_TR_MELEE_16"] = "[16] 천신의 조화 전투장비"
 L["SH_TR_MELEE_A_09"] = "[9] 노분도의 전투장비"
 L["SH_TR_MELEE_H_09"] = "[9] 스랄의 전투장비"
+--Translation missing 
+L["SHIFT_RIGHT_CLICK_HIDDEN"] = "Shift-Right-click to hide/unhide a set."
 L["SHOW_DETAIL"] = "Show Detail"
 L["SLASH_HELP"] = [=[사용 가능한 명령어: show, hide, resetdb, help.
 예: /SetCollector show]=]
@@ -444,6 +627,22 @@ L["SLASH_HELP_BUTTON"] = [=[button Show : 미니맵 버튼 표시, button hide :
 L["SLASH_HELP_SORT"] = [=[기본 세트의 정렬 방식을 변경합니다. asc : 오름차순. desc : 내림차순.
 예: /SetCollector sort asc]=]
 L["TEAL"] = "청록"
+--Translation missing 
+L["TR_CLOTH_17"] = "[17] Ebonflame Raiment"
+--Translation missing 
+L["TR_CLOTH_18"] = "[18] Felfume Raiment"
+--Translation missing 
+L["TR_LEATHER_17"] = "[17] Sootfur Garb"
+--Translation missing 
+L["TR_LEATHER_18"] = "[18] Ironpelt Armor"
+--Translation missing 
+L["TR_MAIL_17"] = "[17] Ashlink Armor"
+--Translation missing 
+L["TR_MAIL_18"] = "[18] Rancorbite Armor"
+--Translation missing 
+L["TR_PLATE_17"] = "[17] Blacksteel Battleplate"
+--Translation missing 
+L["TR_PLATE_18"] = "[18] Demonbreaker Wargear"
 L["TRANSMOG_FILTER"] = "형상변환이 가능한 것만"
 L["TUTORIAL_1"] = "전문화에 따른 분류 및 선호하는 세트만 분류하여 볼 수 있습니다."
 L["TUTORIAL_2"] = "사용가능한 장비세트가 여기에 목록으로 표시됩니다. 클릭하여 장비세트를 미리볼 수 있습니다. 별표시는 즐겨찾기, 체크 표시는 모두 모았다는 표시입니다."
@@ -451,13 +650,31 @@ L["TUTORIAL_3"] = "같은 장비세트에 여러 색상으로 분류된 경우 �
 L["TUTORIAL_4"] = "장비세트의 착용 모습을 미리볼 수 있습니다. 왼쪽의 목록을 클릭하여 착용 모습을 볼 수 있습니다."
 L["VENDOR"] = "상점 세트"
 L["VOID_STORAGE_NOT_READY"] = "공허보관사를 확인할 수 없습니다.. 공허보관사를 닫은 후 다시 열어주세요."
+--Translation missing 
+L["WK_AR_CASTER_10"] = "Sceptre of Sargeras"
+--Translation missing 
+L["WK_AR_CASTER_11"] = "Hubris of the Dark Titan"
+--Translation missing 
+L["WK_AR_CASTER_12"] = "Echo of Gul'dan"
+--Translation missing 
+L["WK_AR_CASTER_13"] = "Shadow of the Destroyer"
 L["WK_CD_90"] = "배신자 세트"
 L["WK_DG_01"] = "D1: 공포안개 의복"
 L["WK_DG_02"] = "D2: 죽음의안개 의복"
 L["WK_DG_03"] = "D3: 망각의 수의"
 L["WK_DG_AQ_1"] = "절대자의 의복"
 L["WK_DG_AQ_2"] = "파멸의 소환사"
+--Translation missing 
+L["WK_LG_CASTER_110"] = "Legion Legendary"
+--Translation missing 
+L["WK_OTH_19"] = "Vestments of the Black Harvest"
 L["WK_PVP_16"] = "[W1] 야성적인 (악마의 검투사 수의)"
+--Translation missing 
+L["WK_PVP_17"] = "[W2] Wild Felshroud"
+--Translation missing 
+L["WK_PVP_18"] = "[W3] Warmongering Felshroud"
+--Translation missing 
+L["WK_PVP_19"] = "[L1] Vindictive Gladiator's Felshroud"
 L["WK_PVP_CASTER_14"] = "[14] 고통을 부르는 (악마의 검투사 수의)"
 L["WK_PVP_CASTER_15"] = "[15] 자부심 가득한 (악마의 검투사 수의)"
 L["WK_TR_01"] = "[1] 타락한심장의 의복"
@@ -465,6 +682,8 @@ L["WK_TR_02"] = "[2] 천벌의 의복"
 L["WK_TR_03"] = "[3] 역병심장 의복"
 L["WK_TR_17"] = "[17] 어둠의 의회 제복"
 L["WK_TR_18"] = "[18] 단발마의 의복"
+--Translation missing 
+L["WK_TR_19"] = "[19] Legacy of Azj'Aquir"
 L["WK_TR_CASTER_04"] = "[4] 공허의 심장 의복"
 L["WK_TR_CASTER_05"] = "[5] 타락자의 의복"
 L["WK_TR_CASTER_06"] = "[6] 재앙의 의복"
@@ -485,7 +704,19 @@ L["WR_DG_02"] = "D2: 무용의 전투장비"
 L["WR_DG_03"] = "D3: 용자의 갑옷"
 L["WR_DG_AQ_1"] = "굴하지 않는 힘의 전투장비"
 L["WR_DG_AQ_2"] = "정복자의 전투장비"
+--Translation missing 
+L["WR_LG_MELEE_110"] = "Legion Legendary"
+--Translation missing 
+L["WR_LG_TANK_110"] = "Legion Legendary"
+--Translation missing 
+L["WR_OTH_19"] = "Battlelord's Plate"
 L["WR_PVP_16"] = "[W1] 야성적인 (전투의 검투사 갑옷)"
+--Translation missing 
+L["WR_PVP_17"] = "[W2] Wild Battlegear"
+--Translation missing 
+L["WR_PVP_18"] = "[W3] Warmongering Battlegear"
+--Translation missing 
+L["WR_PVP_19"] = "[L1] Vindictive Gladiator's Battlegear"
 L["WR_PVP_MELEE_14"] = "[14] 고통을 부르는 (전투의 검투사 갑옷)"
 L["WR_PVP_MELEE_15"] = "[15] 자부심 가득한 (전투의 검투사 갑옷)"
 L["WR_TR_01"] = "[1] 투지의 전투장비"
@@ -493,6 +724,8 @@ L["WR_TR_02"] = "[2] 격노의 전투장비"
 L["WR_TR_03"] = "[3] 무쌍의 전투장비"
 L["WR_TR_17"] = "[17] 블랙핸드의 전투장비"
 L["WR_TR_18"] = "[18] 강철 분노의 전투장비"
+--Translation missing 
+L["WR_TR_19"] = "[19] Warplate of the Obsidian Aspect"
 L["WR_TR_MELEE_04"] = "[4] 전쟁인도자 전투장비"
 L["WR_TR_MELEE_05"] = "[5] 파괴자의 전투장비"
 L["WR_TR_MELEE_06"] = "[6] 맹공의 전투장비"
