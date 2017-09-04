@@ -483,7 +483,8 @@ end
 local function VariantTab_OnClick(self, button, ...)
 	if ( button == "LeftButton" ) then 
 		SetCollector:SetVariantTab(_G["SetCollectorSetDisplay"], self:GetID());
-		PlaySound("UI_Toybox_Tabs");
+		--PlaySound("UI_Toybox_Tabs");			-- Throws Error 
+		--PlaySound("UI_Toybox_Tabs", nil, nil);	-- New Usage, Perhaps ID changed?
 	elseif ( button == "RightButton" ) then
 		SetCollector:Print("VariantTab_OnClick Right Click")
 		SetCollector:SetFavoriteVariant(self.Set, self:GetID())
