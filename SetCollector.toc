@@ -1,4 +1,4 @@
-## Interface: 70200
+## Interface: 70300
 ## Title: Set Collector
 ## Notes: Allows the user to preview and track their progress in the collection of various transmogrification appearance sets, such as Legendary and Raid sets.
 ## Version: 3.0.6
