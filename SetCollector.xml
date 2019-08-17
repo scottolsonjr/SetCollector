@@ -10,7 +10,7 @@
 				self.ButtonText:SetTextColor(0.7, 0.7, 0.7);
 				self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
 			</OnLoad>
-			<OnClick function="SetCollectorCollectionButton_OnClick"/>
+      <OnClick>SetCollectorCollectionButton_OnClick(self, button, down);</OnClick>
 			<OnEnter>
 				self.ButtonText:SetTextColor(1, 1, 1);
 			</OnEnter>
@@ -19,7 +19,7 @@
 			</OnLeave>
 		</Scripts>
 		<Attributes>
-			<Attribute name="Collection" type="string" />
+      <Attribute name="Collection" type="string" value="" />
 		</Attributes>
 		<ButtonText nonspacewrap="true" parentKey="ButtonText">
 			<Size x="0" y="10"/>
@@ -68,19 +68,17 @@
 			</Layer>
 		</Layers>
 		<Attributes>
-			<Attribute name="Collection" type="string" />
-			<Attribute name="Set" type="string" />
-			<Attribute name="Outfit" type="string" />
+      <Attribute name="Collection" type="string" value="" />
+      <Attribute name="Set" type="string" value="" />
+      <Attribute name="Outfit" type="string" value="" />
 		</Attributes>
 		<Scripts>
 			<OnLoad>
 				self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
 			</OnLoad>
-			<OnClick function="SetCollectorSetButton_OnClick"/>
-			<OnEnter function="SetCollectorSetButton_OnEnter"/>
-			<OnLeave function="SetCollectorSetButton_OnLeave"/>
-			<OnMouseDown function="SetCollectorSetButton_OnMouseDown"/>
-			<OnMouseUp function="SetCollectorSetButton_OnMouseUp"/>
+      <OnClick>SetCollectorSetButton_OnClick(self, button, down);</OnClick>
+      <OnEnter>SetCollectorSetButton_OnEnter(self);</OnEnter>
+      <OnLeave>SetCollectorSetButton_OnLeave(self);</OnLeave>
 		</Scripts>
 		<ButtonText nonspacewrap="true" parentKey="ButtonText">
 			<Size x="0" y="10"/>
@@ -120,7 +118,7 @@
 			</Layer>
 		</Layers>
 		<Attributes>
-			<Attribute name="ItemID" type="string" />
+      <Attribute name="ItemID" type="string" value="" />
 		</Attributes>
 		<NormalTexture name="$parentNormalTexture" file="Interface\Buttons\UI-Quickslot2">
 			<Size>
@@ -165,8 +163,8 @@
 					<Layer level="ARTWORK">
 						<Texture name="$parentMiddle">
 							<Anchors>
-								<Anchor point="TOPLEFT" relativeTo="$parentTop" relativePoint="BOTTOMLEFT"/>
-								<Anchor point="BOTTOMRIGHT" relativeTo="$parentBottom" relativePoint="TOPRIGHT"/>
+                <Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT"/>
+                <Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT"/>
 							</Anchors>
 							<Color r="0" g="0" b="0" a="0.7"/>
 						</Texture>

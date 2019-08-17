@@ -2658,7 +2658,7 @@ function SetCollector:IsSetObtainable(collection, set)
 end
 
 function SetCollector:GetSetTooltip(self)
-	if self.Collection == 0 then
+	if self.Collection == nil or self.Collection == 0 then
 		
 	else
 		local db = SetCollector.db.global.collections

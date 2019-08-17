@@ -1,0 +1,7 @@
+#Editor and Version Control Folders
+.git/
+.svn/
+.vs/
+
+# Dependecies
+Libs/
