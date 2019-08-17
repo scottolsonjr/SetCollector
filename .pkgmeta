@@ -28,3 +28,8 @@ externals:
   Libs/LibDBIcon-1.0:
     url: svn://svn.wowace.com/wow/libdbicon-1-0/mainline/trunk
     tag: latest
+
+ignore:
+  - README.md
+
+license-output: LICENSE.txt
