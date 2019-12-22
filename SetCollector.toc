@@ -15,6 +15,7 @@ Localization.esMX.lua
 Localization.koKR.lua
 Core.lua
 SetCollector.xml
+Appearances.lua
 DB.lua
 UI.lua
 Tooltips.lua
