@@ -105,13 +105,13 @@ function SetCollector:GetGeneralAppearances()
 	--[[
 	-- Ny'alotha
 	set = SetCollector:AddSet(80300,nil,col,250,"TR_CLOTH_25",CLOTH,ANY,ANY,ANY)
-				SetCollector:AddVariant(80300,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80300,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
 	set = SetCollector:AddSet(80300,nil,col,250,"TR_LEATHER_25",LEATHER,ANY,ANY,ANY)
-				SetCollector:AddVariant(80300,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80300,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
 	set = SetCollector:AddSet(80300,nil,col,250,"TR_MAIL_25",MAIL,ANY,ANY,ANY)
-				SetCollector:AddVariant(80300,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80300,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
 	set = SetCollector:AddSet(80300,nil,col,250,"TR_PLATE_25",PLATE,ANY,ANY,ANY)
-				SetCollector:AddVariant(80300,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80300,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
 	]]--	
 	-- The Eternal Palace
 	set = SetCollector:AddSet(80200,nil,col,240,"TR_CLOTH_24",CLOTH,ANY,ANY,ANY)
@@ -270,6 +270,63 @@ function SetCollector:GetGeneralAppearances()
 	
 	--  OTHER
 	col = OTHER
+	--[[
+	-- Black Empire Sets
+	set = SetCollector:AddSet(80300,nil,col,1203,"OTH_CLOTH_1203",CLOTH,ANY,ANY,ANY)
+				SetCollector:AddVariant(80300,nil,col,set,"BLACKEMPIRE",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	set = SetCollector:AddSet(80300,nil,col,1203,"OTH_LEATHER_1203",LEATHER,ANY,ANY,ANY)
+				SetCollector:AddVariant(80300,nil,col,set,"BLACKEMPIRE",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	set = SetCollector:AddSet(80300,nil,col,1203,"OTH_MAIL_1203",MAIL,ANY,ANY,ANY)
+				SetCollector:AddVariant(80300,nil,col,set,"BLACKEMPIRE",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	set = SetCollector:AddSet(80300,nil,col,1203,"OTH_PLATE_1203",PLATE,ANY,ANY,ANY)
+				SetCollector:AddVariant(80300,nil,col,set,"BLACKEMPIRE",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+
+	-- Benthic Gear
+	set = SetCollector:AddSet(80200,nil,col,1202,"OTH_CLOTH_1202",CLOTH,ANY,ANY,ANY)
+				SetCollector:AddVariant(80200,nil,col,set,"BENTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	set = SetCollector:AddSet(80200,nil,col,1202,"OTH_LEATHER_1202",LEATHER,ANY,ANY,ANY)
+				SetCollector:AddVariant(80200,nil,col,set,"BENTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	set = SetCollector:AddSet(80200,nil,col,1202,"OTH_MAIL_1202",MAIL,ANY,ANY,ANY)
+				SetCollector:AddVariant(80200,nil,col,set,"BENTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	set = SetCollector:AddSet(80200,nil,col,1202,"OTH_PLATE_1202",PLATE,ANY,ANY,ANY)
+				SetCollector:AddVariant(80200,nil,col,set,"BENTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+
+	-- Kul'Tiran Leveling Sets
+	set = SetCollector:AddSet(80000,nil,col,1101,"OTH_CLOTH_A_110",CLOTH,ANY,ANY,ANY)
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_1",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_2",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	set = SetCollector:AddSet(80000,nil,col,1101,"OTH_LEATHER_A_110",LEATHER,ANY,ANY,ANY)
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_1",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_2",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	set = SetCollector:AddSet(80000,nil,col,1101,"OTH_MAIL_A_110",MAIL,ANY,ANY,ANY)
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_1",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_2",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	set = SetCollector:AddSet(80000,nil,col,1101,"OTH_PLATE_A_110",PLATE,ANY,ANY,ANY)
+				SetCollector:AddVariant(80300,nil,col,set,"ZONE_A_1",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_2",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	-- Zandalar Leveling Sets
+	set = SetCollector:AddSet(80000,nil,col,1102,"OTH_CLOTH_H_110",CLOTH,ANY,ANY,ANY)
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_1",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_2",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	set = SetCollector:AddSet(80000,nil,col,1102,"OTH_LEATHER_H_110",LEATHER,ANY,ANY,ANY)
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_1",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_2",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	set = SetCollector:AddSet(80000,nil,col,1102,"OTH_MAIL_H_110",MAIL,ANY,ANY,ANY)
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_1",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_2",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	set = SetCollector:AddSet(80000,nil,col,1102,"OTH_PLATE_H_110",PLATE,ANY,ANY,ANY)
+				SetCollector:AddVariant(80300,nil,col,set,"ZONE_H_1",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_2",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+
+	]]
 	set = SetCollector:AddSet(70000,nil,col,1009,"OTH_CLOTH_100",CLOTH,ANY,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"OTH_CLOTH_100",TRANSMOG,A(31376,79535),A(31379,79537),A(31718,79539),A(31374,79538),A(31380,79532),A(31375,79533),A(31372,79531),A(31377,79536),A(31373,79534))
 	set = SetCollector:AddSet(70000,nil,col,1009,"OTH_LEATHER_100",LEATHER,ANY,ANY,ANY)
