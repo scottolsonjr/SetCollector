@@ -130,7 +130,10 @@ function SetCollector:GetGeneralAppearances()
 				SetCollector:AddVariant(80200,nil,col,set,"HEROIC",TRANSMOG,A(40371),A(40368),A(40375),A(40330),A(40372),A(40367),A(40370),A(40373))
 				SetCollector:AddVariant(80200,nil,col,set,"MYTHIC",TRANSMOG,A(40008),A(40010),A(40003),A(40012),A(40007),A(40011),A(40009),A(40006))
 	set = SetCollector:AddSet(80200,nil,col,240,"TR_PLATE_24",PLATE,ANY,ANY,ANY)
-				SetCollector:AddVariant(80200,nil,col,set,"RAIDFINDER",TRANSMOG,A(25933,73220),A(25935,73178),A(25931,73192),A(25932,73240),A(25934,73224),A(25930,72890))		-- Need belt
+				SetCollector:AddVariant(80200,nil,col,set,"RAIDFINDER",TRANSMOG,A(39986),A(39984),A(39990),A(39983),A(39987),A(39982),A(39985),A(39988))
+				SetCollector:AddVariant(80200,nil,col,set,"NORMAL",TRANSMOG,A(39968),A(39966),A(39972),A(39965),A(39969),A(39964),A(39967),A(39970))
+				SetCollector:AddVariant(80200,nil,col,set,"HEROIC",TRANSMOG,A(39977),A(39979),A(39973),A(39980),A(39976),A(39981),A(39978),A(39975))
+				SetCollector:AddVariant(80200,nil,col,set,"MYTHIC",TRANSMOG,A(39959),A(39961),A(39955),A(39962),A(39958),A(39963),A(39960),A(39957))
 	
 	-- Battle of Dazar'alor
 	set = SetCollector:AddSet(80100,nil,col,230,"TR_CLOTH_23",CLOTH,ANY,ANY,ANY)
@@ -149,7 +152,10 @@ function SetCollector:GetGeneralAppearances()
 				SetCollector:AddVariant(80100,nil,col,set,"HEROIC",TRANSMOG,A(35081),A(39607),A(39601),A(39609),A(39604),A(39608),A(39606),A(39603))
 				SetCollector:AddVariant(80100,nil,col,set,"MYTHIC",TRANSMOG,A(35082),A(39558),A(39544),A(39551),A(39555),A(39559),A(39557),A(39554))
 	set = SetCollector:AddSet(80100,nil,col,230,"TR_PLATE_23",PLATE,ANY,ANY,ANY)
-				SetCollector:AddVariant(80100,nil,col,set,"RAIDFINDER",TRANSMOG,A(25933,73220),A(25935,73178),A(25931,73192),A(25932,73240),A(25934,73224),A(25930,72890))		-- Need belt
+				SetCollector:AddVariant(80100,nil,col,set,"RAIDFINDER",TRANSMOG,A(39515),A(39517),A(39512),A(39519),A(39514),A(39518),A(39516),A(39513))
+				SetCollector:AddVariant(80100,nil,col,set,"NORMAL",TRANSMOG,A(39482),A(39484),A(39479),A(39486),A(39481),A(39485),A(39483),A(39480))
+				SetCollector:AddVariant(80100,nil,col,set,"HEROIC",TRANSMOG,A(39531),A(39533),A(39528),A(39535),A(39530),A(39534),A(39532),A(39529))
+				SetCollector:AddVariant(80100,nil,col,set,"MYTHIC",TRANSMOG,A(39507),A(39509),A(39496),A(39503),A(39506),A(39510),A(39508),A(39505))
 
 	-- Uldir
 	set = SetCollector:AddSet(80000,nil,col,220,"TR_CLOTH_22",CLOTH,ANY,ANY,ANY)
@@ -168,7 +174,10 @@ function SetCollector:GetGeneralAppearances()
 				SetCollector:AddVariant(80000,nil,col,set,"HEROIC",TRANSMOG,A(38272),A(38274),A(38270),A(38275),A(38271),A(38268),A(38273),A(38269))
 				SetCollector:AddVariant(80000,nil,col,set,"MYTHIC",TRANSMOG,A(38296),A(38298),A(38294),A(38299),A(38295),A(38292),A(38297),A(38293))
 	set = SetCollector:AddSet(80000,nil,col,220,"TR_PLATE_22",PLATE,ANY,ANY,ANY)
-				SetCollector:AddVariant(80000,nil,col,set,"RAIDFINDER",TRANSMOG,A(25933,73220),A(25935,73178),A(25931,73192),A(25932,73240),A(25934,73224),A(25930,72890))		-- Need belt]]--
+				SetCollector:AddVariant(80000,nil,col,set,"RAIDFINDER",TRANSMOG,A(38406),A(38408),A(38404),A(38409),A(38405),A(38402),A(38407),A(38403))
+				SetCollector:AddVariant(80000,nil,col,set,"NORMAL",TRANSMOG,A(38417),A(38419),A(38415),A(38420),A(38416),A(38413),A(38418),A(38414))
+				SetCollector:AddVariant(80000,nil,col,set,"HEROIC",TRANSMOG,A(38395),A(38397),A(38393),A(38398),A(38394),A(38391),A(38396),A(38392))
+				SetCollector:AddVariant(80000,nil,col,set,"MYTHIC",TRANSMOG,A(38428),A(38430),A(38426),A(38431),A(38427),A(38424),A(38429),A(38425))
 
 	set = SetCollector:AddSet(70000,nil,col,180,"TR_CLOTH_18",CLOTH,ANY,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(25845,73196),A(25847,73166),A(25849,73182),A(25844,73228),A(25846,73200),A(25842,72970))	-- Need belt
