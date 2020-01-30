@@ -75,6 +75,11 @@ function SetCollector:GetGeneralAppearances()
 	
 	--  LEGENDARY
 	col = LEGENDARY
+	set = SetCollector:AddSet(80300,nil,col,60,"LG_120",ANY,ANY,ANY,ANY)
+				SetCollector:AddVariant(80300,nil,col,set,"RANK_1_TO_5",TRANSMOG,A(40845,105938))
+				SetCollector:AddVariant(80300,nil,col,set,"RANK_6_TO_11",TRANSMOG,A(40846,105939))
+				SetCollector:AddVariant(80300,nil,col,set,"RANK_12_PLUS",TRANSMOG,A(40847,105940))
+
 	set = SetCollector:AddSet(70000,nil,col,41,"LG_CASTER_INT_90",ANY,ANY,CASTER,ANY)
 		  SetCollector:AddVariant(70000,nil,col,set,"LG_CASTER_INT_90",TRANSMOG,A(20801,54617,102246))
 	set = SetCollector:AddSet(70000,nil,col,42,"LG_HEALER_INT_90",ANY,ANY,HEALER,ANY)
@@ -102,17 +107,29 @@ function SetCollector:GetGeneralAppearances()
 				
 	-- RAID
 	col = RAID
-	--[[
+	
 	-- Ny'alotha
 	set = SetCollector:AddSet(80300,nil,col,250,"TR_CLOTH_25",CLOTH,ANY,ANY,ANY)
-				SetCollector:AddVariant(80300,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80300,nil,col,set,"RAIDFINDER",TRANSMOG,A(41042),A(41050),A(41026),A(41058),A(41038),A(41054),A(41046),A(41034))
+				SetCollector:AddVariant(80300,nil,col,set,"NORMAL",TRANSMOG,A(41041),A(41049),A(41025),A(41057),A(41037),A(41053),A(41045),A(41033))
+				SetCollector:AddVariant(80300,nil,col,set,"HEROIC",TRANSMOG,A(41040),A(41048),A(41024),A(41056),A(41036),A(41052),A(41044),A(41032))
+				SetCollector:AddVariant(80300,nil,col,set,"MYTHIC",TRANSMOG,A(41069),A(41073),A(41061),A(41077),A(41067),A(41075),A(41071),A(41065))
 	set = SetCollector:AddSet(80300,nil,col,250,"TR_LEATHER_25",LEATHER,ANY,ANY,ANY)
-				SetCollector:AddVariant(80300,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80300,nil,col,set,"RAIDFINDER",TRANSMOG,A(40908),A(40930),A(40862),A(40952),A(40897),A(40941),A(40919),A(40886))
+				SetCollector:AddVariant(80300,nil,col,set,"NORMAL",TRANSMOG,A(40905),A(40927),A(40858),A(40949),A(40894),A(40938),A(40916),A(40883))
+				SetCollector:AddVariant(80300,nil,col,set,"HEROIC",TRANSMOG,A(40906),A(40928),A(40859),A(40950),A(40895),A(40939),A(40917),A(40884))
+				SetCollector:AddVariant(80300,nil,col,set,"MYTHIC",TRANSMOG,A(40909),A(40931),A(40863),A(40953),A(40898),A(40942),A(40920),A(40887))
 	set = SetCollector:AddSet(80300,nil,col,250,"TR_MAIL_25",MAIL,ANY,ANY,ANY)
-				SetCollector:AddVariant(80300,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80300,nil,col,set,"RAIDFINDER",TRANSMOG,A(40795),A(40807),A(40783),A(40815),A(40791),A(40811),A(40803),A(40787))
+				SetCollector:AddVariant(80300,nil,col,set,"NORMAL",TRANSMOG,A(40797),A(40809),A(40785),A(40817),A(40793),A(40813),A(40805),A(40789))
+				SetCollector:AddVariant(80300,nil,col,set,"HEROIC",TRANSMOG,A(40798),A(40810),A(40782),A(40818),A(40794),A(40814),A(40806),A(40790))
+				SetCollector:AddVariant(80300,nil,col,set,"MYTHIC",TRANSMOG,A(40833),A(40839),A(40825),A(40843),A(40831),A(40841),A(40835),A(40829))
 	set = SetCollector:AddSet(80300,nil,col,250,"TR_PLATE_25",PLATE,ANY,ANY,ANY)
-				SetCollector:AddVariant(80300,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-	]]--	
+				SetCollector:AddVariant(80300,nil,col,set,"RAIDFINDER",TRANSMOG,A(40971),A(40979),A(40959),A(40987),A(40967),A(40983),A(40975),A(40963))
+				SetCollector:AddVariant(80300,nil,col,set,"NORMAL",TRANSMOG,A(40973),A(40981),A(40961),A(40989),A(40969),A(40985),A(40977),A(40965))
+				SetCollector:AddVariant(80300,nil,col,set,"HEROIC",TRANSMOG,A(40974),A(40982),A(40962),A(40990),A(40970),A(40986),A(40978),A(40966))
+				SetCollector:AddVariant(80300,nil,col,set,"MYTHIC",TRANSMOG,A(41005),A(41011),A(40996),A(41017),A(41002),A(41014),A(41008),A(40999))
+
 	-- The Eternal Palace
 	set = SetCollector:AddSet(80200,nil,col,240,"TR_CLOTH_24",CLOTH,ANY,ANY,ANY)
 				SetCollector:AddVariant(80200,nil,col,set,"RAIDFINDER",TRANSMOG,A(40092),A(40098),A(40096),A(40102),A(40090),A(40100),A(40094),A(40088))
