@@ -234,29 +234,25 @@ function SetCollector:GetAppearanceSources(appearanceID)
 end
 
 function SetCollector:GetCollectedCount(collection, set, variant)
-	local sourcesCount, collectedCount = 0, 0
-	if SetCollector.db.global.collections[collection].Sets[set].Variants[variant] then
-		local appearances = SetCollector.db.global.collections[collection].Sets[set].Variants[variant].Appearances
+	local collectedCount = 0
+	local db = SetCollector.db.global
+	if db.collections[collection].Sets[set].Variants[variant] then
+		local appearances = db.collections[collection].Sets[set].Variants[variant].Appearances
 		for i=1, #appearances do
-			local appID = appearances[i].ID
-			if not appID or appID == 0 then
-				local sLink = select(2, GetItemInfo(appearances[i].itemID))
-				appID, _, _ = SetCollector:GetAppearanceInfo(sLink)
-			end
-			if appID then
-				local anyCollected, sources = false, C_TransmogCollection.GetAppearanceSources(appID)
-				
+			local isCollected
+			local sourceID = appearances[i].sourceID
+			local itemID = appearances[i].itemID
+			if appearances[i].ID then
+				local sources = C_TransmogCollection.GetAppearanceSources(appearances[i].ID)
 				if sources then
-					sourcesCount = sourcesCount + #sources
 					for j=1, #sources do
-						local _, _, _, _, isCollected, link = C_TransmogCollection.GetAppearanceSourceInfo(sources[j].sourceID)
-						if not anyCollected and isCollected then
-							anyCollected = true
+						if sources[j].isCollected then
+						isCollected = true
 						end
 					end
 				end
-				if anyCollected then collectedCount = collectedCount + 1 end
 			end
+			if isCollected then collectedCount = collectedCount + 1 end
 		end
 	end
 	if sourcesCount == 0 and collectedCount == 0 then collectedCount = "*" end
@@ -264,24 +260,16 @@ function SetCollector:GetCollectedCount(collection, set, variant)
 	return collectedCount
 end
 
-function SetCollector:GetSourceCount(collection, set, variant)
-  local collectedCount = 0
-  local isCollected
-	if SetCollector.db.global.collections[collection].Sets[set].Variants[variant] then
-		local appearances = SetCollector.db.global.collections[collection].Sets[set].Variants[variant].Appearances
-		for i=1, #appearances do
-      local sourceID = appearances[i].sourceID
-      if not sourceID or sourceID == 0 then
-        local sLink = select(2, GetItemInfo(appearances[i].itemID))
-        _, sourceID, _ = SetCollector:GetAppearanceInfo(sLink)
-      end
-      if sourceID then
-        isCollected = select(5, C_TransmogCollection.GetAppearanceSourceInfo(sourceID))
-      end
-      if isCollected then collectedCount = collectedCount + 1 end
-    end
-  end
-  return collectedCount
+function SetCollector:GetCompletedVariantCount(collection, set)
+	local completedVariantCount = 0
+	local db = SetCollector.db.global.collections
+	for i=1, #db[collection].Sets[set].Variants do
+		local isVariantCollected = SetCollector:IsVariantCollected(collection, set, i)
+		if isVariantCollected then
+			completedVariantCount = completedVariantCount + 1
+		end
+	end
+	return completedVariantCount
 end
 
 function SetCollector:IsSourceCollected(sourceID)
@@ -309,31 +297,32 @@ function SetCollector:IsAppearanceCollected(appearanceID)
 end
 
 function SetCollector:IsSetFullyCollected(collection, set)
-	local isCollected = true
 	local db = SetCollector.db.global.collections
-	for i=1, #db[collection].Sets[set].Variants do
-		--local collected = SetCollector:GetCollectedCount(collection, set, i)
-		local collected = SetCollector:GetSourceCount(collection, set, i)
-		if collected == "*" or collected < db[collection].Sets[set].Variants[i].Count then
-			isCollected = false
-			break
-		end
+	local completedVariantCount = SetCollector:GetCompletedVariantCount(collection, set)
+	local variantCount = #db[collection].Sets[set].Variants
+	if completedVariantCount == variantCount then
+		return true
 	end
-	return isCollected
+	return false
 end
 
 function SetCollector:IsSetPartiallyCollected(collection, set)
-	local isCollected = false
 	local db = SetCollector.db.global.collections
-	for i=1, #db[collection].Sets[set].Variants do
-		--local collected = SetCollector:GetCollectedCount(collection, set, i)
-		local collected = SetCollector:GetSourceCount(collection, set, i)
-		if collected ~= "*" and collected == db[collection].Sets[set].Variants[i].Count then
-			isCollected = true
-			break
-		end
+	local completedVariantCount = SetCollector:GetCompletedVariantCount(collection, set)
+	local variantCount = #db[collection].Sets[set].Variants
+	if completedVariantCount > 0 then
+		return true
 	end
-	return isCollected
+	return false
+end
+
+function SetCollector:IsVariantCollected(collection, set, variant)
+	local db = SetCollector.db.global.collections
+	local collectedCount = SetCollector:GetCollectedCount(collection, set, variant)
+	local appearanceCount = #db[collection].Sets[set].Variants[variant].Appearances
+	if collectedCount == appearanceCount then
+		return true
+	end
 end
 
 function SetCollector:IsSetObtainable(collection, set)
@@ -364,21 +353,17 @@ function SetCollector:GetSetTooltip(self)
 		
 		for i=1, #db[self.Collection].Sets[self.Set].Variants do
 			local collected = SetCollector:GetCollectedCount(self.Collection, self.Set, i)
-			local sources = SetCollector:GetSourceCount(self.Collection, self.Set, i)
+			local appearances = #db[self.Collection].Sets[self.Set].Variants[i].Appearances
 			if collected ~= "*" or not SetCollector.db.char.filters.obtainable then
 				local line = ""
-				if db[self.Collection].Sets[self.Set].Variants[i].Count and L[db[self.Collection].Sets[self.Set].Variants[i].Title] then
-					--line = "- "..collected.."/"..db[self.Collection].Sets[self.Set].Variants[i].Count.." "..L[db[self.Collection].Sets[self.Set].Variants[i].Title]
-					line = "- "..sources.."/"..db[self.Collection].Sets[self.Set].Variants[i].Count.." ("..collected..") "..L[db[self.Collection].Sets[self.Set].Variants[i].Title]
-				elseif db[self.Collection].Sets[self.Set].Variants[i].Count and not L[db[self.Collection].Sets[self.Set].Variants[i].Title] then
-					--line = "- "..collected.."/"..db[self.Collection].Sets[self.Set].Variants[i].Count.." "..L["MISSING_LOCALIZATION"]
-					line = "- "..sources.."/"..db[self.Collection].Sets[self.Set].Variants[i].Count.." ("..collected..") "..L["MISSING_LOCALIZATION"]
-				elseif not db[self.Collection].Sets[self.Set].Variants[i].Count and L[db[self.Collection].Sets[self.Set].Variants[i].Title] then
-					--line = "- "..collected.."/? "..L[db[self.Collection].Sets[self.Set].Variants[i].Title]
-					line = "- "..sources.."/? ("..collected..") "..L[db[self.Collection].Sets[self.Set].Variants[i].Title]
+				if appearances and L[db[self.Collection].Sets[self.Set].Variants[i].Title] then
+					line = "- "..collected.."/"..appearances.." "..L[db[self.Collection].Sets[self.Set].Variants[i].Title]
+				elseif appearances and not L[db[self.Collection].Sets[self.Set].Variants[i].Title] then
+					line = "- "..collected.."/"..appearances.." "..L["MISSING_LOCALIZATION"]
+				elseif not appearances and L[db[self.Collection].Sets[self.Set].Variants[i].Title] then
+					line = "- "..collected.."/? "..L[db[self.Collection].Sets[self.Set].Variants[i].Title]
 				else
-					--line = "- "..collected.."/? "..L["MISSING_LOCALIZATION"]
-					line = "- "..sources.."/? ("..collected..") "..L["MISSING_LOCALIZATION"]
+					line = "- "..collected.."/? "..L["MISSING_LOCALIZATION"]
 				end
 				GameTooltip:AddLine(line)
 			end
