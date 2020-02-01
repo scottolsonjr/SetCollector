@@ -287,63 +287,55 @@ function SetCollector:GetGeneralAppearances()
 	
 	--  OTHER
 	col = OTHER
-	--[[
-	-- Black Empire Sets
-	set = SetCollector:AddSet(80300,nil,col,1203,"OTH_CLOTH_1203",CLOTH,ANY,ANY,ANY)
-				SetCollector:AddVariant(80300,nil,col,set,"BLACKEMPIRE",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-	set = SetCollector:AddSet(80300,nil,col,1203,"OTH_LEATHER_1203",LEATHER,ANY,ANY,ANY)
-				SetCollector:AddVariant(80300,nil,col,set,"BLACKEMPIRE",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-	set = SetCollector:AddSet(80300,nil,col,1203,"OTH_MAIL_1203",MAIL,ANY,ANY,ANY)
-				SetCollector:AddVariant(80300,nil,col,set,"BLACKEMPIRE",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-	set = SetCollector:AddSet(80300,nil,col,1203,"OTH_PLATE_1203",PLATE,ANY,ANY,ANY)
-				SetCollector:AddVariant(80300,nil,col,set,"BLACKEMPIRE",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	
+	-- Black Empire Sets (Skip, same as Ny'alotha Raid Finder Set)
 
 	-- Benthic Gear
 	set = SetCollector:AddSet(80200,nil,col,1202,"OTH_CLOTH_1202",CLOTH,ANY,ANY,ANY)
-				SetCollector:AddVariant(80200,nil,col,set,"BENTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-	set = SetCollector:AddSet(80200,nil,col,1202,"OTH_LEATHER_1202",LEATHER,ANY,ANY,ANY)
-				SetCollector:AddVariant(80200,nil,col,set,"BENTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-	set = SetCollector:AddSet(80200,nil,col,1202,"OTH_MAIL_1202",MAIL,ANY,ANY,ANY)
-				SetCollector:AddVariant(80200,nil,col,set,"BENTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-	set = SetCollector:AddSet(80200,nil,col,1202,"OTH_PLATE_1202",PLATE,ANY,ANY,ANY)
-				SetCollector:AddVariant(80200,nil,col,set,"BENTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80200,nil,col,set,"OTH_CLOTH_1202",TRANSMOG,A(40596),A(40604),A(40580),A(40612),A(40608),A(40592),A(40608),A(40600),A(40588))
+	--set = SetCollector:AddSet(80200,nil,col,1202,"OTH_LEATHER_1202",LEATHER,ANY,ANY,ANY)
+	--			SetCollector:AddVariant(80200,nil,col,set,"OTH_LEATHER_1202",TRANSMOG,A(40644),A(40652),A(40624),A(),A(40640),A(),A(),A())
+	--set = SetCollector:AddSet(80200,nil,col,1202,"OTH_MAIL_1202",MAIL,ANY,ANY,ANY)
+	--			SetCollector:AddVariant(80200,nil,col,set,"BENTHIC",TRANSMOG,A(40683),A(),A(),A(),A(40679),A(40695),A(40687),A())
+	--			SetCollector:AddVariant(80200,nil,col,set,"RECOLOR",TRANSMOG,A(40684),A(40692),A(),A(40700),A(),A(40687),A(40688),A(40676))
+	--set = SetCollector:AddSet(80200,nil,col,1202,"OTH_PLATE_1202",PLATE,ANY,ANY,ANY)
+	--			SetCollector:AddVariant(80200,nil,col,set,"OTH_PLATE_1202",TRANSMOG,A(),A(40557),A(40541),A(),A(40549),A(40561),A(40553),A(40545))
 
 	-- Kul'Tiran Leveling Sets
 	set = SetCollector:AddSet(80000,nil,col,1101,"OTH_CLOTH_A_110",CLOTH,ANY,ANY,ANY)
-				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_1",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_2",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_1",TRANSMOG,A(35986),A(35988),A(35984),A(35989),A(35985),A(35982),A(35987),A(35983)) -- Stormsong
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_2",TRANSMOG,A(35994),A(35996),A(35992),A(35997),A(35993),A(35990),A(35995),A(35991)) -- Tiragarde Sound
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_3",TRANSMOG,A(35978),A(35980),A(35976),A(35981),A(35977),A(35974),A(35979),A(35975)) -- Drustvar
 	set = SetCollector:AddSet(80000,nil,col,1101,"OTH_LEATHER_A_110",LEATHER,ANY,ANY,ANY)
-				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_1",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_2",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_1",TRANSMOG,A(36281),A(36283),A(36279),A(36284),A(36280),A(36277),A(36282),A(36278))
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_2",TRANSMOG,A(36289),A(36291),A(36287),A(36292),A(36288),A(36285),A(36290),A(36286))
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_3",TRANSMOG,A(36273),A(36275),A(36271),A(36276),A(36272),A(36269),A(36274),A(36270))
 	set = SetCollector:AddSet(80000,nil,col,1101,"OTH_MAIL_A_110",MAIL,ANY,ANY,ANY)
-				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_1",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_2",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_1",TRANSMOG,A(36063),A(36065),A(36061),A(36066),A(36062),A(36059),A(36064),A(36060))
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_2",TRANSMOG,A(36073),A(36075),A(36071),A(36076),A(36072),A(36069),A(36074),A(36070))
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_3",TRANSMOG,A(36081),A(36083),A(36079),A(36084),A(36080),A(36077),A(36082),A(36078))
 	set = SetCollector:AddSet(80000,nil,col,1101,"OTH_PLATE_A_110",PLATE,ANY,ANY,ANY)
-				SetCollector:AddVariant(80300,nil,col,set,"ZONE_A_1",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_2",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80300,nil,col,set,"ZONE_A_1",TRANSMOG,A(36175),A(36177),A(36173),A(36178),A(36174),A(36171),A(36176),A(36172))
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_2",TRANSMOG,A(36167),A(36169),A(36165),A(36170),A(36189),A(36163),A(36168),A(36164))
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_3",TRANSMOG,A(36159),A(36161),A(36157),A(36162),A(36158),A(36155),A(36160),A(36156))
 	-- Zandalar Leveling Sets
-	set = SetCollector:AddSet(80000,nil,col,1102,"OTH_CLOTH_H_110",CLOTH,ANY,ANY,ANY)
-				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_1",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_2",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-	set = SetCollector:AddSet(80000,nil,col,1102,"OTH_LEATHER_H_110",LEATHER,ANY,ANY,ANY)
-				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_1",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_2",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--set = SetCollector:AddSet(80000,nil,col,1102,"OTH_CLOTH_H_110",CLOTH,ANY,ANY,ANY)
+	--			SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_1",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A()) -- Vol'dun
+	--			SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_2",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A()) -- Nazmir
+	--			SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_3",TRANSMOG,A(36363),A(36366),A(36365),A(),A(),A(36360),A(36364),A()) -- Zuldazar
+	--set = SetCollector:AddSet(80000,nil,col,1102,"OTH_LEATHER_H_110",LEATHER,ANY,ANY,ANY)
+	--			SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_1",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_2",TRANSMOG,A(35960),A(),A(35958),A(),A(35959),A(35956),A(),A())
+	--			SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
 	set = SetCollector:AddSet(80000,nil,col,1102,"OTH_MAIL_H_110",MAIL,ANY,ANY,ANY)
-				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_1",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_2",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-	set = SetCollector:AddSet(80000,nil,col,1102,"OTH_PLATE_H_110",PLATE,ANY,ANY,ANY)
-				SetCollector:AddVariant(80300,nil,col,set,"ZONE_H_1",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_2",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_1",TRANSMOG,A(36013),A(36015),A(36011),A(36016),A(36012),A(36009),A(36014),A(36010))
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_2",TRANSMOG,A(36029),A(36031),A(36027),A(36032),A(36028),A(36025),A(36030),A(36026))
+				SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_3",TRANSMOG,A(36021),A(36023),A(36372),A(36024),A(36020),A(36017),A(36022),A(36018))
+	--set = SetCollector:AddSet(80000,nil,col,1102,"OTH_PLATE_H_110",PLATE,ANY,ANY,ANY)
+	--			SetCollector:AddVariant(80300,nil,col,set,"ZONE_H_1",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_2",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
 
-	]]
 	set = SetCollector:AddSet(70000,nil,col,1009,"OTH_CLOTH_100",CLOTH,ANY,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"OTH_CLOTH_100",TRANSMOG,A(31376,79535),A(31379,79537),A(31718,79539),A(31374,79538),A(31380,79532),A(31375,79533),A(31372,79531),A(31377,79536),A(31373,79534))
 	set = SetCollector:AddSet(70000,nil,col,1009,"OTH_LEATHER_100",LEATHER,ANY,ANY,ANY)
@@ -446,6 +438,19 @@ function SetCollector:GetDeathKnightAppearances()
 
 	-- RAID
 	col = RAID
+	-- Antorus, the Burning Throne
+	--set = SetCollector:AddSet(70000,nil,col,210,"DK_TR_21",PLATE,DEATHKNIGHT,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A()),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(),A()),A(),A(),A(),A(),A(),A(),A())
+	-- Tomb of Sargeras
+	--set = SetCollector:AddSet(70000,nil,col,200,"DK_TR_20",PLATE,DEATHKNIGHT,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	-- The Nighthold
 	set = SetCollector:AddSet(70000,nil,col,191,"DK_TR_19",PLATE,DEATHKNIGHT,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(32139,81064),A(32141,81066),A(31975,81068),A(32137,81062),A(32138,81063),A(32140,81065))		-- Need belt and feet for each variant
 				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(29805,79907),A(29807,79925),A(29974,81550),A(29800,79889),A(29804,79898),A(29806,79916))
@@ -578,9 +583,9 @@ function SetCollector:GetDeathKnightAppearances()
 	
 	-- OTHER
 	col = OTHER
-	set = SetCollector:AddSet(70000,nil,col,190,"DK_OTH_19",PLATE,DEATHKNIGHT,ANY,ANY)
+	set = SetCollector:AddSet(70000,nil,col,1100,"DK_OTH_19",PLATE,DEATHKNIGHT,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"DK_OTH_19",TRANSMOG,A(32543,80950),A(32545,80952),A(32541,80947),A(32546,80954),A(32542,80949),A(32539,80953),A(32544,80951),A(32540,80948))
-	set = SetCollector:AddSet(70000,nil,col,1,"DK_STARTER",PLATE,DEATHKNIGHT,ANY,ANY)
+	set = SetCollector:AddSet(70000,nil,col,0580,"DK_STARTER",PLATE,DEATHKNIGHT,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"DK_STARTER",TRANSMOG,A(9034,16090),A(9036,16092),A(7003,16094),A(9032,16088),A(9035,16091),A(9031,16087),A(9033,16089),A(9037,16093),A(9030,16086))
 	
 end
@@ -598,6 +603,19 @@ function SetCollector:GetDemonHunterAppearances()
 
 	-- RAID
 	col = RAID
+	-- Antorus, the Burning Throne
+	--set = SetCollector:AddSet(70000,nil,col,210,"DH_TR_21",LEATHER,DEMONHUNTER,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A()),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(),A()),A(),A(),A(),A(),A(),A(),A())
+	-- Tomb of Sargeras
+	--set = SetCollector:AddSet(70000,nil,col,200,"DH_TR_20",LEATHER,DEMONHUNTER,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	-- The Nighthold
 	set = SetCollector:AddSet(70000,nil,col,191,"DH_TR_19",LEATHER,DEMONHUNTER,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(32020,81113),A(32022,81115),A(32100,81543),A(32018,81111),A(32019,81112),A(32021,81114))		-- Need belt and feet for each variant
 				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(32004,80181),A(32006,80187),A(32208,81540),A(32002,80175),A(32003,80178),A(32005,80184))
@@ -617,7 +635,7 @@ function SetCollector:GetDemonHunterAppearances()
 	
 	-- OTHER
 	col = OTHER
-	set = SetCollector:AddSet(70000,nil,col,190,"DH_OTH_19",LEATHER,DEMONHUNTER,ANY,ANY)
+	set = SetCollector:AddSet(70000,nil,col,1100,"DH_OTH_19",LEATHER,DEMONHUNTER,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"DH_OTH_19",TRANSMOG,A(32573,80990),A(32575,80992),A(32570,80987),A(32576,80994),A(32571,80989),A(32568,80993),A(32574,80991),A(32569,80988))
 	
 end
@@ -639,6 +657,19 @@ function SetCollector:GetDruidAppearances()
 
 	-- RAID
 	col = RAID
+	-- Antorus, the Burning Throne
+	--set = SetCollector:AddSet(70000,nil,col,210,"DR_TR_21",LEATHER,DRUID,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A()),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(),A()),A(),A(),A(),A(),A(),A(),A())
+	-- Tomb of Sargeras
+	--set = SetCollector:AddSet(70000,nil,col,200,"DR_TR_20",LEATHER,DRUID,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	-- The Nighthold
 	set = SetCollector:AddSet(70000,nil,col,191,"DR_TR_19",LEATHER,DRUID,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(32072,81092),A(32074,81094),A(32221,81558),A(32076,81090),A(32071,81091),A(32073,81093))		-- Need belt and feet for each variant
 				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(30740,79832),A(30742,79850),A(31035,80486),A(30744,79814),A(30739,79823),A(30741,79841))
@@ -974,7 +1005,7 @@ function SetCollector:GetDruidAppearances()
 	
 	-- OTHER
 	col = OTHER
-	set = SetCollector:AddSet(70000,nil,col,190,"DR_OTH_19",LEATHER,DRUID,ANY,ANY)
+	set = SetCollector:AddSet(70000,nil,col,1100,"DR_OTH_19",LEATHER,DRUID,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"DR_OTH_19",TRANSMOG,A(32481,80998),A(32483,81000),A(32479,80995),A(32484,81002),A(32480,80997),A(32477,81001),A(32482,80999),A(32478,80996))
 	
 end
@@ -994,6 +1025,19 @@ function SetCollector:GetHunterAppearances()
 
 	-- RAID
 	col = RAID
+	-- Antorus, the Burning Throne
+	--set = SetCollector:AddSet(70000,nil,col,210,"HU_TR_21",MAIL,HUNTER,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A()),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(),A()),A(),A(),A(),A(),A(),A(),A())
+	-- Tomb of Sargeras
+	--set = SetCollector:AddSet(70000,nil,col,200,"HU_TR_20",MAIL,HUNTER,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+
 	set = SetCollector:AddSet(70000,nil,col,191,"HU_TR_19",MAIL,HUNTER,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(31867,81076),A(31869,81078),A(32112,81079),A(31865,81074),A(31866,81075),A(31868,81077))		-- Need belt and feet for each variant
 				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(29758,79868),A(29760,79883),A(30050,81552),A(29755,79859),A(29757,79862),A(29759,79874))
@@ -1159,7 +1203,7 @@ function SetCollector:GetHunterAppearances()
 	
 	-- OTHER
 	col = OTHER
-	set = SetCollector:AddSet(70000,nil,col,190,"HU_OTH_19",MAIL,HUNTER,ANY,ANY)
+	set = SetCollector:AddSet(70000,nil,col,1100,"HU_OTH_19",MAIL,HUNTER,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"HU_OTH_19",TRANSMOG,A(32491,80982),A(32493,80984),A(32489,80979),A(32494,80986),A(32490,80981),A(32487,80985),A(32492,80983),A(32488,80980))
 	
 end
@@ -1179,11 +1223,25 @@ function SetCollector:GetMageAppearances()
 
 	-- RAID
 	col = RAID
+	-- Antorus, the Burning Throne
+	--set = SetCollector:AddSet(70000,nil,col,210,"MA_TR_21",CLOTH,MAGE,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A()),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(),A()),A(),A(),A(),A(),A(),A(),A())
+	-- Tomb of Sargeras
+	--set = SetCollector:AddSet(70000,nil,col,200,"MA_TR_20",CLOTH,MAGE,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(33524,86207),A(33526,86219),A(33528,86215),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	-- The Nighthold
 	set = SetCollector:AddSet(70000,nil,col,190,"MA_TR_19",CLOTH,MAGE,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(31938,81117),A(31940,81120),A(32048,81121),A(31942,81119),A(31937,81116),A(31939,81118))		-- Need belt and feet for each variant
 				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(30785,79778),A(30787,79805),A(31175,81107),A(30789,79796),A(30784,79769),A(30786,79787))
 				SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(30776,79779),A(30778,79806),A(31171,81419),A(30780,79797),A(30775,79770),A(30777,79788))
 				SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(31083,79780),A(31085,79807),A(31115,80174),A(31087,79798),A(31082,79771),A(31084,79789))
+				
 	set = SetCollector:AddSet(70000,nil,col,181,"MA_TR_18",CLOTH,MAGE,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(25451,69597),A(25453,69654),A(25455,69633),A(25450,69578),A(25452,69613),A(25448,69555))
 				SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(25423,69598),A(25425,69655),A(25427,69634),A(25422,69579),A(25424,69614),A(25420,69557))
@@ -1325,7 +1383,7 @@ function SetCollector:GetMageAppearances()
 	
 	-- OTHER
 	col = OTHER
-	set = SetCollector:AddSet(70000,nil,col,190,"MA_OTH_19",CLOTH,MAGE,ANY,ANY)
+	set = SetCollector:AddSet(70000,nil,col,1100,"MA_OTH_19",CLOTH,MAGE,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"MA_OTH_19",TRANSMOG,A(32507,81021),A(32509,81024),A(32512,81023),A(32511,81026),A(32506,81020),A(32504,81025),A(32510,81022),A(32505,81019))
 	
 end
@@ -1345,6 +1403,19 @@ function SetCollector:GetMonkAppearances()
 
 	-- RAID
 	col = RAID
+	-- Antorus, the Burning Throne
+	--set = SetCollector:AddSet(70000,nil,col,210,"MO_TR_21",LEATHER,MONK,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A()),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(),A()),A(),A(),A(),A(),A(),A(),A())
+	-- Tomb of Sargeras
+	--set = SetCollector:AddSet(70000,nil,col,200,"MO_TR_20",LEATHER,MONK,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+
 	set = SetCollector:AddSet(70000,nil,col,190,"MO_TR_19",LEATHER,MONK,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(30634,81086),A(30645,81088),A(30535,81089),A(30633,81108),A(30643,81085),A(30644,81087))		-- Need belt and feet for each variant
 				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(32043,79835),A(32046,79853),A(31917,81109),A(32042,79817),A(32044,79826),A(32045,79844))
@@ -1432,7 +1503,7 @@ function SetCollector:GetMonkAppearances()
 	
 	-- OTHER
 	col = OTHER
-	set = SetCollector:AddSet(70000,nil,col,190,"MO_OTH_19",LEATHER,MONK,ANY,ANY)
+	set = SetCollector:AddSet(70000,nil,col,1100,"MO_OTH_19",LEATHER,MONK,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"MO_OTH_19",TRANSMOG,A(32527,81006),A(32529,81008),A(32525,81003),A(32530,81010),A(32526,81005),A(32523,81009),A(32528,81007),A(32524,81004))
 	
 end
@@ -1452,11 +1523,19 @@ function SetCollector:GetPaladinAppearances()
 
 	-- RAID
 	col = RAID
+	-- Antorus, the Burning Throne
+	--set = SetCollector:AddSet(70000,nil,col,210,"PA_TR_21",PLATE,PALADIN,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A()),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(),A()),A(),A(),A(),A(),A(),A(),A())
+	-- Tomb of Sargeras
 	set = SetCollector:AddSet(70000,nil,col,201,"PA_TR_20",PLATE,PALADIN,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(32925,86259),A(32927,86267),A(32999,86251),A(32923,86247),A(32928,86643),A(32924,86255),A(32921,86639),A(32926,86263),A(32922,86619))
 				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(32946,86260),A(32948,86268),A(32979,86252),A(32944,86248),A(32949,86644),A(32945,86256),A(32942,86640),A(32947,86264),A(32943,86620))
 				SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(32901,86261),A(32903,86269),A(32962,86253),A(32899,86249),A(32904,86645),A(32900,86257),A(32897,86641),A(32902,86265),A(32898,86621))
 				SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(32917,86262),A(32919,86270),A(32993,86254),A(32915,86250),A(32920,86646),A(32916,86258),A(32913,86642),A(32918,86266),A(32914,86622))
+
 	set = SetCollector:AddSet(70000,nil,col,191,"PA_TR_19",PLATE,PALADIN,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(32147,81058),A(32149,81060),A(32105,81549),A(32151,81056),A(32146,81057),A(32148,81059))		-- Need belt and feet for each variant
 				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(29644,79910),A(29647,79928),A(29707,81547),A(29646,79892),A(29643,79901),A(29645,79919))
@@ -1598,7 +1677,7 @@ function SetCollector:GetPaladinAppearances()
 	
 	-- OTHER
 	col = OTHER
-	set = SetCollector:AddSet(70000,nil,col,190,"PA_OTH_19",PLATE,PALADIN,ANY,ANY)
+	set = SetCollector:AddSet(70000,nil,col,1100,"PA_OTH_19",PLATE,PALADIN,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"PA_OTH_19",TRANSMOG,A(32553,80966),A(32555,80968),A(32551,80963),A(32556,80970),A(32552,80965),A(32549,80969),A(32554,80967),A(32550,80964))
 	
 end
@@ -1618,6 +1697,19 @@ function SetCollector:GetPriestAppearances()
 
 	-- RAID
 	col = RAID
+	-- Antorus, the Burning Throne
+	--set = SetCollector:AddSet(70000,nil,col,210,"PR_TR_21",CLOTH,PRIEST,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A()),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(),A()),A(),A(),A(),A(),A(),A(),A())
+	-- Tomb of Sargeras
+	--set = SetCollector:AddSet(70000,nil,col,200,"PR_TR_20",CLOTH,PRIEST,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+
 	set = SetCollector:AddSet(70000,nil,col,191,"PR_TR_19",CLOTH,PRIEST,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(31947,81102),A(31949,81105),A(32060,81106),A(31950,81104),A(31946,81101),A(31948,81103))		-- Need belt and feet for each variant
 				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(30262,79781),A(30264,79808),A(30177,81563),A(30266,79799),A(30261,79772),A(30263,79790))
@@ -1759,7 +1851,7 @@ function SetCollector:GetPriestAppearances()
 	
 	-- OTHER
 	col = OTHER
-	set = SetCollector:AddSet(70000,nil,col,190,"PR_OTH_19",CLOTH,PRIEST,ANY,ANY)
+	set = SetCollector:AddSet(70000,nil,col,1100,"PR_OTH_19",CLOTH,PRIEST,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"PR_OTH_19",TRANSMOG,A(32472,81029),A(32474,81032),A(32476,81031),A(32475,81034),A(32471,81028),A(32468,81033),A(32473,81030),A(32469,81027))
 	
 end
@@ -1781,6 +1873,19 @@ function SetCollector:GetRogueAppearances()
 
 	-- RAID
 	col = RAID
+	-- Antorus, the Burning Throne
+	--set = SetCollector:AddSet(70000,nil,col,210,"RO_TR_21",LEATHER,ROGUE,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A()),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(),A()),A(),A(),A(),A(),A(),A(),A())
+	-- Tomb of Sargeras
+	--set = SetCollector:AddSet(70000,nil,col,200,"RO_TR_20",LEATHER,ROGUE,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+
 	set = SetCollector:AddSet(70000,nil,col,190,"RO_TR_19",LEATHER,ROGUE,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(32083,81082),A(32084,81084),A(32298,81555),A(32079,81080),A(32080,81081),A(32081,81083))		-- Need belt and feet for each variant
 				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(29870,79838),A(29872,79856),A(32292),A(29868,79820),A(29869,79829),A(29871,79847))
@@ -1941,7 +2046,7 @@ function SetCollector:GetRogueAppearances()
 
 	-- OTHER
 	col = OTHER
-	set = SetCollector:AddSet(70000,nil,col,191,"RO_OTH_19",LEATHER,ROGUE,ANY,ANY)
+	set = SetCollector:AddSet(70000,nil,col,1100,"RO_OTH_19",LEATHER,ROGUE,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"RO_OTH_19",TRANSMOG,A(32535,81014),A(32537,81016),A(32533,81011),A(32538,81018),A(32534,81013),A(32531,81017),A(32536,81015),A(32532,81012))		-- Need belt and feet for each variant
 	
 end
@@ -1985,12 +2090,13 @@ function SetCollector:GetShamanAppearances()
 	
 	-- RAID
 	col = RAID
+	-- Antorus, the Burning Throne
 	set = SetCollector:AddSet(70000,nil,col,210,"SH_TR_21",MAIL,SHAMAN,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(35098,90235),A(35100,90243),A(35772,90227),A(35096,90223),A(35101,89905),A(35097,90231),A(35094,89897),A(35099,90239),A(35095,90580))
 				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(35089,90236),A(35091,90244),A(35764,90228),A(35087,90224),A(35092,89906),A(35088,90232),A(35085,89898),A(35090,90240),A(35086,90581))
 				SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(35106,90237),A(35108,90245),A(35768,90229),A(35104,90225),A(35109,89907),A(35105,90233),A(35102,89899),A(35107,90241),A(35103,90582))
 				SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(35122,90238),A(35124,90246),A(35780,90230),A(35120,90226),A(35125,89908),A(35121,90234),A(35118,89900),A(35123,90242),A(35119,90583))
-
+	-- Tomb of Sargeras
 	set = SetCollector:AddSet(70000,nil,col,200,"SH_TR_20",MAIL,SHAMAN,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(34317,86331),A(34319,86339),A(34302,86323),A(34321,86319),A(34316,86327),A(34314,86727),A(34318,86335),A(34315,86707))
 				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(33702,86332),A(33704,86340),A(34299,86324),A(33706,86320),A(33701,86328),A(33698,86728),A(33703,86336),A(33699,86708))
@@ -2167,7 +2273,7 @@ function SetCollector:GetShamanAppearances()
 	
 	-- OTHER
 	col = OTHER
-	set = SetCollector:AddSet(70000,nil,col,190,"SH_OTH_19",MAIL,SHAMAN,ANY,ANY)
+	set = SetCollector:AddSet(70000,nil,col,1100,"SH_OTH_19",MAIL,SHAMAN,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"SH_OTH_19",TRANSMOG,A(32499,80974),A(32501,80976),A(32497,80971),A(32502,80978),A(32498,80973),A(32495,80977),A(32500,80975),A(32496,80972))
 	
 end
@@ -2193,21 +2299,25 @@ function SetCollector:GetWarlockAppearances()
 
 	-- RAID
 	col = RAID
+	-- Antorus, the Burning Throne
 	set = SetCollector:AddSet(70000,nil,col,211,"WK_TR_21",CLOTH,WARLOCK,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(34814,90255),A(34816,90267),A(35367,90247),A(34818,90263),A(34817,89785),A(34812,90251),A(34810,89737),A(34815,90259),A(34811,89749))
 				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(34797,90256),A(34799,90268),A(35357,90248),A(34801,90264),A(34800,89786),A(34796,90252),A(34794,89738),A(34798,90260),A(34795,89750))
 				SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(34789,90257),A(34791,90269),A(35352,90249),A(34793,90265),A(34792,89787),A(34788,90253),A(34786,89739),A(34790,90261),A(34787,89751))
 				SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(34839,90258),A(34841,90270),A(35342,90250),A(34843,90266),A(34842,89788),A(34838,90254),A(34836,89740),A(34840,90262),A(34837,89752))
+	-- Tomb of Sargeras
 	set = SetCollector:AddSet(70000,nil,col,201,"WK_TR_20",CLOTH,WARLOCK,ANY,ANY)
-				SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(33203,86351),A(33205,86363),A(33232,86343),A(33207,86359),A(33206,86763),A(33202,86347),A(33199,86759),A(33204,86355),A(33200,86739))
-				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(33149,86352),A(33151,86364),A(33226,86344),A(33153,86360),A(33152,86764),A(33148,86348),A(33145,86760),A(33150,86356),A(33146,86740))
-				SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(33096,86353),A(33098,86365),A(33214,86345),A(33100,86361),A(33099,86765),A(33095,86349),A(33092,86761),A(33097,86357),A(33093,86741))
-				SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(33194,86354),A(33196,86366),A(33238,86346),A(33198,86362),A(33197,86766),A(33193,86350),A(33190,86762),A(33195,86358),A(33191,86742))
+				SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(33203,86351),A(33205,86363),A(33232,86343),A(33207,86359),A(33202,86347),A(33199,86759),A(33204,86355),A(33200,86739))
+				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(33149,86352),A(33151,86364),A(33226,86344),A(33153,86360),A(33148,86348),A(33145,86760),A(33150,86356),A(33146,86740))
+				SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(33096,86353),A(33098,86365),A(33214,86345),A(33100,86361),A(33095,86349),A(33092,86761),A(33097,86357),A(33093,86741))
+				SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(33194,86354),A(33196,86366),A(33238,86346),A(33198,86362),A(33193,86350),A(33190,86762),A(33195,86358),A(33191,86742))
+	-- The Nighthold
 	set = SetCollector:AddSet(70000,nil,col,191,"WK_TR_19",CLOTH,WARLOCK,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(31884,81097),A(31886,81100),A(31871,81562),A(31888,81099),A(31883,81096),A(31885,81098))		-- Need belt and feet for each variant
 				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(29171,79784),A(29173,79811),A(29040,81559),A(29175,79802),A(29170,79775),A(29172,79793))
 				SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(29161,79785),A(29163,79812),A(29028,81560),A(29165,79803),A(29160,79776),A(29162,79794))
 				SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(29083,79786),A(29085,79813),A(29049,81561),A(29087,79804),A(29082,79777),A(29084,79795))
+	-- Hellfire Citadel
 	set = SetCollector:AddSet(70000,nil,col,181,"WK_TR_18",CLOTH,WARLOCK,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(26169,69603),A(26171,69660),A(26173,69639),A(26168,69584),A(26165,69667),A(26170,69619))
 				SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(26160,69604),A(26162,69661),A(26164,69640),A(26159,69585),A(26156,69669),A(26161,69620))
@@ -2345,7 +2455,7 @@ function SetCollector:GetWarlockAppearances()
 	
 	-- OTHER
 	col = OTHER
-	set = SetCollector:AddSet(70000,nil,col,190,"WK_OTH_19",CLOTH,WARLOCK,ANY,ANY)
+	set = SetCollector:AddSet(70000,nil,col,1100,"WK_OTH_19",CLOTH,WARLOCK,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"WK_OTH_19",TRANSMOG,A(32517,81037),A(32519,81040),A(32521,81039),A(32520,81042),A(32516,81036),A(32513,81041),A(32518,81038),A(32514,81035))
 	
 end
@@ -2365,6 +2475,20 @@ function SetCollector:GetWarriorAppearances()
 
 	-- RAID
 	col = RAID
+	-- Antorus, the Burning Throne
+	--set = SetCollector:AddSet(70000,nil,col,210,"WR_TR_21",PLATE,WARRIOR,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A()),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(),A()),A(),A(),A(),A(),A(),A(),A())
+
+	-- Tomb of Sargeras
+	--set = SetCollector:AddSet(70000,nil,col,200,"WR_TR_20",PLATE,WARRIOR,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--			SetCollector:AddVariant(70000,nil,col,set,"MYTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+
 	set = SetCollector:AddSet(70000,nil,col,191,"WR_TR_19",PLATE,WARRIOR,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(32157,81052),A(32160,81054),A(32127,81055),A(32156,81050),A(32158,81051),A(32159,81053))		-- Need belt and feet for each variant
 				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(31444,79913),A(31447,79931),A(32242,81544),A(31443,79895),A(31445,79904),A(31446,79922))
@@ -2566,7 +2690,7 @@ function SetCollector:GetWarriorAppearances()
 	
 	-- OTHER
 	col = OTHER
-	set = SetCollector:AddSet(70000,nil,col,190,"WR_OTH_19",PLATE,WARRIOR,ANY,ANY)
+	set = SetCollector:AddSet(70000,nil,col,1100,"WR_OTH_19",PLATE,WARRIOR,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"WR_OTH_19",TRANSMOG,A(32561,80958),A(32563,80960),A(32559,80955),A(32564,80962),A(32560,80957),A(32557,80961),A(32562,80959),A(32558,80956))
 	
 end
