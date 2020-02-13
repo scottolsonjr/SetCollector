@@ -216,6 +216,16 @@ function SetCollector:GetGeneralAppearances()
 
 	-- DUNGEON
 	col = DUNGEON
+	-- Warlords of Draenor
+	--set = SetCollector:AddSet(70000,nil,col,31,"DG_CLOTH_06",CLOTH,ANY,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"DG_CLOTH_06",TRANSMOG,A(22461),A(),A(),A(),A(),A(22455),A(),A()) -- Felflame
+	--set = SetCollector:AddSet(70000,nil,col,31,"DG_LEATHER_03",LEATHER,ANY,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"DG_LEATHER_06",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+	--set = SetCollector:AddSet(70000,nil,col,31,"DG_MAIL_06",MAIL,ANY,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"DG_MAIL_06",TRANSMOG,A(22435),A(),A(22449),A(22430),A(),A(22431),A(22436),A()) -- Sharpeye
+	--set = SetCollector:AddSet(70000,nil,col,31,"DG_PLATE_06",PLATE,ANY,ANY,ANY)
+	--			SetCollector:AddVariant(70000,nil,col,set,"DG_PLATE_06",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+
 	set = SetCollector:AddSet(70000,nil,col,31,"DG_CLOTH_03",CLOTH,ANY,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"DG_CLOTH_03",TRANSMOG,A(7071,12315),A(6956,12071),A(7069,12313),A(6852,11913),A(7018,12145))
 	set = SetCollector:AddSet(70000,nil,col,31,"DG_LEATHER_03",LEATHER,ANY,ANY,ANY)
@@ -257,13 +267,13 @@ function SetCollector:GetGeneralAppearances()
 	-- GARRISON
 	col = GARRISON
 	set = SetCollector:AddSet(70000,nil,col,602,"GA_BWM_SET_100",CLOTH,ANY,ANY,ANY)
-				SetCollector:AddVariant(70000,nil,col,set,"CLOTH",TRANSMOG,A(23099),A(23096),A(23097),A(23098),A(23807),A(23100),A(23806))
+				SetCollector:AddVariant(70000,nil,col,set,"CLOTH",TRANSMOG,A(23099),A(23096),A(23097),A(24893),A(23098),A(23807),A(23100),A(23806))
 	set = SetCollector:AddSet(70000,nil,col,602,"GA_BWM_SET_100",LEATHER,ANY,ANY,ANY)
-				SetCollector:AddVariant(70000,nil,col,set,"LEATHER",TRANSMOG,A(22857),A(22859),A(22855),A(22856),A(22853),A(22858),A(22854))
+				SetCollector:AddVariant(70000,nil,col,set,"LEATHER",TRANSMOG,A(22857),A(22859),A(22855),A(22950),A(22856),A(22853),A(22858),A(22854))
 	set = SetCollector:AddSet(70000,nil,col,602,"GA_BWM_SET_100",MAIL,ANY,ANY,ANY)
-				SetCollector:AddVariant(70000,nil,col,set,"MAIL",TRANSMOG,A(22945),A(22944),A(22947),A(22946),A(22949),A(23810),A(22948))
+				SetCollector:AddVariant(70000,nil,col,set,"MAIL",TRANSMOG,A(22945),A(22944),A(22947),A(22852),A(22946),A(22949),A(23810),A(22948))
 	set = SetCollector:AddSet(70000,nil,col,602,"GA_BWM_SET_100",PLATE,ANY,ANY,ANY)
-				SetCollector:AddVariant(70000,nil,col,set,"PLATE",TRANSMOG,A(23274),A(23278),A(23265),A(23271),A(23259),A(23277),A(23262))
+				SetCollector:AddVariant(70000,nil,col,set,"PLATE",TRANSMOG,A(23274),A(23278),A(23265),A(24323),A(23271),A(23259),A(23277),A(23262))
 	
 	set = SetCollector:AddSet(70000,nil,col,601,"GA_ALLIANCE_SET",ANY,ANY,ANY,ALLIANCE)
 				SetCollector:AddVariant(70000,nil,col,set,"GA_ALLIANCE_SET",TRANSMOG,A(24474),A(24476),A(24472),A(24473),A(24470),A(24475),A(24471))
@@ -321,7 +331,7 @@ function SetCollector:GetGeneralAppearances()
 	-- Zandalar Leveling Sets
 	--set = SetCollector:AddSet(80000,nil,col,1102,"OTH_CLOTH_H_110",CLOTH,ANY,ANY,ANY)
 	--			SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_1",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A()) -- Vol'dun
-	--			SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_2",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A()) -- Nazmir
+	--			SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_2",TRANSMOG,A(),A(),A(36318),A(),A(),A(36319),A(36320),A()) -- Nazmir
 	--			SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_3",TRANSMOG,A(36363),A(36366),A(36365),A(),A(),A(36360),A(36364),A()) -- Zuldazar
 	--set = SetCollector:AddSet(80000,nil,col,1102,"OTH_LEATHER_H_110",LEATHER,ANY,ANY,ANY)
 	--			SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_1",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
