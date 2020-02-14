@@ -647,7 +647,11 @@ function SetCollector:GetDemonHunterAppearances()
 	col = OTHER
 	set = SetCollector:AddSet(70000,nil,col,1100,"DH_OTH_19",LEATHER,DEMONHUNTER,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"DH_OTH_19",TRANSMOG,A(32573,80990),A(32575,80992),A(32570,80987),A(32576,80994),A(32571,80989),A(32568,80993),A(32574,80991),A(32569,80988))
-	
+	set = SetCollector:AddSet(70000,nil,col,1000,"DH_STARTER",LEATHER,DEMONHUNTER,ANY,ANY)
+				SetCollector:AddVariant(70000,nil,col,set,"DH_STARTER",TRANSMOG,A(28240),A(2352,60968),A(28242),A(28241),A(28237),A(28234),A(28239),A(28235),A(28700,60967),A(28700,73859))
+				--SetCollector:AddVariant(70000,nil,col,set,"2",TRANSMOG,A(28238),A(27860),A(17491),A(27856),A(27861),A(27857),A(27854),A(27859),A(27855))
+				--SetCollector:AddVariant(70000,nil,col,set,"3",TRANSMOG,A(27858))
+
 end
 
 function SetCollector:GetDruidAppearances()
