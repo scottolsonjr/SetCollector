@@ -330,7 +330,7 @@ function SetCollector:GetGeneralAppearances()
 				SetCollector:AddVariant(80000,nil,col,set,"ZONE_A_3",TRANSMOG,A(36159),A(36161),A(36157),A(36162),A(36158),A(36155),A(36160),A(36156))
 	-- Zandalar Leveling Sets
 	--set = SetCollector:AddSet(80000,nil,col,1102,"OTH_CLOTH_H_110",CLOTH,ANY,ANY,ANY)
-	--			SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_1",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A()) -- Vol'dun
+	--			SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_1",TRANSMOG,A(),A(),A(),A(36357),A(),A(),A(),A()) -- Vol'dun
 	--			SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_2",TRANSMOG,A(),A(),A(36318),A(),A(),A(36319),A(36320),A()) -- Nazmir
 	--			SetCollector:AddVariant(80000,nil,col,set,"ZONE_H_3",TRANSMOG,A(36363),A(36366),A(36365),A(),A(),A(36360),A(36364),A()) -- Zuldazar
 	--set = SetCollector:AddSet(80000,nil,col,1102,"OTH_LEATHER_H_110",LEATHER,ANY,ANY,ANY)
