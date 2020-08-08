@@ -1,7 +1,7 @@
 ## Interface: 80300
 ## Title: Set Collector
 ## Notes: Allows the user to preview and track their progress in the collection of various transmogrification appearance sets, such as Legendary and Raid sets.
-## Version: 3.1.0
+## Version: 3.2.0
 ## Author: Lomiedo-Uldum
 ## SavedVariables: SetCollectorDB
 ## SavedVariablesPerCharacter: SetCollectorCharacterDB
@@ -16,6 +16,16 @@ Localization.koKR.lua
 Core.lua
 SetCollector.xml
 Appearances.lua
+Appearances-00.lua
+Appearances-01.lua
+Appearances-02.lua
+Appearances-03.lua
+Appearances-04.lua
+Appearances-05.lua
+Appearances-06.lua
+Appearances-07.lua
+Appearances-08.lua
+Appearances-09.lua
 DB.lua
 UI.lua
 Tooltips.lua

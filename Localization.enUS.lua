@@ -626,6 +626,7 @@ L["SLASH_HELP_BUTTON"] = [=[Set Collector: Shows (button show) or hides (button 
 For example, /SetCollector button hide or /SetCollector button]=]
 L["SLASH_HELP_SORT"] = [=[Set Collector: Sets the direction of the default collection sort. Use asc for ascending and desc for descending.
 For example, /SetCollector sort asc]=]
+L["STARTER"] = "Starter Set"
 L["TEAL"] = "Teal"
 L["TR_CLOTH_17"] = "[17] Ebonflame Raiment"
 L["TR_CLOTH_18"] = "[18] Felfume Raiment"

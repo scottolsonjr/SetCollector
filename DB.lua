@@ -514,7 +514,19 @@ function SetCollector:AddAppearances(debug)
 	SetCollector.db.global.collections = CreateCollections()
 	--if debug then SetCollector:Print("Added "..#SetCollector.db.global.collections.." collections.") end
 	
-	SetCollector:GetGeneralAppearances()
+	-- FUTURE: Older expansion sets disabled by default. Enabled in settings.
+	SetCollector:GetVersion00Appearances()
+	--SetCollector:GetVersion01Appearances()
+	--SetCollector:GetVersion02Appearances()
+	--SetCollector:GetVersion03Appearances()
+	--SetCollector:GetVersion04Appearances()
+	--SetCollector:GetVersion05Appearances()
+	--SetCollector:GetVersion06Appearances()
+	--SetCollector:GetVersion07Appearances()
+	SetCollector:GetVersion08Appearances()
+	SetCollector:GetVersion09Appearances()
+
+	--SetCollector:GetGeneralAppearances()
 	
 	SetCollector:GetDeathKnightAppearances()
 	SetCollector:GetDemonHunterAppearances()
@@ -525,9 +537,9 @@ function SetCollector:AddAppearances(debug)
 	SetCollector:GetPaladinAppearances()
 	SetCollector:GetPriestAppearances()
 	SetCollector:GetRogueAppearances()
-	SetCollector:GetShamanAppearances()
+	--SetCollector:GetShamanAppearances()
 	SetCollector:GetWarlockAppearances()
-	SetCollector:GetWarriorAppearances()
+	--SetCollector:GetWarriorAppearances()
 	
 	--if debug then SetCollector:Print("Finished adding appearances to database.") end
 end
