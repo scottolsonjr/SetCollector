@@ -514,17 +514,17 @@ function SetCollector:AddAppearances(debug)
 	SetCollector.db.global.collections = CreateCollections()
 	--if debug then SetCollector:Print("Added "..#SetCollector.db.global.collections.." collections.") end
 	
-	-- FUTURE: Older expansion sets disabled by default. Enabled in settings.
-	SetCollector:GetVersion00Appearances()
-	--SetCollector:GetVersion01Appearances()
-	--SetCollector:GetVersion02Appearances()
-	--SetCollector:GetVersion03Appearances()
-	--SetCollector:GetVersion04Appearances()
-	--SetCollector:GetVersion05Appearances()
-	--SetCollector:GetVersion06Appearances()
-	--SetCollector:GetVersion07Appearances()
-	SetCollector:GetVersion08Appearances()
-	SetCollector:GetVersion09Appearances()
+	-- FUTURE: Older expansion sets disabled by default. Can be enabled in settings.
+	SetCollector:GetVersion00Appearances()	-- Default enabled
+	SetCollector:GetVersion01Appearances()
+	SetCollector:GetVersion02Appearances()
+	SetCollector:GetVersion03Appearances()
+	SetCollector:GetVersion04Appearances()
+	SetCollector:GetVersion05Appearances()
+	SetCollector:GetVersion06Appearances()
+	SetCollector:GetVersion07Appearances()
+	SetCollector:GetVersion08Appearances()	-- Default enabled
+	SetCollector:GetVersion09Appearances()	-- Default enabled
 	
 	--if debug then SetCollector:Print("Finished adding appearances to database.") end
 end
@@ -546,41 +546,41 @@ end
 
 function SetCollector:GetOptions()
 	local options = {
-    name = "Set Collector",
-    handler = SetCollector,
-    type = "group",
-    args = {
-    	char = {
-    		name = "Character",
-    		type = "group",
-    		args = {
-	        minimap = {
-            type = "toggle",
-            name = "Enable Minimap",
-            desc = "Turn on minimap",
-            --usage = L["<Your message>"],
-            get = "IsMinimapButtonShown",
-            set = "ToggleMinimapButton",
-            width = "full"
-	        },
-        },
-      },
-      global = {
-    		name = "Global",
-    		type = "group",
-    		args = {
-	        debug = {
-            type = "toggle",
-            name = "Enable Debug",
-            desc = "Turn on debugging details",
-            --usage = L["<Your message>"],
-            get = "GetDebug",
-            set = "OptionsSetDebug",
-            width = "full"
-	        },
-	      },
-	    },
-    },
+		name = "Set Collector",
+		handler = SetCollector,
+		type = "group",
+		args = {
+			char = {
+				name = "Character",
+				type = "group",
+				args = {
+					minimap = {
+						type = "toggle",
+						name = "Enable Minimap",
+						desc = "Turn on minimap",
+						--usage = L["<Your message>"],
+						get = "IsMinimapButtonShown",
+						set = "ToggleMinimapButton",
+						width = "full"
+					},
+				},
+			},
+			global = {
+				name = "Global",
+				type = "group",
+				args = {
+					debug = {
+						type = "toggle",
+						name = "Enable Debug",
+						desc = "Turn on debugging details",
+						--usage = L["<Your message>"],
+						get = "GetDebug",
+						set = "OptionsSetDebug",
+						width = "full"
+					},
+				},
+			},
+		},
 	}
 	return options
 end

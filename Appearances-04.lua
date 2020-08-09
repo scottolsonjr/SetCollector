@@ -315,5 +315,5 @@ function SetCollector:GetVersion04Appearances()
 	GetRogueAppearances()
 	GetShamanAppearances()
 	GetWarlockAppearances()
-	GetWarriorAppearance()
+	GetWarriorAppearances()
 end
