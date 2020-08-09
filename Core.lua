@@ -41,9 +41,8 @@ function SetCollector:OnInitialize()
 	
 	-- Bug in Shadowlands (v.9.x) due to changes to SetBackdrop. Disabling until fix available.
 	if WOW_VERSION < 90000 then
-		local AceConfig = LibStub("AceConfig-3.0")
-		AceConfig:RegisterOptionsTable("SetCollector", SetCollector:GetOptions())
-		self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SetCollector", "Set Collector", nil, "general")
+		LibStub("AceConfig-3.0"):RegisterOptionsTable("SetCollector", SetCollector:GetOptions())
+		self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SetCollector", "Set Collector")
 	end
 	
 	SetCollector:RegisterEvent("PLAYER_LOGIN")
