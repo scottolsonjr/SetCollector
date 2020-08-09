@@ -3,6 +3,7 @@ local DEBUG = false
 SetCollector = LibStub("AceAddon-3.0"):NewAddon("SetCollector", "AceConsole-3.0", "AceEvent-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale("SetCollector", true)
 
+local WOW_VERSION = select(4,GetBuildInfo())
 
 local InventorySlots = {
     ['INVTYPE_HEAD'] = 1,
@@ -38,8 +39,12 @@ function SetCollector:OnInitialize()
 	SetCollector:SetupUI(true)
 	if SetCollector:GetDebug() then SetCollector:Print("Initialized"); end
 	
-	LibStub("AceConfig-3.0"):RegisterOptionsTable("SetCollector", SetCollector:GetOptions())
-	self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SetCollector", "Set Collector")
+	-- Bug in Shadowlands (v.9.x) due to changes to SetBackdrop. Disabling until fix available.
+	if WOW_VERSION < 90000 then
+		local AceConfig = LibStub("AceConfig-3.0")
+		AceConfig:RegisterOptionsTable("SetCollector", SetCollector:GetOptions())
+		self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SetCollector", "Set Collector", nil, "general")
+	end
 	
 	SetCollector:RegisterEvent("PLAYER_LOGIN")
 end
