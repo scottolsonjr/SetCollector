@@ -111,6 +111,36 @@ local function GetShamanAppearances()
 end
 
 
+local function GetWarlockAppearances()
+	local col = ""
+	local set = ""
+	
+	col = SetCollector.RAID
+	set = SetCollector:AddSet(70000,nil,col,31,"WK_TR_03",CLOTH,WARLOCK,CASTER,ANY)
+				SetCollector:AddVariant(70000,nil,col,set,"WK_TR_03",TRANSMOG,A(6032),A(6033),A(6030),A(6037),A(6035),A(6036),A(6031),A(6034))
+	set = SetCollector:AddSet(70000,nil,col,21,"WK_TR_02",CLOTH,WARLOCK,CASTER,ANY)
+				SetCollector:AddVariant(70000,nil,col,set,"WK_TR_02",TRANSMOG,A(5053,6993),A(5055,6996),A(5054,6995),A(5057,6998),A(5052,6992),A(5056,6997),A(4008,6994),A(5051,6991))
+	set = SetCollector:AddSet(70000,nil,col,11,"WK_TR_01",CLOTH,WARLOCK,CASTER,ANY)
+				SetCollector:AddVariant(70000,nil,col,set,"WK_TR_01",TRANSMOG,A(4954,6893),A(4953,6892),A(4955,6894),A(4950,6889),A(4951,6890),A(4952,6891),A(4956,6895),A(4949,6888))
+
+	col = SetCollector.DUNGEON
+	set = SetCollector:AddSet(70000,nil,col,30,"WK_DG_03",CLOTH,WARLOCK,ANY,ANY)
+				SetCollector:AddVariant(70000,nil,col,set,"WK_DG_03",TRANSMOG,A(7197,12459),A(6946,12060),A(7105,12349),A(6892,11965),A(7035,12168))
+				
+	set = SetCollector:AddSet(70000,nil,col,22,"WK_DG_AQ_2",CLOTH,WARLOCK,ANY,ANY)
+				SetCollector:AddVariant(70000,nil,col,set,"WK_DG_AQ_2",TRANSMOG,A(5676,8371),A(5675,8369),A(5674,8368),A(3128,8370),A(5677,8372))
+				
+	set = SetCollector:AddSet(70000,nil,col,21,"WK_DG_AQ_1",CLOTH,WARLOCK,ANY,ANY)
+				SetCollector:AddVariant(70000,nil,col,set,"WK_DG_AQ_1",TRANSMOG,A(5717,8425),A(3006,8426))
+				
+	set = SetCollector:AddSet(70000,nil,col,20,"WK_DG_02",CLOTH,WARLOCK,ANY,ANY)
+				SetCollector:AddVariant(70000,nil,col,set,"REPLICA",TRANSMOG,A(5898,39635),A(5897,39639),A(5899,39642),A(5895,39637),A(5901,39641),A(5894,39638),A(5896,39636),A(5900,39640))
+				
+	set = SetCollector:AddSet(70000,nil,col,10,"WK_DG_01",CLOTH,WARLOCK,ANY,ANY)
+				SetCollector:AddVariant(70000,nil,col,set,"REPLICA",TRANSMOG,A(4900,39632),A(4903,39631),A(4902,39630),A(4905,39634),A(4907,39628),A(4904,39627),A(4901,39633),A(4906,39629))
+end
+
+
 local function GetWarriorAppearances()
 	local col = ""
 	local set = ""
@@ -152,5 +182,6 @@ function SetCollector:GetVersion02Appearances()
 	GetDungeonAppearances()
 
 	GetShamanAppearances()
+	GetWarlockAppearances()
 	GetWarriorAppearances()
 end

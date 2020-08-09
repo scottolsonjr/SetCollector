@@ -526,6 +526,7 @@ function SetCollector:AddAppearances(debug)
 	SetCollector:GetVersion08Appearances()
 	SetCollector:GetVersion09Appearances()
 
+	-- These functions to be removed
 	--SetCollector:GetGeneralAppearances()
 	
 	SetCollector:GetDeathKnightAppearances()
@@ -538,7 +539,7 @@ function SetCollector:AddAppearances(debug)
 	SetCollector:GetPriestAppearances()
 	SetCollector:GetRogueAppearances()
 	--SetCollector:GetShamanAppearances()
-	SetCollector:GetWarlockAppearances()
+	--SetCollector:GetWarlockAppearances()
 	--SetCollector:GetWarriorAppearances()
 	
 	--if debug then SetCollector:Print("Finished adding appearances to database.") end

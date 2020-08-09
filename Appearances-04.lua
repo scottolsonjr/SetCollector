@@ -85,6 +85,24 @@ local function GetShamanAppearances()
 end
 
 
+local function GetWarlockAppearances()
+	local col = ""
+	local set = ""
+	
+	col = SetCollector.RAID
+	set = SetCollector:AddSet(70000,nil,col,131,"WK_TR_CASTER_13",CLOTH,WARLOCK,CASTER,ANY)
+				SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(16549,40134),A(16545,40181),A(16547,40162),A(16548,40113),A(16550,40153))
+				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(16558,38563),A(16554,38560),A(16556,38561),A(16557,38564),A(16559,38562))
+				SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(16540,40039),A(16536,40086),A(16538,40067),A(16539,40018),A(16541,40058))
+	set = SetCollector:AddSet(70000,nil,col,121,"WK_TR_CASTER_12",CLOTH,WARLOCK,CASTER,ANY)
+				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(15821,36564),A(15879,36567),A(15830,36566),A(15536,36563),A(15878,36565))
+				SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(15918,36804),A(15945,36807),A(15913,36806),A(15943,36803),A(15944,36805))
+	set = SetCollector:AddSet(70000,nil,col,111,"WK_TR_CASTER_11",CLOTH,WARLOCK,CASTER,ANY)
+				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(14098,29998),A(14099,30001),A(14031,30000),A(14045,29997),A(13992,29999))
+				SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(14775,32821),A(14776,32824),A(14705,32823),A(14759,32820),A(14724,32822))
+end
+
+
 local function GetWarriorAppearances()
 	local col = ""
 	local set = ""
@@ -126,5 +144,6 @@ function SetCollector:GetVersion04Appearances()
 	GetLegendaries()
 
 	GetShamanAppearances()
+	GetWarlockAppearances()
 	GetWarriorAppearance()
 end

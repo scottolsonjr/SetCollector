@@ -84,6 +84,20 @@ local function GetShamanAppearances()
 end
 
 
+local function GetWarlockAppearances()
+	local col = ""
+	local set = ""
+	
+	col = SetCollector.RAID
+	set = SetCollector:AddSet(70000,nil,col,61,"WK_TR_CASTER_06",CLOTH,WARLOCK,CASTER,ANY)
+				SetCollector:AddVariant(70000,nil,col,set,"WK_TR_CASTER_06",TRANSMOG,A(8093,14119),A(8096,14122),A(8094,14120),A(8958,15965),A(8092,14118),A(8994,16026),A(8095,14121),A(9005,16045))
+	set = SetCollector:AddSet(70000,nil,col,51,"WK_TR_CASTER_05",CLOTH,WARLOCK,CASTER,ANY)
+				SetCollector:AddVariant(70000,nil,col,set,"WK_TR_CASTER_05",TRANSMOG,A(7852,13630),A(7855,13633),A(7854,13632),A(7851,13629),A(7853,13631))
+	set = SetCollector:AddSet(70000,nil,col,41,"WK_TR_CASTER_04",CLOTH,WARLOCK,CASTER,ANY)
+				SetCollector:AddVariant(70000,nil,col,set,"WK_TR_CASTER_04",TRANSMOG,A(7414,12850),A(7418,12854),A(7415,12851),A(7419,12855),A(7417,12853))
+end
+
+
 local function GetWarriorAppearances()
 	local col = ""
 	local set = ""
@@ -117,5 +131,6 @@ function SetCollector:GetVersion02Appearances()
 	GetLegendaries()
 
 	GetShamanAppearances()
+	GetWarlockAppearances()
 	GetWarriorAppearances()
 end
