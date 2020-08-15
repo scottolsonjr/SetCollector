@@ -1124,3 +1124,9 @@ function SetCollector:SetupUI(DEBUG)
 	CreateMinimapButton()
 	-- Other delayed build actions
 end
+
+
+function SetCollector:ReloadUI()
+	print("attempting reload")
+	ReloadUI();
+end

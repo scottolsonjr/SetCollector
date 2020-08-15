@@ -289,17 +289,30 @@ end
 --	GLOBAL FUNCTIONS
 --
 
-function SetCollector:GetVersion04Appearances()
-	GetLegendaries()
+function SetCollector:GetVersion04Appearances(expansion)
+	if expansion.v04 then
+		-- Common
+		GetLegendaries()
+		-- Class-specific
+		GetDeathKnightAppearances()
+		GetDruidAppearances()
+		GetHunterAppearances()
+		GetMageAppearances()
+		GetPaladinAppearances()
+		GetPriestAppearances()
+		GetRogueAppearances()
+		GetShamanAppearances()
+		GetWarlockAppearances()
+		GetWarriorAppearances()
+	end
+end
 
-	GetDeathKnightAppearances()
-	GetDruidAppearances()
-	GetHunterAppearances()
-	GetMageAppearances()
-	GetPaladinAppearances()
-	GetPriestAppearances()
-	GetRogueAppearances()
-	GetShamanAppearances()
-	GetWarlockAppearances()
-	GetWarriorAppearances()
+
+function SetCollector:GetVersion04Status()
+	return SetCollector:GetExpansionStatus("4")
+end
+
+
+function SetCollector:SetVersion04Status()
+	SetCollector:SetExpansionStatus("4")
 end

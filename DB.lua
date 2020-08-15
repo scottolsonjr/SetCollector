@@ -18,7 +18,19 @@ local defaults = {
 	},
   global = {
     debug = false,
-    collections = {}
+	collections = {},
+	expansions = {
+		v00 = true,
+		v01 = false,
+		v02 = false,
+		v03 = false,
+		v04 = false,
+		v05 = false,
+		v06 = false,
+		v07 = false,
+		v08 = true,
+		v09 = true
+	}
   }
 }
 
@@ -515,19 +527,53 @@ function SetCollector:AddAppearances(debug)
 	--if debug then SetCollector:Print("Added "..#SetCollector.db.global.collections.." collections.") end
 	
 	-- FUTURE: Older expansion sets disabled by default. Can be enabled in settings.
-	SetCollector:GetVersion00Appearances()	-- Default enabled
-	SetCollector:GetVersion01Appearances()
-	SetCollector:GetVersion02Appearances()
-	SetCollector:GetVersion03Appearances()
-	SetCollector:GetVersion04Appearances()
-	SetCollector:GetVersion05Appearances()
-	SetCollector:GetVersion06Appearances()
-	SetCollector:GetVersion07Appearances()
-	SetCollector:GetVersion08Appearances()	-- Default enabled
-	SetCollector:GetVersion09Appearances()	-- Default enabled
+	local expansions = SetCollector.db.global.expansions
+	SetCollector:GetVersion00Appearances(expansions)	-- Starter Area(s)/Holidays
+	SetCollector:GetVersion01Appearances(expansions)	-- Vanilla
+	SetCollector:GetVersion02Appearances(expansions)	-- Burning Crusade
+	SetCollector:GetVersion03Appearances(expansions)	-- Wrath of the Lich King
+	SetCollector:GetVersion04Appearances(expansions)	-- Cataclysm
+	SetCollector:GetVersion05Appearances(expansions)	-- Mists of Pandaria
+	SetCollector:GetVersion06Appearances(expansions)	-- Warlords of Draenor
+	SetCollector:GetVersion07Appearances(expansions)	-- Legion
+	SetCollector:GetVersion08Appearances(expansions)	-- Battle for Azeroth
+	SetCollector:GetVersion09Appearances(expansions)	-- Shadowlands
 	
 	--if debug then SetCollector:Print("Finished adding appearances to database.") end
 end
+
+
+function SetCollector:GetExpansionStatus(version)
+	local expansions = SetCollector.db.global.expansions
+	if version == "0" then return expansions.v00 
+	elseif version == "1" then return expansions.v01
+	elseif version == "2" then return expansions.v02
+	elseif version == "3" then return expansions.v03
+	elseif version == "4" then return expansions.v04
+	elseif version == "5" then return expansions.v05
+	elseif version == "6" then return expansions.v06
+	elseif version == "7" then return expansions.v07
+	elseif version == "8" then return expansions.v08
+	elseif version == "9" then return expansions.v09
+	end
+end
+
+
+function SetCollector:SetExpansionStatus(version)
+	local expansions = SetCollector.db.global.expansions
+	if version == "0" then expansions.v00 = not expansions.v00
+	elseif version == "1" then expansions.v01 = not expansions.v01
+	elseif version == "2" then expansions.v02 = not expansions.v02
+	elseif version == "3" then expansions.v03 = not expansions.v03
+	elseif version == "4" then expansions.v04 = not expansions.v04
+	elseif version == "5" then expansions.v05 = not expansions.v05
+	elseif version == "6" then expansions.v06 = not expansions.v06
+	elseif version == "7" then expansions.v07 = not expansions.v07
+	elseif version == "8" then expansions.v08 = not expansions.v08
+	elseif version == "9" then expansions.v09 = not expansions.v09
+	end
+end
+
 
 function SetCollector:SetupDB(debug)
 	SetCollector.db = LibStub("AceDB-3.0"):New("SetCollectorDB", defaults, true)
@@ -544,42 +590,210 @@ function SetCollector:ResetDB()
 	end
 end
 
+
 function SetCollector:GetOptions()
 	local options = {
 		name = "Set Collector",
 		handler = SetCollector,
 		type = "group",
 		args = {
-			char = {
-				name = "Character",
+			description = {
+				type = "description",
+				order = 0,
+				name = "Settings for the Set Collector addon.",
+			},
+			header = {
+				type = "header",
+				order = 1,
+				name = "Settings",
+			},
+			common = {
 				type = "group",
+				order = 10,
+				name = "Common",
 				args = {
+					global_header = {
+						type = "header",
+						order = 0,
+						name = "Global"
+					},
+					none_yet = {
+						type = "description",
+						order = 1,
+						name = "No common global settings currently available here."
+					},
+					char_header = {
+						type = "header",
+						order = 100,
+						name = "Character"
+					},
 					minimap = {
 						type = "toggle",
-						name = "Enable Minimap",
-						desc = "Turn on minimap",
-						--usage = L["<Your message>"],
+						order = 101,
+						name = "Enable Minimap Icon",
+						desc = "Enable | disable minimap icon. Currently per character.",
 						get = "IsMinimapButtonShown",
 						set = "ToggleMinimapButton",
 						width = "full"
 					},
 				},
 			},
-			global = {
-				name = "Global",
+			expansions = {
 				type = "group",
+				order = 20,
+				name = "Expansions",
 				args = {
-					debug = {
+					description = {
+						type = "description",
+						order = 0,
+						name = "Reload after making changes below for them to take effect.",
+					},
+					header = {
+						type = "header",
+						order = 1,
+						name = "Expansions"
+					},
+					v00 = {
 						type = "toggle",
-						name = "Enable Debug",
-						desc = "Turn on debugging details",
-						--usage = L["<Your message>"],
-						get = "GetDebug",
-						set = "OptionsSetDebug",
+						order = 10,
+						name = "Starter and Holiday Sets",
+						desc = "Include Starter and Holiday sets.",
+						get = "GetVersion00Status",
+						set = "SetVersion00Status",
+						width = "full"
+					},
+					v01 = {
+						type = "toggle",
+						order = 11,
+						name = "Vanilla",
+						desc = "Include sets from vanilla World of WarCraft.",
+						get = "GetVersion01Status",
+						set = "SetVersion01Status",
+						width = "full"
+					},
+					v02 = {
+						type = "toggle",
+						order = 12,
+						name = "Burning Crusade",
+						desc = "Include sets from Burning Crusade.",
+						get = "GetVersion02Status",
+						set = "SetVersion02Status",
+						width = "full"
+					},
+					v03 = {
+						type = "toggle",
+						order = 13,
+						name = "Wrath of the Lich King",
+						desc = "Include sets from Wrath of the Lich King.",
+						get = "GetVersion03Status",
+						set = "SetVersion03Status",
+						width = "full"
+					},
+					v04 = {
+						type = "toggle",
+						order = 14,
+						name = "Cataclysm",
+						desc = "Include sets from Cataclysm.",
+						get = "GetVersion04Status",
+						set = "SetVersion04Status",
+						width = "full"
+					},
+					v05 = {
+						type = "toggle",
+						order = 15,
+						name = "Mists of Pandaria",
+						desc = "Include sets from Mists of Pandaria.",
+						get = "GetVersion05Status",
+						set = "SetVersion05Status",
+						width = "full"
+					},
+					v06 = {
+						type = "toggle",
+						order = 16,
+						name = "Warlords of Draenor",
+						desc = "Include sets from Warlords of Draenor.",
+						get = "GetVersion06Status",
+						set = "SetVersion06Status",
+						width = "full"
+					},
+					v07 = {
+						type = "toggle",
+						order = 17,
+						name = "Legion",
+						desc = "Include sets from Legion.",
+						get = "GetVersion07Status",
+						set = "SetVersion07Status",
+						width = "full"
+					},
+					v08 = {
+						type = "toggle",
+						order = 18,
+						name = "Battle for Azeroth",
+						desc = "Include sets from Battle for Azeroth.",
+						get = "GetVersion08Status",
+						set = "SetVersion08Status",
+						width = "full"
+					},
+					v09 = {
+						type = "toggle",
+						order = 19,
+						name = "Shadowlands",
+						desc = "Include sets from Shadowlands.",
+						get = "GetVersion09Status",
+						set = "SetVersion09Status",
 						width = "full"
 					},
 				},
 			},
+			advanced = {
+				type = "group",
+				order = 30,
+				name = "Troubleshooting",
+				args = {
+					debug_header = {
+						type = "header",
+						order = 0,
+						name = "Debugging"
+					},
+					debug = {
+						type = "toggle",
+						order = 1,
+						name = "Enable Debug",
+						desc = "Turn on debugging details",
+						get = "GetDebug",
+						set = "OptionsSetDebug",
+						width = "full"
+					},
+					reset_header = {
+						type = "header",
+						order = 2,
+						name = "Reset"
+					},
+					reset_desc = {
+						type = "description",
+						order = 3,
+						name = "Warning! This section will reset SetCollector to default settings."
+					},
+					reload_desc = {
+						type = "description",
+						order = 4,
+						name = "Please reload after reset for changes to take effect."
+					},
+					reset_db = {
+						type = "execute",
+						order = 5,
+						confirm = true,
+						name = "Reset",
+						func = "ResetDB"
+					}
+				},
+			},
+			reload = {
+				type = "execute",
+				order = -1,
+				name = "Reload UI",
+				func = "ReloadUI"
+			}
 		},
 	}
 	return options

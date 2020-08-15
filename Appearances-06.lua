@@ -562,24 +562,35 @@ end
 --	GLOBAL FUNCTIONS
 --
 
-function SetCollector:GetVersion06Appearances()
-	GetRaidAppearances()
-	GetDungeonAppearances()
-	GetExpansionAppearances()
-	GetCraftedAppearances()
-	GetOtherAppearances()
-
-	GetDeathKnightAppearances()
-	GetDruidAppearances()
-	GetHunterAppearances()
-	GetMageAppearances()
-	GetMonkAppearances()
-	GetPaladinAppearances()
-	GetPriestAppearances()
-	GetRogueAppearances()
-	GetShamanAppearances()
-	GetWarlockAppearances()
-	GetWarriorAppearances()
+function SetCollector:GetVersion06Appearances(expansion)
+	if expansion.v06 then
+		-- Common
+		GetRaidAppearances()
+		GetDungeonAppearances()
+		GetExpansionAppearances()
+		GetCraftedAppearances()
+		GetOtherAppearances()
+		-- Class-specific
+		GetDeathKnightAppearances()
+		GetDruidAppearances()
+		GetHunterAppearances()
+		GetMageAppearances()
+		GetMonkAppearances()
+		GetPaladinAppearances()
+		GetPriestAppearances()
+		GetRogueAppearances()
+		GetShamanAppearances()
+		GetWarlockAppearances()
+		GetWarriorAppearances()
+	end
 end
 
 
+function SetCollector:GetVersion06Status()
+	return SetCollector:GetExpansionStatus("6")
+end
+
+
+function SetCollector:SetVersion06Status()
+	SetCollector:SetExpansionStatus("6")
+end

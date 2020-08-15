@@ -265,7 +265,7 @@ L["HU_TR_RANGED_15"] = "[15] Battlegear of the Saurok Stalker"
 L["HU_TR_RANGED_16"] = "[16] Battlegear of the Unblinking Vigil"
 L["HU_TR_RANGED_A_09"] = "[9] Windrunner's Battlegear"
 L["HU_TR_RANGED_H_09"] = "[9] Windrunner's Pursuit"
-L["ITEMLINK_ERROR"] = "Set Collector: Item information is not in your cache yet or an invalid item ID was used. Please try again."
+L["ITEMLINK_ERROR"] = "Item information is not in your cache yet or an invalid item ID was used. Please try again."
 L["ITEMS_COLLECTED"] = "%d/%d"
 L["L100"] = "100"
 L["L90"] = "90"
@@ -352,7 +352,7 @@ L["MO_TR_TANK_14"] = "[14] Armor of the Red Crane"
 L["MO_TR_TANK_15"] = "[15] Fire-Charm Armor"
 L["MO_TR_TANK_16"] = "[16] Armor of Seven Sacred Seals"
 L["NOOBTAIN"] = "No longer obtainable"
-L["NOT_AVAILABLE"] = "Set Collector: This feature or function is not available yet. Thank you for your patience."
+L["NOT_AVAILABLE"] = "This feature or function is not available yet. Thank you for your patience."
 L["NOTRANSMOG"] = "Not for transmogrification"
 L["OBTAIN_FILTER"] = "Only Obtainable"
 L["ORIGINAL"] = "Original"
@@ -531,6 +531,7 @@ L["RANK_6_TO_11"] = "Ranks 6-11"
 L["RANK_12_PLUS"] = "Ranks 12+"
 L["RECOLOR"] = "Recolor"
 L["RED"] = "Red"
+L["RELOAD"] = "Please reload for changes to take effect. '/reload'"
 L["REPLICA"] = "Replica"
 L["RIGHT_CLICK_FAVORITE"] = "Right-click to favorite a set."
 L["RO_CD_90"] = "The Silent Assassin Set"
@@ -655,11 +656,11 @@ L["SH_TR_MELEE_A_09"] = "[9] Nobundo's Battlegear"
 L["SH_TR_MELEE_H_09"] = "[9] Thrall's Battlegear"
 L["SHIFT_RIGHT_CLICK_HIDDEN"] = "Shift-Right-click to hide/unhide a set."
 L["SHOW_DETAIL"] = "Show Detail"
-L["SLASH_HELP"] = [=[Set Collector: Possible commands include show, hide, resetdb and help.
+L["SLASH_HELP"] = [=[Possible commands include show, hide, resetdb and help.
 For example, /SetCollector show]=]
-L["SLASH_HELP_BUTTON"] = [=[Set Collector: Shows (button show) or hides (button hide) the Minimap button for Set Collector. Leave blank (button) to toggle. 
+L["SLASH_HELP_BUTTON"] = [=[Shows (button show) or hides (button hide) the Minimap button for Set Collector. Leave blank (button) to toggle. 
 For example, /SetCollector button hide or /SetCollector button]=]
-L["SLASH_HELP_SORT"] = [=[Set Collector: Sets the direction of the default collection sort. Use asc for ascending and desc for descending.
+L["SLASH_HELP_SORT"] = [=[Sets the direction of the default collection sort. Use asc for ascending and desc for descending.
 For example, /SetCollector sort asc]=]
 L["STARTER"] = "Starter Set"
 L["TEAL"] = "Teal"

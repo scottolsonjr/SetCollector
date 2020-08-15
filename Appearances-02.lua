@@ -235,16 +235,29 @@ end
 --	GLOBAL FUNCTIONS
 --
 
-function SetCollector:GetVersion02Appearances()
-	GetLegendaries()
+function SetCollector:GetVersion02Appearances(expansion)
+	if expansion.v02 then
+		-- Common
+		GetLegendaries()
+		-- Class-specific
+		GetDruidAppearances()
+		GetHunterAppearances()
+		GetMageAppearances()
+		GetPaladinAppearances()
+		GetPriestAppearances()
+		GetShamanAppearances()
+		GetShamanAppearances()
+		GetWarlockAppearances()
+		GetWarriorAppearances()
+	end
+end
 
-	GetDruidAppearances()
-	GetHunterAppearances()
-	GetMageAppearances()
-	GetPaladinAppearances()
-	GetPriestAppearances()
-	GetShamanAppearances()
-	GetShamanAppearances()
-	GetWarlockAppearances()
-	GetWarriorAppearances()
+
+function SetCollector:GetVersion02Status()
+	return SetCollector:GetExpansionStatus("2")
+end
+
+
+function SetCollector:SetVersion02Status()
+	SetCollector:SetExpansionStatus("2")
 end

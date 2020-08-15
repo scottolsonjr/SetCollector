@@ -178,7 +178,19 @@ end
 --	GLOBAL FUNCTIONS
 --
 
-function SetCollector:GetVersion00Appearances()
-	GetHolidayAppearances()
-	GetStarterAppearances()
+function SetCollector:GetVersion00Appearances(expansion)
+	if expansion.v00 then
+		GetHolidayAppearances()
+		GetStarterAppearances()
+	end
+end
+
+
+function SetCollector:GetVersion00Status()
+	return SetCollector:GetExpansionStatus("0")
+end
+
+
+function SetCollector:SetVersion00Status()
+	SetCollector:SetExpansionStatus("0")
 end

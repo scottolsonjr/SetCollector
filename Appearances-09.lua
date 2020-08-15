@@ -136,7 +136,19 @@ end
 --	GLOBAL FUNCTIONS
 --
 
-function SetCollector:GetVersion09Appearances()
-    GetRaidAppearances()
-    GetCraftedAppearances()
+function SetCollector:GetVersion09Appearances(expansion)
+    if expansion.v09 then
+        GetRaidAppearances()
+        GetCraftedAppearances()
+    end
+end
+
+
+function SetCollector:GetVersion09Status()
+	return SetCollector:GetExpansionStatus("9")
+end
+
+
+function SetCollector:SetVersion09Status()
+	SetCollector:SetExpansionStatus("9")
 end

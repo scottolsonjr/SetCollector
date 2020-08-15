@@ -326,11 +326,23 @@ local function GetOtherAppearances()
 --	GLOBAL FUNCTIONS
 --
 
-function SetCollector:GetVersion08Appearances()
-    GetLegendaries()
-    GetRaidAppearances()
-    GetDungeonAppearances()
-    GetPvpAppearances()
-    GetExpansionAppearances()
-    GetOtherAppearances()
+function SetCollector:GetVersion08Appearances(expansion)
+    if expansion.v08 then
+        GetLegendaries()
+        GetRaidAppearances()
+        GetDungeonAppearances()
+        GetPvpAppearances()
+        GetExpansionAppearances()
+        GetOtherAppearances()
+    end
+end
+
+
+function SetCollector:GetVersion08Status()
+	return SetCollector:GetExpansionStatus("8")
+end
+
+
+function SetCollector:SetVersion08Status()
+	SetCollector:SetExpansionStatus("8")
 end
