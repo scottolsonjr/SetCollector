@@ -97,36 +97,36 @@ local function GetDungeonAppearances()
 end
 
 
-local function GetGarrisonAppearances()
-	local col = SetCollector.GARRISON
+local function GetExpansionAppearances()
+	local col = SetCollector.EXPANSION
 	local set = ""
 	
-	set = SetCollector:AddSet(70000,nil,col,602,"GA_BWM_SET_100",CLOTH,ANY,ANY,ANY)
+	set = SetCollector:AddSet(70000,nil,col,10602,"GA_BWM_SET_100",CLOTH,ANY,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"CLOTH",TRANSMOG,A(23099),A(23096),A(23097),A(24893),A(23098),A(23807),A(23100),A(23806))
-	set = SetCollector:AddSet(70000,nil,col,602,"GA_BWM_SET_100",LEATHER,ANY,ANY,ANY)
+	set = SetCollector:AddSet(70000,nil,col,10602,"GA_BWM_SET_100",LEATHER,ANY,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"LEATHER",TRANSMOG,A(22857),A(22859),A(22855),A(22852),A(22856),A(22853),A(22858),A(22854))
-	set = SetCollector:AddSet(70000,nil,col,602,"GA_BWM_SET_100",MAIL,ANY,ANY,ANY)
+	set = SetCollector:AddSet(70000,nil,col,10602,"GA_BWM_SET_100",MAIL,ANY,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"MAIL",TRANSMOG,A(22945),A(22944),A(22947),A(22950),A(22946),A(22949),A(23810),A(22948))
-	set = SetCollector:AddSet(70000,nil,col,602,"GA_BWM_SET_100",PLATE,ANY,ANY,ANY)
+	set = SetCollector:AddSet(70000,nil,col,10602,"GA_BWM_SET_100",PLATE,ANY,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"PLATE",TRANSMOG,A(23274),A(23278),A(23265),A(24323),A(23271),A(23259),A(23277),A(23262))
 	
-	set = SetCollector:AddSet(70000,nil,col,601,"GA_ALLIANCE_SET",ANY,ANY,ANY,ALLIANCE)
+	set = SetCollector:AddSet(70000,nil,col,10601,"GA_ALLIANCE_SET",ANY,ANY,ANY,ALLIANCE)
 				SetCollector:AddVariant(70000,nil,col,set,"GA_ALLIANCE_SET",TRANSMOG,A(24474),A(24476),A(24472),A(24473),A(24470),A(24475),A(24471),A(185))
 	
-	set = SetCollector:AddSet(70000,nil,col,601,"GA_HORDE_SET",ANY,ANY,ANY,HORDE)
+	set = SetCollector:AddSet(70000,nil,col,10601,"GA_HORDE_SET",ANY,ANY,ANY,HORDE)
 				SetCollector:AddVariant(70000,nil,col,set,"GA_HORDE_SET",TRANSMOG,A(24054),A(24051),A(24052),A(24817),A(24053),A(24050),A(24854))
 				
-	set = SetCollector:AddSet(70000,nil,col,600,"OTH_SHIPYARD_100",ANY,ANY,ANY,ALLIANCE)
+	set = SetCollector:AddSet(70000,nil,col,10600,"OTH_SHIPYARD_100",ANY,ANY,ANY,ALLIANCE)
 				SetCollector:AddVariant(70000,nil,col,set,"CAPTAIN",TRANSMOG,A(26891,73444))
 				SetCollector:AddVariant(70000,nil,col,set,"FLEETCOMMANDER",TRANSMOG,A(26888,73447))
-	set = SetCollector:AddSet(70000,nil,col,600,"OTH_SHIPYARD_100",ANY,ANY,ANY,HORDE)
+	set = SetCollector:AddSet(70000,nil,col,10600,"OTH_SHIPYARD_100",ANY,ANY,ANY,HORDE)
 				SetCollector:AddVariant(70000,nil,col,set,"CAPTAIN",TRANSMOG,A(26892,73445))
 				SetCollector:AddVariant(70000,nil,col,set,"FLEETCOMMANDER",TRANSMOG,A(26889,73446))
 end
 
 
 local function GetCraftedAppearances()
-	local col = SetCollector.GARRISON
+	local col = SetCollector.CRAFTED
 	local set = ""
 	
 	set = SetCollector:AddSet(70000,nil,col,100,"CR_PLATE_100",PLATE,ANY,ANY,ANY)
@@ -565,7 +565,7 @@ end
 function SetCollector:GetVersion06Appearances()
 	GetRaidAppearances()
 	GetDungeonAppearances()
-	GetGarrisonAppearances()
+	GetExpansionAppearances()
 	GetCraftedAppearances()
 	GetOtherAppearances()
 

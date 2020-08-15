@@ -65,6 +65,17 @@ local function GetLegendaries()
 end
 
 
+--[[
+local function GetCraftingAppearances()
+	local col = SetCollector.CRAFTED
+	local set = ""
+				
+	set = SetCollector:AddSet(70000,nil,col,4,"CR_040000",CLOTH,ANY,ANY,ANY)
+			SetCollector:AddVariant(70000,nil,col,set,"LG_85",TRANSMOG,A(15522,36447,71086))
+end
+]]--
+
+
 local function GetDeathKnightAppearances()
 	local col = ""
 	local set = ""
@@ -98,40 +109,14 @@ local function GetDruidAppearances()
 				SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(16628,40128,78791),A(16631,40176,78839),A(16630,40094,78757),A(16627,40108,78771),A(16629,40146,78809))
 				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(16635,38840,77019),A(16633,38843,77022),A(16634,38842,77021),A(16636,38839,77018),A(15984,38841,77020))
 				SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(16618,40033,78696),A(16613,40081,78744),A(16623,39999,78662),A(16615,40013,78676),A(16614,40051,78714))
-
-	--[[set = SetCollector:AddSet(70000,nil,col,13,"DR_TR_MELEE_13",LEATHER,DRUID,MELEE,ANY)
-				SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,78789,78838,78760,78779,78808)
-				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,77015,77017,77013,77014,77016)
-				SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,78694,78743,78665,78684,78713)
-
-	set = SetCollector:AddSet(70000,nil,col,13,"DR_TR_HEALER_13",LEATHER,DRUID,HEALER,ANY)
-				SetCollector:AddVariant(70000,nil,col,set,"RAIDFINDER",TRANSMOG,78785,78835,78755,78775,78805)
-				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,76750,76753,76752,76749,76751)
-				SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,78690,78740,78660,78680,78710)]]--
 	
 	set = SetCollector:AddSet(70000,nil,col,12,"DR_TR_CASTER_12",LEATHER,DRUID,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(15829,36466,71108),A(15826,36469,71111),A(15820,36468,71110),A(15534,36465,71107),A(15836,36467,71109))
 				SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(15856,36724,71497),A(15860,36727,71500),A(15857,36726,71499),A(15858,36723,71496),A(15859,36725,71498))
-
-	--[[set = SetCollector:AddSet(70000,nil,col,12,"DR_TR_MELEE_12",LEATHER,DRUID,MELEE,ANY)
-				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,71098,71101,71100,71097,71099)
-				SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,71488,71490,71486,71487,71489)
-
-	set = SetCollector:AddSet(70000,nil,col,12,"DR_TR_HEALER_12",LEATHER,DRUID,HEALER,ANY)
-				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,71103,71106,71105,71102,71104)
-				SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,71492,71495,71494,71491,71493)]]--
 	
 	set = SetCollector:AddSet(70000,nil,col,11,"DR_TR_CASTER_11",LEATHER,DRUID,ANY,ANY)
 				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,A(13975,30018,60282),A(13962,30020,60284),A(13991,30017,60281),A(14051,30021,60285),A(14002,30019,60283))
 				SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,A(14737,32761,65200),A(14706,32764,65203),A(14725,32763,65202),A(14753,32760,65199),A(14714,32762,65201))
-
-	--[[set = SetCollector:AddSet(70000,nil,col,11,"DR_TR_MELEE_11",LEATHER,DRUID,MELEE,ANY)
-				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,60286,60289,60287,60290,60288)
-				SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,65190,65193,65192,65189,65191)
-
-	set = SetCollector:AddSet(70000,nil,col,11,"DR_TR_HEALER_11",LEATHER,DRUID,HEALER,ANY)
-				SetCollector:AddVariant(70000,nil,col,set,"NORMAL",TRANSMOG,60277,60279,60276,60280,60278)
-				SetCollector:AddVariant(70000,nil,col,set,"HEROIC",TRANSMOG,65195,65198,65197,65194,65196)]]--
 end
 
 
@@ -155,7 +140,7 @@ local function GetHunterAppearances()
 end
 
 
-local function GetHunterAppearances()
+local function GetMageAppearances()
 	local col = ""
 	local set = ""
 
@@ -310,6 +295,7 @@ function SetCollector:GetVersion04Appearances()
 	GetDeathKnightAppearances()
 	GetDruidAppearances()
 	GetHunterAppearances()
+	GetMageAppearances()
 	GetPaladinAppearances()
 	GetPriestAppearances()
 	GetRogueAppearances()

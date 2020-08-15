@@ -133,42 +133,44 @@ local function GetStarterAppearances()
 	col = SetCollector.OTHER
 	set = ""
 	
-	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,DEATHKNIGHT,ANY,ANY)
+	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,DEATHKNIGHT,ANY,ALLIANCE)
 			SetCollector:AddVariant(80300,nil,col,set,"STARTER",TRANSMOG,A(9034,16090),A(9036,16092),A(7003,16094),A(9032,16088),A(9035,16091),A(9031,16087),A(9033,16089),A(9037,16093),A(9030,16086))
 	
-	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,DEMONHUNTER,ANY,ANY)
+	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,DEMONHUNTER,ANY,ALLIANCE)
 			SetCollector:AddVariant(80300,nil,col,set,"STARTER",TRANSMOG,A(28231,76664),A(2352,60968),A(28233,76668),A(28232,76669),A(28228,76667),A(28225,76671),A(28230,76665),A(28226,76670),A(28700,60967))
 
-	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,DRUID,ANY,ANY)
+	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,DRUID,ANY,ALLIANCE)
 			SetCollector:AddVariant(80300,nil,col,set,"STARTER",NOTRANSMOG,A(1977,2258),A(1978,2259),A(1312,1372))
 	
-	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,HUNTER,ANY,ANY)
+	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,HUNTER,ANY,ALLIANCE)
 			SetCollector:AddVariant(80300,nil,col,set,"STARTER",NOTRANSMOG,A(28522,28823),A(186,47),A(182,43),A(889,9213))
 
-	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,MAGE,ANY,ANY)
+	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,MAGE,ANY,ALLIANCE)
 			SetCollector:AddVariant(80300,nil,col,set,"STARTER",NOTRANSMOG,A(6201,9299),A(6197,9298),A(1312,1372))
 	
-	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,MONK,ANY,ANY)
+	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,MONK,ANY,ALLIANCE)
 			SetCollector:AddVariant(80300,nil,col,set,"STARTER",NOTRANSMOG,A(15996,36894),A(17120,39119),A(17123,39104),A(15997,36895),A(16274,37506))
 	
-	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,PALADIN,ANY,ANY)
+	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,PALADIN,ANY,ALLIANCE)
 			SetCollector:AddVariant(80300,nil,col,set,"STARTER",NOTRANSMOG,A(28520,28830),A(6200,9297),A(12832,25751),A(156,17),A(802,746))
 	
-	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,PRIEST,ANY,ANY)
+	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,PRIEST,ANY,ALLIANCE)
 			SetCollector:AddVariant(80300,nil,col,set,"STARTER",NOTRANSMOG,A(1970,2250),A(168,29),A(167,28),A(155,16))
 
-	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,ROGUE,ANY,ANY)
+	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,ROGUE,ANY,ALLIANCE)
 			SetCollector:AddVariant(80300,nil,col,set,"STARTER",NOTRANSMOG,A(28776,28825),A(165,26),A(164,25),A(665,590))
 			-- SetCollector:AddVariant(80300,nil,col,set,"STARTER",NOTRANSMOG,A(12107,24270),A(12078,24263),A(12125,24269),A(12124,24268),A(12126,24271),A(665,590))	-- Worgen
 
-	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,SHAMAN,ANY,ANY)
+	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,SHAMAN,ANY,ALLIANCE)
 			SetCollector:AddVariant(80300,nil,col,set,"STARTER",NOTRANSMOG,A(12833,25752),A(6197,25753),A(156,17),A(802,746))
 
-	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,WARLOCK,ANY,ANY)
+	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,WARLOCK,ANY,ALLIANCE)
 			SetCollector:AddVariant(80300,nil,col,set,"STARTER",NOTRANSMOG,A(172,33),A(396,264),A(173,34),A(155,16))
 
-	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,WARRIOR,ANY,ANY)
+	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,WARRIOR,ANY,ALLIANCE)
 			SetCollector:AddVariant(80300,nil,col,set,"STARTER",NOTRANSMOG,A(28524,28822),A(159,20),A(160,21),A(154,15),A(802,746))
+	set = SetCollector:AddSet(80300,nil,col,000001,"STARTER",ANY,WARRIOR,ANY,HORDE)
+			SetCollector:AddVariant(80300,nil,col,set,"STARTER",NOTRANSMOG,A(23206,28833),A(183,44),A(184,45),A(154,15),A(802,746))
 end
 
 

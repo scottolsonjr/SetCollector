@@ -57,13 +57,74 @@ end
 
 
 local function GetLegendaries()
-	local col = SetCollector.LEGENDARY
+    local col = SetCollector.LEGENDARY
     local set = ""
     
 	set = SetCollector:AddSet(80300,nil,col,60,"LG_120",ANY,ANY,ANY,ANY)
             SetCollector:AddVariant(80300,nil,col,set,"RANK_1_TO_5",TRANSMOG,A(40845,105938))
             SetCollector:AddVariant(80300,nil,col,set,"RANK_6_TO_11",TRANSMOG,A(40846,105939))
             SetCollector:AddVariant(80300,nil,col,set,"RANK_12_PLUS",TRANSMOG,A(40847,105940))
+end
+
+
+local function GetExpansionAppearances()
+	local col = SetCollector.EXPANSION
+    local set = ""
+
+    -- Island Expeditions (May be appearances from earlier sets)
+	set = SetCollector:AddSet(80000,nil,col,10804,"PLACEHOLDER",CLOTH,ANY,ANY,ANY)
+            SetCollector:AddVariant(80000,nil,col,set,"v1",TRANSMOG,A(15699),A(15702),A(15701),A(15703),A(15698),A(15695),A(15700),A(15696))
+            SetCollector:AddVariant(80000,nil,col,set,"v2",TRANSMOG,A(5954),A(5957),A(2044),A(1190),A(5956),A(2059),A(5955),A(5283))
+            SetCollector:AddVariant(80000,nil,col,set,"v3",TRANSMOG,A(39765),A(26513),A(26625),A(26521),A(26517))
+            SetCollector:AddVariant(80000,nil,col,set,"v4",TRANSMOG,A(15963),A(15966),A(15965),A(15967),A(15962),A(15959),A(15964),A(15960))
+            SetCollector:AddVariant(80000,nil,col,set,"v5",TRANSMOG,A(31884),A(31888),A(31887),A(31883),A(31880),A(31885),A(31881))
+    set = SetCollector:AddSet(80000,nil,col,10803,"PLACEHOLDER",CLOTH,ANY,ANY,ANY)
+            SetCollector:AddVariant(80000,nil,col,set,"v6",TRANSMOG,A(15745),A(15748),A(15747),A(15749),A(15744),A(15741),A(15746),A(15742))
+    -- Leather pending
+	set = SetCollector:AddSet(80000,nil,col,10803,"PLACEHOLDER",MAIL,ANY,ANY,ANY)
+            SetCollector:AddVariant(80000,nil,col,set,"v1",TRANSMOG,A(38627),A(38624),A(8628),A(8701),A(8700),A(38631),A(8699),A(38632))
+            SetCollector:AddVariant(80000,nil,col,set,"v2",TRANSMOG,A(15066),A(15068),A(13613),A(15069),A(15065),A(13593),A(15067),A(15064))
+            SetCollector:AddVariant(80000,nil,col,set,"v3",TRANSMOG,A(31650),A(31652),A(31648),A(31653),A(31649),A(31646),A(31651),A(31647))
+    -- Plate pending
+    
+    -- Darkshore Warfront
+    --[[
+	set = SetCollector:AddSet(80000,nil,col,10802,"EX_CLOTH_A_0802",CLOTH,ANY,ANY,ALLIANCE)
+            SetCollector:AddVariant(80000,nil,col,set,"EX_CLOTH_A_0802",TRANSMOG,A(),A(39325),A(),A(39320),A(39327),A(39322),A(39326),A(39324),A(39321))
+	set = SetCollector:AddSet(80000,nil,col,10802,"EX_LEATHER_A_0802",LEATHER,ANY,ANY,ALLIANCE)
+            SetCollector:AddVariant(80000,nil,col,set,"EX_LEATHER_A_0802",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+    set = SetCollector:AddSet(80000,nil,col,10802,"EX_MAIL_A_0802",MAIL,ANY,ANY,ALLIANCE)
+            SetCollector:AddVariant(80000,nil,col,set,"EX_MAIL_A_0802",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+    set = SetCollector:AddSet(80000,nil,col,10802,"EX_PLATE_A_0802",PLATE,ANY,ANY,ALLIANCE)
+            SetCollector:AddVariant(80000,nil,col,set,"EX_PLATE_A_0802",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+    
+    set = SetCollector:AddSet(80000,nil,col,10802,"EX_CLOTH_H_0802",CLOTH,ANY,ANY,HORDE)
+            SetCollector:AddVariant(80000,nil,col,set,"EX_CLOTH_H_0802",TRANSMOG,A(),A(39658),A(),A(39653),A(39660),A(39655),A(39659),A(39657),A(39654))
+    set = SetCollector:AddSet(80000,nil,col,10802,"EX_LEATHER_H_0802",LEATHER,ANY,ANY,HORDE)
+            SetCollector:AddVariant(80000,nil,col,set,"EX_LEATHER_H_0802",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+    set = SetCollector:AddSet(80000,nil,col,10802,"EX_MAIL_H_0802",MAIL,ANY,ANY,HORDE)
+            SetCollector:AddVariant(80000,nil,col,set,"EX_MAIL_H_0802",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+    set = SetCollector:AddSet(80000,nil,col,10802,"EX_PLATE_H_0802",PLATE,ANY,ANY,HORDE)
+            SetCollector:AddVariant(80000,nil,col,set,"EX_PLATE_H_0802",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())]]
+    
+    -- Arathi Warfront
+	set = SetCollector:AddSet(80000,nil,col,10801,"EX_CLOTH_A_0801",CLOTH,ANY,ANY,ALLIANCE)
+            SetCollector:AddVariant(80000,nil,col,set,"EX_CLOTH_A_0801",TRANSMOG,A(37359),A(37235),A(37233),A(37214),A(37216),A(37212),A(37231),A(37213),A(37209))
+	set = SetCollector:AddSet(80000,nil,col,10801,"EX_LEATHER_A_0801",LEATHER,ANY,ANY,ALLIANCE)
+            SetCollector:AddVariant(80000,nil,col,set,"EX_LEATHER_A_0801",TRANSMOG,A(36862),A(36866),A(36874),A(36858),A(36856),A(36860),A(36852),A(36864),A(36854))
+    set = SetCollector:AddSet(80000,nil,col,10801,"EX_MAIL_A_0801",MAIL,ANY,ANY,ALLIANCE)
+            SetCollector:AddVariant(80000,nil,col,set,"EX_MAIL_A_0801",TRANSMOG,A(37253),A(37255),A(37846),A(37251),A(37248),A(37252),A(37246),A(37254),A(37247))
+    set = SetCollector:AddSet(80000,nil,col,10801,"EX_PLATE_A_0801",PLATE,ANY,ANY,ALLIANCE)
+            SetCollector:AddVariant(80000,nil,col,set,"EX_PLATE_A_0801",TRANSMOG,A(37777),A(37779),A(37847),A(37783),A(37788),A(37784),A(37773),A(37786),A(37782))
+    
+    set = SetCollector:AddSet(80000,nil,col,10801,"EX_CLOTH_H_0801",CLOTH,ANY,ANY,HORDE)
+            SetCollector:AddVariant(80000,nil,col,set,"EX_CLOTH_H_0801",TRANSMOG,A(36758),A(36762),A(36959),A(37070),A(36772),A(37074),A(37069),A(36784),A(36769))
+    set = SetCollector:AddSet(80000,nil,col,10801,"EX_LEATHER_H_0801",LEATHER,ANY,ANY,HORDE)
+            SetCollector:AddVariant(80000,nil,col,set,"EX_LEATHER_H_0801",TRANSMOG,A(37419),A(37415),A(37474),A(37386),A(37392),A(37418),A(37416),A(37389),A(37417))
+    set = SetCollector:AddSet(80000,nil,col,10801,"EX_MAIL_H_0801",MAIL,ANY,ANY,HORDE)
+            SetCollector:AddVariant(80000,nil,col,set,"EX_MAIL_H_0801",TRANSMOG,A(38015),A(38017),A(38331),A(38013),A(38018),A(38014),A(38011),A(38016),A(38012))
+    set = SetCollector:AddSet(80000,nil,col,10801,"EX_PLATE_H_0801",PLATE,ANY,ANY,HORDE)
+            SetCollector:AddVariant(80000,nil,col,set,"EX_PLATE_H_0801",TRANSMOG,A(36912),A(37093),A(37474),A(37091),A(36828),A(37092),A(37089),A(37096),A(37090))
 end
 
 
@@ -270,5 +331,6 @@ function SetCollector:GetVersion08Appearances()
     GetRaidAppearances()
     GetDungeonAppearances()
     GetPvpAppearances()
+    GetExpansionAppearances()
     GetOtherAppearances()
 end

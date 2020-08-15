@@ -38,7 +38,7 @@ SetCollector.RAID 				= { ID = 4, Code = "TR", Description = "RAID" }
 SetCollector.DUNGEON 			= { ID = 5, Code = "DG", Description = "DUNGEON" }
 SetCollector.CHALLENGE 		    = { ID = 6, Code = "CD", Description = "CHALLENGE" }
 SetCollector.PVP 				= { ID = 7, Code = "PV", Description = "PVP" }
-SetCollector.GARRISON 			= { ID = 8, Code = "GA", Description = "GARRISON" }
+SetCollector.EXPANSION 			= { ID = 8, Code = "EX", Description = "EXPANSION" }
 SetCollector.CRAFTED 			= { ID = 9, Code = "CR", Description = "CRAFTED" }
 SetCollector.OTHER				= { ID = 10, Code = "OT", Description = "OTHER" }
 SetCollector.CUSTOM			    = { ID = 11, Code = "CU", Description = "CUSTOM" }

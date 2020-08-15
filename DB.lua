@@ -29,51 +29,51 @@ local defaults = {
 local L = LibStub("AceLocale-3.0"):GetLocale("SetCollector", true)
 local WOW_VERSION = select(4,GetBuildInfo())
 
-local ALL					=	{ Code = "A", Description = "All" }
-local ANY					=	{ Code = "Z", Description = "Any" }
+local ALL			= { Code = "A", Description = "All" }
+local ANY			= { Code = "Z", Description = "Any" }
 
-local CLOTH				= { Code = "C", Description = "CLOTH" }
-local LEATHER			= { Code = "L", Description = "LEATHER" }
-local MAIL				= { Code = "M", Description = "MAIL" }
-local PLATE				= { Code = "P", Description = "PLATE" }
+local CLOTH			= { Code = "C", Description = "CLOTH" }
+local LEATHER		= { Code = "L", Description = "LEATHER" }
+local MAIL			= { Code = "M", Description = "MAIL" }
+local PLATE			= { Code = "P", Description = "PLATE" }
 
-local DEATHKNIGHT = { Code = "DK", Description = "DEATHKNIGHT" }
-local DEMONHUNTER = { Code = "DH", Description = "DEMONHUNTER" }
-local DRUID 			= { Code = "DR", Description = "DRUID" }
-local HUNTER 			= { Code = "HU", Description = "HUNTER" }
-local MAGE 				= { Code = "MA", Description = "MAGE" }
-local MONK 				= { Code = "MO", Description = "MONK" }
+local DEATHKNIGHT 	= { Code = "DK", Description = "DEATHKNIGHT" }
+local DEMONHUNTER 	= { Code = "DH", Description = "DEMONHUNTER" }
+local DRUID 		= { Code = "DR", Description = "DRUID" }
+local HUNTER 		= { Code = "HU", Description = "HUNTER" }
+local MAGE 			= { Code = "MA", Description = "MAGE" }
+local MONK 			= { Code = "MO", Description = "MONK" }
 local PALADIN 		= { Code = "PA", Description = "PALADIN" }
-local PRIEST 			= { Code = "PR", Description = "PRIEST" }
-local ROGUE 			= { Code = "RO", Description = "ROGUE" }
-local SHAMAN 			= { Code = "SH", Description = "SHAMAN" }
+local PRIEST 		= { Code = "PR", Description = "PRIEST" }
+local ROGUE 		= { Code = "RO", Description = "ROGUE" }
+local SHAMAN 		= { Code = "SH", Description = "SHAMAN" }
 local WARLOCK 		= { Code = "WK", Description = "WARLOCK" }
 local WARRIOR 		= { Code = "WR", Description = "WARRIOR" }
 
 local ALLIANCE 		= { Code = "A", Description = "Alliance" }
-local HORDE 			= { Code = "H", Description = "Horde" }
+local HORDE 		= { Code = "H", Description = "Horde" }
 
-local TANK 				= { Code = "T", Description = "TANK" }
-local HEALER 			= { Code = "H", Description = "HEALER" }
-local CASTER 			= { Code = "C", Description = "CASTER" }
-local RANGED 			= { Code = "R", Description = "RANGED" }
-local MELEE 			= { Code = "M", Description = "MELEE" }
+local TANK 			= { Code = "T", Description = "TANK" }
+local HEALER 		= { Code = "H", Description = "HEALER" }
+local CASTER 		= { Code = "C", Description = "CASTER" }
+local RANGED 		= { Code = "R", Description = "RANGED" }
+local MELEE 		= { Code = "M", Description = "MELEE" }
 
 -- Collection Types
 local OUTFITS 		= { ID = 1, Code = "OU", Description = "OUTFITS" }
 local ARTIFACT 		= { ID = 2, Code = "AR", Description = "ARTIFACT" }
 local LEGENDARY 	= { ID = 3, Code = "ZZ", Description = "LEGENDARY" }
-local RAID 				= { ID = 4, Code = "TR", Description = "RAID" }
+local RAID 			= { ID = 4, Code = "TR", Description = "RAID" }
 local DUNGEON 		= { ID = 5, Code = "DG", Description = "DUNGEON" }
 local CHALLENGE 	= { ID = 6, Code = "CD", Description = "CHALLENGE" }
-local PVP 				= { ID = 7, Code = "PV", Description = "PVP" }
-local GARRISON 		= { ID = 8, Code = "GA", Description = "GARRISON" }
+local PVP 			= { ID = 7, Code = "PV", Description = "PVP" }
+local EXPANSION 	= { ID = 8, Code = "EX", Description = "EXPANSION" }
 local CRAFTED 		= { ID = 9, Code = "CR", Description = "CRAFTED" }
-local OTHER				= { ID = 10, Code = "OT", Description = "OTHER" }
-local CUSTOM			= { ID = 11, Code = "CU", Description = "CUSTOM" }
-local HOLIDAY			= { ID = 12, Code = "HO", Description = "HOLIDAY" }
+local OTHER			= { ID = 10, Code = "OT", Description = "OTHER" }
+local CUSTOM		= { ID = 11, Code = "CU", Description = "CUSTOM" }
+local HOLIDAY		= { ID = 12, Code = "HO", Description = "HOLIDAY" }
 
-local OBTAIN			= true
+local OBTAIN		= true
 local NOOBTAIN 		= false
 
 local TRANSMOG 		= true
@@ -98,7 +98,7 @@ local function CreateCollections()
 		[DUNGEON.ID] 		= { Title = DUNGEON.Description, Sets = { } },
 		[CHALLENGE.ID] 	= { Title = CHALLENGE.Description, Sets = { } },
 		[PVP.ID] 				= { Title = PVP.Description, Sets = { } },
-		[GARRISON.ID] 	= { Title = GARRISON.Description, Sets = { } },
+		[EXPANSION.ID] 	= { Title = EXPANSION.Description, Sets = { } },
 		[CRAFTED.ID] 		= { Title = CRAFTED.Description, Sets = { } },
 		[OTHER.ID] 			= { Title = OTHER.Description, Sets = { } },
 		[CUSTOM.ID] 		= { Title = CUSTOM.Description, Sets = { } },
