@@ -4,9 +4,6 @@
 
 local defaults = {
 	char = {
-		minimap = {
-			hide = false
-		},
 		filters = {
 			specialization = nil,
 			favorites = false,
@@ -16,22 +13,25 @@ local defaults = {
 		},
 		sets = {}
 	},
-  global = {
-    debug = false,
-	collections = {},
-	expansions = {
-		v00 = true,
-		v01 = false,
-		v02 = false,
-		v03 = false,
-		v04 = false,
-		v05 = false,
-		v06 = false,
-		v07 = false,
-		v08 = true,
-		v09 = true
+	global = {
+		debug = false,
+		expansions = {
+			v00 = true,
+			v01 = false,
+			v02 = false,
+			v03 = false,
+			v04 = false,
+			v05 = false,
+			v06 = false,
+			v07 = false,
+			v08 = true,
+			v09 = true
+		},
+		minimap = {
+			hide = false
+		},
+		collections = {},
 	}
-  }
 }
 
 --
@@ -617,23 +617,54 @@ function SetCollector:GetOptions()
 						order = 0,
 						name = "Global"
 					},
-					none_yet = {
-						type = "description",
+					minimap = {
+						type = "toggle",
 						order = 1,
-						name = "No common global settings currently available here."
+						name = "Enable Minimap Icon",
+						desc = "Enable | disable minimap icon.",
+						get = "IsMinimapButtonShown",
+						set = "ToggleMinimapButton",
+						width = "full"
 					},
 					char_header = {
 						type = "header",
 						order = 100,
 						name = "Character"
 					},
-					minimap = {
+					favorites = {
 						type = "toggle",
 						order = 101,
-						name = "Enable Minimap Icon",
-						desc = "Enable | disable minimap icon. Currently per character.",
-						get = "IsMinimapButtonShown",
-						set = "ToggleMinimapButton",
+						name = "Only show favorite sets",
+						desc = "Only show sets you have marked as favorite.",
+						get = "GetFavoritesFilter",
+						set = "SetFavoritesFilter",
+						width = "full"
+					},
+					obtainable = {
+						type = "toggle",
+						order = 102,
+						name = "Only show obtainable sets",
+						desc = "Only show obtainable sets.",
+						get = "GetObtainableFilter",
+						set = "SetObtainableFilter",
+						width = "full"
+					},
+					transmog = {
+						type = "hidden",
+						order = 103,
+						name = "Only show sets for transmogrification",
+						desc = "Enable | disable transmogrification filter.",
+						get = "GetTransmogFilter",
+						set = "SetTransmogFilter",
+						width = "full"
+					},
+					transmog = {
+						type = "toggle",
+						order = 104,
+						name = "Show sets that you have hidden",
+						desc = "Enable | disable hidden set filter. Useful to unhide hidden sets.",
+						get = "GetHiddenFilter",
+						set = "SetHiddenFilter",
 						width = "full"
 					},
 				},

@@ -674,6 +674,7 @@ end
 --  Filter
 --
 
+
 local filterButton = CreateFrame("Frame","$parentSetFilter",frame,"UIDropDownMenuTemplate")
 filterButton:SetPoint("TOPRIGHT",frame,"TOPRIGHT",-125,-28)
 filterButton:SetAttribute("enableMouse","true")
@@ -693,6 +694,42 @@ local function SetFilters()
 	SetCollector.db.char.filters.obtainable				= SHOW_ONLY_OBTAINABLE
 	SetCollector.db.char.filters.transmog					= SHOW_ONLY_TRANSMOG
 	SetCollector.db.char.filters.hidden						= SHOW_HIDDEN
+end
+
+function SetCollector:GetFavoritesFilter()
+	return SHOW_ONLY_FAVORITES
+end
+
+function SetCollector:SetFavoritesFilter()
+	SHOW_ONLY_FAVORITES = not SHOW_ONLY_FAVORITES
+	SetFilters()
+end
+
+function SetCollector:GetObtainableFilter()
+	return SHOW_ONLY_OBTAINABLE
+end
+
+function SetCollector:SetObtainableFilter()
+	SHOW_ONLY_OBTAINABLE = not SHOW_ONLY_OBTAINABLE
+	SetFilters()
+end
+
+function SetCollector:GetTransmogFilter()
+	return SHOW_ONLY_TRANSMOG
+end
+
+function SetCollector:SetTransmogFilter()
+	SHOW_ONLY_TRANSMOG = not SHOW_ONLY_TRANSMOG
+	SetFilters()
+end
+
+function SetCollector:GetHiddenFilter()
+	return SHOW_HIDDEN
+end
+
+function SetCollector:SetHiddenFilter()
+	SHOW_HIDDEN = not SHOW_HIDDEN
+	SetFilters()
 end
 
 local function SetFilterOptions(classIndex)
@@ -915,12 +952,12 @@ local function CreateMinimapButton()
 			tt:AddLine(L["MINIMAP_TOOLTIP"])
 		end,
 	})
-  icon:Register("SetCollectorMinimap", myLDB, SetCollector.db.char.minimap)
+  icon:Register("SetCollectorMinimap", myLDB, SetCollector.db.global.minimap)
 end
 
 function SetCollector:ToggleMinimapButton()
-	SetCollector.db.char.minimap.hide = not SetCollector.db.char.minimap.hide
-	if SetCollector.db.char.minimap.hide then
+	SetCollector.db.global.minimap.hide = not SetCollector.db.global.minimap.hide
+	if SetCollector.db.global.minimap.hide then
 		icon:Hide("SetCollectorMinimap")
 	else
 		icon:Show("SetCollectorMinimap")
@@ -928,7 +965,7 @@ function SetCollector:ToggleMinimapButton()
 end
 
 function SetCollector:IsMinimapButtonShown()
-	return not SetCollector.db.char.minimap.hide
+	return not SetCollector.db.global.minimap.hide
 end
 
 
