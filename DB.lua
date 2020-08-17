@@ -591,6 +591,14 @@ function SetCollector:ResetDB()
 end
 
 
+local function HideExpansionToggle(version)
+	if tonumber(WOW_VERSION) >= tonumber(version) then
+		return false
+	end
+	return true
+end
+
+
 function SetCollector:GetOptions()
 	local options = {
 		name = "Set Collector",
@@ -686,6 +694,7 @@ function SetCollector:GetOptions()
 					},
 					v00 = {
 						type = "toggle",
+						hidden = HideExpansionToggle("10000"),
 						order = 10,
 						name = "Starter and Holiday Sets",
 						desc = "Include Starter and Holiday sets.",
@@ -695,6 +704,7 @@ function SetCollector:GetOptions()
 					},
 					v01 = {
 						type = "toggle",
+						hidden = HideExpansionToggle("10000"),
 						order = 11,
 						name = "Vanilla",
 						desc = "Include sets from vanilla World of WarCraft.",
@@ -704,6 +714,7 @@ function SetCollector:GetOptions()
 					},
 					v02 = {
 						type = "toggle",
+						hidden = HideExpansionToggle("20000"),
 						order = 12,
 						name = "Burning Crusade",
 						desc = "Include sets from Burning Crusade.",
@@ -713,6 +724,7 @@ function SetCollector:GetOptions()
 					},
 					v03 = {
 						type = "toggle",
+						hidden = HideExpansionToggle("30000"),
 						order = 13,
 						name = "Wrath of the Lich King",
 						desc = "Include sets from Wrath of the Lich King.",
@@ -722,6 +734,7 @@ function SetCollector:GetOptions()
 					},
 					v04 = {
 						type = "toggle",
+						hidden = HideExpansionToggle("40000"),
 						order = 14,
 						name = "Cataclysm",
 						desc = "Include sets from Cataclysm.",
@@ -731,6 +744,7 @@ function SetCollector:GetOptions()
 					},
 					v05 = {
 						type = "toggle",
+						hidden = HideExpansionToggle("50000"),
 						order = 15,
 						name = "Mists of Pandaria",
 						desc = "Include sets from Mists of Pandaria.",
@@ -740,6 +754,7 @@ function SetCollector:GetOptions()
 					},
 					v06 = {
 						type = "toggle",
+						hidden = HideExpansionToggle("60000"),
 						order = 16,
 						name = "Warlords of Draenor",
 						desc = "Include sets from Warlords of Draenor.",
@@ -749,6 +764,7 @@ function SetCollector:GetOptions()
 					},
 					v07 = {
 						type = "toggle",
+						hidden = HideExpansionToggle("70000"),
 						order = 17,
 						name = "Legion",
 						desc = "Include sets from Legion.",
@@ -758,6 +774,7 @@ function SetCollector:GetOptions()
 					},
 					v08 = {
 						type = "toggle",
+						hidden = HideExpansionToggle("80000"),
 						order = 18,
 						name = "Battle for Azeroth",
 						desc = "Include sets from Battle for Azeroth.",
@@ -767,6 +784,7 @@ function SetCollector:GetOptions()
 					},
 					v09 = {
 						type = "toggle",
+						hidden = HideExpansionToggle("90000"),
 						order = 19,
 						name = "Shadowlands",
 						desc = "Include sets from Shadowlands.",
