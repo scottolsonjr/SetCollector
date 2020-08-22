@@ -127,7 +127,6 @@ local frame = CreateFrame("Frame", "SetCollectorFrame", UIParent, "ButtonFrameTe
 
 local function SetUIPosition()
     if SetCollector.db and not SetCollector.db.global.docked then
-        print(SetCollector.db.global.position)
         if SetCollector.db.global.position == "center" then
             frame:SetPoint("CENTER",0,0)
         else
@@ -161,6 +160,9 @@ local function SetDefaultUILocation()
 end
 
 local function ResetUILocation()
+	if (frame:IsVisible()) then
+		SetCollector:HideUI(false)
+	end
     SetDocked(SetCollector:IsUIDocked())
     SetMovable(not SetCollector:IsUIDocked())
 end

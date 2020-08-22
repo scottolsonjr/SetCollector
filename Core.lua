@@ -193,6 +193,9 @@ function SetCollector:MySlashProcessorFunc(input)
 	elseif command == "hide" then
 		SetCollector:HideUI()
 		
+	elseif command == "docked" then
+		SetCollector:SetUIDockedAndUpdate()
+		
 	elseif command == "button" then
 		SetCollector:ToggleMinimapButton()
 

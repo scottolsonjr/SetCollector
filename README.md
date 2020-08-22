@@ -9,8 +9,16 @@ Thank you to everyone who has expressed interest in this project! We have access
 Here are some of the tentative changes planned for the Shadowlands release of Set Collector:
 
 * Set Collector will only show sets from starting zones, Battle for Azeroth, Shadowlands, and holidays by default. This is to manage the size of the list and align with the new leveling experience.
-* Additional set from other expansions can be added/enabled from the Set Collector Addon settings. Possibly through chat command as well.
-* The Garrison Collection has been renamed to Expansion and will include sets obtain from expansion-specific features, such as Garrisons, Class Halls, and Warfronts.
+* Additional sets from other expansions can be added/enabled from the Set Collector Addon settings and through chat command as well. E.g., to toggle the Legion sets `/setcollector version 7`
+* Two much requested features are now here and may be set in the Interface options:
+  * The Set Collector UI can be undocked and moved.
+  * The setting to show/hide the minimap icon is now global and shared by all cahracter.
+* The Garrison Collection has been renamed to Expansion and will include sets obtained from expansion-specific features, such as Garrisons, Class Halls, and Warfronts.
+* Character filters (e.g., Show only favorite sets) can now be seen and modified in Interface options.
+
+### SetBackdrop Error
+
+SetCollector is one of the addons affected by the upcoming change in Shadowlands. The good news is that this issue only impacts the Interface options UI for Set Collector. The latest alpha releases of Set Collector all disable the Interface options in Shadowlands and it will be enabled when the fix is available. All interface options will be available as slash commands if the issue is not resolved in time for the pre-patch, release, or if you are testing out in the addon in Beta.
 
 ## Localization
 
@@ -46,8 +54,10 @@ Here are some of the notable slash commands for Set Collector (/setcollector or 
 
 * `/setcollector` - Toggles the Set Collector UI display
 * `/setcollector button` - Toggles the minimap button
-* `/setcollector show` - Shows the Set Collector UI (new)
-* `/setcollector hide` - Hides the Set Collector UI (new)
+* `/setcollector show` - Shows the Set Collector UI
+* `/setcollector hide` - Hides the Set Collector UI
+* `/setcollector version [0-9]` - Toggles the expansion sets shown in Set Collector. Default: 0, 8, and 9. Requires `/reload` for change to take effect.
+* `/setcollector docked` - Toggles the UI as docked or undocked. When undocked the Set Collector can be moved/dragged to a preferred location and will not move with other UI elements. Default: docked.
 * `/setcollector resetdb` - Rebuilds the collection db (may help if the db gets corrupted or there is an issue with a Set Collector update)
 * `/setcollector help` - Displays the Set Collector slash command help information. (new)
 
