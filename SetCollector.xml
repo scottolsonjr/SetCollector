@@ -3,14 +3,14 @@
                    xsi:schemaLocation="http://www.blizzard.com/wow/ui/ 
                    ..\..\FrameXML\UI.xsd">
   
-  <Button name="SetCollectorCollectionTemplate" virtual="true">
+    <Button name="SetCollectorCollectionTemplate" virtual="true">
 		<Size x="255" y="16"/>		
 		<Scripts>
 			<OnLoad>
 				self.ButtonText:SetTextColor(0.7, 0.7, 0.7);
 				self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
 			</OnLoad>
-      <OnClick>SetCollectorCollectionButton_OnClick(self, button, down);</OnClick>
+            <OnClick>SetCollectorCollectionButton_OnClick(self, button, down);</OnClick>
 			<OnEnter>
 				self.ButtonText:SetTextColor(1, 1, 1);
 			</OnEnter>
@@ -19,7 +19,7 @@
 			</OnLeave>
 		</Scripts>
 		<Attributes>
-      <Attribute name="Collection" type="string" value="" />
+            <Attribute name="Collection" type="string" value="" />
 		</Attributes>
 		<ButtonText nonspacewrap="true" parentKey="ButtonText">
 			<Size x="0" y="10"/>
@@ -68,9 +68,9 @@
 			</Layer>
 		</Layers>
 		<Attributes>
-      <Attribute name="Collection" type="string" value="" />
-      <Attribute name="Set" type="string" value="" />
-      <Attribute name="Outfit" type="string" value="" />
+            <Attribute name="Collection" type="string" value="" />
+            <Attribute name="Set" type="string" value="" />
+            <Attribute name="Outfit" type="string" value="" />
 		</Attributes>
 		<Scripts>
 			<OnLoad>
@@ -118,7 +118,7 @@
 			</Layer>
 		</Layers>
 		<Attributes>
-      <Attribute name="ItemID" type="string" value="" />
+            <Attribute name="ItemID" type="string" value="" />
 		</Attributes>
 		<NormalTexture name="$parentNormalTexture" file="Interface\Buttons\UI-Quickslot2">
 			<Size>
@@ -135,7 +135,7 @@
 		<PushedTexture file="Interface\Buttons\UI-Quickslot-Depress" />
 		<HighlightTexture file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD" />
 	</Button>
-  <ScrollFrame parentKey="CollectionsFrame" name="SetCollectorCollectionsScrollFrameTemplate" inherits="UIPanelScrollFrameCodeTemplate" virtual="true">
+    <ScrollFrame parentKey="CollectionsFrame" name="SetCollectorCollectionsScrollFrameTemplate" inherits="UIPanelScrollFrameCodeTemplate" virtual="true">
 		<Size x="259" y="462"/>
 		<ScrollChild>
 			<Frame parentKey="Contents">
@@ -163,8 +163,8 @@
 					<Layer level="ARTWORK">
 						<Texture name="$parentMiddle">
 							<Anchors>
-                <Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT"/>
-                <Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT"/>
+                                <Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT"/>
+                                <Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT"/>
 							</Anchors>
 							<Color r="0" g="0" b="0" a="0.7"/>
 						</Texture>

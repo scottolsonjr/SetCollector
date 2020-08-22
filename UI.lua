@@ -125,15 +125,55 @@ end
 
 local frame = CreateFrame("Frame", "SetCollectorFrame", UIParent, "ButtonFrameTemplate")
 
+local function SetUIPosition()
+    if SetCollector.db and not SetCollector.db.global.docked then
+        print(SetCollector.db.global.position)
+        if SetCollector.db.global.position == "center" then
+            frame:SetPoint("CENTER",0,0)
+        else
+            frame:SetPoint("TOPLEFT",17,-115)
+        end
+    end
+end
+
+local function SetDocked(docked)
+    frame:SetAttribute("UIPanelLayout-defined", docked)			-- Allows frame to shift other frames when opened or be shifted when others are opened.
+    frame:SetAttribute("UIPanelLayout-enabled", docked)			-- http://www.wowwiki.com/Creating_standard_left-sliding_frames
+    frame:SetAttribute("UIPanelLayout-area", "left")
+    frame:SetAttribute("UIPanelLayout-pushable", 5)
+    frame:SetAttribute("UIPanelLayout-width", width)
+    frame:SetAttribute("UIPanelLayout-whileDead", true)
+end
+
+local function SetMovable(movable)
+    frame:SetMovable(movable)
+    frame:EnableMouse(movable)
+    frame:RegisterForDrag("LeftButton")
+    frame:SetScript("OnDragStart", frame.StartMoving)
+    frame:SetScript("OnDragStop", frame.StopMovingOrSizing)
+
+    SetUIPosition()
+end
+
+local function SetDefaultUILocation()
+    SetDocked(true)
+    SetMovable(false)
+end
+
+local function ResetUILocation()
+    SetDocked(SetCollector:IsUIDocked())
+    SetMovable(not SetCollector:IsUIDocked())
+end
+
+function SetCollector:SetUIDockedAndUpdate()
+    SetCollector:SetUIDocked()
+    ResetUILocation()
+end
+
+SetDefaultUILocation()
 frame:SetWidth(703)
 frame:SetHeight(606)
---frame:SetPoint("TOPLEFT",17,-115)
-frame:SetAttribute("UIPanelLayout-defined", true)			-- Allows frame to shift other frames when opened or be shifted when others are opened.
-frame:SetAttribute("UIPanelLayout-enabled", true)			-- http://www.wowwiki.com/Creating_standard_left-sliding_frames
-frame:SetAttribute("UIPanelLayout-area", "left")
-frame:SetAttribute("UIPanelLayout-pushable", 5)
-frame:SetAttribute("UIPanelLayout-width", width)
-frame:SetAttribute("UIPanelLayout-whileDead", true)
+
 
 local title = CreateFrame("Frame", "$parentTitle", frame)
 title:SetWidth(300)
@@ -149,8 +189,6 @@ tinsert(UISpecialFrames, frame:GetName())							-- Hides frame when Escape is pr
   	
 local helpButton = CreateFrame("Button","$parentTutorialButton",frame,"MainHelpPlateButton")
 helpButton:SetPoint("TOPLEFT",frame, 39, 20)
-
-
 
 --
 --  ScrollFrame
@@ -1148,6 +1186,7 @@ function SetCollector:OnHide(self)
 end
 
 function SetCollector:SetupUI(DEBUG)
+    ResetUILocation()
 	local tutorialScript = function() SetCollector:ToggleTutorial() end
 	helpButton:SetScript("OnClick", tutorialScript)
 	
@@ -1164,6 +1203,5 @@ end
 
 
 function SetCollector:ReloadUI()
-	print("attempting reload")
 	ReloadUI();
 end

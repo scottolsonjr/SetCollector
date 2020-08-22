@@ -14,7 +14,8 @@ local defaults = {
 		sets = {}
 	},
 	global = {
-		debug = false,
+        debug = false,
+        docked = true,
 		expansions = {
 			v00 = true,
 			v01 = false,
@@ -29,7 +30,8 @@ local defaults = {
 		},
 		minimap = {
 			hide = false
-		},
+        },
+        position = "left",
 		collections = {},
 	}
 }
@@ -543,6 +545,26 @@ function SetCollector:AddAppearances(debug)
 end
 
 
+function SetCollector:IsUIDocked()
+    return SetCollector.db.global.docked
+end
+
+
+function SetCollector:SetUIDocked()
+    SetCollector.db.global.docked = not SetCollector.db.global.docked
+end
+
+
+function SetCollector:GetUIPosition()
+    return SetCollector.db.global.position
+end
+
+
+function SetCollector:SetUIPosition(value)
+    SetCollector.db.global.position = value
+end
+
+
 function SetCollector:GetExpansionStatus(version)
 	local expansions = SetCollector.db.global.expansions
 	if version == "0" then return expansions.v00 
@@ -624,10 +646,34 @@ function SetCollector:GetOptions()
 						type = "header",
 						order = 0,
 						name = "Global"
-					},
-					minimap = {
+                    },
+                    docked = {
 						type = "toggle",
 						order = 1,
+						name = "Dock the Set Collector UI",
+						desc = "Opens Set Collector with other UI interfaces, like Character and Social.",
+						get = "IsUIDocked",
+						set = "SetUIDockedAndUpdate",
+						width = "full"
+                    },
+                    position = {
+                        type = "select",
+                        hidden = true,
+						order = 2,
+						name = "Position when undocked",
+						desc = "Default position when UI is undocked.",
+						get = "GetUIPosition",
+						set = function(info,val) SetCollector:SetUIPosition(val) end,
+                        width = "full",
+                        values = {
+                            left = "Left",
+                            center = "Center"
+                        },
+                        style = "radio"
+                    },
+					minimap = {
+						type = "toggle",
+						order = 5,
 						name = "Enable Minimap Icon",
 						desc = "Enable | disable minimap icon.",
 						get = "IsMinimapButtonShown",
