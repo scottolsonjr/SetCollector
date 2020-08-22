@@ -623,35 +623,35 @@ end
 
 function SetCollector:GetOptions()
 	local options = {
-		name = "Set Collector",
+		name = L["ADDON_NAME"],
 		handler = SetCollector,
 		type = "group",
 		args = {
 			description = {
 				type = "description",
 				order = 0,
-				name = "Settings for the Set Collector addon.",
+				name = L["INT_OPT_DESC"],
 			},
 			header = {
 				type = "header",
 				order = 1,
-				name = "Settings",
+				name = L["INT_OPT_SETTINGS"],
 			},
 			common = {
 				type = "group",
 				order = 10,
-				name = "Common",
+				name = L["INT_OPT_COMMON"],
 				args = {
 					global_header = {
 						type = "header",
 						order = 0,
-						name = "Global"
+						name = L["GLOBAL"]
                     },
                     docked = {
 						type = "toggle",
 						order = 1,
-						name = "Dock the Set Collector UI",
-						desc = "Opens Set Collector with other UI interfaces, like Character and Social.",
+						name = L["INT_OPT_DOCKED_NAME"],
+						desc = L["INT_OPT_DOCKED_DESC"],
 						get = "IsUIDocked",
 						set = "SetUIDockedAndUpdate",
 						width = "full"
@@ -660,8 +660,8 @@ function SetCollector:GetOptions()
                         type = "select",
                         hidden = true,
 						order = 2,
-						name = "Position when undocked",
-						desc = "Default position when UI is undocked.",
+						name = L["INT_OPT_POSITION_NAME"],
+						desc = L["INT_OPT_POSITION_DESC"],
 						get = "GetUIPosition",
 						set = function(info,val) SetCollector:SetUIPosition(val) end,
                         width = "full",
@@ -674,8 +674,8 @@ function SetCollector:GetOptions()
 					minimap = {
 						type = "toggle",
 						order = 5,
-						name = "Enable Minimap Icon",
-						desc = "Enable | disable minimap icon.",
+						name = L["INT_OPT_MINIMAP_NAME"],
+						desc = L["INT_OPT_MINIMAP_DESC"],
 						get = "IsMinimapButtonShown",
 						set = "ToggleMinimapButton",
 						width = "full"
@@ -683,13 +683,13 @@ function SetCollector:GetOptions()
 					char_header = {
 						type = "header",
 						order = 100,
-						name = "Character"
+						name = L["CHARACTER"]
 					},
 					favorites = {
 						type = "toggle",
 						order = 101,
-						name = "Only show favorite sets",
-						desc = "Only show sets you have marked as favorite.",
+						name = L["INT_OPT_FAVORITE_NAME"],
+						desc = L["INT_OPT_FAVORITE_DESC"],
 						get = "GetFavoritesFilter",
 						set = "SetFavoritesFilter",
 						width = "full"
@@ -697,8 +697,8 @@ function SetCollector:GetOptions()
 					obtainable = {
 						type = "toggle",
 						order = 102,
-						name = "Only show obtainable sets",
-						desc = "Only show obtainable sets.",
+						name = L["INT_OPT_OBTAINABLE_NAME"],
+						desc = L["INT_OPT_OBTAINABLE_DESC"],
 						get = "GetObtainableFilter",
 						set = "SetObtainableFilter",
 						width = "full"
@@ -706,8 +706,8 @@ function SetCollector:GetOptions()
 					transmog = {
 						type = "hidden",
 						order = 103,
-						name = "Only show sets for transmogrification",
-						desc = "Enable | disable transmogrification filter.",
+						name = L["INT_OPT_TRANSMOG_NAME"],
+						desc = L["INT_OPT_TRANSMOG_DESC"],
 						get = "GetTransmogFilter",
 						set = "SetTransmogFilter",
 						width = "full"
@@ -715,8 +715,8 @@ function SetCollector:GetOptions()
 					transmog = {
 						type = "toggle",
 						order = 104,
-						name = "Show sets that you have hidden",
-						desc = "Enable | disable hidden set filter. Useful to unhide hidden sets.",
+						name = L["INT_OPT_HIDDEN_NAME"],
+						desc = L["INT_OPT_HIDDEN_DESC"],
 						get = "GetHiddenFilter",
 						set = "SetHiddenFilter",
 						width = "full"
@@ -726,24 +726,24 @@ function SetCollector:GetOptions()
 			expansions = {
 				type = "group",
 				order = 20,
-				name = "Expansions",
+				name = L["INT_OPT_EXPANSIONS"],
 				args = {
 					description = {
 						type = "description",
 						order = 0,
-						name = "Reload after making changes below for them to take effect.",
+						name = L["INT_OPT_RELOAD_DESC"],
 					},
 					header = {
 						type = "header",
 						order = 1,
-						name = "Expansions"
+						name = L["INT_OPT_EXPANSIONS"]
 					},
 					v00 = {
 						type = "toggle",
 						hidden = HideExpansionToggle("10000"),
 						order = 10,
-						name = "Starter and Holiday Sets",
-						desc = "Include Starter and Holiday sets.",
+						name = L["INT_OPT_EXPANSION_00_NAME"],
+						desc = L["INT_OPT_EXPANSION_00_DESC"],
 						get = "GetVersion00Status",
 						set = "SetVersion00Status",
 						width = "full"
@@ -752,8 +752,8 @@ function SetCollector:GetOptions()
 						type = "toggle",
 						hidden = HideExpansionToggle("10000"),
 						order = 11,
-						name = "Vanilla",
-						desc = "Include sets from vanilla World of WarCraft.",
+						name = L["INT_OPT_EXPANSION_01_NAME"],
+						desc = L["INT_OPT_EXPANSION_01_DESC"],
 						get = "GetVersion01Status",
 						set = "SetVersion01Status",
 						width = "full"
@@ -762,8 +762,8 @@ function SetCollector:GetOptions()
 						type = "toggle",
 						hidden = HideExpansionToggle("20000"),
 						order = 12,
-						name = "Burning Crusade",
-						desc = "Include sets from Burning Crusade.",
+						name = L["INT_OPT_EXPANSION_02_NAME"],
+						desc = L["INT_OPT_EXPANSION_02_DESC"],
 						get = "GetVersion02Status",
 						set = "SetVersion02Status",
 						width = "full"
@@ -772,8 +772,8 @@ function SetCollector:GetOptions()
 						type = "toggle",
 						hidden = HideExpansionToggle("30000"),
 						order = 13,
-						name = "Wrath of the Lich King",
-						desc = "Include sets from Wrath of the Lich King.",
+						name = L["INT_OPT_EXPANSION_03_NAME"],
+						desc = L["INT_OPT_EXPANSION_03_DESC"],
 						get = "GetVersion03Status",
 						set = "SetVersion03Status",
 						width = "full"
@@ -782,8 +782,8 @@ function SetCollector:GetOptions()
 						type = "toggle",
 						hidden = HideExpansionToggle("40000"),
 						order = 14,
-						name = "Cataclysm",
-						desc = "Include sets from Cataclysm.",
+						name = L["INT_OPT_EXPANSION_04_NAME"],
+						desc = L["INT_OPT_EXPANSION_04_DESC"],
 						get = "GetVersion04Status",
 						set = "SetVersion04Status",
 						width = "full"
@@ -792,8 +792,8 @@ function SetCollector:GetOptions()
 						type = "toggle",
 						hidden = HideExpansionToggle("50000"),
 						order = 15,
-						name = "Mists of Pandaria",
-						desc = "Include sets from Mists of Pandaria.",
+						name = L["INT_OPT_EXPANSION_05_NAME"],
+						desc = L["INT_OPT_EXPANSION_05_DESC"],
 						get = "GetVersion05Status",
 						set = "SetVersion05Status",
 						width = "full"
@@ -802,8 +802,8 @@ function SetCollector:GetOptions()
 						type = "toggle",
 						hidden = HideExpansionToggle("60000"),
 						order = 16,
-						name = "Warlords of Draenor",
-						desc = "Include sets from Warlords of Draenor.",
+						name = L["INT_OPT_EXPANSION_06_NAME"],
+						desc = L["INT_OPT_EXPANSION_06_DESC"],
 						get = "GetVersion06Status",
 						set = "SetVersion06Status",
 						width = "full"
@@ -812,8 +812,8 @@ function SetCollector:GetOptions()
 						type = "toggle",
 						hidden = HideExpansionToggle("70000"),
 						order = 17,
-						name = "Legion",
-						desc = "Include sets from Legion.",
+						name = L["INT_OPT_EXPANSION_07_NAME"],
+						desc = L["INT_OPT_EXPANSION_07_DESC"],
 						get = "GetVersion07Status",
 						set = "SetVersion07Status",
 						width = "full"
@@ -822,8 +822,8 @@ function SetCollector:GetOptions()
 						type = "toggle",
 						hidden = HideExpansionToggle("80000"),
 						order = 18,
-						name = "Battle for Azeroth",
-						desc = "Include sets from Battle for Azeroth.",
+						name = L["INT_OPT_EXPANSION_08_NAME"],
+						desc = L["INT_OPT_EXPANSION_08_DESC"],
 						get = "GetVersion08Status",
 						set = "SetVersion08Status",
 						width = "full"
@@ -832,8 +832,8 @@ function SetCollector:GetOptions()
 						type = "toggle",
 						hidden = HideExpansionToggle("90000"),
 						order = 19,
-						name = "Shadowlands",
-						desc = "Include sets from Shadowlands.",
+						name = L["INT_OPT_EXPANSION_09_NAME"],
+						desc = L["INT_OPT_EXPANSION_09_DESC"],
 						get = "GetVersion09Status",
 						set = "SetVersion09Status",
 						width = "full"
@@ -843,18 +843,18 @@ function SetCollector:GetOptions()
 			advanced = {
 				type = "group",
 				order = 30,
-				name = "Troubleshooting",
+				name = L["INT_OPT_TROUBLESHOOTING"],
 				args = {
 					debug_header = {
 						type = "header",
 						order = 0,
-						name = "Debugging"
+						name = L["INT_OPT_DEBUGGING"]
 					},
 					debug = {
 						type = "toggle",
 						order = 1,
-						name = "Enable Debug",
-						desc = "Turn on debugging details",
+						name = L["INT_OPT_DEBUG_NAME"],
+						desc = L["INT_OPT_DEBUG_DESC"],
 						get = "GetDebug",
 						set = "OptionsSetDebug",
 						width = "full"
@@ -862,23 +862,23 @@ function SetCollector:GetOptions()
 					reset_header = {
 						type = "header",
 						order = 2,
-						name = "Reset"
+						name = L["INT_OPT_RESET"]
 					},
 					reset_desc = {
 						type = "description",
 						order = 3,
-						name = "Warning! This section will reset SetCollector to default settings."
+						name = L["INT_OPT_RESET_WARNING"]
 					},
 					reload_desc = {
 						type = "description",
 						order = 4,
-						name = "Please reload after reset for changes to take effect."
+						name = L["INT_OPT_RELOAD_DESC"]
 					},
 					reset_db = {
 						type = "execute",
 						order = 5,
 						confirm = true,
-						name = "Reset",
+						name = L["INT_OPT_RESET"],
 						func = "ResetDB"
 					}
 				},
@@ -886,7 +886,7 @@ function SetCollector:GetOptions()
 			reload = {
 				type = "execute",
 				order = -1,
-				name = "Reload UI",
+				name = L["INT_OPT_RELOAD_UI"],
 				func = "ReloadUI"
 			}
 		},
