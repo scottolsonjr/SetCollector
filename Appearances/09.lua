@@ -75,22 +75,22 @@ local function GetRaidAppearances()
     local set = ""
         
     -- Castle Nathria
-    set = SetCollector:AddSet(90000,nil,col,250,"TR_CLOTH_26",CLOTH,ANY,ANY,ANY)
+    set = SetCollector:AddSet(90000,nil,col,10901,"TR_CLOTH_26",CLOTH,ANY,ANY,ANY)
             --SetCollector:AddVariant(90000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
             SetCollector:AddVariant(90000,nil,col,set,"NORMAL",TRANSMOG,A(42601),A(42603),A(42597),A(42623),A(42618),A(42604),A(42602),A(42608))
             --SetCollector:AddVariant(90000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
             --SetCollector:AddVariant(90000,nil,col,set,"MYTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-    set = SetCollector:AddSet(90000,nil,col,250,"TR_LEATHER_26",LEATHER,ANY,ANY,ANY)
+    set = SetCollector:AddSet(90000,nil,col,10901,"TR_LEATHER_26",LEATHER,ANY,ANY,ANY)
             --SetCollector:AddVariant(90000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
             SetCollector:AddVariant(90000,nil,col,set,"NORMAL",TRANSMOG,A(42711),A(42686),A(42707),A(42697),A(42683),A(42714),A(42712),A(42682))
             --SetCollector:AddVariant(90000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
             --SetCollector:AddVariant(90000,nil,col,set,"MYTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-    set = SetCollector:AddSet(90000,nil,col,250,"TR_MAIL_26",MAIL,ANY,ANY,ANY)
+    set = SetCollector:AddSet(90000,nil,col,10901,"TR_MAIL_26",MAIL,ANY,ANY,ANY)
             --SetCollector:AddVariant(90000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
             SetCollector:AddVariant(90000,nil,col,set,"NORMAL",TRANSMOG,A(42438),A(42448),A(42418),A(41916),A(42433),A(42453),A(42443),A(42428))
             --SetCollector:AddVariant(90000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
             --SetCollector:AddVariant(90000,nil,col,set,"MYTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-    set = SetCollector:AddSet(90000,nil,col,250,"TR_PLATE_26",PLATE,ANY,ANY,ANY)
+    set = SetCollector:AddSet(90000,nil,col,10901,"TR_PLATE_26",PLATE,ANY,ANY,ANY)
             --SetCollector:AddVariant(90000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
             SetCollector:AddVariant(90000,nil,col,set,"NORMAL",TRANSMOG,A(42235),A(42068),A(42238),A(42242),A(42211),A(42240),A(42241),A(42219))
             --SetCollector:AddVariant(90000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
@@ -137,18 +137,17 @@ local function GetPvPAppearances()
     local set = ""
     
     -- Season 1
-    --[[
-    set = SetCollector:AddSet(90000,nil,col,10902,"PVP_CLOTH_A_0902",CLOTH,ANY,ANY,ALLIANCE)
-            SetCollector:AddVariant(90000,nil,col,set,"ASPIRANT",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())]]
+    set = SetCollector:AddSet(90000,nil,col,10901,"PVP_CLOTH_A_0901",CLOTH,ANY,ANY,ANY)
+            SetCollector:AddVariant(90000,nil,col,set,"ASPIRANT",TRANSMOG,A(42592),A(42594),A(42588),A(42956),A(42591),A(42595),A(42593),A(42590))
             --SetCollector:AddVariant(90000,nil,col,set,"GLADIATOR",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-    set = SetCollector:AddSet(90000,nil,col,10902,"PVP_LEATHER_A_0902",LEATHER,ANY,ANY,ALLIANCE)
+    set = SetCollector:AddSet(90000,nil,col,10901,"PVP_LEATHER_A_0901",LEATHER,ANY,ANY,ANY)
             SetCollector:AddVariant(90000,nil,col,set,"ASPIRANT",TRANSMOG,A(42702),A(42704),A(42698),A(42706),A(42701),A(42705),A(42703),A(42700))
             --SetCollector:AddVariant(90000,nil,col,set,"GLADIATOR",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-    set = SetCollector:AddSet(90000,nil,col,10902,"PVP_MAIL_A_0902",MAIL,ANY,ANY,ALLIANCE)
+    set = SetCollector:AddSet(90000,nil,col,10901,"PVP_MAIL_A_0901",MAIL,ANY,ANY,ANY)
             SetCollector:AddVariant(90000,nil,col,set,"ASPIRANT",TRANSMOG,A(43201),A(43203),A(43197),A(43205),A(43200),A(43204),A(43202),A(43199))
             --SetCollector:AddVariant(90000,nil,col,set,"GLADIATOR",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-    set = SetCollector:AddSet(90000,nil,col,10902,"PVP_PLATE_A_0902",PLATE,ANY,ANY,ALLIANCE)
-            SetCollector:AddVariant(90000,nil,col,set,"APIRANT",TRANSMOG,A(42226),A(42227),A(42229),A(42233),A(42230),A(42231),A(42227),A(42228))
+    set = SetCollector:AddSet(90000,nil,col,10901,"PVP_PLATE_A_0901",PLATE,ANY,ANY,ANY)
+            SetCollector:AddVariant(90000,nil,col,set,"ASPIRANT",TRANSMOG,A(42226),A(42227),A(42229),A(42233),A(42230),A(42231),A(42227),A(42228))
             --SetCollector:AddVariant(90000,nil,col,set,"GLADIATOR",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
 end
 
@@ -160,6 +159,7 @@ end
 function SetCollector:GetVersion09Appearances(expansion)
     if expansion.v09 then
         GetRaidAppearances()
+        GetPvPAppearances()
         GetCraftedAppearances()
     end
 end
