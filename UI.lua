@@ -1041,8 +1041,8 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 			
 			if i == 1 then
 				local outfits = C_TransmogCollection.GetOutfits()
-				for i=1, #outfits do
-					local outfitID = outfits[i].outfitID
+				for j=1, #outfits do
+					local outfitID = outfits[j].outfitID
 					
 					rowIndex = rowIndex + 1
 					titleButton = GetSetButton(rowIndex)
@@ -1066,9 +1066,7 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 						setsDisplayed = setsDisplayed + 1
 					end
 				end
-			end
-			
-			if collections[i].sets then
+			elseif collections[i].sets then
 				local sortedList = SetCollector:SortList(collections[i].sets, SORT_BY, SORT_DIR)
 				for j,value in sortedList do
 					
