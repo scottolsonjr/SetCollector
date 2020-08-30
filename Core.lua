@@ -39,11 +39,8 @@ function SetCollector:OnInitialize()
 	SetCollector:SetupUI(true)
 	if SetCollector:GetDebug() then SetCollector:Print("Initialized"); end
 	
-	-- Bug in Shadowlands (v.9.x) due to changes to SetBackdrop. Disabling until fix available.
-	if WOW_VERSION < 90000 then
-		LibStub("AceConfig-3.0"):RegisterOptionsTable("SetCollector", SetCollector:GetOptions())
-		self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SetCollector", "Set Collector")
-	end
+    LibStub("AceConfig-3.0"):RegisterOptionsTable("SetCollector", SetCollector:GetOptions())
+    self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SetCollector", "Set Collector")
 	
 	SetCollector:RegisterEvent("PLAYER_LOGIN")
 end
