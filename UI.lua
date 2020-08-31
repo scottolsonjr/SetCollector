@@ -1111,11 +1111,11 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 					if isObtainable then
 						titleButton.Text:SetText(L[collections[i].sets[j].Title] or L["MISSING_LOCALIZATION"])			-- Putting Text into FontString allows for Wrapping using SetWidth
 					else
-						titleButton.Text:SetText("|cff999999"..L[collections[i].sets[j].Title])
+						titleButton.Text:SetText("|cff999999"..(L[collections[i].sets[j].Title] or L["MISSING_LOCALIZATION"]))
 					end
 					
-					if (i == 20) then
-						titleButton.SubText:SetText("|cff999999".."SubText Here".."|r")
+					if (collections[i].sets[j].Location) then
+						titleButton.SubText:SetText("|cff555555"..(L[collections[i].sets[j].Location] or L["MISSING_LOCALIZATION"]).."|r")
 					end
 					
 					local height = titleButton.Text:GetHeight() + titleButton.SubText:GetHeight() + 10

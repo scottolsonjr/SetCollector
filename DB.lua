@@ -132,7 +132,7 @@ local function GetTooltipIdentifier(collection, id, title)
 	return identifier
 end
 
-function SetCollector:AddSet(minVersion, maxVersion, collection, id, title, armorType, class, role, faction, ...)
+function SetCollector:AddSet(minVersion, maxVersion, collection, id, title, armorType, class, role, faction, location, ...)
 	if WOW_VERSION >= minVersion then
 		if maxVersion == nil or WOW_VERSION <= maxVersion then
 			local tempSet = { }
@@ -143,7 +143,8 @@ function SetCollector:AddSet(minVersion, maxVersion, collection, id, title, armo
 				Class = class.Description,
 				Role = role.Description,
 				Faction = faction.Description,
-				Name = name,
+                Name = name,
+                Location = location,
 				Variants = { }
 			}
 			local ID = collection.Code..string.format("%03d", id)..armorType.Code..class.Code..role.Code..faction.Code
@@ -213,7 +214,8 @@ function SetCollector:GetCollectionsList()
 			local sortedList = SetCollector:SortList(db[i].Sets, "key", "DESC")
 			for j,value in sortedList do
 				collections[i].sets[j] = {
-					Title = db[i].Sets[j].Title
+                    Title = db[i].Sets[j].Title,
+                    Location = db[i].Sets[j].Location
 				}
 			end
 		end

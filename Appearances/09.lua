@@ -73,24 +73,26 @@ end
 local function GetRaidAppearances()
     local col = SetCollector.RAID
     local set = ""
+    local loc = ""
         
     -- Castle Nathria
-    set = SetCollector:AddSet(90000,nil,col,10901,"TR_CLOTH_26",CLOTH,ANY,ANY,ANY)
+    loc = "LOC_RAID_0901"
+    set = SetCollector:AddSet(90000,nil,col,10901,"TR_CLOTH_26",CLOTH,ANY,ANY,ANY,loc)
             --SetCollector:AddVariant(90000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
             SetCollector:AddVariant(90000,nil,col,set,"NORMAL",TRANSMOG,A(42601),A(42603),A(42597),A(42623),A(42618),A(42604),A(42602),A(42608))
             --SetCollector:AddVariant(90000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
             --SetCollector:AddVariant(90000,nil,col,set,"MYTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-    set = SetCollector:AddSet(90000,nil,col,10901,"TR_LEATHER_26",LEATHER,ANY,ANY,ANY)
+    set = SetCollector:AddSet(90000,nil,col,10901,"TR_LEATHER_26",LEATHER,ANY,ANY,ANY,loc)
             --SetCollector:AddVariant(90000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
             SetCollector:AddVariant(90000,nil,col,set,"NORMAL",TRANSMOG,A(42711),A(42686),A(42707),A(42697),A(42683),A(42714),A(42712),A(42682))
             --SetCollector:AddVariant(90000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
             --SetCollector:AddVariant(90000,nil,col,set,"MYTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-    set = SetCollector:AddSet(90000,nil,col,10901,"TR_MAIL_26",MAIL,ANY,ANY,ANY)
+    set = SetCollector:AddSet(90000,nil,col,10901,"TR_MAIL_26",MAIL,ANY,ANY,ANY,loc)
             --SetCollector:AddVariant(90000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
             SetCollector:AddVariant(90000,nil,col,set,"NORMAL",TRANSMOG,A(42438),A(42448),A(42418),A(41916),A(42433),A(42453),A(42443),A(42428))
             --SetCollector:AddVariant(90000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
             --SetCollector:AddVariant(90000,nil,col,set,"MYTHIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-    set = SetCollector:AddSet(90000,nil,col,10901,"TR_PLATE_26",PLATE,ANY,ANY,ANY)
+    set = SetCollector:AddSet(90000,nil,col,10901,"TR_PLATE_26",PLATE,ANY,ANY,ANY,loc)
             --SetCollector:AddVariant(90000,nil,col,set,"RAIDFINDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
             SetCollector:AddVariant(90000,nil,col,set,"NORMAL",TRANSMOG,A(42235),A(42068),A(42238),A(42242),A(42211),A(42240),A(42241),A(42219))
             --SetCollector:AddVariant(90000,nil,col,set,"HEROIC",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
