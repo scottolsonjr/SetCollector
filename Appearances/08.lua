@@ -255,6 +255,7 @@ end
 local function GetPvpAppearances()
     local col = SetCollector.PVP
     local set = ""
+    local loc = ""
 
 	--[[set = SetCollector:AddSet(80000,nil,col,240,"PVP_CLOTH_A_24",CLOTH,ANY,ANY,ALLIANCE)
 				SetCollector:AddVariant(80000,nil,col,set,"RAIDFINDER",TRANSMOG,A(25845,73196),A(25847,73166),A(25849,73182),A(25844,73228),A(25846,73200),A(25842,72970))	-- Need belt
@@ -274,15 +275,48 @@ local function GetPvpAppearances()
 	set = SetCollector:AddSet(80000,nil,col,230,"PVP_PLATE_A_23",PLATE,ANY,ANY,ALLIANCE)
 				SetCollector:AddVariant(80000,nil,col,set,"RAIDFINDER",TRANSMOG,A(25933,73220),A(25935,73178),A(25931,73192),A(25932,73240),A(25934,73224),A(25930,72890))		-- Need belt
 
-	set = SetCollector:AddSet(80000,nil,col,220,"PVP_CLOTH_A_22",CLOTH,ANY,ANY,ALLIANCE)
+	set = SetCollector:AddSet(80000,nil,col,240,"PVP_CLOTH_H_24",CLOTH,ANY,ANY,ALLIANCE)
 				SetCollector:AddVariant(80000,nil,col,set,"RAIDFINDER",TRANSMOG,A(25845,73196),A(25847,73166),A(25849,73182),A(25844,73228),A(25846,73200),A(25842,72970))	-- Need belt
-	set = SetCollector:AddSet(80000,nil,col,220,"PVP_LEATHER_A_22",LEATHER,ANY,ANY,ALLIANCE)
+	set = SetCollector:AddSet(80000,nil,col,240,"PVP_LEATHER_H_24",LEATHER,ANY,ANY,ALLIANCE)
 				SetCollector:AddVariant(80000,nil,col,set,"RAIDFINDER",TRANSMOG,A(25983,73204),A(25985,73170),A(25981,73184),A(25982,73232),A(25984,73208),A(25979,72978))		-- Need belt
+	set = SetCollector:AddSet(80000,nil,col,240,"PVP_MAIL_H_24",MAIL,ANY,ANY,ALLIANCE)
+				SetCollector:AddVariant(80000,nil,col,set,"RAIDFINDER",TRANSMOG,A(25949,73209),A(25950,73171),A(25947,73185),A(25952,73110),A(25948,73233),A(25945,72983),A(25951,73213),A(25946,73079))
+	set = SetCollector:AddSet(80000,nil,col,240,"PVP_PLATE_H_24",PLATE,ANY,ANY,ALLIANCE)
+				SetCollector:AddVariant(80000,nil,col,set,"RAIDFINDER",TRANSMOG,A(25933,73220),A(25935,73178),A(25931,73192),A(25932,73240),A(25934,73224),A(25930,72890))		-- Need belt
+				
+	set = SetCollector:AddSet(80000,nil,col,230,"PVP_CLOTH_H_23",CLOTH,ANY,ANY,ALLIANCE)
+				SetCollector:AddVariant(80000,nil,col,set,"RAIDFINDER",TRANSMOG,A(25845,73196),A(25847,73166),A(25849,73182),A(25844,73228),A(25846,73200),A(25842,72970))	-- Need belt
+	set = SetCollector:AddSet(80000,nil,col,230,"PVP_LEATHER_H_23",LEATHER,ANY,ANY,ALLIANCE)
+				SetCollector:AddVariant(80000,nil,col,set,"RAIDFINDER",TRANSMOG,A(25983,73204),A(25985,73170),A(25981,73184),A(25982,73232),A(25984,73208),A(25979,72978))		-- Need belt
+	set = SetCollector:AddSet(80000,nil,col,230,"PVP_MAIL_H_23",MAIL,ANY,ANY,ALLIANCE)
+				SetCollector:AddVariant(80000,nil,col,set,"RAIDFINDER",TRANSMOG,A(25949,73209),A(25950,73171),A(25947,73185),A(25952,73110),A(25948,73233),A(25945,72983),A(25951,73213),A(25946,73079))
+	set = SetCollector:AddSet(80000,nil,col,230,"PVP_PLATE_H_23",PLATE,ANY,ANY,ALLIANCE)
+				SetCollector:AddVariant(80000,nil,col,set,"RAIDFINDER",TRANSMOG,A(25933,73220),A(25935,73178),A(25931,73192),A(25932,73240),A(25934,73224),A(25930,72890))		-- Need belt
+    ]]
+    -- Season 1
+    loc = "LOC_PVP_0801"
+    -- Alliance
+	set = SetCollector:AddSet(80000,nil,col,10801,"PVP_CLOTH_A_22",CLOTH,ANY,ANY,ALLIANCE,loc)
+        SetCollector:AddVariant(80000,nil,col,set,"ASPIRANT",TRANSMOG,A(37360),A(37241),A(37238),A(37223),A(37225),A(37221),A(37236),A(37222),A(37218))
+        SetCollector:AddVariant(80000,nil,col,set,"GLADIATOR",TRANSMOG,A(37240),A(37206),A(37201),A(37202),A(37200),A(37204),A(37198),A(37205),A(37199))
+	--set = SetCollector:AddSet(80000,nil,col,220,"PVP_LEATHER_A_22",LEATHER,ANY,ANY,ALLIANCE)
+	--			SetCollector:AddVariant(80000,nil,col,set,"RAIDFINDER",TRANSMOG,A(25983,73204),A(25985,73170),A(25981,73184),A(25982,73232),A(25984,73208),A(25979,72978))		-- Need belt
 	--set = SetCollector:AddSet(80000,nil,col,220,"PVP_MAIL_A_22",MAIL,ANY,ANY,ALLIANCE)
             --SetCollector:AddVariant(80000,nil,col,set,"ASPIRANT",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
             --SetCollector:AddVariant(80000,nil,col,set,"GLADIATOR",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
-	set = SetCollector:AddSet(80000,nil,col,220,"PVP_PLATE_A_22",PLATE,ANY,ANY,ALLIANCE)
-				SetCollector:AddVariant(80000,nil,col,set,"RAIDFINDER",TRANSMOG,A(25933,73220),A(25935,73178),A(25931,73192),A(25932,73240),A(25934,73224),A(25930,72890))		-- Need belt]]--
+	--set = SetCollector:AddSet(80000,nil,col,220,"PVP_PLATE_A_22",PLATE,ANY,ANY,ALLIANCE)
+    --			SetCollector:AddVariant(80000,nil,col,set,"RAIDFINDER",TRANSMOG,A(25933,73220),A(25935,73178),A(25931,73192),A(25932,73240),A(25934,73224),A(25930,72890))		-- Need belt
+    -- Horde
+	set = SetCollector:AddSet(80000,nil,col,10801,"PVP_CLOTH_H_22",CLOTH,ANY,ANY,HORDE,loc)
+        SetCollector:AddVariant(80000,nil,col,set,"ASPIRANT",TRANSMOG,A(36757),A(36761),A(36960),A(37076),A(36771),A(37077),A(37075),A(36785),A(36768))
+        SetCollector:AddVariant(80000,nil,col,set,"GLADIATOR",TRANSMOG,A(36801),A(36804),A(36789),A(36754),A(36770),A(37071),A(36878),A(36783),A(36767))
+	--set = SetCollector:AddSet(80000,nil,col,220,"PVP_LEATHER_H_22",LEATHER,ANY,ANY,ALLIANCE)
+	--			SetCollector:AddVariant(80000,nil,col,set,"RAIDFINDER",TRANSMOG,A(25983,73204),A(25985,73170),A(25981,73184),A(25982,73232),A(25984,73208),A(25979,72978))		-- Need belt
+	--set = SetCollector:AddSet(80000,nil,col,220,"PVP_MAIL_H_22",MAIL,ANY,ANY,ALLIANCE)
+            --SetCollector:AddVariant(80000,nil,col,set,"ASPIRANT",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+            --SetCollector:AddVariant(80000,nil,col,set,"GLADIATOR",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+	--set = SetCollector:AddSet(80000,nil,col,220,"PVP_PLATE_H_22",PLATE,ANY,ANY,ALLIANCE)
+	--			SetCollector:AddVariant(80000,nil,col,set,"RAIDFINDER",TRANSMOG,A(25933,73220),A(25935,73178),A(25931,73192),A(25932,73240),A(25934,73224),A(25930,72890))		-- Need belt]]--
 end
 
 
