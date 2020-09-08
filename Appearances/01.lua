@@ -250,13 +250,13 @@ local function GetRogueAppearances()
 
     col = SetCollector.RAID
     loc = "LOC_RAID_0103"
-    set = SetCollector:AddSet(70000,nil,col,10103,"RO_TR_03",LEATHER,ROGUE,ANY,ANY)
+    set = SetCollector:AddSet(70000,nil,col,10103,"RO_TR_03",LEATHER,ROGUE,ANY,ANY,loc)
                 SetCollector:AddVariant(70000,nil,col,set,"RO_TR_03",TRANSMOG,A(6009,8858),A(6010,8859),A(6007,8856),A(6014,8863),A(6012,8861),A(6013,8862),A(6008,8857),A(6011,8860))
     loc = "LOC_RAID_0102"
-    set = SetCollector:AddSet(70000,nil,col,10102,"RO_TR_02",LEATHER,ROGUE,ANY,ANY)
+    set = SetCollector:AddSet(70000,nil,col,10102,"RO_TR_02",LEATHER,ROGUE,ANY,ANY,loc)
                 SetCollector:AddVariant(70000,nil,col,set,"RO_TR_02",TRANSMOG,A(5032,6972),A(4977,6917),A(5029,6969),A(5035,6975),A(5031,6971),A(5034,6974),A(5033,6973),A(5030,6970))
     loc = "LOC_RAID_0101"
-    set = SetCollector:AddSet(70000,nil,col,10101,"RO_TR_01",LEATHER,ROGUE,ANY,ANY)
+    set = SetCollector:AddSet(70000,nil,col,10101,"RO_TR_01",LEATHER,ROGUE,ANY,ANY,loc)
                 SetCollector:AddVariant(70000,nil,col,set,"RO_TR_01",TRANSMOG,A(4966,6906),A(4968,6908),A(4965,6905),A(4970,6910),A(4971,6911),A(4972,6912),A(4967,6907),A(4969,6909))
 
     col = SetCollector.DUNGEON
