@@ -128,6 +128,32 @@ local function GetCraftedAppearances()
 end
 
 
+local function GetDungeonAppearances()
+    local col = SetCollector.DUNGEON
+    local set = ""
+        
+    --set = SetCollector:AddSet(90000,nil,col,10901,"DG_CLOTH_0901",CLOTH,ANY,ANY,ANY)
+    --    SetCollector:AddVariant(90000,nil,col,set,"DG_CLOTH_0901",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+    set = SetCollector:AddSet(90000,nil,col,10901,"DG_LEATHER_0901",LEATHER,ANY,ANY,ANY)
+        SetCollector:AddVariant(90000,nil,col,set,"1",TRANSMOG,A(42684,111579),A(42686,111661),A(42680,111580),A(42688,111582),A(42683,111655),A(42687,111581),A(42685,111645),A(42682,111668)) -- Da Other Side/Mists of Tirna Scithe
+        SetCollector:AddVariant(90000,nil,col,set,"2",TRANSMOG,A(42693,111521),A(42695,111555),A(42689,111535),A(42697,111547),A(42692,111532),A(42696,111527),A(42694,111523),A(42691,111537)) -- Halls of Atonement/Sanguine Depths
+        SetCollector:AddVariant(90000,nil,col,set,"3",TRANSMOG,A(42711,111482),A(42713,111485),A(42707,111503),A(42715,111588),A(42710,111479),A(42714,111513),A(42712,111509),A(42709,111505)) -- Plaguefall/Theater of Pain
+        SetCollector:AddVariant(90000,nil,col,set,"4",TRANSMOG,A(42720,112883),A(42722,111496),A(42716,111468),A(42724,111466),A(42719,112880),A(42723,112888),A(42721,112885),A(42718,111457)) -- Spires of Ascension/The Necrotic Wake
+    --    SetCollector:AddVariant(90000,nil,col,set,"DG_LEATHER_0901",TRANSMOG,A(),A(42686,111661),A(),A(),A(42683,111655),A(),A(42685,111645),A(42682,111668)) -- Da Other Side (1)
+    --    SetCollector:AddVariant(90000,nil,col,set,"DG_LEATHER_0901",TRANSMOG,A(42693,111521),A(),A(),A(),A(42692,111532),A(42696,111527),A(42694,111523),A()) -- Halls of Atonement (2)
+    --    SetCollector:AddVariant(90000,nil,col,set,"DG_LEATHER_0901",TRANSMOG,A(42684,111579),A(),A(42680,111580),A(42688,111582),A(),A(42687,111581),A(),A()) -- Mists of Tirna Scithe (1)
+    --    SetCollector:AddVariant(90000,nil,col,set,"DG_LEATHER_0901",TRANSMOG,A(42711,111482),A(42713,111485),A(),A(42715,111588),A(42710,111479),A(),A(),A()) -- Plaguefall (3)
+    --    SetCollector:AddVariant(90000,nil,col,set,"DG_LEATHER_0901",TRANSMOG,A(),A(42695,111555),A(42689,111535),A(42697,111547),A(),A(),A(),A(42691,111537)) -- Sanguine Depths (2)
+    --    SetCollector:AddVariant(90000,nil,col,set,"DG_LEATHER_0901",TRANSMOG,A(42720,112883),A(),A(),A(),A(42719,112880),A(42723,112888),A(42721,112885),A()) -- Spires of Ascension (4)
+    --    SetCollector:AddVariant(90000,nil,col,set,"DG_LEATHER_0901",TRANSMOG,A(),A(42722,111496),A(42716,111468),A(42724,111466),A(),A(),A(),A(42718,111457)) -- The Necrotic Wake (4)
+    --    SetCollector:AddVariant(90000,nil,col,set,"DG_LEATHER_0901",TRANSMOG,A(),A(),A(42707,111503),A(),A(),A(42714,111513),A(42712,111509),A(42709,111505)) -- Theater of Pain (3)
+    --set = SetCollector:AddSet(90000,nil,col,10901,"DG_MAIL_0901",MAIL,ANY,ANY,ANY)
+    --    SetCollector:AddVariant(90000,nil,col,set,"DG_MAIL_0901",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+    --set = SetCollector:AddSet(90000,nil,col,10901,"DG_PLATE_0901",PLATE,ANY,ANY,ANY)
+    --    SetCollector:AddVariant(90000,nil,col,set,"DG_PLATE_0901",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+end
+
+
 local function GetPvPAppearances()
     local col = SetCollector.PVP
     local set, loc = ""
@@ -222,6 +248,7 @@ function SetCollector:GetVersion09Appearances(expansion)
         GetRaidAppearances()
         GetPvPAppearances()
         GetCraftedAppearances()
+        GetDungeonAppearances()
         GetExpansionAppearances()
     end
 end
