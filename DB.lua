@@ -316,7 +316,7 @@ function SetCollector:IsSetFullyCollected(collection, set)
 	local db = SetCollector.db.global.collections
 	local completedVariantCount = SetCollector:GetCompletedVariantCount(collection, set)
 	local variantCount = #db[collection].Sets[set].Variants
-	if completedVariantCount == variantCount then
+	if completedVariantCount > 0 and completedVariantCount == variantCount then
 		return true
 	end
 	return false
@@ -336,7 +336,7 @@ function SetCollector:IsVariantCollected(collection, set, variant)
 	local db = SetCollector.db.global.collections
 	local collectedCount = SetCollector:GetCollectedCount(collection, set, variant)
 	local appearanceCount = #db[collection].Sets[set].Variants[variant].Appearances
-	if collectedCount == appearanceCount then
+	if collectedCount > 0 and collectedCount == appearanceCount then
 		return true
 	end
 end

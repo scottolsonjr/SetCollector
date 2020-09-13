@@ -132,25 +132,26 @@ local function GetDungeonAppearances()
     local col = SetCollector.DUNGEON
     local set = ""
         
-    --set = SetCollector:AddSet(90000,nil,col,10901,"DG_CLOTH_0901",CLOTH,ANY,ANY,ANY)
-    --    SetCollector:AddVariant(90000,nil,col,set,"DG_CLOTH_0901",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+    set = SetCollector:AddSet(90000,nil,col,10901,"DG_CLOTH_0901",CLOTH,ANY,ANY,ANY)
+        SetCollector:AddVariant(90000,nil,col,set,"1",TRANSMOG,A(42610,111439),A(42612,111440),A(42606,111654),A(42614,111441),A(42609,111442),A(42613,111660),A(42611,111667),A(42608,111643)) -- De Other Side/Mists of Tirna Scithe
+        SetCollector:AddVariant(90000,nil,col,set,"2",TRANSMOG,A(42601,111557),A(42603,111556),A(42597,111517),A(42605,111544),A(42600,111533),A(42604,111526),A(42602,111538),A(42599,111531)) -- Halls of Atonement/Sanguine Depths
+        SetCollector:AddVariant(90000,nil,col,set,"3",TRANSMOG,A(42619,111481),A(42621,111511),A(42615,111500),A(42623,111514),A(42618,111585),A(42622,111512),A(42620,111483),A(42617,111478)) -- Plaguefall/Theater of Pain
+        SetCollector:AddVariant(90000,nil,col,set,"4",TRANSMOG,A(42628,111458),A(42630,111465),A(42624,112875),A(42632,111498),A(42627,111471),A(42631,112886),A(42629,112884),A(42626,112879)) -- Spires of Ascension/The Necrotic Wake
     set = SetCollector:AddSet(90000,nil,col,10901,"DG_LEATHER_0901",LEATHER,ANY,ANY,ANY)
-        SetCollector:AddVariant(90000,nil,col,set,"1",TRANSMOG,A(42684,111579),A(42686,111661),A(42680,111580),A(42688,111582),A(42683,111655),A(42687,111581),A(42685,111645),A(42682,111668)) -- Da Other Side/Mists of Tirna Scithe
+        SetCollector:AddVariant(90000,nil,col,set,"1",TRANSMOG,A(42684,111579),A(42686,111661),A(42680,111580),A(42688,111582),A(42683,111655),A(42687,111581),A(42685,111645),A(42682,111668)) -- De Other Side/Mists of Tirna Scithe
         SetCollector:AddVariant(90000,nil,col,set,"2",TRANSMOG,A(42693,111521),A(42695,111555),A(42689,111535),A(42697,111547),A(42692,111532),A(42696,111527),A(42694,111523),A(42691,111537)) -- Halls of Atonement/Sanguine Depths
         SetCollector:AddVariant(90000,nil,col,set,"3",TRANSMOG,A(42711,111482),A(42713,111485),A(42707,111503),A(42715,111588),A(42710,111479),A(42714,111513),A(42712,111509),A(42709,111505)) -- Plaguefall/Theater of Pain
         SetCollector:AddVariant(90000,nil,col,set,"4",TRANSMOG,A(42720,112883),A(42722,111496),A(42716,111468),A(42724,111466),A(42719,112880),A(42723,112888),A(42721,112885),A(42718,111457)) -- Spires of Ascension/The Necrotic Wake
-    --    SetCollector:AddVariant(90000,nil,col,set,"DG_LEATHER_0901",TRANSMOG,A(),A(42686,111661),A(),A(),A(42683,111655),A(),A(42685,111645),A(42682,111668)) -- Da Other Side (1)
-    --    SetCollector:AddVariant(90000,nil,col,set,"DG_LEATHER_0901",TRANSMOG,A(42693,111521),A(),A(),A(),A(42692,111532),A(42696,111527),A(42694,111523),A()) -- Halls of Atonement (2)
-    --    SetCollector:AddVariant(90000,nil,col,set,"DG_LEATHER_0901",TRANSMOG,A(42684,111579),A(),A(42680,111580),A(42688,111582),A(),A(42687,111581),A(),A()) -- Mists of Tirna Scithe (1)
-    --    SetCollector:AddVariant(90000,nil,col,set,"DG_LEATHER_0901",TRANSMOG,A(42711,111482),A(42713,111485),A(),A(42715,111588),A(42710,111479),A(),A(),A()) -- Plaguefall (3)
-    --    SetCollector:AddVariant(90000,nil,col,set,"DG_LEATHER_0901",TRANSMOG,A(),A(42695,111555),A(42689,111535),A(42697,111547),A(),A(),A(),A(42691,111537)) -- Sanguine Depths (2)
-    --    SetCollector:AddVariant(90000,nil,col,set,"DG_LEATHER_0901",TRANSMOG,A(42720,112883),A(),A(),A(),A(42719,112880),A(42723,112888),A(42721,112885),A()) -- Spires of Ascension (4)
-    --    SetCollector:AddVariant(90000,nil,col,set,"DG_LEATHER_0901",TRANSMOG,A(),A(42722,111496),A(42716,111468),A(42724,111466),A(),A(),A(),A(42718,111457)) -- The Necrotic Wake (4)
-    --    SetCollector:AddVariant(90000,nil,col,set,"DG_LEATHER_0901",TRANSMOG,A(),A(),A(42707,111503),A(),A(),A(42714,111513),A(42712,111509),A(42709,111505)) -- Theater of Pain (3)
-    --set = SetCollector:AddSet(90000,nil,col,10901,"DG_MAIL_0901",MAIL,ANY,ANY,ANY)
-    --    SetCollector:AddVariant(90000,nil,col,set,"DG_MAIL_0901",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
-    --set = SetCollector:AddSet(90000,nil,col,10901,"DG_PLATE_0901",PLATE,ANY,ANY,ANY)
-    --    SetCollector:AddVariant(90000,nil,col,set,"DG_PLATE_0901",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+    set = SetCollector:AddSet(90000,nil,col,10901,"DG_MAIL_0901",MAIL,ANY,ANY,ANY)
+        SetCollector:AddVariant(90000,nil,col,set,"1",TRANSMOG,A(),A(41914,111444),A(41908,111669),A(41916,111446),A(41911,111646),A(41915,111445),A(41913,111656),A(41910,111662)) -- De Other Side/Mists of Tirna Scithe
+        SetCollector:AddVariant(90000,nil,col,set,"2",TRANSMOG,A(41930,111520),A(41932,111525),A(41926,111519),A(41934,111546),A(41929,111541),A(41933,111543),A(41931,111539),A(41928,111530)) -- Halls of Atonement/Sanguine Depths
+        SetCollector:AddVariant(90000,nil,col,set,"3",TRANSMOG,A(41897,111507),A(41899,111486),A(41894,111502),A(41901,111488),A(41896,111506),A(41900,111587),A(41898,111484),A(41895,111504)) -- Plaguefall/Theater of Pain
+        SetCollector:AddVariant(90000,nil,col,set,"4",TRANSMOG,A(41939,111463),A(41941,111459),A(41935,112877),A(41943,112891),A(41938,112882),A(41942,112887),A(41940,111495),A(41937,111469)) -- Spires of Ascension/The Necrotic Wake
+    set = SetCollector:AddSet(90000,nil,col,10901,"DG_PLATE_0901",PLATE,ANY,ANY,ANY)
+        SetCollector:AddVariant(90000,nil,col,set,"1",TRANSMOG,A(),A(42218,111448),A(42220,111663),A(42224,111670),A(42221,111450),A(42222,111647),A(42223,111449),A(42219,111657)) -- De Other Side/Mists of Tirna Scithe
+        SetCollector:AddVariant(90000,nil,col,set,"2",TRANSMOG,A(42235,111516),A(42236,111524),A(42238,111518),A(42242,111545),A(42239,111540),A(42240,111542),A(42241,111522),A(42237,111536)) -- Halls of Atonement/Sanguine Depths
+        SetCollector:AddVariant(90000,nil,col,set,"3",TRANSMOG,A(42067,111490),A(42068,111510),A(42210,111501),A(42214,111515),A(42211,111492),A(42212,111586),A(42213,111508),A(42209,111491)) -- Plaguefall/Theater of Pain
+        SetCollector:AddVariant(90000,nil,col,set,"4",TRANSMOG,A(42244,111494),A(42245,111472),A(42247,112876),A(42251,112890),A(42248,112881),A(42249,111460),A(42250,111464),A(42246,112878)) -- Spires of Ascension/The Necrotic Wake
 end
 
 
@@ -181,41 +182,89 @@ local function GetExpansionAppearances()
 
     -- Covenants
     -- Kyrian
-    --set = SetCollector:AddSet(90000,nil,col,10904,"EX_CLOTH_0904",CLOTH,ANY,ANY,ANY)
-    --    SetCollector:AddVariant(90000,nil,col,set,"EX_CLOTH_0904",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
-    --set = SetCollector:AddSet(90000,nil,col,10904,"EX_LEATHER_0904",LEATHER,ANY,ANY,ANY)
-    --    SetCollector:AddVariant(90000,nil,col,set,"EX_LEATHER_0904",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+    set = SetCollector:AddSet(90000,nil,col,10904,"EX_CLOTH_0904",CLOTH,ANY,ANY,ANY)
+        SetCollector:AddVariant(90000,nil,col,set,"CAMPAIGN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"RENOWN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"4",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+    set = SetCollector:AddSet(90000,nil,col,10904,"EX_LEATHER_0904",LEATHER,ANY,ANY,ANY)
+        SetCollector:AddVariant(90000,nil,col,set,"CAMPAIGN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"RENOWN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"4",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
     set = SetCollector:AddSet(90000,nil,col,10904,"EX_MAIL_0904",MAIL,ANY,ANY,ANY)
-        SetCollector:AddVariant(90000,nil,col,set,"EX_MAIL_0904",TRANSMOG,A(42911,112709))
-    --set = SetCollector:AddSet(90000,nil,col,10904,"EX_PLATE_0904",PLATE,ANY,ANY,ANY)
-    --c    SetCollector:AddVariant(90000,nil,col,set,"EX_PLATE_0904",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"CAMPAIGN",TRANSMOG,A(),A(),A(41374,108551),A(),A(),A(42911,112709),A(),A(42917,112711),A())
+        SetCollector:AddVariant(90000,nil,col,set,"RENOWN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"4",TRANSMOG,A(42913,112760),A(42919,112762),A(42901,112757),A(42925,112764),A(42910,112759),A(42922,112763),A(42916,112761),A(42907,112758))
+    set = SetCollector:AddSet(90000,nil,col,10904,"EX_PLATE_0904",PLATE,ANY,ANY,ANY)
+        SetCollector:AddVariant(90000,nil,col,set,"CAMPAIGN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"RENOWN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"4",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
     -- Venthyr
-    --[[set = SetCollector:AddSet(90000,nil,col,10903,"EX_CLOTH_0903",CLOTH,ANY,ANY,ANY)
-        SetCollector:AddVariant(90000,nil,col,set,"EX_CLOTH_0903",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+    set = SetCollector:AddSet(90000,nil,col,10903,"EX_CLOTH_0903",CLOTH,ANY,ANY,ANY)
+        SetCollector:AddVariant(90000,nil,col,set,"CAMPAIGN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"RENOWN",TRANSMOG,A(42110,113421),A(42112,113423),A(42105,113418),A(42114,113425),A(42109,113420),A(42113,113424),A(42111,113422),A(42108,113419))
+        SetCollector:AddVariant(90000,nil,col,set,"3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"4",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
     set = SetCollector:AddSet(90000,nil,col,10903,"EX_LEATHER_0903",LEATHER,ANY,ANY,ANY)
-        SetCollector:AddVariant(90000,nil,col,set,"EX_LEATHER_0903",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"CAMPAIGN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"RENOWN",TRANSMOG,A(42073,113367),A(42075,113369),A(42069,113364),A(42077,113371),A(42072,113366),A(42076,113370),A(42074,113368),A(42071,113365))
+        SetCollector:AddVariant(90000,nil,col,set,"3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"4",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
     set = SetCollector:AddSet(90000,nil,col,10903,"EX_MAIL_0903",MAIL,ANY,ANY,ANY)
-        SetCollector:AddVariant(90000,nil,col,set,"EX_MAIL_0903",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"CAMPAIGN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"RENOWN",TRANSMOG,A(42966,113394),A(42968,113396),A(42962,113391),A(42970,113398),A(42965,113393),A(42969,113397),A(42967,113395),A(42964,113392))
+        SetCollector:AddVariant(90000,nil,col,set,"3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"4",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
     set = SetCollector:AddSet(90000,nil,col,10903,"EX_PLATE_0903",PLATE,ANY,ANY,ANY)
-        SetCollector:AddVariant(90000,nil,col,set,"EX_PLATE_0903",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"CAMPAIGN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"RENOWN",TRANSMOG,A(41469,113325),A(41475,113330),A(41457,113326),A(41481,113332),A(41466,113328),A(41478,113331),A(41472,113329),A(41463,113327))
+        SetCollector:AddVariant(90000,nil,col,set,"3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"4",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
     -- Necrolord
-    --set = SetCollector:AddSet(90000,nil,col,10902,"EX_CLOTH_0902",CLOTH,ANY,ANY,ANY)
-        SetCollector:AddVariant(90000,nil,col,set,"EX_CLOTH_0902",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+    set = SetCollector:AddSet(90000,nil,col,10902,"EX_CLOTH_0902",CLOTH,ANY,ANY,ANY)
+        SetCollector:AddVariant(90000,nil,col,set,"CAMPAIGN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"RENOWN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"4",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
     set = SetCollector:AddSet(90000,nil,col,10902,"EX_LEATHER_0902",LEATHER,ANY,ANY,ANY)
-        SetCollector:AddVariant(90000,nil,col,set,"EX_LEATHER_0902",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"CAMPAIGN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"RENOWN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"4",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
     set = SetCollector:AddSet(90000,nil,col,10902,"EX_MAIL_0902",MAIL,ANY,ANY,ANY)
-        SetCollector:AddVariant(90000,nil,col,set,"EX_MAIL_0902",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"CAMPAIGN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"RENOWN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"4",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
     set = SetCollector:AddSet(90000,nil,col,10902,"EX_PLATE_0902",PLATE,ANY,ANY,ANY)
-        SetCollector:AddVariant(90000,nil,col,set,"EX_PLATE_0902",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"CAMPAIGN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"RENOWN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"4",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
     -- Nightfae
-    --set = SetCollector:AddSet(90000,nil,col,10901,"EX_CLOTH_0901",CLOTH,ANY,ANY,ANY)
-        SetCollector:AddVariant(90000,nil,col,set,"EX_CLOTH_0901",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+    set = SetCollector:AddSet(90000,nil,col,10901,"EX_CLOTH_0901",CLOTH,ANY,ANY,ANY)
+        SetCollector:AddVariant(90000,nil,col,set,"CAMPAIGN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"RENOWN",TRANSMOG,A(41879,112449),A(41876,112455),A(41877,112436),A(41874,112461),A(41880,112446),A(41875,112458),A(41878,112452),A(41881,112443)) --41883,112440 Chest alternate
+        SetCollector:AddVariant(90000,nil,col,set,"3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"4",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
     set = SetCollector:AddSet(90000,nil,col,10901,"EX_LEATHER_0901",LEATHER,ANY,ANY,ANY)
-        SetCollector:AddVariant(90000,nil,col,set,"EX_LEATHER_0901",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"CAMPAIGN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"RENOWN",TRANSMOG,A(41838,112568),A(41841,112577),A(41840,112574),A(41843,112583),A(41837,112565),A(41842,112580),A(41839,112571),A(41836,112562))    -- 41834,112556
+        SetCollector:AddVariant(90000,nil,col,set,"3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"4",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
     set = SetCollector:AddSet(90000,nil,col,10901,"EX_MAIL_0901",MAIL,ANY,ANY,ANY)
-        SetCollector:AddVariant(90000,nil,col,set,"EX_MAIL_0901",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"CAMPAIGN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"RENOWN",TRANSMOG,A(43223,113825),A(43226,113823),A(43225,113837),A(43228,113821),A(43222,113826),A(43227,113822),A(73224,113824),A(43221,113827))    -- 43219,113828
+        SetCollector:AddVariant(90000,nil,col,set,"3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"4",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
     set = SetCollector:AddSet(90000,nil,col,10901,"EX_PLATE_0901",PLATE,ANY,ANY,ANY)
-        SetCollector:AddVariant(90000,nil,col,set,"EX_PLATE_0901",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())]]
+        SetCollector:AddVariant(90000,nil,col,set,"CAMPAIGN",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"RENOWN",TRANSMOG,A(41261,112685),A(41270,112683),A(41285,112688),A(41264,112681),A(41276,112686),A(41267,112682),A(41273,112684),A(41279,112678))
+        SetCollector:AddVariant(90000,nil,col,set,"3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariant(90000,nil,col,set,"4",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
     
     -- Pre-patch Set
     set = SetCollector:AddSet(90000,nil,col,10900,"EX_CLOTH_A_0900",CLOTH,ANY,ANY,ALLIANCE)
