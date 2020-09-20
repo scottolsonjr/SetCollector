@@ -50,12 +50,79 @@ SetCollector.NOOBTAIN 			= false
 SetCollector.TRANSMOG 			= true
 SetCollector.NOTRANSMOG 		= false
 
+local WOW_VERSION = select(4, GetBuildInfo())
 
-function SetCollector:A(a, s, i, ...)
+
+function SetCollector:Appearance(a, ...)
 	local t = { 
 		a = a or 0,
-		s = s or 0,
-		i = i or 0
+		s = select(1, ...) or 0 -- Only support one source for now
 	}
 	return t
+end
+
+function SetCollector:CreateSet(collection, uid, title, armorType, class, faction)
+    local function CreateTooltipID(collection, id, title)
+        local identifier
+        if collection == RAID then
+            identifier = "T"..id
+        elseif collection == PVP then
+            identifier = "PVP"
+        end
+        return identifier
+    end
+    local set = {
+        ID = collection.Code..string.format("%03d", uid)..armorType.Code..class.Code..faction.Code,
+        Title = title,
+        TooltipID = CreateTooltipID(collection, uid, title),
+        ArmorType = armorType,
+        Class = class.Description,
+        Role = SetCollector.ANY.Description,
+        Faction = faction.Description,
+        Location = nil,
+        Variants = { }
+    }
+    return set
+end
+
+function SetCollector:CreateVariant(title, transmog, ...)
+    local variant = {
+        Title = title,
+        Transmog = transmog,
+        Appearances = { }
+    }
+    local function AddAppearances(...)
+        local n = select("#", ...)
+        for j = 1, n do
+            local v = select(j, ...)
+            if v.a and v.a > 0 and v.s then
+                local t = { ID = v.a, sourceID = v.s }
+                tinsert(variant.Appearances, t)
+            end
+        end
+    end
+    AddAppearances(...)
+    variant.Count = select('#', ...)
+    return variant
+end
+
+function SetCollector:AddVariantToSet(set, variant)
+    tinsert(set.Variants, variant)
+end
+
+function SetCollector:AddSetToDatabase(version, collection, set)
+	if WOW_VERSION >= version then
+        SetCollector.db.global.collections[collection.ID].Sets[set.ID] = set
+    end
+end
+
+function SetCollector:AddSetsToDatabase(version, collection, ...)
+	if WOW_VERSION >= version then
+        local n = select('#', ...)
+        if n > 0 then
+            for i=1, n do
+                SetCollector:AddSetToDatabase(version, collection, select(i, ...))
+            end
+        end
+    end
 end

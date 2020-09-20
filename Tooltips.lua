@@ -72,7 +72,7 @@ local function OnTooltipSetItemHook(tooltip, ...)
 			tooltip:AddLine("SetCollector Debug")
 			tooltip:AddDoubleLine("Appearance ID:",appearanceID)		-- Make double line
 			tooltip:AddDoubleLine("Source ID:",sourceID)
-			tooltip:AddDoubleLine("Item ID:",itemID)
+			--tooltip:AddDoubleLine("Item ID:",itemID)
 			tooltip:AddLine(" ")
 			tooltip:AddLine("All Available Sources:")
 			local sources = SetCollector:GetAppearanceSources(appearanceID)

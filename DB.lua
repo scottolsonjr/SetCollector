@@ -122,7 +122,7 @@ local function CreateCollections()
 	return collections
 end
 
-local function GetTooltipIdentifier(collection, id, title)
+local function GetTooltipIdentifierLegacy(collection, id, title)
 	local identifier
 	if collection == RAID then
 		identifier = "T"..id
@@ -138,7 +138,7 @@ function SetCollector:AddSet(minVersion, maxVersion, collection, id, title, armo
 			local tempSet = { }
 			tempSet = {
 				Title = title,
-				TooltipID = GetTooltipIdentifier(collection, id, title),
+				TooltipID = GetTooltipIdentifierLegacy(collection, id, title),
 				ArmorType = armorType,
 				Class = class.Description,
 				Role = role.Description,
@@ -154,7 +154,7 @@ function SetCollector:AddSet(minVersion, maxVersion, collection, id, title, armo
 	end
 end
 
-function SetCollector:AddVariant(minVersion, maxVersion, collection, set, title, transmog, ...)
+function SetCollector:AddVariantLegacy(minVersion, maxVersion, collection, set, title, transmog, ...)
 	if WOW_VERSION >= minVersion then
 		if maxVersion == nil or WOW_VERSION <= maxVersion then
 			local a, s, i = 0, 0, 0
@@ -253,7 +253,7 @@ function SetCollector:GetCollectedCount(collection, set, variant)
 	local collectedCount = 0
 	local db = SetCollector.db.global
 	if db.collections[collection].Sets[set].Variants[variant] then
-		local appearances = db.collections[collection].Sets[set].Variants[variant].Appearances
+		local appearances = db.collections[collection].Sets[set].Variants[variant].Appearances or { }
 		for i=1, #appearances do
 			local isCollected
 			local sourceID = appearances[i].sourceID
