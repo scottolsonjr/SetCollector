@@ -132,7 +132,7 @@ local function GetTooltipIdentifierLegacy(collection, id, title)
 	return identifier
 end
 
-function SetCollector:AddSet(minVersion, maxVersion, collection, id, title, armorType, class, role, faction, location, ...)
+function SetCollector:AddSetLegacy(minVersion, maxVersion, collection, id, title, armorType, class, role, faction, location, ...)
 	if WOW_VERSION >= minVersion then
 		if maxVersion == nil or WOW_VERSION <= maxVersion then
 			local tempSet = { }
