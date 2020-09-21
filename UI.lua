@@ -229,6 +229,7 @@ local function GetCollectionButton(index)
 end
 
 function SetCollectorCollectionButton_OnClick(self)
+	PlaySound(SOUNDKIT.UI_TRANSMOG_PAGE_TURN);
 	COLLECTION_COLLAPSED[self.Collection] = not COLLECTION_COLLAPSED[self.Collection]
 	SetCollector:UpdateCollections()
 end
@@ -432,7 +433,7 @@ local function SetItemButton(button, appearanceID, sourceID, itemID)
 			button.link = sLink
 			button.ItemID = itemID
 			button.icon:SetTexture(sTexture)
-			button.icon:SetVertexColor(1, 1, 1, 0.3)
+			button.icon:SetVertexColor(1, 1, 1, 0.5)
 			button.icon:SetDesaturated(true)
 			button.glow:Hide()
 			
