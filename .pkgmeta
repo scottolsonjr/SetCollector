@@ -3,28 +3,28 @@ package-as: SetCollector
 externals:
   Libs/LibStub:
     url: svn://svn.wowace.com/wow/libstub/mainline/trunk
-    tag: r1238-alpha
+    tag: r1239-alpha
   Libs/AceAddon-3.0:
     url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceAddon-3.0
-    tag: r1238-alpha
+    tag: r1239-alpha
   Libs/AceConfig-3.0:
     url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceConfig-3.0
-    tag: r1238-alpha
+    tag: r1239-alpha
   Libs/AceConsole-3.0:
     url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceConsole-3.0
-    tag: r1238-alpha
+    tag: r1239-alpha
   Libs/AceDB-3.0:
     url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceDB-3.0
-    tag: r1238-alpha
+    tag: r1239-alpha
   Libs/AceEvent-3.0:
     url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceEvent-3.0
-    tag: r1238-alpha
+    tag: r1239-alpha
   Libs/AceGUI-3.0:
     url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceGUI-3.0
-    tag: r1238-alpha
+    tag: r1239-alpha
   Libs/AceLocale-3.0:
     url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceLocale-3.0
-    tag: r1238-alpha
+    tag: r1239-alpha
   Libs/LibDBIcon-1.0:
     url: svn://svn.wowace.com/wow/libdbicon-1-0/mainline/trunk
     tag: latest
