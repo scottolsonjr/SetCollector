@@ -261,34 +261,35 @@ end
 
 function SetCollectorSetButton_OnClick(self, button, ...)
 	if ( IsShownInList(self) ) then
-	if ( button == "LeftButton" ) then
-		if ( self ~= SELECTED_BUTTON ) then
-			SetCollector:SetVariantTabs(self.Collection, self.Set, nil, self.Outfit)
-			SetHighlight(self)
-		else
-			SetCollector:SetVariantTabs()
-			--ClearItemButtons()
-			UnsetHighlight(self)
-		end
-	elseif ( not IsShiftKeyDown() and button == "RightButton" ) then
-		if ( self.Set and self.Set ~= "" ) then
-		  SetCollector:SetFavoriteSet(self)
-	  	if ( self == SELECTED_BUTTON ) then
-				SetCollector:SetVariantTabs(self.Collection, self.Set)
-			end
-		end
-	elseif ( IsShiftKeyDown() and button == "RightButton" ) then
-		if ( self.Set and self.Set ~= "" ) then
-		  SetCollector:SetHiddenSet(self)
-	  	if ( self == SELECTED_BUTTON ) then
-				SetCollector:SetVariantTabs(self.Collection, self.Set)
-				UnsetHighlight(self)
-			end
-			SetCollector:UpdateCollections()
-		end
-	else
-		SetCollector:Print(button)
-	end
+        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
+        if ( button == "LeftButton" ) then
+            if ( self ~= SELECTED_BUTTON ) then
+                SetCollector:SetVariantTabs(self.Collection, self.Set, nil, self.Outfit)
+                SetHighlight(self)
+            else
+                SetCollector:SetVariantTabs()
+                --ClearItemButtons()
+                UnsetHighlight(self)
+            end
+        elseif ( not IsShiftKeyDown() and button == "RightButton" ) then
+            if ( self.Set and self.Set ~= "" ) then
+            SetCollector:SetFavoriteSet(self)
+            if ( self == SELECTED_BUTTON ) then
+                    SetCollector:SetVariantTabs(self.Collection, self.Set)
+                end
+            end
+        elseif ( IsShiftKeyDown() and button == "RightButton" ) then
+            if ( self.Set and self.Set ~= "" ) then
+            SetCollector:SetHiddenSet(self)
+            if ( self == SELECTED_BUTTON ) then
+                    SetCollector:SetVariantTabs(self.Collection, self.Set)
+                    UnsetHighlight(self)
+                end
+                SetCollector:UpdateCollections()
+            end
+        else
+            SetCollector:Print(button)
+        end
 	end
 end
 
@@ -413,7 +414,7 @@ local function SetItemButton(button, appearanceID, sourceID, itemID)
 		local src = 0
 		local s = 1
 		local sources = SetCollector:GetAppearanceSources(appearanceID)
-		if sourceID == 0 and sources then
+		if sources then
 			src = sources[1].sourceID
 		else
 			src = sourceID
@@ -431,59 +432,19 @@ local function SetItemButton(button, appearanceID, sourceID, itemID)
 			button.link = sLink
 			button.ItemID = itemID
 			button.icon:SetTexture(sTexture)
-			button.icon:SetVertexColor(1, 1, 1, 1)
+			button.icon:SetVertexColor(1, 1, 1, 0.3)
 			button.icon:SetDesaturated(true)
-			button.count:SetText("")
-			button.count:Hide()
 			button.glow:Hide()
 			
 			local isCollected = SetCollector:IsAppearanceCollected(appearanceID)
 			if isCollected then
+                button.icon:SetVertexColor(1, 1, 1, 1)
 				button.icon:SetDesaturated(false)
-				button.count:SetText(i)
-			end
-			
-			local sourceCollected = SetCollector:IsSourceCollected(sourceID)
-			if sourceCollected then
 				local iRarity = select(3, GetItemInfo(sLink))
 				if iRarity then button.glow:SetVertexColor(GetItemQualityColor(iRarity)) end
 				button.glow:Show()
 			end
 
-			if not sources or #sources == 0 then
-				button.icon:SetVertexColor(1, 0.25, 0.25, 0.5)
-			end
-			
-			button:Show()
-		end
-	elseif button and itemID and itemID > 0 then
-		if SetCollector:GetDebug() then SetCollector:Print(itemID); end
-		_, sLink, _, _, _, _, _, _, _, sTexture = GetItemInfo(itemID)
-		local app = SetCollector:GetAppearanceInfo(sLink)
-		if sTexture then						-- Refactor
-			button.link = sLink
-			button.ItemID = src
-			button.icon:SetTexture(sTexture)
-			button.icon:SetVertexColor(1, 1, 1, 1)
-			button.icon:SetDesaturated(true)
-			button.count:SetText("")
-			button.count:Hide()
-			button.glow:Hide()
-			
-			local isCollected = SetCollector:IsAppearanceCollected(app)
-			if isCollected then
-				button.icon:SetDesaturated(false)
-				button.count:SetText(i)
-			end
-			
-			local sourceCollected = SetCollector:IsSourceCollected(sourceID)
-			if sourceCollected then
-				local iRarity = select(3, GetItemInfo(sLink))
-				if iRarity then button.glow:SetVertexColor(GetItemQualityColor(iRarity)) end
-				button.glow:Show()
-			end
-			
-			local sources = SetCollector:GetAppearanceSources(app);
 			if not sources or #sources == 0 then
 				button.icon:SetVertexColor(1, 0.25, 0.25, 0.5)
 			end
@@ -514,12 +475,10 @@ end
 --
 
 local function VariantTab_OnClick(self, button, ...)
+    PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
 	if ( button == "LeftButton" ) then 
 		SetCollector:SetVariantTab(_G["SetCollectorSetDisplay"], self:GetID());
-		--PlaySound("UI_Toybox_Tabs");			-- Throws Error 
-		--PlaySound("UI_Toybox_Tabs", nil, nil);	-- New Usage, Perhaps ID changed?
 	elseif ( button == "RightButton" ) then
-		SetCollector:Print("VariantTab_OnClick Right Click")
 		SetCollector:SetFavoriteVariant(self.Set, self:GetID())
 		SetCollector:UpdateCollections()
 		SetCollector:SetVariantTabs(self.Collection, self.Set, PanelTemplates_GetSelectedTab(self:GetParent()), self.Outfit)
@@ -704,7 +663,7 @@ function SetCollector:UpdateSelectedVariantTab(self)
 end
 
 function SetCollector:SetVariantTab(self, tab)
-	PanelTemplates_SetTab(self, tab);										--  Possible Taint Source
+	PanelTemplates_SetTab(self, tab);
 	SetCollector:UpdateSelectedVariantTab(self);
 end
 
@@ -1155,12 +1114,14 @@ end
 function SetCollector:HideUI()
 	local DEBUG = SetCollector:GetDebug()
 	if DEBUG then SetCollector:Print("Hiding SetCollector UI") end
+	PlaySound(SOUNDKIT.IG_CHARACTER_INFO_CLOSE);
 	HideUIPanel(frame)
 end
 
 function SetCollector:ShowUI()
 	local DEBUG = SetCollector:GetDebug()
 	if DEBUG then SetCollector:Print("Showing SetCollector UI") end
+	PlaySound(SOUNDKIT.IG_CHARACTER_INFO_OPEN);
 	ShowUIPanel(frame)
 end
 
