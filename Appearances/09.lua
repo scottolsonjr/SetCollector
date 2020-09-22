@@ -65,7 +65,7 @@ local NOTRANSMOG     = SetCollector.NOTRANSMOG
 -- LOCAL FUNCTIONS
 --
 
-local function A(...) return SetCollector:Appearance(...) end
+local function A(...) return SetCollector:CreateAppearance(...) end
 local function CreateSet(...) return SetCollector:CreateSet(...) end
 local function CreateVariant(...) return SetCollector:CreateVariant(...) end
 local function AddVariantToSet(...) return SetCollector:AddVariantToSet(...) end

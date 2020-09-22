@@ -51,7 +51,7 @@ local NOTRANSMOG     = SetCollector.NOTRANSMOG
 -- LOCAL FUNCTIONS
 --
 
-local function A(...) return SetCollector:Appearance(...) end
+local function A(...) return SetCollector:CreateAppearance(...) end
 
 local function GetLegendaries()
     local col = SetCollector.LEGENDARY

@@ -167,8 +167,8 @@ function SetCollector:AddVariantLegacy(minVersion, maxVersion, collection, set, 
 					local sLink = select(2,GetItemInfo(itemID))
 					a, s, i = SetCollector:GetAppearanceInfo(sLink)
 				else
-					a = v.a or 0
-					s = v.s or 0
+					a = v.ID or 0
+					s = v.sourceID or 0
 					i = v.i or 0
 				end
 				--[[if a == 0 and s == 0 and i and i ~= 0 then

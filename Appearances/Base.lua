@@ -53,11 +53,13 @@ SetCollector.NOTRANSMOG 		= false
 local WOW_VERSION = select(4, GetBuildInfo())
 
 
-function SetCollector:Appearance(a, ...)
+function SetCollector:CreateAppearance(ID, sourceID, ...)
 	local t = { 
-		a = a or 0,
-		s = select(1, ...) or 0 -- Only support one source for now
-	}
+        ID = ID or 0,
+        sourceID = sourceID or 0,
+		alternateIDs = {}
+    }
+    -- if select('#', ...) > 0 then -- add alternate appearance IDs
 	return t
 end
 
@@ -89,19 +91,8 @@ function SetCollector:CreateVariant(title, transmog, ...)
     local variant = {
         Title = title,
         Transmog = transmog,
-        Appearances = { }
+        Appearances = {...}
     }
-    local function AddAppearances(...)
-        local n = select("#", ...)
-        for j = 1, n do
-            local v = select(j, ...)
-            if v.a and v.a > 0 and v.s then
-                local t = { ID = v.a, sourceID = v.s }
-                tinsert(variant.Appearances, t)
-            end
-        end
-    end
-    AddAppearances(...)
     variant.Count = select('#', ...)
     return variant
 end
@@ -113,6 +104,12 @@ end
 function SetCollector:AddSetToDatabase(version, collection, set)
 	if WOW_VERSION >= version then
         SetCollector.db.global.collections[collection.ID].Sets[set.ID] = set
+        for i=1, #set.Variants do
+            for j=1, #set.Variants[i].Appearances do
+                local index = set.Variants[i].Appearances[j].ID
+                SetCollector.db.global.collections.Appearances[index] = { collection = collection.ID, set = set.ID, variant = j }
+            end
+        end
     end
 end
 
