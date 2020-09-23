@@ -280,7 +280,7 @@ end
 function SetCollector:GetVersion04Appearances(expansion)
     if expansion.v04 then
         -- Common
-        GetLegendaries()
+        --GetLegendaries()
         -- Class-specific
         GetDeathKnightAppearances()
         GetDruidAppearances()

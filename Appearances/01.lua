@@ -377,7 +377,7 @@ end
 function SetCollector:GetVersion01Appearances(expansion)
     if expansion.v01 then
         -- Common
-        GetLegendaries()
+        --GetLegendaries()
         GetDungeonAppearances()
         -- Class-specific
         GetDruidAppearances()

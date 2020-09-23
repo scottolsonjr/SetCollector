@@ -101,8 +101,8 @@ local function GetHolidayAppearances()
 				SetCollector:AddVariantLegacy(70000,nil,col,set,"GREEN",NOTRANSMOG,A(8812,15712,33967),A(8788,15662,33862),A(8791,15665,33868))
 				SetCollector:AddVariantLegacy(70000,nil,col,set,"PURPLE",NOTRANSMOG,A(8814,15714,33969),A(8788,15662,33862),A(8791,15665,33868))
 	
-	set = SetCollector:AddSetLegacy(70000,nil,col,2003241,"HO_HALLOWED_HELM",ANY,ANY,ANY,ANY)
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"BLACK",NOTRANSMOG,A(8613,15335,33292))
+	--set = SetCollector:AddSetLegacy(70000,nil,col,2003241,"HO_HALLOWED_HELM",ANY,ANY,ANY,ANY)
+	--			SetCollector:AddVariantLegacy(70000,nil,col,set,"BLACK",NOTRANSMOG,A(8613,15335,33292))
 	
 	--[[set = SetCollector:AddSetLegacy(70000,nil,col,2003242,"HO_HORSEMANS_HOOD",PLATE,ANY,ANY,ANY)
 				SetCollector:AddVariantLegacy(70000,nil,col,set,"L90",NOTRANSMOG,87569)

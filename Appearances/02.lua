@@ -225,7 +225,7 @@ end
 function SetCollector:GetVersion02Appearances(expansion)
     if expansion.v02 then
         -- Common
-        GetLegendaries()
+        --GetLegendaries()
         -- Class-specific
         GetDruidAppearances()
         GetHunterAppearances()

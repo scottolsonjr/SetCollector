@@ -93,13 +93,13 @@ end
 local function GetDeathKnightAppearances()
     local col, set, loc = ""
 
-    col = SetCollector.LEGENDARY
-    set = SetCollector:AddSetLegacy(70000,nil,col,50,"DK_LG_MELEE_110",PLATE,DEATHKNIGHT,MELEE,ANY)        -- Frost
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"DK_LG_MELEE_110",TRANSMOG,A(16823,76316),A(18947,76268),A(18047,76315),A(6904,76263),A(13785,76305))
-    set = SetCollector:AddSetLegacy(70000,nil,col,51,"DK_LG_MELEE_110",PLATE,DEATHKNIGHT,MELEE,ANY)        -- Unholy
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"DK_LG_MELEE_110",TRANSMOG,A(20431,78760),A(18947,76268),A(11353,76307),A(16827,76303),A(13785,76305))
-    set = SetCollector:AddSetLegacy(70000,nil,col,52,"DK_LG_TANK_110",PLATE,DEATHKNIGHT,TANK,ANY)            -- Blood
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"DK_LG_TANK_110",TRANSMOG,A(18947,76268),A(11888,76262),A(20434,76264),A(14758,76310),A(13785,76305))
+    --col = SetCollector.LEGENDARY
+    --set = SetCollector:AddSetLegacy(70000,nil,col,50,"DK_LG_MELEE_110",PLATE,DEATHKNIGHT,MELEE,ANY)        -- Frost
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"DK_LG_MELEE_110",TRANSMOG,A(16823,76316),A(18947,76268),A(18047,76315),A(6904,76263),A(13785,76305))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,51,"DK_LG_MELEE_110",PLATE,DEATHKNIGHT,MELEE,ANY)        -- Unholy
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"DK_LG_MELEE_110",TRANSMOG,A(20431,78760),A(18947,76268),A(11353,76307),A(16827,76303),A(13785,76305))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,52,"DK_LG_TANK_110",PLATE,DEATHKNIGHT,TANK,ANY)            -- Blood
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"DK_LG_TANK_110",TRANSMOG,A(18947,76268),A(11888,76262),A(20434,76264),A(14758,76310),A(13785,76305))
 
     col = SetCollector.RAID
     -- Antorus, the Burning Throne
@@ -140,11 +140,11 @@ end
 local function GetDemonHunterAppearances()
     local col, set, loc = ""
 
-    col = SetCollector.LEGENDARY
-    set = SetCollector:AddSetLegacy(70000,nil,col,50,"DH_LG_MELEE_110",LEATHER,DEMONHUNTER,MELEE,ANY)
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"DH_LG_MELEE_110",TRANSMOG,A(8342,78746),A(11154,78718),A(21430,78775),A(19854,78714),A(16625,78726))
-    set = SetCollector:AddSetLegacy(70000,nil,col,51,"DH_LG_TANK_110",LEATHER,DEMONHUNTER,TANK,ANY)
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"DH_LG_TANK_110",TRANSMOG,A(11787,78756),A(7741,78751),A(26599,78776),A(19854,78714),A(18100,80337))
+    --col = SetCollector.LEGENDARY
+    --set = SetCollector:AddSetLegacy(70000,nil,col,50,"DH_LG_MELEE_110",LEATHER,DEMONHUNTER,MELEE,ANY)
+    --    SetCollector:AddVariantLegacy(70000,nil,col,set,"DH_LG_MELEE_110",TRANSMOG,A(8342,78746),A(11154,78718),A(21430,78775),A(19854,78714),A(16625,78726))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,51,"DH_LG_TANK_110",LEATHER,DEMONHUNTER,TANK,ANY)
+    --    SetCollector:AddVariantLegacy(70000,nil,col,set,"DH_LG_TANK_110",TRANSMOG,A(11787,78756),A(7741,78751),A(26599,78776),A(19854,78714),A(18100,80337))
 
     col = SetCollector.RAID
     -- Antorus, the Burning Throne
@@ -185,15 +185,15 @@ end
 local function GetDruidAppearances()
     local col, set, loc = ""
 
-    col = SetCollector.LEGENDARY
-    set = SetCollector:AddSetLegacy(70000,nil,col,50,"DR_LG_CASTER_110",LEATHER,DRUID,CASTER,ANY)        -- Balance
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"DR_LG_CASTER_110",TRANSMOG,A(6935,78747,137062),A(13520,78719,137015),A(12554,78777,137092),A(19854,78714,133976),A(15543,78727,137023))
-    set = SetCollector:AddSetLegacy(70000,nil,col,50,"DR_LG_MELEE_110",LEATHER,DRUID,MELEE,ANY)        -- Feral
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"DR_LG_MELEE_110",TRANSMOG,A(13520,78719,137015),A(25591,78741,137056),A(6468,78779,137094),A(19854,78714,133976),A(12217,78728,137024))
-    set = SetCollector:AddSetLegacy(70000,nil,col,50,"DR_LG_TANK_110",LEATHER,DRUID,TANK,ANY)            -- Guardian
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"DR_LG_TANK_110",TRANSMOG,A(13520,78719,137015),A(25591,78741,137056),A(19854,78714,133976),A(17323,78752,137067),A(5689,78729,137025))
-    set = SetCollector:AddSetLegacy(70000,nil,col,50,"DR_LG_HEALER_110",LEATHER,DRUID,HEALER,ANY)            -- Restoration
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"DR_LG_HEALER_110",TRANSMOG,A(20969,78757,137072),A(13520,78719,137015),A(27243,78780,137095),A(19027,78763,137078),A(25585,78730,137026))
+    --col = SetCollector.LEGENDARY
+    --set = SetCollector:AddSetLegacy(70000,nil,col,50,"DR_LG_CASTER_110",LEATHER,DRUID,CASTER,ANY)        -- Balance
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"DR_LG_CASTER_110",TRANSMOG,A(6935,78747,137062),A(13520,78719,137015),A(12554,78777,137092),A(19854,78714,133976),A(15543,78727,137023))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,50,"DR_LG_MELEE_110",LEATHER,DRUID,MELEE,ANY)        -- Feral
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"DR_LG_MELEE_110",TRANSMOG,A(13520,78719,137015),A(25591,78741,137056),A(6468,78779,137094),A(19854,78714,133976),A(12217,78728,137024))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,50,"DR_LG_TANK_110",LEATHER,DRUID,TANK,ANY)            -- Guardian
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"DR_LG_TANK_110",TRANSMOG,A(13520,78719,137015),A(25591,78741,137056),A(19854,78714,133976),A(17323,78752,137067),A(5689,78729,137025))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,50,"DR_LG_HEALER_110",LEATHER,DRUID,HEALER,ANY)            -- Restoration
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"DR_LG_HEALER_110",TRANSMOG,A(20969,78757,137072),A(13520,78719,137015),A(27243,78780,137095),A(19027,78763,137078),A(25585,78730,137026))
 
     col = SetCollector.RAID
     -- Antorus, the Burning Throne
@@ -234,13 +234,13 @@ end
 local function GetHunterAppearances()
     local col, set, loc = ""
 
-    col = SetCollector.LEGENDARY
-    set = SetCollector:AddSetLegacy(70000,nil,col,52,"HU_LG_RANGED_110",MAIL,HUNTER,RANGED,ANY)        -- Beastmastery
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"HU_LG_RANGED_110",TRANSMOG,A(8610,78749,137064),A(16241,78786,137101),A(16240,78765,137080),A(8006,76319,132466),A(21190,78889,137227))
-    set = SetCollector:AddSetLegacy(70000,nil,col,50,"HU_LG_RANGED_110",MAIL,HUNTER,RANGED,ANY)        -- Marksmanship
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"HU_LG_RANGED_110",TRANSMOG,A(8610,78749,137064),A(15732,82382,141353),A(12489,78766,137081),A(8006,76319,132466),A(12609,78737,137033))
-    set = SetCollector:AddSetLegacy(70000,nil,col,51,"HU_LG_MELEE_110",MAIL,HUNTER,MELEE,ANY)            -- Survival
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"HU_LG_MELEE_110",TRANSMOG,A(8610,78749,137064),A(16241,78786,137101),A(5429,78767,137082),A(8006,76319,132466),A(8348,78738,137034))
+    --col = SetCollector.LEGENDARY
+    --set = SetCollector:AddSetLegacy(70000,nil,col,52,"HU_LG_RANGED_110",MAIL,HUNTER,RANGED,ANY)        -- Beastmastery
+    --    SetCollector:AddVariantLegacy(70000,nil,col,set,"HU_LG_RANGED_110",TRANSMOG,A(8610,78749,137064),A(16241,78786,137101),A(16240,78765,137080),A(8006,76319,132466),A(21190,78889,137227))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,50,"HU_LG_RANGED_110",MAIL,HUNTER,RANGED,ANY)        -- Marksmanship
+    --    SetCollector:AddVariantLegacy(70000,nil,col,set,"HU_LG_RANGED_110",TRANSMOG,A(8610,78749,137064),A(15732,82382,141353),A(12489,78766,137081),A(8006,76319,132466),A(12609,78737,137033))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,51,"HU_LG_MELEE_110",MAIL,HUNTER,MELEE,ANY)            -- Survival
+    --    SetCollector:AddVariantLegacy(70000,nil,col,set,"HU_LG_MELEE_110",TRANSMOG,A(8610,78749,137064),A(16241,78786,137101),A(5429,78767,137082),A(8006,76319,132466),A(8348,78738,137034))
 
     col = SetCollector.RAID
     -- Antorus, the Burning Throne
@@ -281,13 +281,13 @@ end
 local function GetMageAppearances()
     local col, set, loc = ""
 
-    col = SetCollector.LEGENDARY
-    set = SetCollector:AddSetLegacy(70000,nil,col,52,"MA_LG_CASTER_110",CLOTH,MAGE,CASTER,ANY)        -- Arcane
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"MA_LG_CASTER_110",TRANSMOG,A(12341,78708,133977),A(6358,76281,132413),A(5240,76304,132442),A(12777,76308,132451),A(7318,76312,132455))
-    set = SetCollector:AddSetLegacy(70000,nil,col,50,"MA_LG_CASTER_110",CLOTH,MAGE,CASTER,ANY)        -- Fire
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"MA_LG_CASTER_110",TRANSMOG,A(3456,76439,132863),A(12341,78708,133977),A(15880,76275,132406),A(20215,76311,132454),A(7318,76312,132455))
-    set = SetCollector:AddSetLegacy(70000,nil,col,51,"MA_LG_CASTER_110",CLOTH,MAGE,CASTER,ANY)        -- Frost
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"MA_LG_CASTER_110",TRANSMOG,A(12341,78708,133977),A(7193,79506,138140),A(11598,76279,132411),A(16439,78710,133970),A(7318,76312,132455))
+    --col = SetCollector.LEGENDARY
+    --set = SetCollector:AddSetLegacy(70000,nil,col,52,"MA_LG_CASTER_110",CLOTH,MAGE,CASTER,ANY)        -- Arcane
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"MA_LG_CASTER_110",TRANSMOG,A(12341,78708,133977),A(6358,76281,132413),A(5240,76304,132442),A(12777,76308,132451),A(7318,76312,132455))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,50,"MA_LG_CASTER_110",CLOTH,MAGE,CASTER,ANY)        -- Fire
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"MA_LG_CASTER_110",TRANSMOG,A(3456,76439,132863),A(12341,78708,133977),A(15880,76275,132406),A(20215,76311,132454),A(7318,76312,132455))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,51,"MA_LG_CASTER_110",CLOTH,MAGE,CASTER,ANY)        -- Frost
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"MA_LG_CASTER_110",TRANSMOG,A(12341,78708,133977),A(7193,79506,138140),A(11598,76279,132411),A(16439,78710,133970),A(7318,76312,132455))
 
     col = SetCollector.RAID
     -- Antorus, the Burning Throne
@@ -328,13 +328,13 @@ end
 local function GetMonkAppearances()
     local col, set, loc = ""
 
-    col = SetCollector.LEGENDARY
-    set = SetCollector:AddSetLegacy(70000,nil,col,52,"MO_LG_TANK_110",LEATHER,MONK,TANK,ANY)        -- Brewmaster
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"MO_LG_TANK_110",TRANSMOG,A(18147,78748),A(23935,78720),A(19854,78714),A(10290,78764),A(20250,78731))
-    set = SetCollector:AddSetLegacy(70000,nil,col,50,"MO_LG_HEALER_110",LEATHER,MONK,HEALER,ANY)        -- Mistweaver
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"MO_LG_HEALER_110",TRANSMOG,A(26598,78758),A(12414,78781),A(19027,80336),A(11177,78753),A(17416,78732))
-    set = SetCollector:AddSetLegacy(70000,nil,col,51,"MO_LG_MELEE_110",LEATHER,MONK,MELEE,ANY)        -- Windwalker
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"MO_LG_MELEE_110",TRANSMOG,A(17491,78723),A(9805,78782),A(15533,78742),A(19854,78714),A(7107,78733))
+    --col = SetCollector.LEGENDARY
+    --set = SetCollector:AddSetLegacy(70000,nil,col,52,"MO_LG_TANK_110",LEATHER,MONK,TANK,ANY)        -- Brewmaster
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"MO_LG_TANK_110",TRANSMOG,A(18147,78748),A(23935,78720),A(19854,78714),A(10290,78764),A(20250,78731))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,50,"MO_LG_HEALER_110",LEATHER,MONK,HEALER,ANY)        -- Mistweaver
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"MO_LG_HEALER_110",TRANSMOG,A(26598,78758),A(12414,78781),A(19027,80336),A(11177,78753),A(17416,78732))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,51,"MO_LG_MELEE_110",LEATHER,MONK,MELEE,ANY)        -- Windwalker
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"MO_LG_MELEE_110",TRANSMOG,A(17491,78723),A(9805,78782),A(15533,78742),A(19854,78714),A(7107,78733))
 
     col = SetCollector.RAID
     -- Antorus, the Burning Throne
@@ -377,13 +377,13 @@ end
 local function GetPaladinAppearances()
     local col, set, loc = ""
 
-    col = SetCollector.LEGENDARY
-    set = SetCollector:AddSetLegacy(70000,nil,col,50,"PA_LG_HEALER_110",PLATE,PALADIN,HEALER,ANY)        -- Holy
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"PA_LG_HEALER_110",TRANSMOG,A(23720,78761),A(8370,78790),A(4129,78744),A(8489,78771),A(13785,76305))
-    set = SetCollector:AddSetLegacy(70000,nil,col,51,"PA_LG_TANK_110",PLATE,PALADIN,TANK,ANY)        -- Protection
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"PA_LG_TANK_110",TRANSMOG,A(7784,78721),A(8370,78790),A(8489,78771),A(21048,78755),A(13785,76305))
-    set = SetCollector:AddSetLegacy(70000,nil,col,52,"PA_LG_MELEE_110",PLATE,PALADIN,MELEE,ANY)        -- Retribution
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"PA_LG_MELEE_110",TRANSMOG,A(10703,78750),A(18877,78724),A(19946,81795),A(8489,78771),A(13785,76305))
+    --col = SetCollector.LEGENDARY
+    --set = SetCollector:AddSetLegacy(70000,nil,col,50,"PA_LG_HEALER_110",PLATE,PALADIN,HEALER,ANY)        -- Holy
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"PA_LG_HEALER_110",TRANSMOG,A(23720,78761),A(8370,78790),A(4129,78744),A(8489,78771),A(13785,76305))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,51,"PA_LG_TANK_110",PLATE,PALADIN,TANK,ANY)        -- Protection
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"PA_LG_TANK_110",TRANSMOG,A(7784,78721),A(8370,78790),A(8489,78771),A(21048,78755),A(13785,76305))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,52,"PA_LG_MELEE_110",PLATE,PALADIN,MELEE,ANY)        -- Retribution
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"PA_LG_MELEE_110",TRANSMOG,A(10703,78750),A(18877,78724),A(19946,81795),A(8489,78771),A(13785,76305))
 
     col = SetCollector.RAID
     -- Antorus, the Burning Throne
@@ -424,13 +424,13 @@ end
 local function GetPriestAppearances()
     local col, set, loc = ""
 
-    col = SetCollector.LEGENDARY
-    set = SetCollector:AddSetLegacy(70000,nil,col,50,"PR_LG_CASTER_110",CLOTH,PRIEST,CASTER,ANY)        -- Shadow
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"PR_LG_CASTER_110",TRANSMOG,A(15918,78706),A(8351,78709),A(12788,78717),A(6939,78713),A(7318,76312))
-    set = SetCollector:AddSetLegacy(70000,nil,col,51,"PR_LG_HEALER_110",CLOTH,PRIEST,HEALER,ANY)        -- Holy
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"PR_LG_HEALER_110",TRANSMOG,A(3006,78815),A(5230,78716),A(5902,78712),A(19872,78707),A(7318,76312))
-    set = SetCollector:AddSetLegacy(70000,nil,col,52,"PR_LG_HEALER_110",CLOTH,PRIEST,HEALER,ANY)        -- Discipline
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"PR_LG_HEALER_110",TRANSMOG,A(6038,76438),A(7245,78715),A(15368,78705),A(8612,78711),A(7318,76312))
+    --col = SetCollector.LEGENDARY
+    --set = SetCollector:AddSetLegacy(70000,nil,col,50,"PR_LG_CASTER_110",CLOTH,PRIEST,CASTER,ANY)        -- Shadow
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"PR_LG_CASTER_110",TRANSMOG,A(15918,78706),A(8351,78709),A(12788,78717),A(6939,78713),A(7318,76312))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,51,"PR_LG_HEALER_110",CLOTH,PRIEST,HEALER,ANY)        -- Holy
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"PR_LG_HEALER_110",TRANSMOG,A(3006,78815),A(5230,78716),A(5902,78712),A(19872,78707),A(7318,76312))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,52,"PR_LG_HEALER_110",CLOTH,PRIEST,HEALER,ANY)        -- Discipline
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"PR_LG_HEALER_110",TRANSMOG,A(6038,76438),A(7245,78715),A(15368,78705),A(8612,78711),A(7318,76312))
 
     col = SetCollector.RAID
     -- Antorus, the Burning Throne
@@ -472,15 +472,15 @@ end
 local function GetRogueAppearances()
     local col, set, loc = ""
 
-    col = SetCollector.LEGENDARY
-    set = SetCollector:AddSetLegacy(70000,nil,col,50,"RO_LG_MELEE_110",LEATHER,ROGUE,CASTER,ANY)        -- Assassination
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"RO_LG_MELEE_110",TRANSMOG,A(19454,78725),A(26599,78763),A(19854,78714),A(4464,78754),A(15486,78734))
-    set = SetCollector:AddSetLegacy(70000,nil,col,51,"RO_LG_MELEE_110",LEATHER,ROGUE,HEALER,ANY)        -- Outlaw
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"RO_LG_MELEE_110",TRANSMOG,A(16717,78784),A(12239,82377),A(19854,78714),A(4464,78754),A(5542,78735))
-    set = SetCollector:AddSetLegacy(70000,nil,col,52,"RO_LG_MELEE_110",LEATHER,ROGUE,MELEE,ANY)        -- Subtlety
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"RO_LG_MELEE_110",TRANSMOG,A(19454,78725),A(17341,78785),A(19854,78714),A(4464,78754),A(11721,78736))
-    set = SetCollector:AddSetLegacy(70000,nil,col,30,"LG_ROGUE_85",ANY,ROGUE,ANY,ANY)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(16977,39516),A(16977,39517))
+    --col = SetCollector.LEGENDARY
+    --set = SetCollector:AddSetLegacy(70000,nil,col,50,"RO_LG_MELEE_110",LEATHER,ROGUE,CASTER,ANY)        -- Assassination
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"RO_LG_MELEE_110",TRANSMOG,A(19454,78725),A(26599,78763),A(19854,78714),A(4464,78754),A(15486,78734))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,51,"RO_LG_MELEE_110",LEATHER,ROGUE,HEALER,ANY)        -- Outlaw
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"RO_LG_MELEE_110",TRANSMOG,A(16717,78784),A(12239,82377),A(19854,78714),A(4464,78754),A(5542,78735))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,52,"RO_LG_MELEE_110",LEATHER,ROGUE,MELEE,ANY)        -- Subtlety
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"RO_LG_MELEE_110",TRANSMOG,A(19454,78725),A(17341,78785),A(19854,78714),A(4464,78754),A(11721,78736))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,30,"LG_ROGUE_85",ANY,ROGUE,ANY,ANY)
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(16977,39516),A(16977,39517))
 
     col = SetCollector.RAID
     -- Antorus, the Burning Throne
@@ -523,7 +523,7 @@ end
 local function GetShamanAppearances()
     local col, set, loc = ""
 
-    col = SetCollector.ARTIFACT
+    --col = SetCollector.ARTIFACT
     --[[set = SetCollector:AddSetLegacy(70000,nil,col,10,"SH_AR_CASTER_10",MAIL,SHAMAN,CASTER,ANY)
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"ONE",TRANSMOG,A(27742,76534,128935),A(29134,77278,128936))
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"TWO",TRANSMOG,A(27870,77653,128935),A(29135,77279,128936))
@@ -546,13 +546,13 @@ local function GetShamanAppearances()
     set = SetCollector:AddSetLegacy(70000,nil,col,11,"SH_AR_HEALER_11",MAIL,SHAMAN,HEALER,ANY)
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"ONE",TRANSMOG,A(27743,77675,128911),A(28097,77694,128934))]]--
 
-    col = SetCollector.LEGENDARY
-    set = SetCollector:AddSetLegacy(70000,nil,col,50,"SH_LG_CASTER_110",MAIL,SHAMAN,CASTER,ANY)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"SH_LG_CASTER_110",TRANSMOG,A(6844,78759),A(10114,78787),A(17407,78768),A(8006,76319),A(16160,78739))
-    set = SetCollector:AddSetLegacy(70000,nil,col,51,"SH_LG_HEALER_110",MAIL,SHAMAN,HEALER,ANY)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"SH_LG_CASTER_110",TRANSMOG,A(8443,78789),A(9923,78743),A(4573,78770),A(8006,76319),A(15925,78740))
-    set = SetCollector:AddSetLegacy(70000,nil,col,52,"SH_LG_MELEE_110",MAIL,SHAMAN,MELEE,ANY)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"SH_LG_CASTER_110",TRANSMOG,A(18562,79374),A(15919,78769),A(13592,78788),A(8006,76319),A(19925,79500))
+    --col = SetCollector.LEGENDARY
+    --set = SetCollector:AddSetLegacy(70000,nil,col,50,"SH_LG_CASTER_110",MAIL,SHAMAN,CASTER,ANY)
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"SH_LG_CASTER_110",TRANSMOG,A(6844,78759),A(10114,78787),A(17407,78768),A(8006,76319),A(16160,78739))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,51,"SH_LG_HEALER_110",MAIL,SHAMAN,HEALER,ANY)
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"SH_LG_CASTER_110",TRANSMOG,A(8443,78789),A(9923,78743),A(4573,78770),A(8006,76319),A(15925,78740))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,52,"SH_LG_MELEE_110",MAIL,SHAMAN,MELEE,ANY)
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"SH_LG_CASTER_110",TRANSMOG,A(18562,79374),A(15919,78769),A(13592,78788),A(8006,76319),A(19925,79500))
 
     col = SetCollector.RAID
     -- Antorus, the Burning Throne
@@ -616,13 +616,13 @@ local function GetWarlockAppearances()
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"ONE",TRANSMOG,A(27902,74595,128941))
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"TWO",TRANSMOG,A(27900,74596,128941))]]--
     
-    col = SetCollector.LEGENDARY
-    set = SetCollector:AddSetLegacy(70000,nil,col,50,"WK_LG_CASTER_110",CLOTH,WARLOCK,CASTER,ANY)        -- Destruction
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"WK_LG_CASTER_110",TRANSMOG,A(24713,76267),A(1466,76276),A(21312,76313),A(14774,76251),A(7318,76312))
-    set = SetCollector:AddSetLegacy(70000,nil,col,51,"WK_LG_CASTER_110",CLOTH,WARLOCK,CASTER,ANY)        -- Demonology
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"WK_LG_CASTER_110",TRANSMOG,A(18071,76273),A(12774,76270),A(14717,76266),A(14774,76251),A(7318,76312))
-    set = SetCollector:AddSetLegacy(70000,nil,col,52,"WK_LG_CASTER_110",CLOTH,WARLOCK,CASTER,ANY)        -- Affliction
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"WK_LG_CASTER_110",TRANSMOG,A(12764,76274),A(26163,76272),A(3131,76314),A(14774,76251),A(7318,76312))
+    --col = SetCollector.LEGENDARY
+    --set = SetCollector:AddSetLegacy(70000,nil,col,50,"WK_LG_CASTER_110",CLOTH,WARLOCK,CASTER,ANY)        -- Destruction
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"WK_LG_CASTER_110",TRANSMOG,A(24713,76267),A(1466,76276),A(21312,76313),A(14774,76251),A(7318,76312))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,51,"WK_LG_CASTER_110",CLOTH,WARLOCK,CASTER,ANY)        -- Demonology
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"WK_LG_CASTER_110",TRANSMOG,A(18071,76273),A(12774,76270),A(14717,76266),A(14774,76251),A(7318,76312))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,52,"WK_LG_CASTER_110",CLOTH,WARLOCK,CASTER,ANY)        -- Affliction
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"WK_LG_CASTER_110",TRANSMOG,A(12764,76274),A(26163,76272),A(3131,76314),A(14774,76251),A(7318,76312))
 
     col = SetCollector.RAID
     -- Antorus, the Burning Throne
@@ -665,13 +665,13 @@ local function GetWarriorAppearances()
     local set = ""
     local loc = ""
 
-    col = SetCollector.LEGENDARY
-    set = SetCollector:AddSetLegacy(70000,nil,col,50,"WR_LG_MELEE_110",PLATE,WARRIOR,MELEE,ANY)        -- Arms
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"WR_LG_MELEE_110",TRANSMOG,A(15788,78792),A(20175,78745),A(26953,78772),A(11590,78762),A(13785,76305))
-    set = SetCollector:AddSetLegacy(70000,nil,col,51,"WR_LG_MELEE_110",PLATE,WARRIOR,MELEE,ANY)        -- Fury
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"WR_LG_MELEE_110",TRANSMOG,A(7730,78773),A(18867,78812),A(15788,78792),A(26953,78772),A(13785,76305))
-    set = SetCollector:AddSetLegacy(70000,nil,col,52,"WR_LG_TANK_110",PLATE,WARRIOR,TANK,ANY)        -- Protection
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"WR_LG_TANK_110",TRANSMOG,A(11157,78722),A(15788,78792),A(6335,78793),A(15910,78774),A(13785,76305))
+    --col = SetCollector.LEGENDARY
+    --set = SetCollector:AddSetLegacy(70000,nil,col,50,"WR_LG_MELEE_110",PLATE,WARRIOR,MELEE,ANY)        -- Arms
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"WR_LG_MELEE_110",TRANSMOG,A(15788,78792),A(20175,78745),A(26953,78772),A(11590,78762),A(13785,76305))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,51,"WR_LG_MELEE_110",PLATE,WARRIOR,MELEE,ANY)        -- Fury
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"WR_LG_MELEE_110",TRANSMOG,A(7730,78773),A(18867,78812),A(15788,78792),A(26953,78772),A(13785,76305))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,52,"WR_LG_TANK_110",PLATE,WARRIOR,TANK,ANY)        -- Protection
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"WR_LG_TANK_110",TRANSMOG,A(11157,78722),A(15788,78792),A(6335,78793),A(15910,78774),A(13785,76305))
 
     col = SetCollector.RAID
     -- Antorus, the Burning Throne

@@ -115,12 +115,12 @@ local function GetExpansionAppearances()
     set = SetCollector:AddSetLegacy(70000,nil,col,10601,"GA_HORDE_SET",ANY,ANY,ANY,HORDE)
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"GA_HORDE_SET",TRANSMOG,A(24054),A(24051),A(24052),A(24817),A(24053),A(24050),A(24854))
                 
-    set = SetCollector:AddSetLegacy(70000,nil,col,10600,"OTH_SHIPYARD_100",ANY,ANY,ANY,ALLIANCE)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"CAPTAIN",TRANSMOG,A(26891,73444))
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"FLEETCOMMANDER",TRANSMOG,A(26888,73447))
-    set = SetCollector:AddSetLegacy(70000,nil,col,10600,"OTH_SHIPYARD_100",ANY,ANY,ANY,HORDE)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"CAPTAIN",TRANSMOG,A(26892,73445))
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"FLEETCOMMANDER",TRANSMOG,A(26889,73446))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,10600,"OTH_SHIPYARD_100",ANY,ANY,ANY,ALLIANCE)
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"CAPTAIN",TRANSMOG,A(26891,73444))
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"FLEETCOMMANDER",TRANSMOG,A(26888,73447))
+    --set = SetCollector:AddSetLegacy(70000,nil,col,10600,"OTH_SHIPYARD_100",ANY,ANY,ANY,HORDE)
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"CAPTAIN",TRANSMOG,A(26892,73445))
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"FLEETCOMMANDER",TRANSMOG,A(26889,73446))
 end
 
 

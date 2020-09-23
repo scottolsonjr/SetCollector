@@ -402,7 +402,7 @@ local function GetOtherAppearances()
 
 function SetCollector:GetVersion08Appearances(expansion)
     if expansion.v08 then
-        GetLegendaries()
+        --GetLegendaries()
         GetRaidAppearances()
         GetDungeonAppearances()
         GetPvpAppearances()
