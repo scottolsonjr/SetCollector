@@ -681,7 +681,7 @@ filterButton:SetAttribute("enableMouse","true")
 filterButton:SetAttribute("parentKey","setFilter")
 
 local function GetFilters()
-	SHOW_CLASS_SPEC 			= SetCollector.db.char.filters.specialization
+	--SHOW_CLASS_SPEC 			= SetCollector.db.char.filters.specialization
 	SHOW_ONLY_FAVORITES 	= SetCollector.db.char.filters.favorites
 	SHOW_ONLY_OBTAINABLE 	= SetCollector.db.char.filters.obtainable
 	SHOW_ONLY_TRANSMOG 		= SetCollector.db.char.filters.transmog
@@ -689,7 +689,7 @@ local function GetFilters()
 end
 
 local function SetFilters()
-	SetCollector.db.char.filters.specialization		= SHOW_CLASS_SPEC
+	--SetCollector.db.char.filters.specialization		= SHOW_CLASS_SPEC
 	SetCollector.db.char.filters.favorites				= SHOW_ONLY_FAVORITES
 	SetCollector.db.char.filters.obtainable				= SHOW_ONLY_OBTAINABLE
 	SetCollector.db.char.filters.transmog					= SHOW_ONLY_TRANSMOG
@@ -736,16 +736,16 @@ local function SetFilterOptions(classIndex)
 	SHOW_CLASS_SPEC = classIndex
 end
 
-local function GetFilterOptions()
-	if SHOW_CLASS_SPEC == 0 or SHOW_CLASS_SPEC == nil then
-		local currentSpec = GetSpecialization();
-		if currentSpec == nil then currentSpec = 0 end
-		SHOW_CLASS_SPEC = currentSpec + 2
-	end
-	return SHOW_CLASS_SPEC;
-end
+--local function GetFilterOptions()
+--	if SHOW_CLASS_SPEC == 0 or SHOW_CLASS_SPEC == nil then
+--		local currentSpec = GetSpecialization();
+--		if currentSpec == nil then currentSpec = 0 end
+--		SHOW_CLASS_SPEC = currentSpec + 2
+--	end
+--	return SHOW_CLASS_SPEC;
+--end
 
-local function UpdateFilterString()
+--[[local function UpdateFilterString()
 	local name = ALL;
 	local currFilter = GetFilterOptions();
 
@@ -753,13 +753,13 @@ local function UpdateFilterString()
 		name = UnitClass("player");
 	elseif currFilter == NO_CLASS_FILTER then
 		name = ALL_CLASSES
-	else -- Spec
-		local _, specName, _, icon = GetSpecializationInfo(currFilter - LE_LOOT_FILTER_SPEC1 + 1);
-		name = specName;
+	--else -- Spec
+	--	local _, specName, _, icon = GetSpecializationInfo(currFilter - LE_LOOT_FILTER_SPEC1 + 1);
+	--	name = specName;
 	end
 	
 	UIDropDownMenu_SetText(filterButton, name);
-end
+end]]
 
 local function SetFilter(self, classIndex)
 	if ( classIndex == "favorites" ) then
@@ -770,14 +770,14 @@ local function SetFilter(self, classIndex)
 		SHOW_ONLY_TRANSMOG = not SHOW_ONLY_TRANSMOG
 	elseif ( classIndex == "hidden" ) then
 		SHOW_HIDDEN = not SHOW_HIDDEN
-	else
-		SetFilterOptions(classIndex);
+	--else
+	--	SetFilterOptions(classIndex);
 	end
 	SetFilters()
 	if frame:IsShown() then
 		--SetCollector:Print("Setting Filter, Updating UI")
 		SetCollector:UpdateCollections();
-		UpdateFilterString()
+		--UpdateFilterString()
 	
 		-- Clear Selection
 		UnsetHighlight(SELECTED_BUTTON)
@@ -787,7 +787,7 @@ local function SetFilter(self, classIndex)
 	end
 end
 
-local function GetFilteredRole()
+--[[local function GetFilteredRole()
   local currFilter = GetFilterOptions()
 	local specID = 0
 	
@@ -800,42 +800,42 @@ local function GetFilteredRole()
 		specID = id
   	return GetSetSpecializationRole(specID)
 	end
-end
+end]]
 
 local function InitFilter()
 	local info = UIDropDownMenu_CreateInfo();
-	local currFilter = GetFilterOptions();
-	local className = UnitClass("player");
-	
-	UpdateFilterString()
+	--local currFilter = GetFilterOptions();
+    local className = UnitClass("player");
+    
+	--UpdateFilterString()
 	info.func = SetFilter;
 	
-	info.text = className;
-	info.checked = (currFilter ~= LE_LOOT_FILTER_ALL);
-	info.arg1 = LE_LOOT_FILTER_CLASS;
-	UIDropDownMenu_AddButton(info);
+	--info.text = className;
+	--info.checked = (currFilter ~= LE_LOOT_FILTER_ALL);
+	--info.arg1 = LE_LOOT_FILTER_CLASS;
+	--UIDropDownMenu_AddButton(info);
 	
-	local numSpecs = GetNumSpecializations();
-	for i = 1, numSpecs do
-		local _, name, _, icon = GetSpecializationInfo(i);
-		info.text = name;
-		info.arg1 = LE_LOOT_FILTER_SPEC1 + i - 1;
-		info.checked = currFilter == (LE_LOOT_FILTER_SPEC1 + i - 1);
-		info.leftPadding = 10;
-		UIDropDownMenu_AddButton(info);
-	end
+	--local numSpecs = GetNumSpecializations();
+	--for i = 1, numSpecs do
+	--	local _, name, _, icon = GetSpecializationInfo(i);
+	--	info.text = name;
+	--	info.arg1 = LE_LOOT_FILTER_SPEC1 + i - 1;
+	--	info.checked = currFilter == (LE_LOOT_FILTER_SPEC1 + i - 1);
+	--	info.leftPadding = 10;
+	--	UIDropDownMenu_AddButton(info);
+	--end
 
-	info.text = ALL_SPECS;
-	info.checked = currFilter == LE_LOOT_FILTER_CLASS;
-	info.arg1 = LE_LOOT_FILTER_CLASS;
-	info.func = SetFilter;
-	UIDropDownMenu_AddButton(info);
+	--info.text = className -- ALL_SPECS;
+	--info.checked = currFilter == LE_LOOT_FILTER_CLASS;
+	--info.arg1 = LE_LOOT_FILTER_CLASS;
+	--info.func = SetFilter;
+	--UIDropDownMenu_AddButton(info);
 
-	info.text = ALL_CLASSES;
-	info.checked = currFilter == NO_CLASS_FILTER;
-	info.arg1 = NO_CLASS_FILTER;
-	info.func = SetFilter;
-	UIDropDownMenu_AddButton(info);
+	--info.text = ALL_CLASSES;
+	--info.checked = currFilter == NO_CLASS_FILTER;
+	--info.arg1 = NO_CLASS_FILTER;
+	--info.func = SetFilter;
+	--UIDropDownMenu_AddButton(info);
 	
 	info.leftPadding = nil;
 	info.text = FAVORITES_FILTER;
@@ -861,7 +861,7 @@ local function InitFilter()
 	info.arg1 = "hidden";
 	UIDropDownMenu_AddButton(info);
 	
-	UpdateFilterString()
+	--UpdateFilterString()
 end
 
 function SetCollector:DropDownMenu_Initialize(frame, func)
@@ -876,7 +876,8 @@ function SetCollector:InitializeFilter(DEBUG)
 	SetCollector:UpdateCollections()
 	local init = function() InitFilter() end
 	SetCollector:DropDownMenu_Initialize(filterButton, init)
-	UpdateFilterString()
+	UIDropDownMenu_SetText(filterButton, "Filter")
+	--UpdateFilterString()
 	if DEBUG then SetCollector:Print("Filters Initialized") end
 end
 
@@ -1043,7 +1044,7 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 				  local armorType = GetClassArmorType(class)
 				  
 				  local faction = UnitFactionGroup("player")
-					local role = GetFilteredRole()
+					--local role = GetFilteredRole()
 					
 					local isObtainable = SetCollector:IsSetObtainable(i, j)
 					local isTransmog = SetCollector:IsTransmogSet(i, j)
@@ -1083,7 +1084,8 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 					
 					if SetCollector:SetIsFilteredOutByArmorType(i, j, armorType) then
 						-- Keep it hidden
-					elseif role ~= ALL.Description and SetCollector:SetIsFilteredOutByClass(i, j, class) then
+					--elseif role ~= ALL.Description and SetCollector:SetIsFilteredOutByClass(i, j, class) then
+					elseif SetCollector:SetIsFilteredOutByClass(i, j, class) then
 						-- Keep it hidden
 					elseif SetCollector:SetIsFilteredOutByFaction(i, j, faction) then
 						-- Keep it hidden
