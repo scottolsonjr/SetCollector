@@ -410,12 +410,13 @@ local itemButton = CreateFrame("Button","$parentItem"..i,modelFrame,"SetCollecto
 	prevItem = itemButton
 end
 
-local function SetItemButton(button, appearanceID, sourceID, itemID)
+local function SetItemButton(button, appearanceID, sourceID)
 	if button and appearanceID and appearanceID > 0 then
 		local src = 0
-		local s = 1
+        local s = 1
+        local isCollected = SetCollector:IsAppearanceCollected(appearanceID)
 		local sources = SetCollector:GetAppearanceSources(appearanceID)
-		if sources then
+		if sources and isCollected then
 			src = sources[1].sourceID
 		else
 			src = sourceID
@@ -423,13 +424,12 @@ local function SetItemButton(button, appearanceID, sourceID, itemID)
 		local sTexture, sLink
 		if src > 0 then
 			_, _, _, sTexture, _, sLink = C_TransmogCollection.GetAppearanceSourceInfo(src)
-		else
-			_, sLink, _, _, _, _, _, _, _, sTexture = GetItemInfo(itemID)
-		end
-		if itemID == 0 then
+        end
+        local itemID = 0
+		if sLink then
 			_, _, itemID = SetCollector:GetAppearanceInfo(sLink);
 		end
-		if sTexture then
+		if sTexture and itemID > 0 then
 			button.link = sLink
 			button.ItemID = itemID
 			button.icon:SetTexture(sTexture)
@@ -437,7 +437,6 @@ local function SetItemButton(button, appearanceID, sourceID, itemID)
 			button.icon:SetDesaturated(true)
 			button.glow:Hide()
 			
-			local isCollected = SetCollector:IsAppearanceCollected(appearanceID)
 			if isCollected then
                 button.icon:SetVertexColor(1, 1, 1, 1)
 				button.icon:SetDesaturated(false)
@@ -610,7 +609,7 @@ function SetCollector:UpdateSelectedVariantTab(self)
 						
 						inc = inc + 1
 						modelFrame:TryOn(appearanceSources[i])
-					  SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..inc], appearanceID, appearanceSources[i], 0)
+					  SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..inc], appearanceID, appearanceSources[i])
 				  end
 				end
 				
@@ -633,17 +632,9 @@ function SetCollector:UpdateSelectedVariantTab(self)
 					if sourceID and sourceID > 0 then
 						inc = inc + 1
 						modelFrame:TryOn(sourceID)
-					  SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..inc], appearanceID, sourceID, 0)
-					else
-						local itemID = db[collection].Sets[set].Variants[selected].Appearances[i].itemID
-						if itemID and itemID > 0 then
-							inc = inc + 1
-							local sLink = select(2, GetItemInfo(itemID))
-							modelFrame:TryOn(sLink)
-					  	SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..inc], appearanceID, sourceID, itemID)
-						end
-				  end
-			  end
+					    SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..inc], appearanceID, sourceID)
+				    end
+			    end
 			  
 				ClearItemButtons(inc + 1)
 				SetCollectorSummaryButtonSummary:SetText(string.format(L["ITEMS_COLLECTED"],acq,inc))
