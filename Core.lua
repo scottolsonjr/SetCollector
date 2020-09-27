@@ -182,7 +182,50 @@ function SetCollector:MySlashProcessorFunc(input)
 	local command, parameters = input:match("^(%S*)%s*(.-)$")
 	if command == "" then
 		print("No command passed.")
-		SetCollector:ToggleUI()
+        SetCollector:ToggleUI()
+        
+    elseif command == "set" then
+        if (parameters == nil or parameters == "") then
+            local sets = C_TransmogSets.GetAllSets();
+            --local sets = C_TransmogSets.GetUsableSets();
+            if (sets) then
+                for i, set in ipairs(sets) do
+                    if (set.baseSetID == nil) then
+                        local setInfo = (set.setID and C_TransmogSets.GetSetInfo(set.setID)) or nil;
+                        --SetCollector:Print((set.baseSetID or "").." "..set.setID.." "..(setInfo.name or nil))
+                        SetCollector:Print(set.setID.." "..(setInfo.name or nil))
+                    end
+                end
+            end
+        else
+            local setID = parameters
+            local setInfo = (setID and C_TransmogSets.GetSetInfo(setID)) or nil;
+            local sources = C_TransmogSets.GetSetSources(setID);
+            SetCollector:Print(setID.." "..(setInfo.name or nil))
+            local function position(slot)
+                if slot == 3 then
+                    return 2
+                elseif slot == 5 then
+                    return 3
+                elseif slot == 9 then
+                    return 4
+                elseif slot == 10 then
+                    return 5
+                end
+                return slot
+            end
+            local printable = {}
+            for sourceID in pairs(sources) do
+                local sourceInfo = C_TransmogCollection.GetSourceInfo(sourceID);
+                local slot = C_Transmog.GetSlotForInventoryType(sourceInfo.invType);
+                if (slot) then
+                    printable[position(slot)] = sourceInfo.visualID..","..sourceID.." ("..slot..")"
+                end
+            end
+            for i=1, #printable do
+                SetCollector:Print(printable[i])
+            end
+        end
 
 	elseif command == "show" then
 		SetCollector:ShowUI()
