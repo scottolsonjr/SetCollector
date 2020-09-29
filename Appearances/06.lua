@@ -610,7 +610,7 @@ local function GetWarlockAppearances()
         SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(26214,69605),A(26216,69662),A(26218,69641),A(26213,69586),A(26210,69670),A(26215,69621))
     -- Blackrock Foundry
     loc = "LOC_RAID_0601"
-    set = SetCollector:AddSetLegacy(70000,nil,col,10601,"WK_TR_17",CLOTH,WARLOCK,CASTER,ANY,loc)
+    set = SetCollector:AddSetLegacy(70000,nil,col,10601,"WK_TR_17",CLOTH,WARLOCK,ANY,ANY,loc)
         SetCollector:AddVariantLegacy(70000,nil,col,set,"NORMAL",TRANSMOG,A(23850,64476),A(23853,64479),A(23852,64478),A(23849,64475),A(23851,64477))
         SetCollector:AddVariantLegacy(70000,nil,col,set,"HEROIC",TRANSMOG,A(23841,67225),A(23844,67231),A(23843,67229),A(23840,67223),A(23842,67227))
         SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(23866,67226),A(23869,67232),A(23868,67230),A(23865,67224),A(23867,67228))

@@ -57,7 +57,7 @@ local function GetLegendaries()
     local col = SetCollector.LEGENDARY
     local set = ""
                 
-    set = SetCollector:AddSetLegacy(70000,nil,col,2,"LG_MELEE_70",ANY,ANY,MELEE,ANY)
+    set = SetCollector:AddSetLegacy(70000,nil,col,2,"LG_MELEE_70",ANY,ANY,ANY,ANY)
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"LG_MELEE_70",TRANSMOG,A(8460,15136,32837),A(8461,15137,32838))
 end
 
@@ -126,7 +126,7 @@ local function GetMageAppearances()
         SetCollector:AddVariantLegacy(70000,nil,col,set,"MA_TR_CASTER_04",TRANSMOG,A(7457,12952),A(7460,12955),A(7458,12953),A(7228,12495),A(7461,12956),A(7271,12549),A(7459,12954),A(7249,16194))    
 
     col = SetCollector.DUNGEON
-    set = SetCollector:AddSetLegacy(70000,nil,col,30,"MA_DG_03",CLOTH,MAGE,CASTER,ANY)
+    set = SetCollector:AddSetLegacy(70000,nil,col,30,"MA_DG_03",CLOTH,MAGE,ANY,ANY)
         SetCollector:AddVariantLegacy(70000,nil,col,set,"MA_DG_03",TRANSMOG,A(7122,12368),A(6924,12029),A(7102,12346),A(6874,11942),A(6981,12097))
 end
 

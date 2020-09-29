@@ -57,7 +57,7 @@ local function GetLegendaries()
     local col = SetCollector.LEGENDARY
     local set = ""
     
-    set = SetCollector:AddSetLegacy(70000,nil,col,1,"LG_60",ANY,ANY,TANK,ANY)
+    set = SetCollector:AddSetLegacy(70000,nil,col,1,"LG_60",ANY,ANY,ANY,ANY)
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"LG_60",TRANSMOG,A(5131,7098,17182))
 end
 
@@ -143,7 +143,7 @@ local function GetMageAppearances()
 
     col = SetCollector.RAID
     loc = "LOC_RAID_0104"
-    set = SetCollector:AddSetLegacy(70000,nil,col,10104,"MA_DG_AQ_2",CLOTH,MAGE,CASTER,ANY,loc)
+    set = SetCollector:AddSetLegacy(70000,nil,col,10104,"MA_DG_AQ_2",CLOTH,MAGE,ANY,ANY,loc)
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"MA_DG_AQ_2",TRANSMOG,A(5682,8378),A(5681,8376),A(5679,8374),A(5780,8531),A(1475,8377),A(5680,8375))
     loc = "LOC_RAID_0103"
     set = SetCollector:AddSetLegacy(70000,nil,col,10103,"MA_TR_03",CLOTH,MAGE,ANY,ANY,loc)
@@ -156,14 +156,14 @@ local function GetMageAppearances()
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"MA_TR_01",TRANSMOG,A(4941,6880),A(4943,6882),A(4944,6883),A(4945,6884),A(4947,6886),A(4948,6887),A(4942,6881),A(4946,6885))
 
     col = SetCollector.DUNGEON
-    --set = SetCollector:AddSetLegacy(70000,nil,col,21,"MA_DG_AQ_1",CLOTH,MAGE,CASTER,ANY)
+    --set = SetCollector:AddSetLegacy(70000,nil,col,21,"MA_DG_AQ_1",CLOTH,MAGE,ANY,ANY)
     --            SetCollector:AddVariantLegacy(70000,nil,col,set,"MA_DG_AQ_1",TRANSMOG,A(5713,8423,21413),A(2437,8424,21415))
                 
-    set = SetCollector:AddSetLegacy(70000,nil,col,20,"MA_DG_02",CLOTH,MAGE,CASTER,ANY)
+    set = SetCollector:AddSetLegacy(70000,nil,col,20,"MA_DG_02",CLOTH,MAGE,ANY,ANY)
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"REPLICA",TRANSMOG,A(5889,39605,78198),A(5892,39608,78201),A(5893,39607,78200),A(5887,39610,78203),A(5890,39604,78197),A(5886,39609,78202),A(5891,39606,78199),A(5888,39603,78196))
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"ORIGINAL",TRANSMOG,A(5889,8683,22065),A(5892,8686,22068),A(5893,8687,22069),A(5887,8681,22063),A(5890,8684,22066),A(5886,8680,22062),A(5891,8685,22067),A(5888,8682,22064))
                 
-    set = SetCollector:AddSetLegacy(70000,nil,col,10,"MA_DG_01",CLOTH,MAGE,CASTER,ANY)
+    set = SetCollector:AddSetLegacy(70000,nil,col,10,"MA_DG_01",CLOTH,MAGE,ANY,ANY)
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"REPLICA",TRANSMOG,A(4889,39597,78188),A(4891,39600,78191),A(4890,39599,78190),A(4886,39602,78193),A(4887,39596,78187),A(4888,39601,78192),A(4008,39598,78189),A(4885,39595,78186))
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"ORIGINAL",TRANSMOG,A(4889,6817,16686),A(4891,6820,16689),A(4890,6819,16688),A(4886,6814,16683),A(4887,6815,16684),A(4888,6816,16685),A(4008,6818,16687),A(4885,6813,16682))
 end
@@ -293,13 +293,13 @@ local function GetWarlockAppearances()
     set = SetCollector:AddSetLegacy(70000,nil,col,10104,"WK_DG_AQ_2",CLOTH,WARLOCK,ANY,ANY,loc)
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"WK_DG_AQ_2",TRANSMOG,A(5676,8371),A(5675,8369),A(5674,8368),A(3128,8370),A(5677,8372))
     loc = "LOC_RAID_0103"
-    set = SetCollector:AddSetLegacy(70000,nil,col,10103,"WK_TR_03",CLOTH,WARLOCK,CASTER,ANY,loc)
+    set = SetCollector:AddSetLegacy(70000,nil,col,10103,"WK_TR_03",CLOTH,WARLOCK,ANY,ANY,loc)
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"WK_TR_03",TRANSMOG,A(6032),A(6033),A(6030),A(6037),A(6035),A(6036),A(6031),A(6034))
     loc = "LOC_RAID_0102"
-    set = SetCollector:AddSetLegacy(70000,nil,col,10102,"WK_TR_02",CLOTH,WARLOCK,CASTER,ANY,loc)
+    set = SetCollector:AddSetLegacy(70000,nil,col,10102,"WK_TR_02",CLOTH,WARLOCK,ANY,ANY,loc)
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"WK_TR_02",TRANSMOG,A(5053,6993),A(5055,6996),A(5054,6995),A(5057,6998),A(5052,6992),A(5056,6997),A(4008,6994),A(5051,6991))
     loc = "LOC_RAID_0101"
-    set = SetCollector:AddSetLegacy(70000,nil,col,10101,"WK_TR_01",CLOTH,WARLOCK,CASTER,ANY,loc)
+    set = SetCollector:AddSetLegacy(70000,nil,col,10101,"WK_TR_01",CLOTH,WARLOCK,ANY,ANY,loc)
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"WK_TR_01",TRANSMOG,A(4954,6893),A(4953,6892),A(4955,6894),A(4950,6889),A(4951,6890),A(4952,6891),A(4956,6895),A(4949,6888))
 
     col = SetCollector.DUNGEON                
