@@ -294,7 +294,7 @@ local function GetWarlockAppearances()
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"WK_DG_AQ_2",TRANSMOG,A(5676,8371),A(5675,8369),A(5674,8368),A(3128,8370),A(5677,8372))
     loc = "LOC_RAID_0103"
     set = SetCollector:AddSetLegacy(70000,nil,col,10103,"WK_TR_03",CLOTH,WARLOCK,ANY,ANY,loc)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"WK_TR_03",TRANSMOG,A(6032),A(6033),A(6030),A(6037),A(6035),A(6036),A(6031),A(6034))
+                SetCollector:AddVariantLegacy(70000,nil,col,set,"WK_TR_03",TRANSMOG,A(6032,8882),A(6033,8883),A(6030,8880),A(6037,8887),A(6035,8885),A(6036,8886),A(6031,8881),A(6034,8884))
     loc = "LOC_RAID_0102"
     set = SetCollector:AddSetLegacy(70000,nil,col,10102,"WK_TR_02",CLOTH,WARLOCK,ANY,ANY,loc)
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"WK_TR_02",TRANSMOG,A(5053,6993),A(5055,6996),A(5054,6995),A(5057,6998),A(5052,6992),A(5056,6997),A(4008,6994),A(5051,6991))
@@ -323,7 +323,7 @@ local function GetWarriorAppearances()
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"WR_DG_AQ_2",TRANSMOG,A(5669,8363),A(5670,8364),A(5671,8365),A(5672,8366),A(5673,8367))
     loc = "LOC_RAID_0103"
     set = SetCollector:AddSetLegacy(70000,nil,col,10103,"WR_TR_03",PLATE,WARRIOR,ANY,ANY,loc)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"WR_TR_03",TRANSMOG,A(5977,8824,22418),A(5978,8825,22419),A(5975,8822,22416),A(5982,8829,22423),A(5980,8827,22421),A(5981,8828,22422),A(5976,8823,22417),A(5979,8826,22420))
+                SetCollector:AddVariantLegacy(70000,nil,col,set,"WR_TR_03",TRANSMOG,A(5977,8824),A(5978,8825),A(5975,8822),A(5982,8829),A(5980,8827),A(5981,8828),A(5976,8823),A(5979,8826))
     loc = "LOC_RAID_0102"
     set = SetCollector:AddSetLegacy(70000,nil,col,10102,"WR_TR_02",PLATE,WARRIOR,ANY,ANY,loc)
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"WR_TR_02",TRANSMOG,A(5086,7027),A(5084,7025),A(5089,7030),A(5082,7023),A(5087,7028),A(5083,7024),A(5085,7026),A(5088,7029))
