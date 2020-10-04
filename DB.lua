@@ -5,7 +5,6 @@
 local defaults = {
 	char = {
 		filters = {
-			specialization = nil,
 			favorites = false,
 			obtainable = false,
 			transmog = false,
@@ -18,13 +17,13 @@ local defaults = {
         docked = true,
 		expansions = {
 			v00 = true,
-			v01 = false,
-			v02 = false,
-			v03 = false,
-			v04 = false,
-			v05 = false,
-			v06 = false,
-			v07 = false,
+			v01 = true,
+			v02 = true,
+			v03 = true,
+			v04 = true,
+			v05 = true,
+			v06 = true,
+			v07 = true,
 			v08 = true,
 			v09 = true
 		},
@@ -32,6 +31,10 @@ local defaults = {
 			hide = false
         },
         position = "left",
+        tooltips = {
+            show_set = true,
+            show_location = true
+        }
 		collections = {},
 	}
 }
