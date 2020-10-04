@@ -56,19 +56,25 @@ local function OnTooltipSetItemHook(tooltip, ...)
 	
 	appearanceID, sourceID, itemID = SetCollector:GetAppearanceInfo(itemLink);
     if appearanceID then
-        if SetCollector.db.global.collections.Appearances[appearanceID] then
-		
-            -- Need to update this for when an appearance is in multiple collections, sets, or variants
-            collection = SetCollector.db.global.collections.Appearances[appearanceID].collection
-            variant = SetCollector.db.global.collections.Appearances[appearanceID].variant
-            set = SetCollector.db.global.collections.Appearances[appearanceID].set
+        local show_set = SetCollector.db.global.tooltips.show_set
+        local show_location = SetCollector.db.global.tooltips.show_location
+        if debug or show_set then
+            if SetCollector.db.global.collections.Appearances[appearanceID] then
             
-            tooltip:AddLine(" ")
-            local title = "|cFFFFFFFF"..L[SetCollector.db.global.collections[collection].Sets[set].Title].."|r"
-            tooltip:AddLine(title)
-            if SetCollector.db.global.collections[collection].Sets[set].Location ~= nil then
-                local location = "|cFF777777"..L[SetCollector.db.global.collections[collection].Sets[set].Location].."|r"
-                tooltip:AddLine(location)
+                -- Need to update this for when an appearance is in multiple collections, sets, or variants
+                collection = SetCollector.db.global.collections.Appearances[appearanceID].collection
+                variant = SetCollector.db.global.collections.Appearances[appearanceID].variant
+                set = SetCollector.db.global.collections.Appearances[appearanceID].set
+                
+                tooltip:AddLine(" ")
+                local title = "|cFFFFFFFF"..L[SetCollector.db.global.collections[collection].Sets[set].Title].."|r"
+                tooltip:AddLine(title)
+                if debug or show_location then
+                    if SetCollector.db.global.collections[collection].Sets[set].Location ~= nil then
+                        local location = "|cFF777777"..L[SetCollector.db.global.collections[collection].Sets[set].Location].."|r"
+                        tooltip:AddLine(location)
+                    end
+                end
             end
         end
 		if debug then

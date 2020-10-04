@@ -115,6 +115,26 @@ function SetCollector:SetDebug(debug)
 	end
 end
 
+function SetCollector:GetOptionsShowSet()
+	return SetCollector.db.global.tooltips.show_set
+end
+
+function SetCollector:SetOptionsShowSet()
+	if SetCollector.db.global.tooltips.show_set then SetCollector.db.global.tooltips.show_set = false
+	else SetCollector.db.global.tooltips.show_set = true
+	end
+end
+
+function SetCollector:GetOptionsShowSetLocation()
+	return SetCollector.db.global.tooltips.show_location
+end
+
+function SetCollector:SetOptionsShowSetLocation()
+	if SetCollector.db.global.tooltips.show_location then SetCollector.db.global.tooltips.show_location = false
+	else SetCollector.db.global.tooltips.show_location = true
+	end
+end
+
 function SetCollector:SortList(t, f, d)
 	if f == "key" then return pairsByKeys(t, d)		-- Allow for exlicit request to sort by key
 	-- Future sort alternatives here

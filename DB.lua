@@ -34,7 +34,7 @@ local defaults = {
         tooltips = {
             show_set = true,
             show_location = true
-        }
+        },
 		collections = {},
 	}
 }
@@ -844,10 +844,40 @@ function SetCollector:GetOptions()
 						width = "full"
 					},
 				},
-			},
+            },
+            tooltips = {
+                type = "group",
+                order = 30,
+                name = L["INT_OPT_TOOLTIPS"],
+                args = {
+                    item_header = {
+                        type = "header",
+                        order = 0,
+                        name = L["INT_OPT_ITEM_TOOLTIPS"]
+                    },
+                    show_item_set = {
+                        type = "toggle",
+                        order = 1,
+                        name = L["INT_OPT_SHOW_SET_NAME"],
+                        desc = L["INT_OPT_SHOW_SET_DESC"],
+                        get = "GetOptionsShowSet",
+                        set = "SetOptionsShowSet",
+                        width = "full"
+                    },
+                    show_item_set_location = {
+                        type = "toggle",
+                        order = 2,
+                        name = L["INT_OPT_SHOW_LOCATION_NAME"],
+                        desc = L["INT_OPT_SHOW_LOCATION_DESC"],
+                        get = "GetOptionsShowSetLocation",
+                        set = "SetOptionsShowSetLocation",
+                        width = "full"
+                    }
+                }
+            },
 			advanced = {
 				type = "group",
-				order = 30,
+				order = 90,
 				name = L["INT_OPT_TROUBLESHOOTING"],
 				args = {
 					debug_header = {
