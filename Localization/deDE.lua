@@ -36,7 +36,7 @@ L["DH_OTH_19"] = "Battlegear of the Shattered Abyss"
 --Translation missing 
 L["DH_PVP_19"] = "[L1] Vindictive Gladiator's Felskin"
 --Translation missing 
-L["DH_TR_19"] = "[19] Vestment of Second Sight"
+L["DH_RAID_0701"] = "[19] Vestment of Second Sight"
 L["DK_CD_90"] = "Platten des Lichkönigs"
 --Translation missing 
 L["DK_LG_MELEE_110"] = "Legion Legendary"
@@ -59,61 +59,61 @@ L["DK_PVP_MELEE_15"] = "[15] Prideful Gladiator's Desecration"
 --Translation missing 
 L["DK_STARTER"] = "Starter Set"
 --Translation missing 
-L["DK_TR_17"] = "[17] Ogreskull Boneplate Battlegear"
-L["DK_TR_18"] = "[T18] Rüstung des Dämonenblicks"
+L["DK_RAID_0601"] = "[17] Ogreskull Boneplate Battlegear"
+L["DK_RAID_0602"] = "[T18] Rüstung des Dämonenblicks"
 --Translation missing 
-L["DK_TR_19"] = "[19] Dreadwyrm Battleplate"
+L["DK_RAID_0701"] = "[19] Dreadwyrm Battleplate"
 --Translation missing 
-L["DK_TR_MELEE_07"] = "[7] Scourgeborne Battlegear"
+L["DK_RAID_0301"] = "[7] Scourgeborne Battlegear"
 --Translation missing 
-L["DK_TR_MELEE_08"] = "[8] Darkruned Battlegear"
+L["DK_RAID_0302"] = "[8] Darkruned Battlegear"
 --Translation missing 
-L["DK_TR_MELEE_10"] = "[10] Scourgelord's Battlegear"
+L["DK_RAID_0304"] = "[10] Scourgelord's Battlegear"
 --Translation missing 
-L["DK_TR_MELEE_11"] = "[11] Magma Plated Battlegear"
+L["DK_RAID_0401"] = "[11] Magma Plated Battlegear"
 --Translation missing 
-L["DK_TR_MELEE_12"] = "[12] Elementium Deathplate Battlegear"
+L["DK_RAID_0402"] = "[12] Elementium Deathplate Battlegear"
 --Translation missing 
-L["DK_TR_MELEE_13"] = "[13] Necrotic Boneplate Battlegear"
+L["DK_RAID_0403"] = "[13] Necrotic Boneplate Battlegear"
 --Translation missing 
-L["DK_TR_MELEE_14"] = "[14] Battlegear of the Lost Catacomb"
+L["DK_RAID_0501"] = "[14] Battlegear of the Lost Catacomb"
 --Translation missing 
-L["DK_TR_MELEE_15"] = "[15] Battleplate of the All-Consuming Maw"
+L["DK_RAID_0502"] = "[15] Battleplate of the All-Consuming Maw"
 --Translation missing 
-L["DK_TR_MELEE_16"] = "[16] Battleplate of Cyclopean Dread"
+L["DK_RAID_0503"] = "[16] Battleplate of Cyclopean Dread"
 --Translation missing 
-L["DK_TR_MELEE_A_09"] = "[9] Thassarian's Battlegear"
+L["DK_RAID_A_0303"] = "[9] Thassarian's Battlegear"
 --Translation missing 
-L["DK_TR_MELEE_H_09"] = "[9] Koltira's Battlegear"
+L["DK_RAID_H_0303"] = "[9] Koltira's Battlegear"
 --Translation missing 
-L["DK_TR_TANK_07"] = "[7] Scourgeborne Plate"
+L["DK_RAID_0301"] = "[7] Scourgeborne Plate"
 --Translation missing 
-L["DK_TR_TANK_08"] = "[8] Darkruned Plate"
+L["DK_RAID_0302"] = "[8] Darkruned Plate"
 --Translation missing 
-L["DK_TR_TANK_10"] = "[10] Scourgelord's Plate"
+L["DK_RAID_0304"] = "[10] Scourgelord's Plate"
 --Translation missing 
-L["DK_TR_TANK_11"] = "[11] Magma Plated Battlearmor"
+L["DK_RAID_0401"] = "[11] Magma Plated Battlearmor"
 --Translation missing 
-L["DK_TR_TANK_12"] = "[12] Elementium Deathplate Battlearmor"
+L["DK_RAID_0402"] = "[12] Elementium Deathplate Battlearmor"
 --Translation missing 
-L["DK_TR_TANK_13"] = "[13] Necrotic Boneplate Armor"
+L["DK_RAID_0403"] = "[13] Necrotic Boneplate Armor"
 --Translation missing 
-L["DK_TR_TANK_14"] = "[14] Plate of the Lost Catacomb"
+L["DK_RAID_0501"] = "[14] Plate of the Lost Catacomb"
 --Translation missing 
-L["DK_TR_TANK_15"] = "[15] Plate of the All-Consuming Maw"
+L["DK_RAID_0502"] = "[15] Plate of the All-Consuming Maw"
 --Translation missing 
-L["DK_TR_TANK_16"] = "[16] Plate of Cyclopean Dread"
+L["DK_RAID_0503"] = "[16] Plate of Cyclopean Dread"
 --Translation missing 
-L["DK_TR_TANK_A_09"] = "[9] Thassarian's Plate"
+L["DK_RAID_A_0303"] = "[9] Thassarian's Plate"
 --Translation missing 
-L["DK_TR_TANK_H_09"] = "[9] Koltira's Plate"
+L["DK_RAID_H_0303"] = "[9] Koltira's Plate"
 --Translation missing 
 L["DR_CD_90"] = "The Cycle Set"
 L["DR_DG_01"] = "Herz der Wildnis"
 L["DR_DG_02"] = "Ungezähmtes Herz"
 L["DR_DG_03"] = "Gewandung der Mondlichtung"
 L["DR_DG_AQ_1"] = "Symbole des endlosen Lebens"
-L["DR_DG_AQ_2"] = "Gewandung der Genesis"
+L["DR_RAID_0104"] = "Gewandung der Genesis"
 --Translation missing 
 L["DR_LG_CASTER_110"] = "Legion Legendary"
 --Translation missing 
@@ -144,27 +144,27 @@ L["DR_PVP_HEALER_15"] = "[15] Prideful Gladiator's Refuge"
 L["DR_PVP_MELEE_14"] = "[14] Grievous Gladiator's Sanctuary"
 --Translation missing 
 L["DR_PVP_MELEE_15"] = "[15] Prideful Gladiator's Sanctuary"
-L["DR_TR_01"] = "[T1] Gewänder des Cenarius"
-L["DR_TR_02"] = "[T2] Sturmgrimms Gewänder"
-L["DR_TR_03"] = "[T3] Gewandung des Traumwandlers"
-L["DR_TR_17"] = "[T17] Schlachtrüstung des lebendigen Holzes"
-L["DR_TR_18"] = "[T18] Kriegsgewand des Klauenschwurs"
+L["DR_RAID_0101"] = "[T1] Gewänder des Cenarius"
+L["DR_RAID_0102"] = "[T2] Sturmgrimms Gewänder"
+L["DR_RAID_0103"] = "[T3] Gewandung des Traumwandlers"
+L["DR_RAID_0601"] = "[T17] Schlachtrüstung des lebendigen Holzes"
+L["DR_RAID_0602"] = "[T18] Kriegsgewand des Klauenschwurs"
 --Translation missing 
-L["DR_TR_19"] = "[19] Garb of the Astral Warden"
-L["DR_TR_CASTER_04"] = "[T4] Malornes Ornat"
-L["DR_TR_CASTER_05"] = "[T5] Ornat von Nordrassil"
-L["DR_TR_CASTER_06"] = "[T6] Gewandung des Donnerherzens"
-L["DR_TR_CASTER_07"] = "[T7] Gewand des Traumwandlers"
-L["DR_TR_CASTER_08"] = "[T8] Gewand des Nachtweisen"
-L["DR_TR_CASTER_10"] = "[T10] Peitschergewirktes Ornat"
-L["DR_TR_CASTER_11"] = "[T11] Ornat des Sturmreiters"
-L["DR_TR_CASTER_12"] = "[T12] Obsidianholzgewebeornat"
-L["DR_TR_CASTER_13"] = "[T13] Ornat der tiefen Erde"
-L["DR_TR_CASTER_14"] = "[T14] Ornat der ewigen Blüte"
-L["DR_TR_CASTER_15"] = "[T15] Ornat des verwunschenen Waldes"
-L["DR_TR_CASTER_16"] = "[T16] Ornat des gezeichneten Tals"
-L["DR_TR_CASTER_A_09"] = "[T9] Malfurions Ornat"
-L["DR_TR_CASTER_H_09"] = "[T9] Runentotems Ornat"
+L["DR_RAID_0701"] = "[19] Garb of the Astral Warden"
+L["DR_RAID_0201"] = "[T4] Malornes Ornat"
+L["DR_RAID_0202"] = "[T5] Ornat von Nordrassil"
+L["DR_RAID_0203"] = "[T6] Gewandung des Donnerherzens"
+L["DR_RAID_0301"] = "[T7] Gewand des Traumwandlers"
+L["DR_RAID_0302"] = "[T8] Gewand des Nachtweisen"
+L["DR_RAID_0304"] = "[T10] Peitschergewirktes Ornat"
+L["DR_RAID_0401"] = "[T11] Ornat des Sturmreiters"
+L["DR_RAID_0402"] = "[T12] Obsidianholzgewebeornat"
+L["DR_RAID_0403"] = "[T13] Ornat der tiefen Erde"
+L["DR_RAID_0501"] = "[T14] Ornat der ewigen Blüte"
+L["DR_RAID_0502"] = "[T15] Ornat des verwunschenen Waldes"
+L["DR_RAID_0503"] = "[T16] Ornat des gezeichneten Tals"
+L["DR_RAID_A_0303"] = "[T9] Malfurions Ornat"
+L["DR_RAID_H_0303"] = "[T9] Runentotems Ornat"
 --Translation missing 
 L["DR_TR_HEALER_04"] = "[4] Malorne Raiment"
 --Translation missing 
@@ -178,55 +178,55 @@ L["DR_TR_HEALER_08"] = "[8] Nightsong Regalia"
 --Translation missing 
 L["DR_TR_HEALER_10"] = "[10] Lasherweave Garb"
 --Translation missing 
-L["DR_TR_HEALER_11"] = "[11] Stormrider's Vestments"
+L["DR_RAID_0501"] = "[11] Stormrider's Vestments"
 --Translation missing 
 L["DR_TR_HEALER_12"] = "[12] Obsidium Arborweave Vestments"
 --Translation missing 
 L["DR_TR_HEALER_13"] = "[13] Deep Earth Vestments"
 --Translation missing 
-L["DR_TR_HEALER_14"] = "[14] Vestments of the Eternal Blossom"
+L["DR_RAID_0501"] = "[14] Vestments of the Eternal Blossom"
 --Translation missing 
-L["DR_TR_HEALER_15"] = "[15] Vestments of the Haunted Forest"
+L["DR_RAID_0502"] = "[15] Vestments of the Haunted Forest"
 --Translation missing 
-L["DR_TR_HEALER_16"] = "[16] Vestments of the Shattered Vale"
+L["DR_RAID_0503"] = "[16] Vestments of the Shattered Vale"
 --Translation missing 
 L["DR_TR_HEALER_A_09"] = "[9] Malfurion's Garb"
 --Translation missing 
 L["DR_TR_HEALER_H_09"] = "[9] Runetotem's Garb"
 --Translation missing 
-L["DR_TR_MELEE_04"] = "[4] Malorne Harness"
+L["DR_RAID_0201"] = "[4] Malorne Harness"
 --Translation missing 
-L["DR_TR_MELEE_05"] = "[5] Nordrassil Harness"
+L["DR_RAID_0202"] = "[5] Nordrassil Harness"
 --Translation missing 
-L["DR_TR_MELEE_06"] = "[6] Thunderheart Harness"
+L["DR_RAID_0203"] = "[6] Thunderheart Harness"
 --Translation missing 
-L["DR_TR_MELEE_07"] = "[7] Dreamwalker Battlegear"
+L["DR_RAID_0301"] = "[7] Dreamwalker Battlegear"
 --Translation missing 
-L["DR_TR_MELEE_08"] = "[8] Nightsong Battlegear"
+L["DR_RAID_0302"] = "[8] Nightsong Battlegear"
 --Translation missing 
-L["DR_TR_MELEE_10"] = "[10] Lasherweave Battlegear"
+L["DR_RAID_0304"] = "[10] Lasherweave Battlegear"
 --Translation missing 
-L["DR_TR_MELEE_11"] = "[11] Stormrider's Battlegarb"
+L["DR_RAID_0401"] = "[11] Stormrider's Battlegarb"
 --Translation missing 
-L["DR_TR_MELEE_12"] = "[12] Obsidium Arborweave Battlegarb"
+L["DR_RAID_0402"] = "[12] Obsidium Arborweave Battlegarb"
 --Translation missing 
-L["DR_TR_MELEE_13"] = "[13] Deep Earth Battlegarb"
+L["DR_RAID_0403"] = "[13] Deep Earth Battlegarb"
 --Translation missing 
-L["DR_TR_MELEE_14"] = "[14] Battlegear of the Eternal Blossom"
+L["DR_RAID_0501"] = "[14] Battlegear of the Eternal Blossom"
 --Translation missing 
-L["DR_TR_MELEE_15"] = "[15] Battlegear of the Haunted Forest"
+L["DR_RAID_0502"] = "[15] Battlegear of the Haunted Forest"
 --Translation missing 
-L["DR_TR_MELEE_16"] = "[16] Battlegear of the Shattered Vale"
+L["DR_RAID_0503"] = "[16] Battlegear of the Shattered Vale"
 --Translation missing 
-L["DR_TR_MELEE_A_09"] = "[9] Malfurion's Battlegear"
+L["DR_RAID_A_0303"] = "[9] Malfurion's Battlegear"
 --Translation missing 
-L["DR_TR_MELEE_H_09"] = "[9] Runetotem's Battlegear"
+L["DR_RAID_H_0303"] = "[9] Runetotem's Battlegear"
 --Translation missing 
-L["DR_TR_TANK_14"] = "[14] Armor of the Eternal Blossom"
+L["DR_RAID_0501"] = "[14] Armor of the Eternal Blossom"
 --Translation missing 
-L["DR_TR_TANK_15"] = "[15] Armor of the Haunted Forest"
+L["DR_RAID_0502"] = "[15] Armor of the Haunted Forest"
 --Translation missing 
-L["DR_TR_TANK_16"] = "[16] Armor of the Shattered Vale"
+L["DR_RAID_0503"] = "[16] Armor of the Shattered Vale"
 L["ELITE"] = "Elite"
 L["FINE"] = "Fein"
 --Translation missing 
@@ -281,7 +281,7 @@ L["HU_DG_03"] = "D3: Beast Lord Armor"
 --Translation missing 
 L["HU_DG_AQ_1"] = "Trappings of the Unseen Path"
 --Translation missing 
-L["HU_DG_AQ_2"] = "Striker's Garb"
+L["HU_RAID_0104"] = "Striker's Garb"
 --Translation missing 
 L["HU_LG_MELEE_110"] = "Legion Legendary"
 --Translation missing 
@@ -301,44 +301,44 @@ L["HU_PVP_RANGED_14"] = "[14] Grievous Gladiator's Pursuit"
 --Translation missing 
 L["HU_PVP_RANGED_15"] = "[15] Prideful Gladiator's Pursuit"
 --Translation missing 
-L["HU_TR_01"] = "[1] Giantstalker Armor"
+L["HU_RAID_0101"] = "[1] Giantstalker Armor"
 --Translation missing 
-L["HU_TR_02"] = "[2] Dragonstalker Armor"
+L["HU_RAID_0102"] = "[2] Dragonstalker Armor"
 --Translation missing 
-L["HU_TR_03"] = "[3] Cryptstalker Armor"
+L["HU_RAID_0103"] = "[3] Cryptstalker Armor"
 --Translation missing 
-L["HU_TR_17"] = "[17] Rylakstalker's Battlegear"
-L["HU_TR_18"] = "[T18] Schlachtrüstung der wilden Jagd"
+L["HU_RAID_0601"] = "[17] Rylakstalker's Battlegear"
+L["HU_RAID_0602"] = "[T18] Schlachtrüstung der wilden Jagd"
 --Translation missing 
-L["HU_TR_19"] = "[19] Eagletalon Battlegear"
+L["HU_RAID_0701"] = "[19] Eagletalon Battlegear"
 --Translation missing 
-L["HU_TR_RANGED_04"] = "[4] Demon Stalker Armor"
+L["HU_RAID_0201"] = "[4] Demon Stalker Armor"
 --Translation missing 
-L["HU_TR_RANGED_05"] = "[5] Rift Stalker Armor"
+L["HU_RAID_0202"] = "[5] Rift Stalker Armor"
 --Translation missing 
-L["HU_TR_RANGED_06"] = "[6] Gronnstalker's Armor"
+L["HU_RAID_0203"] = "[6] Gronnstalker's Armor"
 --Translation missing 
-L["HU_TR_RANGED_07"] = "[7] Cryptstalker Battlegear"
+L["HU_RAID_0301"] = "[7] Cryptstalker Battlegear"
 --Translation missing 
-L["HU_TR_RANGED_08"] = "[8] Scourgestalker Battlegear"
+L["HU_RAID_0302"] = "[8] Scourgestalker Battlegear"
 --Translation missing 
-L["HU_TR_RANGED_10"] = "[10] Ahn'Kahar Blood Hunter's Battlegear"
+L["HU_RAID_0304"] = "[10] Ahn'Kahar Blood Hunter's Battlegear"
 --Translation missing 
-L["HU_TR_RANGED_11"] = "[11] Lightning-Charged Battlegear"
+L["HU_RAID_0401"] = "[11] Lightning-Charged Battlegear"
 --Translation missing 
-L["HU_TR_RANGED_12"] = "[12] Flamewaker's Battlegear"
+L["HU_RAID_0402"] = "[12] Flamewaker's Battlegear"
 --Translation missing 
-L["HU_TR_RANGED_13"] = "[13] Wyrmstalker Battlegear"
+L["HU_RAID_0403"] = "[13] Wyrmstalker Battlegear"
 --Translation missing 
-L["HU_TR_RANGED_14"] = "[14] Yaungol Slayer Battlegear"
+L["HU_RAID_0501"] = "[14] Yaungol Slayer Battlegear"
 --Translation missing 
-L["HU_TR_RANGED_15"] = "[15] Battlegear of the Saurok Stalker"
+L["HU_RAID_0502"] = "[15] Battlegear of the Saurok Stalker"
 --Translation missing 
-L["HU_TR_RANGED_16"] = "[16] Battlegear of the Unblinking Vigil"
+L["HU_RAID_0503"] = "[16] Battlegear of the Unblinking Vigil"
 --Translation missing 
-L["HU_TR_RANGED_A_09"] = "[9] Windrunner's Battlegear"
+L["HU_RAID_A_0303"] = "[9] Windrunner's Battlegear"
 --Translation missing 
-L["HU_TR_RANGED_H_09"] = "[9] Windrunner's Pursuit"
+L["HU_RAID_H_0303"] = "[9] Windrunner's Pursuit"
 L["ITEMLINK_ERROR"] = "Set Collector: Gegenstandsinformationen im Cache nicht gefunden, oder ungültige Gegentstands-ID eingegeben. Bitte erneut versuchen."
 L["ITEMS_COLLECTED"] = "%d/%d"
 L["L100"] = "100"
@@ -389,7 +389,7 @@ L["MA_DG_03"] = "D3: Incanter's Regalia"
 --Translation missing 
 L["MA_DG_AQ_1"] = "Trappings of Vaulted Secrets"
 --Translation missing 
-L["MA_DG_AQ_2"] = "Enigma Vestments"
+L["MA_RAID_0104"] = "Enigma Vestments"
 --Translation missing 
 L["MA_LG_CASTER_110"] = "Legion Legendary"
 --Translation missing 
@@ -407,44 +407,44 @@ L["MA_PVP_CASTER_14"] = "[14] Grievous Gladiator's Regalia"
 --Translation missing 
 L["MA_PVP_CASTER_15"] = "[15] Prideful Gladiator's Regalia"
 --Translation missing 
-L["MA_TR_01"] = "[1] Arcanist Regalia"
+L["MA_RAID_0101"] = "[1] Arcanist Regalia"
 --Translation missing 
-L["MA_TR_02"] = "[2] Netherwind Regalia"
+L["MA_RAID_0102"] = "[2] Netherwind Regalia"
 --Translation missing 
-L["MA_TR_03"] = "[3] Frostfire Regalia"
+L["MA_RAID_0103"] = "[3] Frostfire Regalia"
 --Translation missing 
-L["MA_TR_17"] = "[17] Arcanoshatter Regalia"
-L["MA_TR_18"] = "[T18] Gewandung des Arkanrats"
+L["MA_RAID_0601"] = "[17] Arcanoshatter Regalia"
+L["MA_RAID_0602"] = "[T18] Gewandung des Arkanrats"
 --Translation missing 
-L["MA_TR_19"] = "[19] Regalia of Everburning Knowledge"
+L["MA_RAID_0701"] = "[19] Regalia of Everburning Knowledge"
 --Translation missing 
-L["MA_TR_CASTER_04"] = "[4] Aldor Regalia"
+L["MA_RAID_0201"] = "[4] Aldor Regalia"
 --Translation missing 
-L["MA_TR_CASTER_05"] = "[5] Tirisfal Regalia"
+L["MA_RAID_0202"] = "[5] Tirisfal Regalia"
 --Translation missing 
-L["MA_TR_CASTER_06"] = "[6] Tempest Regalia"
+L["MA_RAID_0203"] = "[6] Tempest Regalia"
 --Translation missing 
-L["MA_TR_CASTER_07"] = "[7] Frostfire Garb"
+L["MA_RAID_0301"] = "[7] Frostfire Garb"
 --Translation missing 
-L["MA_TR_CASTER_08"] = "[8] Kirin Tor Garb"
+L["MA_RAID_0302"] = "[8] Kirin Tor Garb"
 --Translation missing 
-L["MA_TR_CASTER_10"] = "[10] Bloodmage's Regalia"
+L["MA_RAID_0304"] = "[10] Bloodmage's Regalia"
 --Translation missing 
-L["MA_TR_CASTER_11"] = "[11] Firelord's Vestments"
+L["MA_RAID_0401"] = "[11] Firelord's Vestments"
 --Translation missing 
-L["MA_TR_CASTER_12"] = "[12] Fire Hawk Robes of Conflagration"
+L["MA_RAID_0402"] = "[12] Fire Hawk Robes of Conflagration"
 --Translation missing 
-L["MA_TR_CASTER_13"] = "[13] Time Lord's Regalia"
+L["MA_RAID_0403"] = "[13] Time Lord's Regalia"
 --Translation missing 
-L["MA_TR_CASTER_14"] = "[14] Regalia of the Burning Scroll"
+L["MA_RAID_0501"] = "[14] Regalia of the Burning Scroll"
 --Translation missing 
-L["MA_TR_CASTER_15"] = "[15] Regalia of the Chromatic Hydra"
+L["MA_RAID_0502"] = "[15] Regalia of the Chromatic Hydra"
 --Translation missing 
-L["MA_TR_CASTER_16"] = "[16] Chronomancer Regalia"
+L["MA_RAID_0503"] = "[16] Chronomancer Regalia"
 --Translation missing 
-L["MA_TR_CASTER_A_09"] = "[9] Khadgar's Regalia"
+L["MA_RAID_A_0303"] = "[9] Khadgar's Regalia"
 --Translation missing 
-L["MA_TR_CASTER_H_09"] = "[9] Sunstrider's Regalia"
+L["MA_RAID_H_0303"] = "[9] Sunstrider's Regalia"
 L["MAIL"] = "Kette"
 L["MINIMAP_TOOLTIP"] = "Klicken, um deinen Gegenstandsset-Fortschritt zu betrachten."
 L["MISSING_LOCALIZATION"] = "Fehlende Übersetzung. Bitte diesen Fehler melden."
@@ -475,28 +475,28 @@ L["MO_PVP_MELEE_14"] = "[14] Grievous Gladiator's Ironskin"
 --Translation missing 
 L["MO_PVP_MELEE_15"] = "[15] Prideful Gladiator's Ironskin"
 --Translation missing 
-L["MO_TR_17"] = "[17] Battlegear of the Somber Gaze"
-L["MO_TR_18"] = "[T18] Schlachttücher des Taifunauges"
+L["MO_RAID_0601"] = "[17] Battlegear of the Somber Gaze"
+L["MO_RAID_0602"] = "[T18] Schlachttücher des Taifunauges"
 --Translation missing 
-L["MO_TR_19"] = "[19] Vestments of Enveloped Dissonance"
+L["MO_RAID_0701"] = "[19] Vestments of Enveloped Dissonance"
 --Translation missing 
-L["MO_TR_HEALER_14"] = "[14] Battlegear of the Red Crane"
+L["MO_RAID_0501"] = "[14] Battlegear of the Red Crane"
 --Translation missing 
-L["MO_TR_HEALER_15"] = "[15] Fire-Charm Vestments"
+L["MO_RAID_0502"] = "[15] Fire-Charm Vestments"
 --Translation missing 
-L["MO_TR_HEALER_16"] = "[16] Vestments of Seven Sacred Seals"
+L["MO_RAID_0503"] = "[16] Vestments of Seven Sacred Seals"
 --Translation missing 
-L["MO_TR_MELEE_14"] = "[14] Vestments of the Red Crane"
+L["MO_RAID_0501"] = "[14] Vestments of the Red Crane"
 --Translation missing 
-L["MO_TR_MELEE_15"] = "[15] Fire-Charm Battlegear"
+L["MO_RAID_0502"] = "[15] Fire-Charm Battlegear"
 --Translation missing 
-L["MO_TR_MELEE_16"] = "[16] Battlegear of Seven Sacred Seals"
+L["MO_RAID_0503"] = "[16] Battlegear of Seven Sacred Seals"
 --Translation missing 
-L["MO_TR_TANK_14"] = "[14] Armor of the Red Crane"
+L["MO_RAID_0501"] = "[14] Armor of the Red Crane"
 --Translation missing 
-L["MO_TR_TANK_15"] = "[15] Fire-Charm Armor"
+L["MO_RAID_0502"] = "[15] Fire-Charm Armor"
 --Translation missing 
-L["MO_TR_TANK_16"] = "[16] Armor of Seven Sacred Seals"
+L["MO_RAID_0503"] = "[16] Armor of Seven Sacred Seals"
 L["NOOBTAIN"] = "Nicht mehr erhältlich"
 L["NOT_AVAILABLE"] = "Set Collector: Diese Funktion ist noch nicht verfügbar. Danke für deine Geduld."
 L["NOTRANSMOG"] = "Nicht für Transmogrifizierung"
@@ -532,7 +532,7 @@ L["PA_DG_03"] = "D3: Righteous Armor"
 --Translation missing 
 L["PA_DG_AQ_1"] = "Battlegear of Eternal Justice"
 --Translation missing 
-L["PA_DG_AQ_2"] = "Avenger's Battlegear"
+L["PA_RAID_0104"] = "Avenger's Battlegear"
 --Translation missing 
 L["PA_LG_HEALER_110"] = "Legion Legendary"
 --Translation missing 
@@ -558,17 +558,17 @@ L["PA_PVP_MELEE_14"] = "[14] Grievous Gladiator's Vindication"
 --Translation missing 
 L["PA_PVP_MELEE_15"] = "[15] Prideful Gladiator's Vindication"
 --Translation missing 
-L["PA_TR_01"] = "[1] Lawbringer Armor"
+L["PA_RAID_0101"] = "[1] Lawbringer Armor"
 --Translation missing 
-L["PA_TR_02"] = "[2] Judgement Armor"
+L["PA_RAID_0102"] = "[2] Judgement Armor"
 --Translation missing 
-L["PA_TR_03"] = "[3] Redemption Armor"
+L["PA_RAID_0103"] = "[3] Redemption Armor"
 --Translation missing 
-L["PA_TR_17"] = "[17] Battlegear of Guiding Light"
+L["PA_RAID_0601"] = "[17] Battlegear of Guiding Light"
 --Translation missing 
-L["PA_TR_18"] = "[18] Watch of the Ceaseless Vigil"
+L["PA_RAID_0602"] = "[18] Watch of the Ceaseless Vigil"
 --Translation missing 
-L["PA_TR_19"] = "[19] Battleplate of the Highlord"
+L["PA_RAID_0701"] = "[19] Battleplate of the Highlord"
 --Translation missing 
 L["PA_TR_HEALER_04"] = "[4] Justicar Raiment"
 --Translation missing 
@@ -582,77 +582,77 @@ L["PA_TR_HEALER_08"] = "[8] Aegis Regalia"
 --Translation missing 
 L["PA_TR_HEALER_10"] = "[10] Lightsworn Garb"
 --Translation missing 
-L["PA_TR_HEALER_11"] = "[11] Reinforced Sapphirium Regalia"
+L["PA_RAID_0501"] = "[11] Reinforced Sapphirium Regalia"
 --Translation missing 
 L["PA_TR_HEALER_12"] = "[12] Regalia of Immolation"
 --Translation missing 
 L["PA_TR_HEALER_13"] = "[13] Regalia of Radiant Glory"
 --Translation missing 
-L["PA_TR_HEALER_14"] = "[14] White Tiger Vestments"
+L["PA_RAID_0501"] = "[14] White Tiger Vestments"
 --Translation missing 
-L["PA_TR_HEALER_15"] = "[15] Vestments of the Lightning Emperor"
+L["PA_RAID_0502"] = "[15] Vestments of the Lightning Emperor"
 --Translation missing 
-L["PA_TR_HEALER_16"] = "[16] Vestments of Winged Triumph"
+L["PA_RAID_0503"] = "[16] Vestments of Winged Triumph"
 --Translation missing 
 L["PA_TR_HEALER_A_09"] = "[9] Turalyon's Garb"
 --Translation missing 
 L["PA_TR_HEALER_H_09"] = "[9] Liadrin's Garb"
 --Translation missing 
-L["PA_TR_MELEE_04"] = "[4] Justicar Battlegear"
+L["PA_RAID_0201"] = "[4] Justicar Battlegear"
 --Translation missing 
-L["PA_TR_MELEE_05"] = "[5] Crystalforge Battlegear"
+L["PA_RAID_0202"] = "[5] Crystalforge Battlegear"
 --Translation missing 
-L["PA_TR_MELEE_06"] = "[6] Lightbringer Battlegear"
+L["PA_RAID_0203"] = "[6] Lightbringer Battlegear"
 --Translation missing 
-L["PA_TR_MELEE_07"] = "[7] Redemption Battlegear"
+L["PA_RAID_0301"] = "[7] Redemption Battlegear"
 --Translation missing 
-L["PA_TR_MELEE_08"] = "[8] Aegis Battlegear"
+L["PA_RAID_0302"] = "[8] Aegis Battlegear"
 --Translation missing 
-L["PA_TR_MELEE_10"] = "[10] Lightsworn Battlegear"
+L["PA_RAID_0304"] = "[10] Lightsworn Battlegear"
 --Translation missing 
-L["PA_TR_MELEE_11"] = "[11] Reinforced Sapphirium Battleplate"
+L["PA_RAID_0401"] = "[11] Reinforced Sapphirium Battleplate"
 --Translation missing 
-L["PA_TR_MELEE_12"] = "[12] Battleplate of Immolation"
+L["PA_RAID_0402"] = "[12] Battleplate of Immolation"
 --Translation missing 
-L["PA_TR_MELEE_13"] = "[13] Battleplate of Radiant Glory"
+L["PA_RAID_0403"] = "[13] Battleplate of Radiant Glory"
 --Translation missing 
-L["PA_TR_MELEE_14"] = "[14] White Tiger Battlegear"
+L["PA_RAID_0501"] = "[14] White Tiger Battlegear"
 --Translation missing 
-L["PA_TR_MELEE_15"] = "[15] Battlegear of the Lightning Emperor"
+L["PA_RAID_0502"] = "[15] Battlegear of the Lightning Emperor"
 --Translation missing 
-L["PA_TR_MELEE_16"] = "[16] Battlegear of Winged Triupmh"
+L["PA_RAID_0503"] = "[16] Battlegear of Winged Triupmh"
 --Translation missing 
-L["PA_TR_MELEE_A_09"] = "[9] Turalyon's Battlegear"
+L["PA_RAID_A_0303"] = "[9] Turalyon's Battlegear"
 --Translation missing 
-L["PA_TR_MELEE_H_09"] = "[9] Liadrin's Battlegear"
+L["PA_RAID_H_0303"] = "[9] Liadrin's Battlegear"
 --Translation missing 
-L["PA_TR_TANK_04"] = "[4] Justicar Armor"
+L["PA_RAID_0201"] = "[4] Justicar Armor"
 --Translation missing 
-L["PA_TR_TANK_05"] = "[5] Crystalforge Armor"
+L["PA_RAID_0202"] = "[5] Crystalforge Armor"
 --Translation missing 
-L["PA_TR_TANK_06"] = "[6] Lightbringer Armor"
+L["PA_RAID_0203"] = "[6] Lightbringer Armor"
 --Translation missing 
-L["PA_TR_TANK_07"] = "[7] Redemption Plate"
+L["PA_RAID_0301"] = "[7] Redemption Plate"
 --Translation missing 
-L["PA_TR_TANK_08"] = "[8] Aegis Plate"
+L["PA_RAID_0302"] = "[8] Aegis Plate"
 --Translation missing 
-L["PA_TR_TANK_10"] = "[10] Lightsworn Plate"
+L["PA_RAID_0304"] = "[10] Lightsworn Plate"
 --Translation missing 
-L["PA_TR_TANK_11"] = "[11] Reinforced Sapphirium Battlearmor"
+L["PA_RAID_0401"] = "[11] Reinforced Sapphirium Battlearmor"
 --Translation missing 
-L["PA_TR_TANK_12"] = "[12] Battlearmor of Immolation"
+L["PA_RAID_0402"] = "[12] Battlearmor of Immolation"
 --Translation missing 
-L["PA_TR_TANK_13"] = "[13] Armor of Radiant Glory"
+L["PA_RAID_0403"] = "[13] Armor of Radiant Glory"
 --Translation missing 
-L["PA_TR_TANK_14"] = "[14] White Tiger Plate"
+L["PA_RAID_0501"] = "[14] White Tiger Plate"
 --Translation missing 
-L["PA_TR_TANK_15"] = "[15] Plate of the Lightning Emperor"
+L["PA_RAID_0502"] = "[15] Plate of the Lightning Emperor"
 --Translation missing 
-L["PA_TR_TANK_16"] = "[16] Plate of Winged Triumph"
+L["PA_RAID_0503"] = "[16] Plate of Winged Triumph"
 --Translation missing 
-L["PA_TR_TANK_A_09"] = "[9] Turalyon's Plate"
+L["PA_RAID_A_0303"] = "[9] Turalyon's Plate"
 --Translation missing 
-L["PA_TR_TANK_H_09"] = "[9] Liadrin's Plate"
+L["PA_RAID_H_0303"] = "[9] Liadrin's Plate"
 L["PINK"] = "Rosa"
 L["PLATE"] = "Platte"
 --Translation missing 
@@ -666,7 +666,7 @@ L["PR_DG_03"] = "D3: Hallowed Raiment"
 --Translation missing 
 L["PR_DG_AQ_1"] = "Finery of Infinite Wisdom"
 --Translation missing 
-L["PR_DG_AQ_2"] = "Garments of the Oracle"
+L["PR_RAID_0104"] = "Garments of the Oracle"
 --Translation missing 
 L["PR_LG_CASTER_110"] = "Legion Legendary"
 --Translation missing 
@@ -690,45 +690,45 @@ L["PR_PVP_HEALER_14"] = "[14] Grievous Gladiator's Investiture"
 --Translation missing 
 L["PR_PVP_HEALER_15"] = "[15] Prideful Gladiator's Investiture"
 --Translation missing 
-L["PR_TR_01"] = "[1] Vestments of Prophecy"
+L["PR_RAID_0101"] = "[1] Vestments of Prophecy"
 --Translation missing 
-L["PR_TR_02"] = "[2] Vestments of Transcendence"
+L["PR_RAID_0102"] = "[2] Vestments of Transcendence"
 --Translation missing 
-L["PR_TR_03"] = "[3] Vestments of Faith"
+L["PR_RAID_0103"] = "[3] Vestments of Faith"
 --Translation missing 
-L["PR_TR_17"] = "[17] Soul Priest's Raiment"
+L["PR_RAID_0601"] = "[17] Soul Priest's Raiment"
 --Translation missing 
-L["PR_TR_18"] = "[18] Attire of Piety"
+L["PR_RAID_0602"] = "[18] Attire of Piety"
 --Translation missing 
-L["PR_TR_19"] = "[19] Vestments of the Purifier"
+L["PR_RAID_0701"] = "[19] Vestments of the Purifier"
 --Translation missing 
-L["PR_TR_CASTER_04"] = "[4] Incarnate Regalia"
+L["PR_RAID_0201"] = "[4] Incarnate Regalia"
 --Translation missing 
-L["PR_TR_CASTER_05"] = "[5] Avatar Regalia"
+L["PR_RAID_0202"] = "[5] Avatar Regalia"
 --Translation missing 
-L["PR_TR_CASTER_06"] = "[6] Absolution Raiment"
+L["PR_RAID_0203"] = "[6] Absolution Raiment"
 --Translation missing 
-L["PR_TR_CASTER_07"] = "[7] Garb of Faith"
+L["PR_RAID_0301"] = "[7] Garb of Faith"
 --Translation missing 
-L["PR_TR_CASTER_08"] = "[8] Sanctification Garb"
+L["PR_RAID_0302"] = "[8] Sanctification Garb"
 --Translation missing 
-L["PR_TR_CASTER_10"] = "[10] Crimson Acolyte's Regalia"
+L["PR_RAID_0304"] = "[10] Crimson Acolyte's Regalia"
 --Translation missing 
-L["PR_TR_CASTER_11"] = "[11] Mercurial Regalia"
+L["PR_RAID_0401"] = "[11] Mercurial Regalia"
 --Translation missing 
-L["PR_TR_CASTER_12"] = "[12] Regalia of the Cleansing Flame"
+L["PR_RAID_0402"] = "[12] Regalia of the Cleansing Flame"
 --Translation missing 
-L["PR_TR_CASTER_13"] = "[13] Regalia of Dying Light"
+L["PR_RAID_0403"] = "[13] Regalia of Dying Light"
 --Translation missing 
-L["PR_TR_CASTER_14"] = "[14] Regalia of the Guardian Serpent"
+L["PR_RAID_0501"] = "[14] Regalia of the Guardian Serpent"
 --Translation missing 
-L["PR_TR_CASTER_15"] = "[15] Regalia of the Exorcist"
+L["PR_RAID_0502"] = "[15] Regalia of the Exorcist"
 --Translation missing 
-L["PR_TR_CASTER_16"] = "[16] Regalia of Ternion Glory"
+L["PR_RAID_0503"] = "[16] Regalia of Ternion Glory"
 --Translation missing 
-L["PR_TR_CASTER_A_09"] = "[9] Velen's Regalia"
+L["PR_RAID_A_0303"] = "[9] Velen's Regalia"
 --Translation missing 
-L["PR_TR_CASTER_H_09"] = "[9] Zabra's Regalia"
+L["PR_RAID_H_0303"] = "[9] Zabra's Regalia"
 --Translation missing 
 L["PR_TR_HEALER_04"] = "[4] Incarnate Raiment"
 --Translation missing 
@@ -742,17 +742,17 @@ L["PR_TR_HEALER_08"] = "[8] Sanctification Regalia"
 --Translation missing 
 L["PR_TR_HEALER_10"] = "[10] Crimson Acolyte's Raiment"
 --Translation missing 
-L["PR_TR_HEALER_11"] = "[11] Mercurial Vestments"
+L["PR_RAID_0501"] = "[11] Mercurial Vestments"
 --Translation missing 
 L["PR_TR_HEALER_12"] = "[12] Vestments of the Cleansing Flame"
 --Translation missing 
 L["PR_TR_HEALER_13"] = "[13] Vestments of Dying Light"
 --Translation missing 
-L["PR_TR_HEALER_14"] = "[14] Vestments of the Guardian Serpent"
+L["PR_RAID_0501"] = "[14] Vestments of the Guardian Serpent"
 --Translation missing 
-L["PR_TR_HEALER_15"] = "[15] Vestments of the Exorcist"
+L["PR_RAID_0502"] = "[15] Vestments of the Exorcist"
 --Translation missing 
-L["PR_TR_HEALER_16"] = "[16] Vestments of Ternion Glory"
+L["PR_RAID_0503"] = "[16] Vestments of Ternion Glory"
 --Translation missing 
 L["PR_TR_HEALER_A_09"] = "[9] Velen's Raiment"
 --Translation missing 
@@ -773,7 +773,7 @@ L["RO_DG_03"] = "D3: Assassination Armor"
 --Translation missing 
 L["RO_DG_AQ_1"] = "Emblems of Veiled Shadows"
 --Translation missing 
-L["RO_DG_AQ_2"] = "Deathdealer's Embrace"
+L["RO_RAID_0104"] = "Deathdealer's Embrace"
 --Translation missing 
 L["RO_LG_MELEE_110"] = "Legion Legendary"
 --Translation missing 
@@ -791,45 +791,45 @@ L["RO_PVP_MELEE_14"] = "[14] Grievous Gladiator's Vestments"
 --Translation missing 
 L["RO_PVP_MELEE_15"] = "[15] Prideful Gladiator's Vestments"
 --Translation missing 
-L["RO_TR_01"] = "[1] Nightslayer Armor"
+L["RO_RAID_0101"] = "[1] Nightslayer Armor"
 --Translation missing 
-L["RO_TR_02"] = "[2] Bloodfang Armor"
+L["RO_RAID_0102"] = "[2] Bloodfang Armor"
 --Translation missing 
-L["RO_TR_03"] = "[3] Bonescythe Armor"
+L["RO_RAID_0103"] = "[3] Bonescythe Armor"
 --Translation missing 
-L["RO_TR_17"] = "[17] Poisoner's Battlegear"
+L["RO_RAID_0601"] = "[17] Poisoner's Battlegear"
 --Translation missing 
-L["RO_TR_18"] = "[18] Felblade Armor"
+L["RO_RAID_0602"] = "[18] Felblade Armor"
 --Translation missing 
-L["RO_TR_19"] = "[19] Doomblade Battlegear"
+L["RO_RAID_0701"] = "[19] Doomblade Battlegear"
 --Translation missing 
-L["RO_TR_MELEE_04"] = "[4] Netherblade"
+L["RO_RAID_0201"] = "[4] Netherblade"
 --Translation missing 
-L["RO_TR_MELEE_05"] = "[5] Deathmantle"
+L["RO_RAID_0202"] = "[5] Deathmantle"
 --Translation missing 
-L["RO_TR_MELEE_06"] = "[6] Slayer's Armor"
+L["RO_RAID_0203"] = "[6] Slayer's Armor"
 --Translation missing 
-L["RO_TR_MELEE_07"] = "[7] Bonescythe Battlegear"
+L["RO_RAID_0301"] = "[7] Bonescythe Battlegear"
 --Translation missing 
-L["RO_TR_MELEE_08"] = "[8] Terrorblade Battlegear"
+L["RO_RAID_0302"] = "[8] Terrorblade Battlegear"
 --Translation missing 
-L["RO_TR_MELEE_10"] = "[10] Shadowblade's Battlegear"
+L["RO_RAID_0304"] = "[10] Shadowblade's Battlegear"
 --Translation missing 
-L["RO_TR_MELEE_11"] = "[11] Wind Dancer's Regalia"
+L["RO_RAID_0401"] = "[11] Wind Dancer's Regalia"
 --Translation missing 
-L["RO_TR_MELEE_12"] = "[12] Vestments of the Dark Phoenix"
+L["RO_RAID_0402"] = "[12] Vestments of the Dark Phoenix"
 --Translation missing 
-L["RO_TR_MELEE_13"] = "[13] Blackfang Battleweave"
+L["RO_RAID_0403"] = "[13] Blackfang Battleweave"
 --Translation missing 
-L["RO_TR_MELEE_14"] = "[14] Battlegear of the Thousandfold Blades"
+L["RO_RAID_0501"] = "[14] Battlegear of the Thousandfold Blades"
 --Translation missing 
-L["RO_TR_MELEE_15"] = "[15] Nine-Tail Battlegear"
+L["RO_RAID_0502"] = "[15] Nine-Tail Battlegear"
 --Translation missing 
-L["RO_TR_MELEE_16"] = "[16] Barbed Assassin Battlegear"
+L["RO_RAID_0503"] = "[16] Barbed Assassin Battlegear"
 --Translation missing 
-L["RO_TR_MELEE_A_09"] = "[9] VanCleef's Battlegear"
+L["RO_RAID_A_0303"] = "[9] VanCleef's Battlegear"
 --Translation missing 
-L["RO_TR_MELEE_H_09"] = "[9] Garona's Battlegear"
+L["RO_RAID_H_0303"] = "[9] Garona's Battlegear"
 --Translation missing 
 L["SH_AR_CASTER_10"] = "The Fist of Ra-den"
 --Translation missing 
@@ -865,7 +865,7 @@ L["SH_DG_03"] = "D3: Tidefury Raiment"
 --Translation missing 
 L["SH_DG_AQ_1"] = "Gift of the Gathering Storm"
 --Translation missing 
-L["SH_DG_AQ_2"] = "Stormcaller's Garb"
+L["SH_RAID_0104"] = "Stormcaller's Garb"
 --Translation missing 
 L["SH_LG_CASTER_110"] = "Legion Legendary"
 --Translation missing 
@@ -883,9 +883,9 @@ L["SH_PVP_18"] = "[W3] Warmongering Wartide"
 --Translation missing 
 L["SH_PVP_19"] = "[L1] Vindictive Gladiator's Earthshaker"
 --Translation missing 
-L["SH_PVP_CASTER_14"] = "[14] Grievous Gladiator's Thunderfist"
+L["SH_PVP_14"] = "[14] Grievous Gladiator's Thunderfist"
 --Translation missing 
-L["SH_PVP_CASTER_15"] = "[15] Prideful Gladiator's Thunderfist"
+L["SH_PVP_15"] = "[15] Prideful Gladiator's Thunderfist"
 --Translation missing 
 L["SH_PVP_HEALER_14"] = "[14] Grievous Gladiator's Wartide"
 --Translation missing 
@@ -895,47 +895,47 @@ L["SH_PVP_MELEE_14"] = "[14] Grievous Gladiator's Earthshaker"
 --Translation missing 
 L["SH_PVP_MELEE_15"] = "[15] Prideful Gladiator's Earthshaker"
 --Translation missing 
-L["SH_TR_01"] = "[1] The Earthfury"
+L["SH_RAID_0101"] = "[1] The Earthfury"
 --Translation missing 
-L["SH_TR_02"] = "[2] The Ten Storms"
+L["SH_RAID_0102"] = "[2] The Ten Storms"
 --Translation missing 
-L["SH_TR_03"] = "[3] The Earth Shatterer"
+L["SH_RAID_0103"] = "[3] The Earth Shatterer"
 --Translation missing 
-L["SH_TR_16"] = "[16] Celestial Harmony Regalia"
+L["SH_RAID_0503"] = "[16] Celestial Harmony Regalia"
 --Translation missing 
-L["SH_TR_17"] = "[17] Windspeaker's Regalia"
+L["SH_RAID_0601"] = "[17] Windspeaker's Regalia"
 --Translation missing 
-L["SH_TR_18"] = "[18] Embrace of the Living Mountain"
+L["SH_RAID_0602"] = "[18] Embrace of the Living Mountain"
 --Translation missing 
-L["SH_TR_19"] = "[19] Regalia of Bound Elements"
+L["SH_RAID_0701"] = "[19] Regalia of Bound Elements"
 --Translation missing 
-L["SH_TR_CASTER_04"] = "[4] Cyclone Regalia"
+L["SH_RAID_0201"] = "[4] Cyclone Regalia"
 --Translation missing 
-L["SH_TR_CASTER_05"] = "[5] Cataclysm Regalia"
+L["SH_RAID_0202"] = "[5] Cataclysm Regalia"
 --Translation missing 
-L["SH_TR_CASTER_06"] = "[6] Skyshatter Regalia"
+L["SH_RAID_0203"] = "[6] Skyshatter Regalia"
 --Translation missing 
-L["SH_TR_CASTER_07"] = "[7] Earthshatter Garb"
+L["SH_RAID_0301"] = "[7] Earthshatter Garb"
 --Translation missing 
-L["SH_TR_CASTER_08"] = "[8] Worldbreaker Garb"
+L["SH_RAID_0302"] = "[8] Worldbreaker Garb"
 --Translation missing 
-L["SH_TR_CASTER_10"] = "[10] Frost Witch's Regalia"
+L["SH_RAID_0304"] = "[10] Frost Witch's Regalia"
 --Translation missing 
-L["SH_TR_CASTER_11"] = "[11] Regalia of the Raging Elements"
+L["SH_RAID_0401"] = "[11] Regalia of the Raging Elements"
 --Translation missing 
-L["SH_TR_CASTER_12"] = "[12] Volcanic Regalia"
+L["SH_RAID_0402"] = "[12] Volcanic Regalia"
 --Translation missing 
-L["SH_TR_CASTER_13"] = "[13] Spiritwalker's Regalia"
+L["SH_RAID_0403"] = "[13] Spiritwalker's Regalia"
 --Translation missing 
-L["SH_TR_CASTER_14"] = "[14] Regalia of the Firebird"
+L["SH_RAID_0501"] = "[14] Regalia of the Firebird"
 --Translation missing 
-L["SH_TR_CASTER_15"] = "[15] Regalia of the Witch Doctor"
+L["SH_RAID_0502"] = "[15] Regalia of the Witch Doctor"
 --Translation missing 
-L["SH_TR_CASTER_16"] = "[16] Celestial Harmony Regalia"
+L["SH_RAID_0503"] = "[16] Celestial Harmony Regalia"
 --Translation missing 
-L["SH_TR_CASTER_A_09"] = "[9] Nobundo's Regalia"
+L["SH_RAID_A_0303"] = "[9] Nobundo's Regalia"
 --Translation missing 
-L["SH_TR_CASTER_H_09"] = "[9] Thrall's Regalia"
+L["SH_RAID_H_0303"] = "[9] Thrall's Regalia"
 --Translation missing 
 L["SH_TR_HEALER_04"] = "[4] Cyclone Raiment"
 --Translation missing 
@@ -949,33 +949,33 @@ L["SH_TR_HEALER_08"] = "[8] Worldbreaker Regalia"
 --Translation missing 
 L["SH_TR_HEALER_10"] = "[10] Frost Witch's Garb"
 --Translation missing 
-L["SH_TR_HEALER_11"] = "[11] Vestments of the Raging Elements"
+L["SH_RAID_0501"] = "[11] Vestments of the Raging Elements"
 L["SH_TR_HEALER_12"] = "[T12] Vulkanische Gewänder"
 L["SH_TR_HEALER_13"] = "[T13] Gewänder des Geistwandlers"
-L["SH_TR_HEALER_14"] = "[T14] Tracht des Feuervogels"
-L["SH_TR_HEALER_15"] = "[T15] Gewänder des Hexendoktors"
-L["SH_TR_HEALER_16"] = "[T16] Gewänder der himmlischen Harmonie"
+L["SH_RAID_0501"] = "[T14] Tracht des Feuervogels"
+L["SH_RAID_0502"] = "[T15] Gewänder des Hexendoktors"
+L["SH_RAID_0503"] = "[T16] Gewänder der himmlischen Harmonie"
 L["SH_TR_HEALER_A_09"] = "[T9] Nobundos Gewand der Eroberung"
 --Translation missing 
 L["SH_TR_HEALER_H_09"] = "[9] Thrall's Garb"
-L["SH_TR_MELEE_04"] = "[T4] Harnisch des Orkans"
-L["SH_TR_MELEE_05"] = "[T5] Harnisch der Verheerung"
-L["SH_TR_MELEE_06"] = "[T6] Harnisch des Himmelsdonners"
-L["SH_TR_MELEE_07"] = "[T7] Erdspalterschlachtrüstung"
-L["SH_TR_MELEE_08"] = "[T8] Schlachtrüstung des Weltenbrechers"
-L["SH_TR_MELEE_10"] = "[T10] Schlachtrüstung der Frosthexe"
-L["SH_TR_MELEE_11"] = "[T11] Schlachtrüstung der wütenden Elemente"
-L["SH_TR_MELEE_12"] = "[T12] Vulkanische Schlachtrüstung"
-L["SH_TR_MELEE_13"] = "[T13] Schlachtrüstung des Geistwandlers"
-L["SH_TR_MELEE_14"] = "[T14] Schlachtrüstung des Feuervogels"
+L["SH_RAID_0201"] = "[T4] Harnisch des Orkans"
+L["SH_RAID_0202"] = "[T5] Harnisch der Verheerung"
+L["SH_RAID_0203"] = "[T6] Harnisch des Himmelsdonners"
+L["SH_RAID_0301"] = "[T7] Erdspalterschlachtrüstung"
+L["SH_RAID_0302"] = "[T8] Schlachtrüstung des Weltenbrechers"
+L["SH_RAID_0304"] = "[T10] Schlachtrüstung der Frosthexe"
+L["SH_RAID_0401"] = "[T11] Schlachtrüstung der wütenden Elemente"
+L["SH_RAID_0402"] = "[T12] Vulkanische Schlachtrüstung"
+L["SH_RAID_0403"] = "[T13] Schlachtrüstung des Geistwandlers"
+L["SH_RAID_0501"] = "[T14] Schlachtrüstung des Feuervogels"
 --Translation missing 
-L["SH_TR_MELEE_15"] = "[15] Battlegear of the Witch Doctor"
+L["SH_RAID_0502"] = "[15] Battlegear of the Witch Doctor"
 --Translation missing 
-L["SH_TR_MELEE_16"] = "[16] Celestial Harmony Battlegear"
+L["SH_RAID_0503"] = "[16] Celestial Harmony Battlegear"
 --Translation missing 
-L["SH_TR_MELEE_A_09"] = "[9] Nobundo's Battlegear"
+L["SH_RAID_A_0303"] = "[9] Nobundo's Battlegear"
 --Translation missing 
-L["SH_TR_MELEE_H_09"] = "[9] Thrall's Battlegear"
+L["SH_RAID_H_0303"] = "[9] Thrall's Battlegear"
 --Translation missing 
 L["SHIFT_RIGHT_CLICK_HIDDEN"] = "Shift-Right-click to hide/unhide a set."
 L["SHOW_DETAIL"] = "Einzelheiten anzeigen"
@@ -987,21 +987,21 @@ L["SLASH_HELP_SORT"] = [=[Set Collector: Dieser Befehl legt die Sortierrichtung 
 Beispiel: "/setcollector sort asc"]=]
 L["TEAL"] = "Blaugrün"
 --Translation missing 
-L["TR_CLOTH_17"] = "[17] Ebonflame Raiment"
+L["RAID_CLOTH_0601"] = "[17] Ebonflame Raiment"
 --Translation missing 
-L["TR_CLOTH_18"] = "[18] Felfume Raiment"
+L["RAID_CLOTH_0602"] = "[18] Felfume Raiment"
 --Translation missing 
-L["TR_LEATHER_17"] = "[17] Sootfur Garb"
+L["RAID_LEATHER_0601"] = "[17] Sootfur Garb"
 --Translation missing 
-L["TR_LEATHER_18"] = "[18] Ironpelt Armor"
+L["RAID_LEATHER_0602"] = "[18] Ironpelt Armor"
 --Translation missing 
-L["TR_MAIL_17"] = "[17] Ashlink Armor"
+L["RAID_MAIL_0601"] = "[17] Ashlink Armor"
 --Translation missing 
-L["TR_MAIL_18"] = "[18] Rancorbite Armor"
+L["RAID_MAIL_0602"] = "[18] Rancorbite Armor"
 --Translation missing 
-L["TR_PLATE_17"] = "[17] Blacksteel Battleplate"
+L["RAID_PLATE_0601"] = "[17] Blacksteel Battleplate"
 --Translation missing 
-L["TR_PLATE_18"] = "[18] Demonbreaker Wargear"
+L["RAID_PLATE_0602"] = "[18] Demonbreaker Wargear"
 L["TRANSMOG_FILTER"] = "Nur für Transmogrifizierung"
 L["TUTORIAL_1"] = "Filtere die Sets nach Spezialisierung, und legt fest, ob du nur deine Lieblingssets oder alle Sets sehen will."
 L["TUTORIAL_2"] = "Eine liste der verfügbaren Gegendstandssets wird hier gezeigt. Klick auf ein Set für eine Vorschau. Deine Lieblingssets wird mit einem Stern markiert."
@@ -1028,7 +1028,7 @@ L["WK_DG_03"] = "D3: Oblivion Raiment"
 --Translation missing 
 L["WK_DG_AQ_1"] = "Implements of Unspoken Names"
 --Translation missing 
-L["WK_DG_AQ_2"] = "Doomcaller's Attire"
+L["WK_RAID_0104"] = "Doomcaller's Attire"
 --Translation missing 
 L["WK_LG_CASTER_110"] = "Legion Legendary"
 --Translation missing 
@@ -1046,45 +1046,45 @@ L["WK_PVP_CASTER_14"] = "[14] Grievous Gladiator's Felshroud"
 --Translation missing 
 L["WK_PVP_CASTER_15"] = "[15] Prideful Gladiator's Felshroud"
 --Translation missing 
-L["WK_TR_01"] = "[1] Felheart Raiment"
+L["WK_RAID_0101"] = "[1] Felheart Raiment"
 --Translation missing 
-L["WK_TR_02"] = "[2] Nemesis Raiment"
+L["WK_RAID_0102"] = "[2] Nemesis Raiment"
 --Translation missing 
-L["WK_TR_03"] = "[3] Plagueheart Raiment"
+L["WK_RAID_0103"] = "[3] Plagueheart Raiment"
 --Translation missing 
-L["WK_TR_17"] = "[17] Shadow Council's Garb"
+L["WK_RAID_0601"] = "[17] Shadow Council's Garb"
 --Translation missing 
-L["WK_TR_18"] = "[18] Deathrattle Regalia"
+L["WK_RAID_0602"] = "[18] Deathrattle Regalia"
 --Translation missing 
-L["WK_TR_19"] = "[19] Legacy of Azj'Aquir"
+L["WK_RAID_0701"] = "[19] Legacy of Azj'Aquir"
 --Translation missing 
-L["WK_TR_CASTER_04"] = "[4] Voidheart Raiment"
+L["WK_RAID_0201"] = "[4] Voidheart Raiment"
 --Translation missing 
-L["WK_TR_CASTER_05"] = "[5] Corruptor Raiment"
+L["WK_RAID_0202"] = "[5] Corruptor Raiment"
 --Translation missing 
-L["WK_TR_CASTER_06"] = "[6] Malefic Raiment"
+L["WK_RAID_0203"] = "[6] Malefic Raiment"
 --Translation missing 
-L["WK_TR_CASTER_07"] = "[7] Plagueheart Garb"
+L["WK_RAID_0301"] = "[7] Plagueheart Garb"
 --Translation missing 
-L["WK_TR_CASTER_08"] = "[8] Deathbringer Garb"
+L["WK_RAID_0302"] = "[8] Deathbringer Garb"
 --Translation missing 
-L["WK_TR_CASTER_10"] = "[10] Dark Coven's Regalia"
+L["WK_RAID_0304"] = "[10] Dark Coven's Regalia"
 --Translation missing 
-L["WK_TR_CASTER_11"] = "[11] Shadowflame Regalia"
+L["WK_RAID_0401"] = "[11] Shadowflame Regalia"
 --Translation missing 
-L["WK_TR_CASTER_12"] = "[12] Balespider's Burning Vestments"
+L["WK_RAID_0402"] = "[12] Balespider's Burning Vestments"
 --Translation missing 
-L["WK_TR_CASTER_13"] = "[13] Vestments of the Faceless Shroud"
+L["WK_RAID_0403"] = "[13] Vestments of the Faceless Shroud"
 --Translation missing 
-L["WK_TR_CASTER_14"] = "[14] Sha-Skin Regalia"
+L["WK_RAID_0501"] = "[14] Sha-Skin Regalia"
 --Translation missing 
-L["WK_TR_CASTER_15"] = "[15] Regalia of the Thousandfold Hells"
+L["WK_RAID_0502"] = "[15] Regalia of the Thousandfold Hells"
 --Translation missing 
-L["WK_TR_CASTER_16"] = "[16] Regalia of the Horned Nightmare"
+L["WK_RAID_0503"] = "[16] Regalia of the Horned Nightmare"
 --Translation missing 
-L["WK_TR_CASTER_A_09"] = "[9] Kel'Thuzad's Regalia"
+L["WK_RAID_A_0303"] = "[9] Kel'Thuzad's Regalia"
 --Translation missing 
-L["WK_TR_CASTER_H_09"] = "[9] Gul'dan's Regalia"
+L["WK_RAID_H_0303"] = "[9] Gul'dan's Regalia"
 --Translation missing 
 L["WR_CD_90"] = "The Golden King Set"
 --Translation missing 
@@ -1096,7 +1096,7 @@ L["WR_DG_03"] = "D3: Bold Armor"
 --Translation missing 
 L["WR_DG_AQ_1"] = "Battlegear of Unyielding Strength"
 --Translation missing 
-L["WR_DG_AQ_2"] = "Conqueror's Battlegear"
+L["WR_RAID_0104"] = "Conqueror's Battlegear"
 --Translation missing 
 L["WR_LG_MELEE_110"] = "Legion Legendary"
 --Translation missing 
@@ -1116,70 +1116,70 @@ L["WR_PVP_MELEE_14"] = "[14] Grievous Gladiator's Battlegear"
 --Translation missing 
 L["WR_PVP_MELEE_15"] = "[15] Prideful Gladiator's Battlegear"
 --Translation missing 
-L["WR_TR_01"] = "[1] Battlegear of Might"
+L["WR_RAID_0101"] = "[1] Battlegear of Might"
 --Translation missing 
-L["WR_TR_02"] = "[2] Battlegear of Wrath"
+L["WR_RAID_0102"] = "[2] Battlegear of Wrath"
 --Translation missing 
-L["WR_TR_03"] = "[3] Dreadnaught's Battlegear"
+L["WR_RAID_0103"] = "[3] Dreadnaught's Battlegear"
 --Translation missing 
-L["WR_TR_17"] = "[17] Blackhand's Battlegear"
+L["WR_RAID_0601"] = "[17] Blackhand's Battlegear"
 --Translation missing 
-L["WR_TR_18"] = "[18] Battlegear of Iron Wrath"
+L["WR_RAID_0602"] = "[18] Battlegear of Iron Wrath"
 --Translation missing 
-L["WR_TR_19"] = "[19] Warplate of the Obsidian Aspect"
+L["WR_RAID_0701"] = "[19] Warplate of the Obsidian Aspect"
 --Translation missing 
-L["WR_TR_MELEE_04"] = "[4] Warbringer Battlegear"
+L["WR_RAID_0201"] = "[4] Warbringer Battlegear"
 --Translation missing 
-L["WR_TR_MELEE_05"] = "[5] Destroyer Battlegear"
+L["WR_RAID_0202"] = "[5] Destroyer Battlegear"
 --Translation missing 
-L["WR_TR_MELEE_06"] = "[6] Onslaught Battlegear"
+L["WR_RAID_0203"] = "[6] Onslaught Battlegear"
 --Translation missing 
-L["WR_TR_MELEE_07"] = "[7] Dreadnaught Battlegear"
+L["WR_RAID_0301"] = "[7] Dreadnaught Battlegear"
 --Translation missing 
-L["WR_TR_MELEE_08"] = "[8] Siegebreaker Battlegear"
+L["WR_RAID_0302"] = "[8] Siegebreaker Battlegear"
 --Translation missing 
-L["WR_TR_MELEE_10"] = "[10] Ymirjar Lord's Battlegear"
+L["WR_RAID_0304"] = "[10] Ymirjar Lord's Battlegear"
 --Translation missing 
-L["WR_TR_MELEE_11"] = "[11] Earthen Warplate"
+L["WR_RAID_0401"] = "[11] Earthen Warplate"
 --Translation missing 
-L["WR_TR_MELEE_12"] = "[12] Molten Giant Warplate"
+L["WR_RAID_0402"] = "[12] Molten Giant Warplate"
 --Translation missing 
-L["WR_TR_MELEE_13"] = "[13] Colossal Dragonplate Battlegear"
+L["WR_RAID_0403"] = "[13] Colossal Dragonplate Battlegear"
 --Translation missing 
-L["WR_TR_MELEE_14"] = "[14] Battleplate of Resounding Rings"
+L["WR_RAID_0501"] = "[14] Battleplate of Resounding Rings"
 --Translation missing 
-L["WR_TR_MELEE_15"] = "[15] Battleplate of the Last Mogu"
+L["WR_RAID_0502"] = "[15] Battleplate of the Last Mogu"
 --Translation missing 
-L["WR_TR_MELEE_16"] = "[16] Battleplate of the Prehistoric Marauder"
+L["WR_RAID_0503"] = "[16] Battleplate of the Prehistoric Marauder"
 --Translation missing 
-L["WR_TR_MELEE_A_09"] = "[9] Wrynn's Battlegear"
+L["WR_RAID_A_0303"] = "[9] Wrynn's Battlegear"
 --Translation missing 
-L["WR_TR_MELEE_H_09"] = "[9] Hellscream's Battlegear"
+L["WR_RAID_H_0303"] = "[9] Hellscream's Battlegear"
 --Translation missing 
-L["WR_TR_TANK_04"] = "[4] Warbringer Armor"
+L["WR_RAID_0201"] = "[4] Warbringer Armor"
 --Translation missing 
-L["WR_TR_TANK_05"] = "[5] Destroyer Armor"
+L["WR_RAID_0202"] = "[5] Destroyer Armor"
 --Translation missing 
-L["WR_TR_TANK_06"] = "[6] Onslaught Armor"
+L["WR_RAID_0203"] = "[6] Onslaught Armor"
 --Translation missing 
-L["WR_TR_TANK_07"] = "[7] Dreadnaught Plate"
+L["WR_RAID_0301"] = "[7] Dreadnaught Plate"
 --Translation missing 
-L["WR_TR_TANK_08"] = "[8] Siegebreaker Plate"
+L["WR_RAID_0302"] = "[8] Siegebreaker Plate"
 --Translation missing 
-L["WR_TR_TANK_10"] = "[10] Ymirjar Lord's Plate"
+L["WR_RAID_0304"] = "[10] Ymirjar Lord's Plate"
 --Translation missing 
-L["WR_TR_TANK_11"] = "[11] Earthen Battleplate"
+L["WR_RAID_0401"] = "[11] Earthen Battleplate"
 --Translation missing 
-L["WR_TR_TANK_12"] = "[12] Molten Giant Battleplate"
+L["WR_RAID_0402"] = "[12] Molten Giant Battleplate"
 --Translation missing 
-L["WR_TR_TANK_13"] = "[13] Colossal Dragonplate Armor"
+L["WR_RAID_0403"] = "[13] Colossal Dragonplate Armor"
 --Translation missing 
-L["WR_TR_TANK_14"] = "[14] Plate of Resounding Rings"
+L["WR_RAID_0501"] = "[14] Plate of Resounding Rings"
 --Translation missing 
-L["WR_TR_TANK_15"] = "[15] Plate of the Last Mogu"
+L["WR_RAID_0502"] = "[15] Plate of the Last Mogu"
 --Translation missing 
-L["WR_TR_TANK_16"] = "[16] Plate of the Prehistoric Marauder"
+L["WR_RAID_0503"] = "[16] Plate of the Prehistoric Marauder"
 --Translation missing 
-L["WR_TR_TANK_A_09"] = "[9] Wrynn's Plate"
+L["WR_RAID_A_0303"] = "[9] Wrynn's Plate"
 --Translation missing 
-L["WR_TR_TANK_H_09"] = "[9] Hellscream's Plate"
+L["WR_RAID_H_0303"] = "[9] Hellscream's Plate"
