@@ -73,7 +73,7 @@ local function GetDeathKnightAppearances()
         SetCollector:AddVariantLegacy(70000,nil,col,set,"HEROIC",TRANSMOG,A(12463,25190),A(12474,25192),A(12444,25188),A(12447,24741),A(12491,25189),A(12454,24801),A(12448,25191),A(12457,24752))
     loc = "LOC_RAID_0303"
     set = SetCollector:AddSetLegacy(70000,nil,col,10303,"DK_RAID_A_0303",PLATE,DEATHKNIGHT,ANY,ALLIANCE,loc)
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"VENDOR",TRANSMOG,A(11905),A(11923),A(11746),A(11711,22482),A(11791),A(11741,22545),A(11757),A(11844,22782))
+        SetCollector:AddVariantLegacy(70000,nil,col,set,"VENDOR",TRANSMOG,A(11905),A(11923),A(11746),A(11711,22482),A(11791),A(11741,22545),A(11757),A(11765,22596))
     set = SetCollector:AddSetLegacy(70000,nil,col,10303,"DK_RAID_H_0303",PLATE,DEATHKNIGHT,ANY,HORDE,loc)
         SetCollector:AddVariantLegacy(70000,nil,col,set,"VENDOR",TRANSMOG,A(11904),A(11921),A(11827),A(11891,23057),A(11960),A(11811,23058),A(11838),A(11812,22681))
     loc = "LOC_RAID_0302"
@@ -175,7 +175,7 @@ local function GetPaladinAppearances()
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"HEROIC",TRANSMOG,A(12498,25155),A(12452,25157),A(12485,25153),A(12508,24826),A(12469,25154),A(12477,24781),A(12456,25156),A(12461,24758))
     loc = "LOC_RAID_0303"
     set = SetCollector:AddSetLegacy(70000,nil,col,10303,"PA_RAID_A_0303",PLATE,PALADIN,ANY,ALLIANCE,loc)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"VENDOR",TRANSMOG,A(11907),A(11925),A(11763),A(11750,22910),A(12005),A(11781,11895),A(11738),A(11720,22500))
+                SetCollector:AddVariantLegacy(70000,nil,col,set,"VENDOR",TRANSMOG,A(11907),A(11925),A(11763),A(11750,22910),A(12005),A(11781,22895),A(11738),A(11720,22500))
     set = SetCollector:AddSetLegacy(70000,nil,col,10303,"PA_RAID_H_0303",PLATE,PALADIN,ANY,HORDE,loc)
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"VENDOR",TRANSMOG,A(11908),A(11924),A(11842),A(11831,23158),A(12006),A(11851,23049),A(11819),A(11806,23068))
     loc = "LOC_RAID_0302"
@@ -200,7 +200,7 @@ local function GetPriestAppearances()
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"HEROIC",TRANSMOG,A(12475,25133),A(12588,25135),A(12507,25137),A(12487,24796),A(12509,25134),A(12499,24810),A(12589,25136))
     loc = "LOC_RAID_0303"
     set = SetCollector:AddSetLegacy(70000,nil,col,10303,"PR_RAID_A_0303",CLOTH,PRIEST,ANY,ALLIANCE,loc)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"VENDOR",TRANSMOG,A(11919,22924),A(11934),A(11723),A(11784,22630),A(11980),A(11715,23038),A(11733),A(11937,23114))
+                SetCollector:AddVariantLegacy(70000,nil,col,set,"VENDOR",TRANSMOG,A(11919,22924),A(11934),A(11723),A(11784,22630),A(11980),A(11715,23038),A(11733),A(11830,24015))
     set = SetCollector:AddSetLegacy(70000,nil,col,10303,"PR_RAID_H_0303",CLOTH,PRIEST,ANY,HORDE,loc)
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"VENDOR",TRANSMOG,A(11920),A(11935),A(11807),A(11852,22725),A(11982),A(11801,23210),A(11815),A(11830,24015))
     loc = "LOC_RAID_0302"

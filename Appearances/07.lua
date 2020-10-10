@@ -396,10 +396,10 @@ local function GetPaladinAppearances()
     -- Tomb of Sargeras
     loc = "LOC_RAID_0702"
     set = SetCollector:AddSetLegacy(70000,nil,col,10702,"PA_RAID_0702",PLATE,PALADIN,ANY,ANY,loc)
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(32925),A(32927),A(32999),A(32923),A(32928),A(32924),A(33357,86671),A(32926),A(32922))
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"NORMAL",TRANSMOG,A(32946),A(32948),A(32979),A(32944),A(32949),A(32945),A(33349,86819),A(32947),A(32943))
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"HEROIC",TRANSMOG,A(32901),A(32903),A(32962),A(32899),A(32904),A(32900),A(33365,86673),A(32902),A(32898))
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(32917),A(32919),A(32985),A(32915),A(32920),A(32916),A(33381,86674),A(32918),A(32914))
+        SetCollector:AddVariantLegacy(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(32925,86627),A(32927,86635),A(32999,86251),A(32923,86631),A(),A(32924,86623),A(32921,86639),A(32926,86263),A(32922,86619))
+        SetCollector:AddVariantLegacy(70000,nil,col,set,"NORMAL",TRANSMOG,A(32946,86628),A(32948,86636),A(32979,86252),A(32944,86632),A(),A(32945,86624),A(32942,86640),A(32947,86875),A(32943,86620))
+        SetCollector:AddVariantLegacy(70000,nil,col,set,"HEROIC",TRANSMOG,A(32901,86629),A(32903,86637),A(32962,86253),A(32899,86633),A(),A(32900,86625),A(32897,86641),A(32902,86265),A(32898,86621))
+        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(32917,86630),A(32919,86638),A(32985,86254),A(32915,86634),A(),A(32916,86626),A(32913,86642),A(32918,86266),A(32914,86622))
     -- The Nighthold
     loc = "LOC_RAID_0701"
     set = SetCollector:AddSetLegacy(70000,nil,col,10701,"PA_RAID_0701",PLATE,PALADIN,ANY,ANY,loc)
@@ -444,10 +444,10 @@ local function GetPriestAppearances()
     -- Tomb of Sargeras
     loc = "LOC_RAID_0702"
     set = SetCollector:AddSetLegacy(70000,nil,col,10702,"PR_RAID_0702",CLOTH,PRIEST,ANY,ANY,loc)
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(33360),A(33362),A(34083),A(33364),A(33363),A(33359),A(33521),A(33361),A(33358))
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"NORMAL",TRANSMOG,A(33352),A(33354),A(34077),A(33356),A(33355),A(33351),A(33529),A(33353),A(33350))
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"HEROIC",TRANSMOG,A(33368),A(33370),A(34085),A(33372),A(33371),A(33367),A(33537),A(33369),A(33366))
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(33384),A(33386),A(34091),A(33388),A(33387),A(33383),A(33553),A(33385),A(33382))
+        SetCollector:AddVariantLegacy(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(33360),A(33362),A(34083),A(33364),A(33363),A(33359),A(33357,86671),A(33361),A(33358))
+        SetCollector:AddVariantLegacy(70000,nil,col,set,"NORMAL",TRANSMOG,A(33352),A(33354),A(34077),A(33356),A(33355),A(33351),A(33349,86819),A(33353),A(33350))
+        SetCollector:AddVariantLegacy(70000,nil,col,set,"HEROIC",TRANSMOG,A(33368),A(33370),A(34085),A(33372),A(33371),A(33367),A(33365,86673),A(33369),A(33366))
+        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(33384),A(33386),A(34091),A(33388),A(33387),A(33383),A(33381,86674),A(33385),A(33382))
     -- The Nighthold
     loc = "LOC_RAID_0701"
     set = SetCollector:AddSetLegacy(70000,nil,col,10701,"PR_RAID_0701",CLOTH,PRIEST,ANY,ANY,loc)

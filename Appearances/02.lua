@@ -160,7 +160,7 @@ local function GetPriestAppearances()
     col = SetCollector.RAID
     loc = "LOC_RAID_0204"
     set = SetCollector:AddSetLegacy(70000,nil,col,10204,"PR_RAID_0204",CLOTH,PRIEST,ANY,ANY,loc)
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"PR_RAID_0204",TRANSMOG,A(8929,15890),A(8859,15790),A(8875,15808),A(8957,15963),A(8944,15912),A(8989,16018),A(8839,15770),A(9004,16044))
+        SetCollector:AddVariantLegacy(70000,nil,col,set,"PR_RAID_0204",TRANSMOG,A(8929,15890),A(8859,15790),A(8875,15808),A(8957,15963),A(8932,15893),A(8989,16018),A(8839,15770),A(9004,16044))
     loc = "LOC_RAID_0203"
     set = SetCollector:AddSetLegacy(70000,nil,col,10203,"PR_RAID_0203",CLOTH,PRIEST,ANY,ANY,loc)
         SetCollector:AddVariantLegacy(70000,nil,col,set,"PR_RAID_0203",TRANSMOG,A(8104,14132),A(8107,14138),A(8105,14133),A(8424,15004),A(8102,14129),A(8427,15009),A(8106,14135),A(7999,13959))
