@@ -255,7 +255,6 @@ end
 function SetCollector:MySlashProcessorFunc(input)
 	local command, parameters = input:match("^(%S*)%s*(.-)$")
 	if command == "" then
-		print("No command passed.")
         SetCollector:ToggleUI()
 
 	elseif command == "show" then
