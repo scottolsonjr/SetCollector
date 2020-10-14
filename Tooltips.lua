@@ -55,24 +55,33 @@ local function OnTooltipSetItemHook(tooltip, ...)
 	local itemName, itemLink = tooltip:GetItem();
 	
 	appearanceID, sourceID, itemID = SetCollector:GetAppearanceInfo(itemLink);
-	if appearanceID then
-		if SetCollector.db.global.collections.Appearances[appearanceID] then
-		
-			-- Need to update this for when an appearance is in multiple collections, sets, or variants
-			collection = SetCollector.db.global.collections.Appearances[appearanceID].collection
-			variant = SetCollector.db.global.collections.Appearances[appearanceID].variant
-			set = SetCollector.db.global.collections.Appearances[appearanceID].set
-			
-			tooltip:AddLine(" ")
-			local tip = L[SetCollector.db.global.collections[collection].Sets[set].Title]
-			tooltip:AddLine(tip)
-		end
+    if appearanceID then
+        local show_set = SetCollector.db.global.tooltips.show_set
+        local show_location = SetCollector.db.global.tooltips.show_location
+        if debug or show_set then
+            if SetCollector.db.global.collections.Appearances[appearanceID] then
+            
+                -- Need to update this for when an appearance is in multiple collections, sets, or variants
+                collection = SetCollector.db.global.collections.Appearances[appearanceID].collection
+                variant = SetCollector.db.global.collections.Appearances[appearanceID].variant
+                set = SetCollector.db.global.collections.Appearances[appearanceID].set
+                
+                tooltip:AddLine(" ")
+                local title = "|cFFFFFFFF"..L[SetCollector.db.global.collections[collection].Sets[set].Title].."|r"
+                tooltip:AddLine(title)
+                if debug or show_location then
+                    if SetCollector.db.global.collections[collection].Sets[set].Location ~= nil then
+                        local location = "|cFF777777"..L[SetCollector.db.global.collections[collection].Sets[set].Location].."|r"
+                        tooltip:AddLine(location)
+                    end
+                end
+            end
+        end
 		if debug then
 			tooltip:AddLine(" ")
 			tooltip:AddLine("SetCollector Debug")
-			tooltip:AddDoubleLine("Appearance ID:",appearanceID)		-- Make double line
+			tooltip:AddDoubleLine("Appearance ID:",appearanceID)
 			tooltip:AddDoubleLine("Source ID:",sourceID)
-			tooltip:AddDoubleLine("Item ID:",itemID)
 			tooltip:AddLine(" ")
 			tooltip:AddLine("All Available Sources:")
 			local sources = SetCollector:GetAppearanceSources(appearanceID)
@@ -85,7 +94,7 @@ local function OnTooltipSetItemHook(tooltip, ...)
 					else
 						local name = GetItemInfo(link)
 						if ( name ) then
-						tooltip:AddDoubleLine("|cFF777777"..name.."|r",sources[i].sourceID)
+						    tooltip:AddDoubleLine("|cFF777777"..name.."|r",sources[i].sourceID)
 						end
 					end
 					
@@ -93,12 +102,12 @@ local function OnTooltipSetItemHook(tooltip, ...)
 			else
 				tooltip:AddLine("None")
 			end
-		end
-		if debug and SetCollector.db.global.collections.Appearances[appearanceID] then
-			tooltip:AddLine(" ");
-			tooltip:AddLine("Collection ID: "..collection)
-			tooltip:AddLine("Variant ID: "..variant)
-			tooltip:AddLine("Set ID: "..set)
+            if SetCollector.db.global.collections.Appearances[appearanceID] then
+                tooltip:AddLine(" ");
+                tooltip:AddLine("Collection ID: "..collection)
+                tooltip:AddLine("Variant ID: "..variant)
+                tooltip:AddLine("Set ID: "..set)
+            end
 		end
 	end
 	

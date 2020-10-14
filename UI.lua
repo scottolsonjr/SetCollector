@@ -125,15 +125,57 @@ end
 
 local frame = CreateFrame("Frame", "SetCollectorFrame", UIParent, "ButtonFrameTemplate")
 
+local function SetUIPosition()
+    if SetCollector.db and not SetCollector.db.global.docked then
+        if SetCollector.db.global.position == "center" then
+            frame:SetPoint("CENTER",0,0)
+        else
+            frame:SetPoint("TOPLEFT",17,-115)
+        end
+    end
+end
+
+local function SetDocked(docked)
+    frame:SetAttribute("UIPanelLayout-defined", docked)			-- Allows frame to shift other frames when opened or be shifted when others are opened.
+    frame:SetAttribute("UIPanelLayout-enabled", docked)			-- http://www.wowwiki.com/Creating_standard_left-sliding_frames
+    frame:SetAttribute("UIPanelLayout-area", "left")
+    frame:SetAttribute("UIPanelLayout-pushable", 5)
+    frame:SetAttribute("UIPanelLayout-width", width)
+    frame:SetAttribute("UIPanelLayout-whileDead", true)
+end
+
+local function SetMovable(movable)
+    frame:SetMovable(movable)
+    frame:EnableMouse(movable)
+    frame:RegisterForDrag("LeftButton")
+    frame:SetScript("OnDragStart", frame.StartMoving)
+    frame:SetScript("OnDragStop", frame.StopMovingOrSizing)
+
+    SetUIPosition()
+end
+
+local function SetDefaultUILocation()
+    SetDocked(true)
+    SetMovable(false)
+end
+
+local function ResetUILocation()
+	if (frame:IsVisible()) then
+		SetCollector:HideUI(false)
+	end
+    SetDocked(SetCollector:IsUIDocked())
+    SetMovable(not SetCollector:IsUIDocked())
+end
+
+function SetCollector:SetUIDockedAndUpdate()
+    SetCollector:SetUIDocked()
+    ResetUILocation()
+end
+
+SetDefaultUILocation()
 frame:SetWidth(703)
 frame:SetHeight(606)
---frame:SetPoint("TOPLEFT",17,-115)
-frame:SetAttribute("UIPanelLayout-defined", true)			-- Allows frame to shift other frames when opened or be shifted when others are opened.
-frame:SetAttribute("UIPanelLayout-enabled", true)			-- http://www.wowwiki.com/Creating_standard_left-sliding_frames
-frame:SetAttribute("UIPanelLayout-area", "left")
-frame:SetAttribute("UIPanelLayout-pushable", 5)
-frame:SetAttribute("UIPanelLayout-width", width)
-frame:SetAttribute("UIPanelLayout-whileDead", true)
+
 
 local title = CreateFrame("Frame", "$parentTitle", frame)
 title:SetWidth(300)
@@ -149,8 +191,6 @@ tinsert(UISpecialFrames, frame:GetName())							-- Hides frame when Escape is pr
   	
 local helpButton = CreateFrame("Button","$parentTutorialButton",frame,"MainHelpPlateButton")
 helpButton:SetPoint("TOPLEFT",frame, 39, 20)
-
-
 
 --
 --  ScrollFrame
@@ -189,6 +229,7 @@ local function GetCollectionButton(index)
 end
 
 function SetCollectorCollectionButton_OnClick(self)
+	PlaySound(SOUNDKIT.UI_TRANSMOG_PAGE_TURN);
 	COLLECTION_COLLAPSED[self.Collection] = not COLLECTION_COLLAPSED[self.Collection]
 	SetCollector:UpdateCollections()
 end
@@ -221,34 +262,35 @@ end
 
 function SetCollectorSetButton_OnClick(self, button, ...)
 	if ( IsShownInList(self) ) then
-	if ( button == "LeftButton" ) then
-		if ( self ~= SELECTED_BUTTON ) then
-			SetCollector:SetVariantTabs(self.Collection, self.Set, nil, self.Outfit)
-			SetHighlight(self)
-		else
-			SetCollector:SetVariantTabs()
-			--ClearItemButtons()
-			UnsetHighlight(self)
-		end
-	elseif ( not IsShiftKeyDown() and button == "RightButton" ) then
-		if ( self.Set and self.Set ~= "" ) then
-		  SetCollector:SetFavoriteSet(self)
-	  	if ( self == SELECTED_BUTTON ) then
-				SetCollector:SetVariantTabs(self.Collection, self.Set)
-			end
-		end
-	elseif ( IsShiftKeyDown() and button == "RightButton" ) then
-		if ( self.Set and self.Set ~= "" ) then
-		  SetCollector:SetHiddenSet(self)
-	  	if ( self == SELECTED_BUTTON ) then
-				SetCollector:SetVariantTabs(self.Collection, self.Set)
-				UnsetHighlight(self)
-			end
-			SetCollector:UpdateCollections()
-		end
-	else
-		SetCollector:Print(button)
-	end
+        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
+        if ( button == "LeftButton" ) then
+            if ( self ~= SELECTED_BUTTON ) then
+                SetCollector:SetVariantTabs(self.Collection, self.Set, nil, self.Outfit)
+                SetHighlight(self)
+            else
+                SetCollector:SetVariantTabs()
+                --ClearItemButtons()
+                UnsetHighlight(self)
+            end
+        elseif ( not IsShiftKeyDown() and button == "RightButton" ) then
+            if ( self.Set and self.Set ~= "" ) then
+            SetCollector:SetFavoriteSet(self)
+            if ( self == SELECTED_BUTTON ) then
+                    SetCollector:SetVariantTabs(self.Collection, self.Set)
+                end
+            end
+        elseif ( IsShiftKeyDown() and button == "RightButton" ) then
+            if ( self.Set and self.Set ~= "" ) then
+            SetCollector:SetHiddenSet(self)
+            if ( self == SELECTED_BUTTON ) then
+                    SetCollector:SetVariantTabs(self.Collection, self.Set)
+                    UnsetHighlight(self)
+                end
+                SetCollector:UpdateCollections()
+            end
+        else
+            SetCollector:Print(button)
+        end
 	end
 end
 
@@ -368,12 +410,13 @@ local itemButton = CreateFrame("Button","$parentItem"..i,modelFrame,"SetCollecto
 	prevItem = itemButton
 end
 
-local function SetItemButton(button, appearanceID, sourceID, itemID)
+local function SetItemButton(button, appearanceID, sourceID)
 	if button and appearanceID and appearanceID > 0 then
 		local src = 0
-		local s = 1
+        local s = 1
+        local isCollected = SetCollector:IsAppearanceCollected(appearanceID)
 		local sources = SetCollector:GetAppearanceSources(appearanceID)
-		if sourceID == 0 and sources then
+		if sources and isCollected then
 			src = sources[1].sourceID
 		else
 			src = sourceID
@@ -381,69 +424,27 @@ local function SetItemButton(button, appearanceID, sourceID, itemID)
 		local sTexture, sLink
 		if src > 0 then
 			_, _, _, sTexture, _, sLink = C_TransmogCollection.GetAppearanceSourceInfo(src)
-		else
-			_, sLink, _, _, _, _, _, _, _, sTexture = GetItemInfo(itemID)
-		end
-		if itemID == 0 then
+        end
+        local itemID = 0
+		if sLink then
 			_, _, itemID = SetCollector:GetAppearanceInfo(sLink);
 		end
-		if sTexture then
+		if sTexture and itemID > 0 then
 			button.link = sLink
 			button.ItemID = itemID
 			button.icon:SetTexture(sTexture)
-			button.icon:SetVertexColor(1, 1, 1, 1)
+			button.icon:SetVertexColor(1, 1, 1, 0.5)
 			button.icon:SetDesaturated(true)
-			button.count:SetText("")
-			button.count:Hide()
 			button.glow:Hide()
 			
-			local isCollected = SetCollector:IsAppearanceCollected(appearanceID)
 			if isCollected then
+                button.icon:SetVertexColor(1, 1, 1, 1)
 				button.icon:SetDesaturated(false)
-				button.count:SetText(i)
-			end
-			
-			local sourceCollected = SetCollector:IsSourceCollected(sourceID)
-			if sourceCollected then
 				local iRarity = select(3, GetItemInfo(sLink))
 				if iRarity then button.glow:SetVertexColor(GetItemQualityColor(iRarity)) end
 				button.glow:Show()
 			end
 
-			if not sources or #sources == 0 then
-				button.icon:SetVertexColor(1, 0.25, 0.25, 0.5)
-			end
-			
-			button:Show()
-		end
-	elseif button and itemID and itemID > 0 then
-		if SetCollector:GetDebug() then SetCollector:Print(itemID); end
-		_, sLink, _, _, _, _, _, _, _, sTexture = GetItemInfo(itemID)
-		local app = SetCollector:GetAppearanceInfo(sLink)
-		if sTexture then						-- Refactor
-			button.link = sLink
-			button.ItemID = src
-			button.icon:SetTexture(sTexture)
-			button.icon:SetVertexColor(1, 1, 1, 1)
-			button.icon:SetDesaturated(true)
-			button.count:SetText("")
-			button.count:Hide()
-			button.glow:Hide()
-			
-			local isCollected = SetCollector:IsAppearanceCollected(app)
-			if isCollected then
-				button.icon:SetDesaturated(false)
-				button.count:SetText(i)
-			end
-			
-			local sourceCollected = SetCollector:IsSourceCollected(sourceID)
-			if sourceCollected then
-				local iRarity = select(3, GetItemInfo(sLink))
-				if iRarity then button.glow:SetVertexColor(GetItemQualityColor(iRarity)) end
-				button.glow:Show()
-			end
-			
-			local sources = SetCollector:GetAppearanceSources(app);
 			if not sources or #sources == 0 then
 				button.icon:SetVertexColor(1, 0.25, 0.25, 0.5)
 			end
@@ -474,12 +475,10 @@ end
 --
 
 local function VariantTab_OnClick(self, button, ...)
+    PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
 	if ( button == "LeftButton" ) then 
 		SetCollector:SetVariantTab(_G["SetCollectorSetDisplay"], self:GetID());
-		--PlaySound("UI_Toybox_Tabs");			-- Throws Error 
-		--PlaySound("UI_Toybox_Tabs", nil, nil);	-- New Usage, Perhaps ID changed?
 	elseif ( button == "RightButton" ) then
-		SetCollector:Print("VariantTab_OnClick Right Click")
 		SetCollector:SetFavoriteVariant(self.Set, self:GetID())
 		SetCollector:UpdateCollections()
 		SetCollector:SetVariantTabs(self.Collection, self.Set, PanelTemplates_GetSelectedTab(self:GetParent()), self.Outfit)
@@ -610,7 +609,7 @@ function SetCollector:UpdateSelectedVariantTab(self)
 						
 						inc = inc + 1
 						modelFrame:TryOn(appearanceSources[i])
-					  SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..inc], appearanceID, appearanceSources[i], 0)
+					  SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..inc], appearanceID, appearanceSources[i])
 				  end
 				end
 				
@@ -633,17 +632,9 @@ function SetCollector:UpdateSelectedVariantTab(self)
 					if sourceID and sourceID > 0 then
 						inc = inc + 1
 						modelFrame:TryOn(sourceID)
-					  SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..inc], appearanceID, sourceID, 0)
-					else
-						local itemID = db[collection].Sets[set].Variants[selected].Appearances[i].itemID
-						if itemID and itemID > 0 then
-							inc = inc + 1
-							local sLink = select(2, GetItemInfo(itemID))
-							modelFrame:TryOn(sLink)
-					  	SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..inc], appearanceID, sourceID, itemID)
-						end
-				  end
-			  end
+					    SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..inc], appearanceID, sourceID)
+				    end
+			    end
 			  
 				ClearItemButtons(inc + 1)
 				SetCollectorSummaryButtonSummary:SetText(string.format(L["ITEMS_COLLECTED"],acq,inc))
@@ -664,7 +655,7 @@ function SetCollector:UpdateSelectedVariantTab(self)
 end
 
 function SetCollector:SetVariantTab(self, tab)
-	PanelTemplates_SetTab(self, tab);										--  Possible Taint Source
+	PanelTemplates_SetTab(self, tab);
 	SetCollector:UpdateSelectedVariantTab(self);
 end
 
@@ -674,13 +665,14 @@ end
 --  Filter
 --
 
+
 local filterButton = CreateFrame("Frame","$parentSetFilter",frame,"UIDropDownMenuTemplate")
 filterButton:SetPoint("TOPRIGHT",frame,"TOPRIGHT",-125,-28)
 filterButton:SetAttribute("enableMouse","true")
 filterButton:SetAttribute("parentKey","setFilter")
 
 local function GetFilters()
-	SHOW_CLASS_SPEC 			= SetCollector.db.char.filters.specialization
+	--SHOW_CLASS_SPEC 			= SetCollector.db.char.filters.specialization
 	SHOW_ONLY_FAVORITES 	= SetCollector.db.char.filters.favorites
 	SHOW_ONLY_OBTAINABLE 	= SetCollector.db.char.filters.obtainable
 	SHOW_ONLY_TRANSMOG 		= SetCollector.db.char.filters.transmog
@@ -688,27 +680,63 @@ local function GetFilters()
 end
 
 local function SetFilters()
-	SetCollector.db.char.filters.specialization		= SHOW_CLASS_SPEC
+	--SetCollector.db.char.filters.specialization		= SHOW_CLASS_SPEC
 	SetCollector.db.char.filters.favorites				= SHOW_ONLY_FAVORITES
 	SetCollector.db.char.filters.obtainable				= SHOW_ONLY_OBTAINABLE
 	SetCollector.db.char.filters.transmog					= SHOW_ONLY_TRANSMOG
 	SetCollector.db.char.filters.hidden						= SHOW_HIDDEN
 end
 
+function SetCollector:GetFavoritesFilter()
+	return SHOW_ONLY_FAVORITES
+end
+
+function SetCollector:SetFavoritesFilter()
+	SHOW_ONLY_FAVORITES = not SHOW_ONLY_FAVORITES
+	SetFilters()
+end
+
+function SetCollector:GetObtainableFilter()
+	return SHOW_ONLY_OBTAINABLE
+end
+
+function SetCollector:SetObtainableFilter()
+	SHOW_ONLY_OBTAINABLE = not SHOW_ONLY_OBTAINABLE
+	SetFilters()
+end
+
+function SetCollector:GetTransmogFilter()
+	return SHOW_ONLY_TRANSMOG
+end
+
+function SetCollector:SetTransmogFilter()
+	SHOW_ONLY_TRANSMOG = not SHOW_ONLY_TRANSMOG
+	SetFilters()
+end
+
+function SetCollector:GetHiddenFilter()
+	return SHOW_HIDDEN
+end
+
+function SetCollector:SetHiddenFilter()
+	SHOW_HIDDEN = not SHOW_HIDDEN
+	SetFilters()
+end
+
 local function SetFilterOptions(classIndex)
 	SHOW_CLASS_SPEC = classIndex
 end
 
-local function GetFilterOptions()
-	if SHOW_CLASS_SPEC == 0 or SHOW_CLASS_SPEC == nil then
-		local currentSpec = GetSpecialization();
-		if currentSpec == nil then currentSpec = 0 end
-		SHOW_CLASS_SPEC = currentSpec + 2
-	end
-	return SHOW_CLASS_SPEC;
-end
+--local function GetFilterOptions()
+--	if SHOW_CLASS_SPEC == 0 or SHOW_CLASS_SPEC == nil then
+--		local currentSpec = GetSpecialization();
+--		if currentSpec == nil then currentSpec = 0 end
+--		SHOW_CLASS_SPEC = currentSpec + 2
+--	end
+--	return SHOW_CLASS_SPEC;
+--end
 
-local function UpdateFilterString()
+--[[local function UpdateFilterString()
 	local name = ALL;
 	local currFilter = GetFilterOptions();
 
@@ -716,13 +744,13 @@ local function UpdateFilterString()
 		name = UnitClass("player");
 	elseif currFilter == NO_CLASS_FILTER then
 		name = ALL_CLASSES
-	else -- Spec
-		local _, specName, _, icon = GetSpecializationInfo(currFilter - LE_LOOT_FILTER_SPEC1 + 1);
-		name = specName;
+	--else -- Spec
+	--	local _, specName, _, icon = GetSpecializationInfo(currFilter - LE_LOOT_FILTER_SPEC1 + 1);
+	--	name = specName;
 	end
 	
 	UIDropDownMenu_SetText(filterButton, name);
-end
+end]]
 
 local function SetFilter(self, classIndex)
 	if ( classIndex == "favorites" ) then
@@ -733,14 +761,14 @@ local function SetFilter(self, classIndex)
 		SHOW_ONLY_TRANSMOG = not SHOW_ONLY_TRANSMOG
 	elseif ( classIndex == "hidden" ) then
 		SHOW_HIDDEN = not SHOW_HIDDEN
-	else
-		SetFilterOptions(classIndex);
+	--else
+	--	SetFilterOptions(classIndex);
 	end
 	SetFilters()
 	if frame:IsShown() then
 		--SetCollector:Print("Setting Filter, Updating UI")
 		SetCollector:UpdateCollections();
-		UpdateFilterString()
+		--UpdateFilterString()
 	
 		-- Clear Selection
 		UnsetHighlight(SELECTED_BUTTON)
@@ -750,7 +778,7 @@ local function SetFilter(self, classIndex)
 	end
 end
 
-local function GetFilteredRole()
+--[[local function GetFilteredRole()
   local currFilter = GetFilterOptions()
 	local specID = 0
 	
@@ -763,42 +791,42 @@ local function GetFilteredRole()
 		specID = id
   	return GetSetSpecializationRole(specID)
 	end
-end
+end]]
 
 local function InitFilter()
 	local info = UIDropDownMenu_CreateInfo();
-	local currFilter = GetFilterOptions();
-	local className = UnitClass("player");
-	
-	UpdateFilterString()
+	--local currFilter = GetFilterOptions();
+    local className = UnitClass("player");
+    
+	--UpdateFilterString()
 	info.func = SetFilter;
 	
-	info.text = className;
-	info.checked = (currFilter ~= LE_LOOT_FILTER_ALL);
-	info.arg1 = LE_LOOT_FILTER_CLASS;
-	UIDropDownMenu_AddButton(info);
+	--info.text = className;
+	--info.checked = (currFilter ~= LE_LOOT_FILTER_ALL);
+	--info.arg1 = LE_LOOT_FILTER_CLASS;
+	--UIDropDownMenu_AddButton(info);
 	
-	local numSpecs = GetNumSpecializations();
-	for i = 1, numSpecs do
-		local _, name, _, icon = GetSpecializationInfo(i);
-		info.text = name;
-		info.arg1 = LE_LOOT_FILTER_SPEC1 + i - 1;
-		info.checked = currFilter == (LE_LOOT_FILTER_SPEC1 + i - 1);
-		info.leftPadding = 10;
-		UIDropDownMenu_AddButton(info);
-	end
+	--local numSpecs = GetNumSpecializations();
+	--for i = 1, numSpecs do
+	--	local _, name, _, icon = GetSpecializationInfo(i);
+	--	info.text = name;
+	--	info.arg1 = LE_LOOT_FILTER_SPEC1 + i - 1;
+	--	info.checked = currFilter == (LE_LOOT_FILTER_SPEC1 + i - 1);
+	--	info.leftPadding = 10;
+	--	UIDropDownMenu_AddButton(info);
+	--end
 
-	info.text = ALL_SPECS;
-	info.checked = currFilter == LE_LOOT_FILTER_CLASS;
-	info.arg1 = LE_LOOT_FILTER_CLASS;
-	info.func = SetFilter;
-	UIDropDownMenu_AddButton(info);
+	--info.text = className -- ALL_SPECS;
+	--info.checked = currFilter == LE_LOOT_FILTER_CLASS;
+	--info.arg1 = LE_LOOT_FILTER_CLASS;
+	--info.func = SetFilter;
+	--UIDropDownMenu_AddButton(info);
 
-	info.text = ALL_CLASSES;
-	info.checked = currFilter == NO_CLASS_FILTER;
-	info.arg1 = NO_CLASS_FILTER;
-	info.func = SetFilter;
-	UIDropDownMenu_AddButton(info);
+	--info.text = ALL_CLASSES;
+	--info.checked = currFilter == NO_CLASS_FILTER;
+	--info.arg1 = NO_CLASS_FILTER;
+	--info.func = SetFilter;
+	--UIDropDownMenu_AddButton(info);
 	
 	info.leftPadding = nil;
 	info.text = FAVORITES_FILTER;
@@ -824,7 +852,7 @@ local function InitFilter()
 	info.arg1 = "hidden";
 	UIDropDownMenu_AddButton(info);
 	
-	UpdateFilterString()
+	--UpdateFilterString()
 end
 
 function SetCollector:DropDownMenu_Initialize(frame, func)
@@ -839,7 +867,8 @@ function SetCollector:InitializeFilter(DEBUG)
 	SetCollector:UpdateCollections()
 	local init = function() InitFilter() end
 	SetCollector:DropDownMenu_Initialize(filterButton, init)
-	UpdateFilterString()
+	UIDropDownMenu_SetText(filterButton, "Filter")
+	--UpdateFilterString()
 	if DEBUG then SetCollector:Print("Filters Initialized") end
 end
 
@@ -915,12 +944,12 @@ local function CreateMinimapButton()
 			tt:AddLine(L["MINIMAP_TOOLTIP"])
 		end,
 	})
-  icon:Register("SetCollectorMinimap", myLDB, SetCollector.db.char.minimap)
+  icon:Register("SetCollectorMinimap", myLDB, SetCollector.db.global.minimap)
 end
 
 function SetCollector:ToggleMinimapButton()
-	SetCollector.db.char.minimap.hide = not SetCollector.db.char.minimap.hide
-	if SetCollector.db.char.minimap.hide then
+	SetCollector.db.global.minimap.hide = not SetCollector.db.global.minimap.hide
+	if SetCollector.db.global.minimap.hide then
 		icon:Hide("SetCollectorMinimap")
 	else
 		icon:Show("SetCollectorMinimap")
@@ -928,7 +957,7 @@ function SetCollector:ToggleMinimapButton()
 end
 
 function SetCollector:IsMinimapButtonShown()
-	return not SetCollector.db.char.minimap.hide
+	return not SetCollector.db.global.minimap.hide
 end
 
 
@@ -964,8 +993,8 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 			
 			if i == 1 then
 				local outfits = C_TransmogCollection.GetOutfits()
-				for i=1, #outfits do
-					local outfitID = outfits[i].outfitID
+				for j=1, #outfits do
+					local outfitID = outfits[j].outfitID
 					
 					rowIndex = rowIndex + 1
 					titleButton = GetSetButton(rowIndex)
@@ -989,9 +1018,7 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 						setsDisplayed = setsDisplayed + 1
 					end
 				end
-			end
-			
-			if collections[i].sets then
+			elseif collections[i].sets then
 				local sortedList = SetCollector:SortList(collections[i].sets, SORT_BY, SORT_DIR)
 				for j,value in sortedList do
 					
@@ -1008,7 +1035,7 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 				  local armorType = GetClassArmorType(class)
 				  
 				  local faction = UnitFactionGroup("player")
-					local role = GetFilteredRole()
+					--local role = GetFilteredRole()
 					
 					local isObtainable = SetCollector:IsSetObtainable(i, j)
 					local isTransmog = SetCollector:IsTransmogSet(i, j)
@@ -1036,11 +1063,11 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 					if isObtainable then
 						titleButton.Text:SetText(L[collections[i].sets[j].Title] or L["MISSING_LOCALIZATION"])			-- Putting Text into FontString allows for Wrapping using SetWidth
 					else
-						titleButton.Text:SetText("|cff999999"..L[collections[i].sets[j].Title])
+						titleButton.Text:SetText("|cff999999"..(L[collections[i].sets[j].Title] or L["MISSING_LOCALIZATION"]))
 					end
 					
-					if (i == 20) then
-						titleButton.SubText:SetText("|cff999999".."SubText Here".."|r")
+					if (collections[i].sets[j].Location) then
+						titleButton.SubText:SetText("|cff555555"..(L[collections[i].sets[j].Location] or L["MISSING_LOCALIZATION"]).."|r")
 					end
 					
 					local height = titleButton.Text:GetHeight() + titleButton.SubText:GetHeight() + 10
@@ -1048,7 +1075,8 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 					
 					if SetCollector:SetIsFilteredOutByArmorType(i, j, armorType) then
 						-- Keep it hidden
-					elseif role ~= ALL.Description and SetCollector:SetIsFilteredOutByClass(i, j, class) then
+					--elseif role ~= ALL.Description and SetCollector:SetIsFilteredOutByClass(i, j, class) then
+					elseif SetCollector:SetIsFilteredOutByClass(i, j, class) then
 						-- Keep it hidden
 					elseif SetCollector:SetIsFilteredOutByFaction(i, j, faction) then
 						-- Keep it hidden
@@ -1080,12 +1108,14 @@ end
 function SetCollector:HideUI()
 	local DEBUG = SetCollector:GetDebug()
 	if DEBUG then SetCollector:Print("Hiding SetCollector UI") end
+	PlaySound(SOUNDKIT.IG_CHARACTER_INFO_CLOSE);
 	HideUIPanel(frame)
 end
 
 function SetCollector:ShowUI()
 	local DEBUG = SetCollector:GetDebug()
 	if DEBUG then SetCollector:Print("Showing SetCollector UI") end
+	PlaySound(SOUNDKIT.IG_CHARACTER_INFO_OPEN);
 	ShowUIPanel(frame)
 end
 
@@ -1111,6 +1141,7 @@ function SetCollector:OnHide(self)
 end
 
 function SetCollector:SetupUI(DEBUG)
+    ResetUILocation()
 	local tutorialScript = function() SetCollector:ToggleTutorial() end
 	helpButton:SetScript("OnClick", tutorialScript)
 	
@@ -1123,4 +1154,9 @@ function SetCollector:SetupUI(DEBUG)
 	
 	CreateMinimapButton()
 	-- Other delayed build actions
+end
+
+
+function SetCollector:ReloadUI()
+	ReloadUI();
 end

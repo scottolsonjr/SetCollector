@@ -31,5 +31,6 @@ externals:
 
 ignore:
   - README.md
+  - CODE_OF_CONDUCT.md
 
 license-output: LICENSE.txt

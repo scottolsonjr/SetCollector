@@ -3,6 +3,7 @@ local DEBUG = false
 SetCollector = LibStub("AceAddon-3.0"):NewAddon("SetCollector", "AceConsole-3.0", "AceEvent-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale("SetCollector", true)
 
+local WOW_VERSION = select(4,GetBuildInfo())
 
 local InventorySlots = {
     ['INVTYPE_HEAD'] = 1,
@@ -38,8 +39,8 @@ function SetCollector:OnInitialize()
 	SetCollector:SetupUI(true)
 	if SetCollector:GetDebug() then SetCollector:Print("Initialized"); end
 	
-	LibStub("AceConfig-3.0"):RegisterOptionsTable("SetCollector", SetCollector:GetOptions())
-	self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SetCollector", "Set Collector")
+    LibStub("AceConfig-3.0"):RegisterOptionsTable("SetCollector", SetCollector:GetOptions())
+    self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SetCollector", "Set Collector")
 	
 	SetCollector:RegisterEvent("PLAYER_LOGIN")
 end
@@ -114,6 +115,26 @@ function SetCollector:SetDebug(debug)
 	end
 end
 
+function SetCollector:GetOptionsShowSet()
+	return SetCollector.db.global.tooltips.show_set
+end
+
+function SetCollector:SetOptionsShowSet()
+	if SetCollector.db.global.tooltips.show_set then SetCollector.db.global.tooltips.show_set = false
+	else SetCollector.db.global.tooltips.show_set = true
+	end
+end
+
+function SetCollector:GetOptionsShowSetLocation()
+	return SetCollector.db.global.tooltips.show_location
+end
+
+function SetCollector:SetOptionsShowSetLocation()
+	if SetCollector.db.global.tooltips.show_location then SetCollector.db.global.tooltips.show_location = false
+	else SetCollector.db.global.tooltips.show_location = true
+	end
+end
+
 function SetCollector:SortList(t, f, d)
 	if f == "key" then return pairsByKeys(t, d)		-- Allow for exlicit request to sort by key
 	-- Future sort alternatives here
@@ -149,27 +170,125 @@ function SetCollector:OptionsSetDebug()
 	SetCollector:Print(L[message])
 end
 
+
+function SetCollector:ToggleExpansion(parameters)
+	local expansions = SetCollector.db.global.expansions
+	if parameters == "0" then
+		expansions.v00 = not expansions.v00
+	elseif parameters == "1" then
+		expansions.v01 = not expansions.v01
+	elseif parameters == "2" then
+		expansions.v02 = not expansions.v02
+	elseif parameters == "3" then
+		expansions.v03 = not expansions.v03
+	elseif parameters == "4" then
+		expansions.v04 = not expansions.v04
+	elseif parameters == "5" then
+		expansions.v05 = not expansions.v05
+	elseif parameters == "6" then
+		expansions.v06 = not expansions.v06
+	elseif parameters == "7" then
+		expansions.v07 = not expansions.v07
+	elseif parameters == "8" then
+		expansions.v08 = not expansions.v08
+	elseif parameters == "9" then
+		expansions.v09 = not expansions.v09
+	end
+	SetCollector:Print(L["RELOAD"])
+end
+
+function SetCollector:ListAllSets()
+    local sets = C_TransmogSets.GetAllSets();
+    if (sets) then
+        for i, set in ipairs(sets) do
+            local setInfo = (set.setID and C_TransmogSets.GetSetInfo(set.setID)) or nil;
+            if (set.baseSetID == nil) then
+                SetCollector:Print(set.setID.." "..(setInfo.name or nil))
+            else
+                SetCollector:Print(set.setID.." "..(setInfo.name or nil).." ("..set.baseSetID..")")
+            end
+        end
+    end
+end
+
+function SetCollector:ListBaseSets()
+    local sets = C_TransmogSets.GetAllSets();
+    if (sets) then
+        for i, set in ipairs(sets) do
+            if (set.baseSetID == nil) then
+                local setInfo = (set.setID and C_TransmogSets.GetSetInfo(set.setID)) or nil;
+                SetCollector:Print(set.setID.." "..(setInfo.name or nil))
+            end
+        end
+    end
+end
+
+function SetCollector:ListSetSources(setID)
+    local setInfo = (setID and C_TransmogSets.GetSetInfo(setID)) or nil;
+    local sources = C_TransmogSets.GetSetSources(setID);
+    SetCollector:Print(setID.." "..(setInfo.name or nil))
+    local function position(slot)
+        if slot == 3 then
+            return 2
+        elseif slot == 5 then
+            return 3
+        elseif slot == 9 then
+            return 4
+        elseif slot == 10 then
+            return 5
+        end
+        return slot
+    end
+    local printable = {}
+    for sourceID in pairs(sources) do
+        local sourceInfo = C_TransmogCollection.GetSourceInfo(sourceID);
+        local slot = C_Transmog.GetSlotForInventoryType(sourceInfo.invType);
+        if (slot) then
+            printable[position(slot)] = sourceInfo.visualID..","..sourceID.." ("..slot..")"
+        end
+    end
+    for i=1, #printable do
+        SetCollector:Print(printable[i])
+    end
+end
+
 function SetCollector:MySlashProcessorFunc(input)
-	if input == "show" then
+	local command, parameters = input:match("^(%S*)%s*(.-)$")
+	if command == "" then
+        SetCollector:ToggleUI()
+
+	elseif command == "show" then
 		SetCollector:ShowUI()
 		
-	elseif input == "hide" then
+	elseif command == "hide" then
 		SetCollector:HideUI()
 		
-	elseif input == "button" then
-		SetCollector:ToggleMinimapButton()
+	elseif command == "docked" then
+		SetCollector:SetUIDockedAndUpdate()
 		
-	elseif input == "debug" then
+	elseif command == "button" then
+		SetCollector:ToggleMinimapButton()
+
+	elseif command == "version" then
+		SetCollector:ToggleExpansion(parameters)
+		
+	elseif command == "debug" then
 		SetCollector:OptionsSetDebug()
 		
-	elseif input == "resetdb" then
+	elseif command == "resetdb" then
 		SetCollector:ResetDB()
+        
+    elseif command == "set" then
+        if (parameters == nil or parameters == "") then
+            SetCollector:ListBaseSets()
+        elseif (parameters == nil or parameters == "all") then
+            SetCollector:ListAllSets()
+        else
+            SetCollector:ListSetSources(parameters)
+        end
 		
-	elseif input == "help" then
-    SetCollector:Print(L["SLASH_HELP"])
-    
 	else
-		SetCollector:ToggleUI()
+    	SetCollector:Print(L["SLASH_HELP"])
 		
   end
 end
