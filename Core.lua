@@ -197,6 +197,11 @@ function SetCollector:ToggleExpansion(parameters)
 	SetCollector:Print(L["RELOAD"])
 end
 
+function SetCollector:PrintItem(itemID)
+    local sLink = select(2,GetItemInfo(itemID))
+    SetCollector:Print(sLink)
+end
+
 function SetCollector:ListAllSets()
     local sets = C_TransmogSets.GetAllSets();
     if (sets) then
@@ -276,7 +281,12 @@ function SetCollector:MySlashProcessorFunc(input)
 		SetCollector:OptionsSetDebug()
 		
 	elseif command == "resetdb" then
-		SetCollector:ResetDB()
+        SetCollector:ResetDB()
+        
+    elseif command == "item" then
+        if (parameters) then
+            SetCollector:PrintItem(parameters)
+        end
         
     elseif command == "set" then
         if (parameters == nil or parameters == "") then

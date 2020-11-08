@@ -181,7 +181,8 @@ local function GetPaladinAppearances()
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"PA_RAID_0103",TRANSMOG,A(5987,8834),A(5988,8835),A(5984,8831),A(5983,8830),A(5985,8832),A(5990,8837),A(5986,8833),A(5989,8836))
     loc = "LOC_RAID_0102"
     set = SetCollector:AddSetLegacy(70000,nil,col,10102,"PA_RAID_0102",PLATE,PALADIN,ANY,ANY,loc)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"PA_RAID_0102",TRANSMOG,A(5078,7019),A(5076,7017),A(5081,7022),A(5074,7015),A(5079,7020),A(5075,7016),A(5077,7018),A(5080,7021))
+        SetCollector:AddVariantLegacy(70000,nil,col,set,"ORIGINAL",TRANSMOG,A(5078,7019),A(5076,7017),A(5081,7022),A(5074,7015),A(5079,7020),A(5075,7016),A(5077,7018),A(5080,7021))
+        SetCollector:AddVariantLegacy(70000,nil,col,set,"RECOLOR",TRANSMOG,A(6951,12066),A(6894,11967),A(7010,12137),A(6865,11932),A(6847,11907),A(6901,11974),A(6930,12037),A(7096,12340))
     loc = "LOC_RAID_0101"
     set = SetCollector:AddSetLegacy(70000,nil,col,10101,"PA_RAID_0101",PLATE,PALADIN,ANY,ANY,loc)
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"PA_RAID_0101",TRANSMOG,A(4999,6939),A(5001,6941),A(4998,6938),A(5002,6942),A(5005,6945),A(5003,6943),A(5000,6940),A(5004,6944))
