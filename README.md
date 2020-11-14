@@ -1,7 +1,9 @@
 # SetCollector
 
-[![Check out SetCollector on CurseForge](http://cf.way2muchnoise.eu/title/setcollector.svg)![Available for WoW Version](http://cf.way2muchnoise.eu/versions/setcollector_latest.svg)![Total SetCollector Downloads](http://cf.way2muchnoise.eu/setcollector.svg)![Available for WoW Retail](http://img.shields.io/badge/runs-retail-brightgreen)
-](https://www.curseforge.com/wow/addons/setcollector)
+[![Check out SetCollector on CurseForge](http://cf.way2muchnoise.eu/versions/84114_latest.svg)](https://www.curseforge.com/wow/addons/setcollector)
+[![Total SetCollector Downloads](http://cf.way2muchnoise.eu/full_84114_downloads.svg)](https://www.curseforge.com/wow/addons/setcollector)
+[![Available for WoW Retail](http://img.shields.io/badge/runs-retail-brightgreen)](https://www.curseforge.com/wow/addons/setcollector)
+
 
 Set Collector is an add-on for World of Warcraft that allows the player to view various gear/transmogrification sets on their character and track the progress of their appearance collection.
 
