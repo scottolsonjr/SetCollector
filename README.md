@@ -1,15 +1,19 @@
 # SetCollector
 
+[![Check out SetCollector on CurseForge](http://cf.way2muchnoise.eu/versions/84114_latest.svg)](https://www.curseforge.com/wow/addons/setcollector)
+[![Total SetCollector Downloads](http://cf.way2muchnoise.eu/full_84114_downloads.svg)](https://www.curseforge.com/wow/addons/setcollector)
+[![Available for WoW Retail](http://img.shields.io/badge/runs-retail-brightgreen)](https://www.curseforge.com/wow/addons/setcollector)
+
+
 Set Collector is an add-on for World of Warcraft that allows the player to view various gear/transmogrification sets on their character and track the progress of their appearance collection.
 
 ## Changes for Shadowlands
 
-Thank you to everyone who has expressed interest in this project! We have access to the Shadowlands Beta and have begun preparing Set Collector for its release.
+Thank you to everyone who has expressed interest in this project! We have updated SetCollector for Shadowlands.
 
-Here are some of the tentative changes planned for the Shadowlands release of Set Collector:
+Here are some of the changes for the Shadowlands release of Set Collector:
 
-* Set Collector will only show sets from starting zones, Battle for Azeroth, Shadowlands, and holidays by default. This is to manage the size of the list and align with the new leveling experience.
-* Additional sets from other expansions can be added/enabled from the Set Collector Addon settings and through chat command as well. E.g., to toggle the Legion sets `/setcollector version 7`
+* Set Collector will now allow sets from an entire expansion to be hidden using the Set Collector Addon settings (Interface > Addons > Set Collector). You can also enable/disable expansions through chat command as well. E.g., to toggle the Legion sets `/setcollector version 7`
 * Two commonly requested features are now here and may be set in the Interface options:
   * The Set Collector UI can be undocked and moved.
   * The setting to show/hide the minimap icon is now global and shared by all characters.
