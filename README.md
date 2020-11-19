@@ -4,7 +4,6 @@
 [![Total SetCollector Downloads](http://cf.way2muchnoise.eu/full_84114_downloads.svg)](https://www.curseforge.com/wow/addons/setcollector)
 [![Available for WoW Retail](http://img.shields.io/badge/runs-retail-brightgreen)](https://www.curseforge.com/wow/addons/setcollector)
 
-
 Set Collector is an add-on for World of Warcraft that allows the player to view various gear/transmogrification sets on their character and track the progress of their appearance collection.
 
 ## Changes for Shadowlands
