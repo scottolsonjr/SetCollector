@@ -78,9 +78,13 @@ L["ZONE_A_3"] = "Drustvar"  -- Replace
 L["ZONE_H_1"] = "Vol'dun"   -- Replace
 L["ZONE_H_2"] = "Nazmir"    -- Replace
 L["ZONE_H_3"] = "Zuldazar"  -- Replace
+L["LOC_BASTION"] = "Bastion"
 L["LOC_KYRIAN"] = "Kyrian Covenant"
+L["LOC_ARDENWEALD"] = "Ardenweald"
 L["LOC_NIGHTFAE"] = "Nightfae Covenant"
+L["LOC_MALDRAXXUS"] = "Maldraxxus"
 L["LOC_NECROLORD"] = "Necrolord Covenant"
+L["LOC_REVENDRETH"] = "Revendreth"
 L["LOC_VENTHYR"] = "Venthyr Covenant"
 
 -- Numbers (Revisit)
