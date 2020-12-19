@@ -110,7 +110,7 @@ local function GetExpansionAppearances()
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"PLATE",TRANSMOG,A(23274),A(23278),A(23265),A(24323),A(23271),A(23259),A(23277),A(23262))
     
     set = SetCollector:AddSetLegacy(70000,nil,col,10601,"GA_ALLIANCE_SET",ANY,ANY,ANY,ALLIANCE)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"GA_ALLIANCE_SET",TRANSMOG,A(24474),A(24476),A(24472),A(24473),A(24470),A(24475),A(24471),A(185))
+                SetCollector:AddVariantLegacy(70000,nil,col,set,"GA_ALLIANCE_SET",TRANSMOG,A(24474),A(24476),A(24472),A(24473),A(24470),A(24475),A(24471)) --,A(185)) -- Shield not available for all classes
     
     set = SetCollector:AddSetLegacy(70000,nil,col,10601,"GA_HORDE_SET",ANY,ANY,ANY,HORDE)
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"GA_HORDE_SET",TRANSMOG,A(24054),A(24051),A(24052),A(24817),A(24053),A(24050),A(24854))
