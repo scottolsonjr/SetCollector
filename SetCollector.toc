@@ -1,7 +1,7 @@
 ## Interface: 90002
 ## Title: Set Collector
 ## Notes: Allows the user to preview and track their progress in the collection of various transmogrification appearance sets, such as Legendary and Raid sets.
-## Version: 3.1.4
+## Version: 3.1.5
 ## Author: Lomiedo-Uldum
 ## SavedVariables: SetCollectorDB
 ## SavedVariablesPerCharacter: SetCollectorCharacterDB
