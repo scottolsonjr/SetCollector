@@ -125,7 +125,7 @@ local function GetCraftedAppearances()
     set = SetCollector:AddSetLegacy(90000,nil,col,10901,"CR_MAIL_0901",MAIL,ANY,ANY,ANY)
         SetCollector:AddVariantLegacy(90000,nil,col,set,"CR_MAIL_0901",TRANSMOG,A(42440,106656),A(42450,106658),A(42420,106653),A(42460,106660),A(42435,106655),A(42455,106659),A(42445,106657),A(42430,106654))
     set = SetCollector:AddSetLegacy(90000,nil,col,10901,"CR_PLATE_0901",PLATE,ANY,ANY,ANY)
-        SetCollector:AddVariantLegacy(90000,nil,col,set,"CR_PLATE_0901",TRANSMOG,A(42044,105963),A(42046,105965),A(42040,105960),A(42048,105967),A(42043,105962),A(42047,105966),A(42045,105964),A(42042,105961))
+        SetCollector:AddVariantLegacy(90000,nil,col,set,"CR_PLATE_0901",TRANSMOG,A(42044,115026),A(42046,115028),A(42040,115023),A(42048,115030),A(42043,115025),A(42047,115029),A(42045,115027),A(42042,115024))
 end
 
 local function GetDungeonAppearances()
@@ -238,8 +238,8 @@ local function GetExpansionAppearances()
         SetCollector:AddVariantLegacy(90000,nil,col,set,"REVERENT",TRANSMOG,A(42278,110590),A(42284,110595),A(42269,110591),A(42290,110597),A(42275,110593),A(42287,110596),A(42280,110594),A(42272,110592))
     set = SetCollector:AddSetLegacy(90000,nil,col,10904,"EX_MAIL_0904",MAIL,ANY,ANY,ANY,loc)
         SetCollector:AddVariantLegacy(90000,nil,col,set,"CAMPAIGN",TRANSMOG,A(42914,112710),A(42920,112712),A(42902,112707),A(42926,112714),A(42911,112709),A(42923,112713),A(42917,112711),A(42908,112708))    -- 2023
-        SetCollector:AddVariantLegacy(90000,nil,col,set,"RENOWN",TRANSMOG,A(42915,112719),A(42921,112721),A(42903,112716),A(42927,112723),A(42912,112718),A(42924,112722),A(42918,112720),A(42909,112717))  -- 2025
         SetCollector:AddVariantLegacy(90000,nil,col,set,"ASCENSION",TRANSMOG,A(42913,112760),A(42919,112762),A(42901,112757),A(42925,112764),A(42910,112759),A(42922,112763),A(42916,112761),A(42907,112758))   -- 2024
+        SetCollector:AddVariantLegacy(90000,nil,col,set,"RENOWN",TRANSMOG,A(42915,112719),A(42921,112721),A(42903,112716),A(42927,112723),A(42912,112718),A(42924,112722),A(42918,112720),A(42909,112717))  -- 2025
         SetCollector:AddVariantLegacy(90000,nil,col,set,"REVERENT",TRANSMOG,A(42896,112769),A(42898,112771),A(42892,112766),A(42900,112773),A(42895,112768),A(42899,112772),A(42897,112770),A(42894,112767))   -- 2026
     set = SetCollector:AddSetLegacy(90000,nil,col,10904,"EX_PLATE_0904",PLATE,ANY,ANY,ANY,loc)
         SetCollector:AddVariantLegacy(90000,nil,col,set,"CAMPAIGN",TRANSMOG,A(41383,108543),A(41389,108548),A(41371,108544),A(41395,108550),A(41380,108546),A(41392,108549),A(41386,108547),A(41377,108545))    -- 2029
@@ -333,6 +333,33 @@ local function GetExpansionAppearances()
         SetCollector:AddVariantLegacy(90000,nil,col,set,"EX_PLATE_H_0900",TRANSMOG,A(36850,114830),A(36808,114824),A(38337,114722),A(36849,114836),A(36793,114683),A(37082,114833),A(36847,114842),A(37094,114827),A(36848,114839))
 end
 
+local function GetOtherAppearances()
+    local col = SetCollector.OTHER
+    local set, loc = ""
+
+    -- Leveling Sets
+    set = SetCollector:AddSetLegacy(90000,nil,col,10900,"PLACEHOLDER",CLOTH,ANY,ANY,ANY)
+        SetCollector:AddVariantLegacy(90000,nil,col,set,"LOC_BASTION",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(42006,109267),A())
+        SetCollector:AddVariantLegacy(90000,nil,col,set,"LOC_MALDRAXXUS",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariantLegacy(90000,nil,col,set,"LOC_ARDENWEALD",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariantLegacy(90000,nil,col,set,"LOC_REVENDRETH",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+    set = SetCollector:AddSetLegacy(90000,nil,col,10900,"PLACEHOLDER",LEATHER,ANY,ANY,ANY)
+        SetCollector:AddVariantLegacy(90000,nil,col,set,"LOC_BASTION",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariantLegacy(90000,nil,col,set,"LOC_MALDRAXXUS",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariantLegacy(90000,nil,col,set,"LOC_ARDENWEALD",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariantLegacy(90000,nil,col,set,"LOC_REVENDRETH",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+    set = SetCollector:AddSetLegacy(90000,nil,col,10900,"PLACEHOLDER",MAIL,ANY,ANY,ANY)
+        SetCollector:AddVariantLegacy(90000,nil,col,set,"LOC_BASTION",TRANSMOG,A(42439,107438),A(42449,107447),A(42059,107424),A(42419,107427),A(42459,107454),A(42434,107436),A(42454,107450),A(42444,109268),A(42429,107431))
+        SetCollector:AddVariantLegacy(90000,nil,col,set,"LOC_MALDRAXXUS",TRANSMOG,A(42437,109104),A(42447,109113),A(41961,109349),A(42417,109093),A(42457,109120),A(42432,109102),A(42452,109116),A(42442,109108),A(42427,109097))
+        SetCollector:AddVariantLegacy(90000,nil,col,set,"LOC_ARDENWEALD",TRANSMOG,A(42436,109304),A(42446,109313),A(41972,109353),A(42416,109293),A(42456,109320),A(42431,109302),A(42451,109316),A(42441,109308),A(42426,109297))
+        SetCollector:AddVariantLegacy(90000,nil,col,set,"LOC_REVENDRETH",TRANSMOG,A(42438,109072),A(42448,109081),A(42423,109351),A(42418,109061),A(42458,109088),A(42433,109070),A(42453,109084),A(42443,109076),A(42428,109129))
+    set = SetCollector:AddSetLegacy(90000,nil,col,10900,"PLACEHOLDER",PLATE,ANY,ANY,ANY)
+        SetCollector:AddVariantLegacy(90000,nil,col,set,"LOC_BASTION",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariantLegacy(90000,nil,col,set,"LOC_MALDRAXXUS",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariantLegacy(90000,nil,col,set,"LOC_ARDENWEALD",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+        SetCollector:AddVariantLegacy(90000,nil,col,set,"LOC_REVENDRETH",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A(),A())
+
+end
 
 --
 --    GLOBAL FUNCTIONS
@@ -346,6 +373,7 @@ function SetCollector:GetVersion09Appearances(expansion)
         GetCraftedAppearances()
         GetDungeonAppearances()
         GetExpansionAppearances()
+        --GetOtherAppearances()
     end
 end
 
