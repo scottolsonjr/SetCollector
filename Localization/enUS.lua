@@ -8,11 +8,9 @@ if L then
 -- Mapped Localizations
 L["ARTIFACT"] = ITEM_QUALITY6_DESC
 L["BENTHIC"] = "Benthic"    -- Replace
-L["CASTER"] = RANGED
 L["CHALLENGE"] = GUILD_CHALLENGE_TYPE5
 L["DUNGEON"] = GUILD_CHALLENGE_TYPE1
 L["FLEXIBLE"] = PLAYER_DIFFICULTY4
-L["HEALER"] = HEALER
 L["HEROIC"] = PLAYER_DIFFICULTY2
 L["LEGENDARY"] = ITEM_QUALITY5_DESC
 L["LOC_DG_0900"] = "Shadowlands Dungeons"
@@ -63,15 +61,12 @@ L["LOC_RAID_0802"] = "Battle of Dazar'alor"         -- Replace
 L["LOC_RAID_0803"] = "The Eternal Palace"           -- Replace
 L["LOC_RAID_0804"] = "Ny'alotha, the Waking City"   -- Replace
 L["LOC_RAID_0901"] = "Castle Nathria"               -- Replace
-L["MELEE"] = MELEE
 L["MYTHIC"] = PLAYER_DIFFICULTY6
 L["NORMAL"] = PLAYER_DIFFICULTY1
 L["PLAYER10"] = RAID_DIFFICULTY1
 L["PLAYER25"] = RAID_DIFFICULTY2
 L["PVP"] = PVP
 L["RAIDFINDER"] = PLAYER_DIFFICULTY3
-L["RANGED"] = RANGED
-L["TANK"] = TANK
 L["ZONE_A_1"] = "Stormsong" -- Replace
 L["ZONE_A_2"] = "Tiragarde" -- Replace
 L["ZONE_A_3"] = "Drustvar"  -- Replace

@@ -7,6 +7,7 @@ SetCollector.CLOTH				= { Code = "C", Description = "CLOTH" }
 SetCollector.LEATHER			= { Code = "L", Description = "LEATHER" }
 SetCollector.MAIL				= { Code = "M", Description = "MAIL" }
 SetCollector.PLATE				= { Code = "P", Description = "PLATE" }
+SetCollector.ANY_ARMOR			= { Code = "Z", Description = "Any" }
 
 SetCollector.DEATHKNIGHT		= { Code = "DK", Description = "DEATHKNIGHT" }
 SetCollector.DEMONHUNTER		= { Code = "DH", Description = "DEMONHUNTER" }
@@ -20,15 +21,11 @@ SetCollector.ROGUE 			    = { Code = "RO", Description = "ROGUE" }
 SetCollector.SHAMAN 			= { Code = "SH", Description = "SHAMAN" }
 SetCollector.WARLOCK 			= { Code = "WK", Description = "WARLOCK" }
 SetCollector.WARRIOR 			= { Code = "WR", Description = "WARRIOR" }
+SetCollector.ANY_CLASS			= { Code = "Z", Description = "Any" }
 
 SetCollector.ALLIANCE 			= { Code = "A", Description = "Alliance" }
 SetCollector.HORDE 			    = { Code = "H", Description = "Horde" }
-
-SetCollector.TANK 				= { Code = "T", Description = "TANK" }
-SetCollector.HEALER 			= { Code = "H", Description = "HEALER" }
-SetCollector.CASTER 			= { Code = "C", Description = "CASTER" }
-SetCollector.RANGED 			= { Code = "R", Description = "RANGED" }
-SetCollector.MELEE 			    = { Code = "M", Description = "MELEE" }
+SetCollector.ANY_FACTION			= { Code = "Z", Description = "Any" }
 
 -- Collection Types
 SetCollector.OUTFITS 			= { ID = 1, Code = "OU", Description = "OUTFITS" }
@@ -79,7 +76,6 @@ function SetCollector:CreateSet(collection, uid, title, armorType, class, factio
         TooltipID = CreateTooltipID(collection, uid, title),
         ArmorType = armorType,
         Class = class.Description,
-        Role = SetCollector.ANY.Description,
         Faction = faction.Description,
         Location = nil,
         Variants = { }
