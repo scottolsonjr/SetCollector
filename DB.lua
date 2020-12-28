@@ -36,6 +36,7 @@ local defaults = {
             show_location = true
         },
 		collections = {},
+		export = {}
 	}
 }
 
