@@ -53,7 +53,7 @@ local CLOTH			= { Code = "C", Description = "CLOTH" }
 local LEATHER		= { Code = "L", Description = "LEATHER" }
 local MAIL			= { Code = "M", Description = "MAIL" }
 local PLATE			= { Code = "P", Description = "PLATE" }
-local ANYARMOR			= { Code = "Z", Description = "Any" }
+local ANY_ARMOR			= { Code = "Z", Description = "Any" }
 
 local DEATHKNIGHT 	= { Code = "DK", Description = "DEATHKNIGHT" }
 local DEMONHUNTER 	= { Code = "DH", Description = "DEMONHUNTER" }
@@ -67,11 +67,11 @@ local ROGUE 		= { Code = "RO", Description = "ROGUE" }
 local SHAMAN 		= { Code = "SH", Description = "SHAMAN" }
 local WARLOCK 		= { Code = "WK", Description = "WARLOCK" }
 local WARRIOR 		= { Code = "WR", Description = "WARRIOR" }
-local ANYCLASS			= { Code = "Z", Description = "Any" }
+local ANY_CLASS			= { Code = "Z", Description = "Any" }
 
 local ALLIANCE 		= { Code = "A", Description = "Alliance" }
 local HORDE 		= { Code = "H", Description = "Horde" }
-local ANYFACTION			= { Code = "Z", Description = "Any" }
+local ANY_FACTION			= { Code = "Z", Description = "Any" }
 
 -- Collection Types
 local OUTFITS 		= { ID = 1, Code = "OU", Description = "OUTFITS" }

@@ -7,7 +7,7 @@ SetCollector.CLOTH				= { Code = "C", Description = "CLOTH" }
 SetCollector.LEATHER			= { Code = "L", Description = "LEATHER" }
 SetCollector.MAIL				= { Code = "M", Description = "MAIL" }
 SetCollector.PLATE				= { Code = "P", Description = "PLATE" }
-SetCollector.ANYARMOR			= { Code = "Z", Description = "Any" }
+SetCollector.ANY_ARMOR			= { Code = "Z", Description = "Any" }
 
 SetCollector.DEATHKNIGHT		= { Code = "DK", Description = "DEATHKNIGHT" }
 SetCollector.DEMONHUNTER		= { Code = "DH", Description = "DEMONHUNTER" }
@@ -21,11 +21,11 @@ SetCollector.ROGUE 			    = { Code = "RO", Description = "ROGUE" }
 SetCollector.SHAMAN 			= { Code = "SH", Description = "SHAMAN" }
 SetCollector.WARLOCK 			= { Code = "WK", Description = "WARLOCK" }
 SetCollector.WARRIOR 			= { Code = "WR", Description = "WARRIOR" }
-SetCollector.ANYCLASS			= { Code = "Z", Description = "Any" }
+SetCollector.ANY_CLASS			= { Code = "Z", Description = "Any" }
 
 SetCollector.ALLIANCE 			= { Code = "A", Description = "Alliance" }
 SetCollector.HORDE 			    = { Code = "H", Description = "Horde" }
-SetCollector.ANYFACTION			= { Code = "Z", Description = "Any" }
+SetCollector.ANY_FACTION			= { Code = "Z", Description = "Any" }
 
 -- Collection Types
 SetCollector.OUTFITS 			= { ID = 1, Code = "OU", Description = "OUTFITS" }

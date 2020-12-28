@@ -50,7 +50,7 @@ local CLOTH				= { Code = "C", Description = "CLOTH" }
 local LEATHER			= { Code = "L", Description = "LEATHER" }
 local MAIL				= { Code = "M", Description = "MAIL" }
 local PLATE				= { Code = "P", Description = "PLATE" }
-local ANYARMOR			= { Code = "Z", Description = "Any" }
+local ANY_ARMOR			= { Code = "Z", Description = "Any" }
 
 --
 --  Local Functions
