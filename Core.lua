@@ -264,11 +264,87 @@ function SetCollector:ListSetSources(setID)
             else
                 printable[position(slot)] = sourceInfo.visualID..","..sourceID
             end
+        else
+            SetCollector:Print("ID: "..sourceID.." (No sourceinfo)")
         end
     end
     for i=1, #printable do
         SetCollector:Print(printable[i])
     end
+end
+
+function SetCollector:ExportSetData()
+    local tree = {};
+    local sets = C_TransmogSets.GetAllSets();
+    if (sets) then
+        
+        -- build base sets
+        for i, set in ipairs(sets) do
+            if (set.baseSetID == nil) then
+                local setInfo = (set.setID and C_TransmogSets.GetSetInfo(set.setID)) or nil;
+                if (setInfo ~= nil) then
+                    local setID = set.setID or 0;
+                    tree[setID] = {} 
+                    tree[setID][0] = {
+                        toc = (setInfo.patchID or WOW_VERSION), 
+                        classMask = (setInfo.classMask or 0), 
+                        desc = (setInfo.description or "(blank)"), 
+                        label = (setInfo.label or "(blank)"),
+                        name = (setInfo.name or "(blank)"),
+                        faction = (setInfo.requiredFaction or "Both"),
+                        expansionID = (setInfo.expansionID or 0)
+                    };
+                end
+            end
+        end
+
+        -- populate all sets
+        sets = C_TransmogSets.GetAllSets();
+        for i, set in ipairs(sets) do
+            local setInfo = (set.setID and C_TransmogSets.GetSetInfo(set.setID)) or nil;
+            if (setInfo == nil) then
+                -- SetCollector:Print("Skipping set "..set.setID)
+            else
+                local setID = setInfo.setID or 0;
+                local baseSetID = set.baseSetID or 0;
+                local setData = { 
+                    id = setID,
+                    toc = (setInfo.patchID or WOW_VERSION), 
+                    classMask = (setInfo.classMask or 0), 
+                    desc = (setInfo.description or "(blank)"), 
+                    label = (setInfo.label or "(blank)"),
+                    name = (setInfo.name or "(blank)"),
+                    faction = (setInfo.requiredFaction or "Both"),
+                    expansionID = (setInfo.expansionID or 0),
+                    items = {}
+                };
+
+                local sources = C_TransmogSets.GetSetSources(setID);
+                for sourceID in pairs(sources) do
+                    local sourceInfo = C_TransmogCollection.GetSourceInfo(sourceID);
+                    if (sourceInfo) then
+                        local slot = C_Transmog.GetSlotForInventoryType(sourceInfo.invType);
+                        if (slot) then
+                            local a2 = (sourceInfo.visualID or nil);
+                            local s2 = (sourceInfo.sourceID or nil);
+                            local i2 = (sourceInfo.itemID or nil);                    
+                            local mod2 = (sourceInfo.itemModID or nil);                    
+                            setData.items[sourceInfo.invType] = {a = a2, s = s2, i = i2, mod = mod2 };
+                        end
+                    end
+                end
+
+                if (tree[baseSetID] == nil) then
+                    tree[baseSetID] = {setID = setData};
+                else
+                    tree[baseSetID][setID] = setData;
+                end;
+            end
+        end
+    end
+
+    SetCollector.db.global.export = tree;
+    SetCollector:Print("Done exporting");
 end
 
 function SetCollector:MySlashProcessorFunc(input)
@@ -301,6 +377,9 @@ function SetCollector:MySlashProcessorFunc(input)
         if (parameters) then
             SetCollector:PrintItem(parameters)
         end
+        
+    elseif command == "export" then
+        SetCollector:ExportSetData()
         
     elseif command == "set" then
         if (parameters == nil or parameters == "") then

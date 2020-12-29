@@ -50,12 +50,7 @@ local CLOTH				= { Code = "C", Description = "CLOTH" }
 local LEATHER			= { Code = "L", Description = "LEATHER" }
 local MAIL				= { Code = "M", Description = "MAIL" }
 local PLATE				= { Code = "P", Description = "PLATE" }
-
-local TANK 				= { Code = "T", Description = "TANK" }
-local HEALER 			= { Code = "H", Description = "HEALER" }
-local CASTER 			= { Code = "C", Description = "CASTER" }
-local RANGED 			= { Code = "R", Description = "RANGED" }
-local MELEE 			= { Code = "M", Description = "MELEE" }
+local ANY_ARMOR			= { Code = "Z", Description = "Any" }
 
 --
 --  Local Functions
@@ -75,47 +70,6 @@ local function GetClassArmorType(class)
 	elseif	class == "WARLOCK"		then return CLOTH.Description
 	elseif	class == "WARRIOR"		then return PLATE.Description
 	else return ANY.Description
-	end
-end
-
-local function GetSetSpecializationRole(spec)
-	if 		spec == 62 		then return CASTER.Description 	-- Arcane Mage
-	elseif 	spec == 63 		then return CASTER.Description	-- Fire Mage
-	elseif 	spec == 64 		then return CASTER.Description	-- Frost Mage
-	elseif 	spec == 65 		then return HEALER.Description	-- Holy Paladin
-	elseif 	spec == 66 		then return TANK.Description	-- Protection Paladin
-	elseif 	spec == 70 		then return MELEE.Description	-- Retribution Paladin
-	elseif 	spec == 71 		then return MELEE.Description	-- Arms Warrior
-	elseif 	spec == 72 		then return MELEE.Description	-- Fury Warrior
-	elseif 	spec == 73 		then return TANK.Description	-- Protection Warrior
-	elseif 	spec == 102 	then return CASTER.Description	-- Balance Druid
-	elseif 	spec == 103 	then return MELEE.Description	-- Feral Combat Druid
-	elseif 	spec == 104 	then return TANK.Description	-- Guardian Druid
-	elseif 	spec == 105 	then return HEALER.Description	-- Restoration Druid
-	elseif 	spec == 250 	then return TANK.Description	-- Blood Death Knight
-	elseif 	spec == 251 	then return MELEE.Description	-- Frost Death Knight
-	elseif 	spec == 252 	then return MELEE.Description	-- Unholy Death Knight
-	elseif 	spec == 253 	then return RANGED.Description	-- Beast Mastery Hunter
-	elseif 	spec == 254 	then return RANGED.Description	-- Marksmanship Hunter
-	elseif 	spec == 255 	then return MELEE.Description	-- Survival Hunter
-	elseif 	spec == 256 	then return HEALER.Description	-- Discipline Priest
-	elseif 	spec == 257 	then return HEALER.Description	-- Holy Priest
-	elseif 	spec == 258 	then return CASTER.Description	-- Shadow Priest
-	elseif 	spec == 259 	then return MELEE.Description	-- Assassination Rogue
-	elseif 	spec == 260 	then return MELEE.Description	-- Combat Rogue
-	elseif 	spec == 261 	then return MELEE.Description	-- Subtlety Rogue
-	elseif 	spec == 262 	then return CASTER.Description	-- Elemental Shaman
-	elseif 	spec == 263 	then return MELEE.Description	-- Enhancement Shaman
-	elseif 	spec == 264 	then return HEALER.Description	-- Restoration Shaman
-	elseif 	spec == 265 	then return CASTER.Description	-- Affliction Warlock
-	elseif 	spec == 266 	then return CASTER.Description	-- Demonology Warlock
-	elseif 	spec == 267 	then return CASTER.Description	-- Destruction Warlock
-	elseif 	spec == 268 	then return TANK.Description	-- Brewmaster Monk
-	elseif 	spec == 269 	then return MELEE.Description	-- Windwalker Monk
-	elseif 	spec == 270 	then return HEALER.Description	-- Mistweaver Monk
-	elseif 	spec == 577 	then return MELEE.Description	-- Havoc Demon Hunter
-	elseif 	spec == 581 	then return TANK.Description	-- Vengeance Demon Hunter
-	else return ANY.Description								-- All Specializations Selected
 	end
 end
 
@@ -778,21 +732,6 @@ local function SetFilter(self, classIndex)
 	end
 end
 
---[[local function GetFilteredRole()
-  local currFilter = GetFilterOptions()
-	local specID = 0
-	
-	if currFilter == LE_LOOT_FILTER_CLASS then	-- 2
-		return ANY.Description
-	elseif currFilter == NO_CLASS_FILTER then		-- 1
-		return ALL.Description
-	else -- Spec
-		local id = GetSpecializationInfo(currFilter - LE_LOOT_FILTER_SPEC1 + 1)
-		specID = id
-  	return GetSetSpecializationRole(specID)
-	end
-end]]
-
 local function InitFilter()
 	local info = UIDropDownMenu_CreateInfo();
 	--local currFilter = GetFilterOptions();
@@ -1035,7 +974,6 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 				  local armorType = GetClassArmorType(class)
 				  
 				  local faction = UnitFactionGroup("player")
-					--local role = GetFilteredRole()
 					
 					local isObtainable = SetCollector:IsSetObtainable(i, j)
 					local isTransmog = SetCollector:IsTransmogSet(i, j)
@@ -1075,12 +1013,9 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 					
 					if SetCollector:SetIsFilteredOutByArmorType(i, j, armorType) then
 						-- Keep it hidden
-					--elseif role ~= ALL.Description and SetCollector:SetIsFilteredOutByClass(i, j, class) then
 					elseif SetCollector:SetIsFilteredOutByClass(i, j, class) then
 						-- Keep it hidden
 					elseif SetCollector:SetIsFilteredOutByFaction(i, j, faction) then
-						-- Keep it hidden
-					elseif SetCollector:SetIsFilteredOutByRole(i, j, role) then
 						-- Keep it hidden
 					elseif SHOW_ONLY_OBTAINABLE == true and not isObtainable then
 						-- Keep it hidden

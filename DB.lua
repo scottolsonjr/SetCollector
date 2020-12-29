@@ -36,6 +36,7 @@ local defaults = {
             show_location = true
         },
 		collections = {},
+		export = {}
 	}
 }
 
@@ -53,6 +54,7 @@ local CLOTH			= { Code = "C", Description = "CLOTH" }
 local LEATHER		= { Code = "L", Description = "LEATHER" }
 local MAIL			= { Code = "M", Description = "MAIL" }
 local PLATE			= { Code = "P", Description = "PLATE" }
+local ANY_ARMOR			= { Code = "Z", Description = "Any" }
 
 local DEATHKNIGHT 	= { Code = "DK", Description = "DEATHKNIGHT" }
 local DEMONHUNTER 	= { Code = "DH", Description = "DEMONHUNTER" }
@@ -66,15 +68,11 @@ local ROGUE 		= { Code = "RO", Description = "ROGUE" }
 local SHAMAN 		= { Code = "SH", Description = "SHAMAN" }
 local WARLOCK 		= { Code = "WK", Description = "WARLOCK" }
 local WARRIOR 		= { Code = "WR", Description = "WARRIOR" }
+local ANY_CLASS			= { Code = "Z", Description = "Any" }
 
 local ALLIANCE 		= { Code = "A", Description = "Alliance" }
 local HORDE 		= { Code = "H", Description = "Horde" }
-
-local TANK 			= { Code = "T", Description = "TANK" }
-local HEALER 		= { Code = "H", Description = "HEALER" }
-local CASTER 		= { Code = "C", Description = "CASTER" }
-local RANGED 		= { Code = "R", Description = "RANGED" }
-local MELEE 		= { Code = "M", Description = "MELEE" }
+local ANY_FACTION			= { Code = "Z", Description = "Any" }
 
 -- Collection Types
 local OUTFITS 		= { ID = 1, Code = "OU", Description = "OUTFITS" }
@@ -135,7 +133,7 @@ local function GetTooltipIdentifierLegacy(collection, id, title)
 	return identifier
 end
 
-function SetCollector:AddSetLegacy(minVersion, maxVersion, collection, id, title, armorType, class, role, faction, location, ...)
+function SetCollector:AddSetLegacy(minVersion, maxVersion, collection, id, title, armorType, class, faction, location, ...)
 	if WOW_VERSION >= minVersion then
 		if maxVersion == nil or WOW_VERSION <= maxVersion then
 			local tempSet = { }
@@ -144,13 +142,12 @@ function SetCollector:AddSetLegacy(minVersion, maxVersion, collection, id, title
 				TooltipID = GetTooltipIdentifierLegacy(collection, id, title),
 				ArmorType = armorType,
 				Class = class.Description,
-				Role = role.Description,
 				Faction = faction.Description,
                 Name = name,
                 Location = location,
 				Variants = { }
 			}
-			local ID = collection.Code..string.format("%03d", id)..armorType.Code..class.Code..role.Code..faction.Code
+			local ID = collection.Code..string.format("%03d", id)..armorType.Code..class.Code..faction.Code
 			SetCollector.db.global.collections[collection.ID].Sets[ID] = tempSet
 			return ID
 		end
@@ -427,16 +424,6 @@ function SetCollector:SetIsFilteredOutByFaction(collection, set, faction)
 	local db = SetCollector.db.global.collections
 	local setFaction = db[collection].Sets[set].Faction
 	if (setFaction == ANY.Description or setFaction == faction or faction == "Any") then
-		return false
-	else
-		return true
-	end
-end
-
-function SetCollector:SetIsFilteredOutByRole(collection, set, role)
-	local db = SetCollector.db.global.collections
-	local setRole = db[collection].Sets[set].Role
-	if (setRole == ANY.Description or setRole == role or role == "All" or role == "Any") then
 		return false
 	else
 		return true
