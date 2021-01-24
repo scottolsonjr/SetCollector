@@ -532,9 +532,9 @@ L["MO_RAID_0501"] = "[14] Armor of the Red Crane"
 L["MO_RAID_0502"] = "[15] Fire-Charm Armor"
 --Translation missing 
 L["MO_RAID_0503"] = "[16] Armor of Seven Sacred Seals"
-L["NOOBTAIN"] = "Ya no es obtenible"
+L["NO_OBTAIN"] = "Ya no es obtenible"
 L["NOT_AVAILABLE"] = "Set Collector: Este funcción no está disponible todavía. Gracias por tu paciencia."
-L["NOTRANSMOG"] = "No para transfiguriacón"
+L["NO_TRANSMOG"] = "No para transfiguriacón"
 L["OBTAIN_FILTER"] = "Sólo obtenible"
 L["ORIGINAL"] = "Original"
 --Translation missing 

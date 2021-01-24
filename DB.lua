@@ -89,10 +89,10 @@ local CUSTOM		= { ID = 11, Code = "CU", Description = "CUSTOM" }
 local HOLIDAY		= { ID = 12, Code = "HO", Description = "HOLIDAY" }
 
 local OBTAIN		= true
-local NOOBTAIN 		= false
+local NO_OBTAIN 		= false
 
 local TRANSMOG 		= true
-local NOTRANSMOG 	= false
+local NO_TRANSMOG 	= false
 
 --
 --  Helpers
@@ -386,7 +386,7 @@ function SetCollector:GetSetTooltip(self)
 		end
 		
 		if not isObtainable then
-			GameTooltip:AddLine(L["NOOBTAIN"], 1, 0, 0)
+			GameTooltip:AddLine(L["NO_OBTAIN"], 1, 0, 0)
 		end
 		
 		local rightclick = L["RIGHT_CLICK_FAVORITE"] or L["MISSING_LOCALIZATION"]

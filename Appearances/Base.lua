@@ -42,10 +42,10 @@ SetCollector.CUSTOM			    = { ID = 11, Code = "CU", Description = "CUSTOM" }
 SetCollector.HOLIDAY			= { ID = 12, Code = "HO", Description = "HOLIDAY" }
 
 SetCollector.OBTAIN			    = true
-SetCollector.NOOBTAIN 			= false
+SetCollector.NO_OBTAIN 			= false
 
 SetCollector.TRANSMOG 			= true
-SetCollector.NOTRANSMOG 		= false
+SetCollector.NO_TRANSMOG 		= false
 
 local WOW_VERSION = select(4, GetBuildInfo())
 
@@ -60,7 +60,7 @@ function SetCollector:CreateAppearance(ID, sourceID, ...)
 	return t
 end
 
-function SetCollector:CreateSet(collection, uid, title, armorType, class, faction)
+function SetCollector:CreateSet(collection, uid, title, armorType, class, faction, location, ...)
     local function CreateTooltipID(collection, id, title)
         local identifier
         if collection == RAID then
@@ -77,8 +77,8 @@ function SetCollector:CreateSet(collection, uid, title, armorType, class, factio
         ArmorType = armorType,
         Class = class.Description,
         Faction = faction.Description,
-        Location = nil,
-        Variants = { }
+        Location = location,
+        Variants = {...}
     }
     return set
 end
@@ -93,10 +93,6 @@ function SetCollector:CreateVariant(title, transmog, ...)
     return variant
 end
 
-function SetCollector:AddVariantToSet(set, variant)
-    tinsert(set.Variants, variant)
-end
-
 function SetCollector:AddSetToDatabase(version, collection, set)
 	if WOW_VERSION >= version then
         SetCollector.db.global.collections[collection.ID].Sets[set.ID] = set
@@ -109,8 +105,15 @@ function SetCollector:AddSetToDatabase(version, collection, set)
     end
 end
 
-function SetCollector:AddSetsToDatabase(version, collection, ...)
-	if WOW_VERSION >= version then
+function SetCollector:AddSetsToDatabase(version, collection, sets, ...)
+    if WOW_VERSION >= version then
+        if sets then
+            for index, set in ipairs(sets) do
+                print(index, " -- ", set)
+                SetCollector:AddSetToDatabase(version, collection, set)
+            end
+        end
+
         local n = select('#', ...)
         if n > 0 then
             for i=1, n do

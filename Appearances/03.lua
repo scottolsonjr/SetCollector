@@ -36,11 +36,11 @@ local ANY_FACTION	= SetCollector.ANY_FACTION
 
 -- Obtainable
 local OBTAIN        = SetCollector.OBTAIN
-local NOOBTAIN         = SetCollector.NOOBTAIN
+local NO_OBTAIN         = SetCollector.NO_OBTAIN
 
 -- Useable as Transmog
 local TRANSMOG         = SetCollector.TRANSMOG
-local NOTRANSMOG     = SetCollector.NOTRANSMOG
+local NO_TRANSMOG     = SetCollector.NO_TRANSMOG
 
 
 --
@@ -48,6 +48,9 @@ local NOTRANSMOG     = SetCollector.NOTRANSMOG
 --
 
 local function A(...) return SetCollector:CreateAppearance(...) end
+local function CreateSet(...) return SetCollector:CreateSet(...) end
+local function CreateVariant(...) return SetCollector:CreateVariant(...) end
+local function AddSetsToDatabase(...) return SetCollector:AddSetsToDatabase(...) end
 
 local function GetLegendaries()
     local col = SetCollector.LEGENDARY
