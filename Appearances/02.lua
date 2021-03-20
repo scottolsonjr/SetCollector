@@ -36,11 +36,11 @@ local ANY_FACTION	= SetCollector.ANY_FACTION
 
 -- Obtainable
 local OBTAIN        = SetCollector.OBTAIN
-local NOOBTAIN         = SetCollector.NOOBTAIN
+local NO_OBTAIN         = SetCollector.NO_OBTAIN
 
 -- Useable as Transmog
 local TRANSMOG         = SetCollector.TRANSMOG
-local NOTRANSMOG     = SetCollector.NOTRANSMOG
+local NO_TRANSMOG     = SetCollector.NO_TRANSMOG
 
 
 --
@@ -48,6 +48,10 @@ local NOTRANSMOG     = SetCollector.NOTRANSMOG
 --
 
 local function A(...) return SetCollector:CreateAppearance(...) end
+local function CreateSet(...) return SetCollector:CreateSet(...) end
+local function CreateVariant(...) return SetCollector:CreateVariant(...) end
+local function IncludeSet(...) return SetCollector:IncludeSet(...) end
+local function AddSetsToDatabase(...) return SetCollector:AddSetsToDatabase(...) end
 
 local function GetLegendaries()
     local col = SetCollector.LEGENDARY
@@ -266,6 +270,17 @@ local function GetWarriorAppearances()
 end
 
 
+local function GetOtherAppearances()
+    local COLLECTION, VERSION = SetCollector.OTHER, 90000
+    local sets = {
+        IncludeSet(COLLECTION,10201,1827,CLOTH,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10201,1826,LEATHER,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10201,1825,MAIL,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10201,1824,PLATE,ANY_CLASS,ANY_FACTION),
+    }
+    AddSetsToDatabase(VERSION, COLLECTION, sets)
+end
+
 --
 --    GLOBAL FUNCTIONS
 --
@@ -285,6 +300,8 @@ function SetCollector:GetVersion02Appearances(expansion)
         GetShamanAppearances()
         GetWarlockAppearances()
         GetWarriorAppearances()
+
+        GetOtherAppearances()
     end
 end
 

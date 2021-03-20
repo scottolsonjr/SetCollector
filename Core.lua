@@ -136,7 +136,7 @@ function SetCollector:SetOptionsShowSetLocation()
 end
 
 function SetCollector:SortList(t, f, d)
-	if f == "key" then return pairsByKeys(t, d)		-- Allow for exlicit request to sort by key
+	if f == "key" then return pairsByKeys(t, d)		-- Allow for explicit request to sort by key
 	-- Future sort alternatives here
 	else return pairsByKeys(t, d)									-- Default to sort by key
 	end
@@ -233,16 +233,26 @@ function SetCollector:ListSetSources(setID)
     local sources = C_TransmogSets.GetSetSources(setID);
     SetCollector:Print(setID.." "..(setInfo.name or nil))
     local function position(slot)
-        if slot == 3 then
+        if slot == INVSLOT_HEAD then
+            return 1
+        elseif slot == INVSLOT_SHOULDER then
             return 2
-        elseif slot == 5 then
+        elseif slot == INVSLOT_BACK then
             return 3
-        elseif slot == 9 then
+        elseif slot == INVSLOT_CHEST then
             return 4
-        elseif slot == 10 then
+        elseif slot == INVSLOT_WRIST then
             return 5
+        elseif slot == INVSLOT_HAND then
+            return 6
+        elseif slot == INVSLOT_WAIST then
+            return 7
+        elseif slot == INVSLOT_LEGS then
+            return 8
+        elseif slot == INVSLOT_FEET then
+            return 9
         end
-        return slot
+        return slot + 10
     end
     local printable = {}
     for sourceID in pairs(sources) do
@@ -251,6 +261,8 @@ function SetCollector:ListSetSources(setID)
             local slot = C_Transmog.GetSlotForInventoryType(sourceInfo.invType);
             if (slot) then
                 printable[position(slot)] = sourceInfo.visualID..","..sourceID.." ("..slot..")"
+            else
+                printable[position(slot)] = sourceInfo.visualID..","..sourceID
             end
         else
             SetCollector:Print("ID: "..sourceID.." (No sourceinfo)")

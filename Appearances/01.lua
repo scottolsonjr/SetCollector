@@ -36,11 +36,11 @@ local ANY_FACTION	= SetCollector.ANY_FACTION
 
 -- Obtainable
 local OBTAIN        = SetCollector.OBTAIN
-local NOOBTAIN         = SetCollector.NOOBTAIN
+local NO_OBTAIN         = SetCollector.NO_OBTAIN
 
 -- Useable as Transmog
 local TRANSMOG         = SetCollector.TRANSMOG
-local NOTRANSMOG     = SetCollector.NOTRANSMOG
+local NO_TRANSMOG     = SetCollector.NO_TRANSMOG
 
 
 --
@@ -48,6 +48,10 @@ local NOTRANSMOG     = SetCollector.NOTRANSMOG
 --
 
 local function A(...) return SetCollector:CreateAppearance(...) end
+local function CreateSet(...) return SetCollector:CreateSet(...) end
+local function CreateVariant(...) return SetCollector:CreateVariant(...) end
+local function IncludeSet(...) return SetCollector:IncludeSet(...) end
+local function AddSetsToDatabase(...) return SetCollector:AddSetsToDatabase(...) end
 
 local function GetLegendaries()
     local col = SetCollector.LEGENDARY
@@ -338,7 +342,6 @@ local function GetWarriorAppearances()
     set = SetCollector:AddSetLegacy(70000,nil,col,10,"WR_DG_01",PLATE,WARRIOR,ANY_FACTION)
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"REPLICA",TRANSMOG,A(4930,39727),A(4932,39730),A(4929,39728),A(4934,39726),A(4936,39725),A(4935,39724),A(4931,39729),A(4933,39723))
 end
-
 
 --
 --    GLOBAL FUNCTIONS

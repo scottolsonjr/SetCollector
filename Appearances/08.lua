@@ -36,11 +36,11 @@ local ANY_FACTION	= SetCollector.ANY_FACTION
 
 -- Obtainable
 local OBTAIN         = SetCollector.OBTAIN
-local NOOBTAIN       = SetCollector.NOOBTAIN
+local NO_OBTAIN       = SetCollector.NO_OBTAIN
 
 -- Useable as Transmog
 local TRANSMOG       = SetCollector.TRANSMOG
-local NOTRANSMOG     = SetCollector.NOTRANSMOG
+local NO_TRANSMOG     = SetCollector.NO_TRANSMOG
 
 
 --
@@ -48,6 +48,10 @@ local NOTRANSMOG     = SetCollector.NOTRANSMOG
 --
 
 local function A(...) return SetCollector:CreateAppearance(...) end
+local function CreateSet(...) return SetCollector:CreateSet(...) end
+local function CreateVariant(...) return SetCollector:CreateVariant(...) end
+local function IncludeSet(...) return SetCollector:IncludeSet(...) end
+local function AddSetsToDatabase(...) return SetCollector:AddSetsToDatabase(...) end
 
 local function GetLegendaries()
     local col = SetCollector.LEGENDARY
@@ -118,13 +122,33 @@ local function GetExpansionAppearances()
         SetCollector:AddVariantLegacy(80000,nil,col,set,"EX_PLATE_H_0801",TRANSMOG,A(36912),A(37093),A(37474),A(37091),A(36828),A(37092),A(37089),A(37096),A(37090))
 end
 
-
 local function GetRaidAppearances()
+    local COLLECTION, VERSION = SetCollector.RAID, 80000
+    -- Ny'alotha
+    VERSION = 80300
+    local sets = {
+        IncludeSet(COLLECTION,10804,1994,CLOTH,ANY_CLASS,ANY_FACTION,1995,1996,1197),
+        IncludeSet(COLLECTION,10804,1990,LEATHER,ANY_CLASS,ANY_FACTION,1991,1992,1993),
+        IncludeSet(COLLECTION,10804,1986,MAIL,ANY_CLASS,ANY_FACTION,1987,1988,1989),
+        IncludeSet(COLLECTION,10804,1982,PLATE,ANY_CLASS,ANY_FACTION,1983,1984,1985),
+        
+        --IncludeSet(COLLECTION,10803,1833,CLOTH,ANY_CLASS,ANY_FACTION),
+        --IncludeSet(COLLECTION,10803,1832,LEATHER,ANY_CLASS,ANY_FACTION),
+        --IncludeSet(COLLECTION,10803,1831,MAIL,ANY_CLASS,ANY_FACTION),
+        --IncludeSet(COLLECTION,10803,1830,PLATE,ANY_CLASS,ANY_FACTION),
+        
+        IncludeSet(COLLECTION,10802,1806,CLOTH,ANY_CLASS,ANY_FACTION,1807,1808,1809),
+        IncludeSet(COLLECTION,10802,1810,LEATHER,ANY_CLASS,ANY_FACTION,1811,1812,1813),
+        IncludeSet(COLLECTION,10802,1814,MAIL,ANY_CLASS,ANY_FACTION,1815,1816,1817),
+        IncludeSet(COLLECTION,10802,1818,PLATE,ANY_CLASS,ANY_FACTION,1819,1820,1821),
+    }
+    AddSetsToDatabase(VERSION, COLLECTION, sets)
+
     local col = SetCollector.RAID
     local set, loc = ""
-        
+
     -- Ny'alotha
-    loc = "LOC_RAID_0804"
+    --[[loc = "LOC_RAID_0804"
     set = SetCollector:AddSetLegacy(80300,nil,col,10804,"RAID_CLOTH_0804",CLOTH,ANY_CLASS,ANY_FACTION,loc)
         SetCollector:AddVariantLegacy(80300,nil,col,set,"RAIDFINDER",TRANSMOG,A(41042),A(41050),A(41026),A(41058),A(41038),A(41054),A(41046),A(41034))
         SetCollector:AddVariantLegacy(80300,nil,col,set,"NORMAL",TRANSMOG,A(41041),A(41049),A(41025),A(41057),A(41037),A(41053),A(41045),A(41033))
@@ -144,7 +168,7 @@ local function GetRaidAppearances()
         SetCollector:AddVariantLegacy(80300,nil,col,set,"RAIDFINDER",TRANSMOG,A(40971),A(40979),A(40959),A(40987),A(40967),A(40983),A(40975),A(40963))
         SetCollector:AddVariantLegacy(80300,nil,col,set,"NORMAL",TRANSMOG,A(40973),A(40981),A(40961),A(40989),A(40969),A(40985),A(40977),A(40965))
         SetCollector:AddVariantLegacy(80300,nil,col,set,"HEROIC",TRANSMOG,A(40974),A(40982),A(40962),A(40990),A(40970),A(40986),A(40978),A(40966))
-        SetCollector:AddVariantLegacy(80300,nil,col,set,"MYTHIC",TRANSMOG,A(41005),A(41011),A(40996),A(41017),A(41002),A(41014),A(41008),A(40999))
+        SetCollector:AddVariantLegacy(80300,nil,col,set,"MYTHIC",TRANSMOG,A(41005),A(41011),A(40996),A(41017),A(41002),A(41014),A(41008),A(40999))]]
 
     -- The Eternal Palace
     loc = "LOC_RAID_0803"
@@ -170,7 +194,7 @@ local function GetRaidAppearances()
         SetCollector:AddVariantLegacy(80200,nil,col,set,"MYTHIC",TRANSMOG,A(39959),A(39961),A(39956,104576),A(39955),A(39962),A(39958),A(39963),A(39960),A(39957))
 
     -- Battle of Dazar'alor
-    loc = "LOC_RAID_0802"
+    --[[loc = "LOC_RAID_0802"
     set = SetCollector:AddSetLegacy(80100,nil,col,10802,"RAID_CLOTH_0802",CLOTH,ANY_CLASS,ANY_FACTION,loc)
         SetCollector:AddVariantLegacy(80100,nil,col,set,"RAIDFINDER",TRANSMOG,A(38835),A(38838),A(38833,102299),A(38837),A(38809),A(38806),A(38830),A(38813),A(38831))
         SetCollector:AddVariantLegacy(80100,nil,col,set,"NORMAL",TRANSMOG,A(38855),A(38858),A(38853,102298),A(38857),A(38808),A(38805),A(38850),A(38812),A(38851))
@@ -190,7 +214,7 @@ local function GetRaidAppearances()
         SetCollector:AddVariantLegacy(80100,nil,col,set,"RAIDFINDER",TRANSMOG,A(39515),A(39517),A(39520,102295),A(39512),A(39519),A(39514),A(39518),A(39516),A(39513))
         SetCollector:AddVariantLegacy(80100,nil,col,set,"NORMAL",TRANSMOG,A(39482),A(39484),A(39487,102294),A(39479),A(39486),A(39481),A(39485),A(39483),A(39480))
         SetCollector:AddVariantLegacy(80100,nil,col,set,"HEROIC",TRANSMOG,A(39531),A(39533),A(39536,102296),A(39528),A(39535),A(39530),A(39534),A(39532),A(39529))
-        SetCollector:AddVariantLegacy(80100,nil,col,set,"MYTHIC",TRANSMOG,A(39507),A(39509),A(39511,102297),A(39496),A(39503),A(39506),A(39510),A(39508),A(39505))
+        SetCollector:AddVariantLegacy(80100,nil,col,set,"MYTHIC",TRANSMOG,A(39507),A(39509),A(39511,102297),A(39496),A(39503),A(39506),A(39510),A(39508),A(39505))]]--
 
     -- Uldir
     loc = "LOC_RAID_0801"
@@ -224,11 +248,43 @@ end
 
 
 local function GetPvpAppearances()
+    local COLLECTION, VERSION = SetCollector.PVP, 80300
+    local sets = {
+        -- Season 4
+        IncludeSet(COLLECTION,10804,1969,CLOTH,ANY_CLASS,ALLIANCE,1968),
+        IncludeSet(COLLECTION,10804,1969,CLOTH,ANY_CLASS,HORDE,1975),
+        IncludeSet(COLLECTION,10804,1963,LEATHER,ANY_CLASS,ALLIANCE,1962),
+        IncludeSet(COLLECTION,10804,1963,LEATHER,ANY_CLASS,HORDE,1974),
+        IncludeSet(COLLECTION,10804,1957,MAIL,ANY_CLASS,ALLIANCE,1956),
+        IncludeSet(COLLECTION,10804,1957,MAIL,ANY_CLASS,HORDE,1973),
+        IncludeSet(COLLECTION,10804,1951,PLATE,ANY_CLASS,ALLIANCE,1950),
+        IncludeSet(COLLECTION,10804,1951,PLATE,ANY_CLASS,HORDE,1972),
+        -- Season 3
+        --IncludeSet(COLLECTION,10803,1846,CLOTH,ANY_CLASS,ALLIANCE),
+        --IncludeSet(COLLECTION,10803,1897,CLOTH,ANY_CLASS,HORDE),
+        --IncludeSet(COLLECTION,10803,1852,LEATHER,ANY_CLASS,ALLIANCE),
+        --IncludeSet(COLLECTION,10803,1891,LEATHER,ANY_CLASS,HORDE),
+        --IncludeSet(COLLECTION,10803,1858,MAIL,ANY_CLASS,ALLIANCE),
+        --IncludeSet(COLLECTION,10803,1885,MAIL,ANY_CLASS,HORDE),
+        --IncludeSet(COLLECTION,10803,1864,PLATE,ANY_CLASS,ALLIANCE),
+        --IncludeSet(COLLECTION,10803,1879,PLATE,ANY_CLASS,HORDE),
+        -- Season 2
+        --IncludeSet(COLLECTION,10802,1796,CLOTH,ANY_CLASS,ALLIANCE),
+        --IncludeSet(COLLECTION,10802,1745,CLOTH,ANY_CLASS,HORDE),
+        --IncludeSet(COLLECTION,10802,1789,LEATHER,ANY_CLASS,ALLIANCE),
+        --IncludeSet(COLLECTION,10802,1752,LEATHER,ANY_CLASS,HORDE),
+        --IncludeSet(COLLECTION,10802,1782,MAIL,ANY_CLASS,ALLIANCE),
+        --IncludeSet(COLLECTION,10802,1759,MAIL,ANY_CLASS,HORDE),
+        --IncludeSet(COLLECTION,10802,1775,PLATE,ANY_CLASS,ALLIANCE),
+        --IncludeSet(COLLECTION,10802,1766,PLATE,ANY_CLASS,HORDE),
+    }
+    AddSetsToDatabase(VERSION, COLLECTION, sets)
+
     local col = SetCollector.PVP
     local set, loc = ""
 
     -- Season 4
-    loc = "LOC_PVP_0804"
+    --[[loc = "LOC_PVP_0804"
     set = SetCollector:AddSetLegacy(80000,nil,col,10804,"PVP_CLOTH_A_25",CLOTH,ANY_CLASS,ALLIANCE,loc)
         SetCollector:AddVariantLegacy(80000,nil,col,set,"GLADIATOR",TRANSMOG,A(41043, 106830),A(41051, 106848),A(41027, 106806),A(41059, 106860),A(41039, 106826),A(41055, 106854),A(41047, 106838),A(41035, 106816))
     set = SetCollector:AddSetLegacy(80000,nil,col,10804,"PVP_LEATHER_A_25",LEATHER,ANY_CLASS,ALLIANCE,loc)
@@ -245,7 +301,7 @@ local function GetPvpAppearances()
     set = SetCollector:AddSetLegacy(80000,nil,col,10804,"PVP_MAIL_H_25",MAIL,ANY_CLASS,HORDE,loc)
         SetCollector:AddVariantLegacy(80000,nil,col,set,"GLADIATOR",TRANSMOG,A(40796, 107030),A(40808, 107160),A(40784, 106938),A(40816, 106864),A(40792, 106828),A(40812, 106984),A(40804, 106840),A(40788, 106946))
     set = SetCollector:AddSetLegacy(80000,nil,col,10804,"PVP_PLATE_H_25",PLATE,ANY_CLASS,HORDE,loc)
-        SetCollector:AddVariantLegacy(80000,nil,col,set,"GLADIATOR",TRANSMOG,A(40792, 107040),A(40980, 106798),A(),A(40960, 107072),A(40988, 106990),A(40968, 106824),A(40984, 106980),A(40976, 106836),A(40964, 106814))
+        SetCollector:AddVariantLegacy(80000,nil,col,set,"GLADIATOR",TRANSMOG,A(40792, 107040),A(40980, 106798),A(),A(40960, 107072),A(40988, 106990),A(40968, 106824),A(40984, 106980),A(40976, 106836),A(40964, 106814))]]
 
     -- Season 3
     loc = "LOC_PVP_0803"
@@ -337,6 +393,30 @@ end
 
 
 local function GetOtherAppearances()
+    local COLLECTION, VERSION = SetCollector.OTHER, 80000
+    local sets = {
+        -- Transmog Only Sets
+        IncludeSet(COLLECTION,10810,1902,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10811,1903,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10812,1913,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10813,1914,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10814,1822,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10815,1823,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+
+        --IncludeSet(COLLECTION,10880,1789,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        --IncludeSet(COLLECTION,10881,1796,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        --IncludeSet(COLLECTION,10882,1806,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        --IncludeSet(COLLECTION,10883,1810,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        --IncludeSet(COLLECTION,10884,1814,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        --IncludeSet(COLLECTION,10885,1818,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        --IncludeSet(COLLECTION,10886,1822,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        --IncludeSet(COLLECTION,10887,1823,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        --IncludeSet(COLLECTION,10888,1824,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        --IncludeSet(COLLECTION,10889,1825,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        --IncludeSet(COLLECTION,10890,1826,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+    }
+    AddSetsToDatabase(VERSION, COLLECTION, sets)
+
     local col = SetCollector.OTHER
     local set = ""
     
@@ -390,7 +470,8 @@ local function GetOtherAppearances()
             SetCollector:AddVariantLegacy(80300,nil,col,set,"ZONE_H_1",TRANSMOG,A(36047),A(36049),A(36045),A(36050),A(36046),A(36043),A(36048),A(36044))
             SetCollector:AddVariantLegacy(80000,nil,col,set,"ZONE_H_2",TRANSMOG,A(36037),A(36039),A(36035),A(36040),A(36036),A(36033),A(36038),A(36034))
             SetCollector:AddVariantLegacy(80000,nil,col,set,"ZONE_H_3",TRANSMOG,A(36055),A(36057),A(36053),A(36058),A(36054),A(36051),A(36056),A(36052))
-    end
+            
+end
 
 --
 --    GLOBAL FUNCTIONS
