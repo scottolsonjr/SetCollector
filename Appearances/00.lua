@@ -50,6 +50,7 @@ local NO_TRANSMOG 	= SetCollector.NO_TRANSMOG
 local function A(...) return SetCollector:CreateAppearance(...) end
 local function CreateSet(...) return SetCollector:CreateSet(...) end
 local function CreateVariant(...) return SetCollector:CreateVariant(...) end
+local function IncludeSet(...) return SetCollector:IncludeSet(...) end
 local function AddSetsToDatabase(...) return SetCollector:AddSetsToDatabase(...) end
 
 local function GetHolidayAppearances()
@@ -169,6 +170,30 @@ local function GetStarterAppearances()
 			SetCollector:AddVariantLegacy(80300,nil,col,set,"STARTER",NO_TRANSMOG,A(23206,28833),A(183,44),A(184,45),A(154,15),A(802,746))
 end
 
+local function GetHeritageAppearances()
+    local COLLECTION, VERSION = SetCollector.OTHER, 90000
+    local sets = {
+        IncludeSet(COLLECTION,10099,1522,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10099,1523,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10099,1524,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10099,1525,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10099,1679,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10099,1680,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10099,1681,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10099,1682,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10099,1741,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10099,1742,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10099,1803,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10099,1804,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10099,1828,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10099,1829,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10099,1976,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10099,1977,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10099,1980,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10099,1981,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+    }
+    AddSetsToDatabase(VERSION, COLLECTION, sets)
+end
 
 --
 --	GLOBAL FUNCTIONS
@@ -178,6 +203,7 @@ function SetCollector:GetVersion00Appearances(expansion)
 	if expansion.v00 then
 		GetHolidayAppearances()
 		GetStarterAppearances()
+        --GetHeritageAppearances()
 	end
 end
 

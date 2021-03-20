@@ -1,7 +1,7 @@
 BINDING_HEADER_SETCOLLECTOR = "Set Collector"
 BINDING_NAME_SETCOLLECTOR_TOGGLE = "Toggle Set Collector"
 
-local L = LibStub("AceLocale-3.0"):NewLocale("SetCollector", "enUS", true)
+local L = LibStub("AceLocale-3.0"):NewLocale("SetCollector", "enUS", true, true)
 
 if L then
 

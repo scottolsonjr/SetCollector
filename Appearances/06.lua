@@ -50,6 +50,7 @@ local NO_TRANSMOG     = SetCollector.NO_TRANSMOG
 local function A(...) return SetCollector:CreateAppearance(...) end
 local function CreateSet(...) return SetCollector:CreateSet(...) end
 local function CreateVariant(...) return SetCollector:CreateVariant(...) end
+local function IncludeSet(...) return SetCollector:IncludeSet(...) end
 local function AddSetsToDatabase(...) return SetCollector:AddSetsToDatabase(...) end
 
 local function GetRaidAppearances()

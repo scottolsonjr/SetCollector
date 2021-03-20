@@ -136,7 +136,7 @@ function SetCollector:SetOptionsShowSetLocation()
 end
 
 function SetCollector:SortList(t, f, d)
-	if f == "key" then return pairsByKeys(t, d)		-- Allow for exlicit request to sort by key
+	if f == "key" then return pairsByKeys(t, d)		-- Allow for explicit request to sort by key
 	-- Future sort alternatives here
 	else return pairsByKeys(t, d)									-- Default to sort by key
 	end

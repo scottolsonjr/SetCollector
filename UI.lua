@@ -335,6 +335,7 @@ local function SetItem_OnClick(self, button, ...)
 		end
 	end
 end
+
 local function SetItem_OnEnter(self, motion)
 	if self.link then
 		GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT")
@@ -342,6 +343,7 @@ local function SetItem_OnEnter(self, motion)
 		GameTooltip:Show()
 	end
 end
+
 local function SetItem_OnLeave(self, motion)
 	GameTooltip:Hide()
 end
@@ -351,7 +353,7 @@ for i=1, #EQUIPMENT do
 local itemButton = CreateFrame("Button","$parentItem"..i,modelFrame,"SetCollectorItemTemplate")
 	if i == 1 then
 		itemButton:SetPoint("TOPLEFT",modelFrame,"TOPLEFT", 7, -73)
-	elseif i == 11 then
+	elseif i == 10 then
 		itemButton:SetPoint("TOPRIGHT",modelFrame,"TOPRIGHT", -7, -73)
 	else
 		itemButton:SetPoint("TOPLEFT",prevItem,"BOTTOMLEFT", 0, -7)
@@ -376,7 +378,7 @@ local function SetItemButton(button, appearanceID, sourceID)
 			src = sourceID
 		end
 		local sTexture, sLink
-		if src > 0 then
+		if src and src > 0 then
 			_, _, _, sTexture, _, sLink = C_TransmogCollection.GetAppearanceSourceInfo(src)
         end
         local itemID = 0
@@ -523,7 +525,6 @@ function SetCollector:SetVariantTabs(collection, set, variant, outfit)
 end
 
 local function GetSourceID(appearanceID)
-	--local sources = C_TransmogCollection.GetAppearanceSources(appearanceID)
 	local sources = SetCollector:GetAppearanceSources(appearanceID)
 	local itemID
 	if sources then
@@ -548,32 +549,35 @@ function SetCollector:UpdateSelectedVariantTab(self)
 		local outfit = _G["SetCollectorSetDisplayTab"..selected].Outfit
 		if outfit and SetCollector:GetDebug() then SetCollector:Print("Outfit: "..outfit) end
 		
-		local inc = 0
-				
+        local inc = 0
+        ClearItemButtons(1)
 		if ( collection and set ) then
+            items = {}
+            local acq = 0
 			if ( outfit and collection == 0 ) then
 				local appearanceSources, mainHandEnchant, offHandEnchant = C_TransmogCollection.GetOutfitSources(outfit)
 				for i=1, #appearanceSources do
 					if appearanceSources[i] > 0 then
-						local _, appearanceID = C_TransmogCollection.GetAppearanceSourceInfo(appearanceSources[i])
+						local categoryID, appearanceID = C_TransmogCollection.GetAppearanceSourceInfo(appearanceSources[i])
 						if appearanceID and SetCollector:GetDebug() then SetCollector:Print("Appearance ID: "..appearanceID) end
 						if appearanceSources[i] and SetCollector:GetDebug() then SetCollector:Print("Source ID: "..appearanceSources[i]) end
-						
-						-- Future: Split out to sort by slot
-						
 						inc = inc + 1
 						modelFrame:TryOn(appearanceSources[i])
-					  SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..inc], appearanceID, appearanceSources[i])
+                        items[inc] = {
+                            categoryID = categoryID,
+                            appearanceID = appearanceID,
+                            sourceID = sourceID
+                        }
 				  end
 				end
 				
 			elseif ( collection > 0 ) then
 				modelFrame:Undress()
 				
-		  	local db = SetCollector.db.global.collections
-		  	local char = SetCollector.db.char
+		  	    local db = SetCollector.db.global.collections
+		  	    local char = SetCollector.db.char
 				local num = #db[collection].Sets[set].Variants[selected].Appearances
-				local acq = SetCollector:GetCollectedCount(collection, set, selected)
+				acq = SetCollector:GetCollectedCount(collection, set, selected)
 				for i=1, num do
 					if SetCollector:GetDebug() then SetCollector:Print("Row: "..i) end
 					local sourceID = db[collection].Sets[set].Variants[selected].Appearances[i].sourceID
@@ -586,20 +590,32 @@ function SetCollector:UpdateSelectedVariantTab(self)
 					if sourceID and sourceID > 0 then
 						inc = inc + 1
 						modelFrame:TryOn(sourceID)
-					    SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..inc], appearanceID, sourceID)
+						local categoryID = C_TransmogCollection.GetAppearanceSourceInfo(sourceID)
+                        items[i] = {
+                            categoryID = categoryID,
+                            appearanceID = appearanceID,
+                            sourceID = sourceID
+                        }
 				    end
 			    end
-			  
-				ClearItemButtons(inc + 1)
-				SetCollectorSummaryButtonSummary:SetText(string.format(L["ITEMS_COLLECTED"],acq,inc))
-				if acq ~= "*" and acq > 0 then 
-					SetCollectorSummaryButton.Texture:SetAtlas("collections-itemborder-collected")
-				else
-					SetCollectorSummaryButton.Texture:SetAtlas("collections-itemborder-uncollected")
-				end
-				SetCollectorSummaryButton:Show()
 			
 			end
+
+            local function compare(a, b)
+                return a.categoryID < b.categoryID
+            end
+            table.sort(items, compare)
+            for i=1, #items do
+                SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..i], items[i].appearanceID, items[i].sourceID)
+            end
+			
+            SetCollectorSummaryButtonSummary:SetText(string.format(L["ITEMS_COLLECTED"],acq,inc))
+            if acq ~= "*" and acq > 0 then 
+                SetCollectorSummaryButton.Texture:SetAtlas("collections-itemborder-collected")
+            else
+                SetCollectorSummaryButton.Texture:SetAtlas("collections-itemborder-uncollected")
+            end
+            SetCollectorSummaryButton:Show()
 		else
 			ClearItemButtons(inc + 1)
 			SetCollectorSummaryButton:Hide()
@@ -609,8 +625,8 @@ function SetCollector:UpdateSelectedVariantTab(self)
 end
 
 function SetCollector:SetVariantTab(self, tab)
-	PanelTemplates_SetTab(self, tab);
-	SetCollector:UpdateSelectedVariantTab(self);
+    PanelTemplates_SetTab(self, tab);
+    SetCollector:UpdateSelectedVariantTab(self);
 end
 
 

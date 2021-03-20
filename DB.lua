@@ -366,20 +366,17 @@ function SetCollector:GetSetTooltip(self)
 		
 		GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT", -16, 16)
 		GameTooltip:SetText(set, 1, 1, 1)
-		
+
 		for i=1, #db[self.Collection].Sets[self.Set].Variants do
 			local collected = SetCollector:GetCollectedCount(self.Collection, self.Set, i)
 			local appearances = #db[self.Collection].Sets[self.Set].Variants[i].Appearances
 			if collected ~= "*" or not SetCollector.db.char.filters.obtainable then
 				local line = ""
-				if appearances and L[db[self.Collection].Sets[self.Set].Variants[i].Title] then
-					line = "- "..collected.."/"..appearances.." "..L[db[self.Collection].Sets[self.Set].Variants[i].Title]
-				elseif appearances and not L[db[self.Collection].Sets[self.Set].Variants[i].Title] then
-					line = "- "..collected.."/"..appearances.." "..L["MISSING_LOCALIZATION"]
-				elseif not appearances and L[db[self.Collection].Sets[self.Set].Variants[i].Title] then
-					line = "- "..collected.."/? "..L[db[self.Collection].Sets[self.Set].Variants[i].Title]
+                local title = db[self.Collection].Sets[self.Set].Variants[i].Title
+				if appearances then
+					line = "- "..collected.."/"..appearances.." "..(L[title] or title)
 				else
-					line = "- "..collected.."/? "..L["MISSING_LOCALIZATION"]
+					line = "- "..collected.."/? "..(L[title] or title)
 				end
 				GameTooltip:AddLine(line)
 			end
