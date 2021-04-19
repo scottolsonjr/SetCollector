@@ -42,6 +42,9 @@ local NO_OBTAIN         = SetCollector.NO_OBTAIN
 local TRANSMOG         = SetCollector.TRANSMOG
 local NO_TRANSMOG     = SetCollector.NO_TRANSMOG
 
+-- Locations
+local NO_LOCATION = nil
+
 
 --
 -- LOCAL FUNCTIONS
@@ -97,6 +100,22 @@ end
 
 
 local function GetExpansionAppearances()
+    local COLLECTION, VERSION = SetCollector.EXPANSION, 70000
+    local sets = {
+        -- Transmog Only Sets
+        CreateSet(COLLECTION,10601,"GA_ALLIANCE_SET",ANY_ARMOR,ANY_CLASS,ALLIANCE,NO_LOCATION,
+            CreateVariant("GA_ALLIANCE_SET",TRANSMOG,A(24474),A(24476),A(24472),A(24473),A(24470),A(24475),A(24471))
+        ),
+        CreateSet(COLLECTION,10601,"GA_HORDE_SET",ANY_ARMOR,ANY_CLASS,ALLIANCE,NO_LOCATION,
+            CreateVariant("GA_HORDE_SET",TRANSMOG,A(24054),A(24051),A(24052),A(24817),A(24053),A(24050),A(24854))
+        ),
+        IncludeSet(COLLECTION,10602,1534,CLOTH,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10602,1535,LEATHER,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10602,1536,MAIL,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10602,1533,PLATE,ANY_CLASS,ANY_FACTION),
+    }
+    AddSetsToDatabase(VERSION, COLLECTION, sets)
+    --[[
     local col = SetCollector.EXPANSION
     local set = ""
     
@@ -110,17 +129,17 @@ local function GetExpansionAppearances()
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"PLATE",TRANSMOG,A(23274),A(23278),A(23265),A(24323),A(23271),A(23259),A(23277),A(23262))
     
     set = SetCollector:AddSetLegacy(70000,nil,col,10601,"GA_ALLIANCE_SET",ANY_ARMOR,ANY_CLASS,ALLIANCE)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"GA_ALLIANCE_SET",TRANSMOG,A(24474),A(24476),A(24472),A(24473),A(24470),A(24475),A(24471)) --,A(185)) -- Shield not available for all classes
-    
+    SetCollector:AddVariantLegacy(70000,nil,col,set,"GA_ALLIANCE_SET",TRANSMOG,A(24474),A(24476),A(24472),A(24473),A(24470),A(24475),A(24471)) --,A(185)) -- Shield not available for all classes
+
     set = SetCollector:AddSetLegacy(70000,nil,col,10601,"GA_HORDE_SET",ANY_ARMOR,ANY_CLASS,HORDE)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"GA_HORDE_SET",TRANSMOG,A(24054),A(24051),A(24052),A(24817),A(24053),A(24050),A(24854))
+    SetCollector:AddVariantLegacy(70000,nil,col,set,"GA_HORDE_SET",TRANSMOG,A(24054),A(24051),A(24052),A(24817),A(24053),A(24050),A(24854))
                 
     --set = SetCollector:AddSetLegacy(70000,nil,col,10600,"OTH_SHIPYARD_100",ANY_ARMOR,ANY_CLASS,ALLIANCE)
     --            SetCollector:AddVariantLegacy(70000,nil,col,set,"CAPTAIN",TRANSMOG,A(26891,73444))
     --            SetCollector:AddVariantLegacy(70000,nil,col,set,"FLEETCOMMANDER",TRANSMOG,A(26888,73447))
     --set = SetCollector:AddSetLegacy(70000,nil,col,10600,"OTH_SHIPYARD_100",ANY_ARMOR,ANY_CLASS,HORDE)
     --            SetCollector:AddVariantLegacy(70000,nil,col,set,"CAPTAIN",TRANSMOG,A(26892,73445))
-    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"FLEETCOMMANDER",TRANSMOG,A(26889,73446))
+    --            SetCollector:AddVariantLegacy(70000,nil,col,set,"FLEETCOMMANDER",TRANSMOG,A(26889,73446))]]--
 end
 
 

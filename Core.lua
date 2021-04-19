@@ -55,20 +55,23 @@ end
 
 function SetCollector:GetAppearanceInfo(itemLink)
 	if itemLink then
-    local itemID, _, _, slotName = GetItemInfoInstant(itemLink)
-    local slot = InventorySlots[slotName]
+        local appearanceID, sourceID, itemID
+        itemID = GetItemInfoInstant(itemLink)
+        return appearanceID, sourceID, itemID
+        --[[local itemID, _, _, slotName = GetItemInfoInstant(itemLink)
+        local slot = InventorySlots[slotName]
 
-    if not slot or not IsDressableItem(itemLink) then return end
+        if not slot or not IsDressableItem(itemLink) then return end
 
-    model:SetUnit('player')
-    model:Undress()
-    model:TryOn(itemLink, slot)
-    local sourceID = model:GetSlotTransmogSources(slot)
-    if sourceID then
-      local appearanceID = select(2, C_TransmogCollection.GetAppearanceSourceInfo(sourceID))
-      return appearanceID, sourceID, itemID
+        model:SetUnit('player')
+        model:Undress()
+        model:TryOn(itemLink, slot)
+        local sourceID = model:GetSlotTransmogSources(slot) -- Removed in 9.1
+        if sourceID then
+            local appearanceID = select(2, C_TransmogCollection.GetAppearanceSourceInfo(sourceID))
+            return appearanceID, sourceID, itemID
+        end]]
     end
-  end
 end
 
 function SetCollector:IsDebugging()									-- Redundant?

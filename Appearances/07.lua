@@ -42,6 +42,9 @@ local NO_OBTAIN         = SetCollector.NO_OBTAIN
 local TRANSMOG         = SetCollector.TRANSMOG
 local NO_TRANSMOG     = SetCollector.NO_TRANSMOG
 
+-- Locations
+local NO_LOCATION = nil
+
 
 --
 -- LOCAL FUNCTIONS
@@ -87,10 +90,63 @@ local function GetExpansionAppearances()
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"WK_OTH_19",TRANSMOG,A(32517,81037),A(32519,81040),A(32521,81039),A(32520,81042),A(32516,81036),A(32513,81041),A(32518,81038),A(32514,81035))
     set = SetCollector:AddSetLegacy(70000,nil,col,10701,"WR_OTH_19",PLATE,WARRIOR,ANY_FACTION)
                 SetCollector:AddVariantLegacy(70000,nil,col,set,"WR_OTH_19",TRANSMOG,A(32561,80958),A(32563,80960),A(32559,80955),A(32564,80962),A(32560,80957),A(32557,80961),A(32562,80959),A(32558,80956))
+
+
+    
 end
 
+local function GetOtherAppearances()
+    local COLLECTION, VERSION = SetCollector.OTHER, 70000
+    local sets = {
+        -- Time Keeper
+        IncludeSet(COLLECTION,10703,1457,CLOTH,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10703,1459,LEATHER,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10703,1458,MAIL,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10703,1456,PLATE,ANY_CLASS,ANY_FACTION),
+        -- Seat of the Triumvirate
+        IncludeSet(COLLECTION,10704,1471,CLOTH,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10704,1470,LEATHER,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10704,1469,MAIL,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10704,1468,PLATE,ANY_CLASS,ANY_FACTION),
+        -- Test Sets
+        --[[IncludeSet(COLLECTION,10710,1471,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10711,1470,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10712,1469,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10713,1468,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10714,1459,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10715,1458,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10716,1457,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10717,1456,ANY_ARMOR,ANY_CLASS,ANY_FACTION),]]
+    }
+    AddSetsToDatabase(VERSION, COLLECTION, sets)
+end
+
+local function GetRaidAppearances()
+    
+    local COLLECTION, VERSION = SetCollector.RAID, 70000
+
+
+    -- Antorus, the Burning Throne
+    VERSION = 70300
+    local sets = {
+        IncludeSet(COLLECTION,10703,1472,PLATE,DEATHKNIGHT,ANY_FACTION,1473,1474,1475),
+        IncludeSet(COLLECTION,10703,1476,LEATHER,DEMONHUNTER,ANY_FACTION,1477,1478,1479),
+        IncludeSet(COLLECTION,10703,1480,LEATHER,DRUID,ANY_FACTION,1481,1482,1483),
+        IncludeSet(COLLECTION,10703,1484,MAIL,HUNTER,ANY_FACTION,1485,1486,1487),
+        IncludeSet(COLLECTION,10703,1488,CLOTH,MAGE,ANY_FACTION,1489,1490,1491),
+        IncludeSet(COLLECTION,10703,1492,LEATHER,MONK,ANY_FACTION,1493,1494,1495),
+        IncludeSet(COLLECTION,10703,1496,PLATE,PALADIN,ANY_FACTION,1497,1498,1499),
+        IncludeSet(COLLECTION,10703,1500,CLOTH,PRIEST,ANY_FACTION,1501,1502,1503),
+        IncludeSet(COLLECTION,10703,1504,LEATHER,ROGUE,ANY_FACTION,1505,1506,1507),
+        IncludeSet(COLLECTION,10703,1508,MAIL,SHAMAN,ANY_FACTION,1509,1510,1511),
+        IncludeSet(COLLECTION,10703,1512,CLOTH,WARLOCK,ANY_FACTION,1513,1514,1515),
+        IncludeSet(COLLECTION,10703,1516,PLATE,WARRIOR,ANY_FACTION,1517,1518,1519),
+    }
+    AddSetsToDatabase(VERSION, COLLECTION, sets)
+end
 
 local function GetDeathKnightAppearances()
+
     local col, set, loc = ""
 
     --col = SetCollector.LEGENDARY
@@ -103,12 +159,12 @@ local function GetDeathKnightAppearances()
 
     col = SetCollector.RAID
     -- Antorus, the Burning Throne
-    loc = "LOC_RAID_0703"
+    --[[loc = "LOC_RAID_0703"
     set = SetCollector:AddSetLegacy(70000,nil,col,10703,"DK_RAID_0703",PLATE,DEATHKNIGHT,ANY_FACTION,loc)
         SetCollector:AddVariantLegacy(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(35231),A(35233),A(35880),A(35229),A(35234),A(35230),A(35227),A(35232),A(35228))
         SetCollector:AddVariantLegacy(70000,nil,col,set,"NORMAL",TRANSMOG,A(35239),A(35241),A(35884),A(35237),A(35242),A(35238),A(35235),A(35240),A(35236))
         SetCollector:AddVariantLegacy(70000,nil,col,set,"HEROIC",TRANSMOG,A(34513),A(34515),A(35888),A(34511),A(34516),A(34512),A(34509),A(34514),A(34510))
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(34479),A(34481),A(34517),A(34473),A(34482),A(34478),A(34471),A(34480),A(34472))
+        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(34479),A(34481),A(34517),A(34473),A(34482),A(34478),A(34471),A(34480),A(34472))]]
     -- Tomb of Sargeras
     loc = "LOC_RAID_0702"
     set = SetCollector:AddSetLegacy(70000,nil,col,10702,"DK_RAID_0702",PLATE,DEATHKNIGHT,ANY_FACTION,loc)
@@ -148,12 +204,12 @@ local function GetDemonHunterAppearances()
 
     col = SetCollector.RAID
     -- Antorus, the Burning Throne
-    loc = "LOC_RAID_0703"
+    --[[loc = "LOC_RAID_0703"
     set = SetCollector:AddSetLegacy(70000,nil,col,10703,"DH_RAID_0703",LEATHER,DEMONHUNTER,ANY_FACTION,loc)
         SetCollector:AddVariantLegacy(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(29854),A(29856),A(29780),A(29852),A(29857),A(29853),A(29850),A(29855),A(29851))
         SetCollector:AddVariantLegacy(70000,nil,col,set,"NORMAL",TRANSMOG,A(35268),A(35270),A(35372),A(35266),A(35271),A(35267),A(35264),A(35269),A(35265))
         SetCollector:AddVariantLegacy(70000,nil,col,set,"HEROIC",TRANSMOG,A(29862),A(29864),A(29785),A(29860),A(29865),A(29861),A(29858),A(29863),A(29859))
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(29585),A(29587),A(29597),A(29583),A(29588),A(29584),A(29581),A(29586),A(29582))
+        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(29585),A(29587),A(29597),A(29583),A(29588),A(29584),A(29581),A(29586),A(29582))]]
     -- Tomb of Sargeras
     loc = "LOC_RAID_0702"
     set = SetCollector:AddSetLegacy(70000,nil,col,10702,"DH_RAID_0702",LEATHER,DEMONHUNTER,ANY_FACTION,loc)
@@ -197,12 +253,12 @@ local function GetDruidAppearances()
 
     col = SetCollector.RAID
     -- Antorus, the Burning Throne
-    loc = "LOC_RAID_0703"
+    --[[loc = "LOC_RAID_0703"
     set = SetCollector:AddSetLegacy(70000,nil,col,10703,"DR_RAID_0703",LEATHER,DRUID,ANY_FACTION,loc)
         SetCollector:AddVariantLegacy(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(34938),A(34940),A(35389),A(34941,89986),A(34936),A(34937),A(34939),A(34935))
         SetCollector:AddVariantLegacy(70000,nil,col,set,"NORMAL",TRANSMOG,A(35051),A(35053),A(35673),A(35049),A(35054),A(35050),A(35047),A(35052),A(35048))
         SetCollector:AddVariantLegacy(70000,nil,col,set,"HEROIC",TRANSMOG,A(35043),A(35045),A(35634),A(35046,89988),A(35041),A(35042),A(35044),A(35040))
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(35075),A(35077),A(35384),A(35078,89989),A(35073),A(35074),A(35076),A(35072))
+        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(35075),A(35077),A(35384),A(35078,89989),A(35073),A(35074),A(35076),A(35072))]]
     -- Tomb of Sargeras
     loc = "LOC_RAID_0702"
     set = SetCollector:AddSetLegacy(70000,nil,col,10702,"DR_RAID_0702",LEATHER,DRUID,ANY_FACTION,loc)
@@ -244,12 +300,12 @@ local function GetHunterAppearances()
 
     col = SetCollector.RAID
     -- Antorus, the Burning Throne
-    loc = "LOC_RAID_0703"
+    --[[loc = "LOC_RAID_0703"
     set = SetCollector:AddSetLegacy(70000,nil,col,10703,"HU_RAID_0703",MAIL,HUNTER,ANY_FACTION,loc)
         SetCollector:AddVariantLegacy(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(34605),A(34607),A(35744),A(34603),A(34608),A(34604),A(34601),A(34606),A(34602))
         SetCollector:AddVariantLegacy(70000,nil,col,set,"NORMAL",TRANSMOG,A(34613),A(34615),A(35748),A(34611),A(34616),A(34612),A(34609),A(34614),A(34610))
         SetCollector:AddVariantLegacy(70000,nil,col,set,"HEROIC",TRANSMOG,A(34621),A(34623),A(35740),A(34619),A(34624),A(34620),A(34617),A(34622),A(34618))
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(34629),A(34631),A(35756),A(34627),A(34632),A(34628),A(34625),A(34630),A(34626))
+        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(34629),A(34631),A(35756),A(34627),A(34632),A(34628),A(34625),A(34630),A(34626))]]
     -- Tomb of Sargeras
     loc = "LOC_RAID_0702"
     set = SetCollector:AddSetLegacy(70000,nil,col,10702,"HU_RAID_0702",MAIL,HUNTER,ANY_FACTION,loc)
@@ -291,12 +347,12 @@ local function GetMageAppearances()
 
     col = SetCollector.RAID
     -- Antorus, the Burning Throne
-    loc = "LOC_RAID_0703"
+    --[[loc = "LOC_RAID_0703"
     set = SetCollector:AddSetLegacy(70000,nil,col,10703,"MA_RAID_0703",CLOTH,MAGE,ANY_FACTION,loc)
         SetCollector:AddVariantLegacy(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(34562),A(34565),A(35304),A(34563),A(34566),A(34561),A(34559),A(34564),A(34560))
         SetCollector:AddVariantLegacy(70000,nil,col,set,"NORMAL",TRANSMOG,A(34546),A(34549),A(35296),A(34547),A(34550),A(34545),A(34543),A(34548),A(34544))
         SetCollector:AddVariantLegacy(70000,nil,col,set,"HEROIC",TRANSMOG,A(34554),A(34557),A(35300),A(34555),A(34558),A(34553),A(34551),A(34556),A(34552))
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(34578),A(34581),A(35284),A(34579),A(34582),A(34577),A(34575),A(34580),A(34576))
+        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(34578),A(34581),A(35284),A(34579),A(34582),A(34577),A(34575),A(34580),A(34576))]]
     -- Tomb of Sargeras
     loc = "LOC_RAID_0702"
     set = SetCollector:AddSetLegacy(70000,nil,col,10702,"MA_RAID_0702",CLOTH,MAGE,ANY_FACTION,loc)
@@ -338,12 +394,12 @@ local function GetMonkAppearances()
 
     col = SetCollector.RAID
     -- Antorus, the Burning Throne
-    loc = "LOC_RAID_0703"
+    --[[loc = "LOC_RAID_0703"
     set = SetCollector:AddSetLegacy(70000,nil,col,10703,"MO_RAID_0703",LEATHER,MONK,ANY_FACTION,loc)
         SetCollector:AddVariantLegacy(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(34962),A(34964),A(35712),A(34960),A(34961),A(34958),A(34963),A(34959))
         SetCollector:AddVariantLegacy(70000,nil,col,set,"NORMAL",TRANSMOG,A(34970),A(34972),A(35716),A(34968),A(34973),A(34969),A(34966),A(34971),A(34967))
         SetCollector:AddVariantLegacy(70000,nil,col,set,"HEROIC",TRANSMOG,A(34978),A(34980),A(35720),A(34976),A(34977),A(34974),A(34979),A(34975))
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(34986),A(34988),A(35724),A(34984),A(34985),A(34982),A(34987),A(34983))
+        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(34986),A(34988),A(35724),A(34984),A(34985),A(34982),A(34987),A(34983))]]
 
     -- Tomb of Sargeras
     loc = "LOC_RAID_0702"
@@ -484,12 +540,12 @@ local function GetRogueAppearances()
 
     col = SetCollector.RAID
     -- Antorus, the Burning Throne
-    loc = "LOC_RAID_0703"
+    --[[loc = "LOC_RAID_0703"
     set = SetCollector:AddSetLegacy(70000,nil,col,10703,"RO_RAID_0703",LEATHER,ROGUE,ANY_FACTION,loc)
         SetCollector:AddVariantLegacy(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(35196),A(35198),A(35828),A(35194),A(35199),A(35195),A(35192),A(35197))
         SetCollector:AddVariantLegacy(70000,nil,col,set,"NORMAL",TRANSMOG,A(35181),A(35183),A(35823),A(35179),A(35184),A(35180),A(35177),A(35182),A(35178))
         SetCollector:AddVariantLegacy(70000,nil,col,set,"HEROIC",TRANSMOG,A(35276),A(35278),A(35701),A(35274),A(35279),A(35275),A(35272),A(35277))
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(35205),A(35207),A(35833),A(35203),A(35208),A(35204),A(35201),A(35206))
+        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(35205),A(35207),A(35833),A(35203),A(35208),A(35204),A(35201),A(35206))]]
 
     -- Tomb of Sargeras
     loc = "LOC_RAID_0702"
@@ -556,12 +612,12 @@ local function GetShamanAppearances()
 
     col = SetCollector.RAID
     -- Antorus, the Burning Throne
-    loc = "LOC_RAID_0703"
+    --[[loc = "LOC_RAID_0703"
     set = SetCollector:AddSetLegacy(70000,nil,col,10703,"SH_RAID_0703",MAIL,SHAMAN,ANY_FACTION,loc)
         SetCollector:AddVariantLegacy(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(35098,90235),A(35100,90243),A(35772,90227),A(35096,90223),A(35101,89905),A(35097,90231),A(35094,89897),A(35099,90239),A(35095,90580))
         SetCollector:AddVariantLegacy(70000,nil,col,set,"NORMAL",TRANSMOG,A(35089,90236),A(35091,90244),A(35764,90228),A(35087,90224),A(35092,89906),A(35088,90232),A(35085,89898),A(35090,90240),A(35086,90581))
         SetCollector:AddVariantLegacy(70000,nil,col,set,"HEROIC",TRANSMOG,A(35106,90237),A(35108,90245),A(35768,90229),A(35104,90225),A(35109,89907),A(35105,90233),A(35102,89899),A(35107,90241),A(35103,90582))
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(35122,90238),A(35124,90246),A(35780,90230),A(35120,90226),A(35125,89908),A(35121,90234),A(35118,89900),A(35123,90242),A(35119,90583))
+        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(35122,90238),A(35124,90246),A(35780,90230),A(35120,90226),A(35125,89908),A(35121,90234),A(35118,89900),A(35123,90242),A(35119,90583))]]
     -- Tomb of Sargeras
     loc = "LOC_RAID_0702"
     set = SetCollector:AddSetLegacy(70000,nil,col,10702,"SH_RAID_0702",MAIL,SHAMAN,ANY_FACTION,loc)
@@ -626,12 +682,12 @@ local function GetWarlockAppearances()
 
     col = SetCollector.RAID
     -- Antorus, the Burning Throne
-    loc = "LOC_RAID_0703"
+    --[[loc = "LOC_RAID_0703"
     set = SetCollector:AddSetLegacy(70000,nil,col,10703,"WK_RAID_0703",CLOTH,WARLOCK,ANY_FACTION,loc)
         SetCollector:AddVariantLegacy(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(34814,90255),A(34816,90267),A(35367,90247),A(34818,90263),A(34817,89785),A(34812,90251),A(34810,89737),A(34815,90259),A(34811,89749))
         SetCollector:AddVariantLegacy(70000,nil,col,set,"NORMAL",TRANSMOG,A(34797,90256),A(34799,90268),A(35357,90248),A(34801,90264),A(34800,89786),A(34796,90252),A(34794,89738),A(34798,90260),A(34795,89750))
         SetCollector:AddVariantLegacy(70000,nil,col,set,"HEROIC",TRANSMOG,A(34789,90257),A(34791,90269),A(35352,90249),A(34793,90265),A(34792,89787),A(34788,90253),A(34786,89739),A(34790,90261),A(34787,89751))
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(34839,90258),A(34841,90270),A(35342,90250),A(34843,90266),A(34842,89788),A(34838,90254),A(34836,89740),A(34840,90262),A(34837,89752))
+        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(34839,90258),A(34841,90270),A(35342,90250),A(34843,90266),A(34842,89788),A(34838,90254),A(34836,89740),A(34840,90262),A(34837,89752))]]
     -- Tomb of Sargeras
     loc = "LOC_RAID_0702"
     set = SetCollector:AddSetLegacy(70000,nil,col,10702,"WK_RAID_0702",CLOTH,WARLOCK,ANY_FACTION,loc)
@@ -675,12 +731,12 @@ local function GetWarriorAppearances()
 
     col = SetCollector.RAID
     -- Antorus, the Burning Throne
-    loc = "LOC_RAID_0703"
+    --[[loc = "LOC_RAID_0703"
     set = SetCollector:AddSetLegacy(70000,nil,col,10703,"WR_RAID_0703",PLATE,WARRIOR,ANY_FACTION,loc)
         SetCollector:AddVariantLegacy(70000,nil,col,set,"RAIDFINDER",TRANSMOG,A(34672,90283),A(34674,90291),A(35798,90275),A(34670,90271),A(34675,90343),A(34671,90279),A(34668,89961),A(34673,90287),A(34669,89913))
         SetCollector:AddVariantLegacy(70000,nil,col,set,"NORMAL",TRANSMOG,A(34661,90284),A(34663,90292),A(35795,90276),A(34659,90272),A(34664,90489),A(34660,90280),A(34657,90485),A(34662,90288),A(34658,89914))
         SetCollector:AddVariantLegacy(70000,nil,col,set,"HEROIC",TRANSMOG,A(34680,90285),A(34682,90293),A(35801,90277),A(34678,90273),A(34683,90345),A(34679,90590),A(34676,89963),A(34681,90289),A(34677,89915))
-        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(34698,90286),A(34700,90294),A(35808,90278),A(34696,90274),A(34701,90346),A(34697,90591),A(34694,89964),A(34699,90290),A(34695,89916))
+        SetCollector:AddVariantLegacy(70000,nil,col,set,"MYTHIC",TRANSMOG,A(34698,90286),A(34700,90294),A(35808,90278),A(34696,90274),A(34701,90346),A(34697,90591),A(34694,89964),A(34699,90290),A(34695,89916))]]
 
     -- Tomb of Sargeras
     loc = "LOC_RAID_0702"
@@ -719,6 +775,8 @@ function SetCollector:GetVersion07Appearances(expansion)
         -- Common
         GetLegendaries()
         GetExpansionAppearances()
+        GetOtherAppearances()
+        GetRaidAppearances()
         -- Class-specific
         GetDeathKnightAppearances()
         GetDemonHunterAppearances()

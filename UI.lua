@@ -381,32 +381,31 @@ local function SetItemButton(button, appearanceID, sourceID)
 		if src and src > 0 then
 			_, _, _, sTexture, _, sLink = C_TransmogCollection.GetAppearanceSourceInfo(src)
         end
-        local itemID = 0
-		if sLink then
-			_, _, itemID = SetCollector:GetAppearanceInfo(sLink);
-		end
-		if sTexture and itemID > 0 then
-			button.link = sLink
-			button.ItemID = itemID
-			button.icon:SetTexture(sTexture)
-			button.icon:SetVertexColor(1, 1, 1, 0.5)
-			button.icon:SetDesaturated(true)
-			button.glow:Hide()
-			
-			if isCollected then
-                button.icon:SetVertexColor(1, 1, 1, 1)
-				button.icon:SetDesaturated(false)
-				local iRarity = select(3, GetItemInfo(sLink))
-				if iRarity then button.glow:SetVertexColor(GetItemQualityColor(iRarity)) end
-				button.glow:Show()
-			end
+		if sLink and sTexture then
+			local itemID = GetItemInfoInstant(sLink);
+            if itemID and itemID > 0 then
+                button.link = sLink
+                button.ItemID = itemID
+                button.icon:SetTexture(sTexture)
+                button.icon:SetVertexColor(1, 1, 1, 0.5)
+                button.icon:SetDesaturated(true)
+                button.glow:Hide()
+                
+                if isCollected then
+                    button.icon:SetVertexColor(1, 1, 1, 1)
+                    button.icon:SetDesaturated(false)
+                    local iRarity = select(3, GetItemInfo(sLink))
+                    if iRarity then button.glow:SetVertexColor(GetItemQualityColor(iRarity)) end
+                    button.glow:Show()
+                end
 
-			if not sources or #sources == 0 then
-				button.icon:SetVertexColor(1, 0.25, 0.25, 0.5)
-			end
-			
-			button:Show()
-		end
+                if not sources or #sources == 0 then
+                    button.icon:SetVertexColor(1, 0.25, 0.25, 0.5)
+                end
+                
+                button:Show()
+            end
+        end
 	else
 		button:Hide()
 	end
@@ -965,9 +964,11 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 					titleButton.Favorite:Show()
 						
 					titleButton.Text:SetText(C_TransmogCollection.GetOutfitName(outfitID))
+                    --titleButton.SubText:SetText("|cff555555"..L["OUTFITS"].."|r")
 					
 					local height = titleButton.Text:GetHeight() + titleButton.SubText:GetHeight() + 10
-					titleButton:SetHeight(height)if not COLLECTION_COLLAPSED[i] then
+					titleButton:SetHeight(height)
+                    if not COLLECTION_COLLAPSED[i] then
 						titleButton:Show()
 						prevButton = titleButton
 						setsDisplayed = setsDisplayed + 1

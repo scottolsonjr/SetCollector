@@ -42,6 +42,9 @@ local NO_OBTAIN 		= SetCollector.NO_OBTAIN
 local TRANSMOG 		= SetCollector.TRANSMOG
 local NO_TRANSMOG 	= SetCollector.NO_TRANSMOG
 
+-- Locations
+local NO_LOCATION = nil
+
 
 --
 -- LOCAL FUNCTIONS
