@@ -80,6 +80,7 @@ function SetCollector:IncludeSet(collection, uid, setID, armorType, class, facti
         end
         local set = {
             ID = collection.Code..string.format("%03d", uid)..setID..armorType.Code..class.Code..faction.Code,
+            setID = setInfo.setID,
             Title = setInfo.name,
             TooltipID = SetCollector:CreateTooltipID(collection, uid, setID),
             ArmorType = armorType,
@@ -102,25 +103,32 @@ function SetCollector:IncludeSet(collection, uid, setID, armorType, class, facti
 end
 
 function SetCollector:IncludeVariant(setID, setInfo, ...)
+    local description, order = '', 0
+    if setInfo then
+        description = setInfo.description or setInfo.name
+        order = setInfo.uiOrder
+    end
     local variant = {
-        Title = setInfo.description or setInfo.name,
+        Title = description,
         Transmog = SetCollector.TRANSMOG,
-        Order = setInfo.uiOrder,
+        Order = order,
         Appearances = {}
     }
     local sources = C_TransmogSets.GetSetSources(setID)
-    variant.Count = #sources
-    for sourceID in pairs(sources) do
-        local sourceInfo = C_TransmogCollection.GetSourceInfo(sourceID);
-        if (sourceInfo) then
-            local slotID = C_Transmog.GetSlotForInventoryType(sourceInfo.invType)
-            table.insert(variant.Appearances, SetCollector:CreateAppearance(sourceInfo.visualID or nil, sourceInfo.sourceID or nil, slotID or nil))
+    if sources then
+        variant.Count = #sources
+        for sourceID in pairs(sources) do
+            local sourceInfo = C_TransmogCollection.GetSourceInfo(sourceID);
+            if (sourceInfo) then
+                local slotID = C_Transmog.GetSlotForInventoryType(sourceInfo.invType)
+                table.insert(variant.Appearances, SetCollector:CreateAppearance(sourceInfo.visualID or nil, sourceInfo.sourceID or nil, slotID or nil))
+            end
         end
+        local function compare(a, b)
+            return a.slotID < b.slotID
+        end
+        table.sort(variant.Appearances, compare)
     end
-    local function compare(a, b)
-        return a.slotID < b.slotID
-    end
-    table.sort(variant.Appearances, compare)
     return variant
 end
 
@@ -164,7 +172,6 @@ function SetCollector:AddSetsToDatabase(version, collection, sets, ...)
     if WOW_VERSION >= version then
         if sets then
             for index, set in ipairs(sets) do
-                print(index, " -- ", set)
                 SetCollector:AddSetToDatabase(version, collection, set)
             end
         end

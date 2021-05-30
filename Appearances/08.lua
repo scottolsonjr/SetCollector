@@ -70,60 +70,75 @@ end
 
 
 local function GetExpansionAppearances()
+    local COLLECTION, VERSION = SetCollector.EXPANSION, 80000
+    local sets = {
+        CreateSet(COLLECTION,10804,"ISLAND_EXPEDITIONS",CLOTH,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("1",TRANSMOG,A(15699),A(15702),A(15701),A(15703),A(15698),A(15695),A(15700),A(15696)),
+            CreateVariant("2",TRANSMOG,A(5954),A(5957),A(2044),A(1190),A(5956),A(2059),A(5955),A(5283)),
+            CreateVariant("3",TRANSMOG,A(39765),A(26513),A(26625),A(26521),A(26517)),
+            CreateVariant("4",TRANSMOG,A(15963),A(15966),A(15965),A(15967),A(15962),A(15959),A(15964),A(15960)),
+            CreateVariant("5",TRANSMOG,A(31884),A(31888),A(31887),A(31883),A(31880),A(31885),A(31881))
+        ),
+        CreateSet(COLLECTION,10803,"ISLAND_EXPEDITIONS",CLOTH,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("6",TRANSMOG,A(15745),A(15748),A(15747),A(15749),A(15744),A(15741),A(15746),A(15742))
+        )
+    }
+    AddSetsToDatabase(VERSION, COLLECTION, sets)
+
     local col = SetCollector.EXPANSION
     local set = ""
 
     -- Island Expeditions (May be appearances from earlier sets)
-    set = SetCollector:AddSetLegacy(80000,nil,col,10804,"ISLAND_EXPEDITIONS",CLOTH,ANY_CLASS,ANY_FACTION)
+    --[[set = SetCollector:AddSetLegacy(80000,nil,col,10804,"ISLAND_EXPEDITIONS",CLOTH,ANY_CLASS,ANY_FACTION,NO_LOCATION)
         SetCollector:AddVariantLegacy(80000,nil,col,set,"1",TRANSMOG,A(15699),A(15702),A(15701),A(15703),A(15698),A(15695),A(15700),A(15696))
         SetCollector:AddVariantLegacy(80000,nil,col,set,"2",TRANSMOG,A(5954),A(5957),A(2044),A(1190),A(5956),A(2059),A(5955),A(5283))
         SetCollector:AddVariantLegacy(80000,nil,col,set,"3",TRANSMOG,A(39765),A(26513),A(26625),A(26521),A(26517))
         SetCollector:AddVariantLegacy(80000,nil,col,set,"4",TRANSMOG,A(15963),A(15966),A(15965),A(15967),A(15962),A(15959),A(15964),A(15960))
         SetCollector:AddVariantLegacy(80000,nil,col,set,"5",TRANSMOG,A(31884),A(31888),A(31887),A(31883),A(31880),A(31885),A(31881))
     set = SetCollector:AddSetLegacy(80000,nil,col,10803,"ISLAND_EXPEDITIONS",CLOTH,ANY_CLASS,ANY_FACTION)
-        SetCollector:AddVariantLegacy(80000,nil,col,set,"6",TRANSMOG,A(15745),A(15748),A(15747),A(15749),A(15744),A(15741),A(15746),A(15742))
-    set = SetCollector:AddSetLegacy(80000,nil,col,10804,"ISLAND_EXPEDITIONS",LEATHER,ANY_CLASS,ANY_FACTION)
+        SetCollector:AddVariantLegacy(80000,nil,col,set,"6",TRANSMOG,A(15745),A(15748),A(15747),A(15749),A(15744),A(15741),A(15746),A(15742))]]
+    set = SetCollector:AddSetLegacy(80000,nil,col,10804,"ISLAND_EXPEDITIONS",LEATHER,ANY_CLASS,ANY_FACTION,NO_LOCATION)
         SetCollector:AddVariantLegacy(80000,nil,col,set,"1",TRANSMOG,A(28024),A(28025),A(28022),A(28027),A(28023),A(28020),A(28026),A(28021))
         SetCollector:AddVariantLegacy(80000,nil,col,set,"2",TRANSMOG,A(31640),A(31642),A(31644),A(31643),A(31639),A(31636),A(31641),A(31637))
         SetCollector:AddVariantLegacy(80000,nil,col,set,"3",TRANSMOG,A(18799),A(18803),A(18801),A(18804),A(18718),A(18798),A(18802),A(18800))
         SetCollector:AddVariantLegacy(80000,nil,col,set,"4",TRANSMOG,A(18973),A(18970),A(18971),A(19007),A(18974),A(19164),A(18974),A(19019))
         SetCollector:AddVariantLegacy(80000,nil,col,set,"5",TRANSMOG,A(15842),A(15844),A(15840),A(15845),A(15841),A(15838),A(15843),A(15839))
-    set = SetCollector:AddSetLegacy(80000,nil,col,10803,"ISLAND_EXPEDITIONS",LEATHER,ANY_CLASS,ANY_FACTION)
+    set = SetCollector:AddSetLegacy(80000,nil,col,10803,"ISLAND_EXPEDITIONS",LEATHER,ANY_CLASS,ANY_FACTION,NO_LOCATION)
         SetCollector:AddVariantLegacy(80000,nil,col,set,"6",TRANSMOG,A(28409),A(38655),A(38651),A(38656),A(38652),A(38649),A(38654),A(38650))
         SetCollector:AddVariantLegacy(80000,nil,col,set,"7",TRANSMOG,A(15117),A(15115),A(15119),A(15114),A(15118),A(15121),A(15116),A(15120))
-    set = SetCollector:AddSetLegacy(80000,nil,col,10803,"ISLAND_EXPEDITIONS",MAIL,ANY_CLASS,ANY_FACTION)
+    set = SetCollector:AddSetLegacy(80000,nil,col,10803,"ISLAND_EXPEDITIONS",MAIL,ANY_CLASS,ANY_FACTION,NO_LOCATION)
         SetCollector:AddVariantLegacy(80000,nil,col,set,"1",TRANSMOG,A(38627),A(38624),A(8628),A(8701),A(8700),A(38631),A(8699),A(38632))
         SetCollector:AddVariantLegacy(80000,nil,col,set,"2",TRANSMOG,A(15066),A(15068),A(13613),A(15069),A(15065),A(13593),A(15067),A(15064))
         SetCollector:AddVariantLegacy(80000,nil,col,set,"3",TRANSMOG,A(31650),A(31652),A(31648),A(31653),A(31649),A(31646),A(31651),A(31647))
-    set = SetCollector:AddSetLegacy(80000,nil,col,10804,"ISLAND_EXPEDITIONS",PLATE,ANY_CLASS,ANY_FACTION)
+    set = SetCollector:AddSetLegacy(80000,nil,col,10804,"ISLAND_EXPEDITIONS",PLATE,ANY_CLASS,ANY_FACTION,NO_LOCATION)
         SetCollector:AddVariantLegacy(80000,nil,col,set,"1",TRANSMOG,A(22632),A(22634),A(22630),A(22635),A(22631),A(22628),A(22633),A(22629))
         SetCollector:AddVariantLegacy(80000,nil,col,set,"2",TRANSMOG,A(16686),A(16688),A(16684),A(16689),A(16685),A(16682),A(16687),A(16683))
         SetCollector:AddVariantLegacy(80000,nil,col,set,"3",TRANSMOG,A(20077),A(20079),A(20075),A(20080),A(20076),A(20073),A(20078),A(20074))
         SetCollector:AddVariantLegacy(80000,nil,col,set,"4",TRANSMOG,A(28397),A(28399),A(28395),A(28400),A(28396),A(28393),A(28398),A(28394))
         SetCollector:AddVariantLegacy(80000,nil,col,set,"5",TRANSMOG,A(15665),A(15667),A(15669),A(15668),A(15664),A(15661),A(15666),A(15662))
-    set = SetCollector:AddSetLegacy(80000,nil,col,10803,"ISLAND_EXPEDITIONS",PLATE,ANY_CLASS,ANY_FACTION)
+    set = SetCollector:AddSetLegacy(80000,nil,col,10803,"ISLAND_EXPEDITIONS",PLATE,ANY_CLASS,ANY_FACTION,NO_LOCATION)
         SetCollector:AddVariantLegacy(80000,nil,col,set,"6",TRANSMOG,A(38642),A(38643),A(15490),A(15519),A(15504),A(36033),A(15485),A(38644))
         SetCollector:AddVariantLegacy(80000,nil,col,set,"7",TRANSMOG,A(15144),A(15146),A(15142),A(15147),A(15143),A(15140),A(15145),A(15141))
     
     -- Arathi Warfront
-    set = SetCollector:AddSetLegacy(80000,nil,col,10801,"EX_CLOTH_A_0801",CLOTH,ANY_CLASS,ALLIANCE)
+    set = SetCollector:AddSetLegacy(80000,nil,col,10801,"EX_CLOTH_A_0801",CLOTH,ANY_CLASS,ALLIANCE,NO_LOCATION)
         SetCollector:AddVariantLegacy(80000,nil,col,set,"EX_CLOTH_A_0801",TRANSMOG,A(37359),A(37235),A(37233),A(37214),A(37216),A(37212),A(37231),A(37213),A(37209))
-    set = SetCollector:AddSetLegacy(80000,nil,col,10801,"EX_LEATHER_A_0801",LEATHER,ANY_CLASS,ALLIANCE)
+    set = SetCollector:AddSetLegacy(80000,nil,col,10801,"EX_LEATHER_A_0801",LEATHER,ANY_CLASS,ALLIANCE,NO_LOCATION)
         SetCollector:AddVariantLegacy(80000,nil,col,set,"EX_LEATHER_A_0801",TRANSMOG,A(36862),A(36866),A(36874),A(36858),A(36856),A(36860),A(36852),A(36864),A(36854))
-    set = SetCollector:AddSetLegacy(80000,nil,col,10801,"EX_MAIL_A_0801",MAIL,ANY_CLASS,ALLIANCE)
+    set = SetCollector:AddSetLegacy(80000,nil,col,10801,"EX_MAIL_A_0801",MAIL,ANY_CLASS,ALLIANCE,NO_LOCATION)
         SetCollector:AddVariantLegacy(80000,nil,col,set,"ORIGINAL",TRANSMOG,A(37253),A(37255),A(37559),A(37250),A(37248),A(37252),A(37246),A(37254),A(37247))    -- Chest 37251?
         SetCollector:AddVariantLegacy(80000,nil,col,set,"RECOLOR",TRANSMOG,A(37290),A(37278),A(37249),A(37250),A(37248),A(37289),A(37276),A(37254),A(37286))    -- Back 37846
         SetCollector:AddVariantLegacy(80000,nil,col,set,"WARFRONT",TRANSMOG,A(37277),A(37278),A(37562),A(37250),A(37248),A(37252),A(37276),A(37254),A(37247))
-    set = SetCollector:AddSetLegacy(80000,nil,col,10801,"EX_PLATE_A_0801",PLATE,ANY_CLASS,ALLIANCE)
+    set = SetCollector:AddSetLegacy(80000,nil,col,10801,"EX_PLATE_A_0801",PLATE,ANY_CLASS,ALLIANCE,NO_LOCATION)
         SetCollector:AddVariantLegacy(80000,nil,col,set,"EX_PLATE_A_0801",TRANSMOG,A(37777),A(37779),A(37847),A(37783),A(37788),A(37784),A(37773),A(37786),A(37782))
     
-    set = SetCollector:AddSetLegacy(80000,nil,col,10801,"EX_CLOTH_H_0801",CLOTH,ANY_CLASS,HORDE)
+    set = SetCollector:AddSetLegacy(80000,nil,col,10801,"EX_CLOTH_H_0801",CLOTH,ANY_CLASS,HORDE,NO_LOCATION)
         SetCollector:AddVariantLegacy(80000,nil,col,set,"EX_CLOTH_H_0801",TRANSMOG,A(36758),A(36762),A(36959),A(37070),A(36772),A(37074),A(37069),A(36784),A(36769))
-    set = SetCollector:AddSetLegacy(80000,nil,col,10801,"EX_LEATHER_H_0801",LEATHER,ANY_CLASS,HORDE)
+    set = SetCollector:AddSetLegacy(80000,nil,col,10801,"EX_LEATHER_H_0801",LEATHER,ANY_CLASS,HORDE,NO_LOCATION)
         SetCollector:AddVariantLegacy(80000,nil,col,set,"EX_LEATHER_H_0801",TRANSMOG,A(37419),A(37415),A(37474),A(37386),A(37392),A(37418),A(37416),A(37389),A(37417))
-    set = SetCollector:AddSetLegacy(80000,nil,col,10801,"EX_MAIL_H_0801",MAIL,ANY_CLASS,HORDE)
+    set = SetCollector:AddSetLegacy(80000,nil,col,10801,"EX_MAIL_H_0801",MAIL,ANY_CLASS,HORDE,NO_LOCATION)
         SetCollector:AddVariantLegacy(80000,nil,col,set,"EX_MAIL_H_0801",TRANSMOG,A(38015),A(38017),A(38331),A(38013),A(38018),A(38014),A(38011),A(38016),A(38012))
-    set = SetCollector:AddSetLegacy(80000,nil,col,10801,"EX_PLATE_H_0801",PLATE,ANY_CLASS,HORDE)
+    set = SetCollector:AddSetLegacy(80000,nil,col,10801,"EX_PLATE_H_0801",PLATE,ANY_CLASS,HORDE,NO_LOCATION)
         SetCollector:AddVariantLegacy(80000,nil,col,set,"EX_PLATE_H_0801",TRANSMOG,A(36912),A(37093),A(37474),A(37091),A(36828),A(37092),A(37089),A(37096),A(37090))
 end
 
@@ -199,7 +214,7 @@ local function GetPvpAppearances()
         IncludeSet(COLLECTION,10802,1766,CLOTH,ANY_CLASS,HORDE,1767,1766,1771),
         IncludeSet(COLLECTION,10802,1795,LEATHER,ANY_CLASS,ALLIANCE,1790,1789,1794),
         IncludeSet(COLLECTION,10802,1759,LEATHER,ANY_CLASS,HORDE,1760,1759,1764),
-        IncludeSet(COLLECTION,10802,1788,MAIL,ANY_CLASS,ALLIANCE,1783,1782,1787),
+        IncludeSet(COLLECTION,10802,1782,MAIL,ANY_CLASS,ALLIANCE,1783,1787,1788),
         IncludeSet(COLLECTION,10802,1752,MAIL,ANY_CLASS,HORDE,1753,1752,1757),
         IncludeSet(COLLECTION,10802,1781,PLATE,ANY_CLASS,ALLIANCE,1776,1775,1780),
         IncludeSet(COLLECTION,10802,1745,PLATE,ANY_CLASS,HORDE,1746,1745,1750),
