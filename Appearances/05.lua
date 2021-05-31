@@ -4,43 +4,43 @@
 -- LOCAL VARIABLES
 --
 
-local ALL            = SetCollector.ALL
-local ANY            = SetCollector.ANY
+local ALL = SetCollector.ALL
+local ANY = SetCollector.ANY
 
 -- Armor Type
-local CLOTH            = SetCollector.CLOTH
-local LEATHER        = SetCollector.LEATHER
-local MAIL            = SetCollector.MAIL
-local PLATE            = SetCollector.PLATE
-local ANY_ARMOR			= SetCollector.ANY_ARMOR
+local CLOTH = SetCollector.CLOTH
+local LEATHER = SetCollector.LEATHER
+local MAIL = SetCollector.MAIL
+local PLATE = SetCollector.PLATE
+local ANY_ARMOR = SetCollector.ANY_ARMOR
 
 -- Classes
-local DEATHKNIGHT    = SetCollector.DEATHKNIGHT
-local DEMONHUNTER    = SetCollector.DEMONHUNTER
-local DRUID         = SetCollector.DRUID
-local HUNTER         = SetCollector.HUNTER
-local MAGE             = SetCollector.MAGE
-local MONK             = SetCollector.MONK
-local PALADIN         = SetCollector.PALADIN
-local PRIEST         = SetCollector.PRIEST
-local ROGUE         = SetCollector.ROGUE
-local SHAMAN         = SetCollector.SHAMAN
-local WARLOCK         = SetCollector.WARLOCK
-local WARRIOR         = SetCollector.WARRIOR
-local ANY_CLASS 		= SetCollector.ANY_CLASS
+local DEATHKNIGHT = SetCollector.DEATHKNIGHT
+local DEMONHUNTER = SetCollector.DEMONHUNTER
+local DRUID = SetCollector.DRUID
+local HUNTER = SetCollector.HUNTER
+local MAGE = SetCollector.MAGE
+local MONK = SetCollector.MONK
+local PALADIN = SetCollector.PALADIN
+local PRIEST = SetCollector.PRIEST
+local ROGUE = SetCollector.ROGUE
+local SHAMAN = SetCollector.SHAMAN
+local WARLOCK = SetCollector.WARLOCK
+local WARRIOR = SetCollector.WARRIOR
+local ANY_CLASS = SetCollector.ANY_CLASS
 
 -- Factions
-local ALLIANCE         = SetCollector.ALLIANCE
-local HORDE         = SetCollector.HORDE
-local ANY_FACTION	= SetCollector.ANY_FACTION
+local ALLIANCE = SetCollector.ALLIANCE
+local HORDE = SetCollector.HORDE
+local ANY_FACTION = SetCollector.ANY_FACTION
 
 -- Obtainable
-local OBTAIN        = SetCollector.OBTAIN
-local NO_OBTAIN         = SetCollector.NO_OBTAIN
+local OBTAIN = SetCollector.OBTAIN
+local NO_OBTAIN = SetCollector.NO_OBTAIN
 
 -- Useable as Transmog
-local TRANSMOG         = SetCollector.TRANSMOG
-local NO_TRANSMOG     = SetCollector.NO_TRANSMOG
+local TRANSMOG = SetCollector.TRANSMOG
+local NO_TRANSMOG = SetCollector.NO_TRANSMOG
 
 -- Locations
 local NO_LOCATION = nil
@@ -56,31 +56,66 @@ local function CreateVariant(...) return SetCollector:CreateVariant(...) end
 local function IncludeSet(...) return SetCollector:IncludeSet(...) end
 local function AddSetsToDatabase(...) return SetCollector:AddSetsToDatabase(...) end
 
-local function GetLegendaries()
-    local col = SetCollector.LEGENDARY
-    local set = ""
-    
-    set = SetCollector:AddSetLegacy(70000,nil,col,41,"LG_CASTER_INT_90",ANY_ARMOR,ANY_CLASS,ANY_FACTION)
-          SetCollector:AddVariantLegacy(70000,nil,col,set,"LG_CASTER_INT_90",TRANSMOG,A(20801,54617,102246))
-    set = SetCollector:AddSetLegacy(70000,nil,col,42,"LG_HEALER_INT_90",ANY_ARMOR,ANY_CLASS,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"LG_HEALER_INT_90",TRANSMOG,A(20825,54618,102247))    
-    set = SetCollector:AddSetLegacy(70000,nil,col,43,"LG_MELEE_AGI_90",ANY_ARMOR,ANY_CLASS,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"LG_MELEE_AGI_90",TRANSMOG,A(20805,54619,102248))
-    set = SetCollector:AddSetLegacy(70000,nil,col,44,"LG_MELEE_STR_90",ANY_ARMOR,ANY_CLASS,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"LG_MELEE_STR_90",TRANSMOG,A(20805,54620,102249))
-    set = SetCollector:AddSetLegacy(70000,nil,col,45,"LG_MELEE_AGI_90",ANY_ARMOR,ANY_CLASS,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"LG_MELEE_AGI_90",TRANSMOG,A(20803,54619,102248))
-    set = SetCollector:AddSetLegacy(70000,nil,col,46,"LG_TANK_STR_90",ANY_ARMOR,ANY_CLASS,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"LG_TANK_STR_90",TRANSMOG,A(20805,54620,102249))
+local function GetCraftedAppearances()
+    local COLLECTION, VERSION = SetCollector.CRAFTED, 70000
+    local sets = {
+        CreateSet(COLLECTION,10501,"CR_CLOTH_90",CLOTH,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("CR_CLOTH_90",TRANSMOG,A(22893,63683),A(22895,63686),A(22897,63687),A(22892,63685),A(22894,63684),A(22890,63688))
+        ),
+        --[[CreateSet(COLLECTION,10501,"CR_LEATHER_90",LEATHER,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("CR_LEATHER_90",TRANSMOG,A())
+        ),
+        CreateSet(COLLECTION,10501,"CR_MAIL_90",MAIL,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("CR_MAIL_90",TRANSMOG,A())
+        ),
+        CreateSet(COLLECTION,10501,"CR_PLATE_90",PLATE,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("CR_PLATE_90",TRANSMOG,A())
+        ),]]
+    }
+    AddSetsToDatabase(VERSION, COLLECTION, sets)
 end
 
+local function GetExpansionAppearances()
+    local COLLECTION, VERSION = SetCollector.EXPANSION, 70000
+    local sets = {
+        IncludeSet(COLLECTION,10501,1446,PLATE,DEATHKNIGHT,ANY_FACTION),
+        IncludeSet(COLLECTION,10501,1445,LEATHER,DRUID,ANY_FACTION),
+        IncludeSet(COLLECTION,10501,1444,MAIL,HUNTER,ANY_FACTION),
+        IncludeSet(COLLECTION,10501,1443,CLOTH,MAGE,ANY_FACTION),
+        IncludeSet(COLLECTION,10501,1442,LEATHER,MONK,ANY_FACTION),
+        IncludeSet(COLLECTION,10501,1441,PLATE,PALADIN,ANY_FACTION),
+        IncludeSet(COLLECTION,10501,1440,CLOTH,PRIEST,ANY_FACTION),
+        IncludeSet(COLLECTION,10501,1439,LEATHER,ROGUE,ANY_FACTION),
+        IncludeSet(COLLECTION,10501,1438,MAIL,SHAMAN,ANY_FACTION),
+        IncludeSet(COLLECTION,10501,1437,CLOTH,WARLOCK,ANY_FACTION),
+        IncludeSet(COLLECTION,10501,1436,PLATE,WARRIOR,ANY_FACTION),
+    }
+    AddSetsToDatabase(VERSION, COLLECTION, sets)
+end
 
-local function GetCraftedAppearances()
-    local col = SetCollector.CRAFTED
-    local set = ""
-    
-    set = SetCollector:AddSetLegacy(70000,nil,col,90,"CR_CLOTH_90",CLOTH,ANY_CLASS,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"CR_CLOTH_90",TRANSMOG,A(22893,63683),A(22895,63686),A(22897,63687),A(22892,63685),A(22894,63684),A(22890,63688))
+local function GetLegendaries()
+    local COLLECTION, VERSION = SetCollector.LEGENDARY, 70000
+    local sets = {
+        CreateSet(COLLECTION,10501,"LG_CASTER_INT_90",ANY_ARMOR,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("LG_CASTER_INT_90",TRANSMOG,A(20801,54617))
+        ),
+        CreateSet(COLLECTION,10502,"LG_HEALER_INT_90",ANY_ARMOR,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("LG_HEALER_INT_90",TRANSMOG,A(20825,54618))
+        ),
+        CreateSet(COLLECTION,10503,"LG_MELEE_AGI_90",ANY_ARMOR,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("LG_MELEE_AGI_90",TRANSMOG,A(20805,54619))
+        ),
+        CreateSet(COLLECTION,10504,"LG_MELEE_STR_90",ANY_ARMOR,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("LG_MELEE_STR_90",TRANSMOG,A(20805,54620))
+        ),
+        CreateSet(COLLECTION,10505,"LG_TANK_AGI_90",ANY_ARMOR,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("LG_TANK_AGI_90",TRANSMOG,A(20803,54619))
+        ),
+        CreateSet(COLLECTION,10506,"LG_TANK_STR_90",ANY_ARMOR,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("LG_TANK_STR_90",TRANSMOG,A(20805,54620))
+        ),
+    }
+    AddSetsToDatabase(VERSION, COLLECTION, sets)
 end
 
 local function GetPvPAppearances()
@@ -243,106 +278,6 @@ local function GetRaidAppearances()
     AddSetsToDatabase(VERSION, COLLECTION, sets)
 end
 
-local function GetDeathKnightAppearances()
-    local col, set, loc = ""
-
-    col = SetCollector.CHALLENGE
-    set = SetCollector:AddSetLegacy(70000,nil,col,90,"DK_CD_90",PLATE,DEATHKNIGHT,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"DK_CD_90",TRANSMOG,A(17954,46754),A(17956,46756),A(17952,46752),A(17957,46757),A(17953,46753),A(17950,46750),A(17955,46755),A(17951,46751))
-end
-
-
-local function GetDruidAppearances()
-    local col, set, loc = ""
-
-    col = SetCollector.CHALLENGE
-    set = SetCollector:AddSetLegacy(70000,nil,col,1,"DR_CD_90",LEATHER,DRUID,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"DR_CD_90",TRANSMOG,A(17870,46761,90062),A(17875,46764,90065),A(17877,46763,90064),A(17876,46765,90066),A(17873,46760,90061),A(17869,46758,90059),A(17874,46762,90063),A(17871,46759,90060))
-end
-
-
-local function GetHunterAppearances()
-    local col, set, loc = ""
-
-    col = SetCollector.CHALLENGE
-    set = SetCollector:AddSetLegacy(70000,nil,col,1,"HU_CD_90",MAIL,HUNTER,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"HU_CD_90",TRANSMOG,A(17679,46770,90072),A(17681,46772,90074),A(17677,46768,90070),A(17674,46773,90075),A(17678,46769,90071),A(17675,46766,90068),A(17680,46771,90073),A(17676,46767,90069))
-end
-
-
-local function GetMageAppearances()
-    local col, set, loc = ""
-
-    col = SetCollector.CHALLENGE
-    set = SetCollector:AddSetLegacy(70000,nil,col,1,"MA_CD_90",CLOTH,MAGE,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"MA_CD_90",TRANSMOG,A(19473,46779,90082),A(19474,46782,90085),A(18544,46781,90084),A(18543,46783,90086),A(18545,46778,90081),A(19472,46776,90079),A(18547,46780,90083),A(18541,46777,90080))
-end
-
-
-local function GetMonkAppearances()
-    local col, set, loc = ""
-
-    col = SetCollector.CHALLENGE
-    set = SetCollector:AddSetLegacy(70000,nil,col,90,"MO_CD_90",LEATHER,MONK,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"MO_CD_90",TRANSMOG,A(19477,46789),A(19478,46791),A(18141,46787),A(18145,46792),A(18142,46788),A(19476,46785),A(18143,46790),A(18140,46786))
-end
-
-
-local function GetPaladinAppearances()
-    local col, set, loc = ""
-
-    col = SetCollector.CHALLENGE
-    set = SetCollector:AddSetLegacy(70000,nil,col,90,"PA_CD_90",PLATE,PALADIN,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"PA_CD_90",TRANSMOG,A(17548,46797),A(17550,46799),A(17546,46795),A(17551,46800),A(17547,46796),A(17544,46793),A(17549,46798),A(17545,46794))
-end
-
-
-local function GetPriestAppearances()
-    local col, set, loc = ""
-
-    col = SetCollector.CHALLENGE
-    set = SetCollector:AddSetLegacy(70000,nil,col,90,"PR_CD_90",CLOTH,PRIEST,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"PR_CD_90",TRANSMOG,A(19482,46813),A(19481,46810),A(18917,46811),A(18916,46809),A(18918,46812),A(19480,46807),A(18920,46814),A(18914,46808))
-end
-
-
-local function GetRogueAppearances()
-    local col, set, loc = ""
-
-    col = SetCollector.CHALLENGE
-    set = SetCollector:AddSetLegacy(70000,nil,col,90,"RO_CD_90",LEATHER,ROGUE,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"RO_CD_90",TRANSMOG,A(17620,46817),A(17625,46822),A(17622,46819),A(17626,46823),A(17623,46820),A(17619,46816),A(17624,46821),A(17621,46818))
-end
-
-
-local function GetShamanAppearances()
-    local col, set, loc = ""
-    
-    
-    col = SetCollector.CHALLENGE
-    set = SetCollector:AddSetLegacy(70000,nil,col,90,"SH_CD_90",MAIL,SHAMAN,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"SH_CD_90",TRANSMOG,A(17856,46829,90132),A(17858,46831,90134),A(17854,46827,90130),A(17851,46824,90127),A(17855,46828,90131),A(17852,46825,90128),A(17857,46830,90133),A(17853,46826,90129))
-end
-
-
-local function GetWarlockAppearances()
-    local col, set, loc = ""
-                
-    col = SetCollector.CHALLENGE
-    set = SetCollector:AddSetLegacy(70000,nil,col,90,"WK_CD_90",CLOTH,WARLOCK,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"WK_CD_90",TRANSMOG,A(19485,46838),A(19484,46834),A(19174,46836),A(19173,46835),A(19175,46837),A(19483,46832),A(19177,46839),A(19171,46833)) 
-end
-
-
-local function GetWarriorAppearances()
-    local col, set, loc = ""
-    
-    col = SetCollector.CHALLENGE
-    set = SetCollector:AddSetLegacy(70000,nil,col,90,"WR_CD_90",PLATE,WARRIOR,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"WR_CD_90",TRANSMOG,A(19487,46846,90151),A(19488,46848,90153),A(18627,46844,90149),A(18632,46849,90154),A(18628,46845,90150),A(19486,46842,90147),A(18630,46847,90152),A(18626,46843,90148))
-end
-
-
 --
 --    GLOBAL FUNCTIONS
 --
@@ -350,30 +285,17 @@ end
 function SetCollector:GetVersion05Appearances(expansion)
     if expansion.v05 then
         -- Common
-        --GetLegendaries()
         GetCraftedAppearances()
+        GetExpansionAppearances()
+        --GetLegendaries()
         GetPvPAppearances()
         GetRaidAppearances()
-        -- Class-specific
-        GetDeathKnightAppearances()
-        GetDruidAppearances()
-        GetHunterAppearances()
-        GetMageAppearances()
-        GetMonkAppearances()
-        GetPaladinAppearances()
-        GetPriestAppearances()
-        GetRogueAppearances()
-        GetShamanAppearances()
-        GetWarlockAppearances()
-        GetWarriorAppearances()
     end
 end
-
 
 function SetCollector:GetVersion05Status()
     return SetCollector:GetExpansionStatus("5")
 end
-
 
 function SetCollector:SetVersion05Status()
     SetCollector:SetExpansionStatus("5")

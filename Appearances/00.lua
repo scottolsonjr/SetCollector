@@ -4,43 +4,43 @@
 -- LOCAL VARIABLES
 --
 
-local ALL			= SetCollector.ALL
-local ANY			= SetCollector.ANY
+local ALL = SetCollector.ALL
+local ANY = SetCollector.ANY
 
 -- Armor Type
-local CLOTH			= SetCollector.CLOTH
-local LEATHER		= SetCollector.LEATHER
-local MAIL			= SetCollector.MAIL
-local PLATE			= SetCollector.PLATE
-local ANY_ARMOR			= SetCollector.ANY_ARMOR
+local CLOTH = SetCollector.CLOTH
+local LEATHER = SetCollector.LEATHER
+local MAIL = SetCollector.MAIL
+local PLATE = SetCollector.PLATE
+local ANY_ARMOR = SetCollector.ANY_ARMOR
 
 -- Classes
-local DEATHKNIGHT	= SetCollector.DEATHKNIGHT
-local DEMONHUNTER	= SetCollector.DEMONHUNTER
-local DRUID 		= SetCollector.DRUID
-local HUNTER 		= SetCollector.HUNTER
-local MAGE 			= SetCollector.MAGE
-local MONK 			= SetCollector.MONK
-local PALADIN 		= SetCollector.PALADIN
-local PRIEST 		= SetCollector.PRIEST
-local ROGUE 		= SetCollector.ROGUE
-local SHAMAN 		= SetCollector.SHAMAN
-local WARLOCK 		= SetCollector.WARLOCK
-local WARRIOR 		= SetCollector.WARRIOR
-local ANY_CLASS 		= SetCollector.ANY_CLASS
+local DEATHKNIGHT = SetCollector.DEATHKNIGHT
+local DEMONHUNTER = SetCollector.DEMONHUNTER
+local DRUID = SetCollector.DRUID
+local HUNTER = SetCollector.HUNTER
+local MAGE = SetCollector.MAGE
+local MONK = SetCollector.MONK
+local PALADIN = SetCollector.PALADIN
+local PRIEST = SetCollector.PRIEST
+local ROGUE = SetCollector.ROGUE
+local SHAMAN = SetCollector.SHAMAN
+local WARLOCK = SetCollector.WARLOCK
+local WARRIOR = SetCollector.WARRIOR
+local ANY_CLASS = SetCollector.ANY_CLASS
 
 -- Factions
-local ALLIANCE 		= SetCollector.ALLIANCE
-local HORDE 		  = SetCollector.HORDE
-local ANY_FACTION	= SetCollector.ANY_FACTION
+local ALLIANCE = SetCollector.ALLIANCE
+local HORDE = SetCollector.HORDE
+local ANY_FACTION = SetCollector.ANY_FACTION
 
 -- Obtainable
-local OBTAIN		= SetCollector.OBTAIN
-local NO_OBTAIN 		= SetCollector.NO_OBTAIN
+local OBTAIN = SetCollector.OBTAIN
+local NO_OBTAIN = SetCollector.NO_OBTAIN
 
 -- Useable as Transmog
-local TRANSMOG 		= SetCollector.TRANSMOG
-local NO_TRANSMOG 	= SetCollector.NO_TRANSMOG
+local TRANSMOG = SetCollector.TRANSMOG
+local NO_TRANSMOG = SetCollector.NO_TRANSMOG
 
 -- Locations
 local NO_LOCATION = nil
@@ -55,123 +55,6 @@ local function CreateSet(...) return SetCollector:CreateSet(...) end
 local function CreateVariant(...) return SetCollector:CreateVariant(...) end
 local function IncludeSet(...) return SetCollector:IncludeSet(...) end
 local function AddSetsToDatabase(...) return SetCollector:AddSetsToDatabase(...) end
-
-local function GetHolidayAppearances()
-	local col = SetCollector.HOLIDAY
-	local set = ""
-	
-	set = SetCollector:AddSetLegacy(70000,nil,col,1103271,"HO_FESTIVE_DRESS",ANY_ARMOR,ANY_CLASS,ANY_FACTION)
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"GREEN",NO_TRANSMOG,A(5657,8336,21157))
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"PINK",NO_TRANSMOG,A(5772,8514,21538))
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"PURPLE",NO_TRANSMOG,A(5773,8515,21539))
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"RED",NO_TRANSMOG,A(5656,8335,21154))
-				
-	set = SetCollector:AddSetLegacy(70000,nil,col,1103272,"HO_FESTIVE_SUIT",ANY_ARMOR,ANY_CLASS,ANY_FACTION)
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"BLACK",NO_TRANSMOG,A(5774,8516,21541))
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"BLUE",NO_TRANSMOG,A(5777,8519,21544))
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"TEAL",NO_TRANSMOG,A(5776,8518,21543))
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"RED",NO_TRANSMOG,A(5775,8517,21542))
-				
-	set = SetCollector:AddSetLegacy(70000,nil,col,1203351,"HO_LOVELY_DRESS",ANY_ARMOR,ANY_CLASS,ANY_FACTION)
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"BLACK",NO_TRANSMOG,A(5950,8771,22279))
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"BLUE",NO_TRANSMOG,A(5949,8770,22278))
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"PURPLE",NO_TRANSMOG,A(5951,8772,22280))
-				--SetCollector:AddVariantLegacy(70000,nil,col,set,"RED",NO_TRANSMOG,A(nil,nil,22276))
-				
-	set = SetCollector:AddSetLegacy(70000,nil,col,1203352,"HO_DINNER_SUIT",ANY_ARMOR,ANY_CLASS,ANY_FACTION)
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"BLUE",NO_TRANSMOG,A(5952,8773,22281))
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"PURPLE",NO_TRANSMOG,A(5953,8774,22282))
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"RED",NO_TRANSMOG,A(5948,8769,22277))
-				
-	set = SetCollector:AddSetLegacy(70000,nil,col,1401811,"HO_ELEGANT_DRESS",ANY_ARMOR,ANY_CLASS,ANY_FACTION)
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"HO_ELEGANT_DRESS",NO_TRANSMOG,A(5354,7547,19028))
-				
-	set = SetCollector:AddSetLegacy(70000,nil,col,1401812,"HO_TUXEDO",ANY_ARMOR,ANY_CLASS,ANY_FACTION)
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"BLACK",NO_TRANSMOG,A(2271,3669,6833),A(2273,2635,6835))
-				
-	set = SetCollector:AddSetLegacy(70000,nil,col,1603411,"HO_MIDSUMMER_REVELER",ANY_ARMOR,ANY_CLASS,ANY_FACTION)
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"RED",NO_TRANSMOG,A(6162,9207,23324),A(9042,16111,34685),A(9041,16110,34683))
-				
-	set = SetCollector:AddSetLegacy(70000,nil,col,1903721,"HO_BREWFEST_DRESS",ANY_ARMOR,ANY_CLASS,ANY_FACTION)
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"BLUE",NO_TRANSMOG,A(8813,15713,33968),A(8789,15663,33863),A(8811,15711,33966))
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"BROWN",NO_TRANSMOG,A(8790,15664,33864),A(8789,15663,33863),A(8811,15711,33966))
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"GREEN",NO_TRANSMOG,A(8812,15712,33967),A(8789,15663,33863),A(8811,15711,33966))
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"PURPLE",NO_TRANSMOG,A(8814,15714,33969),A(8789,15663,33863),A(8811,15711,33966))
-				
-	set = SetCollector:AddSetLegacy(70000,nil,col,1903722,"HO_BREWFEST_REGALIA",ANY_ARMOR,ANY_CLASS,ANY_FACTION)
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"BLUE",NO_TRANSMOG,A(8813,15713,33968),A(8788,15662,33862),A(8791,15665,33868))
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"BROWN",NO_TRANSMOG,A(8790,15664,33864),A(8788,15662,33862),A(8791,15665,33868))
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"GREEN",NO_TRANSMOG,A(8812,15712,33967),A(8788,15662,33862),A(8791,15665,33868))
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"PURPLE",NO_TRANSMOG,A(8814,15714,33969),A(8788,15662,33862),A(8791,15665,33868))
-	
-	--set = SetCollector:AddSetLegacy(70000,nil,col,2003241,"HO_HALLOWED_HELM",ANY_ARMOR,ANY_CLASS,ANY_FACTION)
-	--			SetCollector:AddVariantLegacy(70000,nil,col,set,"BLACK",NO_TRANSMOG,A(8613,15335,33292))
-	
-	--[[set = SetCollector:AddSetLegacy(70000,nil,col,2003242,"HO_HORSEMANS_HOOD",PLATE,ANY_CLASS,ANY_FACTION)
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"L90",NO_TRANSMOG,87569)
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"L100",NO_TRANSMOG,117355)
-	
-	set = SetCollector:AddSetLegacy(70000,nil,col,2003243,"HO_HORSEMANS_SLICER",ANY_ARMOR,ROGUE,ANY_FACTION)
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"L90",NO_TRANSMOG,87570)
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"L100",NO_TRANSMOG,117356)]]--
-	
-	set = SetCollector:AddSetLegacy(70000,nil,col,2104041,"HO_PILGRIMS_ATTIRE",ANY_ARMOR,ANY_CLASS,ANY_FACTION)
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"BLACK",NO_TRANSMOG,A(2838,22458,46723),A(11702,22464,46800),A(11254,21595,44788))
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"FINE",NO_TRANSMOG,A(2838,65283,116401),A(11702,22464,46800),A(11254,21595,44788))
-	
-	set = SetCollector:AddSetLegacy(70000,nil,col,2104042,"HO_PILGRIMS_DRESS",ANY_ARMOR,ANY_CLASS,ANY_FACTION)
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"BLACK",NO_TRANSMOG,A(2838,22458,46723),A(11253,21594,44785),A(11254,21595,44788))
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"FINE",NO_TRANSMOG,A(2838,65283,116401),A(11253,21594,44785),A(11254,21595,44788))
-	
-	set = SetCollector:AddSetLegacy(70000,nil,col,2201411,"HO_WINTER_GARB",ANY_ARMOR,ANY_CLASS,ANY_FACTION)
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"GREEN",NO_TRANSMOG,A(5771,8510,21525),A(8831,15751,34087),A(8830,15750,34086))
-				SetCollector:AddVariantLegacy(70000,nil,col,set,"RED",NO_TRANSMOG,A(5770,8509,21524),A(8829,15749,34085),A(8830,15750,34086))
-end
-
-
-local function GetStarterAppearances()
-	col = SetCollector.OTHER
-	set = ""
-	
-	set = SetCollector:AddSetLegacy(80300,nil,col,000001,"STARTER",ANY_ARMOR,DEATHKNIGHT,ALLIANCE)
-			SetCollector:AddVariantLegacy(80300,nil,col,set,"STARTER",TRANSMOG,A(9034,16090),A(9036,16092),A(7003,16094),A(9032,16088),A(9035,16091),A(9031,16087),A(9033,16089),A(9037,16093),A(9030,16086))
-	
-	set = SetCollector:AddSetLegacy(80300,nil,col,000001,"STARTER",ANY_ARMOR,DEMONHUNTER,ALLIANCE)
-			SetCollector:AddVariantLegacy(80300,nil,col,set,"STARTER",TRANSMOG,A(28231,76664),A(2352,60968),A(28233,76668),A(28232,76669),A(28228,76667),A(28225,76671),A(28230,76665),A(28226,76670),A(28700,60967))
-
-	set = SetCollector:AddSetLegacy(80300,nil,col,000001,"STARTER",ANY_ARMOR,DRUID,ALLIANCE)
-			SetCollector:AddVariantLegacy(80300,nil,col,set,"STARTER",NO_TRANSMOG,A(1977,2258),A(1978,2259),A(1312,1372))
-	
-	set = SetCollector:AddSetLegacy(80300,nil,col,000001,"STARTER",ANY_ARMOR,HUNTER,ALLIANCE)
-			SetCollector:AddVariantLegacy(80300,nil,col,set,"STARTER",NO_TRANSMOG,A(28522,28823),A(186,47),A(182,43),A(889,9213))
-
-	set = SetCollector:AddSetLegacy(80300,nil,col,000001,"STARTER",ANY_ARMOR,MAGE,ALLIANCE)
-			SetCollector:AddVariantLegacy(80300,nil,col,set,"STARTER",NO_TRANSMOG,A(6201,9299),A(6197,9298),A(1312,1372))
-	
-	set = SetCollector:AddSetLegacy(80300,nil,col,000001,"STARTER",ANY_ARMOR,MONK,ALLIANCE)
-			SetCollector:AddVariantLegacy(80300,nil,col,set,"STARTER",NO_TRANSMOG,A(15996,36894),A(17120,39119),A(17123,39104),A(15997,36895),A(16274,37506))
-	
-	set = SetCollector:AddSetLegacy(80300,nil,col,000001,"STARTER",ANY_ARMOR,PALADIN,ALLIANCE)
-			SetCollector:AddVariantLegacy(80300,nil,col,set,"STARTER",NO_TRANSMOG,A(28520,28830),A(6200,9297),A(12832,25751),A(156,17),A(802,746))
-	
-	set = SetCollector:AddSetLegacy(80300,nil,col,000001,"STARTER",ANY_ARMOR,PRIEST,ALLIANCE)
-			SetCollector:AddVariantLegacy(80300,nil,col,set,"STARTER",NO_TRANSMOG,A(1970,2250),A(168,29),A(167,28),A(155,16))
-
-	set = SetCollector:AddSetLegacy(80300,nil,col,000001,"STARTER",ANY_ARMOR,ROGUE,ALLIANCE)
-			SetCollector:AddVariantLegacy(80300,nil,col,set,"STARTER",NO_TRANSMOG,A(28776,28825),A(165,26),A(164,25),A(665,590))
-			-- SetCollector:AddVariantLegacy(80300,nil,col,set,"STARTER",NO_TRANSMOG,A(12107,24270),A(12078,24263),A(12125,24269),A(12124,24268),A(12126,24271),A(665,590))	-- Worgen
-
-	set = SetCollector:AddSetLegacy(80300,nil,col,000001,"STARTER",ANY_ARMOR,SHAMAN,ALLIANCE)
-			SetCollector:AddVariantLegacy(80300,nil,col,set,"STARTER",NO_TRANSMOG,A(12833,25752),A(6197,25753),A(156,17),A(802,746))
-
-	set = SetCollector:AddSetLegacy(80300,nil,col,000001,"STARTER",ANY_ARMOR,WARLOCK,ALLIANCE)
-			SetCollector:AddVariantLegacy(80300,nil,col,set,"STARTER",NO_TRANSMOG,A(172,33),A(396,264),A(173,34),A(155,16))
-
-	set = SetCollector:AddSetLegacy(80300,nil,col,000001,"STARTER",ANY_ARMOR,WARRIOR,ALLIANCE)
-			SetCollector:AddVariantLegacy(80300,nil,col,set,"STARTER",NO_TRANSMOG,A(28524,28822),A(159,20),A(160,21),A(154,15),A(802,746))
-	set = SetCollector:AddSetLegacy(80300,nil,col,000001,"STARTER",ANY_ARMOR,WARRIOR,HORDE)
-			SetCollector:AddVariantLegacy(80300,nil,col,set,"STARTER",NO_TRANSMOG,A(23206,28833),A(183,44),A(184,45),A(154,15),A(802,746))
-end
 
 local function GetHeritageAppearances()
     local COLLECTION, VERSION = SetCollector.OTHER, 90000
@@ -198,6 +81,114 @@ local function GetHeritageAppearances()
     AddSetsToDatabase(VERSION, COLLECTION, sets)
 end
 
+local function GetHolidayAppearances()
+    local COLLECTION, VERSION = SetCollector.HOLIDAY, 70000
+    local sets = {
+        CreateSet(COLLECTION,10001,"HO_FESTIVE_DRESS",ANY_ARMOR,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("GREEN",NO_TRANSMOG,A(5657,8336)),
+            CreateVariant("PINK",NO_TRANSMOG,A(5772,8514)),
+            CreateVariant("PURPLE",NO_TRANSMOG,A(5773,8515)),
+            CreateVariant("RED",NO_TRANSMOG,A(5656,8335))
+        ),
+        CreateSet(COLLECTION,10002,"HO_FESTIVE_SUIT",ANY_ARMOR,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("BLACK",NO_TRANSMOG,A(5774,8516)),
+            CreateVariant("BLUE",NO_TRANSMOG,A(5777,8519)),
+            CreateVariant("TEAL",NO_TRANSMOG,A(5776,8518)),
+            CreateVariant("RED",NO_TRANSMOG,A(5775,8517))
+        ),
+        CreateSet(COLLECTION,10003,"HO_LOVELY_DRESS",ANY_ARMOR,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("BLACK",NO_TRANSMOG,A(5950,8771)),
+            CreateVariant("BLUE",NO_TRANSMOG,A(5949,8770)),
+            CreateVariant("PURPLE",NO_TRANSMOG,A(5951,8772))
+            --CreateVariant("RED",NO_TRANSMOG,A(nil,nil,22276))
+        ),
+        CreateSet(COLLECTION,10004,"HO_DINNER_SUIT",ANY_ARMOR,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("BLUE",NO_TRANSMOG,A(5952,8773)),
+            CreateVariant("PURPLE",NO_TRANSMOG,A(5953,8774)),
+            CreateVariant("RED",NO_TRANSMOG,A(5948,8769))
+        ),
+        CreateSet(COLLECTION,10005,"HO_ELEGANT_DRESS",ANY_ARMOR,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("HO_ELEGANT_DRESS",NO_TRANSMOG,A(5354,7547))
+        ),
+        CreateSet(COLLECTION,10006,"HO_TUXEDO",ANY_ARMOR,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("HO_TUXEDO",NO_TRANSMOG,A(2271,3669),A(2273,2635))
+        ),
+        CreateSet(COLLECTION,10007,"HO_MIDSUMMER_REVELER",ANY_ARMOR,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("HO_MIDSUMMER_REVELER",NO_TRANSMOG,A(6162,9207),A(9042,16111),A(9041,16110))
+        ),
+        CreateSet(COLLECTION,10008,"HO_BREWFEST_DRESS",ANY_ARMOR,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("BLUE",NO_TRANSMOG,A(8813,15713),A(8789,15663),A(8811,15711)),
+            CreateVariant("BROWN",NO_TRANSMOG,A(8790,15664),A(8789,15663),A(8811,15711)),
+            CreateVariant("GREEN",NO_TRANSMOG,A(8812,15712),A(8789,15663),A(8811,15711)),
+            CreateVariant("PURPLE",NO_TRANSMOG,A(8814,15714),A(8789,15663),A(8811,15711))
+        ),
+        CreateSet(COLLECTION,10009,"HO_BREWFEST_REGALIA",ANY_ARMOR,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("BLUE",NO_TRANSMOG,A(8813,15713),A(8788,15662),A(8791,15665)),
+            CreateVariant("BROWN",NO_TRANSMOG,A(8790,15664),A(8788,15662),A(8791,15665)),
+            CreateVariant("GREEN",NO_TRANSMOG,A(8812,15712),A(8788,15662),A(8791,15665)),
+            CreateVariant("PURPLE",NO_TRANSMOG,A(8814,15714),A(8788,15662),A(8791,15665))
+        ),
+        CreateSet(COLLECTION,10010,"HO_PILGRIMS_ATTIRE",ANY_ARMOR,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("HO_PILGRIMS_ATTIRE",NO_TRANSMOG,A(2838,22458),A(11702,22464),A(11254,21595))
+        ),
+        CreateSet(COLLECTION,10011,"HO_PILGRIMS_DRESS",ANY_ARMOR,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("HO_PILGRIMS_DRESS",NO_TRANSMOG,A(2838,22458),A(11253,21594),A(11254,21595))
+        ),
+        CreateSet(COLLECTION,10012,"HO_WINTER_GARB",ANY_ARMOR,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("GREEN",NO_TRANSMOG,A(5771,8510),A(8831,15751),A(8830,15750)),
+            CreateVariant("RED",NO_TRANSMOG,A(5770,8509),A(8829,15749),A(8830,15750))
+        ),
+    }
+    AddSetsToDatabase(VERSION, COLLECTION, sets)
+end
+
+local function GetStarterAppearances()
+    local COLLECTION, VERSION = SetCollector.OTHER, 70000
+    local sets = {
+        CreateSet(COLLECTION,10001,"STARTER",ANY_ARMOR,DEATHKNIGHT,ALLIANCE,NO_LOCATION,
+            CreateVariant("STARTER",NO_TRANSMOG,A(9034,16090),A(9036,16092),A(7003,16094),A(9032,16088),A(9035,16091),A(9031,16087),A(9033,16089),A(9037,16093),A(9030,16086))
+        ),
+        CreateSet(COLLECTION,10001,"STARTER",ANY_ARMOR,DEMONHUNTER,ALLIANCE,NO_LOCATION,
+            CreateVariant("STARTER",NO_TRANSMOG,A(28231,76664),A(2352,60968),A(28233,76668),A(28232,76669),A(28228,76667),A(28225,76671),A(28230,76665),A(28226,76670),A(28700,60967))
+        ),
+        CreateSet(COLLECTION,10001,"STARTER",ANY_ARMOR,DRUID,ALLIANCE,NO_LOCATION,
+            CreateVariant("STARTER",NO_TRANSMOG,A(1977,2258),A(1978,2259),A(1312,1372))
+        ),
+        CreateSet(COLLECTION,10001,"STARTER",ANY_ARMOR,HUNTER,ALLIANCE,NO_LOCATION,
+            CreateVariant("STARTER",NO_TRANSMOG,A(28522,28823),A(186,47),A(182,43),A(889,9213))
+        ),
+        CreateSet(COLLECTION,10001,"STARTER",ANY_ARMOR,MAGE,ALLIANCE,NO_LOCATION,
+            CreateVariant("STARTER",NO_TRANSMOG,A(6201,9299),A(6197,9298),A(1312,1372))
+        ),
+        CreateSet(COLLECTION,10001,"STARTER",ANY_ARMOR,MONK,ALLIANCE,NO_LOCATION,
+            CreateVariant("STARTER",NO_TRANSMOG,A(15996,36894),A(17120,39119),A(17123,39104),A(15997,36895),A(16274,37506))
+        ),
+        CreateSet(COLLECTION,10001,"STARTER",ANY_ARMOR,PALADIN,ALLIANCE,NO_LOCATION,
+            CreateVariant("STARTER",NO_TRANSMOG,A(28520,28830),A(6200,9297),A(12832,25751),A(156,17),A(802,746))
+        ),
+        CreateSet(COLLECTION,10001,"STARTER",ANY_ARMOR,PRIEST,ALLIANCE,NO_LOCATION,
+            CreateVariant("STARTER",NO_TRANSMOG,A(1970,2250),A(168,29),A(167,28),A(155,16))
+        ),
+        CreateSet(COLLECTION,10001,"STARTER",ANY_ARMOR,ROGUE,ALLIANCE,NO_LOCATION,
+            CreateVariant("STARTER",NO_TRANSMOG,A(28776,28825),A(165,26),A(164,25),A(665,590))
+            --CreateVariant("STARTER",NO_TRANSMOG,A(12107,24270),A(12078,24263),A(12125,24269),A(12124,24268),A(12126,24271),A(665,590))	-- Worgen
+        ),
+        CreateSet(COLLECTION,10001,"STARTER",ANY_ARMOR,SHAMAN,ALLIANCE,NO_LOCATION,
+            CreateVariant("STARTER",NO_TRANSMOG,A(12833,25752),A(6197,25753),A(156,17),A(802,746))
+        ),
+        CreateSet(COLLECTION,10001,"STARTER",ANY_ARMOR,WARLOCK,ALLIANCE,NO_LOCATION,
+            CreateVariant("STARTER",NO_TRANSMOG,A(172,33),A(396,264),A(173,34),A(155,16))
+        ),
+        CreateSet(COLLECTION,10001,"STARTER",ANY_ARMOR,WARRIOR,ALLIANCE,NO_LOCATION,
+            CreateVariant("STARTER",NO_TRANSMOG,A(28524,28822),A(159,20),A(160,21),A(154,15),A(802,746))
+        ),
+        CreateSet(COLLECTION,10001,"STARTER",ANY_ARMOR,WARRIOR,HORDE,NO_LOCATION,
+            CreateVariant("STARTER",NO_TRANSMOG,A(23206,28833),A(183,44),A(184,45),A(154,15),A(802,746))
+        ),
+    }
+    AddSetsToDatabase(VERSION, COLLECTION, sets)
+end
+
 --
 --	GLOBAL FUNCTIONS
 --
@@ -210,11 +201,9 @@ function SetCollector:GetVersion00Appearances(expansion)
 	end
 end
 
-
 function SetCollector:GetVersion00Status()
 	return SetCollector:GetExpansionStatus("0")
 end
-
 
 function SetCollector:SetVersion00Status()
 	SetCollector:SetExpansionStatus("0")

@@ -4,43 +4,43 @@
 -- LOCAL VARIABLES
 --
 
-local ALL            = SetCollector.ALL
-local ANY            = SetCollector.ANY
+local ALL = SetCollector.ALL
+local ANY = SetCollector.ANY
 
 -- Armor Type
-local CLOTH            = SetCollector.CLOTH
-local LEATHER        = SetCollector.LEATHER
-local MAIL            = SetCollector.MAIL
-local PLATE            = SetCollector.PLATE
-local ANY_ARMOR			= SetCollector.ANY_ARMOR
+local CLOTH = SetCollector.CLOTH
+local LEATHER = SetCollector.LEATHER
+local MAIL = SetCollector.MAIL
+local PLATE = SetCollector.PLATE
+local ANY_ARMOR = SetCollector.ANY_ARMOR
 
 -- Classes
-local DEATHKNIGHT    = SetCollector.DEATHKNIGHT
-local DEMONHUNTER    = SetCollector.DEMONHUNTER
-local DRUID         = SetCollector.DRUID
-local HUNTER         = SetCollector.HUNTER
-local MAGE             = SetCollector.MAGE
-local MONK             = SetCollector.MONK
-local PALADIN         = SetCollector.PALADIN
-local PRIEST         = SetCollector.PRIEST
-local ROGUE         = SetCollector.ROGUE
-local SHAMAN         = SetCollector.SHAMAN
-local WARLOCK         = SetCollector.WARLOCK
-local WARRIOR         = SetCollector.WARRIOR
-local ANY_CLASS 		= SetCollector.ANY_CLASS
+local DEATHKNIGHT = SetCollector.DEATHKNIGHT
+local DEMONHUNTER = SetCollector.DEMONHUNTER
+local DRUID = SetCollector.DRUID
+local HUNTER = SetCollector.HUNTER
+local MAGE = SetCollector.MAGE
+local MONK = SetCollector.MONK
+local PALADIN = SetCollector.PALADIN
+local PRIEST = SetCollector.PRIEST
+local ROGUE = SetCollector.ROGUE
+local SHAMAN = SetCollector.SHAMAN
+local WARLOCK = SetCollector.WARLOCK
+local WARRIOR = SetCollector.WARRIOR
+local ANY_CLASS = SetCollector.ANY_CLASS
 
 -- Factions
-local ALLIANCE         = SetCollector.ALLIANCE
-local HORDE         = SetCollector.HORDE
-local ANY_FACTION	= SetCollector.ANY_FACTION
+local ALLIANCE = SetCollector.ALLIANCE
+local HORDE = SetCollector.HORDE
+local ANY_FACTION = SetCollector.ANY_FACTION
 
 -- Obtainable
-local OBTAIN        = SetCollector.OBTAIN
-local NO_OBTAIN         = SetCollector.NO_OBTAIN
+local OBTAIN = SetCollector.OBTAIN
+local NO_OBTAIN = SetCollector.NO_OBTAIN
 
 -- Useable as Transmog
-local TRANSMOG         = SetCollector.TRANSMOG
-local NO_TRANSMOG     = SetCollector.NO_TRANSMOG
+local TRANSMOG = SetCollector.TRANSMOG
+local NO_TRANSMOG = SetCollector.NO_TRANSMOG
 
 -- Locations
 local NO_LOCATION = nil
@@ -57,11 +57,13 @@ local function IncludeSet(...) return SetCollector:IncludeSet(...) end
 local function AddSetsToDatabase(...) return SetCollector:AddSetsToDatabase(...) end
 
 local function GetLegendaries()
-    local col = SetCollector.LEGENDARY
-    local set = ""
-                
-    set = SetCollector:AddSetLegacy(70000,nil,col,3,"LG_HEALER_80",ANY_ARMOR,ANY_CLASS,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"LG_HEALER_80",TRANSMOG,A(11613,22178,46017))
+    local COLLECTION, VERSION = SetCollector.LEGENDARY, 70000
+    local sets = {
+        CreateSet(COLLECTION,10301,"LG_HEALER_80",ANY_ARMOR,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("LG_HEALER_80",TRANSMOG,A(11613,22178))
+        ),
+    }
+    AddSetsToDatabase(VERSION, COLLECTION, sets)
 end
 
 local function GetRaidAppearances()
@@ -128,11 +130,9 @@ function SetCollector:GetVersion03Appearances(expansion)
     end
 end
 
-
 function SetCollector:GetVersion03Status()
     return SetCollector:GetExpansionStatus("3")
 end
-
 
 function SetCollector:SetVersion03Status()
     SetCollector:SetExpansionStatus("3")

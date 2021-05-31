@@ -123,80 +123,6 @@ local function CreateCollections()
 	return collections
 end
 
-local function GetTooltipIdentifierLegacy(collection, id, title)
-	local identifier
-	if collection == RAID then
-		identifier = "T"..id
-	elseif collection == PVP then
-		identifier = "PVP"
-	end
-	return identifier
-end
-
-function SetCollector:AddSetLegacy(minVersion, maxVersion, collection, id, title, armorType, class, faction, location, ...)
-	if WOW_VERSION >= minVersion then
-		if maxVersion == nil or WOW_VERSION <= maxVersion then
-			local tempSet = { }
-			tempSet = {
-				Title = title,
-				TooltipID = GetTooltipIdentifierLegacy(collection, id, title),
-				ArmorType = armorType,
-				Class = class.Description,
-				Faction = faction.Description,
-                Name = name,
-                Location = location,
-				Variants = { }
-			}
-			local ID = collection.Code..string.format("%03d", id)..armorType.Code..class.Code..faction.Code
-			SetCollector.db.global.collections[collection.ID].Sets[ID] = tempSet
-			return ID
-		end
-	end
-end
-
-function SetCollector:AddVariantLegacy(minVersion, maxVersion, collection, set, title, transmog, ...)
-	if WOW_VERSION >= minVersion then
-		if maxVersion == nil or WOW_VERSION <= maxVersion then
-			local a, s, i = 0, 0, 0
-			local tempAppearances = { }
-			local n = select("#",...)
-			for j = 1,n do
-				local v = select(j,...)
-				if type(v) == 'number' then
-					local itemID = v or 0
-					local sLink = select(2,GetItemInfo(itemID))
-					a, s, i = SetCollector:GetAppearanceInfo(sLink)
-				else
-					a = v.ID or 0
-					s = v.sourceID or 0
-					i = v.i or 0
-				end
-				--[[if a == 0 and s == 0 and i and i ~= 0 then
-					local sLink = select(2,GetItemInfo(i))
-					local b, t, j = SetCollector:GetAppearanceInfo(sLink)
-					if a and b and a ~= 0 and b ~= 0 and a ~= b and i == j then
-						a = b
-						s = t
-					end
-				end]]--
-				if a and a > 0 and s and i then
-					local t = { ID = a, sourceID = s, itemID = i }
-					local index = a
-					tinsert(tempAppearances,t)
-					SetCollector.db.global.collections.Appearances[index] = { collection = collection.ID, set = set, variant = #SetCollector.db.global.collections[collection.ID].Sets[set].Variants + 1 }
-				end
-			end
-			local tempVariant = {
-				Title = title,
-				Transmog = transmog,
-				Appearances = tempAppearances,
-				Count = #tempAppearances
-			}
-			tinsert(SetCollector.db.global.collections[collection.ID].Sets[set].Variants, tempVariant)	
-		end
-	end	
-end
-
 --
 --  Global Functions
 --
@@ -355,9 +281,7 @@ function SetCollector:IsSetObtainable(collection, set)
 end
 
 function SetCollector:GetSetTooltip(self)
-	if self.Collection == nil or self.Collection == 0 then
-		
-	else
+	if self.Collection ~= nil and self.Collection ~= 0 then
 		local db = SetCollector.db.global.collections
 		local collection = db[self.Collection].Title
 		local set = L[db[self.Collection].Sets[self.Set].Title] or L["MISSING_LOCALIZATION"]
@@ -506,8 +430,6 @@ function SetCollector:SetFavoriteVariant(set, variant)
 	end
 end
 
-
-
 --
 -- Setup Database
 --
@@ -533,26 +455,21 @@ function SetCollector:AddAppearances(debug)
 	--if debug then SetCollector:Print("Finished adding appearances to database.") end
 end
 
-
 function SetCollector:IsUIDocked()
     return SetCollector.db.global.docked
 end
-
 
 function SetCollector:SetUIDocked()
     SetCollector.db.global.docked = not SetCollector.db.global.docked
 end
 
-
 function SetCollector:GetUIPosition()
     return SetCollector.db.global.position
 end
 
-
 function SetCollector:SetUIPosition(value)
     SetCollector.db.global.position = value
 end
-
 
 function SetCollector:GetExpansionStatus(version)
 	local expansions = SetCollector.db.global.expansions
@@ -569,7 +486,6 @@ function SetCollector:GetExpansionStatus(version)
 	end
 end
 
-
 function SetCollector:SetExpansionStatus(version)
 	local expansions = SetCollector.db.global.expansions
 	if version == "0" then expansions.v00 = not expansions.v00
@@ -584,7 +500,6 @@ function SetCollector:SetExpansionStatus(version)
 	elseif version == "9" then expansions.v09 = not expansions.v09
 	end
 end
-
 
 function SetCollector:SetupDB(debug)
 	SetCollector.db = LibStub("AceDB-3.0"):New("SetCollectorDB", defaults, true)
@@ -601,14 +516,12 @@ function SetCollector:ResetDB()
 	end
 end
 
-
 local function HideExpansionToggle(version)
 	if tonumber(WOW_VERSION) >= tonumber(version) then
 		return false
 	end
 	return true
 end
-
 
 function SetCollector:GetOptions()
 	local options = {

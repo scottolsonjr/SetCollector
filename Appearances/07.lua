@@ -4,47 +4,46 @@
 -- LOCAL VARIABLES
 --
 
-local ALL            = SetCollector.ALL
-local ANY            = SetCollector.ANY
+local ALL = SetCollector.ALL
+local ANY = SetCollector.ANY
 
 -- Armor Type
-local CLOTH            = SetCollector.CLOTH
-local LEATHER        = SetCollector.LEATHER
-local MAIL            = SetCollector.MAIL
-local PLATE            = SetCollector.PLATE
-local ANY_ARMOR			= SetCollector.ANY_ARMOR
+local CLOTH = SetCollector.CLOTH
+local LEATHER = SetCollector.LEATHER
+local MAIL = SetCollector.MAIL
+local PLATE = SetCollector.PLATE
+local ANY_ARMOR = SetCollector.ANY_ARMOR
 
 -- Classes
-local DEATHKNIGHT    = SetCollector.DEATHKNIGHT
-local DEMONHUNTER    = SetCollector.DEMONHUNTER
-local DRUID         = SetCollector.DRUID
-local HUNTER         = SetCollector.HUNTER
-local MAGE             = SetCollector.MAGE
-local MONK             = SetCollector.MONK
-local PALADIN         = SetCollector.PALADIN
-local PRIEST         = SetCollector.PRIEST
-local ROGUE         = SetCollector.ROGUE
-local SHAMAN         = SetCollector.SHAMAN
-local WARLOCK         = SetCollector.WARLOCK
-local WARRIOR         = SetCollector.WARRIOR
-local ANY_CLASS 		= SetCollector.ANY_CLASS
+local DEATHKNIGHT = SetCollector.DEATHKNIGHT
+local DEMONHUNTER = SetCollector.DEMONHUNTER
+local DRUID = SetCollector.DRUID
+local HUNTER = SetCollector.HUNTER
+local MAGE = SetCollector.MAGE
+local MONK = SetCollector.MONK
+local PALADIN = SetCollector.PALADIN
+local PRIEST = SetCollector.PRIEST
+local ROGUE = SetCollector.ROGUE
+local SHAMAN = SetCollector.SHAMAN
+local WARLOCK = SetCollector.WARLOCK
+local WARRIOR = SetCollector.WARRIOR
+local ANY_CLASS = SetCollector.ANY_CLASS
 
 -- Factions
-local ALLIANCE         = SetCollector.ALLIANCE
-local HORDE         = SetCollector.HORDE
-local ANY_FACTION	= SetCollector.ANY_FACTION
+local ALLIANCE = SetCollector.ALLIANCE
+local HORDE = SetCollector.HORDE
+local ANY_FACTION = SetCollector.ANY_FACTION
 
 -- Obtainable
-local OBTAIN        = SetCollector.OBTAIN
-local NO_OBTAIN         = SetCollector.NO_OBTAIN
+local OBTAIN = SetCollector.OBTAIN
+local NO_OBTAIN = SetCollector.NO_OBTAIN
 
 -- Useable as Transmog
-local TRANSMOG         = SetCollector.TRANSMOG
-local NO_TRANSMOG     = SetCollector.NO_TRANSMOG
+local TRANSMOG = SetCollector.TRANSMOG
+local NO_TRANSMOG = SetCollector.NO_TRANSMOG
 
 -- Locations
 local NO_LOCATION = nil
-
 
 --
 -- LOCAL FUNCTIONS
@@ -56,43 +55,34 @@ local function CreateVariant(...) return SetCollector:CreateVariant(...) end
 local function IncludeSet(...) return SetCollector:IncludeSet(...) end
 local function AddSetsToDatabase(...) return SetCollector:AddSetsToDatabase(...) end
 
+local function GetExpansionAppearances()
+    local COLLECTION, VERSION = SetCollector.EXPANSION, 70000
+    local sets = {
+        -- Legion Invasions (Pre-Patch)
+        IncludeSet(COLLECTION,10700,160,CLOTH,ANY_CLASS,ANY_FACTION), -- Back 31718,79539
+        IncludeSet(COLLECTION,10700,159,LEATHER,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10700,158,MAIL,ANY_CLASS,ANY_FACTION),
+        IncludeSet(COLLECTION,10700,157,PLATE,ANY_CLASS,ANY_FACTION),
+        -- Order Hall Sets
+        IncludeSet(COLLECTION,10701,550,PLATE,DEATHKNIGHT,ANY_FACTION),
+        IncludeSet(COLLECTION,10701,548,LEATHER,DEMONHUNTER,ANY_FACTION),
+        IncludeSet(COLLECTION,10701,549,LEATHER,DRUID,ANY_FACTION),
+        IncludeSet(COLLECTION,10701,532,MAIL,HUNTER,ANY_FACTION),
+        IncludeSet(COLLECTION,10701,516,CLOTH,MAGE,ANY_FACTION),
+        IncludeSet(COLLECTION,10701,497,LEATHER,MONK,ANY_FACTION),
+        IncludeSet(COLLECTION,10701,496,PLATE,PALADIN,ANY_FACTION),
+        IncludeSet(COLLECTION,10701,330,CLOTH,PRIEST,ANY_FACTION),
+        IncludeSet(COLLECTION,10701,464,LEATHER,ROGUE,ANY_FACTION),
+        IncludeSet(COLLECTION,10701,430,MAIL,SHAMAN,ANY_FACTION),
+        IncludeSet(COLLECTION,10701,448,CLOTH,WARLOCK,ANY_FACTION),
+        IncludeSet(COLLECTION,10701,447,PLATE,WARRIOR,ANY_FACTION),
+    }
+    AddSetsToDatabase(VERSION, COLLECTION, sets)
+end
+
 local function GetLegendaries()
     local col = SetCollector.LEGENDARY
     local set = ""
-end
-
-
-local function GetExpansionAppearances()
-    local col = SetCollector.EXPANSION
-    local set = ""
-    
-    set = SetCollector:AddSetLegacy(70000,nil,col,10701,"DK_OTH_19",PLATE,DEATHKNIGHT,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"DK_OTH_19",TRANSMOG,A(32543,80950),A(32545,80952),A(32541,80947),A(32546,80954),A(32542,80949),A(32539,80953),A(32544,80951),A(32540,80948))
-    set = SetCollector:AddSetLegacy(70000,nil,col,10701,"DH_OTH_19",LEATHER,DEMONHUNTER,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"DH_OTH_19",TRANSMOG,A(32573,80990),A(32575,80992),A(32570,80987),A(32576,80994),A(32571,80989),A(32568,80993),A(32574,80991),A(32569,80988))
-    set = SetCollector:AddSetLegacy(70000,nil,col,10701,"DR_OTH_19",LEATHER,DRUID,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"DR_OTH_19",TRANSMOG,A(32481,80998),A(32483,81000),A(32485,80995),A(32484,81002),A(32480,80997),A(32477,81001),A(32482,80999),A(32478,80996))
-    set = SetCollector:AddSetLegacy(70000,nil,col,10701,"HU_OTH_19",MAIL,HUNTER,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"HU_OTH_19",TRANSMOG,A(32491,80982),A(32493,80984),A(32489,80979),A(32494,80986),A(32490,80981),A(32487,80985),A(32492,80983),A(32488,80980))
-    set = SetCollector:AddSetLegacy(70000,nil,col,10701,"MA_OTH_19",CLOTH,MAGE,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"MA_OTH_19",TRANSMOG,A(32507,81021),A(32509,81024),A(32512,81023),A(32511,81026),A(32506,81020),A(32504,81025),A(32510,81022),A(32505,81019))
-    set = SetCollector:AddSetLegacy(70000,nil,col,10701,"MO_OTH_19",LEATHER,MONK,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"MO_OTH_19",TRANSMOG,A(32527,81006),A(32529,81008),A(32525,81003),A(32530,81010),A(32526,81005),A(32523,81009),A(32528,81007),A(32524,81004))
-    set = SetCollector:AddSetLegacy(70000,nil,col,10701,"PA_OTH_19",PLATE,PALADIN,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"PA_OTH_19",TRANSMOG,A(32553,80966),A(32555,80968),A(32551,80963),A(32556,80970),A(32552,80965),A(32549,80969),A(32554,80967),A(32550,80964))
-    set = SetCollector:AddSetLegacy(70000,nil,col,10701,"PR_OTH_19",CLOTH,PRIEST,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"PR_OTH_19",TRANSMOG,A(32472,81029),A(32474,81032),A(32476,81031),A(32475,81034),A(32471,81028),A(32468,81033),A(32473,81030),A(32469,81027))
-    set = SetCollector:AddSetLegacy(70000,nil,col,10701,"RO_OTH_19",LEATHER,ROGUE,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"RO_OTH_19",TRANSMOG,A(32535,81014),A(32537,81016),A(32533,81011),A(32538,81018),A(32534,81013),A(32531,81017),A(32536,81015),A(32532,81012))
-    set = SetCollector:AddSetLegacy(70000,nil,col,10701,"SH_OTH_19",MAIL,SHAMAN,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"SH_OTH_19",TRANSMOG,A(32499,80974),A(32501,80976),A(32497,80971),A(32502,80978),A(32498,80973),A(32495,80977),A(32500,80975),A(32496,80972))
-    set = SetCollector:AddSetLegacy(70000,nil,col,10701,"WK_OTH_19",CLOTH,WARLOCK,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"WK_OTH_19",TRANSMOG,A(32517,81037),A(32519,81040),A(32521,81039),A(32520,81042),A(32516,81036),A(32513,81041),A(32518,81038),A(32514,81035))
-    set = SetCollector:AddSetLegacy(70000,nil,col,10701,"WR_OTH_19",PLATE,WARRIOR,ANY_FACTION)
-                SetCollector:AddVariantLegacy(70000,nil,col,set,"WR_OTH_19",TRANSMOG,A(32561,80958),A(32563,80960),A(32559,80955),A(32564,80962),A(32560,80957),A(32557,80961),A(32562,80959),A(32558,80956))
-
-
-    
 end
 
 local function GetOtherAppearances()
@@ -123,8 +113,8 @@ end
 
 local function GetPvPAppearances()
     local COLLECTION, VERSION = SetCollector.PVP, 70000
+    -- Seasons 1 & 2
     local sets = {
-        -- Seasons 1 & 2
         -- Alliance
         IncludeSet(COLLECTION,10701,1106,PLATE,DEATHKNIGHT,ALLIANCE,1108,1163),
         IncludeSet(COLLECTION,10701,1110,LEATHER,DEMONHUNTER,ALLIANCE,1112,1167),
@@ -153,20 +143,66 @@ local function GetPvPAppearances()
         IncludeSet(COLLECTION,10701,1134,PLATE,WARRIOR,HORDE,1069,1136),
     }
     AddSetsToDatabase(VERSION, COLLECTION, sets)
-    --[[local sets = {
-        -- Seasons 3 & 4
+    -- Seasons 3 & 4
+    local sets = {
         -- Alliance
-        IncludeSet(COLLECTION,10701,1129,MAIL,SHAMAN,ALLIANCE,1131,1161),
+        IncludeSet(COLLECTION,10702,1265,PLATE,DEATHKNIGHT,ALLIANCE,1267,1292),
+        IncludeSet(COLLECTION,10702,1262,LEATHER,DEMONHUNTER,ALLIANCE,1263,1290),
+        IncludeSet(COLLECTION,10702,1257,LEATHER,DRUID,ALLIANCE,1259,1288),
+        IncludeSet(COLLECTION,10702,1254,MAIL,HUNTER,ALLIANCE,1255,1286),
+        IncludeSet(COLLECTION,10702,1249,CLOTH,MAGE,ALLIANCE,1251,1284),
+        IncludeSet(COLLECTION,10702,1245,LEATHER,MONK,ALLIANCE,1247,1282),
+        IncludeSet(COLLECTION,10702,1241,PLATE,PALADIN,ALLIANCE,1243,1280),
+        IncludeSet(COLLECTION,10702,389,CLOTH,PRIEST,ALLIANCE,395,1278),
+        IncludeSet(COLLECTION,10702,1237,LEATHER,ROGUE,ALLIANCE,1239,1276),
+        IncludeSet(COLLECTION,10702,1233,MAIL,SHAMAN,ALLIANCE,1235,1274),
+        IncludeSet(COLLECTION,10702,1229,CLOTH,WARLOCK,ALLIANCE,1231,1272),
+        IncludeSet(COLLECTION,10702,1225,PLATE,WARRIOR,ALLIANCE,1227,1270),
         -- Horde
+        IncludeSet(COLLECTION,10702,1266,PLATE,DEATHKNIGHT,HORDE,1268,1291),
+        IncludeSet(COLLECTION,10702,1261,LEATHER,DEMONHUNTER,HORDE,1264,1289),
+        IncludeSet(COLLECTION,10702,1258,LEATHER,DRUID,HORDE,1260,1287),
+        IncludeSet(COLLECTION,10702,1253,MAIL,HUNTER,HORDE,1256,1285),
+        IncludeSet(COLLECTION,10702,1250,CLOTH,MAGE,HORDE,1252,1283),
+        IncludeSet(COLLECTION,10702,1246,LEATHER,MONK,HORDE,1248,1281),
+        IncludeSet(COLLECTION,10702,1242,PLATE,PALADIN,HORDE,1244,1279),
+        IncludeSet(COLLECTION,10702,391,CLOTH,PRIEST,HORDE,394,1277),
+        IncludeSet(COLLECTION,10702,1238,LEATHER,ROGUE,HORDE,1240,1275),
+        IncludeSet(COLLECTION,10702,1234,MAIL,SHAMAN,HORDE,1236,1273),
+        IncludeSet(COLLECTION,10702,1230,CLOTH,WARLOCK,HORDE,1232,1271),
+        IncludeSet(COLLECTION,10702,1226,PLATE,WARRIOR,HORDE,1228,1269),
     }
     AddSetsToDatabase(VERSION, COLLECTION, sets)
+    -- Seasons 5, 6 & 7
     local sets = {
-        -- Seasons 5, 6 & 7
         -- Alliance
-        IncludeSet(COLLECTION,10701,1129,MAIL,SHAMAN,ALLIANCE,1131,1161),
+        IncludeSet(COLLECTION,10703,1400,PLATE,DEATHKNIGHT,ALLIANCE,1348,1352),
+        IncludeSet(COLLECTION,10703,1402,LEATHER,DEMONHUNTER,ALLIANCE,1354,1358),
+        IncludeSet(COLLECTION,10703,1404,LEATHER,DRUID,ALLIANCE,1360,1380),
+        IncludeSet(COLLECTION,10703,1406,MAIL,HUNTER,ALLIANCE,1362,1382),
+        IncludeSet(COLLECTION,10703,1408,CLOTH,MAGE,ALLIANCE,1364,1384),
+        IncludeSet(COLLECTION,10703,1410,LEATHER,MONK,ALLIANCE,1366,1386),
+        IncludeSet(COLLECTION,10703,1412,PLATE,PALADIN,ALLIANCE,1368,1388),
+        IncludeSet(COLLECTION,10703,1414,CLOTH,PRIEST,ALLIANCE,1370,1390),
+        IncludeSet(COLLECTION,10703,1416,LEATHER,ROGUE,ALLIANCE,1372,1392),
+        IncludeSet(COLLECTION,10703,1418,MAIL,SHAMAN,ALLIANCE,1374,1394),
+        IncludeSet(COLLECTION,10703,1420,CLOTH,WARLOCK,ALLIANCE,1376,1396),
+        IncludeSet(COLLECTION,10703,1422,PLATE,WARRIOR,ALLIANCE,1378,1399),
         -- Horde
+        IncludeSet(COLLECTION,10703,1401,PLATE,DEATHKNIGHT,HORDE,1349,1353),
+        IncludeSet(COLLECTION,10703,1403,LEATHER,DEMONHUNTER,HORDE,1355,1359),
+        IncludeSet(COLLECTION,10703,1405,LEATHER,DRUID,HORDE,1361,1381),
+        IncludeSet(COLLECTION,10703,1407,MAIL,HUNTER,HORDE,1363,1383),
+        IncludeSet(COLLECTION,10703,1409,CLOTH,MAGE,HORDE,1365,1385),
+        IncludeSet(COLLECTION,10703,1411,LEATHER,MONK,HORDE,1367,1387),
+        IncludeSet(COLLECTION,10703,1413,PLATE,PALADIN,HORDE,1369,1389),
+        IncludeSet(COLLECTION,10703,1415,CLOTH,PRIEST,HORDE,1371,1391),
+        IncludeSet(COLLECTION,10703,1417,LEATHER,ROGUE,HORDE,1373,1393),
+        IncludeSet(COLLECTION,10703,1419,MAIL,SHAMAN,HORDE,1375,1395),
+        IncludeSet(COLLECTION,10703,1421,CLOTH,WARLOCK,HORDE,1377,1397),
+        IncludeSet(COLLECTION,10703,1423,PLATE,WARRIOR,HORDE,1398,1423),
     }
-    AddSetsToDatabase(VERSION, COLLECTION, sets)]]
+    AddSetsToDatabase(VERSION, COLLECTION, sets)
 end
 
 local function GetRaidAppearances()
@@ -243,11 +279,9 @@ function SetCollector:GetVersion07Appearances(expansion)
     end
 end
 
-
 function SetCollector:GetVersion07Status()
     return SetCollector:GetExpansionStatus("7")
 end
-
 
 function SetCollector:SetVersion07Status()
     SetCollector:SetExpansionStatus("7")
