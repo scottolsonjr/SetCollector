@@ -50,11 +50,11 @@ end
 
 
 local function OnTooltipSetItemHook(tooltip, ...)
-	local appearanceID, sourceID, itemID, collection, variant, set
+	local collection, variant, set
 	local debug = SetCollector:GetDebug();
 	local itemName, itemLink = tooltip:GetItem();
-	
-	appearanceID, sourceID, itemID = SetCollector:GetAppearanceInfo(itemLink);
+
+	local appearanceID, sourceID, itemID, setIDs = SetCollector:GetAppearanceInfo(itemLink);
     if appearanceID then
         local show_set = SetCollector.db.global.tooltips.show_set
         local show_location = SetCollector.db.global.tooltips.show_location
@@ -77,40 +77,57 @@ local function OnTooltipSetItemHook(tooltip, ...)
                 end
             end
         end
-		if debug then
-			tooltip:AddLine(" ")
-			tooltip:AddLine("SetCollector Debug")
-			tooltip:AddDoubleLine("Appearance ID:", appearanceID)
-			tooltip:AddDoubleLine("Source ID:", sourceID)
-			tooltip:AddDoubleLine("Item ID:", itemID)
-			tooltip:AddLine(" ")
-			tooltip:AddLine("All Available Sources:")
-			local sources = SetCollector:GetAppearanceSources(appearanceID)
-			if sources then
-				for i=1, #sources do
-					local link = select(6, C_TransmogCollection.GetAppearanceSourceInfo(sources[i].sourceID))
-					local sourceCollected = SetCollector:IsSourceCollected(sources[i].sourceID)
-					if sourceCollected then
-						tooltip:AddDoubleLine(link,sources[i].sourceID)
-					else
-						local name = GetItemInfo(link)
-						if ( name ) then
-						    tooltip:AddDoubleLine("|cFF777777"..name.."|r",sources[i].sourceID)
-						end
-					end
-					
-				end
-			else
-				tooltip:AddLine("None")
-			end
-            if SetCollector.db.global.collections.Appearances[appearanceID] then
-                tooltip:AddLine(" ");
-                tooltip:AddLine("Collection ID: "..collection)
-                tooltip:AddLine("Variant ID: "..variant)
-                tooltip:AddLine("Set ID: "..set)
-            end
-		end
 	end
+
+    if debug then
+        if setIDs or appearanceID or itemID then
+            tooltip:AddLine(" ")
+            tooltip:AddLine("Set Collector Debug")
+
+            if setIDs then
+                for i=1, #setIDs do
+                    tooltip:AddDoubleLine("Set ID:", setIDs[i])
+                end
+            end
+
+            if itemID then
+                tooltip:AddDoubleLine("Item ID:", itemID)
+            end
+    
+            if appearanceID then
+                tooltip:AddDoubleLine("Appearance ID:", appearanceID)
+                tooltip:AddDoubleLine("Source ID:", sourceID)
+                tooltip:AddLine(" ")
+                tooltip:AddLine("All Available Sources:")
+                local sources = SetCollector:GetAppearanceSources(appearanceID)
+                if sources then
+                    for i=1, #sources do
+                        local link = select(6, C_TransmogCollection.GetAppearanceSourceInfo(sources[i].sourceID))
+                        local sourceCollected = SetCollector:IsSourceCollected(sources[i].sourceID)
+                        if sourceCollected then
+                            tooltip:AddDoubleLine(link,sources[i].sourceID)
+                        else
+                            local name = GetItemInfo(link)
+                            if ( name ) then
+                                tooltip:AddDoubleLine("|cFF777777"..name.."|r",sources[i].sourceID)
+                            end
+                        end
+                        
+                    end
+                else
+                    tooltip:AddLine("None")
+                end
+                if SetCollector.db.global.collections.Appearances[appearanceID] then
+                    tooltip:AddLine(" ");
+                    tooltip:AddLine("Collection ID: "..collection)
+                    tooltip:AddLine("Variant ID: "..variant)
+                    tooltip:AddLine("Set ID: "..set)
+                end
+            end
+            
+            tooltip:AddLine(" ")
+        end
+    end
 	
 	if origTooltips[tooltip] then
 		return origTooltips[tooltip](tooltip, ...)

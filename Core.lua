@@ -55,20 +55,14 @@ end
 
 function SetCollector:GetAppearanceInfo(itemLink)
 	if itemLink then
-    local itemID, _, _, slotName = GetItemInfoInstant(itemLink)
-    local slot = InventorySlots[slotName]
-
-    if not slot or not IsDressableItem(itemLink) then return end
-
-    model:SetUnit('player')
-    model:Undress()
-    model:TryOn(itemLink, slot)
-    local sourceID = model:GetSlotTransmogSources(slot)
-    if sourceID then
-      local appearanceID = select(2, C_TransmogCollection.GetAppearanceSourceInfo(sourceID))
-      return appearanceID, sourceID, itemID
+        local appearanceID, sourceID, itemID, setIDs
+        itemID = GetItemInfoInstant(itemLink)
+        appearanceID, sourceID = C_TransmogCollection.GetItemInfo(itemLink)
+        if sourceID then
+            setIDs = C_TransmogSets.GetSetsContainingSourceID(sourceID)
+        end
+        return appearanceID, sourceID, itemID, setIDs
     end
-  end
 end
 
 function SetCollector:IsDebugging()									-- Redundant?
@@ -200,6 +194,23 @@ end
 function SetCollector:PrintItem(itemID)
     local sLink = select(2,GetItemInfo(itemID))
     SetCollector:Print(sLink)
+end
+
+function SetCollector:ListSet(input)
+    local setID, parameters = input:match("^(%S*)%s*(.-)$")
+    local sets = C_TransmogSets.GetAllSets();
+    if (sets) then
+        for i, set in ipairs(sets) do
+            local setInfo = (set.setID and C_TransmogSets.GetSetInfo(set.setID)) or nil;
+            if (set.setID == tonumber(setID) or set.baseSetID == tonumber(setID)) then
+                if (set.baseSetID == nil) then
+                    SetCollector:Print(set.setID.." "..(setInfo.name or nil))
+                else
+                    SetCollector:Print(set.setID.." "..(setInfo.name or nil).." ("..set.baseSetID..")")
+                end
+            end
+        end
+    end
 end
 
 function SetCollector:ListAllSets()
@@ -382,12 +393,18 @@ function SetCollector:MySlashProcessorFunc(input)
         SetCollector:ExportSetData()
         
     elseif command == "set" then
-        if (parameters == nil or parameters == "") then
-            SetCollector:ListBaseSets()
-        elseif (parameters == nil or parameters == "all") then
+        if (parameters ~= nil) then
+            SetCollector:ListSet(parameters)
+        --elseif (parameters == "sources") then
+        --    SetCollector:ListSetSources(parameters)
+        end
+        
+    elseif command == "sets" then
+        -- TODO: add parameters for count and starting setID (or pagination)
+        if (parameters == "all") then
             SetCollector:ListAllSets()
         else
-            SetCollector:ListSetSources(parameters)
+            SetCollector:ListBaseSets()
         end
 		
 	else
