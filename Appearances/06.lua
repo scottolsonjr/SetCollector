@@ -145,7 +145,7 @@ local function GetPvPAppearances()
     }
     AddSetsToDatabase(VERSION, COLLECTION, sets)
     -- Season 2
-    local sets = {
+    sets = {
         -- Alliance
         IncludeSet(COLLECTION,10602,90,PLATE,DEATHKNIGHT,ALLIANCE,17,1173),
         IncludeSet(COLLECTION,10602,84,LEATHER,DRUID,ALLIANCE,26,1175),
@@ -173,7 +173,7 @@ local function GetPvPAppearances()
     }
     AddSetsToDatabase(VERSION, COLLECTION, sets)
     -- Season 3
-    local sets = {
+    sets = {
         -- Alliance
         IncludeSet(COLLECTION,10603,108,PLATE,DEATHKNIGHT,ALLIANCE,45,1204),
         IncludeSet(COLLECTION,10603,106,LEATHER,DRUID,ALLIANCE,39,1206),

@@ -49,6 +49,12 @@ SetCollector.NO_TRANSMOG 		= false
 
 local WOW_VERSION = select(4, GetBuildInfo())
 
+local function is_numeric(x)
+    if tonumber(x) ~= nil then
+        return true
+    end
+    return false
+end
 
 function SetCollector:CreateAppearance(ID, sourceID, slotID, ...)
 	local t = { 
@@ -90,9 +96,13 @@ function SetCollector:IncludeSet(collection, uid, setID, armorType, class, facti
             Variants = { SetCollector:IncludeVariant(setID, setInfo) }
         }
         for i = 1, select('#', ...) do
-            local variantID = select(i, ...)
-            local variantInfo = (variantID and C_TransmogSets.GetSetInfo(variantID)) or nil;
-            table.insert(set.Variants, SetCollector:IncludeVariant(variantID, variantInfo))
+            local variant = select(i, ...)
+            if is_numeric(variant) then
+                local variantInfo = (variant and C_TransmogSets.GetSetInfo(variant)) or nil;
+                table.insert(set.Variants, SetCollector:IncludeVariant(variant, variantInfo))
+            else
+                table.insert(set.Variants, variant)
+            end
         end
         local function compare(a, b)
             return a.Order < b.Order
@@ -150,6 +160,7 @@ function SetCollector:CreateVariant(title, transmog, ...)
     local variant = {
         Title = title,
         Transmog = transmog,
+        Order = 99999,
         Appearances = {...}
     }
     variant.Count = select('#', ...)

@@ -144,7 +144,7 @@ local function GetPvPAppearances()
     }
     AddSetsToDatabase(VERSION, COLLECTION, sets)
     -- Seasons 3 & 4
-    local sets = {
+    sets = {
         -- Alliance
         IncludeSet(COLLECTION,10702,1265,PLATE,DEATHKNIGHT,ALLIANCE,1267,1292),
         IncludeSet(COLLECTION,10702,1262,LEATHER,DEMONHUNTER,ALLIANCE,1263,1290),
@@ -174,7 +174,7 @@ local function GetPvPAppearances()
     }
     AddSetsToDatabase(VERSION, COLLECTION, sets)
     -- Seasons 5, 6 & 7
-    local sets = {
+    sets = {
         -- Alliance
         IncludeSet(COLLECTION,10703,1400,PLATE,DEATHKNIGHT,ALLIANCE,1348,1352),
         IncludeSet(COLLECTION,10703,1402,LEATHER,DEMONHUNTER,ALLIANCE,1354,1358),
