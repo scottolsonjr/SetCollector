@@ -18,6 +18,7 @@ L["LOC_DG_0901"] = "De Other Side/Mists of Tirna Scithe"
 L["LOC_DG_0902"] = "Halls of Atonement/Sanguine Depths"
 L["LOC_DG_0903"] = "Plaguefall/Theater of Pain"
 L["LOC_DG_0904"] = "Spires of Ascension/The Necrotic Wake"
+L["LOC_DG_0905"] = "Tazavesh, the Veiled Market"
 L["LOC_PVP_0501"] = "Season 12"                     -- Replace
 L["LOC_PVP_0502"] = "Season 13"                     -- Replace
 L["LOC_PVP_0503"] = "Season 14"                     -- Replace
