@@ -56,6 +56,40 @@ local function CreateVariant(...) return SetCollector:CreateVariant(...) end
 local function IncludeSet(...) return SetCollector:IncludeSet(...) end
 local function AddSetsToDatabase(...) return SetCollector:AddSetsToDatabase(...) end
 
+local function GetCraftedAppearances()
+    local COLLECTION, VERSION = SetCollector.CRAFTED, 70000
+    local sets = {
+        CreateSet(COLLECTION,10001,"PLACEHOLDER",CLOTH,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("1",TRANSMOG,A(5657,8336)),
+            CreateVariant("2",TRANSMOG,A(5772,8514)),
+            CreateVariant("3",TRANSMOG,A(5773,8515)),
+            CreateVariant("4",TRANSMOG,A(5656,8335))
+        ),
+        CreateSet(COLLECTION,10001,"PLACEHOLDER",LEATHER,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("1",TRANSMOG,A(5657,8336)),
+            CreateVariant("2",TRANSMOG,A(5772,8514)),
+            CreateVariant("3",TRANSMOG,A(5773,8515)),
+            CreateVariant("4",TRANSMOG,A(5656,8335))
+        ),
+        CreateSet(COLLECTION,10001,"PLACEHOLDER",MAIL,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("1",TRANSMOG,A(6209,9308),A(),A(6207,9306),A(6210,9309),A(6208,9307)),   -- Fel Iron
+            CreateVariant("2",TRANSMOG,A(),A(),A(6206,9305),A(),A(6203,9301),A(5539,9302),A(6205,9304),A(6204,9303)),   -- Adamantite
+            CreateVariant("3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A()),   -- Swift Steel
+            CreateVariant("4",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A()),   -- 
+            CreateVariant("5",TRANSMOG,A()),   -- 
+            CreateVariant("6",TRANSMOG,A(),A(),A(),A(),A(),A(),A())   -- 
+        ),
+        CreateSet(COLLECTION,10001,"PLACEHOLDER",PLATE,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("1",TRANSMOG,A(),A(),A(6206,9305),A(),A(6203,9301),A(5539,9302),A(6205,9304),A(6204,9303)),   -- Fel Iron
+            CreateVariant("2",TRANSMOG,A(),A(),A(4240,9318),A(4247,9317),A(4241,9319),A(),A(),A()),   -- Adamantite
+            CreateVariant("3",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A()),   -- Red Havoc
+            CreateVariant("4",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A()),   -- Felsteel
+            CreateVariant("5",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())    -- of the protector
+        ),
+    }
+    AddSetsToDatabase(VERSION, COLLECTION, sets)
+end
+
 local function GetLegendaries()
     local COLLECTION, VERSION = SetCollector.RAID, 70000
     
