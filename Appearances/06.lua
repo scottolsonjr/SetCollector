@@ -59,8 +59,11 @@ local function AddSetsToDatabase(...) return SetCollector:AddSetsToDatabase(...)
 local function GetCraftedAppearances()
     local COLLECTION, VERSION = SetCollector.CRAFTED, 70000
     local sets = {
-        CreateSet(COLLECTION,10601,"CR_PLATE_100",PLATE,ANY_CLASS,ANY_FACTION,NO_LOCATION,
-            CreateVariant("CR_PLATE_100",TRANSMOG,A(27327,80888),A(27329,80890),A(27325,80885),A(27330,80892),A(27326,80887),A(27323,80891),A(27328,80889),A(27324,80886))
+        CreateSet(COLLECTION,10601,"PLACEHOLDER",PLATE,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("PLACEHOLDER",TRANSMOG,A(22762,65301),A(),A(22760,65302),A(),A(),A(),A(22763,65300),A())
+        ),
+        CreateSet(COLLECTION,10602,"PLACEHOLDER",PLATE,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("PLACEHOLDER",TRANSMOG,A(23242,62930),A(23240,62931),A(23244,62932),A(23239,62936),A(23243,62937),A(23246,62933),A(23241,62934),A(23245,62935))
         ),
     }
     AddSetsToDatabase(VERSION, COLLECTION, sets)
@@ -265,8 +268,8 @@ end
 function SetCollector:GetVersion06Appearances(expansion)
     if expansion.v06 then
         -- Common
-        GetCraftedAppearances()
-        GetDungeonAppearances()
+        --GetCraftedAppearances()
+        --GetDungeonAppearances()
         GetExpansionAppearances()
         GetOtherAppearances()
         GetPvPAppearances()

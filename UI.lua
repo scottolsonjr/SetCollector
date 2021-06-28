@@ -534,70 +534,61 @@ local function GetSourceID(appearanceID)
 end
 
 function SetCollector:UpdateSelectedVariantTab(self)
-	if SetCollector:GetDebug() then SetCollector:Print("Updating Selected Variant Tab") end
-	local selected = PanelTemplates_GetSelectedTab(self);
-	if selected and SetCollector:GetDebug() then SetCollector:Print("Tab: "..selected) end
-	if ( frame:IsShown() ) then
-		
-		modelFrame:Dress()
+	if frame:IsShown() then
+        local selected = PanelTemplates_GetSelectedTab(self);
+        if selected and SetCollector:GetDebug() then SetCollector:Print("Updating Selected Variant Tab: "..selected) end
 		
 		local collection = _G["SetCollectorSetDisplayTab"..selected].Collection
-		if collection and SetCollector:GetDebug() then SetCollector:Print("Collection: "..collection) end
 		local set = _G["SetCollectorSetDisplayTab"..selected].Set
-		if set and SetCollector:GetDebug() then SetCollector:Print("Set: "..set) end
 		local outfit = _G["SetCollectorSetDisplayTab"..selected].Outfit
-		if outfit and SetCollector:GetDebug() then SetCollector:Print("Outfit: "..outfit) end
-		
-        local inc = 0
+
         ClearItemButtons(1)
-		if ( collection and set ) then
-            items = {}
-            local acq = 0
-			if ( outfit and collection == 0 ) then
+
+        local inc = 0
+		if collection and set then
+            local items, acq = {}, 0
+            modelFrame:Undress()
+			if outfit and collection == 0 then
 				local appearanceSources, mainHandEnchant, offHandEnchant = C_TransmogCollection.GetOutfitSources(outfit)
 				for i=1, #appearanceSources do
 					if appearanceSources[i] > 0 then
-						local categoryID, appearanceID = C_TransmogCollection.GetAppearanceSourceInfo(appearanceSources[i])
-						if appearanceID and SetCollector:GetDebug() then SetCollector:Print("Appearance ID: "..appearanceID) end
-						if appearanceSources[i] and SetCollector:GetDebug() then SetCollector:Print("Source ID: "..appearanceSources[i]) end
+						local categoryID, appearanceID, _, _, isCollected = C_TransmogCollection.GetAppearanceSourceInfo(appearanceSources[i])
+                        if isCollected then
+                            acq = acq + 1
+                        end
 						inc = inc + 1
-						modelFrame:TryOn(appearanceSources[i])
                         items[inc] = {
                             categoryID = categoryID,
                             appearanceID = appearanceID,
-                            sourceID = sourceID
+                            sourceID = appearanceSources[i]
                         }
 				  end
 				end
 				
 			elseif ( collection > 0 ) then
-				modelFrame:Undress()
-				
 		  	    local db = SetCollector.db.global.collections
-		  	    local char = SetCollector.db.char
 				local num = #db[collection].Sets[set].Variants[selected].Appearances
-				acq = SetCollector:GetCollectedCount(collection, set, selected)
 				for i=1, num do
-					if SetCollector:GetDebug() then SetCollector:Print("Row: "..i) end
 					local sourceID = db[collection].Sets[set].Variants[selected].Appearances[i].sourceID
-					if sourceID and SetCollector:GetDebug() then SetCollector:Print("Source ID: "..sourceID) end
-					local appearanceID = db[collection].Sets[set].Variants[selected].Appearances[i].ID
-					if appearanceID and SetCollector:GetDebug() then SetCollector:Print("Appearance ID: "..appearanceID) end
+                    local appearanceID = db[collection].Sets[set].Variants[selected].Appearances[i].ID
 					if sourceID == 0 then
 						sourceID = GetSourceID(appearanceID)
 					end
 					if sourceID and sourceID > 0 then
-						inc = inc + 1
-						modelFrame:TryOn(sourceID)
-						local categoryID = C_TransmogCollection.GetAppearanceSourceInfo(sourceID)
-                        items[i] = {
-                            categoryID = categoryID,
-                            appearanceID = appearanceID,
-                            sourceID = sourceID
-                        }
+						local categoryID, appearanceID, _, _, isCollected = C_TransmogCollection.GetAppearanceSourceInfo(sourceID)
+                        if isCollected then
+                            acq = acq + 1
+                        end
+                        if categoryID then
+                            inc = inc + 1
+                            items[inc] = {
+                                categoryID = categoryID,
+                                appearanceID = appearanceID,
+                                sourceID = sourceID
+                            }
+                        end
 				    end
 			    end
-			
 			end
 
             local function compare(a, b)
@@ -605,6 +596,7 @@ function SetCollector:UpdateSelectedVariantTab(self)
             end
             table.sort(items, compare)
             for i=1, #items do
+                modelFrame:TryOn(items[i].sourceID)
                 SetItemButton(_G["SetCollectorSetDisplayModelFrameItem"..i], items[i].appearanceID, items[i].sourceID)
             end
 			
@@ -616,10 +608,10 @@ function SetCollector:UpdateSelectedVariantTab(self)
             end
             SetCollectorSummaryButton:Show()
 		else
+	        modelFrame:Dress()
 			ClearItemButtons(inc + 1)
 			SetCollectorSummaryButton:Hide()
 		end
-			
 	end
 end
 

@@ -56,11 +56,51 @@ local function CreateVariant(...) return SetCollector:CreateVariant(...) end
 local function IncludeSet(...) return SetCollector:IncludeSet(...) end
 local function AddSetsToDatabase(...) return SetCollector:AddSetsToDatabase(...) end
 
-
-
 local function GetDungeonAppearances()
-    local col = SetCollector.DUNGEON
-    local set = ""
+    local COLLECTION, VERSION = SetCollector.DUNGEON, 80000
+    local LOCATION_01, LOCATION_02, LOCATION_03 = "LOC_DG_0801", "LOC_DG_0802", "LOC_DG_0803"
+    local sets = {
+        -- Kul'Tiras
+        CreateSet(COLLECTION,10801,"DG_CLOTH_0801",CLOTH,ANY_CLASS,ANY_FACTION,LOCATION_01,
+            CreateVariant("LOC_DG_0801",TRANSMOG,A(37957),A(37959),A(37955),A(37960),A(37956),A(37953),A(37958),A(37954))
+        ),
+        CreateSet(COLLECTION,10801,"DG_LEATHER_0801",LEATHER,ANY_CLASS,ANY_FACTION,LOCATION_01,
+            CreateVariant("LOC_DG_0801",TRANSMOG,A(37466),A(37468),A(37464),A(37463),A(37465),A(37461),A(37467),A(37462))    
+        ),
+        CreateSet(COLLECTION,10801,"DG_MAIL_0801",MAIL,ANY_CLASS,ANY_FACTION,LOCATION_01,
+            CreateVariant("LOC_DG_0801",TRANSMOG,A(37528),A(37530),A(37525),A(37532),A(37527),A(37531),A(37529),A(37524))
+        ),
+        CreateSet(COLLECTION,10801,"DG_PLATE_0801",PLATE,ANY_CLASS,ANY_FACTION,LOCATION_01,
+            CreateVariant("LOC_DG_0801",TRANSMOG,A(36613),A(36617),A(36637),A(36633),A(36641),A(36609),A(36645),A(36629))
+        ),
+        -- Zandalar
+        CreateSet(COLLECTION,10802,"DG_CLOTH_0801",CLOTH,ANY_CLASS,ANY_FACTION,LOCATION_02,
+            CreateVariant("LOC_DG_0802",TRANSMOG,A(37167),A(37169),A(37165),A(37163),A(37166),A(37162),A(37168),A(37164))
+        ),
+        CreateSet(COLLECTION,10802,"DG_LEATHER_0801",LEATHER,ANY_CLASS,ANY_FACTION,LOCATION_02,
+            CreateVariant("LOC_DG_0802",TRANSMOG,A(37342),A(37344),A(37340),A(37345),A(37341),A(37338),A(37343),A(37339))    
+        ),
+        CreateSet(COLLECTION,10802,"DG_MAIL_0801",MAIL,ANY_CLASS,ANY_FACTION,LOCATION_02,
+            CreateVariant("LOC_DG_0802",TRANSMOG,A(38128),A(38130),A(38125),A(38131),A(38127),A(38157),A(38129),A(38124))
+        ),
+        CreateSet(COLLECTION,10802,"DG_PLATE_0801",PLATE,ANY_CLASS,ANY_FACTION,LOCATION_02,
+            CreateVariant("LOC_DG_0802",TRANSMOG,A(36933),A(36945),A(36929),A(36925),A(36934),A(36917),A(36941),A(36921))
+        ),
+        -- Operation: Mechagon
+        CreateSet(COLLECTION,10803,"DG_CLOTH_0801",CLOTH,ANY_CLASS,ANY_FACTION,LOCATION_03,
+            CreateVariant("LOC_DG_0803",TRANSMOG,A(37968),A(37964),A(37969),A(37965),A(37962),A(37967),A(37963))
+        ),
+        CreateSet(COLLECTION,10803,"DG_LEATHER_0801",LEATHER,ANY_CLASS,ANY_FACTION,LOCATION_03,
+            CreateVariant("LOC_DG_0803",TRANSMOG,A(37481),A(37477),A(37482),A(37478),A(37469),A(37480),A(37476))    
+        ),
+        CreateSet(COLLECTION,10803,"DG_MAIL_0801",MAIL,ANY_CLASS,ANY_FACTION,LOCATION_03,
+            CreateVariant("LOC_DG_0803",TRANSMOG,A(37514),A(37506),A(37504),A(37507),A(37502),A(37513),A(37503))
+        ),
+        CreateSet(COLLECTION,10803,"DG_PLATE_0801",PLATE,ANY_CLASS,ANY_FACTION,LOCATION_03,
+            CreateVariant("LOC_DG_0803",TRANSMOG,A(36619),A(36639),A(36635),A(36643),A(36611),A(36647),A(36631))
+        ),
+    }
+    AddSetsToDatabase(VERSION, COLLECTION, sets)
 end
 
 local function GetExpansionAppearances()
@@ -289,6 +329,7 @@ end
 
 function SetCollector:GetVersion08Appearances(expansion)
     if expansion.v08 then
+        GetDungeonAppearances()
         --GetLegendaries()
         GetRaidAppearances()
         GetDungeonAppearances()

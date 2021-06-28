@@ -55,6 +55,42 @@ local function CreateVariant(...) return SetCollector:CreateVariant(...) end
 local function IncludeSet(...) return SetCollector:IncludeSet(...) end
 local function AddSetsToDatabase(...) return SetCollector:AddSetsToDatabase(...) end
 
+local function GetCraftedAppearances()
+    local COLLECTION, VERSION = SetCollector.CRAFTED, 70000
+    local sets = {
+        CreateSet(COLLECTION,10001,"PLACEHOLDER",CLOTH,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("1",TRANSMOG,A(5657,8336)),
+            CreateVariant("2",TRANSMOG,A(5772,8514)),
+            CreateVariant("3",TRANSMOG,A(5773,8515)),
+            CreateVariant("4",TRANSMOG,A(5656,8335))
+        ),
+        CreateSet(COLLECTION,10001,"PLACEHOLDER",LEATHER,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("1",TRANSMOG,A(5657,8336)),
+            CreateVariant("2",TRANSMOG,A(5772,8514)),
+            CreateVariant("3",TRANSMOG,A(5773,8515)),
+            CreateVariant("4",TRANSMOG,A(5656,8335))
+        ),
+        CreateSet(COLLECTION,10001,"PLACEHOLDER",MAIL,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("1",TRANSMOG,A(),A(),A(1234,1285)),   -- Copper chain
+            CreateVariant("2",TRANSMOG,A(),A(),A(982,981),A(980,979),A(1235,1286),A(981,980),A(1236,1287)),   -- Runed Copper
+            CreateVariant("1",TRANSMOG,A(),A(1239,1290),A(984,983),A(),A(),A(),A(983,982),A(1450,2357)),   -- Rough Bronze
+            CreateVariant("2",TRANSMOG,A(),A(1240,1291),A(986,986),A(),A(1242,1293),A(),A(1457,3967),A(1241,1292)),   -- Silvered Bronze
+            CreateVariant("3",TRANSMOG,A(1363,1445),A(1365,1447),A(1369,1451),A(1362,1444),A(1244,1295),A(),A(1367,1449),A(1243,1294)),   -- Green Iron
+            CreateVariant("4",TRANSMOG,A(1364,1446),A(1366,1448),A(1370,1452),A(1955,2230),A(),A(),A(1368,1450),A(1372,1454)),   -- Golden Scale
+            CreateVariant("5",TRANSMOG,A(1504,2976)),   -- Mitril
+            CreateVariant("6",TRANSMOG,A(),A(2544,2977),A(),A(569,2969),A(),A(),A(205,2966))   -- Mitril Scale
+        ),
+        CreateSet(COLLECTION,10001,"PLACEHOLDER",PLATE,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("1",TRANSMOG,A(2484,2968)),   -- Steel Plate
+            CreateVariant("2",TRANSMOG,A(2546,2979),A(2537,2964),A(1920,2975),A(),A(2538,2965),A(),A(2539,2967),A(2545,2978)),   -- Heavy Mitril
+            CreateVariant("3",TRANSMOG,A(3539,4408),A(),A(3537,4404),A(3538,4406),A(),A(3259,4405),A(3540,4409),A(2756,4407)),   -- Thorium
+            CreateVariant("4",TRANSMOG,A(3550,4421),A(3551,4422),A(3546,4417),A(3548,4419),A(),A(3547,4418),A(3552,4423),A(3549,4420)),   -- Imperial
+            CreateVariant("5",TRANSMOG,A(3844,7623),A(3423,4196),A(3422,4195),A(4630,7061),A(5392,7631),A(),A(5104,7060),A(5281,7905))    -- Dark Iron
+        ),
+    }
+    AddSetsToDatabase(VERSION, COLLECTION, sets)
+end
+
 local function GetDungeonAppearances()
     local COLLECTION, VERSION = SetCollector.DUNGEON, 70000
     local sets = {

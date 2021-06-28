@@ -148,9 +148,31 @@ local function Get90000DungeonAppearances(collection)
     AddSetsToDatabase(VERSION, collection, sets)
 end
 
+local function Get90100DungeonAppearances(collection)
+    local VERSION = 90100
+    local LOCATION_05 = "LOC_DG_0905"
+    local sets = {
+        -- Tazavesh, the Veiled Market
+        CreateSet(collection,10905,"DG_CLOTH_0901",CLOTH,ANY_CLASS,ANY_FACTION,LOCATION_05,
+            CreateVariant("LOC_DG_0905",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+        ),
+        CreateSet(collection,10905,"DG_LEATHER_0901",LEATHER,ANY_CLASS,ANY_FACTION,LOCATION_05,
+            CreateVariant("LOC_DG_0905",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+        ),
+        CreateSet(collection,10905,"DG_MAIL_0901",MAIL,ANY_CLASS,ANY_FACTION,LOCATION_05,
+            CreateVariant("LOC_DG_0905",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+        ),
+        CreateSet(collection,10905,"DG_PLATE_0901",PLATE,ANY_CLASS,ANY_FACTION,LOCATION_05,
+            CreateVariant("LOC_DG_0905",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A())
+        ),
+    }
+    AddSetsToDatabase(VERSION, collection, sets)
+end
+
 local function GetDungeonAppearances()
     local COLLECTION = SetCollector.DUNGEON
-    Get90000DungeonAppearances(COLLECTION)     
+    Get90000DungeonAppearances(COLLECTION)
+    --Get90100DungeonAppearances(COLLECTION)
 end
 
 local function GetExpansionAppearances()
@@ -224,16 +246,16 @@ local function GetLegendaryAppearances()
     local COLLECTION, VERSION = SetCollector.LEGENDARY, 90000
     local sets = {
         CreateSet(COLLECTION,10901,"LG_CLOTH_0901",CLOTH,ANY_CLASS,ANY_FACTION,NO_LOCATION,
-            CreateVariant("LG_CLOTH_0901",TRANSMOG,A(43079,107406),A(43154,107408),A(43165,107402),A(42984,107410),A(42979,107405),A(43803,107409),A(42981,107407),A(42978,107404))
+            CreateVariant("LG_CLOTH_0901",NO_TRANSMOG,A(43079,107406),A(43154,107408),A(43165,107402),A(42984,107410),A(42979,107405),A(43803,107409),A(42981,107407),A(42978,107404))
         ),
         CreateSet(COLLECTION,10901,"LG_LEATHER_0901",LEATHER,ANY_CLASS,ANY_FACTION,NO_LOCATION,
-            CreateVariant("LG_LEATHER_0901",TRANSMOG,A(44174,106648),A(44176,106650),A(44171,106645),A(44178,106652),A(44173,106647),A(44177,106651),A(44175,106649),A(44172,106646))
+            CreateVariant("LG_LEATHER_0901",NO_TRANSMOG,A(44174,106648),A(44176,106650),A(44171,106645),A(44178,106652),A(44173,106647),A(44177,106651),A(44175,106649),A(44172,106646))
         ),
         CreateSet(COLLECTION,10901,"LG_MAIL_0901",MAIL,ANY_CLASS,ANY_FACTION,NO_LOCATION,
-            CreateVariant("LG_MAIL_0901",TRANSMOG,A(43090,106696),A(43089,106698),A(43080,106693),A(43088,106700),A(43083,106695),A(43087,106699),A(43085,106697),A(43082,106694))
+            CreateVariant("LG_MAIL_0901",NO_TRANSMOG,A(43090,106696),A(43089,106698),A(43080,106693),A(43088,106700),A(43083,106695),A(43087,106699),A(43085,106697),A(43082,106694))
         ),
         CreateSet(COLLECTION,10901,"LG_PLATE_0901",PLATE,ANY_CLASS,ANY_FACTION,NO_LOCATION,
-            CreateVariant("LG_PLATE_0901",TRANSMOG,A(42829,106001),A(42823,106003),A(42760,105998),A(42808,106005),A(42835,106000),A(42818,106004),A(42790,106002),A(42841,105999))
+            CreateVariant("LG_PLATE_0901",NO_TRANSMOG,A(42829,106001),A(42823,106003),A(42760,105998),A(42808,106005),A(42835,106000),A(42818,106004),A(42790,106002),A(42841,105999))
         )
     }
     AddSetsToDatabase(VERSION, COLLECTION, sets)
@@ -303,7 +325,7 @@ local function GetRaidAppearances()
         IncludeSet(COLLECTION,10901,2150,PLATE,ANY_CLASS,ANY_FACTION,2151,2152,2153),
     }
     AddSetsToDatabase(VERSION, COLLECTION, sets)
-
+    -- Sanctum of Domination
     VERSION = 90100
     sets = {
         IncludeSet(COLLECTION,10902,2262,CLOTH,ANY_CLASS,ANY_FACTION,2263,2264,2265),
