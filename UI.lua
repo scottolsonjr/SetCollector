@@ -549,20 +549,23 @@ function SetCollector:UpdateSelectedVariantTab(self)
             local items, acq = {}, 0
             modelFrame:Undress()
 			if outfit and collection == 0 then
-				local appearanceSources, mainHandEnchant, offHandEnchant = C_TransmogCollection.GetOutfitSources(outfit)
-				for i=1, #appearanceSources do
-					if appearanceSources[i] > 0 then
-						local categoryID, appearanceID, _, _, isCollected = C_TransmogCollection.GetAppearanceSourceInfo(appearanceSources[i])
+                local itemTransmogInfoList = C_TransmogCollection.GetOutfitItemTransmogInfoList(outfit)
+                for i=1, #itemTransmogInfoList do
+                    local sourceID = itemTransmogInfoList[i].appearanceID
+					if sourceID and sourceID > 0 then
+                        local categoryID, appearanceID, _, _, isCollected = C_TransmogCollection.GetAppearanceSourceInfo(sourceID)
                         if isCollected then
                             acq = acq + 1
                         end
-						inc = inc + 1
-                        items[inc] = {
-                            categoryID = categoryID,
-                            appearanceID = appearanceID,
-                            sourceID = appearanceSources[i]
-                        }
-				  end
+                        if categoryID then
+                            inc = inc + 1
+                            items[inc] = {
+                                categoryID = categoryID,
+                                appearanceID = appearanceID,
+                                sourceID = sourceID
+                            }
+                        end
+				    end
 				end
 				
 			elseif ( collection > 0 ) then
@@ -575,7 +578,8 @@ function SetCollector:UpdateSelectedVariantTab(self)
 						sourceID = GetSourceID(appearanceID)
 					end
 					if sourceID and sourceID > 0 then
-						local categoryID, appearanceID, _, _, isCollected = C_TransmogCollection.GetAppearanceSourceInfo(sourceID)
+						local categoryID, appearanceID = C_TransmogCollection.GetAppearanceSourceInfo(sourceID)
+                        local isCollected = SetCollector:IsAppearanceCollected(appearanceID)
                         if isCollected then
                             acq = acq + 1
                         end
@@ -940,7 +944,7 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 			if i == 1 then
 				local outfits = C_TransmogCollection.GetOutfits()
 				for j=1, #outfits do
-					local outfitID = outfits[j].outfitID
+					local outfitID = outfits[j]
 					
 					rowIndex = rowIndex + 1
 					titleButton = GetSetButton(rowIndex)
@@ -955,7 +959,7 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 					--titleButton.Check:Show()	-- It is possible to create sets without having collected all of the appearances
 					titleButton.Favorite:Show()
 						
-					titleButton.Text:SetText(C_TransmogCollection.GetOutfitName(outfitID))
+					titleButton.Text:SetText(C_TransmogCollection.GetOutfitInfo(outfitID))
                     --titleButton.SubText:SetText("|cff555555"..L["OUTFITS"].."|r")
 					
 					local height = titleButton.Text:GetHeight() + titleButton.SubText:GetHeight() + 10
