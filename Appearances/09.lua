@@ -233,11 +233,11 @@ local function GetExpansionAppearances()
 
     VERSION = 90100
     sets = {
-        IncludeSet(COLLECTION,10902,2205,ANY_ARMOR,ANY_CLASS,ANY_FACTION,2202,2203,2204),
-        IncludeSet(COLLECTION,10902,2208,ANY_ARMOR,ANY_CLASS,ANY_FACTION,2206,2207,2209),
-        IncludeSet(COLLECTION,10902,2212,ANY_ARMOR,ANY_CLASS,ANY_FACTION,2210,2211,2213),
-        IncludeSet(COLLECTION,10902,2214,ANY_ARMOR,ANY_CLASS,ANY_FACTION,2215,2216,2217),
-        IncludeSet(COLLECTION,10902,2218,ANY_ARMOR,ANY_CLASS,ANY_FACTION,2219,2220,2221),
+        IncludeSet(COLLECTION,10905,2205,ANY_ARMOR,ANY_CLASS,ANY_FACTION,2202,2203,2204),
+        IncludeSet(COLLECTION,10905,2208,ANY_ARMOR,ANY_CLASS,ANY_FACTION,2206,2207,2209),
+        IncludeSet(COLLECTION,10905,2212,ANY_ARMOR,ANY_CLASS,ANY_FACTION,2210,2211,2213),
+        IncludeSet(COLLECTION,10905,2214,ANY_ARMOR,ANY_CLASS,ANY_FACTION,2215,2216,2217),
+        IncludeSet(COLLECTION,10905,2218,ANY_ARMOR,ANY_CLASS,ANY_FACTION,2219,2220,2221),
     }
     AddSetsToDatabase(VERSION, COLLECTION, sets)
 end
@@ -292,6 +292,20 @@ local function GetOtherAppearances()
         -- CreateVariant("Forgehand's Mail",TRANSMOG,A(181596,43200))
     }
     AddSetsToDatabase(VERSION, COLLECTION, sets)
+    --[[VERSION = 90100
+    sets = {
+        -- Korthia Catchup Gear
+        CreateSet(COLLECTION,10902,"OTH_CLOTH_10902",CLOTH,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("LOC_KORTHIA",TRANSMOG,A(55591),A(55592),A(55593),A(55594),A(55595),A(55597),A(55598),A(55599),A(55596))
+        ),
+        CreateSet(COLLECTION,10902,"OTH_LEATHER_10902",LEATHER,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("LOC_KORTHIA",TRANSMOG,A(),A(),A(55583),A(55584),A(55585),A(55587),A(55588),A(55589),A(55586))
+        ),
+        CreateSet(COLLECTION,10902,"OTH_MAIL_10902",MAIL,ANY_CLASS,ANY_FACTION,NO_LOCATION,
+            CreateVariant("LOC_KORTHIA",TRANSMOG,A(55574),A(55573),A(55576),A(55580),A(55575),A(55581),A(55577),A(55578),A(55579))
+        ),
+    }
+    AddSetsToDatabase(VERSION, COLLECTION, sets)]]
 end
 
 local function GetPvPAppearances()
@@ -342,7 +356,7 @@ end
 
 function SetCollector:GetVersion09Appearances(expansion)
     if expansion.v09 then
-        GetLegendaryAppearances()
+        --GetLegendaryAppearances()
         GetRaidAppearances()
         GetPvPAppearances()
         GetCraftedAppearances()
