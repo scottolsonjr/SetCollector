@@ -157,19 +157,27 @@ function SetCollector:GetAppearanceSources(appearanceID)
 			return source1.isCollected;
 		end
 
-		if ( source1.quality and source2.quality ) then
-			if ( source1.quality ~= source2.quality ) then
-				return source1.quality > source2.quality;
-			end
-		else
-			return source1.quality;
-		end
+		-- if ( source1.quality and source2.quality ) then
+		-- 	if ( source1.quality ~= source2.quality ) then
+		-- 		return source1.quality > source2.quality;
+		-- 	end
+		-- else
+		-- 	return source1.quality;
+		-- end
 
 		return source1.sourceID > source2.sourceID;
 	end
 
 	if appearanceID then
-		local sources = C_TransmogCollection.GetAppearanceSources(appearanceID);
+		local sourceIDs = C_TransmogCollection.GetAllAppearanceSources(appearanceID);
+        local sources = { }
+        for i=1, #sourceIDs do
+            local categoryID, visualID, canEnchant, icon, isCollected, itemLink, transmogLink = C_TransmogCollection.GetAppearanceSourceInfo(sourceIDs[i])
+            sources[i] = {}
+            sources[i]["isCollected"] = isCollected
+            sources[i]["sourceID"] = sourceIDs[i]
+        end
+		--local sources = C_TransmogCollection.GetAppearanceSources(appearanceID); -- now requires additional parameters
 		if sources then table.sort(sources, comparison) end
 		return sources;
 	end
@@ -182,14 +190,15 @@ function SetCollector:GetCollectedCount(collection, set, variant)
 		local appearances = db.collections[collection].Sets[set].Variants[variant].Appearances or { }
 		for i=1, #appearances do
 			local isCollected
-			local sourceID = appearances[i].sourceID
-			local itemID = appearances[i].itemID
 			if appearances[i].ID then
-				local sources = C_TransmogCollection.GetAppearanceSources(appearances[i].ID)
+				local sources = C_TransmogCollection.GetAllAppearanceSources(appearances[i].ID)
+				--local sources = SetCollector:GetAppearanceSources(appearances[i].ID)
 				if sources then
 					for j=1, #sources do
-						if sources[j].isCollected then
-						isCollected = true
+                        --if sources[j] and sources[j].isCollected then
+                        local info = C_TransmogCollection.GetAppearanceInfoBySource(sources[j])
+                        if info and info.sourceIsCollected then
+						    isCollected = true
 						end
 					end
 				end
@@ -197,7 +206,7 @@ function SetCollector:GetCollectedCount(collection, set, variant)
 			if isCollected then collectedCount = collectedCount + 1 end
 		end
 	end
-	if sourcesCount == 0 and collectedCount == 0 then collectedCount = "*" end
+	--if sourcesCount == 0 and collectedCount == 0 then collectedCount = "*" end
 	
 	return collectedCount
 end
@@ -215,20 +224,19 @@ function SetCollector:GetCompletedVariantCount(collection, set)
 end
 
 function SetCollector:IsSourceCollected(sourceID)
-  local sourceCollected
   if sourceID then
-    sourceCollected = select(5, C_TransmogCollection.GetAppearanceSourceInfo(sourceID))
+    return select(5, C_TransmogCollection.GetAppearanceSourceInfo(sourceID))
   end
-  return sourceCollected
+  return false
 end
 
 function SetCollector:IsAppearanceCollected(appearanceID)
 	local anyCollected = false
 	if appearanceID then
-		local sources = C_TransmogCollection.GetAppearanceSources(appearanceID)
+		local sources = C_TransmogCollection.GetAllAppearanceSources(appearanceID)
 		if sources then
 			for j=1, #sources do
-				local isCollected = select(5, C_TransmogCollection.GetAppearanceSourceInfo(sources[j].sourceID))
+				local isCollected = SetCollector:IsSourceCollected(sources[j])
 				if not anyCollected and isCollected then
 					anyCollected = true
 				end
@@ -236,6 +244,21 @@ function SetCollector:IsAppearanceCollected(appearanceID)
 		end
 	end
 	return anyCollected
+end
+
+function SetCollector:GetCollectedAppearanceSourceID(appearanceID)
+	if appearanceID then
+		local sources = C_TransmogCollection.GetAllAppearanceSources(appearanceID)
+		if sources then
+			for j=1, #sources do
+				local isCollected = SetCollector:IsSourceCollected(sources[j])
+				if isCollected then
+					return sources[j]
+				end
+			end
+		end
+	end
+	return nil
 end
 
 function SetCollector:IsSetFullyCollected(collection, set)
