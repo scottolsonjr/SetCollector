@@ -371,9 +371,9 @@ local function SetItemButton(button, appearanceID, sourceID)
 		local src = 0
         local s = 1
         local isCollected = SetCollector:IsAppearanceCollected(appearanceID)
-		local sources = SetCollector:GetAppearanceSources(appearanceID)
+		local sources = C_TransmogCollection.GetAllAppearanceSources(appearanceID)
 		if sources and isCollected then
-			src = sources[1].sourceID
+			src = sources[1]
 		else
 			src = sourceID
 		end
@@ -524,13 +524,7 @@ function SetCollector:SetVariantTabs(collection, set, variant, outfit)
 end
 
 local function GetSourceID(appearanceID)
-	local sources = SetCollector:GetAppearanceSources(appearanceID)
-	local itemID
-	if sources then
-		return sources[1].sourceID
-	else
-		return 0
-	end
+    return SetCollector:GetCollectedAppearanceSourceID(appearanceID) or 0
 end
 
 function SetCollector:UpdateSelectedVariantTab(self)
