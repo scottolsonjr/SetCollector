@@ -12,6 +12,7 @@ SetCollector.ANY_ARMOR			= { Code = "Z", Description = "Any" }
 SetCollector.DEATHKNIGHT		= { Code = "DK", Description = "DEATHKNIGHT" }
 SetCollector.DEMONHUNTER		= { Code = "DH", Description = "DEMONHUNTER" }
 SetCollector.DRUID 			    = { Code = "DR", Description = "DRUID" }
+SetCollector.EVOKER             = { Code = "DT", Description = "EVOKER" }
 SetCollector.HUNTER 			= { Code = "HU", Description = "HUNTER" }
 SetCollector.MAGE 				= { Code = "MA", Description = "MAGE" }
 SetCollector.MONK 				= { Code = "MO", Description = "MONK" }
@@ -124,11 +125,11 @@ function SetCollector:IncludeVariant(setID, setInfo, ...)
         Order = order,
         Appearances = {}
     }
-    local sources = C_TransmogSets.GetSetSources(setID)
-    if sources then
-        variant.Count = #sources
-        for sourceID in pairs(sources) do
-            local sourceInfo = C_TransmogCollection.GetSourceInfo(sourceID);
+    local appearances = C_TransmogSets.GetSetPrimaryAppearances(setID)
+    if appearances then
+        variant.Count = #appearances
+        for pos in pairs(appearances) do
+            local sourceInfo = C_TransmogCollection.GetSourceInfo(appearances[pos].appearanceID);
             if (sourceInfo) then
                 local slotID = C_Transmog.GetSlotForInventoryType(sourceInfo.invType)
                 table.insert(variant.Appearances, SetCollector:CreateAppearance(sourceInfo.visualID or nil, sourceInfo.sourceID or nil, slotID or nil))
@@ -144,7 +145,7 @@ end
 
 function SetCollector:CreateSet(collection, uid, title, armorType, class, faction, location, ...)
     local set = {
-        ID = collection.Code..string.format("%03d", uid)..armorType.Code..class.Code..faction.Code,
+        ID = collection.Code..string.format("%04d", uid)..armorType.Code..class.Code..faction.Code,
         Title = title,
         TooltipID = SetCollector:CreateTooltipID(collection, uid, title),
         ArmorType = armorType,

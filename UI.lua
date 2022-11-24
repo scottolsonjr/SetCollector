@@ -60,6 +60,7 @@ local function GetClassArmorType(class)
 	if		class == "DEATHKNIGHT"	then return PLATE.Description
 	elseif	class == "DEMONHUNTER"	then return LEATHER.Description
 	elseif	class == "DRUID"		then return LEATHER.Description
+	elseif	class == "EVOKER"		then return MAIL.Description
 	elseif	class == "HUNTER"		then return MAIL.Description
 	elseif	class == "MAGE"			then return CLOTH.Description
 	elseif	class == "MONK"			then return LEATHER.Description
@@ -138,7 +139,11 @@ title:SetPoint("TOP", 0, -4)
 title:SetFrameLevel(100)
 title:SetAttribute("parentKey", "Title")
 	
-frame.TitleText:SetText(L["ADDON_NAME"])
+if frame.TitleContainer then
+	frame.TitleContainer.TitleText:SetText(L["ADDON_NAME"])
+else
+	frame.TitleText:SetText(L["ADDON_NAME"])
+end
 
 tinsert(UISpecialFrames, frame:GetName())							-- Hides frame when Escape is pressed or Game menu selected.
 
@@ -380,7 +385,7 @@ local function SetItemButton(button, appearanceID, sourceID)
 		local sTexture, sLink
 		if src and src > 0 then
 			_, _, _, sTexture, _, sLink = C_TransmogCollection.GetAppearanceSourceInfo(src)
-        end
+		end
 		if sLink and sTexture then
 			local itemID = GetItemInfoInstant(sLink);
             if itemID and itemID > 0 then
@@ -395,7 +400,10 @@ local function SetItemButton(button, appearanceID, sourceID)
                     button.icon:SetVertexColor(1, 1, 1, 1)
                     button.icon:SetDesaturated(false)
                     local iRarity = select(3, GetItemInfo(sLink))
-                    if iRarity then button.glow:SetVertexColor(GetItemQualityColor(iRarity)) end
+                    if iRarity then 
+											local r, g, b, _ = GetItemQualityColor(iRarity)
+											button.glow:SetVertexColor(r, g, b) 
+										end
                     button.glow:Show()
                 end
 
@@ -440,8 +448,15 @@ local function VariantTab_OnClick(self, button, ...)
 	end
 end
 
+local WOW_VERSION = select(4, GetBuildInfo())
+if WOW_VERSION >= 100000 then
+	TabTemplate = "PanelTabButtonTemplate"
+else
+	TabTemplate = "CharacterFrameTabButtonTemplate"
+end
+
 for i=1, 5 do
-	local variantTab = CreateFrame("Button","$parentTab"..i,setDisplay,"CharacterFrameTabButtonTemplate")
+	local variantTab = CreateFrame("Button","$parentTab"..i,setDisplay,TabTemplate)
 	variantTab:SetID(i)
 	variantTab:SetText(i)
 	if i == 1 then
@@ -484,7 +499,7 @@ function SetCollector:SetVariantTabs(collection, set, variant, outfit)
 				if ( not variantTab.FavoriteTexture ) then
 					variantTab.FavoriteTexture = variantTab:CreateTexture("$parentFavorite","OVERLAY")
 					variantTab.FavoriteTexture:SetAtlas("PetJournal-FavoritesIcon")
-					variantTab.FavoriteTexture:SetPoint("LEFT","$parentText","LEFT",-10,0)
+					variantTab.FavoriteTexture:SetPoint("LEFT",nil,"LEFT",-10,0)
 				end
 				if ( SHOW_ONLY_FAVORITE == true and not char.sets[set].variants[i].favorite ) then
 					variantTab:Hide()

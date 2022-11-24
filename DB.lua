@@ -25,7 +25,8 @@ local defaults = {
 			v06 = true,
 			v07 = true,
 			v08 = true,
-			v09 = true
+			v09 = true,
+			v10 = true
 		},
 		minimap = {
 			hide = false
@@ -59,6 +60,7 @@ local ANY_ARMOR			= { Code = "Z", Description = "Any" }
 local DEATHKNIGHT 	= { Code = "DK", Description = "DEATHKNIGHT" }
 local DEMONHUNTER 	= { Code = "DH", Description = "DEMONHUNTER" }
 local DRUID 		= { Code = "DR", Description = "DRUID" }
+local EVOKER 		= { Code = "DT", Description = "EVOKER" }
 local HUNTER 		= { Code = "HU", Description = "HUNTER" }
 local MAGE 			= { Code = "MA", Description = "MAGE" }
 local MONK 			= { Code = "MO", Description = "MONK" }
@@ -474,6 +476,7 @@ function SetCollector:AddAppearances(debug)
 	SetCollector:GetVersion07Appearances(expansions)	-- Legion
 	SetCollector:GetVersion08Appearances(expansions)	-- Battle for Azeroth
 	SetCollector:GetVersion09Appearances(expansions)	-- Shadowlands
+	SetCollector:GetVersion10Appearances(expansions)	-- Dragonflight
 	
 	--if debug then SetCollector:Print("Finished adding appearances to database.") end
 end
@@ -506,6 +509,7 @@ function SetCollector:GetExpansionStatus(version)
 	elseif version == "7" then return expansions.v07
 	elseif version == "8" then return expansions.v08
 	elseif version == "9" then return expansions.v09
+	elseif version == "10" then return expansions.v10
 	end
 end
 
@@ -521,6 +525,7 @@ function SetCollector:SetExpansionStatus(version)
 	elseif version == "7" then expansions.v07 = not expansions.v07
 	elseif version == "8" then expansions.v08 = not expansions.v08
 	elseif version == "9" then expansions.v09 = not expansions.v09
+	elseif version == "10" then expansions.v10 = not expansions.v10
 	end
 end
 
@@ -761,6 +766,16 @@ function SetCollector:GetOptions()
 						desc = L["INT_OPT_EXPANSION_09_DESC"],
 						get = "GetVersion09Status",
 						set = "SetVersion09Status",
+						width = "full"
+					},
+					v10 = {
+						type = "toggle",
+						hidden = HideExpansionToggle("100000"),
+						order = 20,
+						name = L["INT_OPT_EXPANSION_10_NAME"],
+						desc = L["INT_OPT_EXPANSION_10_DESC"],
+						get = "GetVersion10Status",
+						set = "SetVersion10Status",
 						width = "full"
 					},
 				},
