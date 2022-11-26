@@ -31,80 +31,82 @@ local InventorySlots = {
 TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, function(tooltip)
 	local collection, variant, set
 	local debug = SetCollector:GetDebug();
-	local itemName, itemLink = tooltip:GetItem();
+    if tooltip and tooltip["GetItem"] ~= nil then
+        local itemName, itemLink = tooltip:GetItem();
 
-	local appearanceID, sourceID, itemID, setIDs = SetCollector:GetAppearanceInfo(itemLink);
-    if appearanceID then
-        local show_set = SetCollector.db.global.tooltips.show_set
-        local show_location = SetCollector.db.global.tooltips.show_location
-        if debug or show_set then
-            if SetCollector.db.global.collections.Appearances[appearanceID] then
-            
-                -- Need to update this for when an appearance is in multiple collections, sets, or variants
-                collection = SetCollector.db.global.collections.Appearances[appearanceID].collection
-                variant = SetCollector.db.global.collections.Appearances[appearanceID].variant
-                set = SetCollector.db.global.collections.Appearances[appearanceID].set
+        local appearanceID, sourceID, itemID, setIDs = SetCollector:GetAppearanceInfo(itemLink);
+        if appearanceID then
+            local show_set = SetCollector.db.global.tooltips.show_set
+            local show_location = SetCollector.db.global.tooltips.show_location
+            if debug or show_set then
+                if SetCollector.db.global.collections.Appearances[appearanceID] then
                 
-                tooltip:AddLine(" ")
-                local title = "|cFFFFFFFF"..L[SetCollector.db.global.collections[collection].Sets[set].Title].."|r"
-                tooltip:AddLine(title)
-                if debug or show_location then
-                    if SetCollector.db.global.collections[collection].Sets[set].Location ~= nil then
-                        local location = "|cFF777777"..L[SetCollector.db.global.collections[collection].Sets[set].Location].."|r"
-                        tooltip:AddLine(location)
+                    -- Need to update this for when an appearance is in multiple collections, sets, or variants
+                    collection = SetCollector.db.global.collections.Appearances[appearanceID].collection
+                    variant = SetCollector.db.global.collections.Appearances[appearanceID].variant
+                    set = SetCollector.db.global.collections.Appearances[appearanceID].set
+                    
+                    tooltip:AddLine(" ")
+                    local title = "|cFFFFFFFF"..L[SetCollector.db.global.collections[collection].Sets[set].Title].."|r"
+                    tooltip:AddLine(title)
+                    if debug or show_location then
+                        if SetCollector.db.global.collections[collection].Sets[set].Location ~= nil then
+                            local location = "|cFF777777"..L[SetCollector.db.global.collections[collection].Sets[set].Location].."|r"
+                            tooltip:AddLine(location)
+                        end
                     end
                 end
             end
         end
-	end
 
-    if debug then
-        if setIDs or appearanceID or itemID then
-            tooltip:AddLine(" ")
-            tooltip:AddLine("Set Collector Debug")
-
-            if setIDs then
-                for i=1, #setIDs do
-                    tooltip:AddDoubleLine("Set ID:", setIDs[i])
-                end
-            end
-
-            if itemID then
-                tooltip:AddDoubleLine("Item ID:", itemID)
-            end
-    
-            if appearanceID then
-                tooltip:AddDoubleLine("Appearance ID:", appearanceID)
-                tooltip:AddDoubleLine("Source ID:", sourceID)
+        if debug then
+            if setIDs or appearanceID or itemID then
                 tooltip:AddLine(" ")
-                tooltip:AddLine("All Available Sources:")
-                local sources = C_TransmogCollection.GetAllAppearanceSources(appearanceID)
-                if sources then
-                    for i=1, #sources do
-                        local link = select(6, C_TransmogCollection.GetAppearanceSourceInfo(sources[i]))
-                        local sourceCollected = SetCollector:IsSourceCollected(sources[i])
-                        if sourceCollected then
-                            tooltip:AddDoubleLine(link, sources[i])
-                        else
-                            local name = GetItemInfo(link)
-                            if ( name ) then
-                                tooltip:AddDoubleLine("|cFF777777"..name.."|r",sources[i])
-                            end
-                        end
-                        
+                tooltip:AddLine("Set Collector Debug")
+
+                if setIDs then
+                    for i=1, #setIDs do
+                        tooltip:AddDoubleLine("Set ID:", setIDs[i])
                     end
-                else
-                    tooltip:AddLine("None")
                 end
-                if SetCollector.db.global.collections.Appearances[appearanceID] then
-                    tooltip:AddLine(" ");
-                    tooltip:AddLine("Collection ID: "..collection)
-                    tooltip:AddLine("Variant ID: "..variant)
-                    tooltip:AddLine("Set ID: "..set)
+
+                if itemID then
+                    tooltip:AddDoubleLine("Item ID:", itemID)
                 end
+        
+                if appearanceID then
+                    tooltip:AddDoubleLine("Appearance ID:", appearanceID)
+                    tooltip:AddDoubleLine("Source ID:", sourceID)
+                    tooltip:AddLine(" ")
+                    tooltip:AddLine("All Available Sources:")
+                    local sources = C_TransmogCollection.GetAllAppearanceSources(appearanceID)
+                    if sources then
+                        for i=1, #sources do
+                            local link = select(6, C_TransmogCollection.GetAppearanceSourceInfo(sources[i]))
+                            local sourceCollected = SetCollector:IsSourceCollected(sources[i])
+                            if sourceCollected then
+                                tooltip:AddDoubleLine(link, sources[i])
+                            else
+                                local name = GetItemInfo(link)
+                                if ( name ) then
+                                    tooltip:AddDoubleLine("|cFF777777"..name.."|r",sources[i])
+                                end
+                            end
+                            
+                        end
+                    else
+                        tooltip:AddLine("None")
+                    end
+                    if SetCollector.db.global.collections.Appearances[appearanceID] then
+                        tooltip:AddLine(" ");
+                        tooltip:AddLine("Collection ID: "..collection)
+                        tooltip:AddLine("Variant ID: "..variant)
+                        tooltip:AddLine("Set ID: "..set)
+                    end
+                end
+                
+                tooltip:AddLine(" ")
             end
-            
-            tooltip:AddLine(" ")
         end
     end
 end)
