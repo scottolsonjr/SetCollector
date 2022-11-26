@@ -265,8 +265,6 @@ function SetCollectorSetButton_OnLeave(self)
 	GameTooltip:Hide()
 end
 
-
-
 --
 --  Model
 --
@@ -450,7 +448,7 @@ end
 
 local WOW_VERSION = select(4, GetBuildInfo())
 if WOW_VERSION >= 100000 then
-	TabTemplate = "PanelTabButtonTemplate"
+	TabTemplate = "SetCollectorTabButtonTemplate"
 else
 	TabTemplate = "CharacterFrameTabButtonTemplate"
 end
@@ -504,8 +502,8 @@ function SetCollector:SetVariantTabs(collection, set, variant, outfit)
 				if ( SHOW_ONLY_FAVORITE == true and not char.sets[set].variants[i].favorite ) then
 					variantTab:Hide()
 				else
-						variantTab:SetText(L[db[collection].Sets[set].Variants[i].Title])
-						variantTab.FavoriteTexture:Hide()
+                    variantTab:SetText(L[db[collection].Sets[set].Variants[i].Title])
+                    variantTab.FavoriteTexture:Hide()
 					if char.sets[set] and char.sets[set].variants then
 						if char.sets[set].variants[i] and char.sets[set].variants[i].favorite then
 							variantTab:SetText("      "..L[db[collection].Sets[set].Variants[i].Title])

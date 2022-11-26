@@ -90,6 +90,8 @@
 		<HighlightFont style="GameFontHighlightLeft"/>
 		<DisabledFont style="GameFontHighlightLeft"/>
 	</Button>
+    <Button name="SetCollectorTabButtonTemplate" inherits="PanelTabButtonTemplate" virtual="true">
+	</Button>
 	<Button name="SetCollectorItemTemplate" virtual="true">
 		<Size>
 			<AbsDimension x="37" y="37" />

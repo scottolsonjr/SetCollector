@@ -28,28 +28,7 @@ local InventorySlots = {
     ['INVTYPE_TABARD'] = 19,
 }
 
-local model = CreateFrame("DressUpModel","SetCollectorTooltipDressUpModel",UIParent)
-
-local function GetAppearanceInfo(itemLink)
-	if itemLink then
-    local itemID, _, _, slotName = GetItemInfoInstant(itemLink)
-    local slot = InventorySlots[slotName]
-
-    if not slot or not IsDressableItem(itemLink) then return end
-
-    model:SetUnit('player')
-    model:Undress()
-    model:TryOn(itemLink, slot)
-    local sourceID = model:GetSlotTransmogSources(slot)
-    if sourceID then
-      local appearanceID = select(2, C_TransmogCollection.GetAppearanceSourceInfo(sourceID))
-      return appearanceID, sourceID, itemID
-    end
-  end
-end
-
-
-local function OnTooltipSetItemHook(tooltip, ...)
+TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, function(tooltip)
 	local collection, variant, set
 	local debug = SetCollector:GetDebug();
 	local itemName, itemLink = tooltip:GetItem();
@@ -128,27 +107,4 @@ local function OnTooltipSetItemHook(tooltip, ...)
             tooltip:AddLine(" ")
         end
     end
-	
-	if origTooltips[tooltip] then
-		return origTooltips[tooltip](tooltip, ...)
-	end
-end
-
-local hookTooltips = {}
-hookTooltips[GameTooltip] = 1; -- mouseover
-hookTooltips[ItemRefTooltip] = 1; -- clicked
-if (AtlasLootTooltip) then hookTooltips[AtlasLootTooltip] = 1; end
-
-
-
---
--- Global Functions
---
-
--- for tt in pairs(hookTooltips) do
--- 	local origHook = tt:GetScript("OnTooltipSetItem");
--- 	if (origHook ~= OnTooltipSetItemHook) then
--- 		origTooltips[tt] = origHook;
--- 		tt:SetScript("OnTooltipSetItem", OnTooltipSetItemHook);
--- 	end
--- end
+end)
