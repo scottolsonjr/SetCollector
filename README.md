@@ -6,19 +6,11 @@
 
 Set Collector is an add-on for World of Warcraft that allows the player to view various gear/transmogrification sets on their character and track the progress of their appearance collection.
 
-## Changes for Shadowlands
+## Changes for Dragonflight
 
-Thank you to everyone who has expressed interest in this project! We have updated SetCollector for Shadowlands.
+Thank you to everyone who has expressed interest in this project! We have updated SetCollector for Dragonflight.
 
-Here are some of the changes for the Shadowlands release of Set Collector:
-
-* Set Collector will now allow sets from an entire expansion to be hidden using the Set Collector Addon settings (Interface > Addons > Set Collector). You can also enable/disable expansions through chat command as well. E.g., to toggle the Legion sets `/setcollector version 7`
-* Two commonly requested features are now here and may be set in the Interface options:
-  * The Set Collector UI can be undocked and moved.
-  * The setting to show/hide the minimap icon is now global and shared by all characters.
-* The Garrison Collection has been renamed to Expansion and will include sets obtained from expansion-specific features, such as Garrisons, Class Halls, and Warfronts.
-* Character filters (e.g., Show only favorite sets) can now be seen and modified in Interface options.
-* Raid and PvP sets will now display the raids and pvp seasons the sets were obtained from.
+With Dragonflight, sets and their variants are no longer exclusively associated with a single SetCollector Collection type. We are exploring options to support filtering sets and variants by these collection types without having to break up the sets.
 
 ## Localization
 
@@ -68,4 +60,4 @@ If so, you can submit them here: www.wowace.com/addons/setcollector/tickets/
 
 ## Acknowledgements
 
-My thanks go out to Nefret, Phanx, Okerhs, MartinL, joshmiller83, cc38941, Brear, AlexSUCF, and the many others who have helped providing testing and feedback at various stages throughout the development.
+My thanks go out to Nefret, Phanx, Mikiurban, Okerhs, MartinL, joshmiller83, cc38941, Brear, AlexSUCF, and the many others who have helped providing testing and feedback at various stages throughout the development.
