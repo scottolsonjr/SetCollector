@@ -187,6 +187,8 @@ function SetCollector:ToggleExpansion(parameters)
 		expansions.v08 = not expansions.v08
 	elseif parameters == "9" then
 		expansions.v09 = not expansions.v09
+	elseif parameters == "10" then
+		expansions.v10 = not expansions.v10
 	end
 	SetCollector:Print(L["RELOAD"])
 end
@@ -241,7 +243,7 @@ end
 
 function SetCollector:ListSetSources(setID)
     local setInfo = (setID and C_TransmogSets.GetSetInfo(setID)) or nil;
-    local sources = C_TransmogSets.GetSetSources(setID);
+    local sources = C_TransmogSets.GetSetPrimaryAppearances(setID);
     SetCollector:Print(setID.." "..(setInfo.name or nil))
     local function position(slot)
         if slot == INVSLOT_HEAD then
@@ -266,17 +268,18 @@ function SetCollector:ListSetSources(setID)
         return slot + 10
     end
     local printable = {}
-    for sourceID in pairs(sources) do
-        local sourceInfo = C_TransmogCollection.GetSourceInfo(sourceID);
+    for pos in pairs(sources) do
+        local searchKey = sources[pos].appearanceID
+        local sourceInfo = C_TransmogCollection.GetSourceInfo(searchKey);
         if (sourceInfo) then
             local slot = C_Transmog.GetSlotForInventoryType(sourceInfo.invType);
             if (slot) then
-                printable[position(slot)] = sourceInfo.visualID..","..sourceID.." ("..slot..")"
+                printable[position(slot)] = sourceInfo.visualID..","..searchKey.." ("..slot..")"
             else
-                printable[position(slot)] = sourceInfo.visualID..","..sourceID
+                printable[position(slot)] = sourceInfo.visualID..","..searchKey
             end
         else
-            SetCollector:Print("ID: "..sourceID.." (No sourceinfo)")
+            SetCollector:Print("ID: "..searchKey.." (No sourceinfo)")
         end
     end
     for i=1, #printable do
@@ -284,78 +287,110 @@ function SetCollector:ListSetSources(setID)
     end
 end
 
-function SetCollector:ExportSetData()
-    local tree = {};
-    local sets = C_TransmogSets.GetAllSets();
-    if (sets) then
-        
-        -- build base sets
-        for i, set in ipairs(sets) do
-            if (set.baseSetID == nil) then
-                local setInfo = (set.setID and C_TransmogSets.GetSetInfo(set.setID)) or nil;
-                if (setInfo ~= nil) then
-                    local setID = set.setID or 0;
-                    tree[setID] = {} 
-                    tree[setID][0] = {
-                        toc = (setInfo.patchID or WOW_VERSION), 
-                        classMask = (setInfo.classMask or 0), 
-                        desc = (setInfo.description or "(blank)"), 
-                        label = (setInfo.label or "(blank)"),
-                        name = (setInfo.name or "(blank)"),
-                        faction = (setInfo.requiredFaction or "Both"),
-                        expansionID = (setInfo.expansionID or 0)
-                    };
-                end
-            end
-        end
+local function BitAND(a,b)--Bitwise and
+    local p,c=1,0
+    while a>0 and b>0 do
+        local ra,rb=a%2,b%2
+        if ra+rb>1 then c=c+p end
+        a,b,p=(a-ra)/2,(b-rb)/2,p*2
+    end
+    return c
+end
 
-        -- populate all sets
-        sets = C_TransmogSets.GetAllSets();
+function ParseClassMask(bits)
+    -- 0 == All classes can wear
+    if bits == 0 then
+        return "all"
+    end
+    local map = { 
+        warrior = 0x001,
+        paladin = 0x002,
+        hunter = 0x004,
+        rogue = 0x008,
+        priest = 0x010,
+        deathknight = 0x020,
+        shaman = 0x040,
+        mage = 0x080,
+        warlock = 0x100,
+        monk = 0x200,
+        druid = 0x400,
+        demonhunter = 0x800,
+        drakthyr = 0x1000,
+        plate = 0x001 + 0x002 + 0x020,
+        leather = 0x008 + 0x200 + 0x800 + 0x400,
+        cloth = 0x010 + 0x080 + 0x100,
+        mail = 0x004 + 0x040 + 0x1000
+    }
+    -- Check for exact match between class or material
+    for char, mask in pairs(map) do
+        if bits == mask then
+            return char .. ""
+        end
+    end
+    -- hmm, weird case, better itemize
+    local parse = bits .. ": "
+    for char, mask in pairs(map) do
+        if (BitAND(bits, mask) == mask) then
+            parse = parse .. char .. " "
+        end
+    end
+    return parse
+end
+
+function SetCollector:ExportSetData()
+    local tree = {}
+    tree[0] = { summary = "|XPAC|SET ID|CLASS MASK|NAME|DESCRIPTION|LABEL|" }
+    local sets = C_TransmogSets.GetAllSets()
+    if (sets) then
         for i, set in ipairs(sets) do
-            local setInfo = (set.setID and C_TransmogSets.GetSetInfo(set.setID)) or nil;
+            local setInfo = (set.setID and C_TransmogSets.GetSetInfo(set.setID)) or nil
             if (setInfo == nil) then
                 -- SetCollector:Print("Skipping set "..set.setID)
             else
-                local setID = setInfo.setID or 0;
-                local baseSetID = set.baseSetID or 0;
+                local setID = setInfo.setID or 0
+                local baseSetID = set.baseSetID or setID
+                local strClassMask = ParseClassMask(setInfo.classMask)
+                local strDesc = (setInfo.description or "(blank)")
+                local strLabel = (setInfo.label or "(blank)")
+                local strSummary = "|XPAC" .. setInfo.patchID .. "|ID" .. setID .. "|" .. strClassMask .. "|" .. setInfo.name .. "|" .. strDesc .. "|" .. strLabel .. "|"
                 local setData = { 
                     id = setID,
-                    toc = (setInfo.patchID or WOW_VERSION), 
-                    classMask = (setInfo.classMask or 0), 
-                    desc = (setInfo.description or "(blank)"), 
-                    label = (setInfo.label or "(blank)"),
-                    name = (setInfo.name or "(blank)"),
-                    faction = (setInfo.requiredFaction or "Both"),
-                    expansionID = (setInfo.expansionID or 0),
+                    baseSetId = baseSetID,                    
+                    toc = setInfo.patchID, 
+                    classMask = strClassMask, 
+                    desc = strDesc, 
+                    label = strLabel,
+                    name = setInfo.name,
+                    faction = (setInfo.requiredFaction or ""),
+                    expansionID = setInfo.expansionID,
+                    summary = strSummary,
                     items = {}
-                };
+                }
 
-                local sources = C_TransmogSets.GetSetSources(setID);
-                for sourceID in pairs(sources) do
-                    local sourceInfo = C_TransmogCollection.GetSourceInfo(sourceID);
+                local sources = C_TransmogSets.GetSetPrimaryAppearances(setID)
+                for pos in pairs(sources) do
+                    local sourceInfo = C_TransmogCollection.GetSourceInfo(sources[pos].appearanceID)
                     if (sourceInfo) then
-                        local slot = C_Transmog.GetSlotForInventoryType(sourceInfo.invType);
-                        if (slot) then
-                            local a2 = (sourceInfo.visualID or nil);
-                            local s2 = (sourceInfo.sourceID or nil);
-                            local i2 = (sourceInfo.itemID or nil);                    
-                            local mod2 = (sourceInfo.itemModID or nil);                    
-                            setData.items[sourceInfo.invType] = {a = a2, s = s2, i = i2, mod = mod2 };
+                        if (sourceInfo.invType > 0) then
+                            local a2 = (sourceInfo.visualID or nil)
+                            local s2 = (sourceInfo.sourceID or nil)
+                            local i2 = (sourceInfo.itemID or nil)
+                            local mod2 = (sourceInfo.itemModID or nil)
+                            setData["items"][sourceInfo.invType] = {a = a2, s = s2, i = i2, mod = mod2 }
                         end
                     end
                 end
 
                 if (tree[baseSetID] == nil) then
-                    tree[baseSetID] = {setID = setData};
-                else
-                    tree[baseSetID][setID] = setData;
-                end;
+                    tree[baseSetID] = {}
+                end
+                tree[baseSetID][setID] = setData
             end
         end
     end
 
-    SetCollector.db.global.export = tree;
-    SetCollector:Print("Done exporting");
+    SetCollector.db.global.export = tree
+    SetCollector:Print("Done exporting")
 end
 
 function SetCollector:MySlashProcessorFunc(input)
@@ -397,6 +432,11 @@ function SetCollector:MySlashProcessorFunc(input)
             SetCollector:ListSet(parameters)
         --elseif (parameters == "sources") then
         --    SetCollector:ListSetSources(parameters)
+        end
+        
+    elseif command == "sources" then
+        if (parameters ~= nil) then
+            SetCollector:ListSetSources(parameters)
         end
         
     elseif command == "sets" then
