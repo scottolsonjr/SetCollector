@@ -72,7 +72,7 @@ local function AddSetsToDatabase(...) return SetCollector:AddSetsToDatabase(...)
 
 local function GetCraftedAppearances()
     local COLLECTION, VERSION = SetCollector.CRAFTED, 100000
-    sets = {
+    local sets = {
         -- Primal Elements
         IncludeSet(COLLECTION,11000,2749,PLATE,ANY_CLASS,ANY_FACTION), -- Primal Molten
         IncludeSet(COLLECTION,11000,2743,CLOTH,ANY_CLASS,ANY_FACTION), -- Vibrant Wildercloth
@@ -90,7 +90,7 @@ end
 
 local function GetDungeonAppearances()
     local COLLECTION, VERSION = SetCollector.DUNGEON, 100000
-    sets = {
+    local sets = {
         IncludeSet(COLLECTION,11000,2712,PLATE,ANY_CLASS,ANY_FACTION), -- Djaradin Battlegear / Djaradin Dungeon Battlegear
         IncludeSet(COLLECTION,11000,2710,MAIL,ANY_CLASS,ANY_FACTION), -- Centaur Regalia / Centaur Dungeon Harness
         IncludeSet(COLLECTION,11000,2703,CLOTH,ANY_CLASS,ANY_FACTION), -- Titan Keeper's Vestments / Titan Dungeonkeeper's Vestments
@@ -101,7 +101,7 @@ end
 
 local function GetExpansionAppearances()
     local COLLECTION, VERSION = SetCollector.EXPANSION, 100000
-    sets = {
+    local sets = {
         -- World and Weekly Quests
         IncludeSet(COLLECTION,11000,2711,PLATE,ANY_CLASS,ANY_FACTION,2714,2713), -- Djaradin Battlegear / Wyrmforged Battlegear
         IncludeSet(COLLECTION,11000,2706,MAIL,ANY_CLASS,ANY_FACTION,2708,2709), -- Centaur Regalia / Ohn'ahran Falconer's Regalia
@@ -131,7 +131,7 @@ end
 
 local function GetLegendaryAppearances()
     local COLLECTION, VERSION = SetCollector.LEGENDARY, 100000
-    -- sets = {
+    -- local sets = {
     --     IncludeSet(COLLECTION,11000,SET_ID,ANY_ARMOR,ANY_CLASS,ANY_FACTION,ALT_2,ALT_3,ALT_4),
     -- }
     -- AddSetsToDatabase(VERSION, COLLECTION, sets)
@@ -139,7 +139,7 @@ end
 
 local function GetOtherAppearances()
     local COLLECTION, VERSION = SetCollector.OTHER, 100000
-    -- sets = {
+    -- local sets = {
     --     IncludeSet(COLLECTION,11000,SET_ID,ANY_ARMOR,ANY_CLASS,ANY_FACTION,ALT_2,ALT_3,ALT_4),
     -- }
     -- AddSetsToDatabase(VERSION, COLLECTION, sets)
@@ -147,7 +147,7 @@ end
 
 local function GetPvPAppearances()
     local COLLECTION, VERSION = SetCollector.PVP, 100000
-    sets = {
+    local sets = {
         -- Dragonflight Season 1 (Aspirant)
         IncludeSet(COLLECTION,11000,2715,PLATE,ANY_CLASS,ANY_FACTION), -- Crimson Aspirant's Plate Battlegear
         IncludeSet(COLLECTION,11000,2707,MAIL,ANY_CLASS,ANY_FACTION), -- Crimson Aspirant's Chain Armor
@@ -174,7 +174,7 @@ end
 
 local function GetRaidAppearances()
     local COLLECTION, VERSION = SetCollector.RAID, 100000
-    sets = {
+    local sets = {
         -- Vault of the Incarnates (N, H, M, RF)
         IncludeSet(COLLECTION,11000,2601,ANY_ARMOR,DEATHKNIGHT,ANY_FACTION,2614,2615,2616), -- Haunted Frostbrood Remains
         IncludeSet(COLLECTION,11000,2602,ANY_ARMOR,DEMONHUNTER,ANY_FACTION,2617,2618,2619), -- Skybound Avenger's Flightwear
