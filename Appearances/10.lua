@@ -147,6 +147,12 @@ local function GetExpansionAppearances()
         IncludeSet(COLLECTION,11005,2657,LEATHER,ANY_CLASS,ANY_FACTION),  -- Sylvan Stalker's Leathers
         IncludeSet(COLLECTION,11005,2334,LEATHER,ANY_CLASS,ANY_FACTION),  -- Battlewraps of the Honored Valarjar
         IncludeSet(COLLECTION,11005,2331,MAIL,ANY_CLASS,ANY_FACTION),  -- Chains of the Honored Valarjar
+        IncludeSet(COLLECTION,11005,2343,PLATE,ANY_CLASS,ANY_FACTION),      -- Battleplate of the Honored Valarjar
+        IncludeSet(COLLECTION,11005,2321,CLOTH,ANY_CLASS,ANY_FACTION),      -- Vestment of the Honored Valarjar
+        IncludeSet(COLLECTION,11005,2340,ANY_ARMOR,ANY_CLASS,ANY_FACTION),  -- Swashbuckling Buccaneer's Slops
+        IncludeSet(COLLECTION,11005,2346,ANY_ARMOR,ANY_CLASS,ANY_FACTION),  -- Dashing Buccaneer's Slops
+        IncludeSet(COLLECTION,11005,2654,MAIL,ANY_CLASS,ANY_FACTION),       -- Glorious Dragonrider's Mail
+        IncludeSet(COLLECTION,11005,2327,ANY_ARMOR,ANY_CLASS,ANY_FACTION),  -- Darkmoon Harlequin's Bells
     }
     AddSetsToDatabase(VERSION, COLLECTION, sets)
 end
