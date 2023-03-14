@@ -300,31 +300,39 @@ end
 function ParseClassMask(bits)
     -- 0 == All classes can wear
     if bits == 0 then
-        return "all"
+        return "ANY_CLASS"
     end
     local map = { 
-        warrior = 0x001,
-        paladin = 0x002,
-        hunter = 0x004,
-        rogue = 0x008,
-        priest = 0x010,
-        deathknight = 0x020,
-        shaman = 0x040,
-        mage = 0x080,
-        warlock = 0x100,
-        monk = 0x200,
-        druid = 0x400,
-        demonhunter = 0x800,
-        drakthyr = 0x1000,
-        plate = 0x001 + 0x002 + 0x020,
-        leather = 0x008 + 0x200 + 0x800 + 0x400,
-        cloth = 0x010 + 0x080 + 0x100,
-        mail = 0x004 + 0x040 + 0x1000
+        WARRIOR = 0x001,
+        PALADIN = 0x002,
+        HUNTER = 0x004,
+        ROGUE = 0x008,
+        PRIEST = 0x010,
+        DEATHKNIGHT = 0x020,
+        SHAMAN = 0x040,
+        MAGE = 0x080,
+        WARLOCK = 0x100,
+        MONK = 0x200,
+        DRUID = 0x400,
+        DEMONHUNTER = 0x800,
+        DRAKTHYR = 0x1000
     }
-    -- Check for exact match between class or material
+    -- Check for exact match between class
     for char, mask in pairs(map) do
         if bits == mask then
             return char .. ""
+        end
+    end
+    -- Check for "any" match between class
+    local any_map = { 
+        ANY_PLATE = 0x001 + 0x002 + 0x020,
+        ANY_LEATHER = 0x008 + 0x200 + 0x800 + 0x400,
+        ANY_CLOTH = 0x010 + 0x080 + 0x100,
+        ANY_MAIL = 0x004 + 0x040 + 0x1000
+    }
+    for char, mask in pairs(any_map) do
+        if bits == mask then
+            return "ANY_CLASS"
         end
     end
     -- hmm, weird case, better itemize
@@ -337,9 +345,36 @@ function ParseClassMask(bits)
     return parse
 end
 
+function ParseArmorMask(bits)
+    -- 0 == All classes can wear
+    if bits == 0 then
+        return "ANY_ARMOR"
+    end
+    local map = { 
+        PLATE = 0x001 + 0x002 + 0x020,
+        LEATHER = 0x008 + 0x200 + 0x800 + 0x400,
+        CLOTH = 0x010 + 0x080 + 0x100,
+        MAIL = 0x004 + 0x040 + 0x1000
+    }
+    local parse = bits .. ": "
+    for char, mask in pairs(map) do
+        if (BitAND(bits, mask) > 0) then
+            return char .. ""
+        end
+    end
+    -- hmm, weird case, better itemize
+    local parse = bits .. ": "
+    for char, mask in pairs(map) do
+        if (BitAND(bits, mask) == mask) then
+            parse = parse .. char .. " "
+        end
+    end
+    return parse .. ""
+end
+
 function SetCollector:ExportSetData()
     local tree = {}
-    tree[0] = { summary = "|XPAC|SET ID|CLASS MASK|NAME|DESCRIPTION|LABEL|" }
+    local exportTree = {}
     local sets = C_TransmogSets.GetAllSets()
     if (sets) then
         for i, set in ipairs(sets) do
@@ -349,47 +384,61 @@ function SetCollector:ExportSetData()
             else
                 local setID = setInfo.setID or 0
                 local baseSetID = set.baseSetID or setID
+                local collection = "(missing)"
+                if (SetCollector.db.global.setMap["SET " .. setID] ~= nil) then
+                    collection = SetCollector.db.global.setMap["SET " .. setID].collection
+                end 
+                local strArmorMask = ParseArmorMask(setInfo.classMask)
                 local strClassMask = ParseClassMask(setInfo.classMask)
+                local strFaction = string.upper(setInfo.requiredFaction or "ANY_FACTION")
                 local strDesc = (setInfo.description or "(blank)")
                 local strLabel = (setInfo.label or "(blank)")
-                local strSummary = "|XPAC" .. setInfo.patchID .. "|ID" .. setID .. "|" .. strClassMask .. "|" .. setInfo.name .. "|" .. strDesc .. "|" .. strLabel .. "|"
-                local setData = { 
-                    id = setID,
-                    baseSetId = baseSetID,                    
-                    toc = setInfo.patchID, 
-                    classMask = strClassMask, 
-                    desc = strDesc, 
-                    label = strLabel,
-                    name = setInfo.name,
-                    faction = (setInfo.requiredFaction or ""),
-                    expansionID = setInfo.expansionID,
-                    summary = strSummary,
-                    items = {}
-                }
 
-                local sources = C_TransmogSets.GetSetPrimaryAppearances(setID)
-                for pos in pairs(sources) do
-                    local sourceInfo = C_TransmogCollection.GetSourceInfo(sources[pos].appearanceID)
-                    if (sourceInfo) then
-                        if (sourceInfo.invType > 0) then
-                            local a2 = (sourceInfo.visualID or nil)
-                            local s2 = (sourceInfo.sourceID or nil)
-                            local i2 = (sourceInfo.itemID or nil)
-                            local mod2 = (sourceInfo.itemModID or nil)
-                            setData["items"][sourceInfo.invType] = {a = a2, s = s2, i = i2, mod = mod2 }
-                        end
+                if (tree[setInfo.patchID] == nil) then
+                    tree[setInfo.patchID] = {}
+                end
+                if (tree[setInfo.patchID][collection] == nil) then
+                    tree[setInfo.patchID][collection] = {}
+                end
+                if (tree[setInfo.patchID][collection][baseSetID] == nil) then
+                    tree[setInfo.patchID][collection][baseSetID] = {}
+                    tree[setInfo.patchID][collection][baseSetID][baseSetID] = ""
+                end
+
+                tree[setInfo.patchID][collection][baseSetID][setID] = strDesc
+
+                -- Build: IncludeSet(COLLECTION,11000,2601,ANY_ARMOR,DEATHKNIGHT,ANY_FACTION,2614,2615,2616), -- Haunted Frostbrood Remains
+               
+                local heading = " -- " .. strLabel -- "Dragonflight Season 1"
+                local lua2 = {"IncludeSet(SetCollector." .. collection, setInfo.patchID, baseSetID, strArmorMask, strClassMask, strFaction}
+                local lua2comment = {"), -- " .. setInfo.name}
+
+                for tempId, desc in pairs(tree[setInfo.patchID][collection][baseSetID]) do
+                    if (baseSetID ~= tempId) then
+                        table.insert(lua2, tempId)
+                        table.insert(lua2comment, desc)
                     end
                 end
+                lua2 = table.concat(lua2,",") .. table.concat(lua2comment,", ")
 
-                if (tree[baseSetID] == nil) then
-                    tree[baseSetID] = {}
+                if (exportTree[setInfo.patchID] == nil) then
+                    exportTree[setInfo.patchID] = {}
                 end
-                tree[baseSetID][setID] = setData
+
+                if (exportTree[setInfo.patchID][setInfo.patchID] == nil) then
+                    exportTree[setInfo.patchID][setInfo.patchID] = {}
+                end
+
+                if (exportTree[setInfo.patchID][setInfo.patchID][heading] == nil) then
+                    exportTree[setInfo.patchID][setInfo.patchID][heading] = {}
+                end
+
+                exportTree[setInfo.patchID][setInfo.patchID][heading][baseSetID] = lua2
             end
         end
     end
 
-    SetCollector.db.global.export = tree
+    SetCollector.db.global.export = exportTree
     SetCollector:Print("Done exporting")
 end
 

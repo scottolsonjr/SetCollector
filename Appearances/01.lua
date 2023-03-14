@@ -50,6 +50,7 @@ local NO_LOCATION = nil
 --
 
 local function A(...) return SetCollector:CreateAppearance(...) end
+local function I(...) return SetCollector:CreateAppearanceFromItemID(...) end
 local function CreateSet(...) return SetCollector:CreateSet(...) end
 local function CreateVariant(...) return SetCollector:CreateVariant(...) end
 local function IncludeSet(...) return SetCollector:IncludeSet(...) end
@@ -125,6 +126,26 @@ local function GetDungeonAppearances()
         CreateSet(COLLECTION,10101,"WR_DG_01",PLATE,WARRIOR,ANY_FACTION,NO_LOCATION,
             CreateVariant("REPLICA",TRANSMOG,A(4930,39727),A(4932,39730),A(4929,39728),A(4934,39726),A(4936,39725),A(4935,39724),A(4931,39729),A(4933,39723))
         ),
+
+        -- Darkmoon Faire 
+        IncludeSet(COLLECTION,10104,1424,CLOTH,ANY_CLASS,ANY_FACTION), -- Dreadmist Raiment",
+        IncludeSet(COLLECTION,10104,1425,CLOTH,ANY_CLASS,ANY_FACTION), -- Magister's Regalia",
+        IncludeSet(COLLECTION,10104,1426,LEATHER,ANY_CLASS,ANY_FACTION), -- Wildheart Raiment",
+        IncludeSet(COLLECTION,10104,1427,LEATHER,ANY_CLASS,ANY_FACTION), -- Shadowcraft Armor",
+        IncludeSet(COLLECTION,10104,854,CLOTH,WARLOCK,ANY_FACTION), -- Deathmist Raiment",
+        IncludeSet(COLLECTION,10104,1429,MAIL,ANY_CLASS,ANY_FACTION), -- The Elements",
+        IncludeSet(COLLECTION,10104,855,CLOTH,MAGE,ANY_FACTION), -- Sorcerer's Regalia",
+        IncludeSet(COLLECTION,10104,1431,PLATE,ANY_CLASS,ANY_FACTION), -- Battlegear of Valor",
+        IncludeSet(COLLECTION,10104,856,MAIL,HUNTER,ANY_FACTION), -- Beastmaster Armor",
+        IncludeSet(COLLECTION,10104,857,LEATHER,ROGUE,ANY_FACTION), -- Darkmantle Armor",
+        IncludeSet(COLLECTION,10104,858,LEATHER,DRUID,ANY_FACTION), -- Feralheart Raiment",
+        IncludeSet(COLLECTION,10104,859,PLATE,PALADIN,ANY_FACTION), -- Soulforge Armor",
+        IncludeSet(COLLECTION,10104,860,MAIL,SHAMAN,ANY_FACTION), -- The Five Thunders",
+        IncludeSet(COLLECTION,10104,861,PLATE,WARRIOR,ANY_FACTION), -- Battlegear of Heroism",
+        IncludeSet(COLLECTION,10104,1430,PLATE,ANY_CLASS,ANY_FACTION), -- Lightforge Armor",
+        IncludeSet(COLLECTION,10104,1428,MAIL,ANY_CLASS,ANY_FACTION), -- Beaststalker Armor",
+        IncludeSet(COLLECTION,10104,359,CLOTH,ANY_CLASS,ANY_FACTION), -- Vestments of the Devout",
+        IncludeSet(COLLECTION,10104,360,CLOTH,PRIEST,ANY_FACTION), -- Vestments of the Virtuous",
 
         -- Dungeon 2
         CreateSet(COLLECTION,10102,"DR_DG_02",LEATHER,DRUID,ANY_FACTION,NO_LOCATION,
@@ -235,7 +256,7 @@ local function GetRaidAppearances()
         IncludeSet(COLLECTION,10102,916,MAIL,HUNTER,ANY_FACTION),
         IncludeSet(COLLECTION,10102,909,CLOTH,MAGE,ANY_FACTION),
         IncludeSet(COLLECTION,10102,901,PLATE,PALADIN,ANY_FACTION,
-            CreateVariant("RECOLOR",TRANSMOG,A(6951,12066),A(6894,11967),A(7010,12137),A(6865,11932),A(6847,11907),A(6901,11974),A(6930,12037),A(7096,12340))
+            CreateVariant("RECOLOR",TRANSMOG,I(27790),I(27539),I(27897),I(27548),I(27748),I(28221),I(27489),I(27457))
         ),
         IncludeSet(COLLECTION,10102,356,CLOTH,PRIEST,ANY_FACTION),
         IncludeSet(COLLECTION,10102,893,LEATHER,ROGUE,ANY_FACTION),

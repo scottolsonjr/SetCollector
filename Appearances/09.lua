@@ -228,6 +228,8 @@ local function GetExpansionAppearances()
         IncludeSet(COLLECTION,10904,2019,LEATHER,ANY_CLASS,ANY_FACTION,2020,2021,2022),
         IncludeSet(COLLECTION,10904,2023,MAIL,ANY_CLASS,ANY_FACTION,2024,2025,2026),
         IncludeSet(COLLECTION,10904,2029,PLATE,ANY_CLASS,ANY_FACTION,2030,2028,2027),
+
+        IncludeSet(COLLECTION,10905,2484,MAIL,HUNTER,ANY_FACTION), -- Dark Ranger's Attire
     }
     AddSetsToDatabase(VERSION, COLLECTION, sets)
 
@@ -290,6 +292,7 @@ local function GetOtherAppearances()
             CreateVariant("LOC_REVENDRETH",TRANSMOG,A(42053,109058),A(42055,109079),A(42423,109351),A(42049,109124),A(42057,109087),A(42052,109068),A(42056,109082),A(42054,109074),A(42051,109127))
         ),
         -- CreateVariant("Forgehand's Mail",TRANSMOG,A(181596,43200))
+        IncludeSet(COLLECTION,10902,2200,ANY_ARMOR,ANY_CLASS,ANY_FACTION), -- Celestial Observer's Ensemble
     }
     AddSetsToDatabase(VERSION, COLLECTION, sets)
     VERSION = 90100
@@ -337,6 +340,8 @@ local function GetOtherAppearances()
             --CreateVariant("PLACEHOLDER",TRANSMOG,A(),A(),A(),A(),A(),A(),A(),A()),
             CreateVariant("PLACEHOLDER",TRANSMOG,A(57167),A(57168),A(57175),A(57169),A(57173),A(57174),A(57170),A(57171),A(57172))
         ),
+        IncludeSet(COLLECTION,10922,2292,PLATE,ANY_CLASS,ANY_FACTION), -- Ravencrest's Battleplate
+
         --[[IncludeSet(COLLECTION,10903,2292,ANY_ARMOR,ANY_CLASS,ANY_FACTION), -- Ravencrest's Battleplate
         IncludeSet(COLLECTION,10903,2306,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
         IncludeSet(COLLECTION,10903,2307,ANY_ARMOR,ANY_CLASS,ANY_FACTION),
@@ -369,22 +374,23 @@ local function GetPvPAppearances()
     -- Season 3
     VERSION = 90200
     local sets = {
-        IncludeSet(COLLECTION,10903,2316,CLOTH,ANY_CLASS,ANY_FACTION),
-        IncludeSet(COLLECTION,10903,2317,LEATHER,ANY_CLASS,ANY_FACTION),
-        IncludeSet(COLLECTION,10903,2318,MAIL,ANY_CLASS,ANY_FACTION),
-        IncludeSet(COLLECTION,10903,2319,PLATE,ANY_CLASS,ANY_FACTION),
-        IncludeSet(COLLECTION,10903,2352,PLATE,DEATHKNIGHT,ANY_FACTION,2353),
-        IncludeSet(COLLECTION,10903,2358,LEATHER,DEMONHUNTER,ANY_FACTION,2359),
-        IncludeSet(COLLECTION,10903,2364,LEATHER,DRUID,ANY_FACTION,2365),
-        IncludeSet(COLLECTION,10903,2370,MAIL,HUNTER,ANY_FACTION,2371),
-        IncludeSet(COLLECTION,10903,2376,CLOTH,MAGE,ANY_FACTION,2377),
-        IncludeSet(COLLECTION,10903,2382,LEATHER,MONK,ANY_FACTION,2383),
-        IncludeSet(COLLECTION,10903,2388,PLATE,PALADIN,ANY_FACTION,2389),
-        IncludeSet(COLLECTION,10903,2394,CLOTH,PRIEST,ANY_FACTION,2395),
-        IncludeSet(COLLECTION,10903,2400,LEATHER,ROGUE,ANY_FACTION,2401),
-        IncludeSet(COLLECTION,10903,2406,MAIL,SHAMAN,ANY_FACTION,2407),
-        IncludeSet(COLLECTION,10903,2412,CLOTH,WARLOCK,ANY_FACTION,2413),
-        IncludeSet(COLLECTION,10903,2418,PLATE,WARRIOR,ANY_FACTION,2419),
+        IncludeSet(COLLECTION,10903,2565,CLOTH,ANY_CLASS,ANY_FACTION), -- Eternal Aspirant's Vestment
+        IncludeSet(COLLECTION,10903,2566,LEATHER,ANY_CLASS,ANY_FACTION), -- Eternal Aspirant's Leathers
+        IncludeSet(COLLECTION,10903,2567,MAIL,ANY_CLASS,ANY_FACTION), -- Eternal Aspirant's Chain
+        IncludeSet(COLLECTION,10903,2568,PLATE,ANY_CLASS,ANY_FACTION), -- Eternal Aspirant's Plate
+
+        IncludeSet(COLLECTION,10904,2498,PLATE,DEATHKNIGHT,ANY_FACTION,2569), -- Eternal Gladiator's Dreadplate Armor, Elite
+        IncludeSet(COLLECTION,10904,2504,LEATHER,DEMONHUNTER,ANY_FACTION,2570), -- Eternal Gladiator's Felskin Armor, Elite
+        IncludeSet(COLLECTION,10904,2510,LEATHER,DRUID,ANY_FACTION,2571), -- Eternal Gladiator's Dragonhide Armor, Elite
+        IncludeSet(COLLECTION,10904,2516,MAIL,HUNTER,ANY_FACTION,2572), -- Eternal Gladiator's Chain Armor, Elite
+        IncludeSet(COLLECTION,10904,2522,CLOTH,MAGE,ANY_FACTION,2573), -- Eternal Gladiator's Silk Armor, Elite
+        IncludeSet(COLLECTION,10904,2528,LEATHER,MONK,ANY_FACTION,2574), -- Eternal Gladiator's Ironskin Armor, Elite
+        IncludeSet(COLLECTION,10904,2534,PLATE,PALADIN,ANY_FACTION,2575), -- Eternal Gladiator's Scaled Armor, Elite
+        IncludeSet(COLLECTION,10904,2540,CLOTH,PRIEST,ANY_FACTION,2576), -- Eternal Gladiator's Satin Armor, Elite
+        IncludeSet(COLLECTION,10904,2546,LEATHER,ROGUE,ANY_FACTION,2577), -- Eternal Gladiator's Leather Armor, Elite
+        IncludeSet(COLLECTION,10904,2552,MAIL,SHAMAN,ANY_FACTION,2578), -- Eternal Gladiator's Ringmail Armor, Elite
+        IncludeSet(COLLECTION,10904,2558,CLOTH,WARLOCK,ANY_FACTION,2579), -- Eternal Gladiator's Felweave Armor, Elite
+        IncludeSet(COLLECTION,10904,2564,PLATE,WARRIOR,ANY_FACTION,2580), -- Eternal Gladiator's Plate Armor, Elite
     }
     AddSetsToDatabase(VERSION, COLLECTION, sets)
 end

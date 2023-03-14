@@ -37,7 +37,8 @@ local defaults = {
             show_location = true
         },
 		collections = {},
-		export = {}
+		export = {},
+		setMap = {}
 	}
 }
 
