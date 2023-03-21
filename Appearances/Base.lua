@@ -68,6 +68,19 @@ function SetCollector:CreateAppearance(ID, sourceID, slotID, ...)
 	return t
 end
 
+function SetCollector:CreateAppearanceFromItemID(itemID)
+    appearanceID, sourceID = C_TransmogCollection.GetItemInfo(itemID)
+    slotID = select(1, C_TransmogCollection.GetSourceInfo(sourceID))
+	local t = { 
+        ID = appearanceID or 0,
+        sourceID = sourceID or 0,
+        slotID = slotID or 0,
+		alternateIDs = {}
+    }
+    -- if select('#', ...) > 0 then -- add alternate appearance IDs
+	return t
+end
+
 function SetCollector:CreateTooltipID(collection, id, title)
     local identifier
     if collection == RAID then
@@ -86,8 +99,9 @@ function SetCollector:IncludeSet(collection, uid, setID, armorType, class, facti
             description = description.." ("..setInfo.expansionID..")"
         end
         local set = {
-            ID = collection.Code..string.format("%03d", uid)..setID..armorType.Code..class.Code..faction.Code,
+            ID = collection.Code..string.format("%04d", uid)..setID..armorType.Code..class.Code..faction.Code,
             setID = setInfo.setID,
+            Collection = collection.Description,
             Title = setInfo.name,
             TooltipID = SetCollector:CreateTooltipID(collection, uid, setID),
             ArmorType = armorType,
@@ -96,11 +110,16 @@ function SetCollector:IncludeSet(collection, uid, setID, armorType, class, facti
             Location = description,
             Variants = { SetCollector:IncludeVariant(setID, setInfo) }
         }
+
+        SetCollector.db.global.setMap["SET " .. setID] = {setID = setID, collection = collection.Description, baseSetId = setID}
+
         for i = 1, select('#', ...) do
             local variant = select(i, ...)
             if is_numeric(variant) then
                 local variantInfo = (variant and C_TransmogSets.GetSetInfo(variant)) or nil;
                 table.insert(set.Variants, SetCollector:IncludeVariant(variant, variantInfo))
+
+                SetCollector.db.global.setMap["SET " .. variant] = {setID = variant, collection = collection.Description, baseSetId = setID}
             else
                 table.insert(set.Variants, variant)
             end
@@ -146,6 +165,7 @@ end
 function SetCollector:CreateSet(collection, uid, title, armorType, class, faction, location, ...)
     local set = {
         ID = collection.Code..string.format("%04d", uid)..armorType.Code..class.Code..faction.Code,
+        Collection = collection.Description,
         Title = title,
         TooltipID = SetCollector:CreateTooltipID(collection, uid, title),
         ArmorType = armorType,

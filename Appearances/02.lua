@@ -104,14 +104,21 @@ end
 local function GetOtherAppearances()
     local COLLECTION, VERSION = SetCollector.OTHER, 90000
     local sets = {
-        IncludeSet(COLLECTION,10202,1529,CLOTH,ANY_CLASS,ANY_FACTION),
-        IncludeSet(COLLECTION,10202,1528,LEATHER,ANY_CLASS,ANY_FACTION),
-        IncludeSet(COLLECTION,10202,1527,MAIL,ANY_CLASS,ANY_FACTION),
-        IncludeSet(COLLECTION,10202,1526,PLATE,ANY_CLASS,ANY_FACTION),
-        IncludeSet(COLLECTION,10204,1827,CLOTH,ANY_CLASS,ANY_FACTION),
-        IncludeSet(COLLECTION,10204,1826,LEATHER,ANY_CLASS,ANY_FACTION),
-        IncludeSet(COLLECTION,10204,1825,MAIL,ANY_CLASS,ANY_FACTION),
-        IncludeSet(COLLECTION,10204,1824,PLATE,ANY_CLASS,ANY_FACTION),
+        -- Trial of Style
+        IncludeSet(COLLECTION,10202,1450,CLOTH,ANY_CLASS,ANY_FACTION), -- Mana-Etched Regalia
+        IncludeSet(COLLECTION,10202,1449,LEATHER,ANY_CLASS,ANY_FACTION), -- Obsidian Prowler's Garb
+        IncludeSet(COLLECTION,10202,1448,MAIL,ANY_CLASS,ANY_FACTION), -- Der'izu Armor
+        IncludeSet(COLLECTION,10202,1447,PLATE,ANY_CLASS,ANY_FACTION), -- Righteous Battleplate
+
+        IncludeSet(COLLECTION,10202,1529,CLOTH,ANY_CLASS,ANY_FACTION), -- Mindwrack Raiment
+        IncludeSet(COLLECTION,10202,1528,LEATHER,ANY_CLASS,ANY_FACTION), -- Tundraspite Armor
+        IncludeSet(COLLECTION,10202,1527,MAIL,ANY_CLASS,ANY_FACTION), -- Crimson Sentinel Garb
+        IncludeSet(COLLECTION,10202,1526,PLATE,ANY_CLASS,ANY_FACTION), -- Goldspine Plate
+
+        IncludeSet(COLLECTION,10204,1827,CLOTH,ANY_CLASS,ANY_FACTION), -- Tranquil Spiritbind Regalia
+        IncludeSet(COLLECTION,10204,1826,LEATHER,ANY_CLASS,ANY_FACTION), -- Restless Dreambound Battlegear
+        IncludeSet(COLLECTION,10204,1825,MAIL,ANY_CLASS,ANY_FACTION), -- Chainmail of the Timeless Hunt
+        IncludeSet(COLLECTION,10204,1824,PLATE,ANY_CLASS,ANY_FACTION), -- Armor of the Amaranthine Path
     }
     AddSetsToDatabase(VERSION, COLLECTION, sets)
 end
@@ -150,15 +157,16 @@ local function GetPvPAppearances()
         IncludeSet(COLLECTION,10203,955,CLOTH,WARLOCK,ANY_FACTION),
         IncludeSet(COLLECTION,10203,954,PLATE,WARRIOR,ANY_FACTION),
         -- Season 4
-        IncludeSet(COLLECTION,10204,953,LEATHER,DRUID,ANY_FACTION),
-        IncludeSet(COLLECTION,10204,952,MAIL,HUNTER,ANY_FACTION),
-        IncludeSet(COLLECTION,10204,951,CLOTH,MAGE,ANY_FACTION),
-        IncludeSet(COLLECTION,10204,950,PLATE,PALADIN,ANY_FACTION),
-        IncludeSet(COLLECTION,10204,378,CLOTH,PRIEST,ANY_FACTION),
-        IncludeSet(COLLECTION,10204,949,LEATHER,ROGUE,ANY_FACTION),
-        IncludeSet(COLLECTION,10204,948,MAIL,SHAMAN,ANY_FACTION),
-        IncludeSet(COLLECTION,10204,947,CLOTH,WARLOCK,ANY_FACTION),
-        IncludeSet(COLLECTION,10204,946,PLATE,WARRIOR,ANY_FACTION),
+        IncludeSet(COLLECTION,10204,1202,PLATE,DEATHKNIGHT,ANY_FACTION), -- Brutal Gladiator's Dreadplate Armor
+        IncludeSet(COLLECTION,10204,953,LEATHER,DRUID,ANY_FACTION), -- Brutal Gladiator's Dragonhide Armor
+        IncludeSet(COLLECTION,10204,952,MAIL,HUNTER,ANY_FACTION), -- Brutal Gladiator's Chain Armor
+        IncludeSet(COLLECTION,10204,951,CLOTH,MAGE,ANY_FACTION), -- Brutal Gladiator's Silk Armor
+        IncludeSet(COLLECTION,10204,950,PLATE,PALADIN,ANY_FACTION), -- Brutal Gladiator's Scaled Armor
+        IncludeSet(COLLECTION,10204,378,CLOTH,PRIEST,ANY_FACTION), -- Brutal Gladiator's Satin Armor
+        IncludeSet(COLLECTION,10204,949,LEATHER,ROGUE,ANY_FACTION), -- Brutal Gladiator's Leather Armor
+        IncludeSet(COLLECTION,10204,948,MAIL,SHAMAN,ANY_FACTION), -- Brutal Gladiator's Ringmail Armor
+        IncludeSet(COLLECTION,10204,947,CLOTH,WARLOCK,ANY_FACTION), -- Brutal Gladiator's Felweave Armor
+        IncludeSet(COLLECTION,10204,946,PLATE,WARRIOR,ANY_FACTION), -- Brutal Gladiator's Plate Armor
     }
     AddSetsToDatabase(VERSION, COLLECTION, sets)
 end

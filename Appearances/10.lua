@@ -121,32 +121,34 @@ local function GetExpansionAppearances()
         IncludeSet(COLLECTION,11000,2582,ANY_ARMOR,ANY_CLASS,ANY_FACTION,2583,2584,2585,2586), 
 
         -- Primal Elements
-        IncludeSet(COLLECTION,11000,2667,PLATE,ANY_CLASS,ANY_FACTION,2668,2748),  
-        IncludeSet(COLLECTION,11000,2661,CLOTH,ANY_CLASS,ANY_FACTION,2662,2742),
-        IncludeSet(COLLECTION,11000,2663,MAIL,ANY_CLASS,ANY_FACTION,2664,2744),
-        IncludeSet(COLLECTION,11000,2665,LEATHER,ANY_CLASS,ANY_FACTION,2666,2746),
+        IncludeSet(COLLECTION,11000,2667,PLATE,ANY_CLASS,ANY_FACTION,2668,2748,2856),  
+        IncludeSet(COLLECTION,11000,2661,CLOTH,ANY_CLASS,ANY_FACTION,2662,2742,2853),
+        IncludeSet(COLLECTION,11000,2663,MAIL,ANY_CLASS,ANY_FACTION,2664,2744,2855),
+        IncludeSet(COLLECTION,11000,2665,LEATHER,ANY_CLASS,ANY_FACTION,2666,2746,2854),
     }
     AddSetsToDatabase(VERSION, COLLECTION, sets)
 
     COLLECTION, VERSION = SetCollector.EXPANSION, 100005
     local sets = {
         -- Trading Post
-        IncludeSet(COLLECTION,11005,2659,CLOTH,ANY_CLASS,ANY_FACTION),  -- Void-Bound Raiment
-        IncludeSet(COLLECTION,11005,2677,PLATE,ANY_CLASS,ANY_FACTION),  -- Void-Bound Warplate
-        IncludeSet(COLLECTION,11005,2660,LEATHER,ANY_CLASS,ANY_FACTION),  -- Void-Bound Battlegear
-        IncludeSet(COLLECTION,11005,2676,MAIL,ANY_CLASS,ANY_FACTION),  -- Void-Bound Chains
-        IncludeSet(COLLECTION,11005,2658,MAIL,ANY_CLASS,ANY_FACTION),  -- Tidecaller's Chainmail
-        IncludeSet(COLLECTION,11005,2320,PLATE,ANY_CLASS,ANY_FACTION),  -- Fel-Automaton Exoplate
-        IncludeSet(COLLECTION,11005,2337,LEATHER,ANY_CLASS,ANY_FACTION),  -- Vestments of the Nightmare Forest
-        IncludeSet(COLLECTION,11005,2338,MAIL,ANY_CLASS,ANY_FACTION),  -- Slumbering Caldera Regalia
-        IncludeSet(COLLECTION,11005,2323,CLOTH,ANY_CLASS,ANY_FACTION),  -- Twisted Arcanum Regalia
-        IncludeSet(COLLECTION,11005,2678,LEATHER,ANY_CLASS,ANY_FACTION),  -- Kvaldir Scout Leathers
-        IncludeSet(COLLECTION,11005,2655,CLOTH,ANY_CLASS,ANY_FACTION),  -- Corrupted Runelord's Regalia
-        IncludeSet(COLLECTION,11005,2679,PLATE,ANY_CLASS,ANY_FACTION),  -- Helarjar Berserker Warplate
-        IncludeSet(COLLECTION,11005,2656,PLATE,ANY_CLASS,ANY_FACTION),  -- Val'sharah Protector's Battleplate
-        IncludeSet(COLLECTION,11005,2657,LEATHER,ANY_CLASS,ANY_FACTION),  -- Sylvan Stalker's Leathers
-        IncludeSet(COLLECTION,11005,2334,LEATHER,ANY_CLASS,ANY_FACTION),  -- Battlewraps of the Honored Valarjar
-        IncludeSet(COLLECTION,11005,2331,MAIL,ANY_CLASS,ANY_FACTION),  -- Chains of the Honored Valarjar
+        IncludeSet(COLLECTION,11005,2321,CLOTH,ANY_CLASS,ANY_FACTION), -- Vestment of the Honored Valarjar",
+        IncludeSet(COLLECTION,11005,2323,CLOTH,ANY_CLASS,ANY_FACTION), -- Twisted Arcanum Regalia",
+        IncludeSet(COLLECTION,11005,2320,PLATE,ANY_CLASS,ANY_FACTION), -- Fel-Automaton Exoplate
+        IncludeSet(COLLECTION,11005,2331,MAIL,ANY_CLASS,ANY_FACTION), -- Chains of the Honored Valarjar",
+        IncludeSet(COLLECTION,11005,2334,LEATHER,ANY_CLASS,ANY_FACTION), -- Battlewraps of the Honored Valarjar",
+        IncludeSet(COLLECTION,11005,2337,LEATHER,ANY_CLASS,ANY_FACTION), -- Vestments of the Nightmare Forest
+        IncludeSet(COLLECTION,11005,2338,MAIL,ANY_CLASS,ANY_FACTION), -- Slumbering Caldera Regalia
+        IncludeSet(COLLECTION,11005,2343,PLATE,ANY_CLASS,ANY_FACTION), -- Battleplate of the Honored Valarjar",
+        IncludeSet(COLLECTION,11005,2655,CLOTH,ANY_CLASS,ANY_FACTION), -- Corrupted Runelord's Regalia",
+        IncludeSet(COLLECTION,11005,2656,PLATE,ANY_CLASS,ANY_FACTION), -- Val'sharah Protector's Battleplate",
+        IncludeSet(COLLECTION,11005,2657,LEATHER,ANY_CLASS,ANY_FACTION), -- Sylvan Stalker's Leathers",
+        IncludeSet(COLLECTION,11005,2658,MAIL,ANY_CLASS,ANY_FACTION), -- Tidecaller's Chainmail",
+        IncludeSet(COLLECTION,11005,2659,CLOTH,ANY_CLASS,ANY_FACTION), -- Void-Bound Raiment",
+        IncludeSet(COLLECTION,11005,2660,LEATHER,ANY_CLASS,ANY_FACTION), -- Void-Bound Battlegear",
+        IncludeSet(COLLECTION,11005,2676,MAIL,ANY_CLASS,ANY_FACTION), -- Void-Bound Chains",
+        IncludeSet(COLLECTION,11005,2677,PLATE,ANY_CLASS,ANY_FACTION), -- Void-Bound Warplate",
+        IncludeSet(COLLECTION,11005,2678,LEATHER,ANY_CLASS,ANY_FACTION), -- Kvaldir Scout Leathers",
+        IncludeSet(COLLECTION,11005,2679,PLATE,ANY_CLASS,ANY_FACTION), -- Helarjar Berserker Warplate",
         IncludeSet(COLLECTION,11005,2343,PLATE,ANY_CLASS,ANY_FACTION),      -- Battleplate of the Honored Valarjar
         IncludeSet(COLLECTION,11005,2321,CLOTH,ANY_CLASS,ANY_FACTION),      -- Vestment of the Honored Valarjar
         IncludeSet(COLLECTION,11005,2340,ANY_ARMOR,ANY_CLASS,ANY_FACTION),  -- Swashbuckling Buccaneer's Slops
@@ -167,10 +169,10 @@ end
 
 local function GetOtherAppearances()
     local COLLECTION, VERSION = SetCollector.OTHER, 100000
-    -- local sets = {
-    --     IncludeSet(COLLECTION,11000,SET_ID,ANY_ARMOR,ANY_CLASS,ANY_FACTION,ALT_2,ALT_3,ALT_4),
-    -- }
-    -- AddSetsToDatabase(VERSION, COLLECTION, sets)
+    local sets = {
+        IncludeSet(COLLECTION,11000,2482,ANY_ARMOR,ANY_CLASS,ANY_FACTION), -- Fireplume Regalia",
+    }
+    AddSetsToDatabase(VERSION, COLLECTION, sets)
 end
 
 local function GetPvPAppearances()
