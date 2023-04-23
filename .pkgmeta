@@ -1,4 +1,5 @@
 package-as: SetCollector
+enable-toc-creation: yes
 enable-nolib-creation: no
 
 externals:
@@ -31,6 +32,8 @@ externals:
     tag: latest
 
 ignore:
+  - .github
+  - .gitignore
   - README.md
   - CODE_OF_CONDUCT.md
 
