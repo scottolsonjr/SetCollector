@@ -1,13 +1,15 @@
 name: Package and release
 on:
     push:
+        branches:
+            - master
         tags:
             - '**'
 jobs:
     release:
         runs-on: ubuntu-latest
         env:
-            GITHUB_OAUTH: ${{ secrets.SC_TOKEN }}
+            GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
         steps:
             - name: Clone project
               uses: actions/checkout@v3
