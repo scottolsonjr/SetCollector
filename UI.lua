@@ -1024,7 +1024,7 @@ function SetCollector:UpdateScrollFrame(collections, DEBUG)
 						titleButton.Text:SetText("|cff999999"..(L[collections[i].sets[j].Title] or L["MISSING_LOCALIZATION"]))
 					end
 					
-					if (collections[i].sets[j].Location) then
+					if (collections[i].sets[j].Location and collections[i].sets[j].Location ~= "") then
 						titleButton.SubText:SetText("|cff555555"..(L[collections[i].sets[j].Location] or L["MISSING_LOCALIZATION"]).."|r")
 					end
 					
