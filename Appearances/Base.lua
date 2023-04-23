@@ -70,15 +70,17 @@ end
 
 function SetCollector:CreateAppearanceFromItemID(itemID)
     appearanceID, sourceID = C_TransmogCollection.GetItemInfo(itemID)
-    slotID = select(1, C_TransmogCollection.GetSourceInfo(sourceID))
-	local t = { 
+    if (sourceID) then
+        slotID = select(1, C_TransmogCollection.GetSourceInfo(sourceID))
+    end
+    local t = { 
         ID = appearanceID or 0,
         sourceID = sourceID or 0,
         slotID = slotID or 0,
-		alternateIDs = {}
+        alternateIDs = {}
     }
     -- if select('#', ...) > 0 then -- add alternate appearance IDs
-	return t
+    return t
 end
 
 function SetCollector:CreateTooltipID(collection, id, title)

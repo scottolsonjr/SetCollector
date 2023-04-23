@@ -64,6 +64,7 @@ local NO_LOCATION = nil
 --
 
 local function A(...) return SetCollector:CreateAppearance(...) end
+local function I(...) return SetCollector:CreateAppearanceFromItemID(...) end
 local function CreateSet(...) return SetCollector:CreateSet(...) end
 local function CreateVariant(...) return SetCollector:CreateVariant(...) end
 local function IncludeSet(...) return SetCollector:IncludeSet(...) end
@@ -139,7 +140,7 @@ local function Get90000DungeonAppearances(collection)
             CreateVariant("LOC_DG_0904",TRANSMOG,A(42720,112883),A(42722,111496),A(42716,111468),A(42724,111466),A(42719,112880),A(42723,112888),A(42721,112885),A(42718,111457))
         ),
         CreateSet(collection,10904,"DG_MAIL_0901",MAIL,ANY_CLASS,ANY_FACTION,LOCATION_04,
-            CreateVariant("LOC_DG_0904",TRANSMOG,A(41939,111463),A(41941,111459),A(41935,112877),A(41943,112891),A(41938,112882),A(41942,112887),A(41940,111495),A(41937,111469))
+            CreateVariant("LOC_DG_0904",TRANSMOG,A(43201,111463),A(43203,111459),A(43197,112877),A(43205,112891),A(43200,112882),A(43204,112887),A(43202,111495),A(43199,111469))
         ),
         CreateSet(collection,10904,"DG_PLATE_0901",PLATE,ANY_CLASS,ANY_FACTION,LOCATION_04,
             CreateVariant("LOC_DG_0904",TRANSMOG,A(42244,111494),A(42245,111472),A(42247,112876),A(42251,112890),A(42248,112881),A(42249,111460),A(42250,111464),A(42246,112878))
