@@ -50,6 +50,7 @@ local NO_LOCATION = nil
 --
 
 local function A(...) return SetCollector:CreateAppearance(...) end
+local function I(...) return SetCollector:CreateAppearanceFromItemID(...) end
 local function CreateSet(...) return SetCollector:CreateSet(...) end
 local function CreateVariant(...) return SetCollector:CreateVariant(...) end
 local function IncludeSet(...) return SetCollector:IncludeSet(...) end
