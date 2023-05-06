@@ -41,6 +41,7 @@ SetCollector.CRAFTED 			= { ID = 9, Code = "CR", Description = "CRAFTED" }
 SetCollector.OTHER				= { ID = 10, Code = "OT", Description = "OTHER" }
 SetCollector.CUSTOM			    = { ID = 11, Code = "CU", Description = "CUSTOM" }
 SetCollector.HOLIDAY			= { ID = 12, Code = "HO", Description = "HOLIDAY" }
+SetCollector.TRADING			= { ID = 13, Code = "TP", Description = "TRADING" }
 
 SetCollector.OBTAIN			    = true
 SetCollector.NO_OBTAIN 			= false
