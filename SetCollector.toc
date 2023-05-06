@@ -1,11 +1,13 @@
 ## Interface: 100100
-## X-Curse-Project-ID: 84114
+## X-Min-Interface: 100100
 ## Title: Set Collector
 ## Notes: Allows the user to preview and track their progress in the collection of various transmogrification appearance sets, such as Raid, PvP and other expansion-specific sets.
 ## Version: @project-version@
 ## Author: Lomiedo-Uldum
 ## SavedVariables: SetCollectorDB
 ## SavedVariablesPerCharacter: SetCollectorCharacterDB
+## X-Curse-Project-ID: 84114
+## IconTexture: Interface\Icons\INV_Gauntlets_Mail_RaidShaman_J_01
 
 embeds.xml
 

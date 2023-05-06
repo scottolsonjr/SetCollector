@@ -90,6 +90,7 @@ local CRAFTED 		= { ID = 9, Code = "CR", Description = "CRAFTED" }
 local OTHER			= { ID = 10, Code = "OT", Description = "OTHER" }
 local CUSTOM		= { ID = 11, Code = "CU", Description = "CUSTOM" }
 local HOLIDAY		= { ID = 12, Code = "HO", Description = "HOLIDAY" }
+local TRADING		= { ID = 13, Code = "TP", Description = "TRADING" }
 
 local OBTAIN		= true
 local NO_OBTAIN 		= false
@@ -121,6 +122,7 @@ local function CreateCollections()
 		[OTHER.ID] 			= { Title = OTHER.Description, Sets = { } },
 		[CUSTOM.ID] 		= { Title = CUSTOM.Description, Sets = { } },
 		[HOLIDAY.ID] 		= { Title = HOLIDAY.Description, Sets = { } },
+		[TRADING.ID] 		= { Title = TRADING.Description, Sets = { } },
 		Appearances = { }
 	}
 	return collections
