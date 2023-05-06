@@ -1,4 +1,4 @@
-## Interface: 100007
+## Interface: 100100
 ## X-Curse-Project-ID: 84114
 ## Title: Set Collector
 ## Notes: Allows the user to preview and track their progress in the collection of various transmogrification appearance sets, such as Raid, PvP and other expansion-specific sets.
